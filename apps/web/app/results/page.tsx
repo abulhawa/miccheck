@@ -3,7 +3,6 @@
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import ScoreCard from "../../components/ScoreCard";
-import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
@@ -33,13 +32,10 @@ const sampleResult: AnalysisResult = {
 
 export default function ResultsPage() {
   const router = useRouter();
-  const { reset, initializeRecorder } = useAudioRecorder({ maxDuration: 7 });
 
   const handleTestAgain = useCallback(() => {
-    reset();
     router.push("/test");
-    void initializeRecorder();
-  }, [initializeRecorder, reset, router]);
+  }, [router]);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
   const noSpeechFix = sampleResult.primaryFix ?? {
