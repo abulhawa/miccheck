@@ -8,3 +8,4 @@ coverage
 .env.local
 .env.*.local
 npm-debug.log*
+.turbo/daemon/ae28846886006ca8-turbo.log.2026-01-30
