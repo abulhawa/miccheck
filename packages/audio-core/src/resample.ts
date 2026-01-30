@@ -6,6 +6,7 @@ export const resampleLinear = (
   sourceRate: number,
   targetRate: number
 ): Float32Array => {
+  if (samples.length === 0) return samples;
   if (sourceRate === targetRate) return samples;
   const ratio = targetRate / sourceRate;
   const length = Math.max(1, Math.floor(samples.length * ratio));
