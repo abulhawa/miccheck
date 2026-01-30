@@ -67,7 +67,10 @@ export default function TestPage() {
 
       {analysis ? (
         <section className="grid gap-6 md:grid-cols-2">
-          <ScoreCard result={analysis} />
+          <ScoreCard
+            result={analysis}
+            highlightedCategoryLabel={analysis.primaryIssueCategory}
+          />
           <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
             <h2 className="text-lg font-semibold">Next steps</h2>
             <p className="mt-3 text-sm text-slate-300">{analysis?.recommendation.message}</p>

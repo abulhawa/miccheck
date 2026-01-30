@@ -50,6 +50,8 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
       humRatio: summary.metrics.humRatio,
       echoScore: summary.metrics.echoScore
     },
+    primaryIssueCategory: summary.primaryIssueCategory,
+    primaryIssueExplanation: summary.primaryIssueExplanation,
     recommendation: summary.recommendation
   };
 };
