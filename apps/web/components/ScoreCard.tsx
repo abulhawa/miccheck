@@ -15,12 +15,6 @@ const gradeLabelMap: Record<AnalysisResult["grade"], string> = {
   E: "Needs Improvement",
   F: "Unusable",
 };
-const issueExplanationMap: Record<AnalysisResult["primaryIssueCategory"], string> = {
-  Level: "Volume level is off target.",
-  Noise: "Background noise is too high.",
-  Echo: "Echo or room reverb is too noticeable.",
-};
-
 export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCardProps) {
   const getDescriptorForScore = (score: number, category: "level" | "noise" | "echo") => {
     if (category === "level") {
@@ -52,7 +46,6 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
   };
   const activeHighlight = highlightedCategoryLabel ?? result.primaryIssueCategory;
   const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
-  const issueExplanation = issueExplanationMap[result.primaryIssueCategory];
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
@@ -64,7 +57,7 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
             <span className="text-sm font-medium text-slate-400">({result.grade})</span>
           </p>
           <p className="mt-2 text-sm text-slate-200">
-            {result.primaryIssueExplanation} - {issueExplanation}
+            {result.explanation}
           </p>
           <p className="mt-2 text-sm text-slate-300">{result.summary}</p>
         </div>

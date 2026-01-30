@@ -51,7 +51,7 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
       echoScore: summary.metrics.echoScore
     },
     primaryIssueCategory: summary.primaryIssueCategory,
-    primaryIssueExplanation: summary.primaryIssueExplanation,
+    explanation: summary.explanation,
     recommendation: summary.recommendation,
     primaryFix: summary.primaryFix,
     specialState: summary.specialState

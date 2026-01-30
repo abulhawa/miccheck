@@ -44,7 +44,7 @@ export interface AnalysisSummary {
   categories: CategoryScores;
   metrics: MetricsSummary;
   primaryIssueCategory: CategoryLabel;
-  primaryIssueExplanation: string;
+  explanation: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;
   specialState?: SpecialState;

@@ -22,7 +22,7 @@ const sampleResult: AnalysisResult = {
     echoScore: 0.32
   },
   primaryIssueCategory: "Echo",
-  primaryIssueExplanation: "Your grade is mainly affected by Echo",
+  explanation: "Echo is noticeably affecting clarity.",
   recommendation: {
     category: "Echo",
     message: "Add soft furnishings or move closer to the mic to reduce echo.",
