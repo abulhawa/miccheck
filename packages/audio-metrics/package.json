@@ -11,10 +11,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@miccheck/audio-core": "workspace:*"
+    "@miccheck/audio-core": "file:../audio-core"
   },
   "devDependencies": {
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vitest": "^4.0.18"
   }
 }
