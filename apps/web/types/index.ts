@@ -1,4 +1,5 @@
 export type CategoryLabel = "Level" | "Noise" | "Echo";
+export type CategoryId = "level" | "noise" | "echo" | "clipping";
 
 export interface CategoryScore {
   stars: number;
@@ -25,6 +26,7 @@ export interface PrimaryFix {
 export interface AnalysisMetrics {
   clippingRatio: number;
   rmsDb: number;
+  speechRmsDb: number;
   snrDb: number;
   humRatio: number;
   echoScore: number;
@@ -39,7 +41,7 @@ export interface AnalysisResult {
     echo: CategoryScore;
   };
   metrics: AnalysisMetrics;
-  primaryIssueCategory: CategoryLabel;
+  primaryIssueCategory: CategoryId;
   explanation: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;

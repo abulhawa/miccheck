@@ -37,9 +37,13 @@ export default function RootLayout({
           </header>
           <main className="flex-1 py-10">{children}</main>
           <footer className="border-t border-slate-800 pt-6 text-xs text-slate-500">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <span>MicCheck runs 100% in your browser. No audio is uploaded.</span>
-              <Link className="text-slate-400 transition hover:text-slate-200" href="/docs/PRIVACY.md">
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-slate-700">
+              <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
+              <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
+            </div>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <span>MicCheck runs 100% in your browser.</span>
+              <Link className="text-slate-500 transition hover:text-slate-300" href="/docs/PRIVACY.md">
                 Privacy policy
               </Link>
             </div>

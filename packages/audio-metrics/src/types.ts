@@ -3,12 +3,14 @@ export type GradeLetter = "A" | "B" | "C" | "D" | "E" | "F";
 export interface MetricsSummary {
   clippingRatio: number;
   rmsDb: number;
+  speechRmsDb: number;
   snrDb: number;
   humRatio: number;
   echoScore: number;
 }
 
 export type CategoryLabel = "Level" | "Noise" | "Echo";
+export type CategoryId = "level" | "noise" | "echo" | "clipping";
 
 export interface CategoryScore {
   stars: number;
@@ -43,7 +45,7 @@ export interface AnalysisSummary {
   summary: string;
   categories: CategoryScores;
   metrics: MetricsSummary;
-  primaryIssueCategory: CategoryLabel;
+  primaryIssueCategory: CategoryId;
   explanation: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;

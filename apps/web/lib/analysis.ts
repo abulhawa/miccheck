@@ -46,6 +46,7 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
     metrics: {
       clippingRatio: summary.metrics.clippingRatio,
       rmsDb: summary.metrics.rmsDb,
+      speechRmsDb: summary.metrics.speechRmsDb,
       snrDb: summary.metrics.snrDb,
       humRatio: summary.metrics.humRatio,
       echoScore: summary.metrics.echoScore

@@ -18,7 +18,10 @@ export const analyzeSamples = (
   samples: Float32Array,
   sampleRate: number
 ): AnalysisSummary => {
+  // Gate analysis when speech is not present to avoid false negatives.
   const vadResult = detectVoiceActivity(samples, sampleRate);
+  const toDb = (value: number): number => 20 * Math.log10(Math.max(value, 1e-8));
+  const speechRmsDb = toDb(vadResult.averageSpeechRms);
   if (vadResult.speechRatio < 0.1) {
     return {
       grade: "F",
@@ -31,11 +34,12 @@ export const analyzeSamples = (
       metrics: {
         clippingRatio: 0,
         rmsDb: 0,
+        speechRmsDb,
         snrDb: 0,
         humRatio: 0,
         echoScore: 0
       },
-      primaryIssueCategory: "Level",
+      primaryIssueCategory: "level",
       explanation: "No clear speech detected.",
       recommendation: {
         category: "General",
@@ -59,6 +63,7 @@ export const analyzeSamples = (
   const { grade, primaryIssueCategory, explanation } = computeOverallGrade(categories, {
     clippingRatio: clipping.clippingRatio,
     rmsDb: level.rmsDb,
+    speechRmsDb,
     snrDb: noise.snrDb,
     humRatio: noise.humRatio,
     echoScore: echo.echoScore
@@ -83,6 +88,7 @@ export const analyzeSamples = (
     metrics: {
       clippingRatio: clipping.clippingRatio,
       rmsDb: level.rmsDb,
+      speechRmsDb,
       snrDb: noise.snrDb,
       humRatio: noise.humRatio,
       echoScore: echo.echoScore
