@@ -111,7 +111,7 @@ export function useAudioRecorder({
       source.connect(analyser);
       meterNodeRef.current = analyser;
 
-      const preferredTypes = [\"audio/webm;codecs=opus\", \"audio/webm\", \"audio/mp4\"];
+      const preferredTypes = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"];
       const mimeType = preferredTypes.find((type) => MediaRecorder.isTypeSupported(type));
       const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
       mediaRecorderRef.current = recorder;

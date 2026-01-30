@@ -20,8 +20,6 @@ export default function TestPage() {
 
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
-  const hasResult = Boolean(analysis);
-
   const buttonLabel = useMemo(() => {
     if (isRecording) return "Stop recording";
     if (isAnalyzing) return "Analyzing...";
@@ -67,7 +65,7 @@ export default function TestPage() {
         </div>
       </section>
 
-      {hasResult ? (
+      {analysis ? (
         <section className="grid gap-6 md:grid-cols-2">
           <ScoreCard result={analysis} />
           <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
