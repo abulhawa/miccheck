@@ -5,8 +5,38 @@ interface ScoreCardProps {
 }
 
 const starArray = (stars: number) => Array.from({ length: 5 }, (_, i) => i < stars);
+const LEVEL_TARGET_DB = -14;
 
 export default function ScoreCard({ result }: ScoreCardProps) {
+  const getDescriptorForScore = (score: number, category: "level" | "noise" | "echo") => {
+    if (category === "level") {
+      if (score >= 5) {
+        return "Perfect level";
+      }
+      if (score === 4) {
+        return "Excellent level";
+      }
+      if (score === 3) {
+        return "Slightly off target";
+      }
+      return result.metrics.rmsDb <= LEVEL_TARGET_DB ? "Too quiet" : "Too loud";
+    }
+
+    if (score >= 5) {
+      return "Perfect";
+    }
+    if (score === 4) {
+      return "Excellent";
+    }
+    if (score === 3) {
+      return "Adequate";
+    }
+    if (score === 2) {
+      return "Needs work";
+    }
+    return "Poor";
+  };
+
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -22,7 +52,14 @@ export default function ScoreCard({ result }: ScoreCardProps) {
         </div>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {Object.values(result.categories).map((category) => (
+        {(
+          Object.entries(result.categories) as Array<
+            [
+              keyof AnalysisResult["categories"],
+              AnalysisResult["categories"][keyof AnalysisResult["categories"]]
+            ]
+          >
+        ).map(([categoryKey, category]) => (
           <div key={category.label} className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
             <p className="text-sm font-semibold text-slate-100">{category.label}</p>
             <div className="mt-2 flex gap-1">
@@ -39,7 +76,12 @@ export default function ScoreCard({ result }: ScoreCardProps) {
                 </span>
               ))}
             </div>
-            <p className="mt-2 text-xs text-slate-400">{category.description}</p>
+            <p className="mt-2 text-xs text-slate-400">
+              {getDescriptorForScore(
+                category.stars,
+                categoryKey === "room" ? "echo" : categoryKey
+              )}
+            </p>
           </div>
         ))}
       </div>
