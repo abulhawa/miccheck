@@ -10,7 +10,7 @@ const features = [
     description: "Get a letter grade plus the single best fix to improve quality."
   },
   {
-    title: "Browser friendly",
+    title: "Browser-friendly",
     description: "Supports Chrome, Edge, Firefox, and Safari on desktop + mobile."
   }
 ];
