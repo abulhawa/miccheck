@@ -8,6 +8,7 @@ import type { AnalysisResult } from "../types";
 interface RecorderOptions {
   maxDuration?: number;
   minDuration?: number;
+  deviceId?: string | null;
 }
 
 type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
@@ -20,7 +21,8 @@ const DEFAULT_MIN_DURATION = 5;
  */
 export function useAudioRecorder({
   maxDuration = DEFAULT_MAX_DURATION,
-  minDuration = DEFAULT_MIN_DURATION
+  minDuration = DEFAULT_MIN_DURATION,
+  deviceId = null
 }: RecorderOptions) {
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -114,7 +116,7 @@ export function useAudioRecorder({
     updateMeterRef.current = updateMeter;
   }, [updateMeter]);
 
-  const initializeRecorder = useCallback(async () => {
+  const initializeRecorder = useCallback(async (overrideDeviceId?: string | null) => {
     clearRecorder();
     const support = describeBrowserSupport();
     if (!support.isSupported) {
@@ -124,11 +126,13 @@ export function useAudioRecorder({
     }
 
     try {
+      const activeDeviceId = overrideDeviceId ?? deviceId;
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
           echoCancellation: true,
           noiseSuppression: false,
-          autoGainControl: false
+          autoGainControl: false,
+          ...(activeDeviceId ? { deviceId: { exact: activeDeviceId } } : {})
         }
       });
       mediaStreamRef.current = stream;
@@ -209,7 +213,7 @@ export function useAudioRecorder({
           : "Unable to access the microphone."
       );
     }
-  }, [clearRecorder, clearStopTimeout, minDuration, stopMeter, updateMeter]);
+  }, [clearRecorder, clearStopTimeout, deviceId, minDuration, stopMeter, updateMeter]);
 
   const startRecording = useCallback(async () => {
     reset();
