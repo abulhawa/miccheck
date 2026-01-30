@@ -24,7 +24,7 @@ export const computeOverallGrade = (
   scores: CategoryScores,
   metrics: MetricsSummary
 ): GradeLetter => {
-  const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.room.stars);
+  const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.echo.stars);
   if (minStars > 1) {
     return gradeFromStars(minStars);
   }

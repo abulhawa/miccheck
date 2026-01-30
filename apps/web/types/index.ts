@@ -5,7 +5,7 @@ export interface CategoryScore {
 }
 
 export interface Recommendation {
-  category: "Clipping" | "Noise" | "Room" | "Volume" | "General";
+  category: "Clipping" | "Noise" | "Echo" | "Volume" | "General";
   message: string;
   confidence: number;
 }
@@ -24,7 +24,7 @@ export interface AnalysisResult {
   categories: {
     level: CategoryScore;
     noise: CategoryScore;
-    room: CategoryScore;
+    echo: CategoryScore;
   };
   metrics: AnalysisMetrics;
   recommendation: Recommendation;

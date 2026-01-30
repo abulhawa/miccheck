@@ -4,11 +4,11 @@ import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
   grade: "B",
-  summary: "Strong overall sound with mild room reflections.",
+  summary: "Strong overall sound with mild echo reflections.",
   categories: {
     level: { stars: 4, label: "Level", description: "Healthy speaking level" },
     noise: { stars: 5, label: "Noise", description: "Quiet background" },
-    room: { stars: 3, label: "Room", description: "Some room echo present" }
+    echo: { stars: 3, label: "Echo", description: "Some room echo" }
   },
   metrics: {
     clippingRatio: 0.003,
@@ -18,7 +18,7 @@ const sampleResult: AnalysisResult = {
     echoScore: 0.32
   },
   recommendation: {
-    category: "Room",
+    category: "Echo",
     message: "Add soft furnishings or move closer to the mic to reduce echo.",
     confidence: 0.78
   }
@@ -44,7 +44,7 @@ export default function ResultsPage() {
             dBFS.
           </li>
           <li>Noise: higher SNR means a cleaner background.</li>
-          <li>Room: echo score rises with reflections or large rooms.</li>
+          <li>Echo: echo score rises with reflections or large rooms.</li>
         </ul>
         <Link
           className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"

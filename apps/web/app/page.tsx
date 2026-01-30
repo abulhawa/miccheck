@@ -62,7 +62,7 @@ export default function HomePage() {
               <div className="mt-1 h-3 w-3 rounded-full bg-amber-400" />
               <div>
                 <p className="font-medium">Category stars</p>
-                <p className="text-sm text-slate-400">Level, noise, and room performance.</p>
+                <p className="text-sm text-slate-400">Level, noise, and echo performance.</p>
               </div>
             </div>
             <div className="flex items-start gap-3">

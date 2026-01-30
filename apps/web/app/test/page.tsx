@@ -33,7 +33,7 @@ export default function TestPage() {
           <p className="text-sm uppercase tracking-[0.3em] text-slate-500">MicCheck Test</p>
           <h1 className="text-3xl font-semibold">Record a quick sample</h1>
           <p className="text-sm text-slate-300">
-            We&apos;ll capture 5–7 seconds to analyze level, noise, and room echo.
+            We&apos;ll capture 5–7 seconds to analyze level, noise, and echo.
           </p>
         </div>
         <div className="mt-8 flex flex-col gap-6">

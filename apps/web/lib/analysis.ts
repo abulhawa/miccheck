@@ -41,7 +41,7 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
     categories: {
       level: summary.categories.level,
       noise: summary.categories.noise,
-      room: summary.categories.room
+      echo: summary.categories.echo
     },
     metrics: {
       clippingRatio: summary.metrics.clippingRatio,
