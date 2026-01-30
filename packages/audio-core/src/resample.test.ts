@@ -13,4 +13,11 @@ describe("resampleLinear", () => {
     const result = resampleLinear(samples, 2, 4);
     expect(Array.from(result)).toEqual([0, 0.5, 1, 1]);
   });
+
+  it("returns an empty buffer for empty input without NaN values", () => {
+    const samples = new Float32Array([]);
+    const result = resampleLinear(samples, 48000, 44100);
+    expect(result.length).toBe(0);
+    expect(Array.from(result).some((value) => Number.isNaN(value))).toBe(false);
+  });
 });
