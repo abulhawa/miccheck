@@ -18,13 +18,12 @@ export default function TestPage() {
     reset
   } = useAudioRecorder({ maxDuration: 7 });
 
-  const confidencePercent = analysis
-    ? Math.round((analysis?.recommendation.confidence ?? 0) * 100)
-    : 0;
+  const confidenceValue = analysis?.recommendation.confidence ?? 0;
+  const confidencePercent = Math.round(confidenceValue * 100);
   const confidenceLabel =
-    confidencePercent >= 90
+    confidenceValue >= 0.9
       ? "High confidence"
-      : confidencePercent >= 75
+      : confidenceValue >= 0.75
         ? "Moderate confidence"
         : "Low confidence";
 
