@@ -52,6 +52,8 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
     },
     primaryIssueCategory: summary.primaryIssueCategory,
     primaryIssueExplanation: summary.primaryIssueExplanation,
-    recommendation: summary.recommendation
+    recommendation: summary.recommendation,
+    primaryFix: summary.primaryFix,
+    specialState: summary.specialState
   };
 };

@@ -12,6 +12,16 @@ export interface Recommendation {
   confidence: number;
 }
 
+export type SpecialState = "NO_SPEECH";
+
+export type FixPriority = "critical" | "high" | "medium" | "low";
+
+export interface PrimaryFix {
+  title: string;
+  description: string;
+  priority: FixPriority;
+}
+
 export interface AnalysisMetrics {
   clippingRatio: number;
   rmsDb: number;
@@ -32,4 +42,6 @@ export interface AnalysisResult {
   primaryIssueCategory: CategoryLabel;
   primaryIssueExplanation: string;
   recommendation: Recommendation;
+  primaryFix?: PrimaryFix;
+  specialState?: SpecialState;
 }

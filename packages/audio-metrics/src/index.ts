@@ -1,3 +1,4 @@
+import { detectVoiceActivity } from "@miccheck/audio-core";
 import { measureClipping } from "./metrics/clipping";
 import { measureLevel } from "./metrics/level";
 import { measureNoise } from "./metrics/noise";
@@ -17,6 +18,38 @@ export const analyzeSamples = (
   samples: Float32Array,
   sampleRate: number
 ): AnalysisSummary => {
+  const vadResult = detectVoiceActivity(samples, sampleRate);
+  if (vadResult.speechRatio < 0.1) {
+    return {
+      grade: "F",
+      summary: "No clear speech detected.",
+      categories: {
+        level: { stars: 0, label: "Level", description: "No speech detected." },
+        noise: { stars: 0, label: "Noise", description: "No speech detected." },
+        echo: { stars: 0, label: "Echo", description: "No speech detected." }
+      },
+      metrics: {
+        clippingRatio: 0,
+        rmsDb: 0,
+        snrDb: 0,
+        humRatio: 0,
+        echoScore: 0
+      },
+      primaryIssueCategory: "Level",
+      primaryIssueExplanation: "No clear speech detected.",
+      recommendation: {
+        category: "General",
+        message: "Please speak closer to the microphone or check if your mic is muted.",
+        confidence: 1
+      },
+      primaryFix: {
+        title: "No clear speech detected",
+        description: "Please speak closer to the microphone or check if your mic is muted.",
+        priority: "critical"
+      },
+      specialState: "NO_SPEECH"
+    };
+  }
   const clipping = measureClipping(samples);
   const level = measureLevel(samples);
   const noise = measureNoise(samples, sampleRate);
