@@ -23,7 +23,13 @@ export const analyzeSamples = (
   const echo = measureEcho(samples, sampleRate);
 
   const categories = buildCategoryScores(level, clipping, noise, echo);
-  const grade = computeOverallGrade(categories);
+  const grade = computeOverallGrade(categories, {
+    clippingRatio: clipping.clippingRatio,
+    rmsDb: level.rmsDb,
+    snrDb: noise.snrDb,
+    humRatio: noise.humRatio,
+    echoScore: echo.echoScore
+  });
   const recommendation = recommendFix(level, clipping, noise, echo);
 
   const summary =
