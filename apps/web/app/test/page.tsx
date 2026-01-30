@@ -13,6 +13,7 @@ export default function TestPage() {
     level,
     duration,
     analysis,
+    initializeRecorder,
     startRecording,
     stopRecording,
     reset
@@ -105,9 +106,12 @@ export default function TestPage() {
               </Link>
               <button
                 className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
-                onClick={reset}
+                onClick={() => {
+                  reset();
+                  void initializeRecorder();
+                }}
               >
-                Run another test
+                Test Again
               </button>
             </div>
           </div>
