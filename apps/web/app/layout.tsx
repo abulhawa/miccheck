@@ -1,4 +1,5 @@
 import "./globals.css";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -36,7 +37,12 @@ export default function RootLayout({
           </header>
           <main className="flex-1 py-10">{children}</main>
           <footer className="border-t border-slate-800 pt-6 text-xs text-slate-500">
-            MicCheck runs 100% in your browser. No audio is uploaded.
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <span>MicCheck runs 100% in your browser. No audio is uploaded.</span>
+              <Link className="text-slate-400 transition hover:text-slate-200" href="/docs/PRIVACY.md">
+                Privacy policy
+              </Link>
+            </div>
           </footer>
         </div>
       </body>
