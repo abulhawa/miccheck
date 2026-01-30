@@ -39,7 +39,10 @@ export default function ResultsPage() {
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
         <h2 className="text-lg font-semibold">What the metrics mean</h2>
         <ul className="mt-3 space-y-2">
-          <li>Level: target between -18 and -8 dBFS for clear speech.</li>
+          <li>
+            Level: target around -14 dBFS, acceptable range roughly -26 to -6
+            dBFS.
+          </li>
           <li>Noise: higher SNR means a cleaner background.</li>
           <li>Room: echo score rises with reflections or large rooms.</li>
         </ul>
