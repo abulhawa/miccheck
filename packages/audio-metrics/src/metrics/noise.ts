@@ -16,6 +16,7 @@ const computePercentile = (values: number[], percentile: number): number => {
 };
 
 const goertzel = (samples: Float32Array, sampleRate: number, freq: number): number => {
+  if (samples.length === 0) return 0;
   const k = Math.round((0.5 + (samples.length * freq) / sampleRate));
   const omega = (2 * Math.PI * k) / samples.length;
   const coeff = 2 * Math.cos(omega);
@@ -39,6 +40,9 @@ export const measureNoise = (
   sampleRate: number,
   frameMs = 50
 ): NoiseMetrics => {
+  if (samples.length === 0) {
+    return { noiseFloor: 0, snrDb: 0, humRatio: 0 };
+  }
   const frameSize = Math.max(1, Math.floor((sampleRate * frameMs) / 1000));
   const frameRms: number[] = [];
 

@@ -20,6 +20,11 @@ describe("pcmUtils", () => {
     expect(computeRms(samples)).toBeCloseTo(1, 5);
   });
 
+  it("returns 0 RMS for empty buffers", () => {
+    const samples = new Float32Array([]);
+    expect(computeRms(samples)).toBe(0);
+  });
+
   it("computes peak correctly", () => {
     const samples = new Float32Array([0.1, -0.9, 0.2]);
     expect(computePeak(samples)).toBeCloseTo(0.9, 5);

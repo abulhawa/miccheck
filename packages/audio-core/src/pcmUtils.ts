@@ -21,6 +21,7 @@ export const mixToMono = (channels: Float32Array[]): Float32Array => {
  * Compute RMS for a PCM buffer.
  */
 export const computeRms = (samples: Float32Array): number => {
+  if (samples.length === 0) return 0;
   let total = 0;
   for (const sample of samples) {
     total += sample * sample;
