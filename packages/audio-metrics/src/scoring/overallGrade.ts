@@ -1,4 +1,4 @@
-import type { CategoryScores, GradeLetter, MetricsSummary } from "../types";
+import type { CategoryLabel, CategoryScores, GradeLetter, MetricsSummary } from "../types";
 import { ANALYSIS_CONFIG } from "../config";
 
 const gradeFromStars = (stars: number): GradeLetter => {
@@ -20,14 +20,108 @@ const gradeFromStars = (stars: number): GradeLetter => {
 /**
  * Determine the overall letter grade based on the weakest category.
  */
+const getSeverityByCategory = (metrics: MetricsSummary) => ({
+  Level: Math.max(
+    metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ? 3 : 0,
+    metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere ||
+      metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere
+      ? 3
+      : metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDb ||
+          metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDb
+        ? 2
+        : 0
+  ),
+  Noise: Math.max(
+    metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb
+      ? 3
+      : metrics.snrDb <= ANALYSIS_CONFIG.snrMinDb
+        ? 2
+        : 0,
+    metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio ? 2 : 0
+  ),
+  Echo:
+    metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore
+      ? 3
+      : metrics.echoScore >= ANALYSIS_CONFIG.echoWarningScore
+        ? 2
+        : 0
+});
+
+const getExplanation = (primaryIssueCategory: CategoryLabel, metrics: MetricsSummary): string => {
+  switch (primaryIssueCategory) {
+    case "Level":
+      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere) {
+        return "Clipping is severely distorting the audio signal.";
+      }
+      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioWarning) {
+        return "Clipping is distorting the audio signal.";
+      }
+      if (metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere) {
+        return "The recording is extremely quiet and hard to understand.";
+      }
+      if (metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere) {
+        return "The recording is extremely loud and likely distorted.";
+      }
+      if (metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDb) {
+        return "The recording is too quiet, reducing clarity.";
+      }
+      if (metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDb) {
+        return "The recording is too loud, which can cause distortion.";
+      }
+      return "Volume levels are slightly off target.";
+    case "Noise":
+      if (metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb) {
+        return "Background noise is significantly reducing clarity.";
+      }
+      if (metrics.snrDb <= ANALYSIS_CONFIG.snrMinDb) {
+        return "Background noise is noticeable and lowering clarity.";
+      }
+      if (metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio) {
+        return "A persistent hum is reducing clarity.";
+      }
+      return "Background noise is affecting speech clarity.";
+    case "Echo":
+    default:
+      if (metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore) {
+        return "Echo is overwhelming and smearing speech details.";
+      }
+      if (metrics.echoScore >= ANALYSIS_CONFIG.echoWarningScore) {
+        return "Echo is noticeably affecting clarity.";
+      }
+      return "Room reflections are softening speech clarity.";
+  }
+};
+
+/**
+ * Determine the overall letter grade based on the weakest category.
+ */
 export const computeOverallGrade = (
   scores: CategoryScores,
   metrics: MetricsSummary
-): GradeLetter => {
+): { grade: GradeLetter; primaryIssueCategory: CategoryLabel; explanation: string } => {
   const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.echo.stars);
-  if (minStars > 1) {
-    return gradeFromStars(minStars);
-  }
+  const severityByCategory = getSeverityByCategory(metrics);
+  const hasSevereMetric = Object.values(severityByCategory).some((severity) => severity >= 3);
+  const categories: Array<{ label: CategoryLabel; stars: number }> = [
+    { label: "Level", stars: scores.level.stars },
+    { label: "Noise", stars: scores.noise.stars },
+    { label: "Echo", stars: scores.echo.stars }
+  ];
+  const primaryIssueCategory = hasSevereMetric
+    ? (Object.entries(severityByCategory).reduce(
+        (worst, [label, severity]) =>
+          severity > worst.severity
+            ? { label: label as CategoryLabel, severity }
+            : worst,
+        { label: "Level" as CategoryLabel, severity: -1 }
+      ).label as CategoryLabel)
+    : categories
+        .filter((category) => category.stars === minStars)
+        .reduce((worst, category) =>
+          severityByCategory[category.label] > severityByCategory[worst.label]
+            ? category
+            : worst
+        ).label;
 
   const isSevere =
     metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ||
@@ -36,5 +130,11 @@ export const computeOverallGrade = (
     metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere ||
     metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere;
 
-  return isSevere ? "F" : "E";
+  const grade = minStars > 1 ? gradeFromStars(minStars) : isSevere ? "F" : "E";
+
+  return {
+    grade,
+    primaryIssueCategory,
+    explanation: getExplanation(primaryIssueCategory, metrics)
+  };
 };

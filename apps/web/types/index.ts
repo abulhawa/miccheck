@@ -40,7 +40,7 @@ export interface AnalysisResult {
   };
   metrics: AnalysisMetrics;
   primaryIssueCategory: CategoryLabel;
-  primaryIssueExplanation: string;
+  explanation: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;
   specialState?: SpecialState;

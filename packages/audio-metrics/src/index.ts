@@ -36,7 +36,7 @@ export const analyzeSamples = (
         echoScore: 0
       },
       primaryIssueCategory: "Level",
-      primaryIssueExplanation: "No clear speech detected.",
+      explanation: "No clear speech detected.",
       recommendation: {
         category: "General",
         message: "Please speak closer to the microphone or check if your mic is muted.",
@@ -56,7 +56,7 @@ export const analyzeSamples = (
   const echo = measureEcho(samples, sampleRate);
 
   const categories = buildCategoryScores(level, clipping, noise, echo);
-  const grade = computeOverallGrade(categories, {
+  const { grade, primaryIssueCategory, explanation } = computeOverallGrade(categories, {
     clippingRatio: clipping.clippingRatio,
     rmsDb: level.rmsDb,
     snrDb: noise.snrDb,
@@ -64,11 +64,6 @@ export const analyzeSamples = (
     echoScore: echo.echoScore
   });
   const recommendation = recommendFix(level, clipping, noise, echo);
-  const primaryIssue = Object.values(categories).reduce((lowest, current) =>
-    current.stars < lowest.stars ? current : lowest
-  );
-  const primaryIssueCategory = primaryIssue.label;
-  const primaryIssueExplanation = `Your grade is mainly affected by ${primaryIssueCategory}`;
 
   const summary =
     grade === "A"
@@ -93,7 +88,7 @@ export const analyzeSamples = (
       echoScore: echo.echoScore
     },
     primaryIssueCategory,
-    primaryIssueExplanation,
+    explanation,
     recommendation
   };
 };
