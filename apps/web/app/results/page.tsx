@@ -1,5 +1,9 @@
-import Link from "next/link";
+"use client";
+
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import ScoreCard from "../../components/ScoreCard";
+import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
@@ -27,6 +31,15 @@ const sampleResult: AnalysisResult = {
 };
 
 export default function ResultsPage() {
+  const router = useRouter();
+  const { reset, initializeRecorder } = useAudioRecorder({ maxDuration: 7 });
+
+  const handleTestAgain = useCallback(() => {
+    reset();
+    router.push("/test");
+    void initializeRecorder();
+  }, [initializeRecorder, reset, router]);
+
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
@@ -51,12 +64,13 @@ export default function ResultsPage() {
           <li>Noise: higher SNR means a cleaner background.</li>
           <li>Echo: echo score rises with reflections or large rooms.</li>
         </ul>
-        <Link
+        <button
           className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
-          href="/test"
+          onClick={handleTestAgain}
+          type="button"
         >
-          Run your own test
-        </Link>
+          Test Again
+        </button>
       </section>
     </div>
   );

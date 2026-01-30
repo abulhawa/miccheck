@@ -33,17 +33,16 @@ export function useAudioRecorder({
   const animationRef = useRef<number | null>(null);
   const meterNodeRef = useRef<AnalyserNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const stopTimeoutRef = useRef<number | null>(null);
   const updateMeterRef = useRef<() => void>(() => {});
 
-  const reset = useCallback(() => {
-    setStatus("idle");
-    setError(null);
-    setAnalysis(null);
-    setLevel(0);
-    setDuration(0);
-    audioChunksRef.current = [];
+  const clearStopTimeout = useCallback(() => {
+    if (stopTimeoutRef.current !== null) {
+      window.clearTimeout(stopTimeoutRef.current);
+      stopTimeoutRef.current = null;
+    }
   }, []);
 
   const stopMeter = useCallback(() => {
@@ -51,11 +50,44 @@ export function useAudioRecorder({
       cancelAnimationFrame(animationRef.current);
       animationRef.current = null;
     }
+    meterNodeRef.current = null;
     if (audioContextRef.current) {
       audioContextRef.current.close();
       audioContextRef.current = null;
     }
   }, []);
+
+  const clearRecorder = useCallback(() => {
+    clearStopTimeout();
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.ondataavailable = null;
+      mediaRecorderRef.current.onstop = null;
+      if (mediaRecorderRef.current.state === "recording") {
+        try {
+          mediaRecorderRef.current.stop();
+        } catch {
+          // Ignore stop errors when cleaning up.
+        }
+      }
+    }
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      mediaStreamRef.current = null;
+    }
+    mediaRecorderRef.current = null;
+    stopMeter();
+    audioChunksRef.current = [];
+    startTimeRef.current = null;
+  }, [clearStopTimeout, stopMeter]);
+
+  const reset = useCallback(() => {
+    clearRecorder();
+    setStatus("idle");
+    setError(null);
+    setAnalysis(null);
+    setLevel(0);
+    setDuration(0);
+  }, [clearRecorder]);
 
   const updateMeter = useCallback(() => {
     const analyser = meterNodeRef.current;
@@ -82,10 +114,8 @@ export function useAudioRecorder({
     updateMeterRef.current = updateMeter;
   }, [updateMeter]);
 
-  const startRecording = useCallback(async () => {
-    reset();
-    setError(null);
-
+  const initializeRecorder = useCallback(async () => {
+    clearRecorder();
     const support = describeBrowserSupport();
     if (!support.isSupported) {
       setStatus("error");
@@ -101,6 +131,7 @@ export function useAudioRecorder({
           autoGainControl: false
         }
       });
+      mediaStreamRef.current = stream;
 
       const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) {
@@ -129,7 +160,9 @@ export function useAudioRecorder({
       };
 
       recorder.onstop = async () => {
+        clearStopTimeout();
         stopMeter();
+        mediaStreamRef.current = null;
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
@@ -156,18 +189,8 @@ export function useAudioRecorder({
           );
         }
       };
-
-      recorder.start();
-      startTimeRef.current = performance.now();
-      setStatus("recording");
       updateMeter();
-
-      stopTimeoutRef.current = window.setTimeout(() => {
-        if (mediaRecorderRef.current?.state === "recording") {
-          mediaRecorderRef.current.stop();
-          mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
-        }
-      }, maxDuration * 1000);
+      setStatus("idle");
     } catch (permissionError) {
       setStatus("error");
       if (permissionError instanceof DOMException) {
@@ -186,28 +209,47 @@ export function useAudioRecorder({
           : "Unable to access the microphone."
       );
     }
-  }, [maxDuration, minDuration, reset, stopMeter, updateMeter]);
+  }, [clearRecorder, clearStopTimeout, minDuration, stopMeter, updateMeter]);
+
+  const startRecording = useCallback(async () => {
+    reset();
+    setError(null);
+    await initializeRecorder();
+
+    const recorder = mediaRecorderRef.current;
+    if (!recorder || recorder.state !== "inactive") {
+      return;
+    }
+
+    recorder.start();
+    startTimeRef.current = performance.now();
+    setStatus("recording");
+    updateMeter();
+
+    stopTimeoutRef.current = window.setTimeout(() => {
+      if (mediaRecorderRef.current?.state === "recording") {
+        mediaRecorderRef.current.stop();
+        mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
+      }
+    }, maxDuration * 1000);
+  }, [initializeRecorder, maxDuration, reset, updateMeter]);
 
   const stopRecording = useCallback(() => {
-    if (stopTimeoutRef.current !== null) {
-      window.clearTimeout(stopTimeoutRef.current);
-      stopTimeoutRef.current = null;
-    }
+    clearStopTimeout();
 
     if (mediaRecorderRef.current?.state === "recording") {
       mediaRecorderRef.current.stop();
       mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
+      mediaStreamRef.current = null;
     }
-  }, []);
+  }, [clearStopTimeout]);
 
   useEffect(() => {
     return () => {
-      stopMeter();
-      if (stopTimeoutRef.current) {
-        window.clearTimeout(stopTimeoutRef.current);
-      }
+      clearRecorder();
     };
-  }, [stopMeter]);
+  }, [clearRecorder]);
 
   return {
     status,
@@ -215,6 +257,7 @@ export function useAudioRecorder({
     analysis,
     level,
     duration,
+    initializeRecorder,
     startRecording,
     stopRecording,
     reset
