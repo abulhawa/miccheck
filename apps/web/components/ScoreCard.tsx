@@ -7,6 +7,19 @@ interface ScoreCardProps {
 
 const starArray = (stars: number) => Array.from({ length: 5 }, (_, i) => i < stars);
 const LEVEL_TARGET_DB = -14;
+const gradeLabelMap: Record<AnalysisResult["grade"], string> = {
+  A: "Excellent",
+  B: "Good",
+  C: "Fair",
+  D: "Needs Improvement",
+  E: "Needs Improvement",
+  F: "Unusable",
+};
+const issueExplanationMap: Record<AnalysisResult["primaryIssueCategory"], string> = {
+  Level: "Volume level is off target.",
+  Noise: "Background noise is too high.",
+  Echo: "Echo or room reverb is too noticeable.",
+};
 
 export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCardProps) {
   const getDescriptorForScore = (score: number, category: "level" | "noise" | "echo") => {
@@ -38,14 +51,21 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
     return "Poor";
   };
   const activeHighlight = highlightedCategoryLabel ?? result.primaryIssueCategory;
+  const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
+  const issueExplanation = issueExplanationMap[result.primaryIssueCategory];
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Overall grade</p>
-          <p className="text-4xl font-semibold text-white">{result.grade}</p>
-          <p className="mt-1 text-sm text-slate-200">{result.primaryIssueExplanation}</p>
+          <p className="mt-2 flex flex-wrap items-baseline gap-2 text-2xl font-semibold text-white sm:text-3xl">
+            <span>{gradeLabel}</span>
+            <span className="text-sm font-medium text-slate-400">({result.grade})</span>
+          </p>
+          <p className="mt-2 text-sm text-slate-200">
+            {result.primaryIssueExplanation} - {issueExplanation}
+          </p>
           <p className="mt-2 text-sm text-slate-300">{result.summary}</p>
         </div>
         <div className="rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-xs text-slate-400">
