@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import BrowserSupport from "../components/BrowserSupport";
+
 const features = [
   {
     title: "Local analysis",
@@ -109,6 +111,8 @@ export default function HomePage() {
           </div>
         ))}
       </section>
+
+      <BrowserSupport />
     </div>
   );
 }
