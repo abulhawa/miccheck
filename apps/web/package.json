@@ -7,16 +7,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "vitest run --coverage"
   },
   "vitest": {
     "test": {
-      "include": ["src/**/*.{test,spec}.?(c|m)[jt]s?(x)", "app/**/*.{test,spec}.?(c|m)[jt]s?(x)", "lib/**/*.{test,spec}.?(c|m)[jt]s?(x)"],
-      "exclude": ["dist/**", "node_modules/**", ".next/**"]
+      "include": [
+        "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
+        "app/**/*.{test,spec}.?(c|m)[jt]s?(x)",
+        "lib/**/*.{test,spec}.?(c|m)[jt]s?(x)"
+      ],
+      "exclude": [
+        "dist/**",
+        "node_modules/**",
+        ".next/**"
+      ]
     },
     "coverage": {
-      "reporter": ["text", "html"],
+      "reporter": [
+        "text",
+        "html"
+      ],
       "thresholds": {
         "lines": 60,
         "functions": 60,
@@ -33,14 +44,15 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/node": "25.1.0",
+    "@types/node": "^22.10.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.6",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.9",
     "typescript": "^5.5.4",
-    "vitest": "^4.0.18",
-    "@types/node": "^22.10.0"
+    "vitest": "^4.0.18"
   }
 }

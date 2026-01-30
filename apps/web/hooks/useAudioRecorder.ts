@@ -35,6 +35,7 @@ export function useAudioRecorder({
   const audioContextRef = useRef<AudioContext | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const stopTimeoutRef = useRef<number | null>(null);
+  const updateMeterRef = useRef<() => void>(() => {});
 
   const reset = useCallback(() => {
     setStatus("idle");
@@ -74,8 +75,12 @@ export function useAudioRecorder({
       setDuration((performance.now() - startTimeRef.current) / 1000);
     }
 
-    animationRef.current = requestAnimationFrame(updateMeter);
+    animationRef.current = requestAnimationFrame(() => updateMeterRef.current());
   }, []);
+
+  useEffect(() => {
+    updateMeterRef.current = updateMeter;
+  }, [updateMeter]);
 
   const startRecording = useCallback(async () => {
     reset();
@@ -181,7 +186,7 @@ export function useAudioRecorder({
           : "Unable to access the microphone."
       );
     }
-  }, [maxDuration, reset, stopMeter, updateMeter]);
+  }, [maxDuration, minDuration, reset, stopMeter, updateMeter]);
 
   const stopRecording = useCallback(() => {
     if (stopTimeoutRef.current !== null) {
