@@ -23,12 +23,12 @@ Record → Analyze → Fix
 
 ## Supported Browsers
 
-| Browser | Desktop | Mobile |
+| Browser | Status | Notes |
 | --- | --- | --- |
-| Chrome | ✅ | ✅ |
-| Edge | ✅ | ✅ |
-| Firefox | ✅ | ✅ |
-| Safari | ✅ (14+) | ✅ (14+) |
+| Chrome / Edge (desktop) | ✅ Full | Best experience |
+| Firefox (desktop) | ⚠️ Partial | Minor quirks possible |
+| Safari (macOS) | ⚠️ Limited | System processing may override |
+| Safari (iOS) | ⚠️ Degraded | Basic analysis only |
 
 ## Privacy
 

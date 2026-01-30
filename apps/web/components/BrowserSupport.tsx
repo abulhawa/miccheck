@@ -1,8 +1,24 @@
 const browserRows = [
-  { name: "Chrome", desktop: "✅", mobile: "✅" },
-  { name: "Edge", desktop: "✅", mobile: "✅" },
-  { name: "Firefox", desktop: "✅", mobile: "✅" },
-  { name: "Safari", desktop: "✅ (14+)", mobile: "✅ (14+)" }
+  {
+    browser: "Chrome / Edge (desktop)",
+    status: "✅ Full",
+    notes: "Best experience"
+  },
+  {
+    browser: "Firefox (desktop)",
+    status: "⚠️ Partial",
+    notes: "Minor quirks possible"
+  },
+  {
+    browser: "Safari (macOS)",
+    status: "⚠️ Limited",
+    notes: "System processing may override"
+  },
+  {
+    browser: "Safari (iOS)",
+    status: "⚠️ Degraded",
+    notes: "Basic analysis only"
+  }
 ];
 
 export default function BrowserSupport() {
@@ -14,11 +30,10 @@ export default function BrowserSupport() {
             Supported Browsers
           </p>
           <h2 className="text-2xl font-semibold text-white md:text-3xl">
-            Works across modern desktop and mobile browsers.
+            Browser compatibility at a glance.
           </h2>
           <p className="text-sm text-slate-400">
-            MicCheck relies on MediaRecorder and the Web Audio API, so keep your browser
-            updated for the best experience.
+            Use the matrix below to choose the most reliable device for testing.
           </p>
         </div>
         <div className="overflow-hidden rounded-2xl border border-slate-800">
@@ -26,16 +41,16 @@ export default function BrowserSupport() {
             <thead className="bg-slate-900/80 text-xs uppercase tracking-[0.2em] text-slate-400">
               <tr>
                 <th className="px-4 py-3 font-semibold">Browser</th>
-                <th className="px-4 py-3 font-semibold">Desktop</th>
-                <th className="px-4 py-3 font-semibold">Mobile</th>
+                <th className="px-4 py-3 font-semibold">Status</th>
+                <th className="px-4 py-3 font-semibold">Notes</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800">
-              {browserRows.map((browser) => (
-                <tr key={browser.name} className="bg-slate-950/40">
-                  <td className="px-4 py-3 font-medium text-white">{browser.name}</td>
-                  <td className="px-4 py-3 text-slate-200">{browser.desktop}</td>
-                  <td className="px-4 py-3 text-slate-200">{browser.mobile}</td>
+              {browserRows.map((row) => (
+                <tr key={row.browser} className="bg-slate-950/40">
+                  <td className="px-4 py-3 font-medium text-white">{row.browser}</td>
+                  <td className="px-4 py-3 text-slate-200">{row.status}</td>
+                  <td className="px-4 py-3 text-slate-300">{row.notes}</td>
                 </tr>
               ))}
             </tbody>

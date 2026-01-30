@@ -17,11 +17,12 @@ const sampleResult: AnalysisResult = {
   metrics: {
     clippingRatio: 0.003,
     rmsDb: -16.5,
+    speechRmsDb: -15.2,
     snrDb: 26.2,
     humRatio: 0.04,
     echoScore: 0.32
   },
-  primaryIssueCategory: "Echo",
+  primaryIssueCategory: "echo",
   explanation: "Echo is noticeably affecting clarity.",
   recommendation: {
     category: "Echo",
@@ -77,7 +78,7 @@ export default function ResultsPage() {
         <>
           <ScoreCard
             result={sampleResult}
-            highlightedCategoryLabel={sampleResult.primaryIssueCategory}
+            highlightedCategoryId={sampleResult.primaryIssueCategory}
           />
 
           <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">

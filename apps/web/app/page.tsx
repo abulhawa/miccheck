@@ -78,27 +78,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-sky-500/40 bg-sky-500/10 p-6 md:p-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">
-              Privacy promise
-            </p>
-            <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Your audio stays on your device.
-            </h2>
-            <p className="text-sm text-sky-100/80">
-              MicCheck runs 100% in your browser. No audio is uploaded.
-            </p>
-          </div>
-          <Link
-            className="w-fit rounded-full border border-sky-200/40 bg-sky-500/20 px-5 py-2 text-sm font-semibold text-white transition hover:bg-sky-500/30"
-            href="/docs/PRIVACY.md"
-          >
-            Read the privacy policy
-          </Link>
-        </div>
-      </section>
+      <div className="mt-8 rounded-3xl border border-blue-200 bg-blue-50 p-6 text-center text-sm text-slate-700">
+        <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
+        <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
+        <Link className="mt-2 inline-flex text-xs font-semibold text-blue-700 underline" href="/docs/PRIVACY.md">
+          Read the privacy policy
+        </Link>
+      </div>
 
       <section className="grid gap-6 md:grid-cols-3">
         {features.map((feature) => (

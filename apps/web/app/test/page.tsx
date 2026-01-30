@@ -87,46 +87,73 @@ export default function TestPage() {
       </section>
 
       {analysis ? (
-        <section className="grid gap-6 md:grid-cols-2">
-          <ScoreCard
-            result={analysis}
-            highlightedCategoryLabel={analysis.primaryIssueCategory}
-          />
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-            <h2 className="text-lg font-semibold">Next steps</h2>
-            <p className="mt-3 text-sm text-slate-300">{analysis?.recommendation.message}</p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-400">
-              <li>Category focus: {analysis?.recommendation.category}</li>
-              <li>
-                Confidence:{" "}
-                <span
-                  title="Confidence reflects how clear the audio signal was for analysis."
-                  data-confidence={confidencePercent}
-                >
-                  {confidenceLabel}
-                </span>
-              </li>
-              <li>Keep your mouth 6-8 inches from the mic.</li>
-            </ul>
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link
-                className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
-                href="/results"
-              >
-                See sample results
-              </Link>
-              <button
-                className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
-                onClick={() => {
-                  reset();
-                  void initializeRecorder();
-                }}
-              >
-                Test Again
-              </button>
+        analysis.specialState === "NO_SPEECH" ? (
+          <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
+            <div className="flex flex-col gap-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
+                🎤❌ No speech detected
+              </p>
+              <h2 className="text-2xl font-semibold text-white">
+                {analysis.primaryFix?.title ?? "No clear speech detected"}
+              </h2>
+              <p className="text-sm text-rose-100">
+                {analysis.primaryFix?.description ??
+                  "Please speak closer to the microphone or check if your mic is muted."}
+              </p>
             </div>
-          </div>
-        </section>
+            <button
+              className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+              onClick={() => {
+                reset();
+                void initializeRecorder();
+              }}
+              type="button"
+            >
+              Test Again
+            </button>
+          </section>
+        ) : (
+          <section className="grid gap-6 md:grid-cols-2">
+            <ScoreCard
+              result={analysis}
+              highlightedCategoryId={analysis.primaryIssueCategory}
+            />
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+              <h2 className="text-lg font-semibold">🎯 Your Top Fix</h2>
+              <p className="mt-3 text-sm text-slate-300">{analysis?.recommendation.message}</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-400">
+                <li>Category focus: {analysis?.recommendation.category}</li>
+                <li>
+                  Confidence:{" "}
+                  <span
+                    title="Confidence reflects how clear the audio signal was for analysis."
+                    data-confidence={confidencePercent}
+                  >
+                    {confidenceLabel}
+                  </span>
+                </li>
+                <li>Keep your mouth 6-8 inches from the mic.</li>
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Link
+                  className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
+                  href="/results"
+                >
+                  See sample results
+                </Link>
+                <button
+                  className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
+                  onClick={() => {
+                    reset();
+                    void initializeRecorder();
+                  }}
+                >
+                  Test Again
+                </button>
+              </div>
+            </div>
+          </section>
+        )
       ) : (
         <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
           Your results will appear here after recording.

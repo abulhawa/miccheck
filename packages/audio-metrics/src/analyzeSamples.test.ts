@@ -11,7 +11,7 @@ describe("analyzeSamples", () => {
     expect(summary.categories.level.label).toBe("Level");
     expect(summary.categories.noise.label).toBe("Noise");
     expect(summary.categories.echo.label).toBe("Echo");
-    expect(summary.primaryIssueCategory).toBe("Noise");
+    expect(summary.primaryIssueCategory).toBe("noise");
     expect(summary.explanation).toBe(
       "Background noise is significantly reducing clarity."
     );

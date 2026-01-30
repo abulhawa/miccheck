@@ -2,11 +2,17 @@ import type { AnalysisResult } from "../types";
 
 interface ScoreCardProps {
   result: AnalysisResult;
-  highlightedCategoryLabel?: AnalysisResult["primaryIssueCategory"];
+  highlightedCategoryId?: AnalysisResult["primaryIssueCategory"];
 }
 
 const starArray = (stars: number) => Array.from({ length: 5 }, (_, i) => i < stars);
 const LEVEL_TARGET_DB = -14;
+const categoryImpactMap: Record<AnalysisResult["primaryIssueCategory"], string> = {
+  level: "recording level",
+  noise: "background noise",
+  echo: "echo",
+  clipping: "clipping"
+};
 const gradeLabelMap: Record<AnalysisResult["grade"], string> = {
   A: "Excellent",
   B: "Good",
@@ -15,7 +21,8 @@ const gradeLabelMap: Record<AnalysisResult["grade"], string> = {
   E: "Needs Improvement",
   F: "Unusable",
 };
-export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCardProps) {
+export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardProps) {
+  // Map star scores to user-facing descriptors per category requirements.
   const getDescriptorForScore = (score: number, category: "level" | "noise" | "echo") => {
     if (category === "level") {
       if (score >= 5) {
@@ -27,7 +34,19 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
       if (score === 3) {
         return "Slightly off target";
       }
-      return result.metrics.rmsDb <= LEVEL_TARGET_DB ? "Too quiet" : "Too loud";
+      return result.metrics.speechRmsDb <= LEVEL_TARGET_DB ? "Too quiet" : "Too loud";
+    }
+    if (category === "echo") {
+      if (score >= 5) {
+        return "Minimal echo";
+      }
+      if (score === 4) {
+        return "Slight reflections";
+      }
+      if (score === 3) {
+        return "Some room echo";
+      }
+      return "Strong echo";
     }
 
     if (score >= 5) {
@@ -44,8 +63,11 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
     }
     return "Poor";
   };
-  const activeHighlight = highlightedCategoryLabel ?? result.primaryIssueCategory;
+  const activeHighlight =
+    highlightedCategoryId ?? (result.primaryIssueCategory === "clipping" ? undefined : result.primaryIssueCategory);
+  const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
+  const impactLabel = categoryImpactMap[result.primaryIssueCategory];
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
@@ -55,9 +77,10 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
           <p className="mt-2 flex flex-wrap items-baseline gap-2 text-2xl font-semibold text-white sm:text-3xl">
             <span>{gradeLabel}</span>
             <span className="text-sm font-medium text-slate-400">({result.grade})</span>
+            <span className="text-sm font-medium text-slate-300">- {result.explanation}</span>
           </p>
           <p className="mt-2 text-sm text-slate-200">
-            {result.explanation}
+            Your grade is mainly affected by {impactLabel}.
           </p>
           <p className="mt-2 text-sm text-slate-300">{result.summary}</p>
         </div>
@@ -79,9 +102,11 @@ export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCar
           <div
             key={category.label}
             className={`rounded-2xl border border-slate-800 bg-slate-950/40 p-4 ${
-              category.label === activeHighlight
+              activeHighlight === categoryKey
                 ? "ring-2 ring-amber-500"
-                : "opacity-80"
+                : hasHighlight
+                  ? "opacity-80"
+                  : ""
             }`}
           >
             <p className="text-sm font-semibold text-slate-100">{category.label}</p>

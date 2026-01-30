@@ -1,4 +1,4 @@
-import type { CategoryLabel, CategoryScores, GradeLetter, MetricsSummary } from "../types";
+import type { CategoryId, CategoryScores, GradeLetter, MetricsSummary } from "../types";
 import { ANALYSIS_CONFIG } from "../config";
 
 const gradeFromStars = (stars: number): GradeLetter => {
@@ -21,7 +21,7 @@ const gradeFromStars = (stars: number): GradeLetter => {
  * Determine the overall letter grade based on the weakest category.
  */
 const getSeverityByCategory = (metrics: MetricsSummary) => ({
-  Level: Math.max(
+  level: Math.max(
     metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ? 3 : 0,
     metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere ||
       metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere
@@ -31,7 +31,7 @@ const getSeverityByCategory = (metrics: MetricsSummary) => ({
         ? 2
         : 0
   ),
-  Noise: Math.max(
+  noise: Math.max(
     metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb
       ? 3
       : metrics.snrDb <= ANALYSIS_CONFIG.snrMinDb
@@ -39,17 +39,28 @@ const getSeverityByCategory = (metrics: MetricsSummary) => ({
         : 0,
     metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio ? 2 : 0
   ),
-  Echo:
+  echo:
     metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore
       ? 3
       : metrics.echoScore >= ANALYSIS_CONFIG.echoWarningScore
         ? 2
+        : 0,
+  clipping:
+    metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere
+      ? 3
+      : metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioWarning
+        ? 2
         : 0
 });
 
-const getExplanation = (primaryIssueCategory: CategoryLabel, metrics: MetricsSummary): string => {
+const getExplanation = (primaryIssueCategory: CategoryId, metrics: MetricsSummary): string => {
   switch (primaryIssueCategory) {
-    case "Level":
+    case "clipping":
+      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere) {
+        return "Clipping is severely distorting the audio signal.";
+      }
+      return "Clipping is distorting the audio signal.";
+    case "level":
       if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere) {
         return "Clipping is severely distorting the audio signal.";
       }
@@ -69,7 +80,7 @@ const getExplanation = (primaryIssueCategory: CategoryLabel, metrics: MetricsSum
         return "The recording is too loud, which can cause distortion.";
       }
       return "Volume levels are slightly off target.";
-    case "Noise":
+    case "noise":
       if (metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb) {
         return "Background noise is significantly reducing clarity.";
       }
@@ -80,7 +91,7 @@ const getExplanation = (primaryIssueCategory: CategoryLabel, metrics: MetricsSum
         return "A persistent hum is reducing clarity.";
       }
       return "Background noise is affecting speech clarity.";
-    case "Echo":
+    case "echo":
     default:
       if (metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore) {
         return "Echo is overwhelming and smearing speech details.";
@@ -98,30 +109,30 @@ const getExplanation = (primaryIssueCategory: CategoryLabel, metrics: MetricsSum
 export const computeOverallGrade = (
   scores: CategoryScores,
   metrics: MetricsSummary
-): { grade: GradeLetter; primaryIssueCategory: CategoryLabel; explanation: string } => {
+): { grade: GradeLetter; primaryIssueCategory: CategoryId; explanation: string } => {
   const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.echo.stars);
   const severityByCategory = getSeverityByCategory(metrics);
   const hasSevereMetric = Object.values(severityByCategory).some((severity) => severity >= 3);
-  const categories: Array<{ label: CategoryLabel; stars: number }> = [
-    { label: "Level", stars: scores.level.stars },
-    { label: "Noise", stars: scores.noise.stars },
-    { label: "Echo", stars: scores.echo.stars }
+  const categories: Array<{ id: CategoryId; stars: number }> = [
+    { id: "level", stars: scores.level.stars },
+    { id: "noise", stars: scores.noise.stars },
+    { id: "echo", stars: scores.echo.stars }
   ];
   const primaryIssueCategory = hasSevereMetric
     ? (Object.entries(severityByCategory).reduce(
         (worst, [label, severity]) =>
           severity > worst.severity
-            ? { label: label as CategoryLabel, severity }
+            ? { label: label as CategoryId, severity }
             : worst,
-        { label: "Level" as CategoryLabel, severity: -1 }
-      ).label as CategoryLabel)
+        { label: "level" as CategoryId, severity: -1 }
+      ).label as CategoryId)
     : categories
         .filter((category) => category.stars === minStars)
         .reduce((worst, category) =>
-          severityByCategory[category.label] > severityByCategory[worst.label]
+          severityByCategory[category.id] > severityByCategory[worst.id]
             ? category
             : worst
-        ).label;
+        ).id;
 
   const isSevere =
     metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ||
