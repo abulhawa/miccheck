@@ -40,6 +40,13 @@ export default function ResultsPage() {
     void initializeRecorder();
   }, [initializeRecorder, reset, router]);
 
+  const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
+  const noSpeechFix = sampleResult.primaryFix ?? {
+    title: "No clear speech detected",
+    description: "Please speak closer to the microphone or check if your mic is muted.",
+    priority: "critical" as const
+  };
+
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
@@ -49,29 +56,50 @@ export default function ResultsPage() {
         </p>
       </section>
 
-      <ScoreCard
-        result={sampleResult}
-        highlightedCategoryLabel={sampleResult.primaryIssueCategory}
-      />
+      {isNoSpeech ? (
+        <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
+          <div className="flex flex-col gap-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
+              No speech detected
+            </p>
+            <h2 className="text-2xl font-semibold text-white">{noSpeechFix.title}</h2>
+            <p className="text-sm text-rose-100">{noSpeechFix.description}</p>
+          </div>
+          <button
+            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+            onClick={handleTestAgain}
+            type="button"
+          >
+            Test Again
+          </button>
+        </section>
+      ) : (
+        <>
+          <ScoreCard
+            result={sampleResult}
+            highlightedCategoryLabel={sampleResult.primaryIssueCategory}
+          />
 
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
-        <h2 className="text-lg font-semibold">What the metrics mean</h2>
-        <ul className="mt-3 space-y-2">
-          <li>
-            Level: target around -14 dBFS, acceptable range roughly -26 to -6
-            dBFS.
-          </li>
-          <li>Noise: higher SNR means a cleaner background.</li>
-          <li>Echo: echo score rises with reflections or large rooms.</li>
-        </ul>
-        <button
-          className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
-          onClick={handleTestAgain}
-          type="button"
-        >
-          Test Again
-        </button>
-      </section>
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
+            <h2 className="text-lg font-semibold">What the metrics mean</h2>
+            <ul className="mt-3 space-y-2">
+              <li>
+                Level: target around -14 dBFS, acceptable range roughly -26 to -6
+                dBFS.
+              </li>
+              <li>Noise: higher SNR means a cleaner background.</li>
+              <li>Echo: echo score rises with reflections or large rooms.</li>
+            </ul>
+            <button
+              className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
+              onClick={handleTestAgain}
+              type="button"
+            >
+              Test Again
+            </button>
+          </section>
+        </>
+      )}
     </div>
   );
 }
