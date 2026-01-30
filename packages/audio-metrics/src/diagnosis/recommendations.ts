@@ -30,8 +30,8 @@ export const recommendFix = (
   }
   if (echo.echoScore > ANALYSIS_CONFIG.echoWarningScore) {
     return {
-      category: "Room",
-      message: "Add soft furnishings or close doors to reduce room reflections.",
+      category: "Echo",
+      message: "Add soft furnishings or close doors to reduce echo reflections.",
       confidence: 0.77
     };
   }

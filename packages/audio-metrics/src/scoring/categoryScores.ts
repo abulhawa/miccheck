@@ -33,14 +33,17 @@ const describeNoise = (snrDb: number, humRatio: number): { stars: number; descri
   return { stars: 5, description: "Clean background" };
 };
 
-const describeRoom = (echoScore: number): { stars: number; description: string } => {
+const describeEcho = (echoScore: number): { stars: number; description: string } => {
   if (echoScore > ANALYSIS_CONFIG.echoWarningScore) {
-    return { stars: 2, description: "Echo is present" };
+    return { stars: 2, description: "Strong echo" };
   }
   if (echoScore > ANALYSIS_CONFIG.echoWarningScore * 0.7) {
-    return { stars: 3, description: "Slight reflections" };
+    return { stars: 3, description: "Some room echo" };
   }
-  return { stars: 5, description: "Dry room" };
+  if (echoScore > ANALYSIS_CONFIG.echoWarningScore * 0.4) {
+    return { stars: 4, description: "Slight reflections" };
+  }
+  return { stars: 5, description: "Minimal echo" };
 };
 
 /**
@@ -54,7 +57,7 @@ export const buildCategoryScores = (
 ): CategoryScores => {
   const levelScore = describeLevel(level.rmsDb, clipping.clippingRatio);
   const noiseScore = describeNoise(noise.snrDb, noise.humRatio);
-  const roomScore = describeRoom(echo.echoScore);
+  const echoScore = describeEcho(echo.echoScore);
 
   return {
     level: {
@@ -67,10 +70,10 @@ export const buildCategoryScores = (
       label: "Noise",
       description: noiseScore.description
     },
-    room: {
-      stars: clampStars(roomScore.stars),
-      label: "Room",
-      description: roomScore.description
+    echo: {
+      stars: clampStars(echoScore.stars),
+      label: "Echo",
+      description: echoScore.description
     }
   };
 };

@@ -17,11 +17,11 @@ export interface CategoryScore {
 export interface CategoryScores {
   level: CategoryScore;
   noise: CategoryScore;
-  room: CategoryScore;
+  echo: CategoryScore;
 }
 
 export interface Recommendation {
-  category: "Clipping" | "Noise" | "Room" | "Volume" | "General";
+  category: "Clipping" | "Noise" | "Echo" | "Volume" | "General";
   message: string;
   confidence: number;
 }

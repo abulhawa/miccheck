@@ -10,6 +10,6 @@ describe("analyzeSamples", () => {
     expect(summary.recommendation.category).toBe("Noise");
     expect(summary.categories.level.label).toBe("Level");
     expect(summary.categories.noise.label).toBe("Noise");
-    expect(summary.categories.room.label).toBe("Room");
+    expect(summary.categories.echo.label).toBe("Echo");
   });
 });

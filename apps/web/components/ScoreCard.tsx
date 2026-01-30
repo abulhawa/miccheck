@@ -77,10 +77,7 @@ export default function ScoreCard({ result }: ScoreCardProps) {
               ))}
             </div>
             <p className="mt-2 text-xs text-slate-400">
-              {getDescriptorForScore(
-                category.stars,
-                categoryKey === "room" ? "echo" : categoryKey
-              )}
+              {getDescriptorForScore(category.stars, categoryKey)}
             </p>
           </div>
         ))}
