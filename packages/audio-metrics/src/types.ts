@@ -8,9 +8,11 @@ export interface MetricsSummary {
   echoScore: number;
 }
 
+export type CategoryLabel = "Level" | "Noise" | "Echo";
+
 export interface CategoryScore {
   stars: number;
-  label: string;
+  label: CategoryLabel;
   description: string;
 }
 
@@ -31,5 +33,7 @@ export interface AnalysisSummary {
   summary: string;
   categories: CategoryScores;
   metrics: MetricsSummary;
+  primaryIssueCategory: CategoryLabel;
+  primaryIssueExplanation: string;
   recommendation: Recommendation;
 }

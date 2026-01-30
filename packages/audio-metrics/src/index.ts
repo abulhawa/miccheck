@@ -31,6 +31,11 @@ export const analyzeSamples = (
     echoScore: echo.echoScore
   });
   const recommendation = recommendFix(level, clipping, noise, echo);
+  const primaryIssue = Object.values(categories).reduce((lowest, current) =>
+    current.stars < lowest.stars ? current : lowest
+  );
+  const primaryIssueCategory = primaryIssue.label;
+  const primaryIssueExplanation = `Your grade is mainly affected by ${primaryIssueCategory}`;
 
   const summary =
     grade === "A"
@@ -54,6 +59,8 @@ export const analyzeSamples = (
       humRatio: noise.humRatio,
       echoScore: echo.echoScore
     },
+    primaryIssueCategory,
+    primaryIssueExplanation,
     recommendation
   };
 };

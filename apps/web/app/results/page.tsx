@@ -17,6 +17,8 @@ const sampleResult: AnalysisResult = {
     humRatio: 0.04,
     echoScore: 0.32
   },
+  primaryIssueCategory: "Echo",
+  primaryIssueExplanation: "Your grade is mainly affected by Echo",
   recommendation: {
     category: "Echo",
     message: "Add soft furnishings or move closer to the mic to reduce echo.",
@@ -34,7 +36,10 @@ export default function ResultsPage() {
         </p>
       </section>
 
-      <ScoreCard result={sampleResult} />
+      <ScoreCard
+        result={sampleResult}
+        highlightedCategoryLabel={sampleResult.primaryIssueCategory}
+      />
 
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
         <h2 className="text-lg font-semibold">What the metrics mean</h2>

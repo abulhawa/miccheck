@@ -2,12 +2,13 @@ import type { AnalysisResult } from "../types";
 
 interface ScoreCardProps {
   result: AnalysisResult;
+  highlightedCategoryLabel?: AnalysisResult["primaryIssueCategory"];
 }
 
 const starArray = (stars: number) => Array.from({ length: 5 }, (_, i) => i < stars);
 const LEVEL_TARGET_DB = -14;
 
-export default function ScoreCard({ result }: ScoreCardProps) {
+export default function ScoreCard({ result, highlightedCategoryLabel }: ScoreCardProps) {
   const getDescriptorForScore = (score: number, category: "level" | "noise" | "echo") => {
     if (category === "level") {
       if (score >= 5) {
@@ -36,6 +37,7 @@ export default function ScoreCard({ result }: ScoreCardProps) {
     }
     return "Poor";
   };
+  const activeHighlight = highlightedCategoryLabel ?? result.primaryIssueCategory;
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
@@ -43,6 +45,7 @@ export default function ScoreCard({ result }: ScoreCardProps) {
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Overall grade</p>
           <p className="text-4xl font-semibold text-white">{result.grade}</p>
+          <p className="mt-1 text-sm text-slate-200">{result.primaryIssueExplanation}</p>
           <p className="mt-2 text-sm text-slate-300">{result.summary}</p>
         </div>
         <div className="rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-xs text-slate-400">
@@ -60,7 +63,14 @@ export default function ScoreCard({ result }: ScoreCardProps) {
             ]
           >
         ).map(([categoryKey, category]) => (
-          <div key={category.label} className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
+          <div
+            key={category.label}
+            className={`rounded-2xl border border-slate-800 bg-slate-950/40 p-4 ${
+              category.label === activeHighlight
+                ? "ring-2 ring-amber-500"
+                : "opacity-80"
+            }`}
+          >
             <p className="text-sm font-semibold text-slate-100">{category.label}</p>
             <div className="mt-2 flex gap-1">
               {starArray(category.stars).map((filled, index) => (
