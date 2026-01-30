@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import AudioVisualizer from "../../components/AudioVisualizer";
+import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 
 export default function TestPage() {
+  const [deviceId, setDeviceId] = useState<string | null>(null);
   const {
     status,
     error,
@@ -17,7 +19,7 @@ export default function TestPage() {
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7 });
+  } = useAudioRecorder({ maxDuration: 7, deviceId });
 
   const confidenceValue = analysis?.recommendation.confidence ?? 0;
   const confidencePercent = Math.round(confidenceValue * 100);
@@ -35,6 +37,14 @@ export default function TestPage() {
     if (isAnalyzing) return "Analyzing...";
     return "Start recording";
   }, [isRecording, isAnalyzing]);
+
+  const handleDeviceChange = useCallback(
+    (nextDeviceId: string | null) => {
+      setDeviceId(nextDeviceId);
+      void initializeRecorder(nextDeviceId);
+    },
+    [initializeRecorder]
+  );
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
@@ -67,6 +77,7 @@ export default function TestPage() {
               Duration: {duration.toFixed(1)}s
             </div>
           </div>
+          <DeviceSelector onDeviceChange={handleDeviceChange} />
           {error ? (
             <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
               {error}
