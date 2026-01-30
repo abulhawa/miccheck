@@ -11,6 +11,10 @@
     "test": "vitest run --coverage"
   },
   "vitest": {
+    "test": {
+      "include": ["src/**/*.{test,spec}.?(c|m)[jt]s?(x)"],
+      "exclude": ["dist/**", "node_modules/**"]
+    },
     "coverage": {
       "reporter": ["text", "html"],
       "thresholds": {
