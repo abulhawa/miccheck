@@ -18,6 +18,16 @@ export default function TestPage() {
     reset
   } = useAudioRecorder({ maxDuration: 7 });
 
+  const confidencePercent = analysis
+    ? Math.round((analysis?.recommendation.confidence ?? 0) * 100)
+    : 0;
+  const confidenceLabel =
+    confidencePercent >= 90
+      ? "High confidence"
+      : confidencePercent >= 75
+        ? "Moderate confidence"
+        : "Low confidence";
+
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
   const buttonLabel = useMemo(() => {
@@ -76,7 +86,15 @@ export default function TestPage() {
             <p className="mt-3 text-sm text-slate-300">{analysis?.recommendation.message}</p>
             <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>Category focus: {analysis?.recommendation.category}</li>
-              <li>Confidence: {Math.round((analysis?.recommendation.confidence ?? 0) * 100)}%</li>
+              <li>
+                Confidence:{" "}
+                <span
+                  title="Confidence reflects how clear the audio signal was for analysis."
+                  data-confidence={confidencePercent}
+                >
+                  {confidenceLabel}
+                </span>
+              </li>
               <li>Keep your mouth 6-8 inches from the mic.</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-4">
