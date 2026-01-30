@@ -67,7 +67,17 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
     highlightedCategoryId ?? (result.primaryIssueCategory === "clipping" ? undefined : result.primaryIssueCategory);
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
-  const impactLabel = categoryImpactMap[result.primaryIssueCategory];
+  const impactLabel = categoryImpactMap[result.primaryIssueCategory] ?? "overall audio quality";
+  const categoryEntries = (
+    Object.entries(result.categories ?? {}) as Array<
+      [
+        keyof AnalysisResult["categories"],
+        AnalysisResult["categories"][keyof AnalysisResult["categories"]] | undefined
+      ]
+    >
+  ).filter(([, category]): category is AnalysisResult["categories"][keyof AnalysisResult["categories"]] =>
+    Boolean(category)
+  );
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
@@ -91,14 +101,7 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
         </div>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {(
-          Object.entries(result.categories) as Array<
-            [
-              keyof AnalysisResult["categories"],
-              AnalysisResult["categories"][keyof AnalysisResult["categories"]]
-            ]
-          >
-        ).map(([categoryKey, category]) => (
+        {categoryEntries.map(([categoryKey, category]) => (
           <div
             key={category.label}
             className={`rounded-2xl border border-slate-800 bg-slate-950/40 p-4 ${
