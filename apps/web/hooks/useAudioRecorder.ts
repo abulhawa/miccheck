@@ -7,16 +7,21 @@ import type { AnalysisResult } from "../types";
 
 interface RecorderOptions {
   maxDuration?: number;
+  minDuration?: number;
 }
 
 type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
 
 const DEFAULT_MAX_DURATION = 6;
+const DEFAULT_MIN_DURATION = 5;
 
 /**
  * useAudioRecorder handles microphone capture, level metering, and analysis.
  */
-export function useAudioRecorder({ maxDuration = DEFAULT_MAX_DURATION }: RecorderOptions) {
+export function useAudioRecorder({
+  maxDuration = DEFAULT_MAX_DURATION,
+  minDuration = DEFAULT_MIN_DURATION
+}: RecorderOptions) {
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -128,9 +133,9 @@ export function useAudioRecorder({ maxDuration = DEFAULT_MAX_DURATION }: Recorde
           const audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
           await decodeContext.close();
 
-          if (audioBuffer.length < audioBuffer.sampleRate * 1.5) {
+          if (audioBuffer.duration < minDuration) {
             setStatus("error");
-            setError("Recording was too short. Please try again.");
+            setError("Recording was too short. Please capture at least 5 seconds.");
             return;
           }
 
