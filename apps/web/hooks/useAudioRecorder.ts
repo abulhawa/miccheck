@@ -29,6 +29,7 @@ export function useAudioRecorder({
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [level, setLevel] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -81,6 +82,7 @@ export function useAudioRecorder({
       stopMediaStream(mediaStreamRef.current);
       mediaStreamRef.current = null;
     }
+    setMediaStream(null);
     mediaRecorderRef.current = null;
     stopMeter();
     audioChunksRef.current = [];
@@ -141,6 +143,7 @@ export function useAudioRecorder({
         }
       });
       mediaStreamRef.current = stream;
+      setMediaStream(stream);
 
       const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) {
@@ -189,6 +192,7 @@ export function useAudioRecorder({
         if (mediaStreamRef.current) {
           stopMediaStream(mediaStreamRef.current);
           mediaStreamRef.current = null;
+          setMediaStream(null);
         }
         setStatus("analyzing");
         try {
@@ -268,6 +272,7 @@ export function useAudioRecorder({
         mediaRecorderRef.current.stop();
         stopMediaStream(mediaRecorderRef.current.stream);
         mediaStreamRef.current = null;
+        setMediaStream(null);
       }
     }, maxDuration * 1000);
   }, [initializeRecorder, maxDuration, reset, stopMediaStream, updateMeter]);
@@ -279,6 +284,7 @@ export function useAudioRecorder({
       mediaRecorderRef.current.stop();
       stopMediaStream(mediaRecorderRef.current.stream);
       mediaStreamRef.current = null;
+      setMediaStream(null);
     }
   }, [clearStopTimeout, stopMediaStream]);
 
@@ -294,6 +300,7 @@ export function useAudioRecorder({
     analysis,
     level,
     duration,
+    mediaStream,
     initializeRecorder,
     startRecording,
     stopRecording,
