@@ -185,7 +185,17 @@ export function useAudioRecorder({
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
-          const arrayBuffer = await blob.arrayBuffer();
+          const arrayBuffer =
+            typeof blob.arrayBuffer === "function"
+              ? await blob.arrayBuffer()
+              : typeof Response !== "undefined"
+                ? await new Response(blob).arrayBuffer()
+              : await new Promise<ArrayBuffer>((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result as ArrayBuffer);
+                  reader.onerror = () => reject(reader.error ?? new Error("Unable to read blob."));
+                  reader.readAsArrayBuffer(blob);
+                });
           const decodeContext = new AudioContextClass();
           const audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
           await decodeContext.close();
