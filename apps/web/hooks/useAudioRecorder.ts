@@ -139,11 +139,26 @@ export function useAudioRecorder({
 
       const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) {
+        stream.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
         setStatus("error");
         setError("Web Audio API is unavailable in this browser.");
         return;
       }
-      const audioContext = new AudioContextClass();
+      let audioContext: AudioContext;
+      try {
+        audioContext = new AudioContextClass();
+      } catch (audioContextError) {
+        stream.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
+        setStatus("error");
+        setError(
+          audioContextError instanceof Error
+            ? audioContextError.message
+            : "Unable to initialize the Web Audio API."
+        );
+        return;
+      }
       audioContextRef.current = audioContext;
       const source = audioContext.createMediaStreamSource(stream);
       const analyser = audioContext.createAnalyser();
