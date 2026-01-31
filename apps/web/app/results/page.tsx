@@ -42,7 +42,31 @@ export default function ResultsPage() {
   }, [router]);
 
   useEffect(() => {
-    setRecordingBlob(loadRecording());
+    let attempts = 0;
+    let timeoutId: number | null = null;
+    const maxAttempts = 15;
+    const retryDelay = 200;
+
+    const syncRecording = () => {
+      const stored = loadRecording();
+      if (stored) {
+        setRecordingBlob(stored);
+        return;
+      }
+
+      attempts += 1;
+      if (attempts < maxAttempts) {
+        timeoutId = window.setTimeout(syncRecording, retryDelay);
+      }
+    };
+
+    syncRecording();
+
+    return () => {
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
