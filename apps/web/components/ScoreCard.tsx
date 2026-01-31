@@ -75,8 +75,13 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
         AnalysisResult["categories"][keyof AnalysisResult["categories"]] | undefined
       ]
     >
-  ).filter(([, category]): category is AnalysisResult["categories"][keyof AnalysisResult["categories"]] =>
-    Boolean(category)
+  ).filter(
+    (
+      entry
+    ): entry is [
+      keyof AnalysisResult["categories"],
+      AnalysisResult["categories"][keyof AnalysisResult["categories"]]
+    ] => Boolean(entry[1])
   );
 
   return (
