@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
+import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
@@ -32,10 +34,16 @@ const sampleResult: AnalysisResult = {
 
 export default function ResultsPage() {
   const router = useRouter();
+  const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
 
   const handleTestAgain = useCallback(() => {
+    clearRecording();
     router.push("/test");
   }, [router]);
+
+  useEffect(() => {
+    setRecordingBlob(loadRecording());
+  }, []);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
   const noSpeechFix = sampleResult.primaryFix ?? {
@@ -95,6 +103,14 @@ export default function ResultsPage() {
               Test Again
             </button>
           </section>
+
+          {recordingBlob ? (
+            <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />
+          ) : (
+            <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
+              Record a sample to unlock playback on this page.
+            </section>
+          )}
         </>
       )}
     </div>
