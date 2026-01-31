@@ -40,6 +40,11 @@ export function useAudioRecorder({
   const stopTimeoutRef = useRef<number | null>(null);
   const updateMeterRef = useRef<() => void>(() => {});
 
+  const stopMediaStream = useCallback((stream: MediaStream | null) => {
+    if (!stream) return;
+    stream.getTracks().forEach((track) => track.stop());
+  }, []);
+
   const clearStopTimeout = useCallback(() => {
     if (stopTimeoutRef.current !== null) {
       window.clearTimeout(stopTimeoutRef.current);
@@ -73,14 +78,14 @@ export function useAudioRecorder({
       }
     }
     if (mediaStreamRef.current) {
-      mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      stopMediaStream(mediaStreamRef.current);
       mediaStreamRef.current = null;
     }
     mediaRecorderRef.current = null;
     stopMeter();
     audioChunksRef.current = [];
     startTimeRef.current = null;
-  }, [clearStopTimeout, stopMeter]);
+  }, [clearStopTimeout, stopMediaStream, stopMeter]);
 
   const reset = useCallback(() => {
     clearRecorder();
@@ -139,7 +144,7 @@ export function useAudioRecorder({
 
       const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) {
-        stream.getTracks().forEach((track) => track.stop());
+        stopMediaStream(stream);
         mediaStreamRef.current = null;
         setStatus("error");
         setError("Web Audio API is unavailable in this browser.");
@@ -149,7 +154,7 @@ export function useAudioRecorder({
       try {
         audioContext = new AudioContextClass();
       } catch (audioContextError) {
-        stream.getTracks().forEach((track) => track.stop());
+        stopMediaStream(stream);
         mediaStreamRef.current = null;
         setStatus("error");
         setError(
@@ -181,7 +186,10 @@ export function useAudioRecorder({
       recorder.onstop = async () => {
         clearStopTimeout();
         stopMeter();
-        mediaStreamRef.current = null;
+        if (mediaStreamRef.current) {
+          stopMediaStream(mediaStreamRef.current);
+          mediaStreamRef.current = null;
+        }
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
@@ -258,21 +266,21 @@ export function useAudioRecorder({
     stopTimeoutRef.current = window.setTimeout(() => {
       if (mediaRecorderRef.current?.state === "recording") {
         mediaRecorderRef.current.stop();
-        mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
+        stopMediaStream(mediaRecorderRef.current.stream);
         mediaStreamRef.current = null;
       }
     }, maxDuration * 1000);
-  }, [initializeRecorder, maxDuration, reset, updateMeter]);
+  }, [initializeRecorder, maxDuration, reset, stopMediaStream, updateMeter]);
 
   const stopRecording = useCallback(() => {
     clearStopTimeout();
 
     if (mediaRecorderRef.current?.state === "recording") {
       mediaRecorderRef.current.stop();
-      mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
+      stopMediaStream(mediaRecorderRef.current.stream);
       mediaStreamRef.current = null;
     }
-  }, [clearStopTimeout]);
+  }, [clearStopTimeout, stopMediaStream]);
 
   useEffect(() => {
     return () => {
