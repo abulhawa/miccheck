@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import AudioVisualizer from "../../components/AudioVisualizer";
 import DeviceSelector from "../../components/DeviceSelector";
@@ -20,10 +20,6 @@ export default function TestPage() {
     stopRecording,
     reset
   } = useAudioRecorder({ maxDuration: 7, deviceId });
-
-  useEffect(() => {
-    void initializeRecorder();
-  }, [initializeRecorder]);
 
   const confidenceValue = analysis?.recommendation.confidence ?? 0;
   const confidencePercent = Math.round(confidenceValue * 100);
