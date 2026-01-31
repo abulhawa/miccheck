@@ -9,6 +9,31 @@ vi.mock("@miccheck/audio-core", () => ({
   describeBrowserSupport: () => ({ isSupported: true, issues: [] })
 }));
 
+vi.mock("../lib/analysis", () => ({
+  analyzeRecording: () => ({
+    grade: "A",
+    summary: "Solid recording.",
+    categories: {
+      level: { stars: 4, label: "Level", description: "Good level." },
+      noise: { stars: 4, label: "Noise", description: "Low noise." },
+      echo: { stars: 4, label: "Echo", description: "Low echo." }
+    },
+    metrics: {
+      clippingRatio: 0,
+      rmsDb: -20,
+      speechRmsDb: -18,
+      snrDb: 20,
+      humRatio: 0,
+      echoScore: 0.1
+    },
+    primaryIssueCategory: "level",
+    explanation: "All clear.",
+    recommendation: { category: "General", message: "Keep it up.", confidence: 0.9 },
+    primaryFix: { title: "None", description: "No changes needed.", priority: "low" },
+    specialState: undefined
+  })
+}));
+
 type RecorderHook = ReturnType<typeof useAudioRecorder>;
 
 const HookHarness = ({ onReady }: { onReady: (value: RecorderHook) => void }) => {
@@ -180,6 +205,81 @@ describe("useAudioRecorder", () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(recorder?.error).toBe("Recording was too short. Please capture at least 3 seconds.");
+    root.unmount();
+  });
+
+  it("stops microphone tracks once recording is complete", async () => {
+    window.requestAnimationFrame = vi.fn();
+
+    const stopTrack = vi.fn();
+    const stream = {
+      getTracks: vi.fn(() => [{ stop: stopTrack }])
+    } as unknown as MediaStream;
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: { getUserMedia },
+      configurable: true
+    });
+
+    class MockAudioContext {
+      createMediaStreamSource() {
+        return { connect: vi.fn() };
+      }
+      createAnalyser() {
+        return {
+          fftSize: 0,
+          getFloatTimeDomainData: vi.fn()
+        };
+      }
+      decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
+      close = vi.fn().mockResolvedValue(undefined);
+    }
+
+    window.AudioContext = MockAudioContext as unknown as typeof AudioContext;
+
+    class MockMediaRecorder {
+      static isTypeSupported = vi.fn().mockReturnValue(true);
+      state = "inactive";
+      mimeType = "audio/webm";
+      stream: MediaStream;
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onstop: (() => void) | null = null;
+
+      constructor(stream: MediaStream) {
+        this.stream = stream;
+      }
+
+      start = vi.fn(() => {
+        this.state = "recording";
+      });
+
+      stop = vi.fn(() => {
+        this.state = "inactive";
+        this.onstop?.();
+      });
+    }
+
+    window.MediaRecorder = MockMediaRecorder as unknown as typeof MediaRecorder;
+
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    let recorder: RecorderHook | undefined;
+
+    await act(async () => {
+      root.render(<HookHarness onReady={(value) => (recorder = value)} />);
+    });
+
+    await act(async () => {
+      await recorder?.startRecording();
+    });
+
+    await act(async () => {
+      recorder?.stopRecording();
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(stopTrack).toHaveBeenCalled();
     root.unmount();
   });
 });
