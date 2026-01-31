@@ -10,6 +10,7 @@ import type { AnalysisSummary } from "./types";
 
 export type { AnalysisSummary } from "./types";
 export * from "./types";
+export { getContextualExplanation } from "./scoring/contextHelp";
 
 /**
  * Analyze PCM samples and return a summary of metrics and recommendations.

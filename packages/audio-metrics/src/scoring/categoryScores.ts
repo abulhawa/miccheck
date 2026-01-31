@@ -11,29 +11,49 @@ const describeLevel = (rmsDb: number, clippingRatio: number): { stars: number; d
   if (clippingRatio > ANALYSIS_CONFIG.clippingRatioWarning) {
     return { stars: 1, description: "Clipping detected" };
   }
+  if (rmsDb < ANALYSIS_CONFIG.minRmsDbSevere) {
+    return { stars: 1, description: "Extremely quiet" };
+  }
+  if (rmsDb > ANALYSIS_CONFIG.maxRmsDbSevere) {
+    return { stars: 1, description: "Extremely loud" };
+  }
   if (rmsDb < ANALYSIS_CONFIG.minRmsDb) {
     return { stars: 2, description: "Too quiet" };
   }
   if (rmsDb > ANALYSIS_CONFIG.maxRmsDb) {
     return { stars: 2, description: "Too loud" };
   }
-  if (rmsDb < ANALYSIS_CONFIG.targetRmsDb - 4 || rmsDb > ANALYSIS_CONFIG.targetRmsDb + 4) {
+  const targetRange = ANALYSIS_CONFIG.targetRangeDb;
+  if (rmsDb < ANALYSIS_CONFIG.targetRmsDb - targetRange ||
+      rmsDb > ANALYSIS_CONFIG.targetRmsDb + targetRange) {
     return { stars: 4, description: "Slightly off target" };
   }
-  return { stars: 5, description: "Great level" };
+  return { stars: 5, description: "Excellent level" };
 };
 
 const describeNoise = (snrDb: number, humRatio: number): { stars: number; description: string } => {
-  if (snrDb < ANALYSIS_CONFIG.snrMinDb || humRatio > ANALYSIS_CONFIG.humWarningRatio) {
-    return { stars: 2, description: "Noticeable background noise" };
+  if (humRatio > ANALYSIS_CONFIG.humWarningRatio) {
+    return { stars: 2, description: "Electrical hum detected" };
   }
-  if (snrDb < ANALYSIS_CONFIG.snrGoodDb) {
+  if (snrDb >= ANALYSIS_CONFIG.snrExcellentDb) {
+    return { stars: 5, description: "Very clean" };
+  }
+  if (snrDb >= ANALYSIS_CONFIG.snrGoodDb) {
+    return { stars: 4, description: "Clean background" };
+  }
+  if (snrDb >= ANALYSIS_CONFIG.snrFairDb) {
     return { stars: 3, description: "Some background noise" };
   }
-  return { stars: 5, description: "Clean background" };
+  if (snrDb >= ANALYSIS_CONFIG.snrPoorDb) {
+    return { stars: 2, description: "Noisy background" };
+  }
+  return { stars: 1, description: "Very noisy" };
 };
 
 const describeEcho = (echoScore: number): { stars: number; description: string } => {
+  if (echoScore > ANALYSIS_CONFIG.echoSevereScore) {
+    return { stars: 1, description: "Overwhelming echo" };
+  }
   if (echoScore > ANALYSIS_CONFIG.echoWarningScore) {
     return { stars: 2, description: "Strong echo" };
   }

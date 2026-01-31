@@ -21,7 +21,7 @@ export const recommendFix = (
       confidence: 0.9
     };
   }
-  if (noise.snrDb < ANALYSIS_CONFIG.snrMinDb || noise.humRatio > ANALYSIS_CONFIG.humWarningRatio) {
+  if (noise.snrDb < ANALYSIS_CONFIG.snrFairDb || noise.humRatio > ANALYSIS_CONFIG.humWarningRatio) {
     return {
       category: "Noise",
       message: "Lower background noise by turning off fans or switching to a quieter room.",
