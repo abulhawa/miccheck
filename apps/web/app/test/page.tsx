@@ -2,9 +2,10 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
-import AudioVisualizer from "../../components/AudioVisualizer";
+import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
 import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
+import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 
 export default function TestPage() {
@@ -12,14 +13,20 @@ export default function TestPage() {
   const {
     status,
     error,
-    level,
     duration,
+    mediaStream,
     analysis,
     initializeRecorder,
     startRecording,
     stopRecording,
     reset
   } = useAudioRecorder({ maxDuration: 7, deviceId });
+  const isRecording = status === "recording";
+  const isAnalyzing = status === "analyzing";
+  const { audioDataArray, currentVolume, peakVolume } = useAudioMeter({
+    stream: mediaStream,
+    isActive: isRecording
+  });
 
   const confidenceValue = analysis?.recommendation.confidence ?? 0;
   const confidencePercent = Math.round(confidenceValue * 100);
@@ -30,8 +37,6 @@ export default function TestPage() {
         ? "Moderate confidence"
         : "Low confidence";
 
-  const isRecording = status === "recording";
-  const isAnalyzing = status === "analyzing";
   const buttonLabel = useMemo(() => {
     if (isRecording) return "Stop recording";
     if (isAnalyzing) return "Analyzing...";
@@ -57,7 +62,12 @@ export default function TestPage() {
           </p>
         </div>
         <div className="mt-8 flex flex-col gap-6">
-          <AudioVisualizer level={level} isRecording={isRecording} />
+          <AudioWaveformVisualizer
+            audioDataArray={audioDataArray}
+            currentVolume={currentVolume}
+            peakVolume={peakVolume}
+            isRecording={isRecording}
+          />
           <div className="flex flex-wrap items-center gap-4">
             <button
               className="rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-700"
