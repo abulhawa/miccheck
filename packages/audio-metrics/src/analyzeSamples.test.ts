@@ -16,4 +16,16 @@ describe("analyzeSamples", () => {
       "Background noise is significantly reducing clarity."
     );
   });
+
+  it("keeps echo grading stable for short buffers", () => {
+    const sampleRate = 48000;
+    const maxLag = Math.floor(sampleRate * 0.2);
+    const samples = new Float32Array(maxLag).fill(0.1);
+    const summary = analyzeSamples(samples, sampleRate);
+
+    expect(summary.categories.echo.description).toBe("Minimal echo");
+    expect(summary.metrics.echoScore).toBe(0);
+    expect(Number.isNaN(summary.metrics.echoScore)).toBe(false);
+    expect(Object.is(summary.metrics.echoScore, -0)).toBe(false);
+  });
 });
