@@ -8,13 +8,19 @@ export interface BrowserSupport {
  */
 export const describeBrowserSupport = (): BrowserSupport => {
   const issues: string[] = [];
-  if (typeof window === "undefined") {
+  const hasWindow = typeof window !== "undefined";
+  const hasNavigator = typeof navigator !== "undefined";
+  if (!hasWindow || !hasNavigator) {
     issues.push("Not running in a browser environment.");
+    return {
+      isSupported: false,
+      issues
+    };
   }
-  if (!navigator?.mediaDevices?.getUserMedia) {
+  if (!navigator.mediaDevices?.getUserMedia) {
     issues.push("getUserMedia is unavailable.");
   }
-  if (typeof AudioContext === "undefined" && typeof (window as any)?.webkitAudioContext === "undefined") {
+  if (typeof AudioContext === "undefined" && typeof (window as any).webkitAudioContext === "undefined") {
     issues.push("Web Audio API is unavailable.");
   }
   if (typeof MediaRecorder === "undefined") {
