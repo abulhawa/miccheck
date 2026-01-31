@@ -15,6 +15,11 @@ describe("pcmUtils", () => {
     expect(Array.from(result)).toEqual([0.5, 0]);
   });
 
+  it("returns an empty array when given no channels", () => {
+    const result = mixToMono([]);
+    expect(result).toEqual(new Float32Array(0));
+  });
+
   it("computes RMS correctly", () => {
     const samples = new Float32Array([1, -1]);
     expect(computeRms(samples)).toBeCloseTo(1, 5);
