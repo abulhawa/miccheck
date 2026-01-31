@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { analyzeRecording } from "../lib/analysis";
+import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
 import type { AnalysisResult } from "../types";
 
@@ -30,6 +31,7 @@ export function useAudioRecorder({
   const [level, setLevel] = useState(0);
   const [duration, setDuration] = useState(0);
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+  const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -96,6 +98,8 @@ export function useAudioRecorder({
     setAnalysis(null);
     setLevel(0);
     setDuration(0);
+    setRecordingBlob(null);
+    clearRecording();
   }, [clearRecorder]);
 
   const updateMeter = useCallback(() => {
@@ -197,6 +201,10 @@ export function useAudioRecorder({
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
+          setRecordingBlob(blob);
+          saveRecording(blob).catch(() => {
+            // Non-blocking storage failure: playback can still use in-memory blob.
+          });
           const arrayBuffer =
             typeof blob.arrayBuffer === "function"
               ? await blob.arrayBuffer()
@@ -301,6 +309,7 @@ export function useAudioRecorder({
     level,
     duration,
     mediaStream,
+    recordingBlob,
     initializeRecorder,
     startRecording,
     stopRecording,
