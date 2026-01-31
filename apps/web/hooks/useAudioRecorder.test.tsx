@@ -25,6 +25,8 @@ describe("useAudioRecorder", () => {
     webkitAudioContext?: typeof AudioContext;
   }).webkitAudioContext;
   const originalMediaDevices = navigator.mediaDevices;
+  const originalMediaRecorder = window.MediaRecorder;
+  const originalRequestAnimationFrame = window.requestAnimationFrame;
 
   beforeEach(() => {
     delete (window as Partial<typeof window>).AudioContext;
@@ -52,6 +54,16 @@ describe("useAudioRecorder", () => {
       });
     } else {
       delete (navigator as { mediaDevices?: MediaDevices }).mediaDevices;
+    }
+    if (originalMediaRecorder) {
+      window.MediaRecorder = originalMediaRecorder;
+    } else {
+      delete (window as Partial<typeof window>).MediaRecorder;
+    }
+    if (originalRequestAnimationFrame) {
+      window.requestAnimationFrame = originalRequestAnimationFrame;
+    } else {
+      delete (window as Partial<typeof window>).requestAnimationFrame;
     }
   });
 
@@ -81,6 +93,93 @@ describe("useAudioRecorder", () => {
     expect(getUserMedia).toHaveBeenCalled();
     expect(stream.getTracks).toHaveBeenCalled();
     expect(stopTrack).toHaveBeenCalled();
+    root.unmount();
+  });
+
+  it("includes the configured minDuration in the short recording message", async () => {
+    window.requestAnimationFrame = vi.fn();
+
+    const stopTrack = vi.fn();
+    const stream = {
+      getTracks: vi.fn(() => [{ stop: stopTrack }])
+    } as unknown as MediaStream;
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: { getUserMedia },
+      configurable: true
+    });
+
+    class MockAudioContext {
+      createMediaStreamSource() {
+        return { connect: vi.fn() };
+      }
+      createAnalyser() {
+        return {
+          fftSize: 0,
+          getFloatTimeDomainData: vi.fn()
+        };
+      }
+      decodeAudioData = vi.fn().mockResolvedValue({ duration: 2 });
+      close = vi.fn().mockResolvedValue(undefined);
+    }
+
+    window.AudioContext = MockAudioContext as unknown as typeof AudioContext;
+
+    class MockMediaRecorder {
+      static isTypeSupported = vi.fn().mockReturnValue(true);
+      state = "inactive";
+      mimeType = "audio/webm";
+      stream: MediaStream;
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onstop: (() => void) | null = null;
+
+      constructor(stream: MediaStream) {
+        this.stream = stream;
+      }
+
+      start = vi.fn(() => {
+        this.state = "recording";
+      });
+
+      stop = vi.fn(() => {
+        this.state = "inactive";
+        this.onstop?.();
+      });
+    }
+
+    window.MediaRecorder = MockMediaRecorder as unknown as typeof MediaRecorder;
+
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    let recorder: RecorderHook | undefined;
+
+    const HookHarnessWithOptions = ({
+      onReady
+    }: {
+      onReady: (value: RecorderHook) => void;
+    }) => {
+      const recorder = useAudioRecorder({ minDuration: 3 });
+      useEffect(() => {
+        onReady(recorder);
+      }, [onReady, recorder]);
+      return null;
+    };
+
+    await act(async () => {
+      root.render(<HookHarnessWithOptions onReady={(value) => (recorder = value)} />);
+    });
+
+    await act(async () => {
+      await recorder?.startRecording();
+    });
+
+    await act(async () => {
+      recorder?.stopRecording();
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(recorder?.error).toBe("Recording was too short. Please capture at least 3 seconds.");
     root.unmount();
   });
 });

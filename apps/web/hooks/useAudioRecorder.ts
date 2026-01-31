@@ -192,7 +192,7 @@ export function useAudioRecorder({
 
           if (audioBuffer.duration < minDuration) {
             setStatus("error");
-            setError("Recording was too short. Please capture at least 5 seconds.");
+            setError(`Recording was too short. Please capture at least ${minDuration} seconds.`);
             return;
           }
 
