@@ -136,7 +136,7 @@ export default function TestPage() {
                     {confidenceLabel}
                   </span>
                 </li>
-                <li>Keep your mouth 6-8 inches from the mic.</li>
+                <li>Keep your mouth 6–8 inches from the mic.</li>
               </ul>
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link

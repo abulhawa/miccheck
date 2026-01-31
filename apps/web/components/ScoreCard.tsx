@@ -92,7 +92,7 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
           <p className="mt-2 flex flex-wrap items-baseline gap-2 text-2xl font-semibold text-white sm:text-3xl">
             <span>{gradeLabel}</span>
             <span className="text-sm font-medium text-slate-400">({result.grade})</span>
-            <span className="text-sm font-medium text-slate-300">- {result.explanation}</span>
+            <span className="text-sm font-medium text-slate-300">– {result.explanation}</span>
           </p>
           <p className="mt-2 text-sm text-slate-200">
             Your grade is mainly affected by {impactLabel}.
