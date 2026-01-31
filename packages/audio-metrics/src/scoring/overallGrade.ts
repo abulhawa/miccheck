@@ -12,8 +12,9 @@ const gradeFromStars = (stars: number): GradeLetter => {
     case 2:
       return "D";
     case 1:
+      return "F";
     default:
-      return "E";
+      return "F";
   }
 };
 
@@ -34,7 +35,7 @@ const getSeverityByCategory = (metrics: MetricsSummary) => ({
   noise: Math.max(
     metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb
       ? 3
-      : metrics.snrDb <= ANALYSIS_CONFIG.snrMinDb
+      : metrics.snrDb <= ANALYSIS_CONFIG.snrPoorDb
         ? 2
         : 0,
     metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio ? 2 : 0
@@ -82,15 +83,18 @@ const getExplanation = (primaryIssueCategory: CategoryId, metrics: MetricsSummar
       return "Volume levels are slightly off target.";
     case "noise":
       if (metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb) {
+        return "Background noise is overwhelming speech.";
+      }
+      if (metrics.snrDb <= ANALYSIS_CONFIG.snrPoorDb) {
         return "Background noise is significantly reducing clarity.";
       }
-      if (metrics.snrDb <= ANALYSIS_CONFIG.snrMinDb) {
-        return "Background noise is noticeable and lowering clarity.";
+      if (metrics.snrDb <= ANALYSIS_CONFIG.snrFairDb) {
+        return "Some background noise is noticeable.";
       }
-      if (metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio) {
-        return "A persistent hum is reducing clarity.";
+      if (metrics.snrDb <= ANALYSIS_CONFIG.snrGoodDb) {
+        return "Minor background noise present.";
       }
-      return "Background noise is affecting speech clarity.";
+      return "Background noise is well-controlled.";
     case "echo":
     default:
       if (metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore) {
@@ -134,14 +138,7 @@ export const computeOverallGrade = (
             : worst
         ).id;
 
-  const isSevere =
-    metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ||
-    metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb ||
-    metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore ||
-    metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere ||
-    metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere;
-
-  const grade = minStars > 1 ? gradeFromStars(minStars) : isSevere ? "F" : "E";
+  const grade = minStars > 0 ? gradeFromStars(minStars) : "F";
 
   return {
     grade,
