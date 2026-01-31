@@ -15,6 +15,13 @@ describe("pcmUtils", () => {
     expect(Array.from(result)).toEqual([0.5, 0]);
   });
 
+  it("mixes channels with mismatched lengths by padding shorter channels", () => {
+    const left = new Float32Array([1, -1, 1]);
+    const right = new Float32Array([0, 1]);
+    const result = mixToMono([left, right]);
+    expect(Array.from(result)).toEqual([0.5, 0, 0.5]);
+  });
+
   it("returns an empty array when given no channels", () => {
     const result = mixToMono([]);
     expect(result).toEqual(new Float32Array(0));
