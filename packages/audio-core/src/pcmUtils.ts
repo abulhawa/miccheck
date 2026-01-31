@@ -2,6 +2,9 @@
  * Mix multichannel audio samples into a single mono channel.
  */
 export const mixToMono = (channels: Float32Array[]): Float32Array => {
+  if (channels.length === 0) {
+    return new Float32Array(0);
+  }
   if (channels.length === 1) {
     return channels[0];
   }
