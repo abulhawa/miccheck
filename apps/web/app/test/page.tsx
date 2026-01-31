@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
+import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
 import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
@@ -15,6 +16,7 @@ export default function TestPage() {
     error,
     duration,
     mediaStream,
+    recordingBlob,
     analysis,
     initializeRecorder,
     startRecording,
@@ -169,6 +171,10 @@ export default function TestPage() {
           Your results will appear here after recording.
         </section>
       )}
+
+      {recordingBlob ? (
+        <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />
+      ) : null}
     </div>
   );
 }
