@@ -3,6 +3,7 @@
 const STORAGE_KEY = "miccheck-last-recording";
 
 const isBrowser = typeof window !== "undefined";
+let inMemoryRecording: Blob | null = null;
 
 const dataUrlToBlob = (dataUrl: string): Blob => {
   const [meta, base64Data] = dataUrl.split(",");
@@ -23,6 +24,7 @@ const dataUrlToBlob = (dataUrl: string): Blob => {
  */
 export const saveRecording = async (blob: Blob): Promise<void> => {
   if (!isBrowser) return;
+  inMemoryRecording = blob;
 
   await new Promise<void>((resolve, reject) => {
     const reader = new FileReader();
@@ -45,10 +47,13 @@ export const saveRecording = async (blob: Blob): Promise<void> => {
  */
 export const loadRecording = (): Blob | null => {
   if (!isBrowser) return null;
+  if (inMemoryRecording) return inMemoryRecording;
   const stored = sessionStorage.getItem(STORAGE_KEY);
   if (!stored) return null;
   try {
-    return dataUrlToBlob(stored);
+    const restored = dataUrlToBlob(stored);
+    inMemoryRecording = restored;
+    return restored;
   } catch {
     return null;
   }
@@ -59,5 +64,6 @@ export const loadRecording = (): Blob | null => {
  */
 export const clearRecording = (): void => {
   if (!isBrowser) return;
+  inMemoryRecording = null;
   sessionStorage.removeItem(STORAGE_KEY);
 };
