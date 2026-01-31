@@ -8,7 +8,7 @@ export const mixToMono = (channels: Float32Array[]): Float32Array => {
   if (channels.length === 1) {
     return channels[0];
   }
-  const length = channels[0].length;
+  const length = channels.reduce((maxLength, channel) => Math.max(maxLength, channel.length), 0);
   const mixed = new Float32Array(length);
   for (let i = 0; i < length; i += 1) {
     let sum = 0;
