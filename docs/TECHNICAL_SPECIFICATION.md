@@ -180,18 +180,14 @@ Implementation references: `measureNoise`, `detectVoiceActivity`, `computeRms`, 
 ### 5.2 Overall grade mapping
 - Stars map to letter grades: 5→A, 4→B, 3→C, 2→D, 1→F. Default falls back to F. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L4-L18】
 
-### 5.3 Worst-offender logic
-- Overall stars are the **minimum** of the three category star ratings (`minStars`).【F:packages/audio-metrics/src/scoring/overallGrade.ts†L117-L124】
-- `primaryIssueCategory` is chosen as follows:
-  - If any category has a **severity ≥ 3**, choose the category with the **highest severity**.
-  - Otherwise, among categories at the minimum star rating, select the one with higher severity (tie-break).【F:packages/audio-metrics/src/scoring/overallGrade.ts†L117-L139】
-
-### 5.4 Severity scoring system
-Severity is derived per metric with hard-coded thresholds:
-- **Level severity**: 3 if `clippingRatio ≥ clippingRatioSevere` or RMS beyond severe bounds; 2 if RMS beyond warning bounds. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L24-L34】
-- **Noise severity**: 3 if `snrDb ≤ snrSevereDb`, 2 if `snrDb ≤ snrPoorDb`, and 2 if `humRatio ≥ humWarningRatio`. The max of these is used. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L35-L42】
-- **Echo severity**: 3 if `echoScore ≥ echoSevereScore`, 2 if `echoScore ≥ echoWarningScore`. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L43-L49】
-- **Clipping severity** (used for explanation): 3 if `clippingRatio ≥ clippingRatioSevere`, 2 if ≥ warning. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L49-L55】
+### 5.3 Primary issue selection
+- Overall stars are the **minimum** of the three category star ratings (`minStars`).【F:packages/audio-metrics/src/scoring/overallGrade.ts†L77-L83】
+- `primaryIssueCategory` (and the explanation text) are derived by checking metrics in order:
+  1. `clippingRatio > 0.005` → **clipping**
+  2. `echoScore > 0.35` → **echo**
+  3. `snrDb < 15 dB` → **noise**
+  4. `rmsDb` outside `[-30, -8]` → **level**
+  5. Otherwise, return a positive “all clear” reason/fix.【F:packages/audio-metrics/src/scoring/overallGrade.ts†L20-L69】
 
 ## 6. File Structure & Data Flow
 ```
@@ -206,9 +202,9 @@ audio-metrics/
   metrics/echo.ts: autocorrelation + normalization → echoScore
   ↓
   scoring/categoryScores.ts: metrics → per-category 1–5 stars
-  scoring/overallGrade.ts: star ratings + severities → letter grade + explanation
+  scoring/overallGrade.ts: star ratings + primary-issue rules → letter grade + explanation
 ```
-Implementation references: VAD and utilities in `audio-core`, metrics in `audio-metrics`, and scoring logic in `scoring/`.【F:packages/audio-core/src/vad.ts†L20-L58】【F:packages/audio-core/src/pcmUtils.ts†L23-L46】【F:packages/audio-metrics/src/metrics/noise.ts†L49-L119】【F:packages/audio-metrics/src/metrics/clipping.ts†L12-L26】【F:packages/audio-metrics/src/metrics/level.ts†L13-L15】【F:packages/audio-metrics/src/metrics/echo.ts†L19-L81】【F:packages/audio-metrics/src/scoring/categoryScores.ts†L72-L99】【F:packages/audio-metrics/src/scoring/overallGrade.ts†L113-L147】
+Implementation references: VAD and utilities in `audio-core`, metrics in `audio-metrics`, and scoring logic in `scoring/`.【F:packages/audio-core/src/vad.ts†L20-L58】【F:packages/audio-core/src/pcmUtils.ts†L23-L46】【F:packages/audio-metrics/src/metrics/noise.ts†L49-L119】【F:packages/audio-metrics/src/metrics/clipping.ts†L12-L26】【F:packages/audio-metrics/src/metrics/level.ts†L13-L15】【F:packages/audio-metrics/src/metrics/echo.ts†L19-L81】【F:packages/audio-metrics/src/scoring/categoryScores.ts†L72-L99】【F:packages/audio-metrics/src/scoring/overallGrade.ts†L71-L88】
 
 ## 7. Edge Case Handling
 

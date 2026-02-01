@@ -18,93 +18,54 @@ const gradeFromStars = (stars: number): GradeLetter => {
   }
 };
 
-/**
- * Determine the overall letter grade based on the weakest category.
- */
-const getSeverityByCategory = (metrics: MetricsSummary) => ({
-  level: Math.max(
-    metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere ? 3 : 0,
-    metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere ||
-      metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere
-      ? 3
-      : metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDb ||
-          metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDb
-        ? 2
-        : 0
-  ),
-  noise: Math.max(
-    metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb
-      ? 3
-      : metrics.snrDb <= ANALYSIS_CONFIG.snrPoorDb
-        ? 2
-        : 0,
-    metrics.humRatio >= ANALYSIS_CONFIG.humWarningRatio ? 2 : 0
-  ),
-  echo:
-    metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore
-      ? 3
-      : metrics.echoScore >= ANALYSIS_CONFIG.echoWarningScore
-        ? 2
-        : 0,
-  clipping:
-    metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere
-      ? 3
-      : metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioWarning
-        ? 2
-        : 0
-});
-
-const getExplanation = (primaryIssueCategory: CategoryId, metrics: MetricsSummary): string => {
-  switch (primaryIssueCategory) {
-    case "clipping":
-      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere) {
-        return "Clipping is severely distorting the audio signal.";
-      }
-      return "Clipping is distorting the audio signal.";
-    case "level":
-      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioSevere) {
-        return "Clipping is severely distorting the audio signal.";
-      }
-      if (metrics.clippingRatio >= ANALYSIS_CONFIG.clippingRatioWarning) {
-        return "Clipping is distorting the audio signal.";
-      }
-      if (metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDbSevere) {
-        return "The recording is extremely quiet and hard to understand.";
-      }
-      if (metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDbSevere) {
-        return "The recording is extremely loud and likely distorted.";
-      }
-      if (metrics.rmsDb <= ANALYSIS_CONFIG.minRmsDb) {
-        return "The recording is too quiet, reducing clarity.";
-      }
-      if (metrics.rmsDb >= ANALYSIS_CONFIG.maxRmsDb) {
-        return "The recording is too loud, which can cause distortion.";
-      }
-      return "Volume levels are slightly off target.";
-    case "noise":
-      if (metrics.snrDb <= ANALYSIS_CONFIG.snrSevereDb) {
-        return "Background noise is overwhelming speech.";
-      }
-      if (metrics.snrDb <= ANALYSIS_CONFIG.snrPoorDb) {
-        return "Background noise is significantly reducing clarity.";
-      }
-      if (metrics.snrDb <= ANALYSIS_CONFIG.snrFairDb) {
-        return "Some background noise is noticeable.";
-      }
-      if (metrics.snrDb <= ANALYSIS_CONFIG.snrGoodDb) {
-        return "Minor background noise present.";
-      }
-      return "Background noise is well-controlled.";
-    case "echo":
-    default:
-      if (metrics.echoScore >= ANALYSIS_CONFIG.echoSevereScore) {
-        return "Echo is overwhelming and smearing speech details.";
-      }
-      if (metrics.echoScore >= ANALYSIS_CONFIG.echoWarningScore) {
-        return "Echo is noticeably affecting clarity.";
-      }
-      return "Room reflections are softening speech clarity.";
+const getPrimaryIssue = (
+  metrics: MetricsSummary
+): { category: CategoryId; reason: string; fix: string } => {
+  if (metrics.clippingRatio > ANALYSIS_CONFIG.clippingRatioWarning) {
+    return {
+      category: "clipping",
+      reason: "Clipping is distorting the audio signal.",
+      fix: "Lower the input gain or move farther from the microphone."
+    };
   }
+
+  if (metrics.echoScore > ANALYSIS_CONFIG.echoWarningScore) {
+    return {
+      category: "echo",
+      reason: "Echo is noticeably affecting clarity.",
+      fix: "Add soft furnishings or move closer to the microphone to reduce reflections."
+    };
+  }
+
+  if (metrics.snrDb < ANALYSIS_CONFIG.snrFairDb) {
+    return {
+      category: "noise",
+      reason: "Background noise is overpowering the voice.",
+      fix: "Reduce ambient noise or use a closer, directional microphone."
+    };
+  }
+
+  if (metrics.rmsDb < ANALYSIS_CONFIG.minRmsDb) {
+    return {
+      category: "level",
+      reason: "The recording is too quiet to be clear.",
+      fix: "Increase input gain or move closer to the microphone."
+    };
+  }
+
+  if (metrics.rmsDb > ANALYSIS_CONFIG.maxRmsDb) {
+    return {
+      category: "level",
+      reason: "The recording is too loud and may distort.",
+      fix: "Lower the input gain or move back from the microphone."
+    };
+  }
+
+  return {
+    category: "level",
+    reason: "Levels are balanced with minimal noise, echo, or clipping.",
+    fix: "Keep your current setup for consistent results."
+  };
 };
 
 /**
@@ -115,34 +76,13 @@ export const computeOverallGrade = (
   metrics: MetricsSummary
 ): { grade: GradeLetter; primaryIssueCategory: CategoryId; explanation: string } => {
   const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.echo.stars);
-  const severityByCategory = getSeverityByCategory(metrics);
-  const hasSevereMetric = Object.values(severityByCategory).some((severity) => severity >= 3);
-  const categories: Array<{ id: CategoryId; stars: number }> = [
-    { id: "level", stars: scores.level.stars },
-    { id: "noise", stars: scores.noise.stars },
-    { id: "echo", stars: scores.echo.stars }
-  ];
-  const primaryIssueCategory = hasSevereMetric
-    ? (Object.entries(severityByCategory).reduce(
-        (worst, [label, severity]) =>
-          severity > worst.severity
-            ? { label: label as CategoryId, severity }
-            : worst,
-        { label: "level" as CategoryId, severity: -1 }
-      ).label as CategoryId)
-    : categories
-        .filter((category) => category.stars === minStars)
-        .reduce((worst, category) =>
-          severityByCategory[category.id] > severityByCategory[worst.id]
-            ? category
-            : worst
-        ).id;
+  const primaryIssue = getPrimaryIssue(metrics);
 
   const grade = minStars > 0 ? gradeFromStars(minStars) : "F";
 
   return {
     grade,
-    primaryIssueCategory,
-    explanation: getExplanation(primaryIssueCategory, metrics)
+    primaryIssueCategory: primaryIssue.category,
+    explanation: primaryIssue.reason
   };
 };
