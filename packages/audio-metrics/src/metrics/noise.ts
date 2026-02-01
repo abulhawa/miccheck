@@ -1,9 +1,10 @@
-import { computeRms } from "@miccheck/audio-core";
+import { detectVoiceActivity } from "@miccheck/audio-core";
 
 export interface NoiseMetrics {
   noiseFloor: number;
   snrDb: number;
   humRatio: number;
+  confidence: "low" | "medium" | "high";
 }
 
 const toDb = (value: number): number => 20 * Math.log10(Math.max(value, 1e-8));
@@ -41,24 +42,49 @@ export const measureNoise = (
   frameMs = 50
 ): NoiseMetrics => {
   if (samples.length === 0) {
-    return { noiseFloor: 0, snrDb: 0, humRatio: 0 };
+    return { noiseFloor: 0, snrDb: 0, humRatio: 0, confidence: "low" };
   }
-  const frameSize = Math.max(1, Math.floor((sampleRate * frameMs) / 1000));
-  const frameRms: number[] = [];
+  const vadResult = detectVoiceActivity(samples, sampleRate, frameMs);
+  const frameRms = vadResult.frameRms ?? vadResult.frames.map((frame) => frame.rms);
+  const isSpeechFrame =
+    vadResult.isSpeechFrame ?? vadResult.frames.map((frame) => frame.isSpeech);
 
-  for (let i = 0; i < samples.length; i += frameSize) {
-    const slice = samples.subarray(i, i + frameSize);
-    frameRms.push(computeRms(slice));
+  if (frameRms.length === 0) {
+    return { noiseFloor: 0, snrDb: 0, humRatio: 0, confidence: "low" };
   }
-
-  const noiseFloor = computePercentile(frameRms, 0.2);
-  const signalLevel = computePercentile(frameRms, 0.8);
-  const snrDb = toDb(signalLevel) - toDb(noiseFloor);
 
   const hum50 = goertzel(samples, sampleRate, 50);
   const hum60 = goertzel(samples, sampleRate, 60);
   const totalEnergy = samples.reduce((sum, sample) => sum + sample * sample, 0) / samples.length;
   const humRatio = totalEnergy > 0 ? Math.max(hum50, hum60) / totalEnergy : 0;
 
-  return { noiseFloor, snrDb, humRatio };
+  const speechFrames: number[] = [];
+  const noiseFrames: number[] = [];
+  for (let i = 0; i < frameRms.length; i += 1) {
+    if (isSpeechFrame[i]) {
+      speechFrames.push(frameRms[i]);
+    } else {
+      noiseFrames.push(frameRms[i]);
+    }
+  }
+
+  if (noiseFrames.length === 0) {
+    const noiseEstimate = computePercentile(frameRms, 0.1);
+    noiseFrames.push(noiseEstimate);
+  }
+
+  const speechRatio = speechFrames.length / Math.max(1, frameRms.length);
+  const confidence =
+    speechFrames.length === 0 ? "low" : speechRatio >= 0.3 ? "high" : "medium";
+
+  if (speechFrames.length === 0) {
+    const noiseFloor = computePercentile(noiseFrames, 0.5);
+    return { noiseFloor, snrDb: 0, humRatio, confidence };
+  }
+
+  const noiseFloor = computePercentile(noiseFrames, 0.5);
+  const speechLevel = computePercentile(speechFrames, 0.5);
+  const snrDb = toDb(speechLevel) - toDb(noiseFloor);
+
+  return { noiseFloor, snrDb, humRatio, confidence };
 };
