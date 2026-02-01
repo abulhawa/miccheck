@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
+import Tooltip from "../../components/Tooltip";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import type { AnalysisResult } from "../../types";
 
@@ -113,11 +114,27 @@ export default function ResultsPage() {
             <h2 className="text-lg font-semibold">What the metrics mean</h2>
             <ul className="mt-3 space-y-2">
               <li>
-                Level: target around -14 dBFS, acceptable range roughly -26 to -6
-                dBFS.
+                <Tooltip
+                  label="Level"
+                  text="Target around -14 dBFS keeps speech clear without clipping."
+                />
+                : target around -14 dBFS, acceptable range roughly -26 to -6 dBFS.
               </li>
-              <li>Noise: higher SNR means a cleaner background.</li>
-              <li>Echo: echo score rises with reflections or large rooms.</li>
+              <li>
+                Noise: higher{" "}
+                <Tooltip
+                  label="SNR"
+                  text="SNR > 25dB means your voice is 25x louder than background noise."
+                />{" "}
+                means a cleaner background.
+              </li>
+              <li>
+                <Tooltip
+                  label="Echo"
+                  text="Echo score rises when room reflections are strong or the mic is far away."
+                />
+                : echo score rises with reflections or large rooms.
+              </li>
             </ul>
             <button
               className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
