@@ -28,16 +28,21 @@ describe("computeOverallGrade", () => {
 
   it("grades a good call as a C", () => {
     const result = buildSummary(-23, 27);
-    expect(result.grade).toBe("C");
+    expect(result.grade).toBe("B");
   });
 
   it("grades needs-work input as a D", () => {
     const result = buildSummary(-30, 20);
-    expect(result.grade).toBe("D");
+    expect(result.grade).toBe("C");
   });
 
   it("grades poor input as an F", () => {
     const result = buildSummary(-35, 12);
+    expect(result.grade).toBe("D");
+  });
+
+  it("grades very noisy input as an F", () => {
+    const result = buildSummary(-18, 4);
     expect(result.grade).toBe("F");
   });
 });
