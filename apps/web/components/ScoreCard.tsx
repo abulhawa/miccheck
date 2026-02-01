@@ -1,4 +1,5 @@
 import type { AnalysisResult } from "../types";
+import ShareButton from "./ShareButton";
 
 interface ScoreCardProps {
   result: AnalysisResult;
@@ -94,6 +95,9 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
             <span className="text-sm font-medium text-slate-400">({result.grade})</span>
             <span className="text-sm font-medium text-slate-300">– {result.explanation}</span>
           </p>
+          <div className="mt-3">
+            <ShareButton grade={result.grade} />
+          </div>
           <p className="mt-2 text-sm text-slate-200">
             Your grade is mainly affected by {impactLabel}.
           </p>
