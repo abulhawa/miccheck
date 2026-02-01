@@ -54,6 +54,22 @@ const mixSignals = (a: Float32Array, b: Float32Array): Float32Array => {
   return output;
 };
 
+const applySilenceWindow = (
+  signal: Float32Array,
+  sampleRate: number,
+  leadSeconds: number,
+  tailSeconds: number
+): Float32Array => {
+  const output = new Float32Array(signal.length);
+  const leadSamples = Math.floor(sampleRate * leadSeconds);
+  const tailSamples = Math.floor(sampleRate * tailSeconds);
+  const voicedEnd = Math.max(leadSamples, signal.length - tailSamples);
+  for (let i = leadSamples; i < voicedEnd; i += 1) {
+    output[i] = signal[i];
+  }
+  return output;
+};
+
 /**
  * Create a sine wave at a given frequency, amplitude, and duration.
  *
@@ -197,9 +213,13 @@ export const GOLDEN_SAMPLES = {
    */
   perfect: (sampleRate = 48_000): Float32Array => {
     const durationSeconds = 5;
+    const silenceSeconds = 0.5;
+    const voicedSeconds = durationSeconds - silenceSeconds * 2;
+    const rmsBoost = Math.sqrt(durationSeconds / voicedSeconds);
     const signalRms = dbToLinear(-18);
-    const amplitude = signalRms * Math.SQRT2;
-    const signal = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const amplitude = signalRms * Math.SQRT2 * rmsBoost;
+    const raw = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const signal = applySilenceWindow(raw, sampleRate, silenceSeconds, silenceSeconds);
     const noise = generateNoise(1, sampleRate, durationSeconds);
     return mixAtSNR(signal, noise, 45);
   },
@@ -209,9 +229,13 @@ export const GOLDEN_SAMPLES = {
    */
   goodCall: (sampleRate = 48_000): Float32Array => {
     const durationSeconds = 5;
+    const silenceSeconds = 0.5;
+    const voicedSeconds = durationSeconds - silenceSeconds * 2;
+    const rmsBoost = Math.sqrt(durationSeconds / voicedSeconds);
     const signalRms = dbToLinear(-22);
-    const amplitude = signalRms * Math.SQRT2;
-    const signal = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const amplitude = signalRms * Math.SQRT2 * rmsBoost;
+    const raw = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const signal = applySilenceWindow(raw, sampleRate, silenceSeconds, silenceSeconds);
     const noise = generateNoise(1, sampleRate, durationSeconds);
     return mixAtSNR(signal, noise, 28);
   },
@@ -221,9 +245,13 @@ export const GOLDEN_SAMPLES = {
    */
   needsWork: (sampleRate = 48_000): Float32Array => {
     const durationSeconds = 5;
+    const silenceSeconds = 0.5;
+    const voicedSeconds = durationSeconds - silenceSeconds * 2;
+    const rmsBoost = Math.sqrt(durationSeconds / voicedSeconds);
     const signalRms = dbToLinear(-26);
-    const amplitude = signalRms * Math.SQRT2;
-    const signal = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const amplitude = signalRms * Math.SQRT2 * rmsBoost;
+    const raw = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const signal = applySilenceWindow(raw, sampleRate, silenceSeconds, silenceSeconds);
     const noise = generateNoise(1, sampleRate, durationSeconds);
     return mixAtSNR(signal, noise, 18);
   },
@@ -233,9 +261,13 @@ export const GOLDEN_SAMPLES = {
    */
   poor: (sampleRate = 48_000): Float32Array => {
     const durationSeconds = 5;
+    const silenceSeconds = 0.5;
+    const voicedSeconds = durationSeconds - silenceSeconds * 2;
+    const rmsBoost = Math.sqrt(durationSeconds / voicedSeconds);
     const signalRms = dbToLinear(-30);
-    const amplitude = signalRms * Math.SQRT2;
-    const signal = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const amplitude = signalRms * Math.SQRT2 * rmsBoost;
+    const raw = generateSineWave(1000, amplitude, sampleRate, durationSeconds);
+    const signal = applySilenceWindow(raw, sampleRate, silenceSeconds, silenceSeconds);
     const noise = generateNoise(1, sampleRate, durationSeconds);
     return mixAtSNR(signal, noise, 12);
   },

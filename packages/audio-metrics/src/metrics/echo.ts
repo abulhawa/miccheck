@@ -2,10 +2,7 @@ export interface EchoMetrics {
   echoScore: number;
 }
 
-const computeAutocorrelation = (
-  samples: Float32Array,
-  lag: number
-): number => {
+const computeAutocorrelation = (samples: Float32Array, lag: number): number => {
   if (samples.length <= lag) {
     return 0;
   }
@@ -26,19 +23,60 @@ export const measureEcho = (
   const minLag = Math.floor(sampleRate * 0.08);
   const maxLag = Math.floor(sampleRate * 0.2);
   let peakCorrelation = 0;
+  const correlations: number[] = [];
 
   if (samples.length <= maxLag) {
     // Too few samples to compute reliable autocorrelation; treat as minimal echo.
     return { echoScore: 0 };
   }
 
+  let energy = 0;
+  for (let i = 0; i < samples.length; i += 1) {
+    const value = samples[i];
+    energy += value * value;
+  }
+  const averageEnergy = energy / samples.length;
+  if (averageEnergy <= 0) {
+    return { echoScore: 0 };
+  }
+
   for (let lag = minLag; lag <= maxLag; lag += Math.floor(sampleRate * 0.01)) {
-    const correlation = computeAutocorrelation(samples, lag);
-    if (correlation > peakCorrelation) {
-      peakCorrelation = correlation;
+    const correlation = computeAutocorrelation(samples, lag) / averageEnergy;
+    const normalized = Math.max(0, correlation);
+    correlations.push(normalized);
+    if (normalized > peakCorrelation) {
+      peakCorrelation = normalized;
     }
   }
 
-  const normalized = Math.min(1, Math.max(0, peakCorrelation * 4));
+  if (correlations.length === 0) {
+    return { echoScore: 0 };
+  }
+
+  const meanCorrelation =
+    correlations.reduce((sum, value) => sum + value, 0) / correlations.length;
+  let maxLocalContrast = 0;
+  for (let i = 0; i < correlations.length; i += 1) {
+    const start = Math.max(0, i - 2);
+    const end = Math.min(correlations.length, i + 3);
+    let neighborSum = 0;
+    let neighborCount = 0;
+    for (let j = start; j < end; j += 1) {
+      if (j === i) continue;
+      neighborSum += correlations[j];
+      neighborCount += 1;
+    }
+    const localMean = neighborCount > 0 ? neighborSum / neighborCount : meanCorrelation;
+    const contrast = correlations[i] - localMean;
+    if (contrast > maxLocalContrast) {
+      maxLocalContrast = contrast;
+    }
+  }
+
+  const normalized =
+    meanCorrelation >= 0.999
+      ? 0
+      : Math.min(1, Math.max(0, maxLocalContrast / (1 - meanCorrelation)));
+
   return { echoScore: normalized };
 };

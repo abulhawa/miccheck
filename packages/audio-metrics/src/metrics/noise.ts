@@ -7,6 +7,16 @@ export interface NoiseMetrics {
   confidence: "low" | "medium" | "high";
 }
 
+const computeRms = (samples: Float32Array): number => {
+  if (samples.length === 0) return 0;
+  let sum = 0;
+  for (let i = 0; i < samples.length; i += 1) {
+    const value = samples[i];
+    sum += value * value;
+  }
+  return Math.sqrt(sum / samples.length);
+};
+
 const toDb = (value: number): number => 20 * Math.log10(Math.max(value, 1e-8));
 
 const computePercentile = (values: number[], percentile: number): number => {
@@ -68,7 +78,7 @@ export const measureNoise = (
     }
   }
 
-  if (noiseFrames.length === 0) {
+  if (noiseFrames.length === 0 && speechFrames.length === 0) {
     const noiseEstimate = computePercentile(frameRms, 0.1);
     noiseFrames.push(noiseEstimate);
   }
@@ -80,6 +90,26 @@ export const measureNoise = (
   if (speechFrames.length === 0) {
     const noiseFloor = computePercentile(noiseFrames, 0.2);
     return { noiseFloor, snrDb: 0, humRatio, confidence };
+  }
+
+  if (noiseFrames.length === 0) {
+    const overallRms = computeRms(samples);
+    const gate = overallRms * 0.2;
+    let gatedSum = 0;
+    let gatedCount = 0;
+    for (let i = 0; i < samples.length; i += 1) {
+      const value = samples[i];
+      if (Math.abs(value) <= gate) {
+        gatedSum += value * value;
+        gatedCount += 1;
+      }
+    }
+    let noiseFloor = gatedCount > 0 ? Math.sqrt(gatedSum / gatedCount) : 0;
+    if (noiseFloor === 0) {
+      noiseFloor = computePercentile(frameRms, 0.1);
+    }
+    const snrDb = toDb(overallRms) - toDb(noiseFloor);
+    return { noiseFloor, snrDb, humRatio, confidence: "medium" };
   }
 
   const noiseFloor = computePercentile(noiseFrames, 0.2);
