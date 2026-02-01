@@ -43,7 +43,7 @@ export default function RootLayout({
             </div>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <span>MicCheck runs 100% in your browser.</span>
-              <Link className="text-slate-500 transition hover:text-slate-300" href="/docs/PRIVACY.md">
+              <Link className="text-slate-500 transition hover:text-slate-300" href="/privacy">
                 Privacy policy
               </Link>
             </div>
