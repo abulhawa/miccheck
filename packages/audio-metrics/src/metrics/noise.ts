@@ -78,11 +78,11 @@ export const measureNoise = (
     speechFrames.length === 0 ? "low" : speechRatio >= 0.3 ? "high" : "medium";
 
   if (speechFrames.length === 0) {
-    const noiseFloor = computePercentile(noiseFrames, 0.5);
+    const noiseFloor = computePercentile(noiseFrames, 0.2);
     return { noiseFloor, snrDb: 0, humRatio, confidence };
   }
 
-  const noiseFloor = computePercentile(noiseFrames, 0.5);
+  const noiseFloor = computePercentile(noiseFrames, 0.2);
   const speechLevel = computePercentile(speechFrames, 0.5);
   const snrDb = toDb(speechLevel) - toDb(noiseFloor);
 
