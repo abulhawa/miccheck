@@ -13,7 +13,7 @@ describe("analyzeSamples", () => {
     expect(summary.categories.echo.label).toBe("Echo");
     expect(summary.primaryIssueCategory).toBe("noise");
     expect(summary.explanation).toBe(
-      "Background noise is overwhelming speech."
+      "Background noise is overpowering the voice."
     );
   });
 
