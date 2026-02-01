@@ -12,7 +12,10 @@
   },
   "vitest": {
     "test": {
-      "include": ["src/**/*.{test,spec}.?(c|m)[jt]s?(x)"],
+      "include": [
+        "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
+        "test/**/*.{test,spec}.?(c|m)[jt]s?(x)"
+      ],
       "exclude": ["dist/**", "node_modules/**"]
     },
     "coverage": {
