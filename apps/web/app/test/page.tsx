@@ -8,6 +8,7 @@ import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
+import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -52,6 +53,12 @@ export default function TestPage() {
     },
     [initializeRecorder]
   );
+
+  const handleTestAgain = useCallback(() => {
+    logEvent(ANALYTICS_EVENTS.testAgain);
+    reset();
+    void initializeRecorder();
+  }, [initializeRecorder, reset]);
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
@@ -115,10 +122,7 @@ export default function TestPage() {
             </div>
             <button
               className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
-              onClick={() => {
-                reset();
-                void initializeRecorder();
-              }}
+              onClick={handleTestAgain}
               type="button"
             >
               Test Again
@@ -155,10 +159,7 @@ export default function TestPage() {
                 </Link>
                 <button
                   className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
-                  onClick={() => {
-                    reset();
-                    void initializeRecorder();
-                  }}
+                  onClick={handleTestAgain}
                 >
                   Test Again
                 </button>

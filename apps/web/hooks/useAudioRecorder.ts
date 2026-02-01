@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { analyzeRecording } from "../lib/analysis";
 import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
+import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import type { AnalysisResult } from "../types";
 
 interface RecorderOptions {
@@ -42,6 +43,7 @@ export function useAudioRecorder({
   const startTimeRef = useRef<number | null>(null);
   const stopTimeoutRef = useRef<number | null>(null);
   const updateMeterRef = useRef<() => void>(() => {});
+  const hasLoggedResultsRef = useRef(false);
 
   const stopMediaStream = useCallback((stream: MediaStream | null) => {
     if (!stream) return;
@@ -100,6 +102,7 @@ export function useAudioRecorder({
     setDuration(0);
     setRecordingBlob(null);
     clearRecording();
+    hasLoggedResultsRef.current = false;
   }, [clearRecorder]);
 
   const updateMeter = useCallback(() => {
@@ -129,10 +132,23 @@ export function useAudioRecorder({
 
   const initializeRecorder = useCallback(async (overrideDeviceId?: string | null) => {
     clearRecorder();
+    if (typeof window !== "undefined" && !window.isSecureContext) {
+      setStatus("error");
+      setError("Recording requires a secure (HTTPS) context.");
+      logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "not_secure_context" });
+      return;
+    }
     const support = describeBrowserSupport();
     if (!support.isSupported) {
       setStatus("error");
       setError(`Browser not supported: ${support.issues.join(" ")}`);
+      logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "unknown" });
+      return;
+    }
+    if (typeof MediaRecorder === "undefined") {
+      setStatus("error");
+      setError("MediaRecorder is not available in this browser.");
+      logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "no_mediarecorder" });
       return;
     }
 
@@ -201,6 +217,9 @@ export function useAudioRecorder({
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
+          if (blob.size > 0) {
+            logEvent(ANALYTICS_EVENTS.recordingCompleted);
+          }
           setRecordingBlob(blob);
           saveRecording(blob).catch(() => {
             // Non-blocking storage failure: playback can still use in-memory blob.
@@ -236,6 +255,7 @@ export function useAudioRecorder({
               ? analysisError.message
               : "Unable to analyze recording."
           );
+          logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "unknown" });
         }
       };
       updateMeter();
@@ -245,10 +265,12 @@ export function useAudioRecorder({
       if (permissionError instanceof DOMException) {
         if (permissionError.name === "NotAllowedError") {
           setError("Microphone permission denied. Please allow access and try again.");
+          logEvent(ANALYTICS_EVENTS.permissionDenied);
           return;
         }
         if (permissionError.name === "NotFoundError") {
           setError("No microphone detected. Please connect one and try again.");
+          logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "unknown" });
           return;
         }
       }
@@ -257,10 +279,12 @@ export function useAudioRecorder({
           ? permissionError.message
           : "Unable to access the microphone."
       );
+      logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "unknown" });
     }
   }, [clearRecorder, clearStopTimeout, deviceId, minDuration, stopMeter, updateMeter]);
 
   const startRecording = useCallback(async () => {
+    logEvent(ANALYTICS_EVENTS.startRecording);
     reset();
     setError(null);
     await initializeRecorder();
@@ -301,6 +325,13 @@ export function useAudioRecorder({
       clearRecorder();
     };
   }, [clearRecorder]);
+
+  useEffect(() => {
+    if (status === "complete" && !hasLoggedResultsRef.current) {
+      logEvent(ANALYTICS_EVENTS.viewResults);
+      hasLoggedResultsRef.current = true;
+    }
+  }, [status]);
 
   return {
     status,
