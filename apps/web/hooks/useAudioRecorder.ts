@@ -132,7 +132,7 @@ export function useAudioRecorder({
 
   const initializeRecorder = useCallback(async (overrideDeviceId?: string | null) => {
     clearRecorder();
-    if (typeof window !== "undefined" && !window.isSecureContext) {
+    if (typeof window !== "undefined" && window.isSecureContext === false) {
       setStatus("error");
       setError("Recording requires a secure (HTTPS) context.");
       logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "not_secure_context" });
@@ -145,13 +145,6 @@ export function useAudioRecorder({
       logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "unknown" });
       return;
     }
-    if (typeof MediaRecorder === "undefined") {
-      setStatus("error");
-      setError("MediaRecorder is not available in this browser.");
-      logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "no_mediarecorder" });
-      return;
-    }
-
     try {
       const activeDeviceId = overrideDeviceId ?? deviceId;
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -193,6 +186,15 @@ export function useAudioRecorder({
       analyser.fftSize = 2048;
       source.connect(analyser);
       meterNodeRef.current = analyser;
+
+      if (typeof MediaRecorder === "undefined") {
+        stopMediaStream(stream);
+        mediaStreamRef.current = null;
+        setStatus("error");
+        setError("MediaRecorder is not available in this browser.");
+        logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "no_mediarecorder" });
+        return;
+      }
 
       const preferredTypes = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"];
       const mimeType = preferredTypes.find((type) => MediaRecorder.isTypeSupported(type));
