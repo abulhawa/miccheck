@@ -9,6 +9,7 @@ describe("measureEcho", () => {
     const result = measureEcho(samples, sampleRate);
 
     expect(result.echoScore).toBe(0);
+    expect(result.confidence).toBe("low");
     expect(Number.isNaN(result.echoScore)).toBe(false);
     expect(Object.is(result.echoScore, -0)).toBe(false);
   });

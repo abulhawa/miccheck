@@ -1,5 +1,6 @@
 export interface EchoMetrics {
   echoScore: number;
+  confidence: "low" | "medium" | "high";
 }
 
 const computeAutocorrelation = (samples: Float32Array, lag: number): number => {
@@ -27,7 +28,7 @@ export const measureEcho = (
 
   if (samples.length <= maxLag) {
     // Too few samples to compute reliable autocorrelation; treat as minimal echo.
-    return { echoScore: 0 };
+    return { echoScore: 0, confidence: "low" };
   }
 
   let energy = 0;
@@ -36,8 +37,8 @@ export const measureEcho = (
     energy += value * value;
   }
   const averageEnergy = energy / samples.length;
-  if (averageEnergy <= 0) {
-    return { echoScore: 0 };
+  if (averageEnergy < 1e-10 || samples.length < sampleRate * 0.1) {
+    return { echoScore: 0, confidence: "low" };
   }
 
   for (let lag = minLag; lag <= maxLag; lag += Math.floor(sampleRate * 0.01)) {
@@ -50,7 +51,7 @@ export const measureEcho = (
   }
 
   if (correlations.length === 0) {
-    return { echoScore: 0 };
+    return { echoScore: 0, confidence: "low" };
   }
 
   const meanCorrelation =
@@ -78,5 +79,5 @@ export const measureEcho = (
       ? 0
       : Math.min(1, Math.max(0, maxLocalContrast / (1 - meanCorrelation)));
 
-  return { echoScore: normalized };
+  return { echoScore: normalized, confidence: "high" };
 };
