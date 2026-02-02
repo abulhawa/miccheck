@@ -2,6 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "MicCheck",
@@ -51,6 +52,7 @@ export default function RootLayout({
           </footer>
         </div>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
