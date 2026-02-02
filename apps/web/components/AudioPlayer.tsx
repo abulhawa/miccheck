@@ -143,7 +143,7 @@ export default function AudioPlayer({
           onSeek={seek}
         />
 
-        <div className="text-xs text-slate-500">
+        <div className="text-xs text-slate-200">
           🔊 Playing from your browser&apos;s memory (not uploaded)
         </div>
       </div>

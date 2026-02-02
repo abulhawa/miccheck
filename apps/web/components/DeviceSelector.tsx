@@ -94,7 +94,7 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500" htmlFor="miccheck-device-selector">
+      <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-200" htmlFor="miccheck-device-selector">
         Microphone
       </label>
       <select

@@ -49,7 +49,7 @@ const AffiliateRecommendation: FC<AffiliateRecommendationProps> = ({ issueCatego
       >
         View on Amazon →
       </a>
-      <p className="mt-3 text-[11px] text-slate-500">
+      <p className="mt-3 text-[11px] text-slate-600">
         As an Amazon Associate I earn from qualifying purchases.
       </p>
     </div>

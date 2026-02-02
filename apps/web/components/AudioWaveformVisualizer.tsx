@@ -139,8 +139,14 @@ export default function AudioWaveformVisualizer({
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span className="flex items-center gap-2">
           <span>Input waveform</span>
-          <span className={isRecording ? "text-emerald-300" : "text-slate-500"}>
-            <svg aria-hidden="true" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+          <span className={isRecording ? "text-emerald-300" : "text-slate-200"}>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              className="h-3.5 w-3.5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
               <path d="M6 10a1 1 0 1 0-2 0 8 8 0 0 0 7 7.93V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-2.07A8 8 0 0 0 20 10a1 1 0 1 0-2 0 6 6 0 0 1-12 0Z" />
             </svg>
@@ -153,7 +159,7 @@ export default function AudioWaveformVisualizer({
           <canvas ref={canvasRef} width={width} height={height} className="h-full w-full" />
         </div>
       </div>
-      <p className="mt-3 text-xs text-slate-500">
+      <p className="mt-3 text-xs text-slate-200">
         Peaks are marked in red—aim for a strong signal without touching the ceiling.
       </p>
     </div>

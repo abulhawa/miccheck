@@ -15,28 +15,28 @@ export default function PrivacyPage() {
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Privacy</p>
         <h1 className="text-3xl font-semibold text-white md:text-4xl">MicCheck Privacy Policy</h1>
-        <p className="text-sm text-slate-300">MicCheck is designed to keep your audio private.</p>
+        <p className="text-sm text-slate-200">MicCheck is designed to keep your audio private.</p>
       </header>
 
-      <section className="space-y-4 text-sm text-slate-300">
+      <section className="space-y-4 text-sm text-slate-200">
         <h2 className="text-lg font-semibold text-white">What We Collect</h2>
-        <ul className="list-disc space-y-2 pl-5 text-slate-300">
+        <ul className="list-disc space-y-2 pl-5 text-slate-200">
           {privacyItems.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </section>
 
-      <section className="space-y-4 text-sm text-slate-300">
+      <section className="space-y-4 text-sm text-slate-200">
         <h2 className="text-lg font-semibold text-white">How Audio Is Used</h2>
-        <ul className="list-disc space-y-2 pl-5 text-slate-300">
+        <ul className="list-disc space-y-2 pl-5 text-slate-200">
           {audioUseItems.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </section>
 
-      <section className="space-y-3 text-sm text-slate-300">
+      <section className="space-y-3 text-sm text-slate-200">
         <h2 className="text-lg font-semibold text-white">Browser Permissions</h2>
         <p>
           MicCheck requests access to your microphone solely to record the sample. You can

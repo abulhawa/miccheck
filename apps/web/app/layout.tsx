@@ -28,7 +28,7 @@ export default function RootLayout({
                 <p className="text-xs text-slate-400">Local microphone analysis</p>
               </div>
             </div>
-            <nav className="hidden gap-6 text-sm text-slate-300 md:flex">
+            <nav className="hidden gap-6 text-sm text-slate-200 md:flex">
               <a className="transition hover:text-white" href="/test">
                 Start Test
               </a>
@@ -38,14 +38,14 @@ export default function RootLayout({
             </nav>
           </header>
           <main className="flex-1 py-10">{children}</main>
-          <footer className="border-t border-slate-800 pt-6 text-xs text-slate-500">
+          <footer className="border-t border-slate-800 pt-6 text-xs text-slate-200">
             <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-slate-700">
               <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
               <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
             </div>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <span>MicCheck runs 100% in your browser.</span>
-              <Link className="text-slate-500 transition hover:text-slate-300" href="/privacy">
+              <Link className="text-slate-200 transition hover:text-white" href="/privacy">
                 Privacy policy
               </Link>
             </div>

@@ -50,7 +50,7 @@ export default function BrowserSupport() {
                 <tr key={row.browser} className="bg-slate-950/40">
                   <td className="px-4 py-3 font-medium text-white">{row.browser}</td>
                   <td className="px-4 py-3 text-slate-200">{row.status}</td>
-                  <td className="px-4 py-3 text-slate-300">{row.notes}</td>
+                  <td className="px-4 py-3 text-slate-200">{row.notes}</td>
                 </tr>
               ))}
             </tbody>
