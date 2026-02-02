@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: "website",
   },
+  facebook: {
+    appId: '2153727485390703',
+  },
   twitter: {
     card: "summary_large_image",
     title: "MicCheck - 7-Second Mic Quality Test",
