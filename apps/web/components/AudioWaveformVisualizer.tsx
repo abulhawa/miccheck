@@ -9,10 +9,41 @@ export interface AudioWaveformVisualizerProps {
   isRecording: boolean;
   width?: number;
   height?: number;
+  peakFadeDurationMs?: number;
+  peakSampleIntervalMs?: number;
+  guidanceThresholds?: {
+    loud: number;
+    good: number;
+    quiet: number;
+  };
 }
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(max, Math.max(min, value));
+
+const DEFAULT_GUIDANCE_THRESHOLDS = {
+  loud: 0.95,
+  good: 0.7,
+  quiet: 0.3
+};
+
+// Maps the latest peak level into actionable, color-coded guidance for the user.
+// Keep this pure so it is easy to test and reuse in other views.
+const getGuidance = (
+  currentPeak: number,
+  thresholds: typeof DEFAULT_GUIDANCE_THRESHOLDS
+) => {
+  if (currentPeak > thresholds.loud) {
+    return { text: "⚠️ Too loud! Reduce input volume", colorClass: "text-red-600" };
+  }
+  if (currentPeak > thresholds.good) {
+    return { text: "✅ Good level", colorClass: "text-green-600" };
+  }
+  if (currentPeak > thresholds.quiet) {
+    return { text: "🔊 Speak a bit louder", colorClass: "text-amber-600" };
+  }
+  return { text: "🎤 Very quiet - check microphone", colorClass: "text-blue-600" };
+};
 
 export default function AudioWaveformVisualizer({
   audioDataArray,
@@ -20,11 +51,26 @@ export default function AudioWaveformVisualizer({
   peakVolume,
   isRecording,
   width = 640,
-  height = 120
+  height = 120,
+  peakFadeDurationMs = 1600,
+  peakSampleIntervalMs = 80,
+  guidanceThresholds = DEFAULT_GUIDANCE_THRESHOLDS
 }: AudioWaveformVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const dataRef = useRef<Float32Array | null>(audioDataArray);
   const volumeRef = useRef({ currentVolume, peakVolume, isRecording });
+  const peaksRef = useRef<Array<{ value: number; timestamp: number }>>([]);
+  const lastPeakSampleTimeRef = useRef(0);
+  const lastPeakValueRef = useRef(0);
+
+  // Clamp the live values once per render so the UI, accessibility text,
+  // and guidance are always within the expected 0-1 range.
+  const normalizedCurrentVolume = useMemo(() => clamp(currentVolume), [currentVolume]);
+  const normalizedPeakVolume = useMemo(() => clamp(peakVolume), [peakVolume]);
+  const guidance = useMemo(
+    () => getGuidance(normalizedPeakVolume, guidanceThresholds),
+    [guidanceThresholds, normalizedPeakVolume]
+  );
 
   useEffect(() => {
     dataRef.current = audioDataArray;
@@ -52,20 +98,15 @@ export default function AudioWaveformVisualizer({
     let animationFrameId: number;
 
     const draw = () => {
+      const now = performance.now();
       const { currentVolume: liveVolume, peakVolume: livePeak, isRecording: liveRecording } =
         volumeRef.current;
       const data = dataRef.current;
 
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "#0f172a";
-      ctx.fillRect(0, 0, width, height);
 
       const zoneGradient = ctx.createLinearGradient(0, height, 0, 0);
       gradientStops.forEach(({ offset, color }) => zoneGradient.addColorStop(offset, color));
-      ctx.globalAlpha = 0.12;
-      ctx.fillStyle = zoneGradient;
-      ctx.fillRect(0, 0, width, height);
-      ctx.globalAlpha = 1;
 
       ctx.lineWidth = 2;
       ctx.strokeStyle = zoneGradient;
@@ -101,15 +142,46 @@ export default function AudioWaveformVisualizer({
         ctx.globalAlpha = 1;
       }
 
+      // Track instantaneous peaks with timestamps so we can fade them out smoothly.
+      // This gives users a short history of their loudest moments without a performance hit.
       const peak = clamp(livePeak);
-      if (peak > 0) {
-        const peakY = height - peak * height;
-        ctx.strokeStyle = "rgba(248, 113, 113, 0.9)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, peakY);
-        ctx.lineTo(width, peakY);
-        ctx.stroke();
+      if (liveRecording) {
+        if (peak > 0) {
+          const shouldSample =
+            now - lastPeakSampleTimeRef.current > peakSampleIntervalMs ||
+            peak > lastPeakValueRef.current + 0.02;
+          if (shouldSample) {
+            peaksRef.current.push({ value: peak, timestamp: now });
+            lastPeakSampleTimeRef.current = now;
+            lastPeakValueRef.current = peak;
+          }
+        }
+      } else if (peaksRef.current.length > 0) {
+        peaksRef.current = [];
+      }
+
+      // Draw each stored peak with opacity based on age.
+      // Older peaks fade out over the configured duration and are removed when fully transparent.
+      if (peaksRef.current.length > 0) {
+        const nextPeaks = peaksRef.current;
+        let writeIndex = 0;
+        for (let i = 0; i < nextPeaks.length; i += 1) {
+          const sample = nextPeaks[i];
+          const age = now - sample.timestamp;
+          if (age <= peakFadeDurationMs) {
+            const alpha = 1 - age / peakFadeDurationMs;
+            const peakY = height - sample.value * height;
+            ctx.strokeStyle = `rgba(248, 113, 113, ${0.15 + 0.75 * alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, peakY);
+            ctx.lineTo(width, peakY);
+            ctx.stroke();
+            nextPeaks[writeIndex] = sample;
+            writeIndex += 1;
+          }
+        }
+        nextPeaks.length = writeIndex;
       }
 
       if (!liveRecording) {
@@ -134,6 +206,14 @@ export default function AudioWaveformVisualizer({
     };
   }, [gradientStops, height, width]);
 
+  const zoneBackground = useMemo(
+    () => ({
+      backgroundImage:
+        "linear-gradient(to top, rgba(239, 68, 68, 0.05) 0%, rgba(34, 197, 94, 0.1) 5% 30%, rgba(59, 130, 246, 0.05) 30% 100%)"
+    }),
+    []
+  );
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
       <div className="flex items-center justify-between text-xs text-slate-400">
@@ -149,12 +229,31 @@ export default function AudioWaveformVisualizer({
         <span>{isRecording ? "Listening…" : "Idle"}</span>
       </div>
       <div className="mt-4 rounded-2xl bg-slate-900/80 p-3">
-        <div className="relative h-28 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
-          <canvas ref={canvasRef} width={width} height={height} className="h-full w-full" />
+        <div
+          className="relative h-28 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950"
+          style={zoneBackground}
+        >
+          <canvas
+            ref={canvasRef}
+            width={width}
+            height={height}
+            className="h-full w-full"
+            role="meter"
+            aria-label="Audio waveform visualization"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(normalizedCurrentVolume * 100)}
+            aria-valuetext={`Current volume: ${Math.round(normalizedCurrentVolume * 100)}%`}
+          />
         </div>
       </div>
       <p className="mt-3 text-xs text-slate-500">
-        Peaks are marked in red—aim for a strong signal without touching the ceiling.
+        🔴 Red markers = peak volume. Aim for the green zone, avoid red at the top.
+      </p>
+      <p
+        className={`mt-2 text-sm font-medium transition-colors duration-200 ${guidance.colorClass}`}
+      >
+        {guidance.text}
       </p>
     </div>
   );
