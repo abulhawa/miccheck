@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
+import AffiliateRecommendation from "../../components/AffiliateRecommendation";
 import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
@@ -150,6 +151,7 @@ export default function TestPage() {
                 </li>
                 <li>Keep your mouth 6–8 inches from the mic.</li>
               </ul>
+              <AffiliateRecommendation issueCategory={analysis.primaryIssueCategory} />
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"

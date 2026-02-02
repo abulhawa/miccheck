@@ -1,0 +1,59 @@
+import type { FC } from "react";
+
+export type AffiliateIssueCategory = "echo" | "noise" | "clipping" | "level";
+
+interface AffiliateRecommendationProps {
+  issueCategory: AffiliateIssueCategory;
+}
+
+const affiliateProducts: Record<AffiliateIssueCategory, { name: string; url: string; description: string }> = {
+  echo: {
+    name: "Acoustic Foam Panels",
+    url: "https://amzn.to/4qTnyHf",
+    description: "To reduce echo, consider acoustic panels that absorb sound reflections."
+  },
+  noise: {
+    name: "FIFINE USB Microphone",
+    url: "https://amzn.to/4rpWH5l",
+    description: "A directional USB mic can help reject background noise and focus on your voice."
+  },
+  clipping: {
+    name: "Pop Filter",
+    url: "https://amzn.to/4bCdmOB",
+    description: "Pop filters soften plosive bursts that can cause clipping on P and B sounds."
+  },
+  level: {
+    name: "Microphone Arm",
+    url: "https://amzn.to/4anIYpX",
+    description: "A mic arm makes it easy to keep a consistent distance and angle."
+  }
+};
+
+const AffiliateRecommendation: FC<AffiliateRecommendationProps> = ({ issueCategory }) => {
+  const product = affiliateProducts[issueCategory];
+
+  const handleClick = () => {
+    console.log(`Affiliate link clicked: ${product.name}`);
+  };
+
+  return (
+    <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-slate-700">
+      <p className="font-semibold text-slate-800">Suggested gear</p>
+      <p className="mt-2 text-sm text-slate-600">{product.description}</p>
+      <a
+        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition hover:text-blue-800"
+        href={product.url}
+        onClick={handleClick}
+        rel="noopener noreferrer nofollow"
+        target="_blank"
+      >
+        View on Amazon →
+      </a>
+      <p className="mt-3 text-[11px] text-slate-500">
+        As an Amazon Associate I earn from qualifying purchases.
+      </p>
+    </div>
+  );
+};
+
+export default AffiliateRecommendation;
