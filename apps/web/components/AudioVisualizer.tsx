@@ -24,9 +24,10 @@ export default function AudioVisualizer({ level, isRecording }: AudioVisualizerP
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span className="flex items-center gap-2">
           <span>Input level</span>
-          <span className={!hasAudio ? "animate-pulse text-slate-500" : "text-emerald-300"}>
+          <span className={!hasAudio ? "animate-pulse text-slate-200" : "text-emerald-300"}>
             <svg
               aria-hidden="true"
+              focusable="false"
               className="h-3.5 w-3.5"
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -46,7 +47,7 @@ export default function AudioVisualizer({ level, isRecording }: AudioVisualizerP
           />
         </div>
       </div>
-      <p className="mt-3 text-xs text-slate-500">
+      <p className="mt-3 text-xs text-slate-200">
         Aim for peaks in the upper green zone without hitting the top.
       </p>
     </div>

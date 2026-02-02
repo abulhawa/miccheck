@@ -65,9 +65,9 @@ export default function TestPage() {
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
         <div className="flex flex-col gap-3">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">MicCheck Test</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-200">MicCheck Test</p>
           <h1 className="text-3xl font-semibold">Record a quick sample</h1>
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-200">
             We&apos;ll capture 5–7 seconds to analyze level, noise, and echo.
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function TestPage() {
           />
           <div className="flex flex-wrap items-center gap-4">
             <button
-              className="rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-700"
+              className="rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:bg-slate-700"
               onClick={isRecording ? stopRecording : startRecording}
               disabled={isAnalyzing}
             >
@@ -122,7 +122,7 @@ export default function TestPage() {
               </p>
             </div>
             <button
-              className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+              className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
               onClick={handleTestAgain}
               type="button"
             >
@@ -137,7 +137,7 @@ export default function TestPage() {
             />
             <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
               <h2 className="text-lg font-semibold">🎯 Your Top Fix</h2>
-              <p className="mt-3 text-sm text-slate-300">{analysis?.recommendation.message}</p>
+              <p className="mt-3 text-sm text-slate-200">{analysis?.recommendation.message}</p>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
                 <li>Category focus: {analysis?.recommendation.category}</li>
                 <li>

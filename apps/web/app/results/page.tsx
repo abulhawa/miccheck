@@ -81,7 +81,7 @@ export default function ResultsPage() {
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
         <h1 className="text-3xl font-semibold">Sample results</h1>
-        <p className="mt-2 text-sm text-slate-300">
+        <p className="mt-2 text-sm text-slate-200">
           This is a preview of the insights you&apos;ll receive after recording.
         </p>
       </section>
@@ -96,7 +96,7 @@ export default function ResultsPage() {
             <p className="text-sm text-rose-100">{noSpeechFix.description}</p>
           </div>
           <button
-            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
             onClick={handleTestAgain}
             type="button"
           >
@@ -110,7 +110,7 @@ export default function ResultsPage() {
             highlightedCategoryId={sampleResult.primaryIssueCategory}
           />
 
-          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
             <h2 className="text-lg font-semibold">What the metrics mean</h2>
             <ul className="mt-3 space-y-2">
               <li>
@@ -137,7 +137,7 @@ export default function ResultsPage() {
               </li>
             </ul>
             <button
-              className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
+              className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-600"
               onClick={handleTestAgain}
               type="button"
             >

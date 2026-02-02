@@ -22,19 +22,19 @@ export default function HomePage() {
     <div className="flex flex-col gap-12">
       <section className="grid gap-10 md:grid-cols-2">
         <div className="flex flex-col gap-6">
-          <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-300">
+          <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-200">
             MicCheck
           </span>
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
             Check your microphone quality in under 60 seconds.
           </h1>
-          <p className="text-base text-slate-300 md:text-lg">
+          <p className="text-base text-slate-200 md:text-lg">
             Record a quick sample, get an instant grade, and fix the biggest issue in
             your setup. Everything happens locally in your browser.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
-              className="rounded-xl bg-brand-500 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-700"
+              className="rounded-xl bg-brand-500 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-600"
               href="/test"
             >
               Start a test
@@ -46,7 +46,7 @@ export default function HomePage() {
               View sample results
             </Link>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-200">
             We never upload audio. Review our privacy policy anytime.
           </p>
         </div>
