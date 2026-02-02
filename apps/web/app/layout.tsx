@@ -1,8 +1,8 @@
 import "./globals.css";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "MicCheck",
@@ -38,18 +38,7 @@ export default function RootLayout({
             </nav>
           </header>
           <main className="flex-1 py-10">{children}</main>
-          <footer className="border-t border-slate-800 pt-6 text-xs text-slate-200">
-            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-slate-700">
-              <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
-              <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
-            </div>
-            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <span>MicCheck runs 100% in your browser.</span>
-              <Link className="text-slate-200 transition hover:text-white" href="/privacy">
-                Privacy policy
-              </Link>
-            </div>
-          </footer>
+          <Footer />
         </div>
         <Analytics />
         <SpeedInsights />
