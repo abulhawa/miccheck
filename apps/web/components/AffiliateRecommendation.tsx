@@ -32,8 +32,8 @@ const affiliateProducts: Record<AffiliateIssueCategory, { name: string; url: str
 const AffiliateRecommendation: FC<AffiliateRecommendationProps> = ({ issueCategory }) => {
   const product = affiliateProducts[issueCategory];
 
-  const handleClick = () => {
-    console.log(`Affiliate link clicked: ${product.name}`);
+  const trackClick = () => {
+    window.gtag?.("event", "affiliate_click", { product_name: product.name });
   };
 
   return (
@@ -43,7 +43,7 @@ const AffiliateRecommendation: FC<AffiliateRecommendationProps> = ({ issueCatego
       <a
         className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition hover:text-blue-800"
         href={product.url}
-        onClick={handleClick}
+        onClick={trackClick}
         rel="noopener noreferrer nofollow"
         target="_blank"
       >
