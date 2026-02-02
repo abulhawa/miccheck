@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
@@ -13,6 +13,7 @@ import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
+  const hasShownIOSAlert = useRef(false);
   const {
     status,
     error,
@@ -31,6 +32,14 @@ export default function TestPage() {
     stream: mediaStream,
     isActive: isRecording
   });
+
+  useEffect(() => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS && !hasShownIOSAlert.current) {
+      hasShownIOSAlert.current = true;
+      window.alert("For best results, use Chrome on iOS.");
+    }
+  }, []);
 
   const confidenceValue = analysis?.recommendation.confidence ?? 0;
   const confidencePercent = Math.round(confidenceValue * 100);
