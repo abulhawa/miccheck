@@ -31,7 +31,7 @@ export default function ShareButton({ grade }: ShareButtonProps) {
         clearTimeout(timeoutRef.current);
       }
       timeoutRef.current = setTimeout(() => setStatus("idle"), 2000);
-    } catch (error) {
+    } catch {
       setStatus("error");
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);

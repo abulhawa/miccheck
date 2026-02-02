@@ -39,9 +39,6 @@ export function useAudioMeter({ stream, isActive }: AudioMeterOptions): AudioMet
         audioContextRef.current.close();
         audioContextRef.current = null;
       }
-      setAudioDataArray(null);
-      setCurrentVolume(0);
-      setPeakVolume(0);
       return;
     }
 
@@ -49,9 +46,6 @@ export function useAudioMeter({ stream, isActive }: AudioMeterOptions): AudioMet
       window.AudioContext ||
       (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) {
-      setAudioDataArray(null);
-      setCurrentVolume(0);
-      setPeakVolume(0);
       return;
     }
 
@@ -68,10 +62,14 @@ export function useAudioMeter({ stream, isActive }: AudioMeterOptions): AudioMet
     source.connect(analyser);
 
     const dataArray = new Float32Array(analyser.fftSize);
-    setAudioDataArray(dataArray);
-    setPeakVolume(0);
+    let hasInitialized = false;
 
     const update = () => {
+      if (!hasInitialized) {
+        setAudioDataArray(dataArray);
+        setPeakVolume(0);
+        hasInitialized = true;
+      }
       analyser.getFloatTimeDomainData(dataArray);
       let sum = 0;
       for (const value of dataArray) {
@@ -102,5 +100,11 @@ export function useAudioMeter({ stream, isActive }: AudioMeterOptions): AudioMet
     };
   }, [isActive, stream]);
 
-  return { audioDataArray, currentVolume, peakVolume };
+  const isStreaming = Boolean(isActive && stream);
+
+  return {
+    audioDataArray: isStreaming ? audioDataArray : null,
+    currentVolume: isStreaming ? currentVolume : 0,
+    peakVolume: isStreaming ? peakVolume : 0
+  };
 }

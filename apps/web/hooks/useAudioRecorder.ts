@@ -283,7 +283,15 @@ export function useAudioRecorder({
       );
       logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "unknown" });
     }
-  }, [clearRecorder, clearStopTimeout, deviceId, minDuration, stopMeter, updateMeter]);
+  }, [
+    clearRecorder,
+    clearStopTimeout,
+    deviceId,
+    minDuration,
+    stopMediaStream,
+    stopMeter,
+    updateMeter
+  ]);
 
   const startRecording = useCallback(async () => {
     logEvent(ANALYTICS_EVENTS.startRecording);

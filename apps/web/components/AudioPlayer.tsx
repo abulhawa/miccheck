@@ -47,6 +47,8 @@ export default function AudioPlayer({
   });
 
   const progress = useMemo(() => (duration ? currentTime / duration : 0), [currentTime, duration]);
+  const displayWaveform = waveformData ?? derivedWaveform;
+  const displayWaveformError = waveformData ? null : waveformError;
 
   useEffect(() => {
     let isActive = true;
@@ -82,8 +84,6 @@ export default function AudioPlayer({
 
     if (!waveformData) {
       void decodeWaveform();
-    } else {
-      setDerivedWaveform(waveformData);
     }
 
     return () => {
@@ -122,12 +122,12 @@ export default function AudioPlayer({
         {showWaveform ? (
           <div className="rounded-2xl bg-slate-900/80 p-3">
             <WaveformWithPlayhead
-              waveformData={derivedWaveform}
+              waveformData={displayWaveform}
               progress={progress}
               onSeek={handleSeek}
             />
-            {waveformError ? (
-              <p className="mt-2 text-xs text-rose-200">{waveformError}</p>
+            {displayWaveformError ? (
+              <p className="mt-2 text-xs text-rose-200">{displayWaveformError}</p>
             ) : null}
           </div>
         ) : null}

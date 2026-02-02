@@ -33,10 +33,17 @@ export const useAudioPlayback = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const objectUrlRef = useRef<string | null>(null);
+  const updateCurrentTimeRef = useRef<() => void>(() => {});
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  const resetPlaybackState = useCallback(() => {
+    setCurrentTime(0);
+    setDuration(0);
+    setIsPlaying(false);
+  }, []);
 
   const cancelAnimation = useCallback(() => {
     if (animationRef.current !== null) {
@@ -53,9 +60,13 @@ export const useAudioPlayback = ({
     onTimeUpdate?.(nextTime);
 
     if (!audio.paused) {
-      animationRef.current = requestAnimationFrame(updateCurrentTime);
+      animationRef.current = requestAnimationFrame(() => updateCurrentTimeRef.current());
     }
   }, [onTimeUpdate]);
+
+  useEffect(() => {
+    updateCurrentTimeRef.current = updateCurrentTime;
+  }, [updateCurrentTime]);
 
   useEffect(() => {
     audioRef.current = new Audio();
@@ -98,8 +109,7 @@ export const useAudioPlayback = ({
     if (!audioBlob) {
       audio.removeAttribute("src");
       audio.load();
-      setCurrentTime(0);
-      setDuration(0);
+      queueMicrotask(resetPlaybackState);
       return;
     }
 
@@ -107,9 +117,7 @@ export const useAudioPlayback = ({
     objectUrlRef.current = objectUrl;
     audio.src = objectUrl;
     audio.load();
-    setCurrentTime(0);
-    setDuration(0);
-    setIsPlaying(false);
+    queueMicrotask(resetPlaybackState);
 
     return () => {
       if (objectUrlRef.current) {
@@ -117,7 +125,7 @@ export const useAudioPlayback = ({
         objectUrlRef.current = null;
       }
     };
-  }, [audioBlob]);
+  }, [audioBlob, resetPlaybackState]);
 
   const play = useCallback(async () => {
     const audio = audioRef.current;
@@ -126,12 +134,12 @@ export const useAudioPlayback = ({
       await audio.play();
       setIsPlaying(true);
       cancelAnimation();
-      animationRef.current = requestAnimationFrame(updateCurrentTime);
+      animationRef.current = requestAnimationFrame(() => updateCurrentTimeRef.current());
     } catch {
       setIsPlaying(false);
       cancelAnimation();
     }
-  }, [cancelAnimation, updateCurrentTime]);
+  }, [cancelAnimation]);
 
   const pause = useCallback(() => {
     const audio = audioRef.current;

@@ -6,8 +6,8 @@ const buildSummary = (rmsDb: number, snrDb: number) => {
   const categories = buildCategoryScores(
     { rms: 0, rmsDb },
     { clippingRatio: 0, peak: 0 },
-    { noiseFloor: 0, snrDb, humRatio: 0 },
-    { echoScore: 0 }
+    { noiseFloor: 0, snrDb, humRatio: 0, confidence: "high" },
+    { echoScore: 0, confidence: "high" }
   );
 
   return computeOverallGrade(categories, {
