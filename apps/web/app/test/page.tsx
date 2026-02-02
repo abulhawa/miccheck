@@ -80,7 +80,7 @@ export default function TestPage() {
           />
           <div className="flex flex-wrap items-center gap-4">
             <button
-              className="rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:bg-slate-700"
+              className="rounded-xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-700"
               onClick={isRecording ? stopRecording : startRecording}
               disabled={isAnalyzing}
             >
@@ -122,7 +122,7 @@ export default function TestPage() {
               </p>
             </div>
             <button
-              className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
+              className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
               onClick={handleTestAgain}
               type="button"
             >
