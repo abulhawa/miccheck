@@ -5,19 +5,52 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "MicCheck - Speedtest for Microphones",
-  description: "Test your microphone quality in 7 seconds. Free, private, no sign-up.",
+  metadataBase: new URL("https://miccheck-sage.vercel.app"),
+  title: {
+    default: "MicCheck - 7-Second Mic Quality Test",
+    template: "%s | MicCheck"
+  },
+  description: "Find out why your audio sounds bad. Free, private, no sign-up.",
+  keywords: ["microphone test", "audio quality", "mic check", "audio test", "podcast audio"],
+  authors: [{ name: "Ali Abul Hawa" }],
+  alternates: {
+    canonical: '/',
+  },
+  icons: {
+    icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>`,
+  },
   openGraph: {
-    title: "MicCheck - Speedtest for Microphones",
-    description: "Test your microphone quality in 7 seconds. Free, private, no sign-up.",
+    title: "MicCheck - 7-Second Mic Quality Test",
+    description: "Find out why your audio sounds bad. Free, private, no sign-up.",
+    url: "https://miccheck-sage.vercel.app/",
+    siteName: "MicCheck",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "MicCheck microphone test preview"
+        alt: "MicCheck - 7-Second Mic Quality Test"
       }
-    ]
+    ],
+    locale: 'en_US',
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MicCheck - 7-Second Mic Quality Test",
+    description: "Find out why your audio sounds bad. Free, private, no sign-up.",
+    images: ["/og-image.png"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   }
 };
 
@@ -28,12 +61,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎤</text></svg>"
-        />
-      </head>
       <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
           <header className="flex items-center justify-between">
@@ -43,7 +70,7 @@ export default function RootLayout({
               </div>
               <div>
                 <p className="text-lg font-semibold">MicCheck</p>
-                <p className="text-xs text-slate-400">Local microphone analysis</p>
+                <p className="text-xs text-slate-400">7-Second Mic Quality Test</p> {/* UPDATED */}
               </div>
             </div>
             <nav className="hidden gap-6 text-sm text-slate-200 md:flex">

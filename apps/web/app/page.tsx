@@ -26,7 +26,7 @@ export default function HomePage() {
             MicCheck
           </span>
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
-            Check your microphone quality in under 60 seconds.
+            Check your microphone quality in 7 seconds.
           </h1>
           <p className="text-base text-slate-200 md:text-lg">
             Record a quick sample, get an instant grade, and fix the biggest issue in
