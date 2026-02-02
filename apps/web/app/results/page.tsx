@@ -96,7 +96,7 @@ export default function ResultsPage() {
             <p className="text-sm text-rose-100">{noSpeechFix.description}</p>
           </div>
           <button
-            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
+            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
             onClick={handleTestAgain}
             type="button"
           >
@@ -137,7 +137,7 @@ export default function ResultsPage() {
               </li>
             </ul>
             <button
-              className="mt-6 inline-flex rounded-xl bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-600"
+              className="mt-6 inline-flex rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
               onClick={handleTestAgain}
               type="button"
             >
