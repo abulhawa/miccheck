@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     template: "%s | MicCheck"
   },
   description: "Find out why your audio sounds bad. Free, private, no sign-up.",
+  other: {
+    "google-site-verification": "zsJsIA8UAymquGY2wdM8XB-hDCCLb3F-gfcJ4L6fF3g",
+  },
   keywords: ["microphone test", "audio quality", "mic check", "audio test", "podcast audio"],
   authors: [{ name: "Ali Abul Hawa" }],
   alternates: {
