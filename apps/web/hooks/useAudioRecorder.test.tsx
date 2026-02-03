@@ -28,6 +28,7 @@ vi.mock("../lib/analysis", () => ({
     },
     primaryIssueCategory: "level",
     explanation: "All clear.",
+    fix: "Keep your current setup for consistent results.",
     recommendation: { category: "General", message: "Keep it up.", confidence: 0.9 },
     primaryFix: { title: "None", description: "No changes needed.", priority: "low" },
     specialState: undefined

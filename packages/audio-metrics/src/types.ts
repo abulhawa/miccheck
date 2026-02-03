@@ -10,7 +10,7 @@ export interface MetricsSummary {
 }
 
 export type CategoryLabel = "Level" | "Noise" | "Echo";
-export type CategoryId = "level" | "noise" | "echo" | "clipping";
+export type CategoryId = "level" | "noise" | "echo";
 
 export interface CategoryScore {
   stars: number;
@@ -47,6 +47,7 @@ export interface AnalysisSummary {
   metrics: MetricsSummary;
   primaryIssueCategory: CategoryId;
   explanation: string;
+  fix: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;
   specialState?: SpecialState;

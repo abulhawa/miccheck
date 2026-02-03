@@ -30,7 +30,7 @@ describe("buildCategoryScores", () => {
   });
 
   it("marks off-target level as acceptable", () => {
-    const scores = buildScores(ANALYSIS_CONFIG.targetRmsDb - ANALYSIS_CONFIG.targetRangeDb - 1, ANALYSIS_CONFIG.snrGoodDb);
+    const scores = buildScores(ANALYSIS_CONFIG.targetRmsDb - ANALYSIS_CONFIG.targetRangeDb + 1, ANALYSIS_CONFIG.snrGoodDb);
 
     expect(scores.level.stars).toBe(4);
     expect(scores.level.description).toBe("Slightly off target");
@@ -53,5 +53,17 @@ describe("buildCategoryScores", () => {
 
     expect(scores.noise.stars).toBe(2);
     expect(scores.noise.description).toBe("Electrical hum detected");
+  });
+
+  it("does not let hum override a worse noise rating", () => {
+    const scores = buildScores(
+      ANALYSIS_CONFIG.targetRmsDb,
+      ANALYSIS_CONFIG.snrPoorDb - 1,
+      0,
+      ANALYSIS_CONFIG.humWarningRatio + 0.01
+    );
+
+    expect(scores.noise.stars).toBe(1);
+    expect(scores.noise.description).toBe("Very noisy");
   });
 });

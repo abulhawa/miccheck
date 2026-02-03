@@ -15,6 +15,9 @@ describe("analyzeSamples", () => {
     expect(summary.explanation).toBe(
       "Background noise is overpowering the voice."
     );
+    expect(summary.fix).toBe(
+      "Silence the room or use a close mic to improve SNR."
+    );
   });
 
   it("keeps echo grading stable for short buffers", () => {

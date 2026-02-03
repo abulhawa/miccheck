@@ -1,6 +1,7 @@
 import type { FC } from "react";
+import type { CategoryId } from "../types";
 
-export type AffiliateIssueCategory = "echo" | "noise" | "clipping" | "level";
+export type AffiliateIssueCategory = CategoryId;
 
 interface AffiliateRecommendationProps {
   issueCategory: AffiliateIssueCategory;
@@ -16,11 +17,6 @@ const affiliateProducts: Record<AffiliateIssueCategory, { name: string; url: str
     name: "FIFINE USB Microphone",
     url: "https://amzn.to/4rpWH5l",
     description: "A directional USB mic can help reject background noise and focus on your voice."
-  },
-  clipping: {
-    name: "Pop Filter",
-    url: "https://amzn.to/4bCdmOB",
-    description: "Pop filters soften plosive bursts that can cause clipping on P and B sounds."
   },
   level: {
     name: "Microphone Arm",

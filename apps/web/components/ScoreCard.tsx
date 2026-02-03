@@ -11,8 +11,7 @@ const LEVEL_TARGET_DB = -14;
 const categoryImpactMap: Record<AnalysisResult["primaryIssueCategory"], string> = {
   level: "recording level",
   noise: "background noise",
-  echo: "echo",
-  clipping: "clipping"
+  echo: "echo"
 };
 const gradeLabelMap: Record<AnalysisResult["grade"], string> = {
   A: "Excellent",
@@ -64,8 +63,7 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
     }
     return "Poor";
   };
-  const activeHighlight =
-    highlightedCategoryId ?? (result.primaryIssueCategory === "clipping" ? undefined : result.primaryIssueCategory);
+  const activeHighlight = highlightedCategoryId ?? result.primaryIssueCategory;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
   const impactLabel = categoryImpactMap[result.primaryIssueCategory] ?? "overall audio quality";
