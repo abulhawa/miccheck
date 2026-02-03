@@ -26,6 +26,7 @@ const sampleResult: AnalysisResult = {
   },
   primaryIssueCategory: "echo",
   explanation: "Echo is noticeably affecting clarity.",
+  fix: "Add soft furnishings or move closer to the mic to reduce echo.",
   recommendation: {
     category: "Echo",
     message: "Add soft furnishings or move closer to the mic to reduce echo.",

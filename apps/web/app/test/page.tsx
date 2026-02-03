@@ -146,9 +146,9 @@ export default function TestPage() {
             />
             <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
               <h2 className="text-lg font-semibold">🎯 Your Top Fix</h2>
-              <p className="mt-3 text-sm text-slate-200">{analysis?.recommendation.message}</p>
+              <p className="mt-3 text-sm text-slate-200">{analysis.fix}</p>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li>Category focus: {analysis?.recommendation.category}</li>
+                <li>Category focus: {analysis.primaryIssueCategory}</li>
                 <li>
                   Confidence:{" "}
                   <span
@@ -158,7 +158,6 @@ export default function TestPage() {
                     {confidenceLabel}
                   </span>
                 </li>
-                <li>Keep your mouth 6–8 inches from the mic.</li>
               </ul>
               <AffiliateRecommendation issueCategory={analysis.primaryIssueCategory} />
               <div className="mt-6 flex flex-wrap gap-4">

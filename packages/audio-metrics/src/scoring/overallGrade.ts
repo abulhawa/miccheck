@@ -1,5 +1,5 @@
-import type { CategoryId, CategoryScores, GradeLetter, MetricsSummary } from "../types";
-import { ANALYSIS_CONFIG } from "../config";
+import type { CategoryId, GradeLetter, MetricsSummary } from "../types";
+import { describeEcho, describeLevel, describeNoise } from "./categoryScores";
 
 const gradeFromStars = (stars: number): GradeLetter => {
   switch (stars) {
@@ -18,71 +18,49 @@ const gradeFromStars = (stars: number): GradeLetter => {
   }
 };
 
-const getPrimaryIssue = (
-  metrics: MetricsSummary
-): { category: CategoryId; reason: string; fix: string } => {
-  if (metrics.clippingRatio > ANALYSIS_CONFIG.clippingRatioWarning) {
-    return {
-      category: "clipping",
-      reason: "Clipping is distorting the audio signal.",
-      fix: "Lower the input gain or move farther from the microphone."
-    };
-  }
-
-  if (metrics.echoScore > ANALYSIS_CONFIG.echoWarningScore) {
-    return {
-      category: "echo",
-      reason: "Echo is noticeably affecting clarity.",
-      fix: "Add soft furnishings or move closer to the microphone to reduce reflections."
-    };
-  }
-
-  if (metrics.snrDb < ANALYSIS_CONFIG.snrFairDb) {
-    return {
-      category: "noise",
-      reason: "Background noise is overpowering the voice.",
-      fix: "Reduce ambient noise or use a closer, directional microphone."
-    };
-  }
-
-  if (metrics.rmsDb < ANALYSIS_CONFIG.minRmsDb) {
-    return {
-      category: "level",
-      reason: "The recording is too quiet to be clear.",
-      fix: "Increase input gain or move closer to the microphone."
-    };
-  }
-
-  if (metrics.rmsDb > ANALYSIS_CONFIG.maxRmsDb) {
-    return {
-      category: "level",
-      reason: "The recording is too loud and may distort.",
-      fix: "Lower the input gain or move back from the microphone."
-    };
-  }
-
-  return {
-    category: "level",
-    reason: "Levels are balanced with minimal noise, echo, or clipping.",
-    fix: "Keep your current setup for consistent results."
-  };
-};
-
 /**
  * Determine the overall letter grade based on the weakest category.
  */
 export const computeOverallGrade = (
-  scores: CategoryScores,
   metrics: MetricsSummary
-): { grade: GradeLetter; primaryIssueCategory: CategoryId; explanation: string } => {
-  const minStars = Math.min(scores.level.stars, scores.noise.stars, scores.echo.stars);
-  const primaryIssue = getPrimaryIssue(metrics);
+): { grade: GradeLetter; primaryIssueCategory: CategoryId; explanation: string; fix: string } => {
+  const level = describeLevel(metrics.rmsDb, metrics.clippingRatio);
+  const noise = describeNoise(metrics.snrDb, metrics.humRatio);
+  const echo = describeEcho(metrics.echoScore);
 
+  const minStars = Math.min(level.stars, noise.stars, echo.stars);
   const grade = minStars > 0 ? gradeFromStars(minStars) : "F";
+
+  const levelIsMin = level.stars === minStars;
+  const noiseIsMin = noise.stars === minStars;
+  const echoIsMin = echo.stars === minStars;
+
+  let primaryCategory: CategoryId = "level";
+  let primaryInsight = level;
+
+  if (levelIsMin && level.isCatastrophic) {
+    primaryCategory = "level";
+    primaryInsight = level;
+  } else if (echoIsMin) {
+    primaryCategory = "echo";
+    primaryInsight = echo;
+  } else if (noiseIsMin) {
+    primaryCategory = "noise";
+    primaryInsight = noise;
+  } else if (levelIsMin) {
+    primaryCategory = "level";
+    primaryInsight = level;
+  }
+
+  const explanation = primaryInsight.reason ?? primaryInsight.description;
+  const fix =
+    primaryInsight.fix ??
+    (minStars >= 4 ? "Keep your current setup for consistent results." : "Make targeted adjustments to improve clarity.");
 
   return {
     grade,
-    primaryIssueCategory: primaryIssue.category,
-    explanation: primaryIssue.reason
+    primaryIssueCategory: primaryCategory,
+    explanation,
+    fix
   };
 };

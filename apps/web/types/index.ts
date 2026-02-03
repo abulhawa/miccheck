@@ -1,5 +1,5 @@
 export type CategoryLabel = "Level" | "Noise" | "Echo";
-export type CategoryId = "level" | "noise" | "echo" | "clipping";
+export type CategoryId = "level" | "noise" | "echo";
 
 export interface CategoryScore {
   stars: number;
@@ -43,6 +43,7 @@ export interface AnalysisResult {
   metrics: AnalysisMetrics;
   primaryIssueCategory: CategoryId;
   explanation: string;
+  fix: string;
   recommendation: Recommendation;
   primaryFix?: PrimaryFix;
   specialState?: SpecialState;

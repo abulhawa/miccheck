@@ -1,16 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { buildCategoryScores } from "./categoryScores";
 import { computeOverallGrade } from "./overallGrade";
 
 const buildSummary = (rmsDb: number, snrDb: number) => {
-  const categories = buildCategoryScores(
-    { rms: 0, rmsDb },
-    { clippingRatio: 0, peak: 0 },
-    { noiseFloor: 0, snrDb, humRatio: 0, confidence: "high" },
-    { echoScore: 0, confidence: "high" }
-  );
-
-  return computeOverallGrade(categories, {
+  return computeOverallGrade({
     clippingRatio: 0,
     rmsDb,
     speechRmsDb: rmsDb,
@@ -44,5 +36,65 @@ describe("computeOverallGrade", () => {
   it("grades very noisy input as an F", () => {
     const result = buildSummary(-18, 4);
     expect(result.grade).toBe("F");
+  });
+
+  it("picks noise with hum when SNR is otherwise strong", () => {
+    const result = computeOverallGrade({
+      clippingRatio: 0,
+      rmsDb: -18,
+      speechRmsDb: -18,
+      snrDb: 40,
+      humRatio: 0.2,
+      echoScore: 0
+    });
+
+    expect(result.primaryIssueCategory).toBe("noise");
+    expect(result.explanation.toLowerCase()).toContain("hum");
+    expect(result.fix.toLowerCase()).toContain("cable");
+    expect(result.fix.toLowerCase()).toContain("ground");
+  });
+
+  it("surfaces clipping as the primary level issue", () => {
+    const result = computeOverallGrade({
+      clippingRatio: 0.01,
+      rmsDb: -18,
+      speechRmsDb: -18,
+      snrDb: 40,
+      humRatio: 0,
+      echoScore: 0
+    });
+
+    expect(result.primaryIssueCategory).toBe("level");
+    expect(result.explanation.toLowerCase()).toContain("clipping");
+    expect(result.fix.toLowerCase()).toContain("gain");
+  });
+
+  it("surfaces echo as the primary issue when reflections are strong", () => {
+    const result = computeOverallGrade({
+      clippingRatio: 0,
+      rmsDb: -18,
+      speechRmsDb: -18,
+      snrDb: 40,
+      humRatio: 0,
+      echoScore: 0.6
+    });
+
+    expect(result.primaryIssueCategory).toBe("echo");
+    expect(result.fix.toLowerCase()).toContain("closer");
+  });
+
+  it("avoids the balanced copy for low grades", () => {
+    const result = computeOverallGrade({
+      clippingRatio: 0,
+      rmsDb: -30,
+      speechRmsDb: -30,
+      snrDb: 20,
+      humRatio: 0,
+      echoScore: 0
+    });
+
+    expect(result.grade).toBe("C");
+    expect(result.explanation.toLowerCase()).not.toContain("balanced");
+    expect(result.explanation.toLowerCase()).not.toContain("minimal");
   });
 });

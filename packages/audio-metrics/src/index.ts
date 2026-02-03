@@ -42,6 +42,7 @@ export const analyzeSamples = (
       },
       primaryIssueCategory: "level",
       explanation: "No clear speech detected.",
+      fix: "Please speak closer to the microphone or check if your mic is muted.",
       recommendation: {
         category: "General",
         message: "Please speak closer to the microphone or check if your mic is muted.",
@@ -61,7 +62,7 @@ export const analyzeSamples = (
   const echo = measureEcho(samples, sampleRate);
 
   const categories = buildCategoryScores(level, clipping, noise, echo);
-  const { grade, primaryIssueCategory, explanation } = computeOverallGrade(categories, {
+  const { grade, primaryIssueCategory, explanation, fix } = computeOverallGrade({
     clippingRatio: clipping.clippingRatio,
     rmsDb: level.rmsDb,
     speechRmsDb,
@@ -96,6 +97,7 @@ export const analyzeSamples = (
     },
     primaryIssueCategory,
     explanation,
+    fix,
     recommendation
   };
 };
