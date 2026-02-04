@@ -6,7 +6,7 @@ import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import Tooltip from "../../components/Tooltip";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
-import { resolveCopy } from "../../lib/analysisCopy";
+import { resolveCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
@@ -39,7 +39,7 @@ const sampleResult: AnalysisResult = {
   },
   recommendation: {
     category: "Echo",
-    message: "Add soft furnishings or move closer to the mic to reduce echo.",
+    messageKey: "recommendation.reduce_echo",
     confidence: 0.78
   }
 };

@@ -38,7 +38,11 @@ vi.mock("../lib/analysis", () => ({
       humRatio: 0,
       echoScore: 0.1
     },
-    recommendation: { category: "General", message: "Keep it up.", confidence: 0.9 },
+    recommendation: {
+      category: "General",
+      messageKey: "recommendation.keep_consistent",
+      confidence: 0.9
+    },
     specialState: undefined
   })
 }));

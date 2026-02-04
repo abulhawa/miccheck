@@ -8,8 +8,16 @@ import type {
   VerdictNoSpeechDescriptionKey,
   VerdictNoSpeechTitleKey,
   VerdictOverallLabelKey,
-  VerdictOverallSummaryKey
+  VerdictOverallSummaryKey,
+  type RecommendationCopyKey
 } from "@miccheck/audio-metrics";
+
+export type AppCopyKey =
+  | "error.silent_recording"
+  | "ui.overall_grade"
+  | "ui.metric.clipping"
+  | "ui.metric.rms"
+  | "ui.metric.snr";
 
 export type CopyKey =
   | VerdictCategoryDescriptionKey
@@ -21,7 +29,9 @@ export type CopyKey =
   | VerdictNoSpeechDescriptionKey
   | VerdictNoSpeechTitleKey
   | VerdictOverallLabelKey
-  | VerdictOverallSummaryKey;
+  | VerdictOverallSummaryKey
+  | RecommendationCopyKey
+  | AppCopyKey;
 
 const copyMap: Record<CopyKey, string> = {
   "category.level": "Level",
@@ -94,7 +104,21 @@ const copyMap: Record<CopyKey, string> = {
   "impact.biggest_opportunity": "Strong overall — the biggest opportunity is {impact}.",
   "impact.mainly_affected": "Your grade is mainly affected by {impact}.",
   "no_speech.title": "No clear speech detected",
-  "no_speech.description": "Please speak closer to the microphone or check if your mic is muted."
+  "no_speech.description": "Please speak closer to the microphone or check if your mic is muted.",
+  "recommendation.reduce_clipping":
+    "Reduce input gain or move slightly farther from the mic to prevent clipping.",
+  "recommendation.reduce_noise":
+    "Lower background noise by turning off fans or switching to a quieter room.",
+  "recommendation.reduce_echo": "Add soft furnishings or close doors to reduce echo reflections.",
+  "recommendation.raise_volume": "Increase mic gain or move closer to the microphone.",
+  "recommendation.keep_consistent":
+    "Your microphone sounds solid. Keep consistent distance and speak clearly.",
+  "recommendation.no_speech": "Please speak closer to the microphone or check if your mic is muted.",
+  "error.silent_recording": "Recording is silent. Please speak closer to the microphone.",
+  "ui.overall_grade": "Overall grade",
+  "ui.metric.clipping": "Clipping",
+  "ui.metric.rms": "RMS",
+  "ui.metric.snr": "SNR"
 };
 
 export const resolveCopy = (key: CopyKey, params?: Record<string, string>) => {

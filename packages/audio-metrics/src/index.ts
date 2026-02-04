@@ -37,7 +37,7 @@ export const analyzeSamples = (
       },
       recommendation: {
         category: "General",
-        message: "Please speak closer to the microphone or check if your mic is muted.",
+        messageKey: "recommendation.no_speech",
         confidence: 1
       },
       specialState: "NO_SPEECH"
