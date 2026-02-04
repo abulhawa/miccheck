@@ -9,7 +9,7 @@ import type {
   VerdictNoSpeechTitleKey,
   VerdictOverallLabelKey,
   VerdictOverallSummaryKey,
-  type RecommendationCopyKey
+  RecommendationCopyKey
 } from "@miccheck/audio-metrics";
 
 export type AppCopyKey =
