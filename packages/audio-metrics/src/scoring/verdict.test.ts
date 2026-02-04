@@ -3,6 +3,18 @@ import { ANALYSIS_CONFIG } from "../config";
 import type { MetricsSummary, Verdict } from "../types";
 import { assertVerdictInvariant, getVerdict } from "./verdict";
 
+/**
+ * Semantic failure modes covered in this suite:
+ * - “Primary issue assigned when its stars are 5” → `assertVerdictInvariant` test
+ *   "throws when the primary issue has perfect stars" + assertion
+ *   "Verdict primary issue must have fewer than 5 stars."
+ * - “Perfect grade with non-null primary issue” → `getVerdict` test
+ *   "maps perfect metrics to the excellent overall label and no primary issue"
+ *   asserting `primaryIssue` is null.
+ * - “Label/star mismatch (Perfect ≠ 5)” → `assertVerdictInvariant` test
+ *   "throws when the primary issue has perfect stars" + assertion
+ *   "Verdict primary issue must have fewer than 5 stars."
+ */
 const buildMetrics = (overrides: Partial<MetricsSummary> = {}): MetricsSummary => ({
   clippingRatio: 0,
   rmsDb: ANALYSIS_CONFIG.targetRmsDb,
