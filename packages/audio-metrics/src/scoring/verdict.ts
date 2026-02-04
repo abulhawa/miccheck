@@ -30,6 +30,14 @@ const summaryKeyByGrade: Record<GradeLetter, VerdictOverallSummaryKey> = {
   F: "overall.summary.severe"
 };
 
+const expectedStarsByLabelKey: Record<VerdictOverallLabelKey, number[]> = {
+  "overall.label.excellent": [5],
+  "overall.label.good": [4],
+  "overall.label.fair": [3],
+  "overall.label.needs_improvement": [2],
+  "overall.label.unusable": [0, 1]
+};
+
 const buildDimensionsFromMetrics = (metrics: MetricsSummary): VerdictDimensions => {
   const levelScore = describeLevel(metrics.rmsDb, metrics.clippingRatio);
   const noiseScore = describeNoise(metrics.snrDb, metrics.humRatio);
@@ -79,6 +87,7 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
     verdict.dimensions.noise.stars,
     verdict.dimensions.echo.stars
   ];
+  const minStars = Math.min(...stars);
 
   if (stars.some((value) => !Number.isFinite(value) || value < 0 || value > 5)) {
     throw new Error("Verdict stars must be finite values between 0 and 5.");
@@ -86,6 +95,30 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
 
   if (verdict.primaryIssue && !verdict.dimensions[verdict.primaryIssue]) {
     throw new Error("Verdict primary issue must map to a dimension.");
+  }
+
+  if (verdict.primaryIssue && verdict.dimensions[verdict.primaryIssue].stars >= 5) {
+    throw new Error("Verdict primary issue must have fewer than 5 stars.");
+  }
+
+  if ((verdict.overall.grade as string) === "Perfect" && verdict.primaryIssue !== null) {
+    throw new Error("Perfect grades must not declare a primary issue.");
+  }
+
+  if (labelKeyByGrade[verdict.overall.grade] !== verdict.overall.labelKey) {
+    throw new Error("Verdict overall label must match its grade.");
+  }
+
+  const expectedSummaryKey = summaryKeyByGrade[verdict.overall.grade];
+  if (
+    verdict.overall.summaryKey !== expectedSummaryKey &&
+    verdict.overall.summaryKey !== "overall.summary.no_speech"
+  ) {
+    throw new Error("Verdict overall summary must match its grade.");
+  }
+
+  if (!expectedStarsByLabelKey[verdict.overall.labelKey].includes(minStars)) {
+    throw new Error("Verdict overall label must align with the overall star rating.");
   }
 };
 
