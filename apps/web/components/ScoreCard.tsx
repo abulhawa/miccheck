@@ -67,6 +67,7 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = gradeLabelMap[result.grade] ?? "Needs Improvement";
   const impactLabel = categoryImpactMap[result.primaryIssueCategory] ?? "overall audio quality";
+  const primaryStars = result.categories?.[result.primaryIssueCategory]?.stars ?? 0;
   const categoryEntries = (
     Object.entries(result.categories ?? {}) as Array<
       [
@@ -97,7 +98,11 @@ export default function ScoreCard({ result, highlightedCategoryId }: ScoreCardPr
             <ShareButton grade={result.grade} />
           </div>
           <p className="mt-2 text-sm text-slate-200">
-            Your grade is mainly affected by {impactLabel}.
+            {primaryStars >= 5
+              ? "No major issues detected across level, noise, or echo."
+              : primaryStars >= 4
+                ? `Strong overall — the biggest opportunity is ${impactLabel}.`
+                : `Your grade is mainly affected by ${impactLabel}.`}
           </p>
           <p className="mt-2 text-sm text-slate-200">{result.summary}</p>
         </div>
