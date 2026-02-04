@@ -220,15 +220,15 @@ describe("Generator + Analysis Integration", () => {
   it("perfect sample gets A grade", () => {
     const sample = GOLDEN_SAMPLES.perfect(48_000);
     const result = analyzeSamples(sample, 48_000);
-    expect(result.grade).toBe("A");
-    expect(result.categories.level.stars).toBe(5);
-    expect(result.categories.noise.stars).toBe(5);
+    expect(result.verdict.overall.grade).toBe("A");
+    expect(result.verdict.dimensions.level.stars).toBe(5);
+    expect(result.verdict.dimensions.noise.stars).toBe(5);
   });
 
   it("goodCall sample gets B grade with current thresholds", () => {
     const sample = GOLDEN_SAMPLES.goodCall(48_000);
     const result = analyzeSamples(sample, 48_000);
-    expect(result.grade).toBe("B");
+    expect(result.verdict.overall.grade).toBe("B");
     expect(result.metrics.snrDb).toBeGreaterThan(25);
     expect(result.metrics.snrDb).toBeLessThan(35);
   });
@@ -237,14 +237,16 @@ describe("Generator + Analysis Integration", () => {
     const sample = GOLDEN_SAMPLES.clipped(48_000);
     const result = analyzeSamples(sample, 48_000);
     expect(result.metrics.clippingRatio).toBeGreaterThan(0.01);
-    expect(result.categories.level.description).toContain("Clipping");
+    expect(result.verdict.dimensions.level.descriptionKey).toBe(
+      "level.clipping_detected"
+    );
   });
 
   it("echoey sample shows echo detection", () => {
     const sample = GOLDEN_SAMPLES.echoey(48_000);
     const result = analyzeSamples(sample, 48_000);
     expect(result.metrics.echoScore).toBeGreaterThan(0.3);
-    expect(result.categories.echo.stars).toBeLessThan(4);
+    expect(result.verdict.dimensions.echo.stars).toBeLessThan(4);
   });
 });
 
