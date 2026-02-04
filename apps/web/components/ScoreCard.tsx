@@ -1,5 +1,5 @@
 import type { MetricsSummary, Verdict } from "../types";
-import { resolveCopy } from "../lib/analysisCopy";
+import { resolveCopy } from "../lib/copy";
 import ShareButton from "./ShareButton";
 
 interface ScoreCardProps {
@@ -25,7 +25,9 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-200">Overall grade</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-200">
+            {resolveCopy("ui.overall_grade")}
+          </p>
           <p className="mt-2 flex flex-wrap items-baseline gap-2 text-2xl font-semibold text-white sm:text-3xl">
             <span>{gradeLabel}</span>
             <span className="text-sm font-medium text-slate-400">({verdict.overall.grade})</span>
@@ -45,9 +47,15 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
         </div>
         {metrics ? (
           <div className="rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-xs text-slate-400">
-            <p>Clipping: {(metrics.clippingRatio * 100).toFixed(2)}%</p>
-            <p>RMS: {metrics.rmsDb.toFixed(1)} dBFS</p>
-            <p>SNR: {metrics.snrDb.toFixed(1)} dB</p>
+            <p>
+              {resolveCopy("ui.metric.clipping")}: {(metrics.clippingRatio * 100).toFixed(2)}%
+            </p>
+            <p>
+              {resolveCopy("ui.metric.rms")}: {metrics.rmsDb.toFixed(1)} dBFS
+            </p>
+            <p>
+              {resolveCopy("ui.metric.snr")}: {metrics.snrDb.toFixed(1)} dB
+            </p>
           </div>
         ) : null}
       </div>

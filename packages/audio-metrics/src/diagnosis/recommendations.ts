@@ -17,34 +17,34 @@ export const recommendFix = (
   if (clipping.clippingRatio > ANALYSIS_CONFIG.clippingRatioWarning) {
     return {
       category: "Clipping",
-      message: "Reduce input gain or move slightly farther from the mic to prevent clipping.",
+      messageKey: "recommendation.reduce_clipping",
       confidence: 0.9
     };
   }
   if (noise.snrDb < ANALYSIS_CONFIG.snrFairDb || noise.humRatio > ANALYSIS_CONFIG.humWarningRatio) {
     return {
       category: "Noise",
-      message: "Lower background noise by turning off fans or switching to a quieter room.",
+      messageKey: "recommendation.reduce_noise",
       confidence: 0.82
     };
   }
   if (echo.echoScore > ANALYSIS_CONFIG.echoWarningScore) {
     return {
       category: "Echo",
-      message: "Add soft furnishings or close doors to reduce echo reflections.",
+      messageKey: "recommendation.reduce_echo",
       confidence: 0.77
     };
   }
   if (level.rmsDb < ANALYSIS_CONFIG.minRmsDb) {
     return {
       category: "Volume",
-      message: "Increase mic gain or move closer to the microphone.",
+      messageKey: "recommendation.raise_volume",
       confidence: 0.7
     };
   }
   return {
     category: "General",
-    message: "Your microphone sounds solid. Keep consistent distance and speak clearly.",
+    messageKey: "recommendation.keep_consistent",
     confidence: 0.6
   };
 };

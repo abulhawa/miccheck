@@ -10,7 +10,7 @@ import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
-import { resolveCopy } from "../../lib/analysisCopy";
+import { resolveCopy } from "../../lib/copy";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);

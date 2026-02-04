@@ -11,12 +11,12 @@ export interface MetricsSummary {
 
 export type CategoryId = "level" | "noise" | "echo";
 
-export type VerdictCategoryLabelKey =
+export type CategoryLabelKey =
   | "category.level"
   | "category.noise"
   | "category.echo";
 
-export type VerdictCategoryDescriptionKey =
+export type CategoryDescriptorKey =
   | "level.clipping_detected"
   | "level.extremely_quiet"
   | "level.extremely_loud"
@@ -38,14 +38,14 @@ export type VerdictCategoryDescriptionKey =
   | "echo.minimal"
   | "special.no_speech";
 
-export type VerdictOverallLabelKey =
+export type OverallLabelKey =
   | "overall.label.excellent"
   | "overall.label.good"
   | "overall.label.fair"
   | "overall.label.needs_improvement"
   | "overall.label.unusable";
 
-export type VerdictOverallSummaryKey =
+export type OverallSummaryKey =
   | "overall.summary.excellent"
   | "overall.summary.strong"
   | "overall.summary.fair"
@@ -53,7 +53,7 @@ export type VerdictOverallSummaryKey =
   | "overall.summary.severe"
   | "overall.summary.no_speech";
 
-export type VerdictExplanationKey =
+export type ExplanationCopyKey =
   | "explanation.clipping_distortion"
   | "explanation.extremely_quiet"
   | "explanation.extremely_loud"
@@ -68,9 +68,9 @@ export type VerdictExplanationKey =
   | "explanation.strong_echo"
   | "explanation.some_room_echo"
   | "explanation.no_speech"
-  | VerdictCategoryDescriptionKey;
+  | CategoryDescriptorKey;
 
-export type VerdictFixKey =
+export type FixCopyKey =
   | "fix.lower_gain_move_back"
   | "fix.increase_gain_move_closer"
   | "fix.lower_gain_move_back_slight"
@@ -86,24 +86,45 @@ export type VerdictFixKey =
   | "fix.targeted_adjustments"
   | "fix.no_speech";
 
-export type VerdictImpactKey =
+export type ImpactKey =
   | "impact.level"
   | "impact.noise"
   | "impact.echo"
   | "impact.overall";
 
-export type VerdictImpactSummaryKey =
+export type ImpactSummaryKey =
   | "impact.no_major_issues"
   | "impact.biggest_opportunity"
   | "impact.mainly_affected";
 
-export type VerdictNoSpeechTitleKey = "no_speech.title";
-export type VerdictNoSpeechDescriptionKey = "no_speech.description";
+export type NoSpeechTitleKey = "no_speech.title";
+export type NoSpeechDescriptionKey = "no_speech.description";
+
+export type RecommendationCopyKey =
+  | "recommendation.reduce_clipping"
+  | "recommendation.reduce_noise"
+  | "recommendation.reduce_echo"
+  | "recommendation.raise_volume"
+  | "recommendation.keep_consistent"
+  | "recommendation.no_speech";
+
+export type PrimaryIssueCopyKey = ExplanationCopyKey | FixCopyKey;
+
+export type VerdictCategoryLabelKey = CategoryLabelKey;
+export type VerdictCategoryDescriptionKey = CategoryDescriptorKey;
+export type VerdictOverallLabelKey = OverallLabelKey;
+export type VerdictOverallSummaryKey = OverallSummaryKey;
+export type VerdictExplanationKey = ExplanationCopyKey;
+export type VerdictFixKey = FixCopyKey;
+export type VerdictImpactKey = ImpactKey;
+export type VerdictImpactSummaryKey = ImpactSummaryKey;
+export type VerdictNoSpeechTitleKey = NoSpeechTitleKey;
+export type VerdictNoSpeechDescriptionKey = NoSpeechDescriptionKey;
 
 export interface VerdictDimension {
   stars: number;
-  labelKey: VerdictCategoryLabelKey;
-  descriptionKey: VerdictCategoryDescriptionKey;
+  labelKey: CategoryLabelKey;
+  descriptionKey: CategoryDescriptorKey;
 }
 
 export interface VerdictDimensions {
@@ -114,17 +135,17 @@ export interface VerdictDimensions {
 
 export interface VerdictOverall {
   grade: GradeLetter;
-  labelKey: VerdictOverallLabelKey;
-  summaryKey: VerdictOverallSummaryKey;
+  labelKey: OverallLabelKey;
+  summaryKey: OverallSummaryKey;
 }
 
 export interface VerdictCopyKeys {
-  explanationKey: VerdictExplanationKey;
-  fixKey: VerdictFixKey;
-  impactKey: VerdictImpactKey;
-  impactSummaryKey: VerdictImpactSummaryKey;
-  noSpeechTitleKey?: VerdictNoSpeechTitleKey;
-  noSpeechDescriptionKey?: VerdictNoSpeechDescriptionKey;
+  explanationKey: ExplanationCopyKey;
+  fixKey: FixCopyKey;
+  impactKey: ImpactKey;
+  impactSummaryKey: ImpactSummaryKey;
+  noSpeechTitleKey?: NoSpeechTitleKey;
+  noSpeechDescriptionKey?: NoSpeechDescriptionKey;
 }
 
 export interface Verdict {
@@ -136,7 +157,7 @@ export interface Verdict {
 
 export interface Recommendation {
   category: "Clipping" | "Noise" | "Echo" | "Volume" | "General";
-  message: string;
+  messageKey: RecommendationCopyKey;
   confidence: number;
 }
 
