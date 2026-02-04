@@ -124,11 +124,17 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
 
 export const getVerdict = (metrics: MetricsSummary): Verdict => {
   const dimensions = buildDimensionsFromMetrics(metrics);
-  const { grade, primaryIssueCategory, explanationKey, fixKey } =
+  const { grade, primaryIssueCategory: rawPrimaryIssueCategory, explanationKey, fixKey } =
     computeOverallGrade(metrics);
+  const minStars = Math.min(
+    dimensions.level.stars,
+    dimensions.noise.stars,
+    dimensions.echo.stars
+  );
+  const primaryIssueCategory = minStars === 5 ? null : rawPrimaryIssueCategory;
   const primaryStars = primaryIssueCategory
     ? dimensions[primaryIssueCategory].stars
-    : 0;
+    : minStars;
 
   const verdict: Verdict = {
     overall: {
