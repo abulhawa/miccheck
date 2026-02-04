@@ -6,15 +6,28 @@ import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import Tooltip from "../../components/Tooltip";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
+import { resolveCopy } from "../../lib/analysisCopy";
 import type { AnalysisResult } from "../../types";
 
 const sampleResult: AnalysisResult = {
-  grade: "B",
-  summary: "Strong overall sound with mild echo reflections.",
-  categories: {
-    level: { stars: 4, label: "Level", description: "Healthy speaking level" },
-    noise: { stars: 5, label: "Noise", description: "Quiet background" },
-    echo: { stars: 3, label: "Echo", description: "Some room echo" }
+  verdict: {
+    overall: {
+      grade: "B",
+      labelKey: "overall.label.good",
+      summaryKey: "overall.summary.strong"
+    },
+    dimensions: {
+      level: { stars: 4, labelKey: "category.level", descriptionKey: "level.slightly_off_target" },
+      noise: { stars: 5, labelKey: "category.noise", descriptionKey: "noise.very_clean" },
+      echo: { stars: 3, labelKey: "category.echo", descriptionKey: "echo.some_room_echo" }
+    },
+    primaryIssue: "echo",
+    copyKeys: {
+      explanationKey: "explanation.strong_echo",
+      fixKey: "fix.add_soft_furnishings_move_closer",
+      impactKey: "impact.echo",
+      impactSummaryKey: "impact.biggest_opportunity"
+    }
   },
   metrics: {
     clippingRatio: 0.003,
@@ -24,9 +37,6 @@ const sampleResult: AnalysisResult = {
     humRatio: 0.04,
     echoScore: 0.32
   },
-  primaryIssueCategory: "echo",
-  explanation: "Echo is noticeably affecting clarity.",
-  fix: "Add soft furnishings or move closer to the mic to reduce echo.",
   recommendation: {
     category: "Echo",
     message: "Add soft furnishings or move closer to the mic to reduce echo.",
@@ -72,11 +82,12 @@ export default function ResultsPage() {
   }, []);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
-  const noSpeechFix = sampleResult.primaryFix ?? {
-    title: "No clear speech detected",
-    description: "Please speak closer to the microphone or check if your mic is muted.",
-    priority: "critical" as const
-  };
+  const noSpeechTitle = sampleResult.verdict.copyKeys.noSpeechTitleKey
+    ? resolveCopy(sampleResult.verdict.copyKeys.noSpeechTitleKey)
+    : "No clear speech detected";
+  const noSpeechDescription = sampleResult.verdict.copyKeys.noSpeechDescriptionKey
+    ? resolveCopy(sampleResult.verdict.copyKeys.noSpeechDescriptionKey)
+    : "Please speak closer to the microphone or check if your mic is muted.";
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
@@ -93,8 +104,8 @@ export default function ResultsPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
               No speech detected
             </p>
-            <h2 className="text-2xl font-semibold text-white">{noSpeechFix.title}</h2>
-            <p className="text-sm text-rose-100">{noSpeechFix.description}</p>
+            <h2 className="text-2xl font-semibold text-white">{noSpeechTitle}</h2>
+            <p className="text-sm text-rose-100">{noSpeechDescription}</p>
           </div>
           <button
             className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
@@ -107,8 +118,9 @@ export default function ResultsPage() {
       ) : (
         <>
           <ScoreCard
-            result={sampleResult}
-            highlightedCategoryId={sampleResult.primaryIssueCategory}
+            verdict={sampleResult.verdict}
+            metrics={sampleResult.metrics}
+            highlightedCategoryId={sampleResult.verdict.primaryIssue}
           />
 
           <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">

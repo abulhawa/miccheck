@@ -49,9 +49,8 @@ describe("computeOverallGrade", () => {
     });
 
     expect(result.primaryIssueCategory).toBe("noise");
-    expect(result.explanation.toLowerCase()).toContain("hum");
-    expect(result.fix.toLowerCase()).toContain("cable");
-    expect(result.fix.toLowerCase()).toContain("ground");
+    expect(result.explanationKey).toBe("explanation.electrical_hum");
+    expect(result.fixKey).toBe("fix.check_cables_grounding");
   });
 
   it("surfaces clipping as the primary level issue", () => {
@@ -65,8 +64,8 @@ describe("computeOverallGrade", () => {
     });
 
     expect(result.primaryIssueCategory).toBe("level");
-    expect(result.explanation.toLowerCase()).toContain("clipping");
-    expect(result.fix.toLowerCase()).toContain("gain");
+    expect(result.explanationKey).toBe("explanation.clipping_distortion");
+    expect(result.fixKey).toBe("fix.lower_gain_move_back");
   });
 
   it("surfaces echo as the primary issue when reflections are strong", () => {
@@ -80,7 +79,7 @@ describe("computeOverallGrade", () => {
     });
 
     expect(result.primaryIssueCategory).toBe("echo");
-    expect(result.fix.toLowerCase()).toContain("closer");
+    expect(result.fixKey).toBe("fix.add_soft_furnishings_move_closer");
   });
 
   it("avoids the balanced copy for low grades", () => {
@@ -94,7 +93,7 @@ describe("computeOverallGrade", () => {
     });
 
     expect(result.grade).toBe("C");
-    expect(result.explanation.toLowerCase()).not.toContain("balanced");
-    expect(result.explanation.toLowerCase()).not.toContain("minimal");
+    expect(result.explanationKey).not.toBe("echo.minimal");
+    expect(result.explanationKey).not.toBe("noise.very_clean");
   });
 });

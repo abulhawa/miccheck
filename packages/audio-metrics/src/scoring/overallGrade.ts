@@ -1,4 +1,10 @@
-import type { CategoryId, GradeLetter, MetricsSummary } from "../types";
+import type {
+  CategoryId,
+  GradeLetter,
+  MetricsSummary,
+  VerdictExplanationKey,
+  VerdictFixKey
+} from "../types";
 import { describeEcho, describeLevel, describeNoise } from "./categoryScores";
 
 const gradeFromStars = (stars: number): GradeLetter => {
@@ -23,7 +29,12 @@ const gradeFromStars = (stars: number): GradeLetter => {
  */
 export const computeOverallGrade = (
   metrics: MetricsSummary
-): { grade: GradeLetter; primaryIssueCategory: CategoryId; explanation: string; fix: string } => {
+): {
+  grade: GradeLetter;
+  primaryIssueCategory: CategoryId;
+  explanationKey: VerdictExplanationKey;
+  fixKey: VerdictFixKey;
+} => {
   const level = describeLevel(metrics.rmsDb, metrics.clippingRatio);
   const noise = describeNoise(metrics.snrDb, metrics.humRatio);
   const echo = describeEcho(metrics.echoScore);
@@ -52,15 +63,15 @@ export const computeOverallGrade = (
     primaryInsight = level;
   }
 
-  const explanation = primaryInsight.reason ?? primaryInsight.description;
-  const fix =
-    primaryInsight.fix ??
-    (minStars >= 4 ? "Keep your current setup for consistent results." : "Make targeted adjustments to improve clarity.");
+  const explanationKey =
+    primaryInsight.reasonKey ?? primaryInsight.descriptionKey;
+  const fixKey =
+    primaryInsight.fixKey ?? (minStars >= 4 ? "fix.keep_setup" : "fix.targeted_adjustments");
 
   return {
     grade,
     primaryIssueCategory: primaryCategory,
-    explanation,
-    fix
+    explanationKey,
+    fixKey
   };
 };

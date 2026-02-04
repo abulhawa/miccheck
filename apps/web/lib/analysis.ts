@@ -36,26 +36,9 @@ export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
   const summary: AnalysisSummary = analyzeSamples(samples, buffer.sampleRate);
 
   return {
-    grade: summary.grade,
-    summary: summary.summary,
-    categories: {
-      level: summary.categories.level,
-      noise: summary.categories.noise,
-      echo: summary.categories.echo
-    },
-    metrics: {
-      clippingRatio: summary.metrics.clippingRatio,
-      rmsDb: summary.metrics.rmsDb,
-      speechRmsDb: summary.metrics.speechRmsDb,
-      snrDb: summary.metrics.snrDb,
-      humRatio: summary.metrics.humRatio,
-      echoScore: summary.metrics.echoScore
-    },
-    primaryIssueCategory: summary.primaryIssueCategory,
-    explanation: summary.explanation,
-    fix: summary.fix,
+    verdict: summary.verdict,
+    metrics: summary.metrics,
     recommendation: summary.recommendation,
-    primaryFix: summary.primaryFix,
     specialState: summary.specialState
   };
 };
