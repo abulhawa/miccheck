@@ -10,6 +10,7 @@ import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
+import { resolveCopy } from "../../lib/analysisCopy";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -123,11 +124,14 @@ export default function TestPage() {
                 🎤❌ No speech detected
               </p>
               <h2 className="text-2xl font-semibold text-white">
-                {analysis.primaryFix?.title ?? "No clear speech detected"}
+                {analysis.verdict.copyKeys.noSpeechTitleKey
+                  ? resolveCopy(analysis.verdict.copyKeys.noSpeechTitleKey)
+                  : "No clear speech detected"}
               </h2>
               <p className="text-sm text-rose-100">
-                {analysis.primaryFix?.description ??
-                  "Please speak closer to the microphone or check if your mic is muted."}
+                {analysis.verdict.copyKeys.noSpeechDescriptionKey
+                  ? resolveCopy(analysis.verdict.copyKeys.noSpeechDescriptionKey)
+                  : "Please speak closer to the microphone or check if your mic is muted."}
               </p>
             </div>
             <button
@@ -141,14 +145,24 @@ export default function TestPage() {
         ) : (
           <section className="grid gap-6 md:grid-cols-2">
             <ScoreCard
-              result={analysis}
-              highlightedCategoryId={analysis.primaryIssueCategory}
+              verdict={analysis.verdict}
+              metrics={analysis.metrics}
+              highlightedCategoryId={analysis.verdict.primaryIssue}
             />
             <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
               <h2 className="text-lg font-semibold">🎯 Your Top Fix</h2>
-              <p className="mt-3 text-sm text-slate-200">{analysis.fix}</p>
+              <p className="mt-3 text-sm text-slate-200">
+                {resolveCopy(analysis.verdict.copyKeys.fixKey)}
+              </p>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li>Category focus: {analysis.primaryIssueCategory}</li>
+                <li>
+                  Category focus:{" "}
+                  {analysis.verdict.primaryIssue
+                    ? resolveCopy(
+                        analysis.verdict.dimensions[analysis.verdict.primaryIssue].labelKey
+                      )
+                    : resolveCopy(analysis.verdict.copyKeys.impactKey)}
+                </li>
                 <li>
                   Confidence:{" "}
                   <span
@@ -159,7 +173,7 @@ export default function TestPage() {
                   </span>
                 </li>
               </ul>
-              <AffiliateRecommendation issueCategory={analysis.primaryIssueCategory} />
+              <AffiliateRecommendation issueCategory={analysis.verdict.primaryIssue ?? "level"} />
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"

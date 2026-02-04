@@ -19,28 +19,28 @@ describe("buildCategoryScores", () => {
     );
 
     expect(scores.level.stars).toBe(1);
-    expect(scores.level.description).toBe("Clipping detected");
+    expect(scores.level.descriptionKey).toBe("level.clipping_detected");
   });
 
   it("marks extremely quiet input as severe", () => {
     const scores = buildScores(ANALYSIS_CONFIG.minRmsDbSevere - 1, ANALYSIS_CONFIG.snrGoodDb);
 
     expect(scores.level.stars).toBe(1);
-    expect(scores.level.description).toBe("Extremely quiet");
+    expect(scores.level.descriptionKey).toBe("level.extremely_quiet");
   });
 
   it("marks off-target level as acceptable", () => {
     const scores = buildScores(ANALYSIS_CONFIG.targetRmsDb - ANALYSIS_CONFIG.targetRangeDb + 1, ANALYSIS_CONFIG.snrGoodDb);
 
     expect(scores.level.stars).toBe(4);
-    expect(scores.level.description).toBe("Slightly off target");
+    expect(scores.level.descriptionKey).toBe("level.slightly_off_target");
   });
 
   it("uses the 5-tier SNR grading without hum", () => {
     const scores = buildScores(ANALYSIS_CONFIG.targetRmsDb, ANALYSIS_CONFIG.snrFairDb + 1);
 
     expect(scores.noise.stars).toBe(3);
-    expect(scores.noise.description).toBe("Some background noise");
+    expect(scores.noise.descriptionKey).toBe("noise.some_background_noise");
   });
 
   it("prioritizes hum detection over SNR tiers", () => {
@@ -52,7 +52,7 @@ describe("buildCategoryScores", () => {
     );
 
     expect(scores.noise.stars).toBe(2);
-    expect(scores.noise.description).toBe("Electrical hum detected");
+    expect(scores.noise.descriptionKey).toBe("noise.electrical_hum");
   });
 
   it("does not let hum override a worse noise rating", () => {
@@ -64,6 +64,6 @@ describe("buildCategoryScores", () => {
     );
 
     expect(scores.noise.stars).toBe(1);
-    expect(scores.noise.description).toBe("Very noisy");
+    expect(scores.noise.descriptionKey).toBe("noise.very_noisy");
   });
 });

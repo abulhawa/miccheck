@@ -11,12 +11,24 @@ vi.mock("@miccheck/audio-core", () => ({
 
 vi.mock("../lib/analysis", () => ({
   analyzeRecording: () => ({
-    grade: "A",
-    summary: "Solid recording.",
-    categories: {
-      level: { stars: 4, label: "Level", description: "Good level." },
-      noise: { stars: 4, label: "Noise", description: "Low noise." },
-      echo: { stars: 4, label: "Echo", description: "Low echo." }
+    verdict: {
+      overall: {
+        grade: "A",
+        labelKey: "overall.label.excellent",
+        summaryKey: "overall.summary.excellent"
+      },
+      dimensions: {
+        level: { stars: 4, labelKey: "category.level", descriptionKey: "level.slightly_off_target" },
+        noise: { stars: 4, labelKey: "category.noise", descriptionKey: "noise.clean_background" },
+        echo: { stars: 4, labelKey: "category.echo", descriptionKey: "echo.slight_reflections" }
+      },
+      primaryIssue: "level",
+      copyKeys: {
+        explanationKey: "explanation.noticeably_off_target",
+        fixKey: "fix.nudge_gain",
+        impactKey: "impact.level",
+        impactSummaryKey: "impact.biggest_opportunity"
+      }
     },
     metrics: {
       clippingRatio: 0,
@@ -26,11 +38,7 @@ vi.mock("../lib/analysis", () => ({
       humRatio: 0,
       echoScore: 0.1
     },
-    primaryIssueCategory: "level",
-    explanation: "All clear.",
-    fix: "Keep your current setup for consistent results.",
     recommendation: { category: "General", message: "Keep it up.", confidence: 0.9 },
-    primaryFix: { title: "None", description: "No changes needed.", priority: "low" },
     specialState: undefined
   })
 }));

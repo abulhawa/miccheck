@@ -6,17 +6,17 @@ describe("analyzeSamples", () => {
     const samples = new Float32Array(48000).fill(0.1);
     const summary = analyzeSamples(samples, 48000);
 
-    expect(summary.grade).toBe("F");
+    expect(summary.verdict.overall.grade).toBe("F");
     expect(summary.recommendation.category).toBe("Noise");
-    expect(summary.categories.level.label).toBe("Level");
-    expect(summary.categories.noise.label).toBe("Noise");
-    expect(summary.categories.echo.label).toBe("Echo");
-    expect(summary.primaryIssueCategory).toBe("noise");
-    expect(summary.explanation).toBe(
-      "Background noise is overpowering the voice."
+    expect(summary.verdict.dimensions.level.labelKey).toBe("category.level");
+    expect(summary.verdict.dimensions.noise.labelKey).toBe("category.noise");
+    expect(summary.verdict.dimensions.echo.labelKey).toBe("category.echo");
+    expect(summary.verdict.primaryIssue).toBe("noise");
+    expect(summary.verdict.copyKeys.explanationKey).toBe(
+      "explanation.very_noisy"
     );
-    expect(summary.fix).toBe(
-      "Silence the room or use a close mic to improve SNR."
+    expect(summary.verdict.copyKeys.fixKey).toBe(
+      "fix.silence_room_close_mic"
     );
   });
 
@@ -26,7 +26,7 @@ describe("analyzeSamples", () => {
     const samples = new Float32Array(maxLag).fill(0.1);
     const summary = analyzeSamples(samples, sampleRate);
 
-    expect(summary.categories.echo.description).toBe("Minimal echo");
+    expect(summary.verdict.dimensions.echo.descriptionKey).toBe("echo.minimal");
     expect(summary.metrics.echoScore).toBe(0);
     expect(Number.isNaN(summary.metrics.echoScore)).toBe(false);
     expect(Object.is(summary.metrics.echoScore, -0)).toBe(false);
