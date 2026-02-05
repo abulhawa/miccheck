@@ -33,4 +33,16 @@ export const assertPolicyInvariants = ({
       "Policy invariant violated: reassuranceMode=true requires bestNextSteps to be empty."
     );
   }
+
+  if (useCaseFit.fit === "pass" && !reassuranceMode) {
+    throw new Error(
+      "Policy invariant violated: useCaseFit.fit=pass requires reassuranceMode=true."
+    );
+  }
+
+  if (useCaseFit.fit === "pass" && bestNextSteps.length > 0) {
+    throw new Error(
+      "Policy invariant violated: useCaseFit.fit=pass requires bestNextSteps to be empty."
+    );
+  }
 };

@@ -27,7 +27,8 @@ export const computeUseCaseFit = (metrics: MetricsSummary, context?: ContextInpu
 
 export const computeOverallGrade = (minStars: number): GradeLetter => gradeFromStars(minStars);
 
-export const computeReassuranceMode = (minStars: number): boolean => minStars >= 4;
+export const computeReassuranceMode = (minStars: number, fit: ReturnType<typeof computeUseCaseFit>): boolean =>
+  fit.overall.result === "pass" || minStars >= 4;
 
 export const computeBestNextSteps = (
   primaryIssue: CategoryId | null,
@@ -72,9 +73,9 @@ export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): V
   }
 
   const grade = computeOverallGrade(minStars);
-  const reassuranceMode = computeReassuranceMode(minStars);
+  const reassuranceMode = computeReassuranceMode(minStars, fit);
   const certainty = computeCertainty(fit);
-  const bestNextSteps = reassuranceMode
+  const bestNextSteps = reassuranceMode || fit.overall.result === "pass"
     ? []
     : [computeBestNextSteps(primaryIssue, primaryInsight)];
 
