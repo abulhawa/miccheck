@@ -5,6 +5,8 @@ import { measureNoise } from "./metrics/noise";
 import { measureEcho } from "./metrics/echo";
 import { buildRecommendationPolicy, buildVerdictNextSteps, recommendFix } from "./diagnosis/recommendations";
 import { getNoSpeechVerdict, getVerdict } from "./scoring/verdict";
+import { evaluateMetrics } from "./policy/evaluateMetrics";
+import { buildSecondaryNotes } from "./policy/secondaryNotes";
 import type { AnalysisSummary, ContextInput, DiagnosticCertainty, UseCaseFit, Verdict } from "./types";
 
 export * from "./types";
@@ -101,6 +103,34 @@ export const analyzeSamples = (
 
   const verdict = withVerdictExtensions(baseVerdict, resolvedContext);
   verdict.bestNextSteps = verdict.reassuranceMode ? [] : buildVerdictNextSteps(recommendationPolicy);
+
+  const metricStatuses = evaluateMetrics({
+    rmsDb: level.rmsDb,
+    snrDb: noise.snrDb,
+    echoScore: echo.echoScore,
+    clippingRatio: clipping.clippingRatio,
+    humRatio: noise.humRatio
+  }, resolvedContext.use_case);
+
+  verdict.secondaryNotes = buildSecondaryNotes({
+    metricStatuses,
+    context: {
+      useCase: resolvedContext.use_case,
+      deviceType: resolvedContext.device_type
+    },
+    primaryUseCaseFit: verdict.useCaseFit ?? "fail",
+    evaluateUseCaseFit: (useCase) =>
+      evaluateMetrics(
+        {
+          rmsDb: level.rmsDb,
+          snrDb: noise.snrDb,
+          echoScore: echo.echoScore,
+          clippingRatio: clipping.clippingRatio,
+          humRatio: noise.humRatio
+        },
+        useCase === "music" ? "podcast" : useCase
+      )
+  });
 
   return {
     verdict,
