@@ -25,6 +25,13 @@ export type {
 
 export type WebVerdict = Verdict;
 
+export interface VerdictTargetMetadata {
+  lowLabel: string;
+  idealLabel: string;
+  highLabel: string;
+  marker: "low" | "ideal" | "high";
+}
+
 export interface AnalysisResult {
   verdict: WebVerdict;
   metrics: MetricsSummary;
