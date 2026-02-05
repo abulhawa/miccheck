@@ -9,6 +9,10 @@ import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
 import { analysisDisplayThresholds } from "../../lib/domain/analysisDisplay";
+import {
+  STORAGE_SYNC_MAX_ATTEMPTS,
+  STORAGE_SYNC_RETRY_DELAY_MS
+} from "../../src/domain/recording/constants";
 
 const sampleResult: AnalysisResult = {
   verdict: {
@@ -57,8 +61,8 @@ export default function ResultsPage() {
   useEffect(() => {
     let attempts = 0;
     let timeoutId: number | null = null;
-    const maxAttempts = 15;
-    const retryDelay = 200;
+    const maxAttempts = STORAGE_SYNC_MAX_ATTEMPTS;
+    const retryDelay = STORAGE_SYNC_RETRY_DELAY_MS;
 
     const syncRecording = () => {
       const stored = loadRecording();

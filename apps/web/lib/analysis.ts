@@ -2,6 +2,7 @@ import { analyzeSamples, type AnalysisSummary } from "@miccheck/audio-metrics";
 import { computeRms } from "@miccheck/audio-core";
 import type { AnalysisResult } from "../types";
 import { resolveCopy } from "./copy";
+import { SILENT_RECORDING_RMS_THRESHOLD } from "../src/domain/recording/constants";
 
 /**
  * Convert an AudioBuffer to Mono Float32 samples.
@@ -31,7 +32,7 @@ const mixToMono = (buffer: AudioBuffer): Float32Array => {
 export const analyzeRecording = (buffer: AudioBuffer): AnalysisResult => {
   const samples = mixToMono(buffer);
   const rms = computeRms(samples);
-  if (rms < 0.002) {
+  if (rms < SILENT_RECORDING_RMS_THRESHOLD) {
     throw new Error(resolveCopy("error.silent_recording"));
   }
   const summary: AnalysisSummary = analyzeSamples(samples, buffer.sampleRate);

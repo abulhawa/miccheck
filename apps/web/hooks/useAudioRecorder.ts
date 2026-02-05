@@ -6,6 +6,11 @@ import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import type { AnalysisResult } from "../types";
+import {
+  DEFAULT_MAX_RECORDING_DURATION_SECONDS,
+  DEFAULT_MIN_RECORDING_DURATION_SECONDS,
+  METER_NORMALIZATION_MULTIPLIER
+} from "../src/domain/recording/constants";
 
 interface RecorderOptions {
   maxDuration?: number;
@@ -15,15 +20,12 @@ interface RecorderOptions {
 
 type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
 
-const DEFAULT_MAX_DURATION = 6;
-const DEFAULT_MIN_DURATION = 5;
-
 /**
  * useAudioRecorder handles microphone capture, level metering, and analysis.
  */
 export function useAudioRecorder({
-  maxDuration = DEFAULT_MAX_DURATION,
-  minDuration = DEFAULT_MIN_DURATION,
+  maxDuration = DEFAULT_MAX_RECORDING_DURATION_SECONDS,
+  minDuration = DEFAULT_MIN_RECORDING_DURATION_SECONDS,
   deviceId = null
 }: RecorderOptions) {
   const [status, setStatus] = useState<RecorderStatus>("idle");
@@ -116,7 +118,7 @@ export function useAudioRecorder({
       sum += value * value;
     }
     const rms = Math.sqrt(sum / buffer.length);
-    const normalized = Math.min(1, rms * 4.5);
+    const normalized = Math.min(1, rms * METER_NORMALIZATION_MULTIPLIER);
     setLevel(normalized);
 
     if (startTimeRef.current) {
