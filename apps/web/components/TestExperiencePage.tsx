@@ -50,7 +50,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     mediaStream,
     recordingBlob,
     analysis,
-    initializeRecorder,
     startRecording,
     stopRecording,
     reset
@@ -110,9 +109,8 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     (nextDeviceId: string | null, meta?: { detectedType: DeviceType }) => {
       setDeviceId(nextDeviceId);
       setDetectedDeviceType(meta?.detectedType ?? "unknown");
-      void initializeRecorder(nextDeviceId);
     },
-    [initializeRecorder]
+    []
   );
 
   const handleTestAgain = useCallback(() => {
@@ -129,8 +127,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     });
 
     reset();
-    void initializeRecorder();
-  }, [analysis, initializeRecorder, reset, viewMode]);
+  }, [analysis, reset, viewMode]);
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">

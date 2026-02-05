@@ -28,7 +28,7 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
     selectedIdRef.current = selectedId;
   }, [selectedId]);
 
-  const loadDevices = useCallback(async (requestPermission = false) => {
+  const loadDevices = useCallback(async () => {
     const requestId = ++loadRequestIdRef.current;
 
     if (!navigator.mediaDevices?.getUserMedia) {
@@ -37,23 +37,16 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
       return;
     }
 
-    if (requestPermission) {
-      setIsLoading(true);
-      setError(null);
-    }
+    setIsLoading(true);
+    setError(null);
 
     try {
-      if (requestPermission) {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        stream.getTracks().forEach((track) => track.stop());
-      }
-
       const availableDevices = await navigator.mediaDevices.enumerateDevices();
       let inputDevices = availableDevices.filter(
         (device) => device.kind === "audioinput"
       );
 
-      if (!requestPermission && inputDevices.length === 0) {
+      if (inputDevices.length === 0) {
         const retryDevices = await navigator.mediaDevices.enumerateDevices();
         inputDevices = retryDevices.filter((device) => device.kind === "audioinput");
       }
@@ -89,21 +82,19 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
           : "Unable to load available microphones."
       );
     } finally {
-      if (requestPermission) {
-        setIsLoading(false);
-      }
+      setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    void loadDevices(true);
+    void loadDevices();
   }, [loadDevices]);
 
   useEffect(() => {
     if (!navigator.mediaDevices?.addEventListener) return;
 
     const handleDeviceChange = () => {
-      void loadDevices(false);
+      void loadDevices();
     };
 
     navigator.mediaDevices.addEventListener("devicechange", handleDeviceChange);

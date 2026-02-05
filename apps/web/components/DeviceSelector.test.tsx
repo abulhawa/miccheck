@@ -21,10 +21,6 @@ describe("DeviceSelector", () => {
   });
 
   it("does not request microphone permission again on devicechange", async () => {
-    const stopTrack = vi.fn();
-    const getUserMedia = vi.fn().mockResolvedValue({
-      getTracks: () => [{ stop: stopTrack }]
-    });
     const enumerateDevices = vi.fn().mockResolvedValue([
       {
         deviceId: "default",
@@ -38,7 +34,7 @@ describe("DeviceSelector", () => {
 
     Object.defineProperty(navigator, "mediaDevices", {
       value: {
-        getUserMedia,
+        getUserMedia: vi.fn(),
         enumerateDevices,
         addEventListener: (_type: string, cb: () => void) => {
           onDeviceChangeHandler = cb;
@@ -60,7 +56,6 @@ describe("DeviceSelector", () => {
       await Promise.resolve();
     });
 
-    expect(getUserMedia).toHaveBeenCalledTimes(1);
     expect(enumerateDevices).toHaveBeenCalledTimes(1);
 
     await act(async () => {
@@ -68,17 +63,12 @@ describe("DeviceSelector", () => {
       await Promise.resolve();
     });
 
-    expect(getUserMedia).toHaveBeenCalledTimes(1);
     expect(enumerateDevices).toHaveBeenCalledTimes(2);
 
     root.unmount();
   });
 
   it("ignores stale device refresh results that resolve out of order", async () => {
-    const getUserMedia = vi.fn().mockResolvedValue({
-      getTracks: () => [{ stop: vi.fn() }]
-    });
-
     const firstRefreshResult = [
       {
         deviceId: "old-device",
@@ -112,7 +102,7 @@ describe("DeviceSelector", () => {
 
     Object.defineProperty(navigator, "mediaDevices", {
       value: {
-        getUserMedia,
+        getUserMedia: vi.fn(),
         enumerateDevices,
         addEventListener: (_type: string, cb: () => void) => {
           onDeviceChangeHandler = cb;
@@ -161,10 +151,6 @@ describe("DeviceSelector", () => {
   });
 
   it("retries once on transient empty device list during devicechange", async () => {
-    const getUserMedia = vi.fn().mockResolvedValue({
-      getTracks: () => [{ stop: vi.fn() }]
-    });
-
     const enumerateDevices = vi
       .fn()
       .mockResolvedValueOnce([
@@ -189,7 +175,7 @@ describe("DeviceSelector", () => {
 
     Object.defineProperty(navigator, "mediaDevices", {
       value: {
-        getUserMedia,
+        getUserMedia: vi.fn(),
         enumerateDevices,
         addEventListener: (_type: string, cb: () => void) => {
           onDeviceChangeHandler = cb;
