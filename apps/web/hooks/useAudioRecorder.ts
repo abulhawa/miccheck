@@ -258,6 +258,13 @@ export function useAudioRecorder({
           }
 
           const result = analyzeRecording(audioBuffer, analysisContext);
+          logEvent(ANALYTICS_EVENTS.analysisCompleted, {
+            useCase: analysisContext.use_case,
+            deviceType: analysisContext.device_type,
+            diagnosticCertainty: result.verdict.diagnosticCertainty ?? "unknown",
+            reassuranceMode: Boolean(result.verdict.reassuranceMode),
+            specialState: result.specialState
+          });
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {
