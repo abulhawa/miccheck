@@ -128,7 +128,7 @@ describe("useAudioRecorder", () => {
 
     expect(getUserMedia).toHaveBeenCalled();
     expect(stream.getTracks).toHaveBeenCalled();
-    expect(stopTrack).toHaveBeenCalled();
+    expect(stopTrack).toHaveBeenCalledTimes(1);
     root.unmount();
   });
 
@@ -147,12 +147,13 @@ describe("useAudioRecorder", () => {
 
     class MockAudioContext {
       createMediaStreamSource() {
-        return { connect: vi.fn() };
+        return { connect: vi.fn(), disconnect: vi.fn() };
       }
       createAnalyser() {
         return {
           fftSize: 0,
-          getFloatTimeDomainData: vi.fn()
+          getFloatTimeDomainData: vi.fn(),
+          disconnect: vi.fn()
         };
       }
       decodeAudioData = vi.fn().mockResolvedValue({ duration: 2 });
@@ -234,12 +235,13 @@ describe("useAudioRecorder", () => {
 
     class MockAudioContext {
       createMediaStreamSource() {
-        return { connect: vi.fn() };
+        return { connect: vi.fn(), disconnect: vi.fn() };
       }
       createAnalyser() {
         return {
           fftSize: 0,
-          getFloatTimeDomainData: vi.fn()
+          getFloatTimeDomainData: vi.fn(),
+          disconnect: vi.fn()
         };
       }
       decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
@@ -290,7 +292,86 @@ describe("useAudioRecorder", () => {
 
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    expect(stopTrack).toHaveBeenCalled();
+    expect(stopTrack).toHaveBeenCalledTimes(1);
     root.unmount();
   });
+
+  it("releases tracks on unmount while recording", async () => {
+    window.requestAnimationFrame = vi.fn();
+
+    const track = {
+      readyState: "live" as MediaStreamTrackState,
+      enabled: true,
+      stop: vi.fn(() => {
+        track.readyState = "ended";
+      })
+    };
+    const stream = {
+      getTracks: vi.fn(() => [track])
+    } as unknown as MediaStream;
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: { getUserMedia },
+      configurable: true
+    });
+
+    class MockAudioContext {
+      createMediaStreamSource() {
+        return { connect: vi.fn(), disconnect: vi.fn() };
+      }
+      createAnalyser() {
+        return {
+          fftSize: 0,
+          getFloatTimeDomainData: vi.fn(),
+          disconnect: vi.fn()
+        };
+      }
+      close = vi.fn().mockResolvedValue(undefined);
+    }
+
+    window.AudioContext = MockAudioContext as unknown as typeof AudioContext;
+
+    class MockMediaRecorder {
+      static isTypeSupported = vi.fn().mockReturnValue(true);
+      state = "inactive";
+      mimeType = "audio/webm";
+      stream: MediaStream;
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onstop: (() => void) | null = null;
+
+      constructor(stream: MediaStream) {
+        this.stream = stream;
+      }
+
+      start = vi.fn(() => {
+        this.state = "recording";
+      });
+
+      stop = vi.fn(() => {
+        this.state = "inactive";
+        this.onstop?.();
+      });
+    }
+
+    window.MediaRecorder = MockMediaRecorder as unknown as typeof MediaRecorder;
+
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    let recorder: RecorderHook | undefined;
+
+    await act(async () => {
+      root.render(<HookHarness onReady={(value) => (recorder = value)} />);
+    });
+
+    await act(async () => {
+      await recorder?.startRecording();
+    });
+
+    await act(async () => {
+      root.unmount();
+    });
+
+    expect(track.stop).toHaveBeenCalledTimes(1);
+  });
+
 });
