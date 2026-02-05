@@ -38,12 +38,15 @@ export const loadAnalysisContext = (): ContextInput => {
     if (!raw) return getDefaultAnalysisContext();
     const parsed = JSON.parse(raw) as Partial<ContextInput>;
 
+    const useCase = parsed.use_case;
+    const deviceType = parsed.device_type;
+    const mode = parsed.mode;
+
     return {
-      use_case: isValidUseCase(parsed.use_case ?? "") ? parsed.use_case : DEFAULT_CONTEXT.use_case,
-      device_type: isValidDeviceType(parsed.device_type ?? "")
-        ? parsed.device_type
-        : DEFAULT_CONTEXT.device_type,
-      mode: isValidMode(parsed.mode ?? "") ? parsed.mode : DEFAULT_CONTEXT.mode
+      use_case: useCase && isValidUseCase(useCase) ? useCase : DEFAULT_CONTEXT.use_case,
+      device_type:
+        deviceType && isValidDeviceType(deviceType) ? deviceType : DEFAULT_CONTEXT.device_type,
+      mode: mode && isValidMode(mode) ? mode : DEFAULT_CONTEXT.mode
     };
   } catch {
     return getDefaultAnalysisContext();
