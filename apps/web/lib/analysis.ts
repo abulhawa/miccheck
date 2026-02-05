@@ -132,7 +132,7 @@ export const analyzeRecording = (
           marker:
             summary.metrics.echoScore > 0.5
               ? "high"
-              : summary.metrics.echoScore > 0.2
+              : summary.metrics.echoScore <= 0.2
                 ? "ideal"
                 : "low"
         }
