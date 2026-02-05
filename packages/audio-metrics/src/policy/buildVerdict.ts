@@ -4,6 +4,7 @@ import { evaluateMetrics } from "./evaluateMetrics";
 import { describeEcho, describeLevel, describeNoise } from "../scoring/categoryScores";
 import { explanationKeyFor, fixKeyFor, impactFor, impactSummaryFor } from "./copy";
 import type { MetricResult } from "./evaluateMetrics";
+import { assertPolicyInvariants } from "./invariants";
 
 const gradeFromStars = (stars: number): GradeLetter => {
   switch (stars) {
@@ -73,6 +74,18 @@ export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): V
   const grade = computeOverallGrade(minStars);
   const reassuranceMode = computeReassuranceMode(minStars);
   const certainty = computeCertainty(fit);
+  const bestNextSteps = reassuranceMode
+    ? []
+    : [computeBestNextSteps(primaryIssue, primaryInsight)];
+
+  assertPolicyInvariants({
+    useCaseFit: {
+      fit: fit.overall.result
+    },
+    grade,
+    reassuranceMode,
+    bestNextSteps
+  });
 
   const verdict: Verdict = {
     version: "1.0",
@@ -101,7 +114,9 @@ export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): V
     primaryIssue,
     copyKeys: {
       explanationKey: explanationKeyFor(primaryIssue, primaryInsight),
-      fixKey: computeBestNextSteps(primaryIssue, primaryInsight),
+      fixKey:
+        bestNextSteps[0] ??
+        computeBestNextSteps(primaryIssue, primaryInsight),
       impactKey: impactFor(primaryIssue),
       impactSummaryKey: computeSecondaryNotes(fit.overall.result)
     },
