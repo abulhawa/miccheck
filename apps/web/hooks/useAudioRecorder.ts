@@ -48,17 +48,60 @@ export function useAudioRecorder({
   const audioChunksRef = useRef<Blob[]>([]);
   const animationRef = useRef<number | null>(null);
   const meterNodeRef = useRef<AnalyserNode | null>(null);
+  const meterSourceNodeRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
+  const releasedStreamsRef = useRef(new WeakSet<MediaStream>());
   const startTimeRef = useRef<number | null>(null);
   const stopTimeoutRef = useRef<number | null>(null);
   const updateMeterRef = useRef<() => void>(() => {});
   const hasLoggedResultsRef = useRef(false);
 
-  const stopMediaStream = useCallback((stream: MediaStream | null) => {
-    if (!stream) return;
-    stream.getTracks().forEach((track) => track.stop());
+  const debugLog = useCallback((event: string, details?: Record<string, unknown>) => {
+    if (process.env.NODE_ENV === "production") {
+      return;
+    }
+    // eslint-disable-next-line no-console
+    console.debug(`[useAudioRecorder] ${event}`, details ?? {});
   }, []);
+
+  const stopMediaStreamTracksOnce = useCallback(
+    (stream: MediaStream | null, reason: string) => {
+      if (!stream || releasedStreamsRef.current.has(stream)) {
+        return;
+      }
+
+      const tracks = stream.getTracks();
+      debugLog("stopping_stream_tracks", {
+        reason,
+        tracks: tracks.map((track) => ({ id: track.id, readyState: track.readyState, enabled: track.enabled }))
+      });
+      tracks.forEach((track) => track.stop());
+      releasedStreamsRef.current.add(stream);
+      debugLog("stopped_stream_tracks", {
+        reason,
+        tracks: tracks.map((track) => ({ id: track.id, readyState: track.readyState, enabled: track.enabled }))
+      });
+    },
+    [debugLog]
+  );
+
+  const assertNoLiveTracks = useCallback(
+    (stream: MediaStream | null, reason: string) => {
+      if (process.env.NODE_ENV === "production" || !stream) {
+        return;
+      }
+      const liveTracks = stream.getTracks().filter((track) => track.readyState === "live");
+      if (liveTracks.length > 0) {
+        // eslint-disable-next-line no-console
+        console.warn("[useAudioRecorder] live_tracks_detected_after_release", {
+          reason,
+          tracks: liveTracks.map((track) => ({ id: track.id, enabled: track.enabled }))
+        });
+      }
+    },
+    []
+  );
 
   const clearStopTimeout = useCallback(() => {
     if (stopTimeoutRef.current !== null) {
@@ -72,36 +115,57 @@ export function useAudioRecorder({
       cancelAnimationFrame(animationRef.current);
       animationRef.current = null;
     }
+    if (meterSourceNodeRef.current) {
+      meterSourceNodeRef.current.disconnect();
+      meterSourceNodeRef.current = null;
+    }
+    if (meterNodeRef.current) {
+      meterNodeRef.current.disconnect();
+    }
     meterNodeRef.current = null;
     if (audioContextRef.current) {
-      audioContextRef.current.close();
+      void audioContextRef.current.close();
       audioContextRef.current = null;
     }
   }, []);
 
-  const clearRecorder = useCallback(() => {
-    clearStopTimeout();
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.ondataavailable = null;
-      mediaRecorderRef.current.onstop = null;
-      if (mediaRecorderRef.current.state === "recording") {
-        try {
-          mediaRecorderRef.current.stop();
-        } catch {
-          // Ignore stop errors when cleaning up.
+  const releaseMic = useCallback(
+    (reason: string) => {
+      clearStopTimeout();
+
+      const recorder = mediaRecorderRef.current;
+      if (recorder) {
+        recorder.ondataavailable = null;
+        recorder.onstop = null;
+        if (recorder.state !== "inactive") {
+          try {
+            recorder.stop();
+          } catch {
+            // Ignore stop errors when cleaning up.
+          }
         }
       }
-    }
-    if (mediaStreamRef.current) {
-      stopMediaStream(mediaStreamRef.current);
+
+      const stream = mediaStreamRef.current;
+      stopMeter();
+      stopMediaStreamTracksOnce(stream, reason);
+      assertNoLiveTracks(stream, reason);
+
       mediaStreamRef.current = null;
-    }
-    setMediaStream(null);
-    mediaRecorderRef.current = null;
-    stopMeter();
-    audioChunksRef.current = [];
-    startTimeRef.current = null;
-  }, [clearStopTimeout, stopMediaStream, stopMeter]);
+      setMediaStream(null);
+      mediaRecorderRef.current = null;
+      audioChunksRef.current = [];
+      startTimeRef.current = null;
+      setLevel(0);
+      setDuration(0);
+      debugLog("released_mic", { reason });
+    },
+    [assertNoLiveTracks, clearStopTimeout, debugLog, stopMediaStreamTracksOnce, stopMeter]
+  );
+
+  const clearRecorder = useCallback(() => {
+    releaseMic("clear_recorder");
+  }, [releaseMic]);
 
   const reset = useCallback(() => {
     clearRecorder();
@@ -167,11 +231,15 @@ export function useAudioRecorder({
       });
       mediaStreamRef.current = stream;
       setMediaStream(stream);
+      debugLog("acquired_stream", {
+        tracks: stream
+          .getTracks()
+          .map((track) => ({ id: track.id, readyState: track.readyState, enabled: track.enabled }))
+      });
 
       const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) {
-        stopMediaStream(stream);
-        mediaStreamRef.current = null;
+        releaseMic("audio_context_unavailable");
         setStatus("error");
         setError("Web Audio API is unavailable in this browser.");
         return;
@@ -180,8 +248,7 @@ export function useAudioRecorder({
       try {
         audioContext = new AudioContextClass();
       } catch (audioContextError) {
-        stopMediaStream(stream);
-        mediaStreamRef.current = null;
+        releaseMic("audio_context_initialization_failed");
         setStatus("error");
         setError(
           audioContextError instanceof Error
@@ -192,14 +259,14 @@ export function useAudioRecorder({
       }
       audioContextRef.current = audioContext;
       const source = audioContext.createMediaStreamSource(stream);
+      meterSourceNodeRef.current = source;
       const analyser = audioContext.createAnalyser();
       analyser.fftSize = 2048;
       source.connect(analyser);
       meterNodeRef.current = analyser;
 
       if (typeof MediaRecorder === "undefined") {
-        stopMediaStream(stream);
-        mediaStreamRef.current = null;
+        releaseMic("media_recorder_unavailable");
         setStatus("error");
         setError("MediaRecorder is not available in this browser.");
         logEvent(ANALYTICS_EVENTS.unsupportedBrowser, { reason: "no_mediarecorder" });
@@ -219,13 +286,7 @@ export function useAudioRecorder({
       };
 
       recorder.onstop = async () => {
-        clearStopTimeout();
-        stopMeter();
-        if (mediaStreamRef.current) {
-          stopMediaStream(mediaStreamRef.current);
-          mediaStreamRef.current = null;
-          setMediaStream(null);
-        }
+        releaseMic("recorder_onstop");
         setStatus("analyzing");
         try {
           const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
@@ -280,6 +341,7 @@ export function useAudioRecorder({
       updateMeter();
       setStatus("idle");
     } catch (permissionError) {
+      releaseMic("permission_or_stream_error");
       setStatus("error");
       if (permissionError instanceof DOMException) {
         if (permissionError.name === "NotAllowedError") {
@@ -306,8 +368,7 @@ export function useAudioRecorder({
     deviceId,
     analysisContext,
     minDuration,
-    stopMediaStream,
-    stopMeter,
+    releaseMic,
     updateMeter
   ]);
 
@@ -330,23 +391,18 @@ export function useAudioRecorder({
     stopTimeoutRef.current = window.setTimeout(() => {
       if (mediaRecorderRef.current?.state === "recording") {
         mediaRecorderRef.current.stop();
-        stopMediaStream(mediaRecorderRef.current.stream);
-        mediaStreamRef.current = null;
-        setMediaStream(null);
       }
     }, maxDuration * 1000);
-  }, [initializeRecorder, maxDuration, reset, stopMediaStream, updateMeter]);
+  }, [initializeRecorder, maxDuration, reset, updateMeter]);
 
   const stopRecording = useCallback(() => {
     clearStopTimeout();
 
     if (mediaRecorderRef.current?.state === "recording") {
       mediaRecorderRef.current.stop();
-      stopMediaStream(mediaRecorderRef.current.stream);
-      mediaStreamRef.current = null;
-      setMediaStream(null);
     }
-  }, [clearStopTimeout, stopMediaStream]);
+    releaseMic("manual_stop");
+  }, [clearStopTimeout, releaseMic]);
 
   useEffect(() => {
     return () => {
