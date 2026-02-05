@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import type { DeviceType } from "../types";
 import { detectDeviceTypeFromLabel } from "../lib/deviceTypeDetection";
@@ -16,20 +16,34 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
   const [selectedId, setSelectedId] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const onDeviceChangeRef = useRef(onDeviceChange);
+  const selectedIdRef = useRef(selectedId);
 
-  const loadDevices = useCallback(async () => {
+  useEffect(() => {
+    onDeviceChangeRef.current = onDeviceChange;
+  }, [onDeviceChange]);
+
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+  }, [selectedId]);
+
+  const loadDevices = useCallback(async (requestPermission = false) => {
     if (!navigator.mediaDevices?.getUserMedia) {
       setError("Microphone access is not supported in this browser.");
       setIsLoading(false);
       return;
     }
 
-    setIsLoading(true);
-    setError(null);
+    if (requestPermission) {
+      setIsLoading(true);
+      setError(null);
+    }
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      stream.getTracks().forEach((track) => track.stop());
+      if (requestPermission) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach((track) => track.stop());
+      }
 
       const availableDevices = await navigator.mediaDevices.enumerateDevices();
       const inputDevices = availableDevices.filter(
@@ -39,13 +53,15 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
 
       const storedId = window.localStorage.getItem(STORAGE_KEY);
       const defaultId =
-        (storedId && inputDevices.some((device) => device.deviceId === storedId)
+        (selectedIdRef.current && inputDevices.some((device) => device.deviceId === selectedIdRef.current)
+          ? selectedIdRef.current
+          : storedId && inputDevices.some((device) => device.deviceId === storedId)
           ? storedId
           : inputDevices[0]?.deviceId) ?? "";
 
       setSelectedId(defaultId);
       const selectedDevice = inputDevices.find((device) => device.deviceId === defaultId);
-      onDeviceChange(defaultId || null, {
+      onDeviceChangeRef.current(defaultId || null, {
         label: selectedDevice?.label,
         detectedType: detectDeviceTypeFromLabel(selectedDevice?.label)
       });
@@ -60,19 +76,21 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
           : "Unable to load available microphones."
       );
     } finally {
-      setIsLoading(false);
+      if (requestPermission) {
+        setIsLoading(false);
+      }
     }
-  }, [onDeviceChange]);
+  }, []);
 
   useEffect(() => {
-    void loadDevices();
+    void loadDevices(true);
   }, [loadDevices]);
 
   useEffect(() => {
     if (!navigator.mediaDevices?.addEventListener) return;
 
     const handleDeviceChange = () => {
-      void loadDevices();
+      void loadDevices(false);
     };
 
     navigator.mediaDevices.addEventListener("devicechange", handleDeviceChange);
@@ -96,7 +114,7 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
     setSelectedId(nextId);
     window.localStorage.setItem(STORAGE_KEY, nextId);
     const selectedDevice = devices.find((device) => device.deviceId === nextId);
-    onDeviceChange(nextId || null, {
+    onDeviceChangeRef.current(nextId || null, {
       label: selectedDevice?.label,
       detectedType: detectDeviceTypeFromLabel(selectedDevice?.label)
     });
