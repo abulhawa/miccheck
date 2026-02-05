@@ -4,17 +4,22 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
-import AffiliateRecommendation from "../../components/AffiliateRecommendation";
 import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
+import {
+  ANALYSIS_CONTEXT_OPTIONS,
+  getDefaultAnalysisContext,
+  loadAnalysisContext,
+  saveAnalysisContext
+} from "../../lib/analysisContextStorage";
 import { resolveCopy, resolveNoSpeechCopy } from "../../lib/copy";
-import { mapConfidenceToLabel } from "../../src/domain/recommendationConfidence";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
+  const [analysisContext, setAnalysisContext] = useState(getDefaultAnalysisContext());
   const hasShownIOSAlert = useRef(false);
   const {
     status,
@@ -27,7 +32,7 @@ export default function TestPage() {
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7, deviceId });
+  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext });
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
   const { audioDataArray, currentVolume, peakVolume } = useAudioMeter({
@@ -36,16 +41,20 @@ export default function TestPage() {
   });
 
   useEffect(() => {
+    setAnalysisContext(loadAnalysisContext());
+  }, []);
+
+  useEffect(() => {
+    saveAnalysisContext(analysisContext);
+  }, [analysisContext]);
+
+  useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS && !hasShownIOSAlert.current) {
       hasShownIOSAlert.current = true;
       window.alert("For best results, use Chrome on iOS.");
     }
   }, []);
-
-  const confidenceValue = analysis?.recommendation.confidence ?? 0;
-  const confidencePercent = Math.round(confidenceValue * 100);
-  const confidenceLabel = mapConfidenceToLabel(confidenceValue);
 
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
@@ -103,11 +112,68 @@ export default function TestPage() {
             >
               Reset
             </button>
-            <div className="text-sm text-slate-400">
-              Duration: {duration.toFixed(1)}s
-            </div>
+            <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
           <DeviceSelector onDeviceChange={handleDeviceChange} />
+          <div className="grid gap-3 sm:grid-cols-3">
+            <label className="flex flex-col gap-1 text-xs text-slate-300">
+              Use case
+              <select
+                className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                value={analysisContext.use_case}
+                onChange={(event) =>
+                  setAnalysisContext((current) => ({
+                    ...current,
+                    use_case: event.target.value as typeof current.use_case
+                  }))
+                }
+              >
+                {ANALYSIS_CONTEXT_OPTIONS.useCases.map((useCase) => (
+                  <option key={useCase} value={useCase}>
+                    {useCase}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-1 text-xs text-slate-300">
+              Device type
+              <select
+                className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                value={analysisContext.device_type}
+                onChange={(event) =>
+                  setAnalysisContext((current) => ({
+                    ...current,
+                    device_type: event.target.value as typeof current.device_type
+                  }))
+                }
+              >
+                {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
+                  <option key={deviceType} value={deviceType}>
+                    {deviceType}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-1 text-xs text-slate-300">
+              Mode
+              <select
+                className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                value={analysisContext.mode}
+                onChange={(event) =>
+                  setAnalysisContext((current) => ({
+                    ...current,
+                    mode: event.target.value as typeof current.mode
+                  }))
+                }
+              >
+                {ANALYSIS_CONTEXT_OPTIONS.modes.map((mode) => (
+                  <option key={mode} value={mode}>
+                    {mode}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
           {error ? (
             <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
               {error}
@@ -123,12 +189,8 @@ export default function TestPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
                 🎤❌ No speech detected
               </p>
-              <h2 className="text-2xl font-semibold text-white">
-                {noSpeechCopy.title}
-              </h2>
-              <p className="text-sm text-rose-100">
-                {noSpeechCopy.description}
-              </p>
+              <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
+              <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
             </div>
             <button
               className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
@@ -142,34 +204,42 @@ export default function TestPage() {
           <section className="grid gap-6 md:grid-cols-2">
             <ScoreCard
               verdict={analysis.verdict}
-              metrics={analysis.metrics}
               highlightedCategoryId={analysis.verdict.primaryIssue}
             />
             <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-              <h2 className="text-lg font-semibold">🎯 Your Top Fix</h2>
+              <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
               <p className="mt-3 text-sm text-slate-200">
-                {resolveCopy(analysis.verdict.copyKeys.fixKey)}
+                {analysis.verdict.bestNextSteps?.[0]?.title ??
+                  resolveCopy(analysis.verdict.copyKeys.fixKey)}
               </p>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
+                <li>Use case fit: {analysis.verdict.useCaseFit ?? "unknown"}</li>
                 <li>
-                  Category focus:{" "}
-                  {analysis.verdict.primaryIssue
-                    ? resolveCopy(
-                        analysis.verdict.dimensions[analysis.verdict.primaryIssue].labelKey
-                      )
-                    : resolveCopy(analysis.verdict.copyKeys.impactKey)}
-                </li>
-                <li>
-                  Confidence:{" "}
-                  <span
-                    title="Confidence reflects how clear the audio signal was for analysis."
-                    data-confidence={confidencePercent}
-                  >
-                    {confidenceLabel}
-                  </span>
+                  Diagnostic certainty: {analysis.verdict.diagnosticCertainty ?? "unknown"}
                 </li>
               </ul>
-              <AffiliateRecommendation issueCategory={analysis.verdict.primaryIssue ?? "level"} />
+              {!analysis.verdict.reassuranceMode && analysis.verdict.bestNextSteps?.length ? (
+                <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                  {analysis.verdict.bestNextSteps
+                    .filter((step) => step.kind !== "gear_optional")
+                    .map((step) => (
+                      <li key={`${step.kind}-${step.title}`}>• {step.title}</li>
+                    ))}
+                </ul>
+              ) : null}
+              {analysis.verdict.bestNextSteps
+                ?.filter((step) => step.kind === "gear_optional")
+                .map((step) => (
+                  <a
+                    key={step.title}
+                    className="mt-4 block rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100"
+                    href={step.affiliateUrl}
+                    rel="noopener noreferrer nofollow"
+                    target="_blank"
+                  >
+                    Optional gear: {step.title}
+                  </a>
+                ))}
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
@@ -193,9 +263,7 @@ export default function TestPage() {
         </section>
       )}
 
-      {recordingBlob ? (
-        <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />
-      ) : null}
+      {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
     </div>
   );
 }

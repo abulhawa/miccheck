@@ -23,11 +23,37 @@ const sampleResult: AnalysisResult = {
       summaryKey: "overall.summary.strong"
     },
     dimensions: {
-      level: { stars: 4, labelKey: "category.level", descriptionKey: "level.slightly_off_target" },
-      noise: { stars: 5, labelKey: "category.noise", descriptionKey: "noise.very_clean" },
-      echo: { stars: 3, labelKey: "category.echo", descriptionKey: "echo.some_room_echo" }
+      level: {
+        stars: 4,
+        labelKey: "category.level",
+        descriptionKey: "level.slightly_off_target",
+        target: { marker: "ideal", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
+      },
+      noise: {
+        stars: 5,
+        labelKey: "category.noise",
+        descriptionKey: "noise.very_clean",
+        target: { marker: "ideal", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
+      },
+      echo: {
+        stars: 3,
+        labelKey: "category.echo",
+        descriptionKey: "echo.some_room_echo",
+        target: { marker: "high", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
+      }
     },
     primaryIssue: "echo",
+    useCaseFit: "warn",
+    diagnosticCertainty: "medium",
+    reassuranceMode: false,
+    bestNextSteps: [
+      { kind: "action", title: "Add soft furnishings and sit closer to your mic" },
+      {
+        kind: "gear_optional",
+        title: "Acoustic panels",
+        affiliateUrl: "https://amzn.to/4qTnyHf"
+      }
+    ],
     copyKeys: {
       explanationKey: "explanation.strong_echo",
       fixKey: "fix.add_soft_furnishings_move_closer",
@@ -42,11 +68,6 @@ const sampleResult: AnalysisResult = {
     snrDb: 26.2,
     humRatio: 0.04,
     echoScore: 0.32
-  },
-  recommendation: {
-    category: "Echo",
-    messageKey: "recommendation.reduce_echo",
-    confidence: 0.78
   }
 };
 
@@ -120,9 +141,39 @@ export default function ResultsPage() {
         <>
           <ScoreCard
             verdict={sampleResult.verdict}
-            metrics={sampleResult.metrics}
             highlightedCategoryId={sampleResult.verdict.primaryIssue}
           />
+
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
+            <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
+            <p className="mt-2">{sampleResult.verdict.bestNextSteps?.[0]?.title}</p>
+            <ul className="mt-3 space-y-2 text-slate-300">
+              <li>Use case fit: {sampleResult.verdict.useCaseFit ?? "unknown"}</li>
+              <li>
+                Diagnostic certainty: {sampleResult.verdict.diagnosticCertainty ?? "unknown"}
+              </li>
+            </ul>
+            {!sampleResult.verdict.reassuranceMode ? (
+              <ul className="mt-4 space-y-1 text-slate-300">
+                {sampleResult.verdict.bestNextSteps
+                  ?.filter((step) => step.kind !== "gear_optional")
+                  .map((step) => <li key={step.title}>• {step.title}</li>)}
+              </ul>
+            ) : null}
+            {sampleResult.verdict.bestNextSteps
+              ?.filter((step) => step.kind === "gear_optional")
+              .map((step) => (
+                <a
+                  key={step.title}
+                  className="mt-4 block rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100"
+                  href={step.affiliateUrl}
+                  rel="noopener noreferrer nofollow"
+                  target="_blank"
+                >
+                  Optional gear: {step.title}
+                </a>
+              ))}
+          </section>
 
           <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
             <h2 className="text-lg font-semibold">What the metrics mean</h2>

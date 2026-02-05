@@ -1,23 +1,24 @@
-import type { MetricsSummary, Verdict } from "../types";
+import type { WebVerdict } from "../types";
 import { resolveCopy } from "../lib/copy";
 import ShareButton from "./ShareButton";
+import TargetZoneBar from "./TargetZoneBar";
 
 interface ScoreCardProps {
-  verdict: Verdict;
-  metrics?: MetricsSummary;
-  highlightedCategoryId?: Verdict["primaryIssue"];
+  verdict: WebVerdict;
+  highlightedCategoryId?: WebVerdict["primaryIssue"];
 }
 
-const starArray = (stars: number) => Array.from({ length: 5 }, (_, i) => i < stars);
-export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
+export default function ScoreCard({ verdict, highlightedCategoryId }: ScoreCardProps) {
   const activeHighlight = highlightedCategoryId ?? verdict.primaryIssue;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = resolveCopy(verdict.overall.labelKey);
   const impactLabel = resolveCopy(verdict.copyKeys.impactKey);
-  const primaryStars = verdict.primaryIssue ? verdict.dimensions[verdict.primaryIssue].stars : 0;
   const categoryEntries = (
     Object.entries(verdict.dimensions) as Array<
-      [keyof Verdict["dimensions"], Verdict["dimensions"][keyof Verdict["dimensions"]]]
+      [
+        keyof WebVerdict["dimensions"],
+        WebVerdict["dimensions"][keyof WebVerdict["dimensions"]]
+      ]
     >
   );
 
@@ -45,19 +46,6 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
             {resolveCopy(verdict.overall.summaryKey)}
           </p>
         </div>
-        {metrics ? (
-          <div className="rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-xs text-slate-400">
-            <p>
-              {resolveCopy("ui.metric.clipping")}: {(metrics.clippingRatio * 100).toFixed(2)}%
-            </p>
-            <p>
-              {resolveCopy("ui.metric.rms")}: {metrics.rmsDb.toFixed(1)} dBFS
-            </p>
-            <p>
-              {resolveCopy("ui.metric.snr")}: {metrics.snrDb.toFixed(1)} dB
-            </p>
-          </div>
-        ) : null}
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {categoryEntries.map(([categoryKey, category]) => (
@@ -74,20 +62,7 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
             <p className="text-sm font-semibold text-slate-100">
               {resolveCopy(category.labelKey)}
             </p>
-            <div className="mt-2 flex gap-1">
-              {starArray(category.stars).map((filled, index) => (
-                <span
-                  key={`${category.labelKey}-star-${index}`}
-                  className={
-                    filled
-                      ? "text-amber-400"
-                      : "text-slate-700"
-                  }
-                >
-                  ★
-                </span>
-              ))}
-            </div>
+            <TargetZoneBar target={category.target} />
             <p className="mt-2 text-xs text-slate-400">
               {resolveCopy(category.descriptionKey)}
             </p>
