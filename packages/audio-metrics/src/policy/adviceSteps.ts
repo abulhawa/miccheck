@@ -30,7 +30,14 @@ export type AdviceStepKey =
   | "check_cables_grounding"
   | "consider_external_mic";
 
+export type AdviceStepKind = "behavioral" | "software" | "gear_optional";
+
 export interface AdviceStep {
+  key: AdviceStepKey;
+  kind: AdviceStepKind;
+}
+
+export interface AdviceTemplateStep {
   key: AdviceStepKey;
 }
 
@@ -44,6 +51,44 @@ interface BuildAdviceStepOptions {
   diagnosticCertainty?: DiagnosticCertainty;
 }
 
+const adviceStepKindByKey: Record<AdviceStepKey, AdviceStepKind> = {
+  adjust_input_gain: "software",
+  move_mic_closer: "behavioral",
+  increase_distance_from_mic: "behavioral",
+  reduce_background_noise: "behavioral",
+  treat_room_echo: "behavioral",
+  enable_echo_cancellation: "software",
+  reposition_mic_away_from_speakers: "behavioral",
+  check_system_mic_level: "software",
+  check_app_input_level: "software",
+  disable_audio_enhancements: "software",
+  disable_auto_volume: "software",
+  speak_louder: "behavioral",
+  speak_softer: "behavioral",
+  keep_headset_mic_facing_mouth: "behavioral",
+  keep_head_angle_stable: "behavioral",
+  check_charger_interference: "software",
+  check_power_interference: "software",
+  check_usb_port_interference: "software",
+  check_cables_grounding: "software",
+  consider_external_mic: "gear_optional"
+};
+
+const adviceKindRank: Record<AdviceStepKind, number> = {
+  behavioral: 0,
+  software: 1,
+  gear_optional: 2
+};
+
+export const normalizeAdviceOrder = (steps: AdviceStep[]): AdviceStep[] =>
+  [...steps].sort((left, right) => adviceKindRank[left.kind] - adviceKindRank[right.kind]);
+
+const expandAdviceSteps = (steps: AdviceTemplateStep[]): AdviceStep[] =>
+  steps.map((step) => ({
+    key: step.key,
+    kind: adviceStepKindByKey[step.key]
+  }));
+
 const mapDeviceType = (deviceType: ContextInput["device_type"]): AdviceDeviceType => {
   if (deviceType === "usb_mic") return "usb_mic";
   if (deviceType === "bluetooth" || deviceType === "headset") return "bluetooth_headset";
@@ -56,7 +101,7 @@ const mapUseCase = (useCase: ContextInput["use_case"]): AdviceUseCase => {
   return useCase;
 };
 
-const lowCertaintyChecks = (deviceType: AdviceDeviceType): AdviceStep[] => {
+const lowCertaintyChecks = (deviceType: AdviceDeviceType): AdviceTemplateStep[] => {
   if (deviceType === "bluetooth_headset") {
     return [
       { key: "check_system_mic_level" },
@@ -118,15 +163,20 @@ export const buildAdviceSteps = (primaryIssue: CategoryId | null, options: Build
   const shouldUseHypothesisChecks =
     options.diagnosticCertainty === "low" && !options.hasHum && !options.clippingDetected;
 
-  const baseSteps = shouldUseHypothesisChecks
+  const mode = determineMode(primaryIssue, options);
+  const templateSteps = shouldUseHypothesisChecks
     ? lowCertaintyChecks(deviceType)
     : selectAdviceTemplate({
-        ...determineMode(primaryIssue, options),
+        ...mode,
         useCase,
         deviceType
       });
 
-  return applyDeviceConstraints(baseSteps, {
-    device_type: options.deviceType ?? "unknown"
+  const constrained = applyDeviceConstraints(templateSteps, {
+    device_type: options.deviceType ?? "unknown",
+    metric: mode.metric,
+    failureMode: mode.failureMode
   });
+
+  return normalizeAdviceOrder(expandAdviceSteps(constrained));
 };

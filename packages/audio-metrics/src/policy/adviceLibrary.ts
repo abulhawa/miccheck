@@ -1,4 +1,4 @@
-import type { AdviceStep } from "./adviceSteps";
+import type { AdviceTemplateStep } from "./adviceSteps";
 
 export type AdviceMetric = "level" | "noise" | "echo" | "clipping";
 export type AdviceFailureMode =
@@ -17,7 +17,7 @@ export interface AdviceTemplateEntry {
   failureMode: AdviceFailureMode;
   useCase?: AdviceUseCase;
   deviceType?: AdviceDeviceType;
-  steps: AdviceStep[];
+  steps: AdviceTemplateStep[];
 }
 
 const t = (entry: AdviceTemplateEntry): AdviceTemplateEntry => entry;
@@ -34,13 +34,20 @@ export const adviceTemplates: AdviceTemplateEntry[] = [
   t({ metric: "level", failureMode: "low", steps: [{ key: "move_mic_closer" }, { key: "check_system_mic_level" }] }),
 
   // Level: high
+  t({ metric: "level", failureMode: "high", useCase: "podcast", deviceType: "bluetooth_headset", steps: [{ key: "speak_softer" }, { key: "check_app_input_level" }, { key: "disable_auto_volume" }] }),
+  t({ metric: "level", failureMode: "high", useCase: "streaming", deviceType: "bluetooth_headset", steps: [{ key: "speak_softer" }, { key: "check_system_mic_level" }, { key: "disable_auto_volume" }] }),
   t({ metric: "level", failureMode: "high", useCase: "podcast", steps: [{ key: "increase_distance_from_mic" }, { key: "check_app_input_level" }, { key: "disable_auto_volume" }] }),
   t({ metric: "level", failureMode: "high", useCase: "streaming", steps: [{ key: "increase_distance_from_mic" }, { key: "check_system_mic_level" }] }),
+  t({ metric: "level", failureMode: "high", deviceType: "bluetooth_headset", steps: [{ key: "speak_softer" }, { key: "check_system_mic_level" }, { key: "check_app_input_level" }] }),
   t({ metric: "level", failureMode: "high", deviceType: "usb_mic", steps: [{ key: "increase_distance_from_mic" }, { key: "adjust_input_gain" }] }),
   t({ metric: "level", failureMode: "high", deviceType: "built_in_mic", steps: [{ key: "speak_softer" }, { key: "check_system_mic_level" }, { key: "disable_auto_volume" }] }),
   t({ metric: "level", failureMode: "high", steps: [{ key: "speak_softer" }, { key: "increase_distance_from_mic" }, { key: "check_app_input_level" }] }),
 
   // Noise: general
+  t({ metric: "noise", failureMode: "general_noise", useCase: "meetings", deviceType: "bluetooth_headset", steps: [{ key: "reduce_background_noise" }, { key: "keep_head_angle_stable" }, { key: "disable_audio_enhancements" }] }),
+  t({ metric: "noise", failureMode: "general_noise", useCase: "streaming", deviceType: "bluetooth_headset", steps: [{ key: "reduce_background_noise" }, { key: "keep_headset_mic_facing_mouth" }, { key: "check_app_input_level" }] }),
+  t({ metric: "noise", failureMode: "general_noise", useCase: "podcast", deviceType: "bluetooth_headset", steps: [{ key: "reduce_background_noise" }, { key: "keep_headset_mic_facing_mouth" }, { key: "check_system_mic_level" }] }),
+  t({ metric: "noise", failureMode: "general_noise", useCase: "music", deviceType: "bluetooth_headset", steps: [{ key: "reduce_background_noise" }, { key: "keep_head_angle_stable" }] }),
   t({ metric: "noise", failureMode: "general_noise", useCase: "meetings", steps: [{ key: "reduce_background_noise" }, { key: "move_mic_closer" }, { key: "disable_audio_enhancements" }] }),
   t({ metric: "noise", failureMode: "general_noise", useCase: "streaming", steps: [{ key: "reduce_background_noise" }, { key: "move_mic_closer" }, { key: "check_app_input_level" }] }),
   t({ metric: "noise", failureMode: "general_noise", useCase: "podcast", steps: [{ key: "reduce_background_noise" }, { key: "move_mic_closer" }, { key: "check_system_mic_level" }] }),
@@ -56,6 +63,8 @@ export const adviceTemplates: AdviceTemplateEntry[] = [
   t({ metric: "noise", failureMode: "constant_hum", steps: [{ key: "check_charger_interference" }, { key: "check_power_interference" }] }),
 
   // Echo: roomy
+  t({ metric: "echo", failureMode: "roomy", useCase: "meetings", deviceType: "bluetooth_headset", steps: [{ key: "keep_head_angle_stable" }, { key: "enable_echo_cancellation" }] }),
+  t({ metric: "echo", failureMode: "roomy", useCase: "podcast", deviceType: "bluetooth_headset", steps: [{ key: "treat_room_echo" }, { key: "keep_headset_mic_facing_mouth" }] }),
   t({ metric: "echo", failureMode: "roomy", useCase: "meetings", steps: [{ key: "move_mic_closer" }, { key: "enable_echo_cancellation" }] }),
   t({ metric: "echo", failureMode: "roomy", useCase: "podcast", steps: [{ key: "treat_room_echo" }, { key: "move_mic_closer" }] }),
   t({ metric: "echo", failureMode: "roomy", useCase: "music", steps: [{ key: "treat_room_echo" }, { key: "reposition_mic_away_from_speakers" }] }),
@@ -63,6 +72,9 @@ export const adviceTemplates: AdviceTemplateEntry[] = [
   t({ metric: "echo", failureMode: "roomy", steps: [{ key: "treat_room_echo" }, { key: "move_mic_closer" }] }),
 
   // Echo: strong
+  t({ metric: "echo", failureMode: "strong_echo", useCase: "meetings", deviceType: "bluetooth_headset", steps: [{ key: "keep_headset_mic_facing_mouth" }, { key: "reposition_mic_away_from_speakers" }, { key: "enable_echo_cancellation" }] }),
+  t({ metric: "echo", failureMode: "strong_echo", useCase: "podcast", deviceType: "bluetooth_headset", steps: [{ key: "treat_room_echo" }, { key: "keep_head_angle_stable" }, { key: "reposition_mic_away_from_speakers" }] }),
+  t({ metric: "echo", failureMode: "strong_echo", useCase: "music", deviceType: "bluetooth_headset", steps: [{ key: "treat_room_echo" }, { key: "reposition_mic_away_from_speakers" }, { key: "keep_headset_mic_facing_mouth" }] }),
   t({ metric: "echo", failureMode: "strong_echo", useCase: "meetings", steps: [{ key: "move_mic_closer" }, { key: "reposition_mic_away_from_speakers" }, { key: "enable_echo_cancellation" }] }),
   t({ metric: "echo", failureMode: "strong_echo", useCase: "podcast", steps: [{ key: "treat_room_echo" }, { key: "move_mic_closer" }, { key: "reposition_mic_away_from_speakers" }] }),
   t({ metric: "echo", failureMode: "strong_echo", useCase: "music", steps: [{ key: "treat_room_echo" }, { key: "reposition_mic_away_from_speakers" }, { key: "move_mic_closer" }] }),
@@ -95,7 +107,7 @@ const matches = (
   return !template.useCase && !template.deviceType;
 };
 
-export const selectAdviceTemplate = (input: AdviceTemplateSelectionInput): AdviceStep[] => {
+export const selectAdviceTemplate = (input: AdviceTemplateSelectionInput): AdviceTemplateStep[] => {
   const priority: Array<"exact" | "useCase" | "device" | "global"> = ["exact", "useCase", "device", "global"];
 
   for (const mode of priority) {
