@@ -18,6 +18,7 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
   const [error, setError] = useState<string | null>(null);
   const onDeviceChangeRef = useRef(onDeviceChange);
   const selectedIdRef = useRef(selectedId);
+  const loadRequestIdRef = useRef(0);
 
   useEffect(() => {
     onDeviceChangeRef.current = onDeviceChange;
@@ -28,6 +29,8 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
   }, [selectedId]);
 
   const loadDevices = useCallback(async (requestPermission = false) => {
+    const requestId = ++loadRequestIdRef.current;
+
     if (!navigator.mediaDevices?.getUserMedia) {
       setError("Microphone access is not supported in this browser.");
       setIsLoading(false);
@@ -46,9 +49,19 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
       }
 
       const availableDevices = await navigator.mediaDevices.enumerateDevices();
-      const inputDevices = availableDevices.filter(
+      let inputDevices = availableDevices.filter(
         (device) => device.kind === "audioinput"
       );
+
+      if (!requestPermission && inputDevices.length === 0) {
+        const retryDevices = await navigator.mediaDevices.enumerateDevices();
+        inputDevices = retryDevices.filter((device) => device.kind === "audioinput");
+      }
+
+      if (requestId !== loadRequestIdRef.current) {
+        return;
+      }
+
       setDevices(inputDevices);
 
       const storedId = window.localStorage.getItem(STORAGE_KEY);
