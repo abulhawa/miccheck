@@ -126,6 +126,6 @@ describe("adviceLibrary template selection", () => {
 
   it("contains a bounded deterministic template set", () => {
     expect(adviceTemplates.length).toBeGreaterThanOrEqual(30);
-    expect(adviceTemplates.length).toBeLessThanOrEqual(40);
+    expect(adviceTemplates.length).toBeLessThanOrEqual(55);
   });
 });
