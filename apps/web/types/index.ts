@@ -1,53 +1,29 @@
 import type {
   AnalysisSpecialState,
-  CategoryId,
   ContextInput,
   DeviceType,
+  DiagnosticCertainty,
   MetricsSummary,
   Recommendation,
   UseCase,
-  Verdict
+  UseCaseFit,
+  Verdict,
+  VerdictBestNextStep
 } from "@miccheck/audio-metrics";
 
 export type {
   AnalysisSpecialState,
-  CategoryId,
   ContextInput,
   DeviceType,
+  DiagnosticCertainty,
   MetricsSummary,
   Recommendation,
-  UseCase
+  UseCase,
+  UseCaseFit,
+  VerdictBestNextStep
 };
 
-export type UseCaseFit = "pass" | "warn" | "fail";
-export type DiagnosticCertainty = "low" | "medium" | "high";
-
-export interface VerdictTargetMetadata {
-  marker: "low" | "ideal" | "high";
-  lowLabel: string;
-  idealLabel: string;
-  highLabel: string;
-}
-
-export interface VerdictBestNextStep {
-  kind: "action" | "gear_optional";
-  title: string;
-  description?: string;
-  affiliateUrl?: string;
-}
-
-export type WebVerdict = Verdict & {
-  context?: ContextInput;
-  useCaseFit?: UseCaseFit;
-  diagnosticCertainty?: DiagnosticCertainty;
-  reassuranceMode?: boolean;
-  bestNextSteps?: VerdictBestNextStep[];
-  dimensions: {
-    [K in keyof Verdict["dimensions"]]: Verdict["dimensions"][K] & {
-      target?: VerdictTargetMetadata;
-    };
-  };
-};
+export type WebVerdict = Verdict;
 
 export interface AnalysisResult {
   verdict: WebVerdict;

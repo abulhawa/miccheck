@@ -7,6 +7,7 @@ import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
 import DeviceSelector from "../../components/DeviceSelector";
 import ScoreCard from "../../components/ScoreCard";
+import BestNextSteps from "../../components/BestNextSteps";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
@@ -16,7 +17,9 @@ import {
   loadAnalysisContext,
   saveAnalysisContext
 } from "../../lib/analysisContextStorage";
-import { resolveCopy, resolveNoSpeechCopy } from "../../lib/copy";
+import { resolveNoSpeechCopy } from "../../lib/copy";
+
+const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -48,12 +51,24 @@ export default function TestPage() {
 
   useEffect(() => {
     setAnalysisContext(loadAnalysisContext());
+    const storedOverride = window.localStorage.getItem(DEVICE_OVERRIDE_STORAGE_KEY);
+    if (storedOverride) {
+      setDeviceTypeOverride(storedOverride as DeviceType);
+    }
   }, []);
 
   useEffect(() => {
     saveAnalysisContext(analysisContext);
   }, [analysisContext]);
 
+
+  useEffect(() => {
+    if (deviceTypeOverride) {
+      window.localStorage.setItem(DEVICE_OVERRIDE_STORAGE_KEY, deviceTypeOverride);
+      return;
+    }
+    window.localStorage.removeItem(DEVICE_OVERRIDE_STORAGE_KEY);
+  }, [deviceTypeOverride]);
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS && !hasShownIOSAlert.current) {
@@ -210,42 +225,11 @@ export default function TestPage() {
           <section className="grid gap-6 md:grid-cols-2">
             <ScoreCard
               verdict={analysis.verdict}
+              metrics={analysis.metrics}
               highlightedCategoryId={analysis.verdict.primaryIssue}
             />
+            <BestNextSteps verdict={analysis.verdict} />
             <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-              <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
-              <p className="mt-3 text-sm text-slate-200">
-                {analysis.verdict.bestNextSteps?.[0]?.title ??
-                  resolveCopy(analysis.verdict.copyKeys.fixKey)}
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li>Use case fit: {analysis.verdict.useCaseFit ?? "unknown"}</li>
-                <li>
-                  Diagnostic certainty: {analysis.verdict.diagnosticCertainty ?? "unknown"}
-                </li>
-              </ul>
-              {!analysis.verdict.reassuranceMode && analysis.verdict.bestNextSteps?.length ? (
-                <ul className="mt-4 space-y-2 text-sm text-slate-300">
-                  {analysis.verdict.bestNextSteps
-                    .filter((step) => step.kind !== "gear_optional")
-                    .map((step) => (
-                      <li key={`${step.kind}-${step.title}`}>• {step.title}</li>
-                    ))}
-                </ul>
-              ) : null}
-              {analysis.verdict.bestNextSteps
-                ?.filter((step) => step.kind === "gear_optional")
-                .map((step) => (
-                  <a
-                    key={step.title}
-                    className="mt-4 block rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100"
-                    href={step.affiliateUrl}
-                    rel="noopener noreferrer nofollow"
-                    target="_blank"
-                  >
-                    Optional gear: {step.title}
-                  </a>
-                ))}
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"

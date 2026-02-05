@@ -3,9 +3,9 @@ import { measureClipping } from "./metrics/clipping";
 import { measureLevel } from "./metrics/level";
 import { measureNoise } from "./metrics/noise";
 import { measureEcho } from "./metrics/echo";
-import { recommendFix } from "./diagnosis/recommendations";
+import { buildRecommendationPolicy, buildVerdictNextSteps, recommendFix } from "./diagnosis/recommendations";
 import { getNoSpeechVerdict, getVerdict } from "./scoring/verdict";
-import type { AnalysisSummary, ContextInput } from "./types";
+import type { AnalysisSummary, ContextInput, DiagnosticCertainty, UseCaseFit, Verdict } from "./types";
 
 export * from "./types";
 export { getContextualExplanation } from "./scoring/contextHelp";
@@ -15,6 +15,32 @@ const DEFAULT_CONTEXT: ContextInput = {
   use_case: "meetings",
   device_type: "unknown",
   mode: "single"
+};
+
+const fitFromGrade = (grade: string): UseCaseFit => {
+  if (["A", "A-", "B"].includes(grade)) return "pass";
+  if (grade === "C") return "warn";
+  return "fail";
+};
+
+const certaintyFrom = (fit: UseCaseFit, deviceType: ContextInput["device_type"]): DiagnosticCertainty => {
+  const base: DiagnosticCertainty = fit === "pass" ? "high" : fit === "warn" ? "medium" : "low";
+  if (deviceType === "unknown" && base === "high") return "medium";
+  return base;
+};
+
+const withVerdictExtensions = (verdict: Verdict, context: ContextInput): Verdict => {
+  const fit = fitFromGrade(verdict.overall.grade);
+  const diagnosticCertainty = certaintyFrom(fit, context.device_type);
+  const reassuranceMode = fit === "pass";
+
+  return {
+    ...verdict,
+    context,
+    useCaseFit: fit,
+    diagnosticCertainty,
+    reassuranceMode
+  };
 };
 
 /**
@@ -35,7 +61,7 @@ export const analyzeSamples = (
   const toDb = (value: number): number => 20 * Math.log10(Math.max(value, 1e-8));
   const speechRmsDb = toDb(vadResult.averageSpeechRms);
   if (vadResult.speechRatio < 0.1) {
-    const verdict = getNoSpeechVerdict(resolvedContext);
+    const verdict = withVerdictExtensions(getNoSpeechVerdict(resolvedContext), resolvedContext);
     return {
       verdict,
       metrics: {
@@ -59,7 +85,7 @@ export const analyzeSamples = (
   const noise = measureNoise(samples, sampleRate);
   const echo = measureEcho(samples, sampleRate);
 
-  const verdict = getVerdict(
+  const baseVerdict = getVerdict(
     {
       clippingRatio: clipping.clippingRatio,
       rmsDb: level.rmsDb,
@@ -70,7 +96,11 @@ export const analyzeSamples = (
     },
     resolvedContext
   );
+  const recommendationPolicy = buildRecommendationPolicy(level, clipping, noise, echo, resolvedContext);
   const recommendation = recommendFix(level, clipping, noise, echo, resolvedContext);
+
+  const verdict = withVerdictExtensions(baseVerdict, resolvedContext);
+  verdict.bestNextSteps = verdict.reassuranceMode ? [] : buildVerdictNextSteps(recommendationPolicy);
 
   return {
     verdict,

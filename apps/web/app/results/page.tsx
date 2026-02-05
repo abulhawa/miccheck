@@ -4,11 +4,10 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
-import Tooltip from "../../components/Tooltip";
+import BestNextSteps from "../../components/BestNextSteps";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
-import { analysisDisplayThresholds } from "../../lib/domain/analysisDisplay";
 import {
   STORAGE_SYNC_MAX_ATTEMPTS,
   STORAGE_SYNC_RETRY_DELAY_MS
@@ -27,19 +26,16 @@ const sampleResult: AnalysisResult = {
         stars: 4,
         labelKey: "category.level",
         descriptionKey: "level.slightly_off_target",
-        target: { marker: "ideal", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
       },
       noise: {
         stars: 5,
         labelKey: "category.noise",
         descriptionKey: "noise.very_clean",
-        target: { marker: "ideal", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
       },
       echo: {
         stars: 3,
         labelKey: "category.echo",
         descriptionKey: "echo.some_room_echo",
-        target: { marker: "high", lowLabel: "Low", idealLabel: "Ideal", highLabel: "High" }
       }
     },
     primaryIssue: "echo",
@@ -51,7 +47,12 @@ const sampleResult: AnalysisResult = {
       {
         kind: "gear_optional",
         title: "Acoustic panels",
-        affiliateUrl: "https://amzn.to/4qTnyHf"
+        gear: {
+          category: "USB dynamic mic",
+          relevance: "high",
+          rationale: "Reduces room pickup and reflections for clearer speech.",
+          affiliateUrl: "https://amzn.to/4qTnyHf"
+        }
       }
     ],
     copyKeys: {
@@ -141,68 +142,15 @@ export default function ResultsPage() {
         <>
           <ScoreCard
             verdict={sampleResult.verdict}
+            metrics={sampleResult.metrics}
             highlightedCategoryId={sampleResult.verdict.primaryIssue}
           />
 
-          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
-            <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
-            <p className="mt-2">{sampleResult.verdict.bestNextSteps?.[0]?.title}</p>
-            <ul className="mt-3 space-y-2 text-slate-300">
-              <li>Use case fit: {sampleResult.verdict.useCaseFit ?? "unknown"}</li>
-              <li>
-                Diagnostic certainty: {sampleResult.verdict.diagnosticCertainty ?? "unknown"}
-              </li>
-            </ul>
-            {!sampleResult.verdict.reassuranceMode ? (
-              <ul className="mt-4 space-y-1 text-slate-300">
-                {sampleResult.verdict.bestNextSteps
-                  ?.filter((step) => step.kind !== "gear_optional")
-                  .map((step) => <li key={step.title}>• {step.title}</li>)}
-              </ul>
-            ) : null}
-            {sampleResult.verdict.bestNextSteps
-              ?.filter((step) => step.kind === "gear_optional")
-              .map((step) => (
-                <a
-                  key={step.title}
-                  className="mt-4 block rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100"
-                  href={step.affiliateUrl}
-                  rel="noopener noreferrer nofollow"
-                  target="_blank"
-                >
-                  Optional gear: {step.title}
-                </a>
-              ))}
-          </section>
+          <BestNextSteps verdict={sampleResult.verdict} />
 
           <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
-            <h2 className="text-lg font-semibold">What the metrics mean</h2>
-            <ul className="mt-3 space-y-2">
-              <li>
-                <Tooltip
-                  label="Level"
-                  text={`Target around ${analysisDisplayThresholds.levelTargetDbfs} dBFS keeps speech clear without clipping.`}
-                />
-                : target around {analysisDisplayThresholds.levelTargetDbfs} dBFS, acceptable range roughly {analysisDisplayThresholds.levelAcceptableMinDbfs} to {analysisDisplayThresholds.levelAcceptableMaxDbfs} dBFS.
-              </li>
-              <li>
-                Noise: higher{" "}
-                <Tooltip
-                  label="SNR"
-                  text={`SNR > ${analysisDisplayThresholds.snrCleanThresholdDb}dB means your voice is ${analysisDisplayThresholds.snrCleanLoudnessRatio}x louder than background noise.`}
-                />{" "}
-                means a cleaner background.
-              </li>
-              <li>
-                <Tooltip
-                  label="Echo"
-                  text="Echo score rises when room reflections are strong or the mic is far away."
-                />
-                : echo score rises with reflections or large rooms.
-              </li>
-            </ul>
             <button
-              className="mt-6 inline-flex rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
+              className="inline-flex rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
               onClick={handleTestAgain}
               type="button"
             >

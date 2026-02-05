@@ -1,16 +1,24 @@
+import React from "react";
 import { toStarRating } from "../lib/starRating";
-import type { WebVerdict } from "../types";
+import type { MetricsSummary, WebVerdict } from "../types";
 import { resolveCopy } from "../lib/copy";
+import {
+  formatClippingMetric,
+  formatEchoMetric,
+  formatLevelMetric,
+  formatNoiseMetric
+} from "../lib/metricFormatting";
 import ShareButton from "./ShareButton";
 
 interface ScoreCardProps {
   verdict: WebVerdict;
+  metrics: MetricsSummary;
   highlightedCategoryId?: WebVerdict["primaryIssue"];
 }
 
 const renderStars = (count: number): string => "★".repeat(count) + "☆".repeat(5 - count);
 
-export default function ScoreCard({ verdict, highlightedCategoryId }: ScoreCardProps) {
+export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
   const activeHighlight = highlightedCategoryId ?? verdict.primaryIssue;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = resolveCopy(verdict.overall.labelKey);
@@ -54,6 +62,13 @@ export default function ScoreCard({ verdict, highlightedCategoryId }: ScoreCardP
             descriptionKey: category.descriptionKey
           });
 
+          const metricText =
+            categoryKey === "level"
+              ? formatLevelMetric(metrics)
+              : categoryKey === "noise"
+                ? formatNoiseMetric(metrics)
+                : formatEchoMetric(metrics);
+
           return (
             <div
               key={category.labelKey}
@@ -71,9 +86,14 @@ export default function ScoreCard({ verdict, highlightedCategoryId }: ScoreCardP
               </p>
               <p className="mt-1 text-xs font-medium text-slate-300">{rating.label}</p>
               <p className="mt-2 text-xs text-slate-400">{resolveCopy(category.descriptionKey)}</p>
+              <p className="mt-2 text-xs font-medium text-slate-200">{metricText}</p>
             </div>
           );
         })}
+      </div>
+      <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
+        <p className="text-sm font-semibold text-slate-100">{resolveCopy("ui.metric.clipping")}</p>
+        <p className="mt-2 text-xs font-medium text-slate-200">{formatClippingMetric(metrics)}</p>
       </div>
     </div>
   );
