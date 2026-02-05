@@ -23,6 +23,7 @@ export const buildGearStep = (
 
   return [
     {
+      kind: "gear_optional",
       key: "consider_external_mic",
       relevance,
       category,
