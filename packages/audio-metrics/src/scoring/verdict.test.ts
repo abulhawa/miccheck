@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { ANALYSIS_CONFIG } from "../config";
 import type { MetricsSummary, Verdict } from "../types";
-import { assertVerdictInvariant, getVerdict } from "./verdict";
+import { buildVerdictDimensionsFromMetrics } from "./categoryScores";
+import { assertVerdictInvariant, getNoSpeechVerdict, getVerdict } from "./verdict";
 
 /**
  * Semantic failure modes covered in this suite:
@@ -116,4 +117,31 @@ describe("getVerdict", () => {
     expect(severeBoundary.dimensions.echo.stars).toBe(2);
     expect(severeAbove.dimensions.echo.stars).toBe(1);
   });
+
+  it("keeps dimensions aligned with shared metrics builder", () => {
+    const metrics = buildMetrics({
+      clippingRatio: ANALYSIS_CONFIG.clippingRatioWarning + 0.01,
+      rmsDb: ANALYSIS_CONFIG.minRmsDb + 0.5,
+      snrDb: ANALYSIS_CONFIG.snrFairDb + 0.5,
+      humRatio: ANALYSIS_CONFIG.humWarningRatio + 0.01,
+      echoScore: ANALYSIS_CONFIG.echoWarningScore + 0.01
+    });
+
+    const verdict = getVerdict(metrics);
+
+    expect(verdict.dimensions).toEqual(buildVerdictDimensionsFromMetrics(metrics));
+  });
+
+  it("keeps no-speech verdict dimensions and summary unchanged", () => {
+    const verdict = getNoSpeechVerdict();
+
+    expect(verdict.overall.grade).toBe("F");
+    expect(verdict.overall.summaryKey).toBe("overall.summary.no_speech");
+    expect(verdict.dimensions).toEqual({
+      level: { stars: 0, labelKey: "category.level", descriptionKey: "special.no_speech" },
+      noise: { stars: 0, labelKey: "category.noise", descriptionKey: "special.no_speech" },
+      echo: { stars: 0, labelKey: "category.echo", descriptionKey: "special.no_speech" }
+    });
+  });
+
 });

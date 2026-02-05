@@ -3,14 +3,12 @@ import type {
   GradeLetter,
   MetricsSummary,
   Verdict,
-  VerdictDimensions,
   VerdictOverallLabelKey,
   VerdictOverallSummaryKey
 } from "../types";
-import { describeEcho, describeLevel, describeNoise } from "./categoryScores";
+import { buildVerdictDimensionsFromMetrics } from "./categoryScores";
 import { computeOverallGrade } from "./overallGrade";
 
-const clampStars = (value: number) => Math.max(0, Math.min(5, value));
 
 const labelKeyByGrade: Record<GradeLetter, VerdictOverallLabelKey> = {
   A: "overall.label.excellent",
@@ -36,30 +34,6 @@ const expectedStarsByLabelKey: Record<VerdictOverallLabelKey, number[]> = {
   "overall.label.fair": [3],
   "overall.label.needs_improvement": [2],
   "overall.label.unusable": [0, 1]
-};
-
-const buildDimensionsFromMetrics = (metrics: MetricsSummary): VerdictDimensions => {
-  const levelScore = describeLevel(metrics.rmsDb, metrics.clippingRatio);
-  const noiseScore = describeNoise(metrics.snrDb, metrics.humRatio);
-  const echoScore = describeEcho(metrics.echoScore);
-
-  return {
-    level: {
-      stars: clampStars(levelScore.stars),
-      labelKey: "category.level",
-      descriptionKey: levelScore.descriptionKey
-    },
-    noise: {
-      stars: clampStars(noiseScore.stars),
-      labelKey: "category.noise",
-      descriptionKey: noiseScore.descriptionKey
-    },
-    echo: {
-      stars: clampStars(echoScore.stars),
-      labelKey: "category.echo",
-      descriptionKey: echoScore.descriptionKey
-    }
-  };
 };
 
 const resolveImpactKey = (primaryIssue: CategoryId | null) =>
@@ -123,7 +97,7 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
 };
 
 export const getVerdict = (metrics: MetricsSummary): Verdict => {
-  const dimensions = buildDimensionsFromMetrics(metrics);
+  const dimensions = buildVerdictDimensionsFromMetrics(metrics);
   const { grade, primaryIssueCategory: rawPrimaryIssueCategory, explanationKey, fixKey } =
     computeOverallGrade(metrics);
   const minStars = Math.min(
