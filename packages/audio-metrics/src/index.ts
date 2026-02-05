@@ -70,7 +70,7 @@ export const analyzeSamples = (
     },
     resolvedContext
   );
-  const recommendation = recommendFix(level, clipping, noise, echo);
+  const recommendation = recommendFix(level, clipping, noise, echo, resolvedContext);
 
   return {
     verdict,
