@@ -5,12 +5,13 @@ import type {
   VerdictExplanationKey,
   VerdictFixKey
 } from "../types";
-import { ANALYSIS_CONFIG } from "../config";
 import type { ClippingMetrics } from "../metrics/clipping";
 import type { LevelMetrics } from "../metrics/level";
 import type { NoiseMetrics } from "../metrics/noise";
 import type { EchoMetrics } from "../metrics/echo";
+import { getThresholdsForUseCase } from "../policy/thresholdMatrix";
 
+const thresholds = getThresholdsForUseCase("meetings");
 const clampStars = (value: number) => Math.max(1, Math.min(5, value));
 
 export interface CategoryInsight {
@@ -22,7 +23,7 @@ export interface CategoryInsight {
 }
 
 export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryInsight => {
-  if (clippingRatio > ANALYSIS_CONFIG.clippingRatioWarning) {
+  if (clippingRatio > thresholds.clipping.warningRatio) {
     return {
       stars: 1,
       descriptionKey: "level.clipping_detected",
@@ -31,7 +32,7 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
       isCatastrophic: true
     };
   }
-  if (rmsDb < ANALYSIS_CONFIG.minRmsDbSevere) {
+  if (rmsDb < thresholds.level.minRmsDbSevere) {
     return {
       stars: 1,
       descriptionKey: "level.extremely_quiet",
@@ -40,7 +41,7 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
       isCatastrophic: true
     };
   }
-  if (rmsDb > ANALYSIS_CONFIG.maxRmsDbSevere) {
+  if (rmsDb > thresholds.level.maxRmsDbSevere) {
     return {
       stars: 1,
       descriptionKey: "level.extremely_loud",
@@ -49,7 +50,7 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
       isCatastrophic: true
     };
   }
-  if (rmsDb < ANALYSIS_CONFIG.minRmsDb) {
+  if (rmsDb < thresholds.level.minRmsDb) {
     return {
       stars: 2,
       descriptionKey: "level.too_quiet",
@@ -57,7 +58,7 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
       fixKey: "fix.increase_gain_move_closer"
     };
   }
-  if (rmsDb > ANALYSIS_CONFIG.maxRmsDb) {
+  if (rmsDb > thresholds.level.maxRmsDb) {
     return {
       stars: 2,
       descriptionKey: "level.too_loud",
@@ -65,11 +66,11 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
       fixKey: "fix.lower_gain_move_back_slight"
     };
   }
-  const targetRange = ANALYSIS_CONFIG.targetRangeDb;
+  const targetRange = thresholds.level.targetRangeDb;
   const innerRange = targetRange / 2;
   if (
-    rmsDb < ANALYSIS_CONFIG.targetRmsDb - targetRange ||
-    rmsDb > ANALYSIS_CONFIG.targetRmsDb + targetRange
+    rmsDb < thresholds.level.targetRmsDb - targetRange ||
+    rmsDb > thresholds.level.targetRmsDb + targetRange
   ) {
     return {
       stars: 3,
@@ -79,8 +80,8 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
     };
   }
   if (
-    rmsDb < ANALYSIS_CONFIG.targetRmsDb - innerRange ||
-    rmsDb > ANALYSIS_CONFIG.targetRmsDb + innerRange
+    rmsDb < thresholds.level.targetRmsDb - innerRange ||
+    rmsDb > thresholds.level.targetRmsDb + innerRange
   ) {
     return {
       stars: 4,
@@ -93,18 +94,18 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
 export const describeNoise = (snrDb: number, humRatio: number): CategoryInsight => {
   let base: CategoryInsight;
 
-  if (snrDb >= ANALYSIS_CONFIG.snrExcellentDb) {
+  if (snrDb >= thresholds.noise.snrExcellentDb) {
     base = { stars: 5, descriptionKey: "noise.very_clean" };
-  } else if (snrDb >= ANALYSIS_CONFIG.snrGoodDb) {
+  } else if (snrDb >= thresholds.noise.snrGoodDb) {
     base = { stars: 4, descriptionKey: "noise.clean_background" };
-  } else if (snrDb >= ANALYSIS_CONFIG.snrFairDb) {
+  } else if (snrDb >= thresholds.noise.snrFairDb) {
     base = {
       stars: 3,
       descriptionKey: "noise.some_background_noise",
       reasonKey: "explanation.some_background_noise",
       fixKey: "fix.reduce_noise_quieter_space"
     };
-  } else if (snrDb >= ANALYSIS_CONFIG.snrPoorDb) {
+  } else if (snrDb >= thresholds.noise.snrPoorDb) {
     base = {
       stars: 2,
       descriptionKey: "noise.noisy_background",
@@ -120,7 +121,7 @@ export const describeNoise = (snrDb: number, humRatio: number): CategoryInsight 
     };
   }
 
-  if (humRatio > ANALYSIS_CONFIG.humWarningRatio && base.stars > 2) {
+  if (humRatio > thresholds.noise.humWarningRatio && base.stars > 2) {
     return {
       stars: 2,
       descriptionKey: "noise.electrical_hum",
@@ -133,7 +134,7 @@ export const describeNoise = (snrDb: number, humRatio: number): CategoryInsight 
 };
 
 export const describeEcho = (echoScore: number): CategoryInsight => {
-  if (echoScore > ANALYSIS_CONFIG.echoSevereScore) {
+  if (echoScore > thresholds.echo.severeScore) {
     return {
       stars: 1,
       descriptionKey: "echo.overwhelming",
@@ -141,7 +142,7 @@ export const describeEcho = (echoScore: number): CategoryInsight => {
       fixKey: "fix.add_acoustic_treatment_move_closer"
     };
   }
-  if (echoScore > ANALYSIS_CONFIG.echoWarningScore) {
+  if (echoScore > thresholds.echo.warningScore) {
     return {
       stars: 2,
       descriptionKey: "echo.strong",
@@ -149,7 +150,7 @@ export const describeEcho = (echoScore: number): CategoryInsight => {
       fixKey: "fix.add_soft_furnishings_move_closer"
     };
   }
-  if (echoScore > ANALYSIS_CONFIG.echoWarningScore * 0.7) {
+  if (echoScore > thresholds.echo.warningScore * thresholds.echo.moderateFactor) {
     return {
       stars: 3,
       descriptionKey: "echo.some_room_echo",
@@ -157,15 +158,12 @@ export const describeEcho = (echoScore: number): CategoryInsight => {
       fixKey: "fix.light_acoustic_treatment_close_mic"
     };
   }
-  if (echoScore > ANALYSIS_CONFIG.echoWarningScore * 0.4) {
+  if (echoScore > thresholds.echo.warningScore * thresholds.echo.lightFactor) {
     return { stars: 4, descriptionKey: "echo.slight_reflections" };
   }
   return { stars: 5, descriptionKey: "echo.minimal" };
 };
 
-/**
- * Convert raw metrics into 1-5 star category scores.
- */
 export const buildCategoryScores = (
   level: LevelMetrics,
   clipping: ClippingMetrics,

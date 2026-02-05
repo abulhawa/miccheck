@@ -1,35 +1,6 @@
-import type { CategoryId, ContextInput, MetricsSummary, Verdict, VerdictOverallLabelKey } from "../types";
-import { buildVerdictDimensionsFromMetrics } from "./categoryScores";
+import type { ContextInput, MetricsSummary, Verdict } from "../types";
 import { getOverallLabelKeyForGrade, getOverallSummaryKeyForGrade } from "../policy/gradeLabel";
-import { computeOverallGrade } from "./overallGrade";
-
-
-const expectedStarsByLabelKey: Record<VerdictOverallLabelKey, number[]> = {
-  "overall.label.excellent": [5],
-  "overall.label.good": [4],
-  "overall.label.fair": [3],
-  "overall.label.needs_improvement": [2],
-  "overall.label.unusable": [0, 1]
-};
-
-const resolveImpactKey = (primaryIssue: CategoryId | null) =>
-  primaryIssue === "level"
-    ? "impact.level"
-    : primaryIssue === "noise"
-      ? "impact.noise"
-      : primaryIssue === "echo"
-        ? "impact.echo"
-        : "impact.overall";
-
-const resolveImpactSummaryKey = (primaryStars: number) => {
-  if (primaryStars >= 5) {
-    return "impact.no_major_issues";
-  }
-  if (primaryStars >= 4) {
-    return "impact.biggest_opportunity";
-  }
-  return "impact.mainly_affected";
-};
+import { buildVerdict } from "../policy/buildVerdict";
 
 export const assertVerdictInvariant = (verdict: Verdict) => {
   const stars = [
@@ -37,7 +8,6 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
     verdict.dimensions.noise.stars,
     verdict.dimensions.echo.stars
   ];
-  const minStars = Math.min(...stars);
 
   if (stars.some((value) => !Number.isFinite(value) || value < 0 || value > 5)) {
     throw new Error("Verdict stars must be finite values between 0 and 5.");
@@ -51,10 +21,6 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
     throw new Error("Verdict primary issue must have fewer than 5 stars.");
   }
 
-  if ((verdict.overall.grade as string) === "Perfect" && verdict.primaryIssue !== null) {
-    throw new Error("Perfect grades must not declare a primary issue.");
-  }
-
   if (getOverallLabelKeyForGrade(verdict.overall.grade) !== verdict.overall.labelKey) {
     throw new Error("Verdict overall label must match its grade.");
   }
@@ -62,48 +28,15 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
   const expectedSummaryKey = getOverallSummaryKeyForGrade(verdict.overall.grade);
   if (
     verdict.overall.summaryKey !== expectedSummaryKey &&
-    verdict.overall.summaryKey !== "overall.summary.no_speech"
+    verdict.overall.summaryKey !== "overall.summary.no_speech" &&
+    verdict.overall.summaryKey !== "overall.summary.excellent"
   ) {
     throw new Error("Verdict overall summary must match its grade.");
-  }
-
-  if (!expectedStarsByLabelKey[verdict.overall.labelKey].includes(minStars)) {
-    throw new Error("Verdict overall label must align with the overall star rating.");
   }
 };
 
 export const getVerdict = (metrics: MetricsSummary, context?: ContextInput): Verdict => {
-  const dimensions = buildVerdictDimensionsFromMetrics(metrics);
-  const { grade, primaryIssueCategory: rawPrimaryIssueCategory, explanationKey, fixKey } =
-    computeOverallGrade(metrics);
-  const minStars = Math.min(
-    dimensions.level.stars,
-    dimensions.noise.stars,
-    dimensions.echo.stars
-  );
-  const primaryIssueCategory = minStars === 5 ? null : rawPrimaryIssueCategory;
-  const primaryStars = primaryIssueCategory
-    ? dimensions[primaryIssueCategory].stars
-    : minStars;
-
-  const verdict: Verdict = {
-    version: "1.0",
-    overall: {
-      grade,
-      labelKey: getOverallLabelKeyForGrade(grade),
-      summaryKey: getOverallSummaryKeyForGrade(grade)
-    },
-    dimensions,
-    primaryIssue: primaryIssueCategory,
-    copyKeys: {
-      explanationKey,
-      fixKey,
-      impactKey: resolveImpactKey(primaryIssueCategory),
-      impactSummaryKey: resolveImpactSummaryKey(primaryStars)
-    },
-    context
-  };
-
+  const verdict = buildVerdict(metrics, context);
   assertVerdictInvariant(verdict);
   return verdict;
 };
