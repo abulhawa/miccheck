@@ -12,6 +12,7 @@ import { useAudioMeter } from "../hooks/useAudioMeter";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
 import {
   ANALYSIS_CONTEXT_OPTIONS,
+  formatUseCaseLabel,
   loadAnalysisContext,
   saveAnalysisContext
 } from "../lib/analysisContextStorage";
@@ -196,7 +197,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 >
                   {ANALYSIS_CONTEXT_OPTIONS.useCases.map((nextUseCase) => (
                     <option key={nextUseCase} value={nextUseCase}>
-                      {nextUseCase}
+                      {formatUseCaseLabel(nextUseCase)}
                     </option>
                   ))}
                 </select>
