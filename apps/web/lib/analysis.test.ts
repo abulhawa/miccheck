@@ -23,7 +23,7 @@ const makeBuffer = (): AudioBuffer =>
     getChannelData: () => new Float32Array([0.1, 0.1, 0.1, 0.1])
   }) as unknown as AudioBuffer;
 
-const makeSummary = (grade: "A" | "F") => ({
+const sampleSummary = {
   metrics: {
     clippingRatio: 0,
     rmsDb: -18,
@@ -33,36 +33,45 @@ const makeSummary = (grade: "A" | "F") => ({
     echoScore: 0
   },
   specialState: undefined,
+  recommendation: {
+    category: "General" as const,
+    messageKey: "recommendation.keep_consistent" as const,
+    confidence: 0.9
+  },
   verdict: {
-    version: "1.0",
+    version: "1.0" as const,
     overall: {
-      grade,
-      labelKey: grade === "A" ? "overall.label.excellent" : "overall.label.unusable",
-      summaryKey: grade === "A" ? "overall.summary.excellent" : "overall.summary.severe"
+      grade: "A" as const,
+      labelKey: "overall.label.excellent" as const,
+      summaryKey: "overall.summary.excellent" as const
     },
     dimensions: {
-      level: { stars: grade === "A" ? 5 : 1, labelKey: "category.level", descriptionKey: "level.excellent" },
-      noise: { stars: grade === "A" ? 5 : 1, labelKey: "category.noise", descriptionKey: "noise.very_noisy" },
-      echo: { stars: grade === "A" ? 5 : 1, labelKey: "category.echo", descriptionKey: "echo.overwhelming" }
+      level: { stars: 5, labelKey: "category.level" as const, descriptionKey: "level.excellent" as const },
+      noise: { stars: 5, labelKey: "category.noise" as const, descriptionKey: "noise.very_clean" as const },
+      echo: { stars: 5, labelKey: "category.echo" as const, descriptionKey: "echo.minimal" as const }
     },
-    primaryIssue: grade === "A" ? null : "noise",
+    primaryIssue: null,
     copyKeys: {
-      explanationKey: "explanation.strong_echo",
-      fixKey: "fix.add_soft_furnishings_move_closer",
-      impactKey: "impact.echo",
-      impactSummaryKey: "impact.mainly_affected"
-    }
+      explanationKey: "level.excellent" as const,
+      fixKey: "fix.keep_setup" as const,
+      impactKey: "impact.overall" as const,
+      impactSummaryKey: "impact.no_major_issues" as const
+    },
+    useCaseFit: "pass" as const,
+    diagnosticCertainty: "medium" as const,
+    reassuranceMode: true,
+    bestNextSteps: []
   }
-});
+};
 
-describe("analyzeRecording verdict extensions", () => {
+describe("analyzeRecording", () => {
   beforeEach(() => {
     computeRmsMock.mockReturnValue(0.1);
     analyzeSamplesMock.mockReset();
   });
 
-  it("enforces pass => reassurance mode true and best next steps empty", () => {
-    analyzeSamplesMock.mockReturnValue(makeSummary("A"));
+  it("returns verdict data from audio-metrics without recomputing UI policy", () => {
+    analyzeSamplesMock.mockReturnValue(sampleSummary);
 
     const result = analyzeRecording(makeBuffer(), {
       use_case: "meetings",
@@ -71,33 +80,6 @@ describe("analyzeRecording verdict extensions", () => {
     });
 
     expect(result.verdict.useCaseFit).toBe("pass");
-    expect(result.verdict.reassuranceMode).toBe(true);
     expect(result.verdict.bestNextSteps).toEqual([]);
-  });
-
-  it("caps diagnostic certainty for unknown device type", () => {
-    analyzeSamplesMock.mockReturnValue(makeSummary("A"));
-
-    const result = analyzeRecording(makeBuffer(), {
-      use_case: "meetings",
-      device_type: "unknown",
-      mode: "single"
-    });
-
-    expect(result.verdict.diagnosticCertainty).not.toBe("high");
-    expect(result.verdict.diagnosticCertainty).toBe("medium");
-  });
-
-  it("uses low-certainty hypothesis checks for low certainty verdicts", () => {
-    analyzeSamplesMock.mockReturnValue(makeSummary("F"));
-
-    const result = analyzeRecording(makeBuffer(), {
-      use_case: "meetings",
-      device_type: "unknown",
-      mode: "single"
-    });
-
-    expect(result.verdict.diagnosticCertainty).toBe("low");
-    expect(result.verdict.bestNextSteps?.length).toBeGreaterThanOrEqual(2);
   });
 });

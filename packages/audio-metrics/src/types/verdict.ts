@@ -152,6 +152,22 @@ export interface VerdictCopyKeys {
   noSpeechDescriptionKey?: NoSpeechDescriptionKey;
 }
 
+export type UseCaseFit = "pass" | "warn" | "fail";
+export type DiagnosticCertainty = "low" | "medium" | "high";
+export type GearRelevance = "low" | "medium" | "high";
+
+export interface VerdictBestNextStep {
+  kind: "action" | "gear_optional";
+  title: string;
+  description?: string;
+  gear?: {
+    category: string;
+    relevance: GearRelevance;
+    rationale: string;
+    affiliateUrl?: string;
+  };
+}
+
 export type AnalysisSpecialState = "NO_SPEECH" | "TOO_SHORT" | "SILENT" | "ERROR";
 
 export interface Verdict {
@@ -161,4 +177,8 @@ export interface Verdict {
   primaryIssue: CategoryId | null;
   copyKeys: VerdictCopyKeys;
   context?: ContextInput;
+  useCaseFit?: UseCaseFit;
+  diagnosticCertainty?: DiagnosticCertainty;
+  reassuranceMode?: boolean;
+  bestNextSteps?: VerdictBestNextStep[];
 }

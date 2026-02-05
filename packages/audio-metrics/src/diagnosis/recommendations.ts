@@ -2,7 +2,7 @@ import type { ClippingMetrics } from "../metrics/clipping";
 import type { NoiseMetrics } from "../metrics/noise";
 import type { EchoMetrics } from "../metrics/echo";
 import type { LevelMetrics } from "../metrics/level";
-import type { ContextInput, Recommendation } from "../types";
+import type { ContextInput, Recommendation, VerdictBestNextStep } from "../types";
 import { buildVerdict } from "../policy/buildVerdict";
 import { recommendationMessageFor } from "../policy/copy";
 import { buildAdviceSteps, type AdviceStep } from "../policy/adviceSteps";
@@ -73,6 +73,48 @@ const lowCertaintyChecks = (deviceType: ContextInput["device_type"]): AdviceStep
     { key: "move_mic_closer" }
   ];
 };
+
+const adviceStepTitle: Record<AdviceStep["key"], string> = {
+  adjust_input_gain: "Adjust microphone input gain.",
+  move_mic_closer: "Move closer to the microphone.",
+  increase_distance_from_mic: "Move slightly farther from the microphone.",
+  reduce_background_noise: "Reduce background noise around your setup.",
+  treat_room_echo: "Add soft furnishings to reduce room reflections.",
+  check_system_mic_level: "Check your system microphone level.",
+  check_app_input_level: "Check your app input level.",
+  disable_audio_enhancements: "Disable audio enhancements.",
+  disable_auto_volume: "Disable auto-volume controls.",
+  speak_louder: "Speak a bit louder into the mic.",
+  keep_headset_mic_facing_mouth: "Keep your headset mic facing your mouth.",
+  keep_head_angle_stable: "Keep your head angle stable while speaking.",
+  check_charger_interference: "Check charger interference.",
+  check_power_interference: "Move away from power interference.",
+  check_usb_port_interference: "Try a different USB port.",
+  check_cables_grounding: "Check cables and grounding.",
+  consider_external_mic: "Consider an external microphone."
+};
+
+const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextStep[] =>
+  steps.map((step) => {
+    if (step.key === "consider_external_mic") {
+      return {
+        kind: "gear_optional",
+        title: `Optional gear: ${step.category}`,
+        description: step.rationale,
+        gear: {
+          category: step.category,
+          relevance: step.relevance,
+          rationale: step.rationale,
+          ...(step.affiliateUrl ? { affiliateUrl: step.affiliateUrl } : {})
+        }
+      } satisfies VerdictBestNextStep;
+    }
+
+    return {
+      kind: "action",
+      title: adviceStepTitle[step.key]
+    } satisfies VerdictBestNextStep;
+  });
 
 export const buildRecommendationPolicy = (
   level: LevelMetrics,
@@ -154,6 +196,10 @@ export const buildRecommendationPolicy = (
     adviceSteps: [...constrainedAdviceSteps, ...gearSteps]
   };
 };
+
+export const buildVerdictNextSteps = (
+  policy: RecommendationPolicyOutput
+): VerdictBestNextStep[] => toBestNextSteps(policy.adviceSteps);
 
 export const recommendFix = (
   level: LevelMetrics,
