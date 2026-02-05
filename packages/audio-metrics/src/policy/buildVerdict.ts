@@ -40,9 +40,11 @@ export const computeSecondaryNotes = (worstResult: MetricResult) => impactSummar
 
 export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): Verdict => {
   const fit = computeUseCaseFit(metrics, context);
-  const level = describeLevel(metrics.rmsDb, metrics.clippingRatio);
-  const noise = describeNoise(metrics.snrDb, metrics.humRatio);
-  const echo = describeEcho(metrics.echoScore);
+  const useCase = context?.use_case ?? "meetings";
+
+  const level = describeLevel(metrics.rmsDb, metrics.clippingRatio, useCase);
+  const noise = describeNoise(metrics.snrDb, metrics.humRatio, useCase);
+  const echo = describeEcho(metrics.echoScore, useCase);
 
   const minStars = Math.min(level.stars, noise.stars, echo.stars);
   const levelIsMin = level.stars === minStars;

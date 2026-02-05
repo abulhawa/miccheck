@@ -1,5 +1,6 @@
 import type {
   MetricsSummary,
+  UseCase,
   VerdictCategoryDescriptionKey,
   VerdictDimensions,
   VerdictExplanationKey,
@@ -11,7 +12,6 @@ import type { NoiseMetrics } from "../metrics/noise";
 import type { EchoMetrics } from "../metrics/echo";
 import { getThresholdsForUseCase } from "../policy/thresholdMatrix";
 
-const thresholds = getThresholdsForUseCase("meetings");
 const clampStars = (value: number) => Math.max(1, Math.min(5, value));
 
 export interface CategoryInsight {
@@ -22,7 +22,13 @@ export interface CategoryInsight {
   isCatastrophic?: boolean;
 }
 
-export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryInsight => {
+export const describeLevel = (
+  rmsDb: number,
+  clippingRatio: number,
+  useCase: UseCase = "meetings"
+): CategoryInsight => {
+  const thresholds = getThresholdsForUseCase(useCase);
+
   if (clippingRatio > thresholds.clipping.warningRatio) {
     return {
       stars: 1,
@@ -91,7 +97,12 @@ export const describeLevel = (rmsDb: number, clippingRatio: number): CategoryIns
   return { stars: 5, descriptionKey: "level.excellent" };
 };
 
-export const describeNoise = (snrDb: number, humRatio: number): CategoryInsight => {
+export const describeNoise = (
+  snrDb: number,
+  humRatio: number,
+  useCase: UseCase = "meetings"
+): CategoryInsight => {
+  const thresholds = getThresholdsForUseCase(useCase);
   let base: CategoryInsight;
 
   if (snrDb >= thresholds.noise.snrExcellentDb) {
@@ -133,7 +144,9 @@ export const describeNoise = (snrDb: number, humRatio: number): CategoryInsight 
   return base;
 };
 
-export const describeEcho = (echoScore: number): CategoryInsight => {
+export const describeEcho = (echoScore: number, useCase: UseCase = "meetings"): CategoryInsight => {
+  const thresholds = getThresholdsForUseCase(useCase);
+
   if (echoScore > thresholds.echo.severeScore) {
     return {
       stars: 1,
@@ -168,11 +181,12 @@ export const buildCategoryScores = (
   level: LevelMetrics,
   clipping: ClippingMetrics,
   noise: NoiseMetrics,
-  echo: EchoMetrics
+  echo: EchoMetrics,
+  useCase: UseCase = "meetings"
 ): VerdictDimensions => {
-  const levelScore = describeLevel(level.rmsDb, clipping.clippingRatio);
-  const noiseScore = describeNoise(noise.snrDb, noise.humRatio);
-  const echoScore = describeEcho(echo.echoScore);
+  const levelScore = describeLevel(level.rmsDb, clipping.clippingRatio, useCase);
+  const noiseScore = describeNoise(noise.snrDb, noise.humRatio, useCase);
+  const echoScore = describeEcho(echo.echoScore, useCase);
 
   return {
     level: {
@@ -194,11 +208,13 @@ export const buildCategoryScores = (
 };
 
 export const buildVerdictDimensionsFromMetrics = (
-  metrics: Pick<MetricsSummary, "rmsDb" | "clippingRatio" | "snrDb" | "humRatio" | "echoScore">
+  metrics: Pick<MetricsSummary, "rmsDb" | "clippingRatio" | "snrDb" | "humRatio" | "echoScore">,
+  useCase: UseCase = "meetings"
 ): VerdictDimensions =>
   buildCategoryScores(
     { rms: 0, rmsDb: metrics.rmsDb },
     { clippingRatio: metrics.clippingRatio, peak: 0 },
     { noiseFloor: 0, snrDb: metrics.snrDb, humRatio: metrics.humRatio, confidence: "low" },
-    { echoScore: metrics.echoScore, confidence: "low" }
+    { echoScore: metrics.echoScore, confidence: "low" },
+    useCase
   );

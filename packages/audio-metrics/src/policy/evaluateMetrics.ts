@@ -31,9 +31,9 @@ export const evaluateMetrics = (
 ): Record<MetricKey, MetricStatus> => {
   const selected = getThresholdsForUseCase(useCase);
 
-  const level = resultFromStars(describeLevel(metrics.rmsDb, metrics.clippingRatio).stars);
-  const noise = resultFromStars(describeNoise(metrics.snrDb, metrics.humRatio ?? 0).stars);
-  const echo = resultFromStars(describeEcho(metrics.echoScore).stars);
+  const level = resultFromStars(describeLevel(metrics.rmsDb, metrics.clippingRatio, useCase).stars);
+  const noise = resultFromStars(describeNoise(metrics.snrDb, metrics.humRatio ?? 0, useCase).stars);
+  const echo = resultFromStars(describeEcho(metrics.echoScore, useCase).stars);
   const clipping =
     metrics.clippingRatio > selected.clipping.severeRatio
       ? "fail"

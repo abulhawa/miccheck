@@ -70,6 +70,23 @@ describe("buildCategoryScores", () => {
 
 
 describe("buildVerdictDimensionsFromMetrics", () => {
+
+
+  it("applies use-case noise thresholds when requested", () => {
+    const metrics = {
+      clippingRatio: 0,
+      rmsDb: ANALYSIS_CONFIG.targetRmsDb,
+      snrDb: ANALYSIS_CONFIG.snrGoodDb,
+      humRatio: 0,
+      echoScore: 0
+    };
+
+    const meetingScores = buildVerdictDimensionsFromMetrics(metrics, "meetings");
+    const podcastScores = buildVerdictDimensionsFromMetrics(metrics, "podcast");
+
+    expect(meetingScores.noise.stars).toBe(4);
+    expect(podcastScores.noise.stars).toBe(3);
+  });
   it("matches buildCategoryScores for representative fixtures", () => {
     const fixtures = [
       {
