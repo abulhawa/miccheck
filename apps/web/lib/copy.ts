@@ -1,6 +1,7 @@
 import type {
   VerdictCategoryDescriptionKey,
   VerdictCategoryLabelKey,
+  VerdictCopyKeys,
   VerdictExplanationKey,
   VerdictFixKey,
   VerdictImpactKey,
@@ -130,3 +131,8 @@ export const resolveCopy = (key: CopyKey, params?: Record<string, string>) => {
   }
   return text;
 };
+
+export const resolveNoSpeechCopy = (verdictCopyKeys: VerdictCopyKeys) => ({
+  title: resolveCopy(verdictCopyKeys.noSpeechTitleKey ?? "no_speech.title"),
+  description: resolveCopy(verdictCopyKeys.noSpeechDescriptionKey ?? "no_speech.description")
+});

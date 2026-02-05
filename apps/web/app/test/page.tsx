@@ -10,7 +10,7 @@ import ScoreCard from "../../components/ScoreCard";
 import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
-import { resolveCopy } from "../../lib/copy";
+import { resolveCopy, resolveNoSpeechCopy } from "../../lib/copy";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -50,6 +50,10 @@ export default function TestPage() {
       : confidenceValue >= 0.75
         ? "Moderate confidence"
         : "Low confidence";
+
+  const noSpeechCopy = analysis
+    ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
+    : { title: "", description: "" };
 
   const buttonLabel = useMemo(() => {
     if (isRecording) return "Stop recording";
@@ -124,14 +128,10 @@ export default function TestPage() {
                 🎤❌ No speech detected
               </p>
               <h2 className="text-2xl font-semibold text-white">
-                {analysis.verdict.copyKeys.noSpeechTitleKey
-                  ? resolveCopy(analysis.verdict.copyKeys.noSpeechTitleKey)
-                  : "No clear speech detected"}
+                {noSpeechCopy.title}
               </h2>
               <p className="text-sm text-rose-100">
-                {analysis.verdict.copyKeys.noSpeechDescriptionKey
-                  ? resolveCopy(analysis.verdict.copyKeys.noSpeechDescriptionKey)
-                  : "Please speak closer to the microphone or check if your mic is muted."}
+                {noSpeechCopy.description}
               </p>
             </div>
             <button
