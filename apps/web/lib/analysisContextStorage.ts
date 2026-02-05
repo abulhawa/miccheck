@@ -12,6 +12,20 @@ const DEFAULT_CONTEXT: ContextInput = {
 const USE_CASES: UseCase[] = ["meetings", "podcast", "streaming", "voice_note"];
 export const formatUseCaseLabel = (useCase: UseCase): string => UI_USE_CASE_LABEL[useCase];
 
+const UI_DEVICE_TYPE_LABEL: Record<DeviceType, string> = {
+  unknown: "Unknown",
+  laptop: "Laptop",
+  desktop: "Desktop",
+  mobile: "Mobile",
+  usb_mic: "USB mic",
+  headset: "Headset",
+  bluetooth: "Bluetooth",
+  built_in: "Built-in",
+  other: "Other"
+};
+export const formatDeviceTypeLabel = (deviceType: DeviceType): string =>
+  UI_DEVICE_TYPE_LABEL[deviceType];
+
 const DEVICE_TYPES: DeviceType[] = [
   "unknown",
   "laptop",

@@ -12,6 +12,7 @@ import { useAudioMeter } from "../hooks/useAudioMeter";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
 import {
   ANALYSIS_CONTEXT_OPTIONS,
+  formatDeviceTypeLabel,
   formatUseCaseLabel,
   loadAnalysisContext,
   saveAnalysisContext
@@ -184,7 +185,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           </div>
 
           <DeviceSelector onDeviceChange={handleDeviceChange} />
-          <p className="text-xs text-slate-400">Detected device type: {detectedDeviceType}</p>
+          <p className="text-xs text-slate-400">Detected device type: {formatDeviceTypeLabel(detectedDeviceType)}</p>
 
           {viewMode === "pro" ? (
             <div className="grid gap-3 sm:grid-cols-2">
@@ -213,10 +214,10 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                   }
                   value={deviceTypeOverride ?? "auto"}
                 >
-                  <option value="auto">auto ({resolvedDeviceType})</option>
+                  <option value="auto">Auto ({formatDeviceTypeLabel(resolvedDeviceType)})</option>
                   {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
                     <option key={deviceType} value={deviceType}>
-                      {deviceType}
+                      {formatDeviceTypeLabel(deviceType)}
                     </option>
                   ))}
                 </select>
