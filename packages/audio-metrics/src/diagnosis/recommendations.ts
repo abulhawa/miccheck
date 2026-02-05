@@ -6,7 +6,6 @@ import type { ContextInput, Recommendation, VerdictBestNextStep } from "../types
 import { buildVerdict } from "../policy/buildVerdict";
 import { recommendationMessageFor } from "../policy/copy";
 import { buildAdviceSteps, type AdviceStep } from "../policy/adviceSteps";
-import { applyDeviceConstraints } from "../policy/deviceConstraints";
 import { buildGearStep, type GearRelevance, type GearStep } from "../policy/gearPolicy";
 
 export interface RecommendationPolicyOutput {
@@ -50,41 +49,20 @@ const gearRelevanceFrom = (
   return "low";
 };
 
-const lowCertaintyChecks = (deviceType: ContextInput["device_type"]): AdviceStep[] => {
-  if (deviceType === "bluetooth") {
-    return [
-      { key: "check_system_mic_level" },
-      { key: "check_app_input_level" },
-      { key: "keep_headset_mic_facing_mouth" }
-    ];
-  }
-
-  if (deviceType === "built_in") {
-    return [
-      { key: "check_system_mic_level" },
-      { key: "disable_audio_enhancements" },
-      { key: "disable_auto_volume" }
-    ];
-  }
-
-  return [
-    { key: "check_system_mic_level" },
-    { key: "check_app_input_level" },
-    { key: "move_mic_closer" }
-  ];
-};
-
 const adviceStepTitle: Record<AdviceStep["key"], string> = {
   adjust_input_gain: "Adjust microphone input gain.",
   move_mic_closer: "Move closer to the microphone.",
   increase_distance_from_mic: "Move slightly farther from the microphone.",
   reduce_background_noise: "Reduce background noise around your setup.",
   treat_room_echo: "Add soft furnishings to reduce room reflections.",
+  enable_echo_cancellation: "Enable echo cancellation in your calling or recording app.",
+  reposition_mic_away_from_speakers: "Reposition your mic away from speakers and reflective surfaces.",
   check_system_mic_level: "Check your system microphone level.",
   check_app_input_level: "Check your app input level.",
   disable_audio_enhancements: "Disable audio enhancements.",
   disable_auto_volume: "Disable auto-volume controls.",
   speak_louder: "Speak a bit louder into the mic.",
+  speak_softer: "Speak a bit softer to avoid overload.",
   keep_headset_mic_facing_mouth: "Keep your headset mic facing your mouth.",
   keep_head_angle_stable: "Keep your head angle stable while speaking.",
   check_charger_interference: "Check charger interference.",
@@ -155,30 +133,21 @@ export const buildRecommendationPolicy = (
   const severity = severityFrom(verdict);
 
   const hasHum = noise.humRatio > 0.08;
-  const humChecks = hasHum
-    ? buildAdviceSteps("noise", {
-        isQuiet: level.rmsDb < -18,
-        hasHum,
-        deviceType: resolvedContext.device_type
-      })
-    : [];
-
-  const baseAdviceSteps =
-    hasHum
-      ? humChecks
-      : certainty === "low"
-        ? lowCertaintyChecks(resolvedContext.device_type)
-        : buildAdviceSteps(verdict.primaryIssue, {
-            isQuiet: level.rmsDb < -18,
-            hasHum,
-            deviceType: resolvedContext.device_type
-          });
-  const constrainedAdviceSteps = applyDeviceConstraints(baseAdviceSteps, resolvedContext);
+  const constrainedAdviceSteps = buildAdviceSteps(verdict.primaryIssue, {
+    isQuiet: level.rmsDb < -18,
+    hasHum,
+    clippingDetected: clipping.clippingRatio >= 0.03,
+    echoScore: echo.echoScore,
+    useCase: resolvedContext.use_case,
+    deviceType: resolvedContext.device_type,
+    diagnosticCertainty: certainty
+  });
 
   const relevance = gearRelevanceFrom(verdict.primaryIssue);
   const allowGear =
-    resolvedContext.use_case !== "meetings" ||
-    (fit === "fail" && severity === "high");
+    !(certainty === "low" && resolvedContext.device_type === "unknown") &&
+    (resolvedContext.use_case !== "meetings" ||
+      (fit === "fail" && severity === "high"));
   const gearSteps = allowGear
     ? buildGearStep(
         relevance,
