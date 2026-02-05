@@ -77,4 +77,31 @@ describe("recommendation policy", () => {
     expect(gearIdx).toBeGreaterThanOrEqual(0);
     expect(gearIdx).toBe(failPolicy.adviceSteps.length - 1);
   });
+
+  it("uses hypothesis-style quick checks when certainty is low", () => {
+    const policy = buildRecommendationPolicy(
+      { ...levelBase, rmsDb: -40 },
+      clippingBase,
+      { ...noiseBase, snrDb: 5 },
+      { ...echoBase, echoScore: 0.9 },
+      { mode: "single", use_case: "meetings", device_type: "unknown" }
+    );
+
+    expect(policy.adviceSteps.length).toBeGreaterThanOrEqual(2);
+    expect(policy.adviceSteps.length).toBeLessThanOrEqual(3);
+  });
+
+  it("keeps clipping guidance action-only when gear relevance is low", () => {
+    const policy = buildRecommendationPolicy(
+      { ...levelBase, rmsDb: -10 },
+      { ...clippingBase, clippingRatio: 0.08 },
+      noiseBase,
+      echoBase,
+      { mode: "single", use_case: "podcast", device_type: "usb_mic" }
+    );
+
+    const keys = policy.adviceSteps.map((step) => step.key);
+    expect(keys).toEqual(expect.arrayContaining(["speak_softer", "adjust_input_gain"]));
+    expect(keys).not.toContain("consider_external_mic");
+  });
 });
