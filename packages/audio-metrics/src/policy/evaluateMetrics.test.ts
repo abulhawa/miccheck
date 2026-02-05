@@ -31,4 +31,21 @@ describe("evaluateMetrics", () => {
     expect(status.clipping.result).toBe("fail");
     expect(status.overall.severity).toBe("high");
   });
+
+  it("uses use-case-specific thresholds for category status", () => {
+    const metrics = {
+      rmsDb: -18,
+      snrDb: 30,
+      echoScore: 0.1,
+      clippingRatio: 0,
+      humRatio: 0
+    };
+
+    const meetingsStatus = evaluateMetrics(metrics, "meetings");
+    const podcastStatus = evaluateMetrics(metrics, "podcast");
+
+    expect(meetingsStatus.noise.result).toBe("pass");
+    expect(podcastStatus.noise.result).toBe("warn");
+  });
+
 });
