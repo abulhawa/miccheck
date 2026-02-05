@@ -1,4 +1,5 @@
 import type {
+  MetricsSummary,
   VerdictCategoryDescriptionKey,
   VerdictDimensions,
   VerdictExplanationKey,
@@ -193,3 +194,13 @@ export const buildCategoryScores = (
     }
   };
 };
+
+export const buildVerdictDimensionsFromMetrics = (
+  metrics: Pick<MetricsSummary, "rmsDb" | "clippingRatio" | "snrDb" | "humRatio" | "echoScore">
+): VerdictDimensions =>
+  buildCategoryScores(
+    { rms: 0, rmsDb: metrics.rmsDb },
+    { clippingRatio: metrics.clippingRatio, peak: 0 },
+    { noiseFloor: 0, snrDb: metrics.snrDb, humRatio: metrics.humRatio, confidence: "low" },
+    { echoScore: metrics.echoScore }
+  );

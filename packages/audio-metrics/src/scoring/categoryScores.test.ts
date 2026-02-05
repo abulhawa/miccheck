@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { ANALYSIS_CONFIG } from "../config";
-import { buildCategoryScores } from "./categoryScores";
+import { buildCategoryScores, buildVerdictDimensionsFromMetrics } from "./categoryScores";
 
 const buildScores = (rmsDb: number, snrDb: number, clippingRatio = 0, humRatio = 0) =>
   buildCategoryScores(
     { rms: 0, rmsDb },
     { clippingRatio, peak: 0 },
-    { noiseFloor: 0, snrDb, humRatio },
+    { noiseFloor: 0, snrDb, humRatio, confidence: "low" },
     { echoScore: 0 }
   );
 
@@ -65,5 +65,46 @@ describe("buildCategoryScores", () => {
 
     expect(scores.noise.stars).toBe(1);
     expect(scores.noise.descriptionKey).toBe("noise.very_noisy");
+  });
+});
+
+
+describe("buildVerdictDimensionsFromMetrics", () => {
+  it("matches buildCategoryScores for representative fixtures", () => {
+    const fixtures = [
+      {
+        clippingRatio: ANALYSIS_CONFIG.clippingRatioWarning + 0.01,
+        rmsDb: ANALYSIS_CONFIG.targetRmsDb,
+        snrDb: ANALYSIS_CONFIG.snrExcellentDb,
+        humRatio: 0,
+        echoScore: 0
+      },
+      {
+        clippingRatio: 0,
+        rmsDb: ANALYSIS_CONFIG.minRmsDbSevere - 0.1,
+        snrDb: ANALYSIS_CONFIG.snrPoorDb - 0.1,
+        humRatio: ANALYSIS_CONFIG.humWarningRatio + 0.01,
+        echoScore: ANALYSIS_CONFIG.echoSevereScore + 0.01
+      },
+      {
+        clippingRatio: 0,
+        rmsDb: ANALYSIS_CONFIG.targetRmsDb,
+        snrDb: ANALYSIS_CONFIG.snrGoodDb,
+        humRatio: 0,
+        echoScore: ANALYSIS_CONFIG.echoWarningScore * 0.7
+      }
+    ];
+
+    fixtures.forEach((fixture) => {
+      const fromMetrics = buildVerdictDimensionsFromMetrics(fixture);
+      const fromCategoryScores = buildCategoryScores(
+        { rms: 0, rmsDb: fixture.rmsDb },
+        { clippingRatio: fixture.clippingRatio, peak: 0 },
+        { noiseFloor: 0, snrDb: fixture.snrDb, humRatio: fixture.humRatio, confidence: "low" },
+        { echoScore: fixture.echoScore }
+      );
+
+      expect(fromMetrics).toEqual(fromCategoryScores);
+    });
   });
 });
