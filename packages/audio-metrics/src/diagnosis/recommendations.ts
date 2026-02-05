@@ -96,7 +96,7 @@ const adviceStepTitle: Record<AdviceStep["key"], string> = {
 
 const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextStep[] =>
   steps.map((step) => {
-    if (step.key === "consider_external_mic") {
+    if (step.key === "consider_external_mic" && "category" in step && "rationale" in step) {
       return {
         kind: "gear_optional",
         title: `Optional gear: ${step.category}`,
