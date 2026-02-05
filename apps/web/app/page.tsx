@@ -35,7 +35,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               className="rounded-xl bg-brand-600 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-700"
-              href="/test"
+              href="/pro"
             >
               Start a test
             </Link>

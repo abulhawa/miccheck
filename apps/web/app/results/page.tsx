@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import BestNextSteps from "../../components/BestNextSteps";
+import ResultsNotice from "../../components/ResultsNotice";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
@@ -121,6 +122,11 @@ export default function ResultsPage() {
         </p>
       </section>
 
+      <ResultsNotice
+        specialState={sampleResult.specialState}
+        diagnosticCertainty={sampleResult.verdict.diagnosticCertainty}
+      />
+
       {isNoSpeech ? (
         <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
           <div className="flex flex-col gap-3">
@@ -146,7 +152,7 @@ export default function ResultsPage() {
             highlightedCategoryId={sampleResult.verdict.primaryIssue}
           />
 
-          <BestNextSteps verdict={sampleResult.verdict} />
+          <BestNextSteps verdict={sampleResult.verdict} mode="pro" includeGear={true} includeSecondaryNotes={true} showDiagnosticCertainty={true} trackAdviceEvent={false} />
 
           <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
             <button

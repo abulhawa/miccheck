@@ -1,6 +1,6 @@
 import React from "react";
 import TestExperiencePage from "../../components/TestExperiencePage";
 
-export default function BasicTestPage() {
-  return <TestExperiencePage viewMode="basic" />;
+export default function ProTestPage() {
+  return <TestExperiencePage viewMode="pro" />;
 }

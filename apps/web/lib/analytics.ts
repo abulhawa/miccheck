@@ -7,7 +7,10 @@ export const ANALYTICS_EVENTS = {
   testAgain: "miccheck_test_again",
   permissionDenied: "miccheck_permission_denied",
   recordingFailed: "miccheck_recording_failed",
-  unsupportedBrowser: "miccheck_unsupported_browser"
+  unsupportedBrowser: "miccheck_unsupported_browser",
+  analysisCompleted: "analysis_completed",
+  adviceEmitted: "advice_emitted",
+  reRecordClicked: "re_record_clicked"
 } as const;
 
 export type AnalyticsEventName =
@@ -21,6 +24,7 @@ export interface AnalyticsProps {
   device?: AnalyticsDevice;
   browser?: AnalyticsBrowser;
   reason?: AnalyticsReason;
+  [key: string]: string | number | boolean | string[] | undefined;
 }
 
 const getDevice = (): AnalyticsDevice => {
