@@ -181,4 +181,5 @@ export interface Verdict {
   diagnosticCertainty?: DiagnosticCertainty;
   reassuranceMode?: boolean;
   bestNextSteps?: VerdictBestNextStep[];
+  secondaryNotes?: string[];
 }
