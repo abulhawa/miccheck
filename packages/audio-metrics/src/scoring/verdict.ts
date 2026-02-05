@@ -1,32 +1,8 @@
-import type {
-  CategoryId,
-  GradeLetter,
-  MetricsSummary,
-  Verdict,
-  VerdictOverallLabelKey,
-  VerdictOverallSummaryKey
-} from "../types";
+import type { CategoryId, MetricsSummary, Verdict, VerdictOverallLabelKey } from "../types";
 import { buildVerdictDimensionsFromMetrics } from "./categoryScores";
+import { getOverallLabelKeyForGrade, getOverallSummaryKeyForGrade } from "../policy/gradeLabel";
 import { computeOverallGrade } from "./overallGrade";
 
-
-const labelKeyByGrade: Record<GradeLetter, VerdictOverallLabelKey> = {
-  A: "overall.label.excellent",
-  B: "overall.label.good",
-  C: "overall.label.fair",
-  D: "overall.label.needs_improvement",
-  E: "overall.label.needs_improvement",
-  F: "overall.label.unusable"
-};
-
-const summaryKeyByGrade: Record<GradeLetter, VerdictOverallSummaryKey> = {
-  A: "overall.summary.excellent",
-  B: "overall.summary.strong",
-  C: "overall.summary.fair",
-  D: "overall.summary.noticeable",
-  E: "overall.summary.noticeable",
-  F: "overall.summary.severe"
-};
 
 const expectedStarsByLabelKey: Record<VerdictOverallLabelKey, number[]> = {
   "overall.label.excellent": [5],
@@ -79,11 +55,11 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
     throw new Error("Perfect grades must not declare a primary issue.");
   }
 
-  if (labelKeyByGrade[verdict.overall.grade] !== verdict.overall.labelKey) {
+  if (getOverallLabelKeyForGrade(verdict.overall.grade) !== verdict.overall.labelKey) {
     throw new Error("Verdict overall label must match its grade.");
   }
 
-  const expectedSummaryKey = summaryKeyByGrade[verdict.overall.grade];
+  const expectedSummaryKey = getOverallSummaryKeyForGrade(verdict.overall.grade);
   if (
     verdict.overall.summaryKey !== expectedSummaryKey &&
     verdict.overall.summaryKey !== "overall.summary.no_speech"
@@ -111,10 +87,11 @@ export const getVerdict = (metrics: MetricsSummary): Verdict => {
     : minStars;
 
   const verdict: Verdict = {
+    version: "1.0",
     overall: {
       grade,
-      labelKey: labelKeyByGrade[grade],
-      summaryKey: summaryKeyByGrade[grade]
+      labelKey: getOverallLabelKeyForGrade(grade),
+      summaryKey: getOverallSummaryKeyForGrade(grade)
     },
     dimensions,
     primaryIssue: primaryIssueCategory,
@@ -132,6 +109,7 @@ export const getVerdict = (metrics: MetricsSummary): Verdict => {
 
 export const getNoSpeechVerdict = (): Verdict => {
   const verdict: Verdict = {
+    version: "1.0",
     overall: {
       grade: "F",
       labelKey: "overall.label.unusable",

@@ -7,7 +7,6 @@ import { recommendFix } from "./diagnosis/recommendations";
 import { getNoSpeechVerdict, getVerdict } from "./scoring/verdict";
 import type { AnalysisSummary } from "./types";
 
-export type { AnalysisSummary } from "./types";
 export * from "./types";
 export { getContextualExplanation } from "./scoring/contextHelp";
 export { getVerdict } from "./scoring/verdict";
