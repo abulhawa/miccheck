@@ -12,6 +12,7 @@ vi.mock("@miccheck/audio-core", () => ({
 vi.mock("../lib/analysis", () => ({
   analyzeRecording: () => ({
     verdict: {
+      version: "1.0",
       overall: {
         grade: "A",
         labelKey: "overall.label.excellent",
@@ -28,7 +29,9 @@ vi.mock("../lib/analysis", () => ({
         fixKey: "fix.nudge_gain",
         impactKey: "impact.level",
         impactSummaryKey: "impact.biggest_opportunity"
-      }
+      },
+      reassuranceMode: true,
+      bestNextSteps: []
     },
     metrics: {
       clippingRatio: 0,
@@ -37,11 +40,6 @@ vi.mock("../lib/analysis", () => ({
       snrDb: 20,
       humRatio: 0,
       echoScore: 0.1
-    },
-    recommendation: {
-      category: "General",
-      messageKey: "recommendation.keep_consistent",
-      confidence: 0.9
     },
     specialState: undefined
   })

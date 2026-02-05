@@ -5,7 +5,7 @@ import { analyzeRecording } from "../lib/analysis";
 import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
-import type { AnalysisResult } from "../types";
+import type { AnalysisResult, ContextInput } from "../types";
 import {
   DEFAULT_MAX_RECORDING_DURATION_SECONDS,
   DEFAULT_MIN_RECORDING_DURATION_SECONDS,
@@ -16,9 +16,16 @@ interface RecorderOptions {
   maxDuration?: number;
   minDuration?: number;
   deviceId?: string | null;
+  analysisContext?: ContextInput;
 }
 
 type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
+
+const DEFAULT_ANALYSIS_CONTEXT: ContextInput = {
+  use_case: "meetings",
+  device_type: "unknown",
+  mode: "single"
+};
 
 /**
  * useAudioRecorder handles microphone capture, level metering, and analysis.
@@ -26,7 +33,8 @@ type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
 export function useAudioRecorder({
   maxDuration = DEFAULT_MAX_RECORDING_DURATION_SECONDS,
   minDuration = DEFAULT_MIN_RECORDING_DURATION_SECONDS,
-  deviceId = null
+  deviceId = null,
+  analysisContext = DEFAULT_ANALYSIS_CONTEXT
 }: RecorderOptions) {
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -249,7 +257,7 @@ export function useAudioRecorder({
             return;
           }
 
-          const result = analyzeRecording(audioBuffer);
+          const result = analyzeRecording(audioBuffer, analysisContext);
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {
@@ -289,6 +297,7 @@ export function useAudioRecorder({
     clearRecorder,
     clearStopTimeout,
     deviceId,
+    analysisContext,
     minDuration,
     stopMediaStream,
     stopMeter,
