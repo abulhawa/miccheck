@@ -6,7 +6,7 @@ import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import Tooltip from "../../components/Tooltip";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
-import { resolveCopy } from "../../lib/copy";
+import { resolveNoSpeechCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
 import { analysisDisplayThresholds } from "../../lib/domain/analysisDisplay";
 
@@ -83,12 +83,7 @@ export default function ResultsPage() {
   }, []);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
-  const noSpeechTitle = sampleResult.verdict.copyKeys.noSpeechTitleKey
-    ? resolveCopy(sampleResult.verdict.copyKeys.noSpeechTitleKey)
-    : "No clear speech detected";
-  const noSpeechDescription = sampleResult.verdict.copyKeys.noSpeechDescriptionKey
-    ? resolveCopy(sampleResult.verdict.copyKeys.noSpeechDescriptionKey)
-    : "Please speak closer to the microphone or check if your mic is muted.";
+  const noSpeechCopy = resolveNoSpeechCopy(sampleResult.verdict.copyKeys);
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
@@ -105,8 +100,8 @@ export default function ResultsPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
               No speech detected
             </p>
-            <h2 className="text-2xl font-semibold text-white">{noSpeechTitle}</h2>
-            <p className="text-sm text-rose-100">{noSpeechDescription}</p>
+            <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
+            <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
           </div>
           <button
             className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
