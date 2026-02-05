@@ -12,7 +12,8 @@
 
 ### Guardrails
 - In this Codex container, `npm --workspace packages/audio-metrics run build` often fails because workspace resolution for `@miccheck/audio-core` is unavailable. Skip that build unless the user explicitly asks; note it is an environment limitation.
-- Prefer `npm --workspace packages/audio-metrics run test` for validation when possible.
+- In this Codex container, `npm --workspace packages/audio-metrics run test` often fails for the same workspace resolution issue. Skip that test unless the user explicitly asks; note it is an environment limitation unrelated to the change.
+- When changes are complete, run `npm run test` and `npm run build` and ensure neither breaks. If either is skipped due to known container limitations, state that explicitly.
 
 ### Preferences
 - Keep changes scoped to the relevant package or app.
