@@ -23,29 +23,29 @@ const makeBuffer = (): AudioBuffer =>
     getChannelData: () => new Float32Array([0.1, 0.1, 0.1, 0.1])
   }) as unknown as AudioBuffer;
 
-const makeSummary = (echoScore: number) => ({
+const makeSummary = (grade: "A" | "F") => ({
   metrics: {
     clippingRatio: 0,
     rmsDb: -18,
     speechRmsDb: -18,
     snrDb: 30,
     humRatio: 0,
-    echoScore
+    echoScore: 0
   },
   specialState: undefined,
   verdict: {
     version: "1.0",
     overall: {
-      grade: "A",
-      labelKey: "overall.label.excellent",
-      summaryKey: "overall.summary.excellent"
+      grade,
+      labelKey: grade === "A" ? "overall.label.excellent" : "overall.label.unusable",
+      summaryKey: grade === "A" ? "overall.summary.excellent" : "overall.summary.severe"
     },
     dimensions: {
-      level: { stars: 5, labelKey: "category.level", descriptionKey: "level.excellent" },
-      noise: { stars: 5, labelKey: "category.noise", descriptionKey: "noise.very_clean" },
-      echo: { stars: 5, labelKey: "category.echo", descriptionKey: "echo.minimal" }
+      level: { stars: grade === "A" ? 5 : 1, labelKey: "category.level", descriptionKey: "level.excellent" },
+      noise: { stars: grade === "A" ? 5 : 1, labelKey: "category.noise", descriptionKey: "noise.very_noisy" },
+      echo: { stars: grade === "A" ? 5 : 1, labelKey: "category.echo", descriptionKey: "echo.overwhelming" }
     },
-    primaryIssue: "echo",
+    primaryIssue: grade === "A" ? null : "noise",
     copyKeys: {
       explanationKey: "explanation.strong_echo",
       fixKey: "fix.add_soft_furnishings_move_closer",
@@ -55,14 +55,14 @@ const makeSummary = (echoScore: number) => ({
   }
 });
 
-describe("analyzeRecording echo target marker", () => {
+describe("analyzeRecording verdict extensions", () => {
   beforeEach(() => {
     computeRmsMock.mockReturnValue(0.1);
     analyzeSamplesMock.mockReset();
   });
 
-  it("marks minimal echo as ideal", () => {
-    analyzeSamplesMock.mockReturnValue(makeSummary(0.2));
+  it("enforces pass => reassurance mode true and best next steps empty", () => {
+    analyzeSamplesMock.mockReturnValue(makeSummary("A"));
 
     const result = analyzeRecording(makeBuffer(), {
       use_case: "meetings",
@@ -70,24 +70,34 @@ describe("analyzeRecording echo target marker", () => {
       mode: "single"
     });
 
-    expect(result.verdict.dimensions.echo.target?.marker).toBe("ideal");
+    expect(result.verdict.useCaseFit).toBe("pass");
+    expect(result.verdict.reassuranceMode).toBe(true);
+    expect(result.verdict.bestNextSteps).toEqual([]);
   });
 
-  it("marks mid echo as low and high echo as high", () => {
-    analyzeSamplesMock.mockReturnValueOnce(makeSummary(0.3)).mockReturnValueOnce(makeSummary(0.7));
+  it("caps diagnostic certainty for unknown device type", () => {
+    analyzeSamplesMock.mockReturnValue(makeSummary("A"));
 
-    const midResult = analyzeRecording(makeBuffer(), {
-      use_case: "meetings",
-      device_type: "unknown",
-      mode: "single"
-    });
-    const highResult = analyzeRecording(makeBuffer(), {
+    const result = analyzeRecording(makeBuffer(), {
       use_case: "meetings",
       device_type: "unknown",
       mode: "single"
     });
 
-    expect(midResult.verdict.dimensions.echo.target?.marker).toBe("low");
-    expect(highResult.verdict.dimensions.echo.target?.marker).toBe("high");
+    expect(result.verdict.diagnosticCertainty).not.toBe("high");
+    expect(result.verdict.diagnosticCertainty).toBe("medium");
+  });
+
+  it("uses low-certainty hypothesis checks for low certainty verdicts", () => {
+    analyzeSamplesMock.mockReturnValue(makeSummary("F"));
+
+    const result = analyzeRecording(makeBuffer(), {
+      use_case: "meetings",
+      device_type: "unknown",
+      mode: "single"
+    });
+
+    expect(result.verdict.diagnosticCertainty).toBe("low");
+    expect(result.verdict.bestNextSteps?.length).toBeGreaterThanOrEqual(2);
   });
 });

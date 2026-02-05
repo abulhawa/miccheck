@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { DeviceType } from "../../types";
 import Link from "next/link";
 import AudioPlayer from "../../components/AudioPlayer";
 import AudioWaveformVisualizer from "../../components/AudioWaveformVisualizer";
@@ -20,7 +21,12 @@ import { resolveCopy, resolveNoSpeechCopy } from "../../lib/copy";
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [analysisContext, setAnalysisContext] = useState(getDefaultAnalysisContext());
+  const [detectedDeviceType, setDetectedDeviceType] = useState<DeviceType>("unknown");
+  const [deviceTypeOverride, setDeviceTypeOverride] = useState<DeviceType | null>(null);
   const hasShownIOSAlert = useRef(false);
+  const resolvedDeviceType = deviceTypeOverride ?? detectedDeviceType;
+  const resolvedAnalysisContext = { ...analysisContext, device_type: resolvedDeviceType };
+
   const {
     status,
     error,
@@ -32,7 +38,7 @@ export default function TestPage() {
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext });
+  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext: resolvedAnalysisContext });
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
   const { audioDataArray, currentVolume, peakVolume } = useAudioMeter({
@@ -67,8 +73,9 @@ export default function TestPage() {
   }, [isRecording, isAnalyzing]);
 
   const handleDeviceChange = useCallback(
-    (nextDeviceId: string | null) => {
+    (nextDeviceId: string | null, meta?: { detectedType: DeviceType }) => {
       setDeviceId(nextDeviceId);
+      setDetectedDeviceType(meta?.detectedType ?? "unknown");
       void initializeRecorder(nextDeviceId);
     },
     [initializeRecorder]
@@ -115,6 +122,7 @@ export default function TestPage() {
             <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
           <DeviceSelector onDeviceChange={handleDeviceChange} />
+          <p className="text-xs text-slate-400">Detected device type: {detectedDeviceType}</p>
           <div className="grid gap-3 sm:grid-cols-3">
             <label className="flex flex-col gap-1 text-xs text-slate-300">
               Use case
@@ -139,14 +147,12 @@ export default function TestPage() {
               Device type
               <select
                 className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
-                value={analysisContext.device_type}
+                value={deviceTypeOverride ?? "auto"}
                 onChange={(event) =>
-                  setAnalysisContext((current) => ({
-                    ...current,
-                    device_type: event.target.value as typeof current.device_type
-                  }))
+                  setDeviceTypeOverride(event.target.value === "auto" ? null : (event.target.value as DeviceType))
                 }
               >
+                <option value="auto">auto ({resolvedDeviceType})</option>
                 {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
                   <option key={deviceType} value={deviceType}>
                     {deviceType}

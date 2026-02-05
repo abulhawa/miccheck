@@ -43,5 +43,4 @@ describe("buildVerdict", () => {
     expect(meetingsVerdict.overall.grade).toBe("B");
     expect(podcastVerdict.overall.grade).toBe("C");
   });
-
 });

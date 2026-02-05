@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
+import type { DeviceType } from "../types";
+import { detectDeviceTypeFromLabel } from "../lib/deviceTypeDetection";
 
 const STORAGE_KEY = "miccheck-preferred-device-id";
 
 interface DeviceSelectorProps {
-  onDeviceChange: (deviceId: string | null) => void;
+  onDeviceChange: (deviceId: string | null, meta?: { label?: string; detectedType: DeviceType }) => void;
 }
 
 export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) {
@@ -42,7 +44,11 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
           : inputDevices[0]?.deviceId) ?? "";
 
       setSelectedId(defaultId);
-      onDeviceChange(defaultId || null);
+      const selectedDevice = inputDevices.find((device) => device.deviceId === defaultId);
+      onDeviceChange(defaultId || null, {
+        label: selectedDevice?.label,
+        detectedType: detectDeviceTypeFromLabel(selectedDevice?.label)
+      });
 
       if (defaultId) {
         window.localStorage.setItem(STORAGE_KEY, defaultId);
@@ -89,7 +95,11 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
     const nextId = event.target.value;
     setSelectedId(nextId);
     window.localStorage.setItem(STORAGE_KEY, nextId);
-    onDeviceChange(nextId || null);
+    const selectedDevice = devices.find((device) => device.deviceId === nextId);
+    onDeviceChange(nextId || null, {
+      label: selectedDevice?.label,
+      detectedType: detectDeviceTypeFromLabel(selectedDevice?.label)
+    });
   };
 
   return (

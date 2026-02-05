@@ -15,6 +15,10 @@ export const applyDeviceConstraints = (
       return false;
     }
 
+    if (context.device_type === "bluetooth" && GAIN_STEP_KEYS.has(step.key)) {
+      return false;
+    }
+
     if (context.device_type === "built_in" && GAIN_STEP_KEYS.has(step.key)) {
       return false;
     }

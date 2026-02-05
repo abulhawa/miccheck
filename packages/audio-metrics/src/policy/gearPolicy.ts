@@ -5,12 +5,18 @@ export type GearRelevance = "low" | "medium" | "high";
 export interface GearStep extends AdviceStep {
   key: "consider_external_mic";
   relevance: GearRelevance;
+  category: "USB dynamic mic" | "USB condenser mic";
+  rationale: string;
   affiliateUrl?: string;
 }
 
 const DEFAULT_AFFILIATE_URL = "https://miccheck.example/recommended-mics";
 
-export const buildGearStep = (relevance: GearRelevance): GearStep[] => {
+export const buildGearStep = (
+  relevance: GearRelevance,
+  category: GearStep["category"],
+  rationale: string
+): GearStep[] => {
   if (relevance === "low") {
     return [];
   }
@@ -19,6 +25,8 @@ export const buildGearStep = (relevance: GearRelevance): GearStep[] => {
     {
       key: "consider_external_mic",
       relevance,
+      category,
+      rationale,
       affiliateUrl: DEFAULT_AFFILIATE_URL
     }
   ];

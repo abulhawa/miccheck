@@ -7,62 +7,74 @@ const noiseBase = { noiseFloor: 0.001, snrDb: 35, humRatio: 0, confidence: "high
 const echoBase = { echoScore: 0.05, confidence: "high" as const };
 
 describe("recommendation policy", () => {
-  it("filters distance advice on bluetooth devices", () => {
-    const policy = buildRecommendationPolicy(
-      levelBase,
-      clippingBase,
-      { ...noiseBase, snrDb: 10 },
-      echoBase,
-      { mode: "single", use_case: "meetings", device_type: "bluetooth" }
-    );
-
-    expect(policy.adviceSteps.map((step) => step.key)).toEqual([
-      "reduce_background_noise",
-      "consider_external_mic"
-    ]);
-  });
-
-  it("filters gain-knob advice for built-in devices", () => {
+  it("filters distance and gain advice on bluetooth devices", () => {
     const policy = buildRecommendationPolicy(
       { ...levelBase, rmsDb: -35 },
       clippingBase,
       noiseBase,
       echoBase,
+      { mode: "single", use_case: "meetings", device_type: "bluetooth" }
+    );
+
+    const keys = policy.adviceSteps.map((step) => step.key);
+    expect(keys).not.toContain("move_mic_closer");
+    expect(keys).not.toContain("adjust_input_gain");
+  });
+
+  it("uses charger/interference checks for built-in mic hum", () => {
+    const policy = buildRecommendationPolicy(
+      levelBase,
+      clippingBase,
+      { ...noiseBase, snrDb: 22, humRatio: 0.2 },
+      echoBase,
       { mode: "single", use_case: "meetings", device_type: "built_in" }
     );
 
-    expect(policy.adviceSteps.map((step) => step.key)).toEqual(["move_mic_closer"]);
+    const keys = policy.adviceSteps.map((step) => step.key);
+    expect(keys).not.toContain("check_cables_grounding");
+    expect(keys).toEqual(
+      expect.arrayContaining([
+        "check_charger_interference",
+        "check_power_interference",
+        "check_usb_port_interference"
+      ])
+    );
   });
 
-  it("applies gear inclusion matrix based on relevance", () => {
-    const lowRelevance = buildRecommendationPolicy(
+  it("caps certainty for unknown devices and yields low-certainty check style", () => {
+    const policy = buildRecommendationPolicy(
+      { ...levelBase, rmsDb: -40 },
+      clippingBase,
+      { ...noiseBase, snrDb: 5 },
+      { ...echoBase, echoScore: 0.9 },
+      { mode: "single", use_case: "meetings", device_type: "unknown" }
+    );
+
+    expect(policy.confidence).toBeLessThanOrEqual(0.6);
+    expect(policy.adviceSteps.length).toBeGreaterThanOrEqual(2);
+    expect(policy.adviceSteps.some((step) => step.key === "check_system_mic_level")).toBe(true);
+  });
+
+  it("shows gear only for meetings fail + high severity and always last", () => {
+    const passPolicy = buildRecommendationPolicy(
       levelBase,
       clippingBase,
       noiseBase,
       echoBase,
-      { mode: "single", use_case: "meetings", device_type: "unknown" }
+      { mode: "single", use_case: "meetings", device_type: "usb_mic" }
     );
-    const mediumRelevance = buildRecommendationPolicy(
+    expect(passPolicy.adviceSteps.some((step) => step.key === "consider_external_mic")).toBe(false);
+
+    const failPolicy = buildRecommendationPolicy(
       levelBase,
       clippingBase,
-      { ...noiseBase, snrDb: 10 },
+      { ...noiseBase, snrDb: 5 },
       echoBase,
-      { mode: "single", use_case: "meetings", device_type: "unknown" }
-    );
-    const highRelevance = buildRecommendationPolicy(
-      levelBase,
-      clippingBase,
-      { ...noiseBase, snrDb: 35 },
-      { ...echoBase, echoScore: 0.8 },
-      { mode: "single", use_case: "meetings", device_type: "unknown" }
+      { mode: "single", use_case: "meetings", device_type: "usb_mic" }
     );
 
-    expect(lowRelevance.adviceSteps.some((step) => step.key === "consider_external_mic")).toBe(false);
-    expect(
-      mediumRelevance.adviceSteps.find((step) => step.key === "consider_external_mic")
-    ).toMatchObject({ affiliateUrl: expect.any(String) });
-    expect(
-      highRelevance.adviceSteps.find((step) => step.key === "consider_external_mic")
-    ).toMatchObject({ affiliateUrl: expect.any(String) });
+    const gearIdx = failPolicy.adviceSteps.findIndex((step) => step.key === "consider_external_mic");
+    expect(gearIdx).toBeGreaterThanOrEqual(0);
+    expect(gearIdx).toBe(failPolicy.adviceSteps.length - 1);
   });
 });
