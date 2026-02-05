@@ -202,5 +202,5 @@ export const buildVerdictDimensionsFromMetrics = (
     { rms: 0, rmsDb: metrics.rmsDb },
     { clippingRatio: metrics.clippingRatio, peak: 0 },
     { noiseFloor: 0, snrDb: metrics.snrDb, humRatio: metrics.humRatio, confidence: "low" },
-    { echoScore: metrics.echoScore }
+    { echoScore: metrics.echoScore, confidence: "low" }
   );
