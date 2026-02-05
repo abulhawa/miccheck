@@ -50,7 +50,8 @@ export function useAudioRecorder({
   const meterNodeRef = useRef<AnalyserNode | null>(null);
   const meterSourceNodeRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
-  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const previewStreamRef = useRef<MediaStream | null>(null);
+  const recordStreamRef = useRef<MediaStream | null>(null);
   const releasedStreamsRef = useRef(new WeakSet<MediaStream>());
   const startTimeRef = useRef<number | null>(null);
   const stopTimeoutRef = useRef<number | null>(null);
@@ -129,6 +130,50 @@ export function useAudioRecorder({
     }
   }, []);
 
+  const clearVideoElements = useCallback((stream: MediaStream | null) => {
+    if (!stream || typeof document === "undefined") {
+      return;
+    }
+    const mediaElements = Array.from(document.querySelectorAll("audio,video"));
+    mediaElements.forEach((element) => {
+      if ((element as HTMLMediaElement).srcObject === stream) {
+        (element as HTMLMediaElement).srcObject = null;
+      }
+    });
+  }, []);
+
+  const releasePreviewMic = useCallback(
+    (reason: string) => {
+      const stream = previewStreamRef.current;
+      stopMediaStreamTracksOnce(stream, reason);
+      assertNoLiveTracks(stream, reason);
+      clearVideoElements(stream);
+      previewStreamRef.current = null;
+      debugLog("released_preview_mic", { reason });
+    },
+    [assertNoLiveTracks, clearVideoElements, debugLog, stopMediaStreamTracksOnce]
+  );
+
+  const releaseRecordMic = useCallback(
+    (reason: string) => {
+      const stream = recordStreamRef.current;
+      stopMeter();
+      stopMediaStreamTracksOnce(stream, reason);
+      assertNoLiveTracks(stream, reason);
+      clearVideoElements(stream);
+
+      recordStreamRef.current = null;
+      setMediaStream(null);
+      mediaRecorderRef.current = null;
+      audioChunksRef.current = [];
+      startTimeRef.current = null;
+      setLevel(0);
+      setDuration(0);
+      debugLog("released_record_mic", { reason });
+    },
+    [assertNoLiveTracks, clearVideoElements, debugLog, stopMediaStreamTracksOnce, stopMeter]
+  );
+
   const releaseMic = useCallback(
     (reason: string) => {
       clearStopTimeout();
@@ -146,21 +191,11 @@ export function useAudioRecorder({
         }
       }
 
-      const stream = mediaStreamRef.current;
-      stopMeter();
-      stopMediaStreamTracksOnce(stream, reason);
-      assertNoLiveTracks(stream, reason);
-
-      mediaStreamRef.current = null;
-      setMediaStream(null);
-      mediaRecorderRef.current = null;
-      audioChunksRef.current = [];
-      startTimeRef.current = null;
-      setLevel(0);
-      setDuration(0);
+      releasePreviewMic(reason);
+      releaseRecordMic(reason);
       debugLog("released_mic", { reason });
     },
-    [assertNoLiveTracks, clearStopTimeout, debugLog, stopMediaStreamTracksOnce, stopMeter]
+    [clearStopTimeout, debugLog, releasePreviewMic, releaseRecordMic]
   );
 
   const clearRecorder = useCallback(() => {
@@ -229,7 +264,7 @@ export function useAudioRecorder({
           ...(activeDeviceId ? { deviceId: { exact: activeDeviceId } } : {})
         }
       });
-      mediaStreamRef.current = stream;
+      recordStreamRef.current = stream;
       setMediaStream(stream);
       debugLog("acquired_stream", {
         tracks: stream
@@ -376,6 +411,7 @@ export function useAudioRecorder({
     logEvent(ANALYTICS_EVENTS.startRecording);
     reset();
     setError(null);
+    releasePreviewMic("start_recording");
     await initializeRecorder();
 
     const recorder = mediaRecorderRef.current;
@@ -393,7 +429,7 @@ export function useAudioRecorder({
         mediaRecorderRef.current.stop();
       }
     }, maxDuration * 1000);
-  }, [initializeRecorder, maxDuration, reset, updateMeter]);
+  }, [initializeRecorder, maxDuration, releasePreviewMic, reset, updateMeter]);
 
   const stopRecording = useCallback(() => {
     clearStopTimeout();
@@ -406,9 +442,11 @@ export function useAudioRecorder({
 
   useEffect(() => {
     return () => {
+      releasePreviewMic("unmount");
+      releaseRecordMic("unmount");
       clearRecorder();
     };
-  }, [clearRecorder]);
+  }, [clearRecorder, releasePreviewMic, releaseRecordMic]);
 
   useEffect(() => {
     if (status === "complete" && !hasLoggedResultsRef.current) {
