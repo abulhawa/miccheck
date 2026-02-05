@@ -16,6 +16,7 @@ import {
 
 const sampleResult: AnalysisResult = {
   verdict: {
+    version: "1.0",
     overall: {
       grade: "B",
       labelKey: "overall.label.good",
