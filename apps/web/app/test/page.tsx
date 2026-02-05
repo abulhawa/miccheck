@@ -11,6 +11,7 @@ import { useAudioMeter } from "../../hooks/useAudioMeter";
 import { useAudioRecorder } from "../../hooks/useAudioRecorder";
 import { ANALYTICS_EVENTS, logEvent } from "../../lib/analytics";
 import { resolveCopy, resolveNoSpeechCopy } from "../../lib/copy";
+import { mapConfidenceToLabel } from "../../src/domain/recommendationConfidence";
 
 export default function TestPage() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -44,12 +45,7 @@ export default function TestPage() {
 
   const confidenceValue = analysis?.recommendation.confidence ?? 0;
   const confidencePercent = Math.round(confidenceValue * 100);
-  const confidenceLabel =
-    confidenceValue >= 0.9
-      ? "High confidence"
-      : confidenceValue >= 0.75
-        ? "Moderate confidence"
-        : "Low confidence";
+  const confidenceLabel = mapConfidenceToLabel(confidenceValue);
 
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
