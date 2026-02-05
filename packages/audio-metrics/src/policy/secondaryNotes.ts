@@ -1,4 +1,5 @@
 import type { DeviceType, MetricKey, UseCase, UseCaseFit } from "../types";
+import { canonicalUseCase } from "./canonicalUseCase";
 import type { MetricStatus } from "./evaluateMetrics";
 
 const USE_CASE_ORDER = ["meetings", "streaming", "podcast", "music"] as const;
@@ -28,10 +29,7 @@ const USE_CASE_LABEL: Record<SecondaryUseCase, string> = {
 
 const fitRank = (fit: FitResult): number => (fit === "pass" ? 2 : fit === "warn" ? 1 : 0);
 
-const toCanonicalUseCase = (useCase: UseCase): SecondaryUseCase => {
-  if (useCase === "voice_note") return "podcast";
-  return useCase;
-};
+const toCanonicalUseCase = (useCase: UseCase): SecondaryUseCase => canonicalUseCase(useCase);
 
 const primaryIssueFromStatuses = (statuses: MetricsMap): MetricKey => {
   const ordered: MetricKey[] = ["clipping", "echo", "noise", "level"];

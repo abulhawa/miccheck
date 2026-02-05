@@ -1,5 +1,6 @@
 import type { CategoryId, ContextInput, DiagnosticCertainty } from "../types";
 import { applyDeviceConstraints } from "./deviceConstraints";
+import { canonicalUseCase } from "./canonicalUseCase";
 import {
   selectAdviceTemplate,
   type AdviceDeviceType,
@@ -96,10 +97,7 @@ const mapDeviceType = (deviceType: ContextInput["device_type"]): AdviceDeviceTyp
   return "unknown";
 };
 
-const mapUseCase = (useCase: ContextInput["use_case"]): AdviceUseCase => {
-  if (useCase === "voice_note") return "podcast";
-  return useCase;
-};
+const mapUseCase = (useCase: ContextInput["use_case"]): AdviceUseCase => canonicalUseCase(useCase);
 
 const lowCertaintyChecks = (deviceType: AdviceDeviceType): AdviceTemplateStep[] => {
   if (deviceType === "bluetooth_headset") {

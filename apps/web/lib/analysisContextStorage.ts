@@ -9,6 +9,15 @@ const DEFAULT_CONTEXT: ContextInput = {
 };
 
 const USE_CASES: UseCase[] = ["meetings", "podcast", "streaming", "voice_note"];
+export const USE_CASE_LABEL: Record<UseCase, string> = {
+  meetings: "Meetings",
+  podcast: "Podcast",
+  streaming: "Streaming",
+  voice_note: "Voice note"
+};
+
+export const formatUseCaseLabel = (useCase: UseCase): string => USE_CASE_LABEL[useCase];
+
 const DEVICE_TYPES: DeviceType[] = [
   "unknown",
   "laptop",
