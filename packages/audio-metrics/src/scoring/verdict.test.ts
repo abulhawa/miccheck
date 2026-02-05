@@ -48,6 +48,7 @@ describe("getVerdict", () => {
   it("maps perfect metrics to the excellent overall label and no primary issue", () => {
     const verdict = getVerdict(buildMetrics());
 
+    expect(verdict.version).toBe("1.0");
     expect(verdict.overall.grade).toBe("A");
     expect(verdict.overall.labelKey).toBe("overall.label.excellent");
     expect(verdict.overall.summaryKey).toBe("overall.summary.excellent");
@@ -135,6 +136,7 @@ describe("getVerdict", () => {
   it("keeps no-speech verdict dimensions and summary unchanged", () => {
     const verdict = getNoSpeechVerdict();
 
+    expect(verdict.version).toBe("1.0");
     expect(verdict.overall.grade).toBe("F");
     expect(verdict.overall.summaryKey).toBe("overall.summary.no_speech");
     expect(verdict.dimensions).toEqual({
