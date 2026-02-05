@@ -8,6 +8,7 @@ import Tooltip from "../../components/Tooltip";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveCopy } from "../../lib/copy";
 import type { AnalysisResult } from "../../types";
+import { analysisDisplayThresholds } from "../../lib/domain/analysisDisplay";
 
 const sampleResult: AnalysisResult = {
   verdict: {
@@ -129,15 +130,15 @@ export default function ResultsPage() {
               <li>
                 <Tooltip
                   label="Level"
-                  text="Target around -14 dBFS keeps speech clear without clipping."
+                  text={`Target around ${analysisDisplayThresholds.levelTargetDbfs} dBFS keeps speech clear without clipping.`}
                 />
-                : target around -14 dBFS, acceptable range roughly -26 to -6 dBFS.
+                : target around {analysisDisplayThresholds.levelTargetDbfs} dBFS, acceptable range roughly {analysisDisplayThresholds.levelAcceptableMinDbfs} to {analysisDisplayThresholds.levelAcceptableMaxDbfs} dBFS.
               </li>
               <li>
                 Noise: higher{" "}
                 <Tooltip
                   label="SNR"
-                  text="SNR > 25dB means your voice is 25x louder than background noise."
+                  text={`SNR > ${analysisDisplayThresholds.snrCleanThresholdDb}dB means your voice is ${analysisDisplayThresholds.snrCleanLoudnessRatio}x louder than background noise.`}
                 />{" "}
                 means a cleaner background.
               </li>
