@@ -1,4 +1,4 @@
-import type { CategoryId, MetricsSummary, Verdict, VerdictOverallLabelKey } from "../types";
+import type { CategoryId, ContextInput, MetricsSummary, Verdict, VerdictOverallLabelKey } from "../types";
 import { buildVerdictDimensionsFromMetrics } from "./categoryScores";
 import { getOverallLabelKeyForGrade, getOverallSummaryKeyForGrade } from "../policy/gradeLabel";
 import { computeOverallGrade } from "./overallGrade";
@@ -72,7 +72,7 @@ export const assertVerdictInvariant = (verdict: Verdict) => {
   }
 };
 
-export const getVerdict = (metrics: MetricsSummary): Verdict => {
+export const getVerdict = (metrics: MetricsSummary, context?: ContextInput): Verdict => {
   const dimensions = buildVerdictDimensionsFromMetrics(metrics);
   const { grade, primaryIssueCategory: rawPrimaryIssueCategory, explanationKey, fixKey } =
     computeOverallGrade(metrics);
@@ -100,14 +100,15 @@ export const getVerdict = (metrics: MetricsSummary): Verdict => {
       fixKey,
       impactKey: resolveImpactKey(primaryIssueCategory),
       impactSummaryKey: resolveImpactSummaryKey(primaryStars)
-    }
+    },
+    context
   };
 
   assertVerdictInvariant(verdict);
   return verdict;
 };
 
-export const getNoSpeechVerdict = (): Verdict => {
+export const getNoSpeechVerdict = (context?: ContextInput): Verdict => {
   const verdict: Verdict = {
     version: "1.0",
     overall: {
@@ -128,7 +129,8 @@ export const getNoSpeechVerdict = (): Verdict => {
       impactSummaryKey: "impact.no_major_issues",
       noSpeechTitleKey: "no_speech.title",
       noSpeechDescriptionKey: "no_speech.description"
-    }
+    },
+    context
   };
 
   assertVerdictInvariant(verdict);

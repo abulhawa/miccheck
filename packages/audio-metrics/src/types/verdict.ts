@@ -1,4 +1,4 @@
-export type UseCase = "meeting" | "podcast" | "streaming" | "voice_note";
+export type UseCase = "meetings" | "podcast" | "streaming" | "voice_note";
 
 export type DeviceType =
   | "laptop"
@@ -6,7 +6,8 @@ export type DeviceType =
   | "mobile"
   | "usb_mic"
   | "headset"
-  | "other";
+  | "other"
+  | "unknown";
 
 export type MetricKey = "level" | "noise" | "echo" | "clipping" | "overall";
 
@@ -17,9 +18,9 @@ export type PassFail = "pass" | "fail";
 export type ContextMode = "single" | "basic" | "pro";
 
 export interface ContextInput {
-  mode?: ContextMode;
-  useCase?: UseCase;
-  deviceType?: DeviceType;
+  mode: ContextMode;
+  use_case: UseCase;
+  device_type: DeviceType;
 }
 
 export type GradeLetter = "A" | "A-" | "B" | "C" | "D" | "F";
@@ -149,7 +150,7 @@ export interface VerdictCopyKeys {
   noSpeechDescriptionKey?: NoSpeechDescriptionKey;
 }
 
-export type AnalysisSpecialState = "NO_SPEECH";
+export type AnalysisSpecialState = "NO_SPEECH" | "TOO_SHORT" | "SILENT" | "ERROR";
 
 export interface Verdict {
   version: "1.0";
@@ -157,5 +158,5 @@ export interface Verdict {
   dimensions: VerdictDimensions;
   primaryIssue: CategoryId | null;
   copyKeys: VerdictCopyKeys;
-  context?: Pick<ContextInput, "mode">;
+  context?: ContextInput;
 }
