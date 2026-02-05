@@ -10,6 +10,7 @@ import { buildSecondaryNotes } from "./policy/secondaryNotes";
 import type { AnalysisSummary, ContextInput, DiagnosticCertainty, UseCaseFit, Verdict } from "./types";
 
 export * from "./types";
+export * from "./useCaseLabels";
 export { getContextualExplanation } from "./scoring/contextHelp";
 export { getVerdict } from "./scoring/verdict";
 

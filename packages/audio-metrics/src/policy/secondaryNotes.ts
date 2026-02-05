@@ -1,9 +1,9 @@
 import type { DeviceType, MetricKey, UseCase, UseCaseFit } from "../types";
+import { SECONDARY_USE_CASE_LABEL, type SecondaryUseCase } from "../useCaseLabels";
 import { canonicalUseCase } from "./canonicalUseCase";
 import type { MetricStatus } from "./evaluateMetrics";
 
-const USE_CASE_ORDER = ["meetings", "streaming", "podcast", "music"] as const;
-type SecondaryUseCase = (typeof USE_CASE_ORDER)[number];
+const USE_CASE_ORDER: SecondaryUseCase[] = ["meetings", "streaming", "podcast", "music"];
 type FitResult = UseCaseFit;
 
 type MetricsMap = Record<MetricKey, MetricStatus>;
@@ -19,13 +19,6 @@ interface SecondaryNotesInput {
   primaryUseCaseFit: FitResult;
   evaluateUseCaseFit: (useCase: SecondaryUseCase) => MetricsMap;
 }
-
-const USE_CASE_LABEL: Record<SecondaryUseCase, string> = {
-  meetings: "Meetings",
-  streaming: "Streaming",
-  podcast: "Podcasts",
-  music: "Music recording"
-};
 
 const fitRank = (fit: FitResult): number => (fit === "pass" ? 2 : fit === "warn" ? 1 : 0);
 
@@ -113,11 +106,11 @@ export const buildSecondaryNotes = ({
 
   if (positiveUseCase) {
     if (primaryUseCaseFit === "pass") {
-      notes.push(`Also good for ${USE_CASE_LABEL[positiveUseCase]}.`);
+      notes.push(`Also good for ${SECONDARY_USE_CASE_LABEL[positiveUseCase]}.`);
     } else if (primaryUseCaseFit === "warn") {
-      notes.push(`Likely acceptable for ${USE_CASE_LABEL[positiveUseCase]}.`);
+      notes.push(`Likely acceptable for ${SECONDARY_USE_CASE_LABEL[positiveUseCase]}.`);
     } else {
-      notes.push(`It may still work for ${USE_CASE_LABEL[positiveUseCase]} with minor tweaks.`);
+      notes.push(`It may still work for ${SECONDARY_USE_CASE_LABEL[positiveUseCase]} with minor tweaks.`);
     }
   }
 
@@ -133,9 +126,9 @@ export const buildSecondaryNotes = ({
     const reason = reasonSnippetFromIssue(issue === "overall" ? fallbackIssue : issue);
 
     if (primaryUseCaseFit === "pass") {
-      notes.push(`Not ideal for ${USE_CASE_LABEL[cautionUseCase]} — ${reason}.`);
+      notes.push(`Not ideal for ${SECONDARY_USE_CASE_LABEL[cautionUseCase]} — ${reason}.`);
     } else {
-      notes.push(`Too limited for ${USE_CASE_LABEL[cautionUseCase]} — ${reason}.`);
+      notes.push(`Too limited for ${SECONDARY_USE_CASE_LABEL[cautionUseCase]} — ${reason}.`);
     }
   }
 
