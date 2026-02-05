@@ -6,6 +6,8 @@ export type DeviceType =
   | "mobile"
   | "usb_mic"
   | "headset"
+  | "bluetooth"
+  | "built_in"
   | "other"
   | "unknown";
 
