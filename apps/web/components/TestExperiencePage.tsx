@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "./AudioPlayer";
 import AudioWaveformVisualizer from "./AudioWaveformVisualizer";
