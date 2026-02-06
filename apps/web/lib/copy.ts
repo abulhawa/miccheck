@@ -12,6 +12,7 @@ import type {
   VerdictOverallSummaryKey,
   RecommendationCopyKey
 } from "@miccheck/audio-metrics";
+import { t } from "./i18n";
 
 export type AppCopyKey =
   | "error.silent_recording"
@@ -43,9 +44,11 @@ const copyMap: Record<CopyKey, string> = {
   "level.extremely_loud": "Extremely loud",
   "level.too_quiet": "Too quiet",
   "level.too_loud": "Too loud",
-  "level.noticeably_off_target": "Noticeably off target",
-  "level.slightly_off_target": "Slightly off target",
-  "level.excellent": "Excellent level",
+  "level.noticeably_off_target": "Acceptable",
+  "level.slightly_off_target": "Good",
+  "level.excellent": "Excellent",
+  "level.low": "Low level",
+  "level.acceptable_noise_first": "Acceptable level (fix noise first).",
   "noise.very_clean": "Very clean",
   "noise.clean_background": "Clean background",
   "noise.some_background_noise": "Some background noise",
@@ -64,10 +67,10 @@ const copyMap: Record<CopyKey, string> = {
   "overall.label.needs_improvement": "Needs Improvement",
   "overall.label.unusable": "Unusable",
   "overall.summary.excellent": "Excellent clarity with minimal issues.",
-  "overall.summary.strong": "Strong recording with minor improvements possible.",
-  "overall.summary.fair": "Fair quality; targeted adjustments will help.",
-  "overall.summary.noticeable": "Noticeable issues impacting clarity.",
-  "overall.summary.severe": "Severe issues detected. Immediate fixes recommended.",
+  "overall.summary.strong": "Good fundamentals; one issue is holding this back.",
+  "overall.summary.fair": "Good fundamentals; one issue is holding this back.",
+  "overall.summary.noticeable": "Background noise is significantly impacting clarity.",
+  "overall.summary.severe": "Background noise is significantly impacting clarity.",
   "overall.summary.no_speech": "No clear speech detected.",
   "explanation.clipping_distortion": "Clipping is distorting the audio signal.",
   "explanation.extremely_quiet": "The recording is extremely quiet and hard to understand.",
@@ -83,6 +86,9 @@ const copyMap: Record<CopyKey, string> = {
   "explanation.strong_echo": "Echo is noticeably affecting clarity.",
   "explanation.some_room_echo": "Room reflections are softening speech detail.",
   "explanation.no_speech": "No clear speech detected.",
+  "overall.echo.impact_minor": "Minor room echo.",
+  "overall.echo.impact_some": "Some room echo is present.",
+  "overall.echo.impact_noticeable": "Echo is noticeably affecting clarity.",
   "fix.lower_gain_move_back": "Lower the input gain or move farther from the microphone.",
   "fix.increase_gain_move_closer": "Increase input gain or move closer to the microphone.",
   "fix.lower_gain_move_back_slight": "Lower the input gain or move back from the microphone.",
@@ -102,7 +108,7 @@ const copyMap: Record<CopyKey, string> = {
   "impact.echo": "echo",
   "impact.overall": "overall audio quality",
   "impact.no_major_issues": "No major issues detected across level, noise, or echo.",
-  "impact.biggest_opportunity": "Strong overall — the biggest opportunity is {impact}.",
+  "impact.biggest_opportunity": "Biggest opportunity: {impact}.",
   "impact.mainly_affected": "Your grade is mainly affected by {impact}.",
   "no_speech.title": "No clear speech detected",
   "no_speech.description": "Please speak closer to the microphone or check if your mic is muted.",
@@ -123,6 +129,11 @@ const copyMap: Record<CopyKey, string> = {
 };
 
 export const resolveCopy = (key: CopyKey, params?: Record<string, string>) => {
+  const translated = t(key, params);
+  if (translated !== key) {
+    return translated;
+  }
+
   let text = copyMap[key] ?? key;
   if (params) {
     for (const [paramKey, paramValue] of Object.entries(params)) {

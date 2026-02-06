@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { WebVerdict } from "../types";
 import { resolveCopy } from "../lib/copy";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
+import { t } from "../lib/i18n";
 
 interface BestNextStepsProps {
   verdict: WebVerdict;
@@ -14,6 +15,15 @@ interface BestNextStepsProps {
   showDiagnosticCertainty?: boolean;
   trackAdviceEvent?: boolean;
 }
+
+const useCaseFitNoteKeyFor = (verdict: WebVerdict): string | null => {
+  if (verdict.useCaseFit !== "warn") return null;
+
+  if (verdict.primaryIssue === "echo") return "usecase.warn.echo";
+  if (verdict.primaryIssue === "noise") return "usecase.warn.noise";
+  if (verdict.primaryIssue === "level") return "usecase.warn.level";
+  return "usecase.warn.generic";
+};
 
 export default function BestNextSteps({
   verdict,
@@ -26,10 +36,22 @@ export default function BestNextSteps({
 }: BestNextStepsProps) {
   const actionSteps = verdict.bestNextSteps?.filter((step) => step.kind === "action") ?? [];
   const visibleActionSteps = typeof maxActionSteps === "number" ? actionSteps.slice(0, maxActionSteps) : actionSteps;
-  const gearStep = includeGear
-    ? verdict.bestNextSteps?.find((step) => step.kind === "gear_optional")
-    : undefined;
+  const gearSteps = includeGear
+    ? verdict.bestNextSteps?.filter((step) => step.kind === "gear_optional") ?? []
+    : [];
+  const [showGearLinks, setShowGearLinks] = useState(false);
   const emittedKeyRef = useRef<string | null>(null);
+
+  const gearRecommendations = gearSteps
+    .map((step) => step.gear)
+    .filter((gear): gear is NonNullable<typeof gearSteps[number]["gear"]> => Boolean(gear));
+  const activeGearLinks = gearRecommendations.filter(
+    (gear) => gear.linkStatus === "active" && Boolean(gear.affiliateUrl)
+  );
+  const shouldShowGearCta = activeGearLinks.length > 0;
+  const shouldShowNoiseGate =
+    verdict.primaryIssue === "noise" && verdict.dimensions.level.descriptionKey === "level.acceptable_noise_first";
+  const useCaseFitNoteKey = useCaseFitNoteKeyFor(verdict);
 
   useEffect(() => {
     if (!trackAdviceEvent) {
@@ -54,7 +76,7 @@ export default function BestNextSteps({
     emittedKeyRef.current = emittedKey;
   }, [mode, trackAdviceEvent, verdict.bestNextSteps, verdict.primaryIssue]);
 
-  if (!visibleActionSteps.length && !gearStep) {
+  if (!visibleActionSteps.length && !gearSteps.length) {
     return null;
   }
 
@@ -63,9 +85,14 @@ export default function BestNextSteps({
       <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
       <p className="mt-3 text-sm text-slate-200">
         {visibleActionSteps[0]?.title ?? resolveCopy(verdict.copyKeys.fixKey)}
+        {shouldShowNoiseGate ? ` ${t("advice.noise_fix_before_gain")}` : null}
       </p>
+      {shouldShowNoiseGate ? (
+        <p className="mt-2 text-xs text-slate-300">{t("level.note_noise_first")}</p>
+      ) : null}
       <ul className="mt-4 space-y-2 text-sm text-slate-400">
         <li>Use case fit: {verdict.useCaseFit ?? "unknown"}</li>
+        {useCaseFitNoteKey ? <li>{t(useCaseFitNoteKey)}</li> : null}
         {showDiagnosticCertainty ? (
           <li>Diagnostic certainty: {verdict.diagnosticCertainty ?? "unknown"}</li>
         ) : null}
@@ -86,19 +113,45 @@ export default function BestNextSteps({
         </ul>
       ) : null}
 
-      {gearStep ? (
+      {gearSteps.length ? (
         <div className="mt-4 rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100">
-          <p className="font-semibold">{gearStep.title}</p>
-          {gearStep.gear?.rationale ? <p className="mt-1 text-blue-200">{gearStep.gear.rationale}</p> : null}
-          {gearStep.gear?.affiliateUrl ? (
-            <a
-              className="mt-2 inline-block underline"
-              href={gearStep.gear.affiliateUrl}
-              rel="noopener noreferrer nofollow"
-              target="_blank"
+          <p className="font-semibold">{gearSteps[0]?.title}</p>
+          {gearRecommendations[0]?.why ? <p className="mt-1 text-blue-200">{gearRecommendations[0].why}</p> : null}
+          {shouldShowGearCta ? (
+            <button
+              className="mt-2 inline-flex items-center gap-1 underline"
+              onClick={() => setShowGearLinks((prev) => !prev)}
+              type="button"
             >
-              View recommended gear
-            </a>
+              {t("affiliate.view_recommended_gear")}
+            </button>
+          ) : null}
+          {shouldShowGearCta ? (
+            <p className="mt-2 text-xs text-blue-200">{t("affiliate.disclosure_short")}</p>
+          ) : null}
+          {showGearLinks ? (
+            <div className="mt-3 space-y-3 text-xs text-blue-50">
+              {activeGearLinks.length ? (
+                activeGearLinks.map((gear) => (
+                  <div key={gear.id}>
+                    <p className="font-semibold">{gear.title}</p>
+                    {gear.why ? <p className="mt-1 text-blue-200">{gear.why}</p> : null}
+                    {gear.affiliateUrl ? (
+                      <a
+                        className="mt-1 inline-block underline"
+                        href={gear.affiliateUrl}
+                        rel="noopener noreferrer nofollow"
+                        target="_blank"
+                      >
+                        {t("affiliate.view_recommended_gear")}
+                      </a>
+                    ) : null}
+                  </div>
+                ))
+              ) : (
+                <p>{t("affiliate.empty_state")}</p>
+              )}
+            </div>
           ) : null}
         </div>
       ) : null}

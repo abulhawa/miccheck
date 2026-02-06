@@ -43,6 +43,8 @@ export type CategoryDescriptorKey =
   | "level.noticeably_off_target"
   | "level.slightly_off_target"
   | "level.excellent"
+  | "level.low"
+  | "level.acceptable_noise_first"
   | "noise.very_clean"
   | "noise.clean_background"
   | "noise.some_background_noise"
@@ -86,6 +88,9 @@ export type ExplanationCopyKey =
   | "explanation.strong_echo"
   | "explanation.some_room_echo"
   | "explanation.no_speech"
+  | "overall.echo.impact_minor"
+  | "overall.echo.impact_some"
+  | "overall.echo.impact_noticeable"
   | CategoryDescriptorKey;
 
 export type FixCopyKey =
@@ -155,16 +160,21 @@ export interface VerdictCopyKeys {
 export type UseCaseFit = "pass" | "warn" | "fail";
 export type DiagnosticCertainty = "low" | "medium" | "high";
 export type GearRelevance = "low" | "medium" | "high";
+export type AffiliateLinkStatus = "active" | "missing" | "disabled";
 
 export interface VerdictBestNextStep {
   kind: "action" | "gear_optional";
   title: string;
   description?: string;
   gear?: {
+    id: string;
+    title: string;
+    why: string;
     category: string;
     relevance: GearRelevance;
     rationale: string;
     affiliateUrl?: string;
+    linkStatus: AffiliateLinkStatus;
   };
 }
 

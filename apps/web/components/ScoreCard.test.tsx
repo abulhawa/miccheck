@@ -21,7 +21,7 @@ const verdict: WebVerdict = {
   },
   primaryIssue: "echo",
   copyKeys: {
-    explanationKey: "explanation.strong_echo",
+    explanationKey: "overall.echo.impact_some",
     fixKey: "fix.add_soft_furnishings_move_closer",
     impactKey: "impact.echo",
     impactSummaryKey: "impact.biggest_opportunity"

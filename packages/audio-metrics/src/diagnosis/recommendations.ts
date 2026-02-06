@@ -7,6 +7,7 @@ import { buildVerdict } from "../policy/buildVerdict";
 import { recommendationMessageFor } from "../policy/copy";
 import { buildAdviceSteps, type AdviceStep } from "../policy/adviceSteps";
 import { buildGearStep, type GearRelevance, type GearStep } from "../policy/gearPolicy";
+import { interpretLevel } from "../scoring/levelInterpretation";
 
 export interface RecommendationPolicyOutput {
   category: Recommendation["category"];
@@ -80,10 +81,14 @@ const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextSt
         title: `Optional gear: ${step.category}`,
         description: step.rationale,
         gear: {
+          id: step.id,
+          title: step.title,
+          why: step.why,
           category: step.category,
           relevance: step.relevance,
           rationale: step.rationale,
-          ...(step.affiliateUrl ? { affiliateUrl: step.affiliateUrl } : {})
+          ...(step.affiliateUrl ? { affiliateUrl: step.affiliateUrl } : {}),
+          linkStatus: step.linkStatus
         }
       } satisfies VerdictBestNextStep;
     }
@@ -132,9 +137,15 @@ export const buildRecommendationPolicy = (
   const certainty = certaintyFrom(fit, resolvedContext.device_type);
   const severity = severityFrom(verdict);
 
+  const levelInterpretation = interpretLevel({
+    rmsDb: level.rmsDb,
+    clippingRatio: clipping.clippingRatio,
+    humRatio: noise.humRatio,
+    useCase: resolvedContext.use_case
+  });
   const hasHum = noise.humRatio > 0.08;
   const constrainedAdviceSteps = buildAdviceSteps(verdict.primaryIssue, {
-    isQuiet: level.rmsDb < -18,
+    isQuiet: levelInterpretation.levelAdviceEnabled && level.rmsDb < -18,
     hasHum,
     clippingDetected: clipping.clippingRatio >= 0.03,
     echoScore: echo.echoScore,

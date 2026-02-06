@@ -121,7 +121,10 @@ describe("buildVerdictDimensionsFromMetrics", () => {
         { echoScore: fixture.echoScore }
       );
 
-      expect(fromMetrics).toEqual(fromCategoryScores);
+      expect(fromMetrics.level.stars).toBe(fromCategoryScores.level.stars);
+      expect(fromMetrics.level.labelKey).toBe(fromCategoryScores.level.labelKey);
+      expect(fromMetrics.noise).toEqual(fromCategoryScores.noise);
+      expect(fromMetrics.echo).toEqual(fromCategoryScores.echo);
     });
   });
 });
