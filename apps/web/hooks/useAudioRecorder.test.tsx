@@ -1,6 +1,5 @@
 // @vitest-environment jsdom
-import React, { useEffect } from "react";
-import { act } from "react-dom/test-utils";
+import React, { act, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useAudioRecorder } from "./useAudioRecorder";
@@ -381,6 +380,7 @@ describe("useAudioRecorder", () => {
 
 
   it("keeps onstop callback intact when stopping manually", async () => {
+    vi.useFakeTimers();
     window.requestAnimationFrame = vi.fn();
 
     const stream = {
@@ -452,19 +452,27 @@ describe("useAudioRecorder", () => {
       await recorder?.startRecording();
     });
 
-    await act(async () => {
-      recorder?.stopRecording();
-    });
+    try {
+      await act(async () => {
+        recorder?.stopRecording();
+      });
 
-    expect(recorder?.status).toBe("analyzing");
+      expect(recorder?.status).toBe("analyzing");
 
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
+      await act(async () => {
+        vi.runAllTimers();
+      });
 
-    expect(decodeAudioData).toHaveBeenCalledTimes(1);
-    expect(recorder?.status).toBe("complete");
-    root.unmount();
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(decodeAudioData).toHaveBeenCalledTimes(1);
+      expect(recorder?.status).toBe("complete");
+    } finally {
+      root.unmount();
+      vi.useRealTimers();
+    }
   });
 
   it("releases tracks on unmount while recording", async () => {
