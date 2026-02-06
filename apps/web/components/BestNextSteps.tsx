@@ -96,7 +96,7 @@ export default function BestNextSteps({
 
     logEvent(ANALYTICS_EVENTS.adviceEmitted, {
       primaryIssue: verdict.primaryIssue ?? "unknown",
-      adviceKeys,
+      adviceKeys: adviceKeys.join(","),
       mode
     });
     emittedKeyRef.current = emittedKey;

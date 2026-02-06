@@ -21,11 +21,13 @@ export type AnalyticsDevice = "mobile" | "desktop";
 export type AnalyticsBrowser = "safari" | "chrome" | "firefox" | "edge" | "other";
 export type AnalyticsReason = "no_mediarecorder" | "not_secure_context" | "unknown";
 
+type AnalyticsValue = string | number | boolean | null;
+
 export interface AnalyticsProps {
   device?: AnalyticsDevice;
   browser?: AnalyticsBrowser;
   reason?: AnalyticsReason;
-  [key: string]: string | number | boolean | string[] | undefined;
+  [key: string]: AnalyticsValue | undefined;
 }
 
 const getDevice = (): AnalyticsDevice => {
@@ -54,8 +56,29 @@ export const getAnalyticsContext = () => ({
   browser: getBrowser()
 });
 
+const coerceAnalyticsValue = (value: unknown): AnalyticsValue | undefined => {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return value;
+  }
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+};
+
+const sanitizeAnalyticsProps = (props: Record<string, unknown>) => {
+  const entries = Object.entries(props)
+    .map(([key, value]) => [key, coerceAnalyticsValue(value)] as const)
+    .filter(([, value]) => value !== undefined);
+
+  return Object.fromEntries(entries) as Record<string, AnalyticsValue>;
+};
+
 export const logEvent = (name: AnalyticsEventName, props: AnalyticsProps = {}) => {
   if (typeof window === "undefined") return;
   const context = getAnalyticsContext();
-  track(name, { ...context, ...props });
+  track(name, sanitizeAnalyticsProps({ ...context, ...props }));
 };
