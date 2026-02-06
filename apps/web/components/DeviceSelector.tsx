@@ -78,12 +78,20 @@ export default function DeviceSelector({ onDeviceChange, refreshSignal }: Device
         window.localStorage.setItem(STORAGE_KEY, defaultId);
       }
     } catch (permissionError) {
+      if (requestId !== loadRequestIdRef.current) {
+        return;
+      }
+
       setError(
         permissionError instanceof Error
           ? permissionError.message
           : "Unable to load available microphones."
       );
     } finally {
+      if (requestId !== loadRequestIdRef.current) {
+        return;
+      }
+
       setIsLoading(false);
     }
   }, []);
