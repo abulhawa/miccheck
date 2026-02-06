@@ -35,21 +35,12 @@ export type CopyKey =
   | RecommendationCopyKey
   | AppCopyKey;
 
-const copyMap: Record<CopyKey, string> = {
-  "category.level": "Level",
-  "category.noise": "Noise",
-  "category.echo": "Echo",
+const copyMap: Partial<Record<CopyKey, string>> = {
   "level.clipping_detected": "Clipping detected",
   "level.extremely_quiet": "Extremely quiet",
   "level.extremely_loud": "Extremely loud",
   "level.too_quiet": "Too quiet",
   "level.too_loud": "Too loud",
-  "level.noticeably_off_target": "Acceptable",
-  "level.slightly_off_target": "Good",
-  "level.excellent": "Excellent",
-  "level.low": "Low level",
-  "level.acceptable_noise_first": "Acceptable level (fix noise first).",
-  "noise.very_clean": "Very clean",
   "noise.clean_background": "Clean background",
   "noise.some_background_noise": "Some background noise",
   "noise.noisy_background": "Noisy background",
@@ -57,20 +48,14 @@ const copyMap: Record<CopyKey, string> = {
   "noise.electrical_hum": "Electrical hum detected",
   "echo.overwhelming": "Overwhelming echo",
   "echo.strong": "Strong echo",
-  "echo.some_room_echo": "Some room echo",
   "echo.slight_reflections": "Slight reflections",
   "echo.minimal": "Minimal echo",
   "special.no_speech": "No speech detected.",
   "overall.label.excellent": "Excellent",
-  "overall.label.good": "Good",
   "overall.label.fair": "Fair",
   "overall.label.needs_improvement": "Needs Improvement",
   "overall.label.unusable": "Unusable",
   "overall.summary.excellent": "Excellent clarity with minimal issues.",
-  "overall.summary.strong": "Good fundamentals; one issue is holding this back.",
-  "overall.summary.fair": "Good fundamentals; one issue is holding this back.",
-  "overall.summary.noticeable": "Background noise is significantly impacting clarity.",
-  "overall.summary.severe": "Background noise is significantly impacting clarity.",
   "overall.summary.no_speech": "No clear speech detected.",
   "explanation.clipping_distortion": "Clipping is distorting the audio signal.",
   "explanation.extremely_quiet": "The recording is extremely quiet and hard to understand.",
@@ -83,12 +68,8 @@ const copyMap: Record<CopyKey, string> = {
   "explanation.very_noisy": "Background noise is overpowering the voice.",
   "explanation.electrical_hum": "Electrical hum is present in the background.",
   "explanation.overwhelming_echo": "Severe echo is obscuring speech clarity.",
-  "explanation.strong_echo": "Echo is noticeably affecting clarity.",
   "explanation.some_room_echo": "Room reflections are softening speech detail.",
   "explanation.no_speech": "No clear speech detected.",
-  "overall.echo.impact_minor": "Minor room echo.",
-  "overall.echo.impact_some": "Some room echo is present.",
-  "overall.echo.impact_noticeable": "Echo is noticeably affecting clarity.",
   "fix.lower_gain_move_back": "Lower the input gain or move farther from the microphone.",
   "fix.increase_gain_move_closer": "Increase input gain or move closer to the microphone.",
   "fix.lower_gain_move_back_slight": "Lower the input gain or move back from the microphone.",
@@ -105,33 +86,55 @@ const copyMap: Record<CopyKey, string> = {
   "fix.no_speech": "Please speak closer to the microphone or check if your mic is muted.",
   "impact.level": "recording level",
   "impact.noise": "background noise",
-  "impact.echo": "echo",
   "impact.overall": "overall audio quality",
   "impact.no_major_issues": "No major issues detected across level, noise, or echo.",
-  "impact.biggest_opportunity": "Biggest opportunity: {impact}.",
   "impact.mainly_affected": "Your grade is mainly affected by {impact}.",
-  "no_speech.title": "No clear speech detected",
-  "no_speech.description": "Please speak closer to the microphone or check if your mic is muted.",
   "recommendation.reduce_clipping":
     "Reduce input gain or move slightly farther from the mic to prevent clipping.",
   "recommendation.reduce_noise":
     "Lower background noise by turning off fans or switching to a quieter room.",
-  "recommendation.reduce_echo": "Add soft furnishings or close doors to reduce echo reflections.",
   "recommendation.raise_volume": "Increase mic gain or move closer to the microphone.",
   "recommendation.keep_consistent":
     "Your microphone sounds solid. Keep consistent distance and speak clearly.",
   "recommendation.no_speech": "Please speak closer to the microphone or check if your mic is muted.",
   "error.silent_recording": "Recording is silent. Please speak closer to the microphone.",
-  "ui.overall_grade": "Overall grade",
-  "ui.metric.clipping": "Clipping",
   "ui.metric.rms": "RMS",
   "ui.metric.snr": "SNR"
 };
+
+const copyMapAllowListPrefixes = [
+  "category.",
+  "level.",
+  "noise.",
+  "echo.",
+  "special.",
+  "overall.",
+  "explanation.",
+  "fix.",
+  "impact.",
+  "no_speech.",
+  "recommendation."
+] as const;
+
+const isAllowListedCopyKey = (key: CopyKey) =>
+  key === "ui.overall_grade" ||
+  key.startsWith("ui.metric.") ||
+  key.startsWith("error.") ||
+  copyMapAllowListPrefixes.some((prefix) => key.startsWith(prefix));
 
 export const resolveCopy = (key: CopyKey, params?: Record<string, string>) => {
   const translated = t(key, params);
   if (translated !== key) {
     return translated;
+  }
+
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.warn("[copy] missing key", key);
+  }
+
+  if (!isAllowListedCopyKey(key)) {
+    return key;
   }
 
   let text = copyMap[key] ?? key;
