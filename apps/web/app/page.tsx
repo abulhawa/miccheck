@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import BrowserSupport from "../components/BrowserSupport";
+import { buttonStyles } from "../components/buttonStyles";
 
 const features = [
   {
@@ -22,7 +23,7 @@ export default function HomePage() {
     <div className="flex flex-col gap-12">
       <section className="grid gap-10 md:grid-cols-2">
         <div className="flex flex-col gap-6">
-          <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-200">
+          <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">
             MicCheck
           </span>
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
@@ -34,13 +35,13 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
-              className="rounded-xl bg-brand-600 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-700"
+              className={buttonStyles({ variant: "primary", className: "text-center" })}
               href="/pro"
             >
               Start a test
             </Link>
             <Link
-              className="rounded-xl border border-slate-700 px-6 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-500"
+              className={buttonStyles({ variant: "secondary", className: "text-center" })}
               href="/results"
             >
               View sample results
