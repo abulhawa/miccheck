@@ -11,6 +11,7 @@ import type { LevelMetrics } from "../metrics/level";
 import type { NoiseMetrics } from "../metrics/noise";
 import type { EchoMetrics } from "../metrics/echo";
 import { getThresholdsForUseCase } from "../policy/thresholdMatrix";
+import { interpretLevel } from "./levelInterpretation";
 
 const clampStars = (value: number) => Math.max(1, Math.min(5, value));
 
@@ -211,10 +212,26 @@ export const buildVerdictDimensionsFromMetrics = (
   metrics: Pick<MetricsSummary, "rmsDb" | "clippingRatio" | "snrDb" | "humRatio" | "echoScore">,
   useCase: UseCase = "meetings"
 ): VerdictDimensions =>
-  buildCategoryScores(
-    { rms: 0, rmsDb: metrics.rmsDb },
-    { clippingRatio: metrics.clippingRatio, peak: 0 },
-    { noiseFloor: 0, snrDb: metrics.snrDb, humRatio: metrics.humRatio, confidence: "low" },
-    { echoScore: metrics.echoScore, confidence: "low" },
-    useCase
-  );
+  (() => {
+    const base = buildCategoryScores(
+      { rms: 0, rmsDb: metrics.rmsDb },
+      { clippingRatio: metrics.clippingRatio, peak: 0 },
+      { noiseFloor: 0, snrDb: metrics.snrDb, humRatio: metrics.humRatio, confidence: "low" },
+      { echoScore: metrics.echoScore, confidence: "low" },
+      useCase
+    );
+    const levelInterpretation = interpretLevel({
+      rmsDb: metrics.rmsDb,
+      clippingRatio: metrics.clippingRatio,
+      humRatio: metrics.humRatio,
+      useCase
+    });
+
+    return {
+      ...base,
+      level: {
+        ...base.level,
+        descriptionKey: levelInterpretation.levelCopyKey
+      }
+    };
+  })();

@@ -2,6 +2,7 @@ import type { CategoryId, ContextInput, GradeLetter, MetricsSummary, Verdict } f
 import { getOverallLabelKeyForGrade, getOverallSummaryKeyForGrade } from "./gradeLabel";
 import { evaluateMetrics } from "./evaluateMetrics";
 import { describeEcho, describeLevel, describeNoise } from "../scoring/categoryScores";
+import { interpretLevel } from "../scoring/levelInterpretation";
 import { explanationKeyFor, fixKeyFor, impactFor, impactSummaryFor } from "./copy";
 import type { MetricResult } from "./evaluateMetrics";
 import { assertPolicyInvariants } from "./invariants";
@@ -45,6 +46,12 @@ export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): V
   const useCase = context?.use_case ?? "meetings";
 
   const level = describeLevel(metrics.rmsDb, metrics.clippingRatio, useCase);
+  const levelInterpretation = interpretLevel({
+    rmsDb: metrics.rmsDb,
+    clippingRatio: metrics.clippingRatio,
+    humRatio: metrics.humRatio,
+    useCase
+  });
   const noise = describeNoise(metrics.snrDb, metrics.humRatio, useCase);
   const echo = describeEcho(metrics.echoScore, useCase);
 
@@ -99,7 +106,7 @@ export const buildVerdict = (metrics: MetricsSummary, context?: ContextInput): V
       level: {
         stars: level.stars,
         labelKey: "category.level",
-        descriptionKey: level.descriptionKey
+        descriptionKey: levelInterpretation.levelCopyKey
       },
       noise: {
         stars: noise.stars,

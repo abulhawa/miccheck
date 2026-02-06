@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
@@ -8,6 +8,7 @@ import BestNextSteps from "../../components/BestNextSteps";
 import ResultsNotice from "../../components/ResultsNotice";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
+import { t } from "../../lib/i18n";
 import type { AnalysisResult } from "../../types";
 import {
   STORAGE_SYNC_MAX_ATTEMPTS,
@@ -49,15 +50,19 @@ const sampleResult: AnalysisResult = {
         kind: "gear_optional",
         title: "Acoustic panels",
         gear: {
+          id: "usb-dynamic-mic",
+          title: "USB dynamic mic",
+          why: "Reduces room pickup and reflections for clearer speech.",
           category: "USB dynamic mic",
           relevance: "high",
           rationale: "Reduces room pickup and reflections for clearer speech.",
-          affiliateUrl: "https://amzn.to/4qTnyHf"
+          affiliateUrl: "https://amzn.to/4qTnyHf",
+          linkStatus: "active"
         }
       }
     ],
     copyKeys: {
-      explanationKey: "explanation.strong_echo",
+      explanationKey: "overall.echo.impact_some",
       fixKey: "fix.add_soft_furnishings_move_closer",
       impactKey: "impact.echo",
       impactSummaryKey: "impact.biggest_opportunity"
@@ -120,6 +125,9 @@ export default function ResultsPage() {
         <p className="mt-2 text-sm text-slate-200">
           This is a preview of the insights you&apos;ll receive after recording.
         </p>
+        <span className="mt-3 inline-flex rounded-full border border-slate-700/60 bg-slate-900/70 px-3 py-1 text-xs text-slate-300">
+          {t("sample.tag")}
+        </span>
       </section>
 
       <ResultsNotice

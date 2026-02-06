@@ -12,5 +12,6 @@ describe("ProTestPage", () => {
   it("renders the pro experience", () => {
     const html = renderToStaticMarkup(<ProTestPage />);
     expect(html).toContain('data-view-mode="pro"');
+    expect(html).not.toContain("Example: common home-office setup");
   });
 });

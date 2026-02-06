@@ -15,7 +15,16 @@ export const explanationKeyFor = (
   insight: CategoryInsight
 ): VerdictExplanationKey => {
   if (primaryIssue === null) return "level.excellent";
+  if (primaryIssue === "echo") {
+    return echoImpactKeyForStars(insight.stars);
+  }
   return insight.reasonKey ?? insight.descriptionKey;
+};
+
+export const echoImpactKeyForStars = (stars: number): VerdictExplanationKey => {
+  if (stars >= 4) return "overall.echo.impact_minor";
+  if (stars === 3) return "overall.echo.impact_some";
+  return "overall.echo.impact_noticeable";
 };
 
 export const fixKeyFor = (

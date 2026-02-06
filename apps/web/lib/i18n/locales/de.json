@@ -1,0 +1,16 @@
+{
+  "affiliate.disclosure_short": "Links können Affiliate-Links sein; der Preis bleibt gleich.",
+  "affiliate.empty_state": "Derzeit sind keine Links verfügbar.",
+  "affiliate.view_recommended_gear": "Empfohlenes Zubehör ansehen",
+  "level.low": "Niedriger Pegel",
+  "overall.echo.impact_minor": "Leichter Raumecho.",
+  "overall.echo.impact_noticeable": "Echo beeinträchtigt die Verständlichkeit merklich.",
+  "overall.echo.impact_some": "Etwas Raumecho ist vorhanden.",
+  "results.notice.low_certainty": "Ergebnisse sind möglicherweise weniger zuverlässig – bitte in einer ruhigeren Umgebung erneut testen.",
+  "sample.tag": "Beispiel: typisches Home-Office-Setup",
+  "ui.overall_grade": "Gesamtbewertung",
+  "usecase.warn.echo": "Sollte funktionieren, aber Echo kann in größeren Räumen die Verständlichkeit mindern.",
+  "usecase.warn.generic": "Es sollte funktionieren, aber ein Punkt kann die Verständlichkeit beeinflussen.",
+  "usecase.warn.level": "Sollte funktionieren, aber du könntest leise klingen, wenn du nicht näher ans Mikrofon gehst.",
+  "usecase.warn.noise": "Sollte funktionieren, aber Hintergrundgeräusche können die Verständlichkeit mindern."
+}
