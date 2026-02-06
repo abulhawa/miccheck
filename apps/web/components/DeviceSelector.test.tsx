@@ -212,4 +212,51 @@ describe("DeviceSelector", () => {
 
     root.unmount();
   });
+  it("refreshes devices when refreshSignal changes after mount", async () => {
+    const enumerateDevices = vi.fn().mockResolvedValue([
+      {
+        deviceId: "default",
+        kind: "audioinput",
+        label: "Default Mic",
+        groupId: "group"
+      }
+    ]);
+
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: {
+        getUserMedia: vi.fn(),
+        enumerateDevices,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
+      },
+      configurable: true
+    });
+
+    const onDeviceChange = vi.fn();
+    const container = document.createElement("div");
+    const root = createRoot(container);
+
+    await act(async () => {
+      root.render(<DeviceSelector onDeviceChange={onDeviceChange} refreshSignal="0" />);
+    });
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    expect(enumerateDevices).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      root.render(<DeviceSelector onDeviceChange={onDeviceChange} refreshSignal="1" />);
+    });
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    expect(enumerateDevices).toHaveBeenCalledTimes(2);
+
+    root.unmount();
+  });
+
 });

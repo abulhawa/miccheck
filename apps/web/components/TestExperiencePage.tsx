@@ -36,6 +36,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const [detectedDeviceType, setDetectedDeviceType] = useState<DeviceType>("unknown");
   const [deviceTypeOverride, setDeviceTypeOverride] = useState<DeviceType | null>(null);
   const hasShownIOSAlert = useRef(false);
+  const [deviceRefreshSignal, setDeviceRefreshSignal] = useState("0");
 
   const resolvedDeviceType = deviceTypeOverride ?? detectedDeviceType;
   const analysisContext = useMemo(
@@ -94,6 +95,12 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
       window.alert("For best results, use Chrome on iOS.");
     }
   }, []);
+
+  useEffect(() => {
+    if (status === "recording") {
+      setDeviceRefreshSignal((current) => `${Number(current) + 1}`);
+    }
+  }, [status]);
 
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
@@ -181,7 +188,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
 
-          <DeviceSelector onDeviceChange={handleDeviceChange} />
+          <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
           <p className="text-xs text-slate-400">Detected device type: {formatDeviceTypeLabel(detectedDeviceType)}</p>
 
           {viewMode === "pro" ? (
