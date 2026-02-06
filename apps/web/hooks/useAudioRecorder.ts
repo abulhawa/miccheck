@@ -344,9 +344,28 @@ export function useAudioRecorder({
                   reader.onerror = () => reject(reader.error ?? new Error("Unable to read blob."));
                   reader.readAsArrayBuffer(blob);
                 });
-          const decodeContext = new AudioContextClass();
-          const audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
-          await decodeContext.close();
+          let decodeContext: AudioContext | null = null;
+          let audioBuffer: AudioBuffer | null = null;
+          try {
+            decodeContext = new AudioContextClass();
+            audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
+          } catch (decodeError) {
+            throw decodeError instanceof Error
+              ? decodeError
+              : new Error("Unable to decode the recorded audio.");
+          } finally {
+            if (decodeContext) {
+              try {
+                await decodeContext.close();
+              } catch {
+                // Ignore close errors when cleaning up decoding context.
+              }
+            }
+          }
+
+          if (!audioBuffer) {
+            throw new Error("Unable to decode the recorded audio.");
+          }
 
           if (audioBuffer.duration < minDuration) {
             setStatus("error");
