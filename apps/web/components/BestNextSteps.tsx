@@ -25,6 +25,32 @@ const useCaseFitNoteKeyFor = (verdict: WebVerdict): string | null => {
   return "usecase.warn.generic";
 };
 
+const useCaseFitValueKeyMap = {
+  pass: "results.use_case_fit.pass",
+  warn: "results.use_case_fit.warn",
+  fail: "results.use_case_fit.fail",
+  unknown: "results.use_case_fit.unknown"
+} as const;
+
+const certaintyValueKeyMap = {
+  low: "results.certainty.low",
+  medium: "results.certainty.medium",
+  high: "results.certainty.high",
+  unknown: "results.certainty.unknown"
+} as const;
+
+const resolveActionTitle = (step?: { title: string; titleKey?: string }) => {
+  if (!step) {
+    return null;
+  }
+
+  if (step.titleKey) {
+    return resolveCopy(step.titleKey as never);
+  }
+
+  return step.title;
+};
+
 export default function BestNextSteps({
   verdict,
   mode = "pro",
@@ -82,25 +108,31 @@ export default function BestNextSteps({
 
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-      <h2 className="text-lg font-semibold">🎯 Best Next Step</h2>
+      <h2 className="text-lg font-semibold">{t("results.next_steps.title")}</h2>
       <p className="mt-3 text-sm text-slate-200">
-        {visibleActionSteps[0]?.title ?? resolveCopy(verdict.copyKeys.fixKey)}
+        {resolveActionTitle(visibleActionSteps[0]) ?? resolveCopy(verdict.copyKeys.fixKey)}
         {shouldShowNoiseGate ? ` ${t("advice.noise_fix_before_gain")}` : null}
       </p>
       {shouldShowNoiseGate ? (
         <p className="mt-2 text-xs text-slate-300">{t("level.note_noise_first")}</p>
       ) : null}
       <ul className="mt-4 space-y-2 text-sm text-slate-400">
-        <li>Use case fit: {verdict.useCaseFit ?? "unknown"}</li>
+        <li>
+          {t("results.next_steps.use_case_fit_label")}{" "}
+          {t(useCaseFitValueKeyMap[verdict.useCaseFit ?? "unknown"])}
+        </li>
         {useCaseFitNoteKey ? <li>{t(useCaseFitNoteKey)}</li> : null}
         {showDiagnosticCertainty ? (
-          <li>Diagnostic certainty: {verdict.diagnosticCertainty ?? "unknown"}</li>
+          <li>
+            {t("results.next_steps.certainty_label")}{" "}
+            {t(certaintyValueKeyMap[verdict.diagnosticCertainty ?? "unknown"])}
+          </li>
         ) : null}
       </ul>
       {visibleActionSteps.length ? (
         <ul className="mt-4 space-y-2 text-sm text-slate-300">
           {visibleActionSteps.map((step) => (
-            <li key={`${step.kind}-${step.title}`}>• {step.title}</li>
+            <li key={`${step.kind}-${step.title}`}>• {resolveActionTitle(step)}</li>
           ))}
         </ul>
       ) : null}

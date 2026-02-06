@@ -15,7 +15,7 @@ import {
   STORAGE_SYNC_RETRY_DELAY_MS
 } from "../../src/domain/recording/constants";
 
-const sampleResult: AnalysisResult = {
+const sampleResult = {
   verdict: {
     version: "1.0",
     overall: {
@@ -45,7 +45,7 @@ const sampleResult: AnalysisResult = {
     diagnosticCertainty: "medium",
     reassuranceMode: false,
     bestNextSteps: [
-      { kind: "action", title: "Add soft furnishings and sit closer to your mic" },
+      { kind: "action", title: "recommendation.reduce_echo", titleKey: "recommendation.reduce_echo" },
       {
         kind: "gear_optional",
         title: "Acoustic panels",
@@ -76,7 +76,7 @@ const sampleResult: AnalysisResult = {
     humRatio: 0.04,
     echoScore: 0.32
   }
-};
+} as AnalysisResult;
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -121,9 +121,9 @@ export default function ResultsPage() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
-        <h1 className="text-3xl font-semibold">Sample results</h1>
+        <h1 className="text-3xl font-semibold">{t("results.sample.title")}</h1>
         <p className="mt-2 text-sm text-slate-200">
-          This is a preview of the insights you&apos;ll receive after recording.
+          {t("results.sample.subtitle")}
         </p>
         <span className="mt-3 inline-flex rounded-full border border-slate-700/60 bg-slate-900/70 px-3 py-1 text-xs text-slate-300">
           {t("sample.tag")}
@@ -139,7 +139,7 @@ export default function ResultsPage() {
         <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
           <div className="flex flex-col gap-3">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
-              No speech detected
+              {t("results.no_speech.badge")}
             </p>
             <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
             <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
@@ -149,7 +149,7 @@ export default function ResultsPage() {
             onClick={handleTestAgain}
             type="button"
           >
-            Test Again
+            {t("results.cta.test_again")}
           </button>
         </section>
       ) : (
@@ -168,7 +168,7 @@ export default function ResultsPage() {
               onClick={handleTestAgain}
               type="button"
             >
-              Test Again
+              {t("results.cta.test_again")}
             </button>
           </section>
 
@@ -176,7 +176,7 @@ export default function ResultsPage() {
             <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />
           ) : (
             <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
-              Record a sample to unlock playback on this page.
+              {t("results.sample.playback_locked")}
             </section>
           )}
         </>
