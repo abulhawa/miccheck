@@ -17,7 +17,7 @@
   "results.next_steps.use_case_fit_label": "Einsatzfall-Passung:",
   "results.next_steps.certainty_label": "Diagnosesicherheit:",
   "results.use_case_fit.pass": "bestanden",
-  "results.use_case_fit.warn": "warnung",
+  "results.use_case_fit.warn": "Warnung",
   "results.use_case_fit.fail": "nicht bestanden",
   "results.use_case_fit.unknown": "unbekannt",
   "results.certainty.low": "niedrig",
