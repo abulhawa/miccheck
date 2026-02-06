@@ -41,7 +41,8 @@ export const measureEcho = (
     return { echoScore: 0, confidence: "low" };
   }
 
-  for (let lag = minLag; lag <= maxLag; lag += Math.floor(sampleRate * 0.01)) {
+  const lagStep = Math.max(1, Math.floor(sampleRate * 0.01));
+  for (let lag = minLag; lag <= maxLag; lag += lagStep) {
     const correlation = computeAutocorrelation(samples, lag) / averageEnergy;
     const normalized = Math.max(0, correlation);
     correlations.push(normalized);
