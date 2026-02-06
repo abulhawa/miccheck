@@ -71,12 +71,12 @@ export default function RootLayout({
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 items-center justify-center rounded-xl bg-brand-600 px-3 text-sm font-semibold text-white">
-                MicCheck
+              <div aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-lg font-semibold text-white">
+                MC
               </div>
               <div>
                 <p className="text-lg font-semibold">MicCheck</p>
-                <p className="text-xs text-slate-400">7-Second Mic Quality Test</p> {/* UPDATED */}
+                <p className="text-xs text-slate-400">7-Second Mic Quality Test</p>
               </div>
             </div>
             <nav className="hidden gap-6 text-sm text-slate-200 md:flex">
