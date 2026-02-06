@@ -46,4 +46,31 @@ describe("ScoreCard", () => {
     expect(html).toContain("Echo: 0.31 score");
     expect(html).toContain("Clipping: 0.0%");
   });
+
+  it("removes duplicate Excellent subtitles and softens negligible clipping", () => {
+    const excellentVerdict: WebVerdict = {
+      ...verdict,
+      overall: {
+        grade: "A",
+        labelKey: "overall.label.excellent",
+        summaryKey: "overall.summary.excellent"
+      },
+      copyKeys: {
+        ...verdict.copyKeys,
+        explanationKey: "overall.label.excellent"
+      }
+    };
+    const excellentMetrics: MetricsSummary = { ...metrics, clippingRatio: 0.002 };
+
+    const html = renderToStaticMarkup(<ScoreCard verdict={excellentVerdict} metrics={excellentMetrics} />);
+
+    expect(html).not.toContain("– Excellent");
+    expect(html).toContain("Clipping: negligible (0.2%)");
+  });
+
+  it("keeps the explanation for non-Excellent grades", () => {
+    const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={metrics} />);
+
+    expect(html).toContain("– Some room echo is present.");
+  });
 });

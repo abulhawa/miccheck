@@ -2,6 +2,7 @@ import React from "react";
 import { toStarRating } from "../lib/starRating";
 import type { MetricsSummary, WebVerdict } from "../types";
 import { resolveCopy } from "../lib/copy";
+import { t } from "../lib/i18n";
 import {
   formatClippingMetric,
   formatEchoMetric,
@@ -22,7 +23,16 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
   const activeHighlight = highlightedCategoryId ?? verdict.primaryIssue;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = resolveCopy(verdict.overall.labelKey);
+  const explanationLabel = resolveCopy(verdict.copyKeys.explanationKey);
   const impactLabel = resolveCopy(verdict.copyKeys.impactKey);
+  const shouldShowExplanation =
+    !(verdict.overall.grade === "A" && explanationLabel === gradeLabel);
+  const clippingPercent = metrics.clippingRatio * 100;
+  const isNegligibleClipping =
+    verdict.overall.grade === "A" && clippingPercent > 0 && clippingPercent <= 0.5;
+  const clippingText = isNegligibleClipping
+    ? t("clipping.negligible", { pct: clippingPercent.toFixed(1) })
+    : formatClippingMetric(metrics);
   const categoryEntries = (
     Object.entries(verdict.dimensions) as Array<
       [
@@ -42,9 +52,9 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
           <p className="mt-2 flex flex-wrap items-baseline gap-2 text-2xl font-semibold text-white sm:text-3xl">
             <span>{gradeLabel}</span>
             <span className="text-sm font-medium text-slate-400">({verdict.overall.grade})</span>
-            <span className="text-sm font-medium text-slate-200">
-              – {resolveCopy(verdict.copyKeys.explanationKey)}
-            </span>
+            {shouldShowExplanation ? (
+              <span className="text-sm font-medium text-slate-200">– {explanationLabel}</span>
+            ) : null}
           </p>
           <div className="mt-3">
             <ShareButton grade={verdict.overall.grade} />
@@ -93,7 +103,7 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
       </div>
       <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
         <p className="text-sm font-semibold text-slate-100">{resolveCopy("ui.metric.clipping")}</p>
-        <p className="mt-2 text-xs font-medium text-slate-200">{formatClippingMetric(metrics)}</p>
+        <p className="mt-2 text-xs font-medium text-slate-200">{clippingText}</p>
       </div>
     </div>
   );

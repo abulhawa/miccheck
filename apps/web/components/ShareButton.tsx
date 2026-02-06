@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { t } from "../lib/i18n";
 
 interface ShareButtonProps {
   grade: string;
@@ -10,6 +11,7 @@ export default function ShareButton({ grade }: ShareButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shareText = `My microphone scored ${grade} on MicCheck! Test yours: https://miccheck.com`;
+  const shareLabel = grade === "A" ? t("results.share.excellent") : "Share";
 
   useEffect(
     () => () => {
@@ -47,7 +49,7 @@ export default function ShareButton({ grade }: ShareButtonProps) {
         onClick={handleShare}
         className="rounded-full border border-slate-700 bg-slate-950/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100 transition hover:border-amber-400 hover:text-amber-200"
       >
-        Share
+        {shareLabel}
       </button>
       {status === "copied" ? (
         <span className="text-xs font-medium text-emerald-300">Copied</span>

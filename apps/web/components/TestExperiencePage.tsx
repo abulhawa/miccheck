@@ -19,6 +19,7 @@ import {
 } from "../lib/analysisContextStorage";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import { resolveNoSpeechCopy } from "../lib/copy";
+import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
 import type { DeviceType, UseCase } from "../types";
 
@@ -106,6 +107,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
+  const isExcellent = analysis?.verdict.overall.grade === "A";
 
   const buttonLabel = useMemo(() => {
     if (isRecording) return "Stop recording";
@@ -275,14 +277,22 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 metrics={analysis.metrics}
                 verdict={analysis.verdict}
               />
-              <BestNextSteps
-                includeGear={viewMode === "pro"}
-                includeSecondaryNotes={viewMode === "pro"}
-                maxActionSteps={viewMode === "basic" ? 1 : undefined}
-                mode={viewMode}
-                showDiagnosticCertainty={viewMode === "pro"}
-                verdict={analysis.verdict}
-              />
+              {isExcellent ? (
+                <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+                  <h2 className="text-lg font-semibold">{t("results.excellent.title")}</h2>
+                  <p className="mt-3 text-sm text-slate-200">{t("results.excellent.body")}</p>
+                  <p className="mt-3 text-xs text-slate-400">{t("results.excellent.share_hint")}</p>
+                </div>
+              ) : (
+                <BestNextSteps
+                  includeGear={viewMode === "pro"}
+                  includeSecondaryNotes={viewMode === "pro"}
+                  maxActionSteps={viewMode === "basic" ? 1 : undefined}
+                  mode={viewMode}
+                  showDiagnosticCertainty={viewMode === "pro"}
+                  verdict={analysis.verdict}
+                />
+              )}
               <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
                 <div className="mt-6 flex flex-wrap gap-4">
                   <Link
