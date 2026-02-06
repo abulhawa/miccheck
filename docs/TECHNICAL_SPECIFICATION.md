@@ -178,16 +178,16 @@ Implementation references: `measureNoise`, `detectVoiceActivity`, `computeRms`, 
 - 5 stars otherwise.【F:packages/audio-metrics/src/scoring/categoryScores.ts†L53-L67】
 
 ### 5.2 Overall grade mapping
-- Stars map to letter grades: 5→A, 4→B, 3→C, 2→D, 1→F. Default falls back to F. 【F:packages/audio-metrics/src/scoring/overallGrade.ts†L4-L18】
+- Stars map to letter grades: 5→A, 4→B, 3→C, 2→D, 1→F. Default falls back to F. 【F:packages/audio-metrics/src/policy/buildVerdict.ts†L12-L26】
 
 ### 5.3 Primary issue selection
-- Overall stars are the **minimum** of the three category star ratings (`minStars`).【F:packages/audio-metrics/src/scoring/overallGrade.ts†L77-L83】
-- `primaryIssueCategory` (and the explanation text) are derived by checking metrics in order:
-  1. `clippingRatio > 0.005` → **clipping**
-  2. `echoScore > 0.35` → **echo**
-  3. `snrDb < 15 dB` → **noise**
-  4. `rmsDb` outside `[-30, -8]` → **level**
-  5. Otherwise, return a positive “all clear” reason/fix.【F:packages/audio-metrics/src/scoring/overallGrade.ts†L20-L69】
+- Overall stars are the **minimum** of the three category star ratings (`minStars`).【F:packages/audio-metrics/src/policy/buildVerdict.ts†L43-L47】
+- `primaryIssue` is only assigned when `minStars < 5`; otherwise it remains `null`.【F:packages/audio-metrics/src/policy/buildVerdict.ts†L53-L71】
+- When `minStars < 5`, the selection order is:
+  1. **Level** if level is a minimum-star category *and* is catastrophic (`level.isCatastrophic`).
+  2. **Echo** if echo is a minimum-star category.
+  3. **Noise** if noise is a minimum-star category.
+  4. **Level** if level is a minimum-star category (non-catastrophic fallback).【F:packages/audio-metrics/src/policy/buildVerdict.ts†L53-L71】
 
 ## 6. File Structure & Data Flow
 ```
@@ -202,9 +202,9 @@ audio-metrics/
   metrics/echo.ts: autocorrelation + normalization → echoScore
   ↓
   scoring/categoryScores.ts: metrics → per-category 1–5 stars
-  scoring/overallGrade.ts: star ratings + primary-issue rules → letter grade + explanation
+  policy/buildVerdict.ts: star ratings → letter grade + primary-issue selection
 ```
-Implementation references: VAD and utilities in `audio-core`, metrics in `audio-metrics`, and scoring logic in `scoring/`.【F:packages/audio-core/src/vad.ts†L20-L58】【F:packages/audio-core/src/pcmUtils.ts†L23-L46】【F:packages/audio-metrics/src/metrics/noise.ts†L49-L119】【F:packages/audio-metrics/src/metrics/clipping.ts†L12-L26】【F:packages/audio-metrics/src/metrics/level.ts†L13-L15】【F:packages/audio-metrics/src/metrics/echo.ts†L19-L81】【F:packages/audio-metrics/src/scoring/categoryScores.ts†L72-L99】【F:packages/audio-metrics/src/scoring/overallGrade.ts†L71-L88】
+Implementation references: VAD and utilities in `audio-core`, metrics in `audio-metrics`, scoring logic in `scoring/`, and verdict policy in `policy/`.【F:packages/audio-core/src/vad.ts†L20-L58】【F:packages/audio-core/src/pcmUtils.ts†L23-L46】【F:packages/audio-metrics/src/metrics/noise.ts†L49-L119】【F:packages/audio-metrics/src/metrics/clipping.ts†L12-L26】【F:packages/audio-metrics/src/metrics/level.ts†L13-L15】【F:packages/audio-metrics/src/metrics/echo.ts†L19-L81】【F:packages/audio-metrics/src/scoring/categoryScores.ts†L72-L99】【F:packages/audio-metrics/src/policy/buildVerdict.ts†L12-L145】
 
 ## 7. Edge Case Handling
 
