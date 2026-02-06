@@ -19,6 +19,7 @@ import {
 } from "../lib/analysisContextStorage";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import { resolveNoSpeechCopy } from "../lib/copy";
+import { buttonStyles } from "./buttonStyles";
 import type { DeviceType, UseCase } from "../types";
 
 const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
@@ -172,14 +173,20 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
 
           <div className="flex flex-wrap items-center gap-4">
             <button
-              className="rounded-xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-700"
+              className={buttonStyles({
+                variant: "primary",
+                className: "min-w-[11rem]"
+              })}
               disabled={isAnalyzing}
               onClick={isRecording ? stopRecording : startRecording}
             >
-              {buttonLabel}
+              <span className="inline-flex min-w-[8rem] items-center justify-center gap-2">
+                {isAnalyzing ? <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
+                {buttonLabel}
+              </span>
             </button>
             <button
-              className="rounded-xl border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500"
+              className={buttonStyles({ variant: "secondary" })}
               disabled={isRecording}
               onClick={reset}
             >

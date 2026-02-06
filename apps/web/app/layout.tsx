@@ -71,8 +71,8 @@ export default function RootLayout({
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-lg font-semibold text-white">
-                MC
+              <div className="flex h-10 items-center justify-center rounded-xl bg-brand-600 px-3 text-sm font-semibold text-white">
+                MicCheck
               </div>
               <div>
                 <p className="text-lg font-semibold">MicCheck</p>
