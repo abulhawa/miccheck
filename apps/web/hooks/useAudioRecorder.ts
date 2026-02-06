@@ -435,11 +435,12 @@ export function useAudioRecorder({
   const stopRecording = useCallback(() => {
     clearStopTimeout();
 
-    if (mediaRecorderRef.current?.state === "recording") {
-      mediaRecorderRef.current.stop();
+    const recorder = mediaRecorderRef.current;
+    if (recorder?.state === "recording") {
+      recorder.stop();
+      setStatus("analyzing");
     }
-    releaseMic("manual_stop");
-  }, [clearStopTimeout, releaseMic]);
+  }, [clearStopTimeout]);
 
   useEffect(() => {
     return () => {
