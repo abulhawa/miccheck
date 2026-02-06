@@ -321,10 +321,11 @@ export function useAudioRecorder({
       };
 
       recorder.onstop = async () => {
+        const recordedChunks = [...audioChunksRef.current];
         releaseMic("recorder_onstop");
         setStatus("analyzing");
         try {
-          const blob = new Blob(audioChunksRef.current, { type: recorder.mimeType });
+          const blob = new Blob(recordedChunks, { type: recorder.mimeType });
           if (blob.size > 0) {
             logEvent(ANALYTICS_EVENTS.recordingCompleted);
           }

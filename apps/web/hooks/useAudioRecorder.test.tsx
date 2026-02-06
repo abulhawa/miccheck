@@ -296,6 +296,89 @@ describe("useAudioRecorder", () => {
     root.unmount();
   });
 
+  it("analyzes recorded chunks after the recorder stops", async () => {
+    window.requestAnimationFrame = vi.fn();
+
+    const stopTrack = vi.fn();
+    const stream = {
+      getTracks: vi.fn(() => [{ stop: stopTrack }])
+    } as unknown as MediaStream;
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: { getUserMedia },
+      configurable: true
+    });
+
+    const decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
+
+    class MockAudioContext {
+      createMediaStreamSource() {
+        return { connect: vi.fn(), disconnect: vi.fn() };
+      }
+      createAnalyser() {
+        return {
+          fftSize: 0,
+          getFloatTimeDomainData: vi.fn(),
+          disconnect: vi.fn()
+        };
+      }
+      decodeAudioData = decodeAudioData;
+      close = vi.fn().mockResolvedValue(undefined);
+    }
+
+    window.AudioContext = MockAudioContext as unknown as typeof AudioContext;
+
+    class MockMediaRecorder {
+      static isTypeSupported = vi.fn().mockReturnValue(true);
+      state = "inactive";
+      mimeType = "audio/webm";
+      stream: MediaStream;
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onstop: (() => void) | null = null;
+
+      constructor(stream: MediaStream) {
+        this.stream = stream;
+      }
+
+      start = vi.fn(() => {
+        this.state = "recording";
+      });
+
+      stop = vi.fn(() => {
+        this.ondataavailable?.({
+          data: new Blob([new Uint8Array([1, 2, 3, 4])], { type: this.mimeType })
+        } as BlobEvent);
+        this.state = "inactive";
+        this.onstop?.();
+      });
+    }
+
+    window.MediaRecorder = MockMediaRecorder as unknown as typeof MediaRecorder;
+
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    let recorder: RecorderHook | undefined;
+
+    await act(async () => {
+      root.render(<HookHarness onReady={(value) => (recorder = value)} />);
+    });
+
+    await act(async () => {
+      await recorder?.startRecording();
+    });
+
+    await act(async () => {
+      recorder?.stopRecording();
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(decodeAudioData).toHaveBeenCalledTimes(1);
+    expect(recorder?.status).toBe("complete");
+    expect(recorder?.error).toBeNull();
+    root.unmount();
+  });
+
   it("releases tracks on unmount while recording", async () => {
     window.requestAnimationFrame = vi.fn();
 
