@@ -2,6 +2,7 @@
   "advice.noise_fix_before_gain": "Fix the background hum first — increasing gain now can make the noise worse.",
   "affiliate.disclosure_short": "Links may be affiliate links; it doesn’t change your price.",
   "affiliate.empty_state": "No links available right now.",
+  "affiliate.recommendation_title": "Recommended gear",
   "affiliate.view_recommended_gear": "View recommended gear",
   "category.echo": "Echo",
   "category.level": "Level",

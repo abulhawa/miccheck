@@ -10,7 +10,8 @@ export const ANALYTICS_EVENTS = {
   unsupportedBrowser: "miccheck_unsupported_browser",
   analysisCompleted: "analysis_completed",
   adviceEmitted: "advice_emitted",
-  reRecordClicked: "re_record_clicked"
+  reRecordClicked: "re_record_clicked",
+  affiliateClick: "affiliate_click"
 } as const;
 
 export type AnalyticsEventName =

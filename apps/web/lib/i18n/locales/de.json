@@ -1,6 +1,7 @@
 {
   "affiliate.disclosure_short": "Links können Affiliate-Links sein; der Preis bleibt gleich.",
   "affiliate.empty_state": "Derzeit sind keine Links verfügbar.",
+  "affiliate.recommendation_title": "Empfohlenes Zubehör",
   "affiliate.view_recommended_gear": "Empfohlenes Zubehör ansehen",
   "clipping.negligible": "Clipping: vernachlässigbar ({pct}%)",
   "level.low": "Niedriger Pegel",
