@@ -187,13 +187,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 {buttonLabel}
               </span>
             </button>
-            <button
-              className={buttonStyles({ variant: "secondary" })}
-              disabled={isRecording}
-              onClick={reset}
-            >
-              Reset
-            </button>
             <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
 
