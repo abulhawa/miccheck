@@ -9,9 +9,10 @@ const STORAGE_KEY = "miccheck-preferred-device-id";
 
 interface DeviceSelectorProps {
   onDeviceChange: (deviceId: string | null, meta?: { label?: string; detectedType: DeviceType }) => void;
+  refreshSignal?: string;
 }
 
-export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) {
+export default function DeviceSelector({ onDeviceChange, refreshSignal }: DeviceSelectorProps) {
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [selectedId, setSelectedId] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +20,7 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
   const onDeviceChangeRef = useRef(onDeviceChange);
   const selectedIdRef = useRef(selectedId);
   const loadRequestIdRef = useRef(0);
+  const hasSeenRefreshSignalRef = useRef(false);
 
   useEffect(() => {
     onDeviceChangeRef.current = onDeviceChange;
@@ -89,6 +91,19 @@ export default function DeviceSelector({ onDeviceChange }: DeviceSelectorProps) 
   useEffect(() => {
     void loadDevices();
   }, [loadDevices]);
+
+  useEffect(() => {
+    if (refreshSignal === undefined) {
+      return;
+    }
+
+    if (!hasSeenRefreshSignalRef.current) {
+      hasSeenRefreshSignalRef.current = true;
+      return;
+    }
+
+    void loadDevices();
+  }, [loadDevices, refreshSignal]);
 
   useEffect(() => {
     if (!navigator.mediaDevices?.addEventListener) return;
