@@ -129,7 +129,6 @@ export const resolveCopy = (key: CopyKey, params?: Record<string, string>) => {
   }
 
   if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line no-console
     console.warn("[copy] missing key", key);
   }
 

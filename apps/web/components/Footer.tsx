@@ -5,7 +5,9 @@ export default function Footer() {
     <footer className="border-t border-slate-800 pt-6 text-xs text-slate-200">
       <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center text-sm text-slate-700">
         <strong>Your privacy is protected.</strong> Audio analyzed locally, never uploaded.
-        <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
+        <span className="block">
+          We store your latest recording only in this browser tab to enable playback.
+        </span>
       </div>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-1">

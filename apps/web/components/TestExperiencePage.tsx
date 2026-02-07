@@ -37,7 +37,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const [useCase, setUseCase] = useState<UseCase>("meetings");
   const [detectedDeviceType, setDetectedDeviceType] = useState<DeviceType>("unknown");
   const [deviceTypeOverride, setDeviceTypeOverride] = useState<DeviceType | null>(null);
-  const hasShownIOSAlert = useRef(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [deviceRefreshSignal, setDeviceRefreshSignal] = useState("0");
   const [isRecordingDetailsOpen, setIsRecordingDetailsOpen] = useState(false);
   const [trackSettingsSnapshot, setTrackSettingsSnapshot] = useState<MediaTrackSettings | null>(null);
@@ -101,10 +101,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
 
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if (isIOS && !hasShownIOSAlert.current) {
-      hasShownIOSAlert.current = true;
-      window.alert("For best results, use Chrome on iOS.");
-    }
+    setIsIOSDevice(isIOS);
   }, []);
 
   useEffect(() => {
@@ -334,6 +331,12 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             </button>
             <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
+
+          {isIOSDevice ? (
+            <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
+              iOS note: for best results, use Chrome on iOS and speak close to the microphone.
+            </div>
+          ) : null}
 
           <details
             className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"

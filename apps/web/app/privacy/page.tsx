@@ -1,12 +1,13 @@
 const privacyItems = [
   "No audio uploads. All recording, analysis, and scoring happen locally in your browser.",
-  "No personal data storage. We do not store microphone data, identifiers, or recordings."
+  "No account is required and we do not send recorded audio to our servers.",
+  "Anonymous product analytics events are collected to measure app usage and reliability."
 ];
 
 const audioUseItems = [
-  "The app captures 5–7 seconds of audio to analyze quality.",
-  "Audio data is processed in-memory only.",
-  "When you close the tab or refresh, the data is discarded."
+  "The app captures 5-7 seconds of audio to analyze quality.",
+  "Audio is processed locally and your latest sample is stored in sessionStorage so playback survives navigation and refresh in the same tab.",
+  "Stored audio is cleared when you start a new test or close the tab."
 ];
 
 export default function PrivacyPage() {

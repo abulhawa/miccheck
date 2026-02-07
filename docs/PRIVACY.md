@@ -5,13 +5,15 @@ MicCheck is designed to keep your audio private.
 ## What We Collect
 
 - **No audio uploads.** All recording, analysis, and scoring happen locally in your browser.
-- **No personal data storage.** We do not store microphone data, identifiers, or recordings.
+- **No account required.** We do not send recorded audio to our servers.
+- **Anonymous product analytics.** We collect non-audio analytics events to understand usage and reliability.
 
 ## How Audio Is Used
 
-- The app captures 5–7 seconds of audio to analyze quality.
-- Audio data is processed in-memory only.
-- When you close the tab or refresh, the data is discarded.
+- The app captures 5-7 seconds of audio to analyze quality.
+- Audio is processed locally in your browser.
+- To keep playback available across navigation and refresh in the same tab, the latest recording is stored in `sessionStorage`.
+- Stored audio is cleared when you start a new test or close the tab.
 
 ## Browser Permissions
 

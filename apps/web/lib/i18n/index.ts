@@ -44,7 +44,6 @@ export const t = (key: string, params?: Record<string, string>, locale?: Locale)
 
   if (!text) {
     if (process.env.NODE_ENV === "development") {
-      // eslint-disable-next-line no-console
       console.warn(`[i18n] Missing translation for key "${key}" in "${resolvedLocale}".`);
     }
     return key;

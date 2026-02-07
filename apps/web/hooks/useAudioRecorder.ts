@@ -63,7 +63,6 @@ export function useAudioRecorder({
     if (process.env.NODE_ENV === "production") {
       return;
     }
-    // eslint-disable-next-line no-console
     console.debug(`[useAudioRecorder] ${event}`, details ?? {});
   }, []);
 
@@ -95,7 +94,6 @@ export function useAudioRecorder({
       }
       const liveTracks = stream.getTracks().filter((track) => track.readyState === "live");
       if (liveTracks.length > 0) {
-        // eslint-disable-next-line no-console
         console.warn("[useAudioRecorder] live_tracks_detected_after_release", {
           reason,
           tracks: liveTracks.map((track) => ({ id: track.id, enabled: track.enabled }))
@@ -422,9 +420,9 @@ export function useAudioRecorder({
     }
   }, [
     clearRecorder,
-    clearStopTimeout,
     deviceId,
     analysisContext,
+    debugLog,
     minDuration,
     releaseMic,
     updateMeter

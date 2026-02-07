@@ -81,7 +81,9 @@ export default function HomePage() {
 
       <div className="mt-8 rounded-3xl border border-blue-200 bg-blue-50 p-6 text-center text-sm text-slate-700">
         <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
-        <span className="block">Nothing is uploaded, stored, or sent to our servers.</span>
+        <span className="block">
+          We keep your latest sample only in this browser tab so you can replay it.
+        </span>
         <Link className="mt-2 inline-flex text-xs font-semibold text-blue-700 underline" href="/privacy">
           Read the privacy policy
         </Link>
