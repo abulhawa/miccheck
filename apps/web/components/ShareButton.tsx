@@ -10,7 +10,10 @@ interface ShareButtonProps {
 export default function ShareButton({ grade }: ShareButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shareText = `My microphone scored ${grade} on MicCheck! Test yours: https://miccheck.com`;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    (typeof window !== "undefined" ? window.location.origin : "https://miccheck-sage.vercel.app");
+  const shareText = `My microphone scored ${grade} on MicCheck! Test yours: ${baseUrl}`;
   const shareLabel = grade === "A" ? t("results.share.excellent") : "Share";
 
   useEffect(
