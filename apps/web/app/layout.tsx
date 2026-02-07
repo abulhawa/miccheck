@@ -21,7 +21,15 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   icons: {
-    icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>`,
+    icon: [
+      { url: "/icons/miccheck-icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/miccheck-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/miccheck-icon-512.png", sizes: "512x512", type: "image/png" }
+    ],
+    apple: [
+      { url: "/icons/miccheck-icon-180.png", sizes: "180x180", type: "image/png" }
+    ],
+    shortcut: ["/favicon.ico"],
   },
   openGraph: {
     title: "MicCheck - 7-Second Mic Quality Test",
@@ -31,8 +39,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        width: 1024,
+        height: 1024,
         alt: "MicCheck - 7-Second Mic Quality Test"
       }
     ],
