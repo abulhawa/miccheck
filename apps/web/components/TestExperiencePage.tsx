@@ -308,114 +308,118 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             </Link>
           </div>
 
-          <AudioWaveformVisualizer
-            audioDataArray={audioDataArray}
-            currentVolume={currentVolume}
-            peakVolume={peakVolume}
-            isRecording={isRecording}
-          />
+          {!analysis ? (
+            <>
+              <AudioWaveformVisualizer
+                audioDataArray={audioDataArray}
+                currentVolume={currentVolume}
+                peakVolume={peakVolume}
+                isRecording={isRecording}
+              />
 
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-            <button
-              className={buttonStyles({
-                variant: "primary",
-                className: "min-w-[11rem]"
-              })}
-              disabled={isAnalyzing}
-              onClick={isRecording ? stopRecording : startRecording}
-            >
-              <span className="inline-flex min-w-[8rem] items-center justify-center gap-2">
-                {isAnalyzing ? <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
-                {buttonLabel}
-              </span>
-            </button>
-            <div className="text-sm text-slate-400">
-              {t("test.recording.duration", { seconds: duration.toFixed(1) })}
-            </div>
-          </div>
-
-          {isIOSDevice ? (
-            <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-100">
-              {t("test.ios.note")}
-            </div>
-          ) : null}
-
-          <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
-          <p className="text-xs text-slate-400">
-            {t("test.detected_device_type", { type: formatDeviceTypeLabel(detectedDeviceType) })}
-          </p>
-
-          {viewMode === "pro" ? (
-            <div className="grid gap-3 sm:grid-cols-2">
-              <label className="flex flex-col gap-1 text-xs text-slate-300">
-                {t("test.controls.use_case")}
-                <select
-                  className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
-                  onChange={(event) => setUseCase(event.target.value as UseCase)}
-                  value={useCase}
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                <button
+                  className={buttonStyles({
+                    variant: "primary",
+                    className: "min-w-[11rem]"
+                  })}
+                  disabled={isAnalyzing}
+                  onClick={isRecording ? stopRecording : startRecording}
                 >
-                  {ANALYSIS_CONTEXT_OPTIONS.useCases.map((nextUseCase) => (
-                    <option key={nextUseCase} value={nextUseCase}>
-                      {formatUseCaseLabel(nextUseCase)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="flex flex-col gap-1 text-xs text-slate-300">
-                {t("test.controls.device_type")}
-                <select
-                  className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
-                  onChange={(event) =>
-                    setDeviceTypeOverride(
-                      event.target.value === "auto" ? null : (event.target.value as DeviceType)
-                    )
-                  }
-                  value={deviceTypeOverride ?? "auto"}
-                >
-                  <option value="auto">{t("test.controls.auto", { type: formatDeviceTypeLabel(resolvedDeviceType) })}</option>
-                  {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
-                    <option key={deviceType} value={deviceType}>
-                      {formatDeviceTypeLabel(deviceType)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          ) : null}
-
-          <details
-            className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"
-            onToggle={(event) => setIsRecordingDetailsOpen(event.currentTarget.open)}
-          >
-            <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
-              <span className="flex items-center justify-between">
-                {t("test.details.title")}
-                <span className="text-xs font-normal text-slate-400">
-                  {isRecordingDetailsOpen ? t("test.details.collapse") : t("test.details.expand")}
-                </span>
-              </span>
-            </summary>
-            <div className="mt-3 text-xs text-slate-200">
-              {!mediaStream ? (
-                !hasCapturedRecordingDetails ? (
-                  <p className="mb-3 text-slate-400">{t("test.details.grant_access")}</p>
-                ) : null
-              ) : null}
-              <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
-                {recordingDetailsRows.map((row) => (
-                  <React.Fragment key={row.label}>
-                    <span className="text-slate-400">{row.label}</span>
-                    <span>{row.value}</span>
-                  </React.Fragment>
-                ))}
+                  <span className="inline-flex min-w-[8rem] items-center justify-center gap-2">
+                    {isAnalyzing ? <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
+                    {buttonLabel}
+                  </span>
+                </button>
+                <div className="text-sm text-slate-400">
+                  {t("test.recording.duration", { seconds: duration.toFixed(1) })}
+                </div>
               </div>
-            </div>
-          </details>
 
-          {error ? (
-            <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
-              {error}
-            </div>
+              {isIOSDevice ? (
+                <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-100">
+                  {t("test.ios.note")}
+                </div>
+              ) : null}
+
+              <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
+              <p className="text-xs text-slate-400">
+                {t("test.detected_device_type", { type: formatDeviceTypeLabel(detectedDeviceType) })}
+              </p>
+
+              {viewMode === "pro" ? (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="flex flex-col gap-1 text-xs text-slate-300">
+                    {t("test.controls.use_case")}
+                    <select
+                      className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                      onChange={(event) => setUseCase(event.target.value as UseCase)}
+                      value={useCase}
+                    >
+                      {ANALYSIS_CONTEXT_OPTIONS.useCases.map((nextUseCase) => (
+                        <option key={nextUseCase} value={nextUseCase}>
+                          {formatUseCaseLabel(nextUseCase)}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-slate-300">
+                    {t("test.controls.device_type")}
+                    <select
+                      className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                      onChange={(event) =>
+                        setDeviceTypeOverride(
+                          event.target.value === "auto" ? null : (event.target.value as DeviceType)
+                        )
+                      }
+                      value={deviceTypeOverride ?? "auto"}
+                    >
+                      <option value="auto">{t("test.controls.auto", { type: formatDeviceTypeLabel(resolvedDeviceType) })}</option>
+                      {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
+                        <option key={deviceType} value={deviceType}>
+                          {formatDeviceTypeLabel(deviceType)}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              ) : null}
+
+              <details
+                className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"
+                onToggle={(event) => setIsRecordingDetailsOpen(event.currentTarget.open)}
+              >
+                <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
+                  <span className="flex items-center justify-between">
+                    {t("test.details.title")}
+                    <span className="text-xs font-normal text-slate-400">
+                      {isRecordingDetailsOpen ? t("test.details.collapse") : t("test.details.expand")}
+                    </span>
+                  </span>
+                </summary>
+                <div className="mt-3 text-xs text-slate-200">
+                  {!mediaStream ? (
+                    !hasCapturedRecordingDetails ? (
+                      <p className="mb-3 text-slate-400">{t("test.details.grant_access")}</p>
+                    ) : null
+                  ) : null}
+                  <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
+                    {recordingDetailsRows.map((row) => (
+                      <React.Fragment key={row.label}>
+                        <span className="text-slate-400">{row.label}</span>
+                        <span>{row.value}</span>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              </details>
+
+              {error ? (
+                <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
+                  {error}
+                </div>
+              ) : null}
+            </>
           ) : null}
         </div>
       </section>
@@ -480,11 +484,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             </section>
           )}
         </>
-      ) : (
-        <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
-          {t("test.results.placeholder")}
-        </section>
-      )}
+      ) : null}
 
       {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
     </div>

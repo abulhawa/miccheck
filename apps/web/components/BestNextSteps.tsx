@@ -62,6 +62,8 @@ export default function BestNextSteps({
 }: BestNextStepsProps) {
   const actionSteps = verdict.bestNextSteps?.filter((step) => step.kind === "action") ?? [];
   const visibleActionSteps = typeof maxActionSteps === "number" ? actionSteps.slice(0, maxActionSteps) : actionSteps;
+  const hasPrimaryActionSummary = visibleActionSteps.length > 0;
+  const listedActionSteps = hasPrimaryActionSummary ? visibleActionSteps.slice(1) : visibleActionSteps;
   const gearSteps = includeGear
     ? verdict.bestNextSteps?.filter((step) => step.kind === "gear_optional") ?? []
     : [];
@@ -129,9 +131,9 @@ export default function BestNextSteps({
           </li>
         ) : null}
       </ul>
-      {visibleActionSteps.length ? (
+      {listedActionSteps.length ? (
         <ul className="mt-4 space-y-2 text-sm text-slate-300">
-          {visibleActionSteps.map((step) => (
+          {listedActionSteps.map((step) => (
             <li key={`${step.kind}-${step.title}`}>• {resolveActionTitle(step)}</li>
           ))}
         </ul>
