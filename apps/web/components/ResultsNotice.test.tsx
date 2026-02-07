@@ -8,7 +8,7 @@ describe("ResultsNotice", () => {
     const html = renderToStaticMarkup(
       <ResultsNotice diagnosticCertainty="high" specialState="NO_SPEECH" />
     );
-    expect(html).toContain("Results may be less reliable");
+    expect(html).toContain("No speech was detected");
   });
 
   it("shows notice for low diagnostic certainty", () => {

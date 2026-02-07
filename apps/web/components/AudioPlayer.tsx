@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import PlaybackControls from "./PlaybackControls";
 import WaveformWithPlayhead from "./WaveformWithPlayhead";
 import { useAudioPlayback } from "../hooks/useAudioPlayback";
+import { t } from "../lib/i18n";
 
 interface AudioPlayerProps {
   audioBlob: Blob;
@@ -60,7 +61,7 @@ export default function AudioPlayer({
         const AudioContextClass = window.AudioContext ||
           (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
         if (!AudioContextClass) {
-          setWaveformError("Waveform preview is unavailable in this browser.");
+          setWaveformError(t("audio.playback.waveform_unavailable"));
           return;
         }
         const audioContext = new AudioContextClass();
@@ -76,7 +77,7 @@ export default function AudioPlayer({
           setWaveformError(
             error instanceof Error
               ? error.message
-              : "Unable to generate waveform preview."
+              : t("audio.playback.waveform_failed")
           );
         }
       }
@@ -113,9 +114,9 @@ export default function AudioPlayer({
     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-slate-200">
       <div className="flex flex-col gap-4">
         <div>
-          <h3 className="text-base font-semibold">Playback</h3>
+          <h3 className="text-base font-semibold">{t("audio.playback.title")}</h3>
           <p className="mt-1 text-xs text-slate-400">
-            Hear exactly what was analyzed to build trust in your results.
+            {t("audio.playback.subtitle")}
           </p>
         </div>
 
@@ -144,7 +145,7 @@ export default function AudioPlayer({
         />
 
         <div className="text-xs text-slate-200">
-          🔊 Playing from your browser&apos;s memory (not uploaded)
+          {t("audio.playback.memory_notice")}
         </div>
       </div>
     </div>

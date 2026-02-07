@@ -8,15 +8,18 @@ interface ResultsNoticeProps {
 }
 
 export default function ResultsNotice({ specialState, diagnosticCertainty }: ResultsNoticeProps) {
-  const shouldShowNotice = specialState === "NO_SPEECH" || diagnosticCertainty === "low";
+  const shouldShowNoSpeechNotice = specialState === "NO_SPEECH";
+  const shouldShowLowCertaintyNotice = diagnosticCertainty === "low";
 
-  if (!shouldShowNotice) {
+  if (!shouldShowNoSpeechNotice && !shouldShowLowCertaintyNotice) {
     return null;
   }
 
   return (
     <section className="rounded-2xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
-      {t("results.notice.low_certainty")}
+      {shouldShowNoSpeechNotice
+        ? t("results.notice.no_speech")
+        : t("results.notice.low_certainty")}
     </section>
   );
 }

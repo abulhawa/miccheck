@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import type { ChangeEvent } from "react";
+import { t } from "../lib/i18n";
 
 interface PlaybackControlsProps {
   isPlaying: boolean;
@@ -46,25 +47,25 @@ export default function PlaybackControls({
           className="rounded-lg border border-slate-700 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:border-slate-500"
           onClick={isPlaying ? onPause : onPlay}
           type="button"
-          aria-label={isPlaying ? "Pause playback" : "Play recording"}
+          aria-label={isPlaying ? t("playback.aria.pause") : t("playback.aria.play")}
         >
-          {isPlaying ? "⏸ Pause" : "▶ Play"}
+          {isPlaying ? t("playback.pause") : t("playback.play")}
         </button>
         <button
           className="rounded-lg border border-slate-700 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:border-slate-500"
           onClick={onStop}
           type="button"
-          aria-label="Stop playback"
+          aria-label={t("playback.aria.stop")}
         >
-          ⏹ Stop
+          {t("playback.stop")}
         </button>
         <button
           className="rounded-lg border border-slate-700 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:border-slate-500"
           onClick={onReplay}
           type="button"
-          aria-label="Replay recording"
+          aria-label={t("playback.aria.replay")}
         >
-          🔁 Replay
+          {t("playback.replay")}
         </button>
       </div>
 
@@ -77,7 +78,7 @@ export default function PlaybackControls({
           type="range"
           value={Math.min(currentTime, duration || 0)}
           onChange={handleRangeChange}
-          aria-label="Seek through recording"
+          aria-label={t("playback.aria.seek")}
         />
         <div className="flex items-center justify-between text-xs text-slate-400">
           <span>{formatTime(currentTime)}</span>

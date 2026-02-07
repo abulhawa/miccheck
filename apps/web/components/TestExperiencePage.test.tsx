@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import type { AnalysisResult } from "../types";
@@ -110,7 +110,7 @@ describe("TestExperiencePage", () => {
 
     const html = renderToStaticMarkup(<TestExperiencePage viewMode="pro" />);
 
-    expect(html).toContain("✅ You’re good to go");
+    expect(html).toContain("You are good to go");
     expect(html).toContain("Want to save it? Share your result.");
     expect(html).not.toContain("BestNextSteps");
   });
@@ -135,7 +135,9 @@ describe("TestExperiencePage", () => {
             ...baseAnalysis.verdict.copyKeys,
             explanationKey: "overall.echo.impact_some"
           },
-          bestNextSteps: [{ kind: "action", title: "recommendation.reduce_echo", titleKey: "recommendation.reduce_echo" }]
+          bestNextSteps: [
+            { kind: "action", title: "recommendation.reduce_echo", titleKey: "recommendation.reduce_echo" }
+          ]
         }
       },
       startRecording: vi.fn(),
@@ -146,6 +148,6 @@ describe("TestExperiencePage", () => {
     const html = renderToStaticMarkup(<TestExperiencePage viewMode="pro" />);
 
     expect(html).toContain("BestNextSteps");
-    expect(html).not.toContain("✅ You’re good to go");
+    expect(html).not.toContain("You are good to go");
   });
 });

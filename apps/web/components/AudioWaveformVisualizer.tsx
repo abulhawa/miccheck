@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
+import { t } from "../lib/i18n";
 
 export interface AudioWaveformVisualizerProps {
   audioDataArray: Float32Array | null;
@@ -49,7 +50,7 @@ export default function AudioWaveformVisualizer({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
 
     const draw = () => {
       const { currentVolume: liveVolume, peakVolume: livePeak, isRecording: liveRecording } =
@@ -115,7 +116,7 @@ export default function AudioWaveformVisualizer({
       if (!liveRecording) {
         ctx.fillStyle = "rgba(148, 163, 184, 0.6)";
         ctx.font = "12px ui-sans-serif";
-        ctx.fillText("Idle", 12, 18);
+        ctx.fillText(t("audio.waveform.status_idle"), 12, 18);
       } else {
         const normalized = clamp(liveVolume);
         const meterX = width - 12;
@@ -124,21 +125,25 @@ export default function AudioWaveformVisualizer({
         ctx.fillRect(meterX, height - meterHeight, 4, meterHeight);
       }
 
-      animationFrameId = requestAnimationFrame(draw);
+      if (liveRecording) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
     };
 
     draw();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
-  }, [gradientStops, height, width]);
+  }, [gradientStops, height, width, isRecording]);
 
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span className="flex items-center gap-2">
-          <span>Input waveform</span>
+          <span>{t("audio.waveform.title")}</span>
           <span className={isRecording ? "text-emerald-300" : "text-slate-200"}>
             <svg
               aria-hidden="true"
@@ -152,7 +157,7 @@ export default function AudioWaveformVisualizer({
             </svg>
           </span>
         </span>
-        <span>{isRecording ? "Listening…" : "Idle"}</span>
+        <span>{isRecording ? t("audio.waveform.status_listening") : t("audio.waveform.status_idle")}</span>
       </div>
       <div className="mt-4 rounded-2xl bg-slate-900/80 p-3">
         <div className="relative h-28 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
@@ -160,7 +165,7 @@ export default function AudioWaveformVisualizer({
         </div>
       </div>
       <p className="mt-3 text-xs text-slate-200">
-        Peaks are marked in red—aim for a strong signal without touching the ceiling.
+        {t("audio.waveform.caption")}
       </p>
     </div>
   );

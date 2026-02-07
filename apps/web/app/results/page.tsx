@@ -149,7 +149,7 @@ export default function ResultsPage() {
             onClick={handleTestAgain}
             type="button"
           >
-            {t("results.cta.test_again")}
+            {t("results.cta.run_another_test")}
           </button>
         </section>
       ) : (
@@ -168,7 +168,7 @@ export default function ResultsPage() {
               onClick={handleTestAgain}
               type="button"
             >
-              {t("results.cta.test_again")}
+              {t("results.cta.run_another_test")}
             </button>
           </section>
 

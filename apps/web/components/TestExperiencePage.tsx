@@ -218,9 +218,9 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const isExcellent = analysis?.verdict.overall.grade === "A";
 
   const buttonLabel = useMemo(() => {
-    if (isRecording) return "Stop recording";
-    if (isAnalyzing) return "Analyzing...";
-    return "Start recording";
+    if (isRecording) return t("test.recording.stop");
+    if (isAnalyzing) return t("test.recording.analyzing");
+    return t("test.recording.start");
   }, [isRecording, isAnalyzing]);
 
   const handleDeviceChange = useCallback(
@@ -249,13 +249,13 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
 
   const formatValue = useCallback((value: unknown) => {
     if (value === undefined || value === null || value === "") {
-      return "Not available";
+      return t("test.details.not_available");
     }
     if (typeof value === "boolean") {
-      return value ? "Enabled" : "Disabled";
+      return value ? t("test.details.enabled") : t("test.details.disabled");
     }
     if (typeof value === "number") {
-      return Number.isFinite(value) ? `${value}` : "Not available";
+      return Number.isFinite(value) ? `${value}` : t("test.details.not_available");
     }
     return String(value);
   }, []);
@@ -266,16 +266,16 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
         ? (trackSettingsSnapshot as MediaTrackSettings & { latency?: number }).latency
         : undefined;
     return [
-      { label: "Auto gain control", value: formatValue(trackSettingsSnapshot?.autoGainControl) },
-      { label: "Echo cancellation", value: formatValue(trackSettingsSnapshot?.echoCancellation) },
-      { label: "Noise suppression", value: formatValue(trackSettingsSnapshot?.noiseSuppression) },
-      { label: "Channel count", value: formatValue(trackSettingsSnapshot?.channelCount) },
-      { label: "Sample rate", value: formatValue(trackSettingsSnapshot?.sampleRate) },
-      { label: "Sample size", value: formatValue(trackSettingsSnapshot?.sampleSize) },
-      { label: "Latency", value: formatValue(trackLatency) },
-      { label: "AudioContext sample rate", value: formatValue(audioContextSnapshot?.sampleRate) },
-      { label: "AudioContext base latency", value: formatValue(audioContextSnapshot?.baseLatency) },
-      { label: "AudioContext output latency", value: formatValue(audioContextSnapshot?.outputLatency) }
+      { label: t("test.details.auto_gain_control"), value: formatValue(trackSettingsSnapshot?.autoGainControl) },
+      { label: t("test.details.echo_cancellation"), value: formatValue(trackSettingsSnapshot?.echoCancellation) },
+      { label: t("test.details.noise_suppression"), value: formatValue(trackSettingsSnapshot?.noiseSuppression) },
+      { label: t("test.details.channel_count"), value: formatValue(trackSettingsSnapshot?.channelCount) },
+      { label: t("test.details.sample_rate"), value: formatValue(trackSettingsSnapshot?.sampleRate) },
+      { label: t("test.details.sample_size"), value: formatValue(trackSettingsSnapshot?.sampleSize) },
+      { label: t("test.details.latency"), value: formatValue(trackLatency) },
+      { label: t("test.details.audio_context_sample_rate"), value: formatValue(audioContextSnapshot?.sampleRate) },
+      { label: t("test.details.audio_context_base_latency"), value: formatValue(audioContextSnapshot?.baseLatency) },
+      { label: t("test.details.audio_context_output_latency"), value: formatValue(audioContextSnapshot?.outputLatency) }
     ];
   }, [audioContextSnapshot, formatValue, trackSettingsSnapshot]);
 
@@ -285,10 +285,10 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
       <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
         <div className="flex flex-col gap-3">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-200">MicCheck Test</p>
-          <h1 className="text-3xl font-semibold">Record a quick sample</h1>
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{t("test.header.eyebrow")}</p>
+          <h1 className="text-3xl font-semibold">{t("test.header.title")}</h1>
           <p className="text-sm text-slate-200">
-            We&apos;ll capture 5–7 seconds to analyze level, noise, and echo.
+            {t("test.header.subtitle")}
           </p>
         </div>
         <div className="mt-8 flex flex-col gap-6">
@@ -297,14 +297,14 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
               className={viewMode === "basic" ? "text-white underline" : "text-slate-300"}
               href="/test"
             >
-              Basic view
+              {t("test.view.basic")}
             </Link>
             <span className="text-slate-500">/</span>
             <Link
               className={viewMode === "pro" ? "text-white underline" : "text-slate-300"}
               href="/pro"
             >
-              Pro view
+              {t("test.view.pro")}
             </Link>
           </div>
 
@@ -329,12 +329,14 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 {buttonLabel}
               </span>
             </button>
-            <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
+            <div className="text-sm text-slate-400">
+              {t("test.recording.duration", { seconds: duration.toFixed(1) })}
+            </div>
           </div>
 
           {isIOSDevice ? (
             <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
-              iOS note: for best results, use Chrome on iOS and speak close to the microphone.
+              {t("test.ios.note")}
             </div>
           ) : null}
 
@@ -344,16 +346,16 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           >
             <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
               <span className="flex items-center justify-between">
-                Recording details
+                {t("test.details.title")}
                 <span className="text-xs font-normal text-slate-400">
-                  {isRecordingDetailsOpen ? "Collapse" : "Expand"}
+                  {isRecordingDetailsOpen ? t("test.details.collapse") : t("test.details.expand")}
                 </span>
               </span>
             </summary>
             <div className="mt-3 text-xs text-slate-200">
               {!mediaStream ? (
                 !hasCapturedRecordingDetails ? (
-                  <p className="mb-3 text-slate-400">Grant mic access to view details.</p>
+                  <p className="mb-3 text-slate-400">{t("test.details.grant_access")}</p>
                 ) : null
               ) : null}
               <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
@@ -368,12 +370,14 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           </details>
 
           <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
-          <p className="text-xs text-slate-400">Detected device type: {formatDeviceTypeLabel(detectedDeviceType)}</p>
+          <p className="text-xs text-slate-400">
+            {t("test.detected_device_type", { type: formatDeviceTypeLabel(detectedDeviceType) })}
+          </p>
 
           {viewMode === "pro" ? (
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="flex flex-col gap-1 text-xs text-slate-300">
-                Use case
+                {t("test.controls.use_case")}
                 <select
                   className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
                   onChange={(event) => setUseCase(event.target.value as UseCase)}
@@ -387,7 +391,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 </select>
               </label>
               <label className="flex flex-col gap-1 text-xs text-slate-300">
-                Device type
+                {t("test.controls.device_type")}
                 <select
                   className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
                   onChange={(event) =>
@@ -397,7 +401,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                   }
                   value={deviceTypeOverride ?? "auto"}
                 >
-                  <option value="auto">Auto ({formatDeviceTypeLabel(resolvedDeviceType)})</option>
+                  <option value="auto">{t("test.controls.auto", { type: formatDeviceTypeLabel(resolvedDeviceType) })}</option>
                   {ANALYSIS_CONTEXT_OPTIONS.deviceTypes.map((deviceType) => (
                     <option key={deviceType} value={deviceType}>
                       {formatDeviceTypeLabel(deviceType)}
@@ -427,7 +431,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
               <div className="flex flex-col gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
-                  🎤❌ No speech detected
+                  {t("test.no_speech.badge")}
                 </p>
                 <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
                 <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
@@ -437,7 +441,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 onClick={handleTestAgain}
                 type="button"
               >
-                Test again
+                {t("results.cta.run_another_test")}
               </button>
             </section>
           ) : (
@@ -465,17 +469,11 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
               )}
               <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
                 <div className="mt-6 flex flex-wrap gap-4">
-                  <Link
-                    className="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:bg-slate-700"
-                    href="/results"
-                  >
-                    See sample results
-                  </Link>
                   <button
                     className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
                     onClick={handleTestAgain}
                   >
-                    Test again
+                    {t("results.cta.run_another_test")}
                   </button>
                 </div>
               </div>
@@ -484,7 +482,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
         </>
       ) : (
         <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
-          Your results will appear here after recording.
+          {t("test.results.placeholder")}
         </section>
       )}
 

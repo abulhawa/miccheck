@@ -36,15 +36,15 @@ export default function HomePage() {
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               className={buttonStyles({ variant: "primary", className: "text-center" })}
-              href="/pro"
+              href="/test"
             >
-              Start a test
+              Start Mic Test
             </Link>
             <Link
               className={buttonStyles({ variant: "secondary", className: "text-center" })}
               href="/results"
             >
-              View sample results
+              Sample Results
             </Link>
           </div>
           <p className="text-xs text-slate-200">
