@@ -27,6 +27,7 @@ const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
 const VIEW_MODE_STORAGE_KEY = "miccheck.view.mode.v1";
 
 type ViewMode = "basic" | "pro";
+type MicPermissionState = "unknown" | "granted" | "denied" | "prompt" | "unsupported";
 
 interface TestExperiencePageProps {
   viewMode: ViewMode;
@@ -40,6 +41,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [deviceRefreshSignal, setDeviceRefreshSignal] = useState("0");
   const [isRecordingDetailsOpen, setIsRecordingDetailsOpen] = useState(false);
+  const [micPermissionState, setMicPermissionState] = useState<MicPermissionState>("unknown");
   const [trackSettingsSnapshot, setTrackSettingsSnapshot] = useState<MediaTrackSettings | null>(null);
   const [audioContextSnapshot, setAudioContextSnapshot] = useState<{
     sampleRate?: number;
@@ -102,6 +104,44 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     setIsIOSDevice(isIOS);
+  }, []);
+
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !navigator.permissions?.query) {
+      setMicPermissionState("unsupported");
+      return;
+    }
+
+    let isCancelled = false;
+    let permissionStatus: PermissionStatus | null = null;
+
+    const handlePermissionChange = () => {
+      if (isCancelled || !permissionStatus) return;
+      setMicPermissionState(permissionStatus.state as MicPermissionState);
+    };
+
+    const readPermission = async () => {
+      try {
+        permissionStatus = await navigator.permissions.query({
+          name: "microphone" as PermissionName
+        });
+        if (isCancelled) return;
+
+        setMicPermissionState(permissionStatus.state as MicPermissionState);
+        permissionStatus.addEventListener("change", handlePermissionChange);
+      } catch {
+        if (!isCancelled) {
+          setMicPermissionState("unsupported");
+        }
+      }
+    };
+
+    void readPermission();
+
+    return () => {
+      isCancelled = true;
+      permissionStatus?.removeEventListener("change", handlePermissionChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -216,6 +256,38 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
   const isExcellent = analysis?.verdict.overall.grade === "A";
+  const hasResults = Boolean(analysis);
+
+  const activeStep = useMemo(() => {
+    if (hasResults) return "results";
+    if (isAnalyzing) return "analyze";
+    return "record";
+  }, [hasResults, isAnalyzing]);
+
+  const stepItems = useMemo(
+    () => [
+      { id: "record", label: t("test.steps.record") },
+      { id: "analyze", label: t("test.steps.analyze") },
+      { id: "results", label: t("test.steps.results") }
+    ],
+    []
+  );
+
+  const micStatusMessage = useMemo(() => {
+    if (isRecording) return t("audio.waveform.status_listening");
+    if (isAnalyzing) return t("test.recording.analyzing");
+    if (micPermissionState === "granted") return t("test.permission.granted");
+    if (micPermissionState === "denied") return t("test.permission.denied");
+    if (micPermissionState === "unsupported") return t("test.permission.unsupported");
+    return t("test.permission.prompt");
+  }, [isAnalyzing, isRecording, micPermissionState]);
+
+  const micStatusToneClass =
+    micPermissionState === "granted"
+      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-100"
+      : micPermissionState === "denied"
+        ? "border-rose-500/40 bg-rose-500/10 text-rose-100"
+        : "border-slate-700 bg-slate-900/60 text-slate-200";
 
   const buttonLabel = useMemo(() => {
     if (isRecording) return t("test.recording.stop");
@@ -290,6 +362,28 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           <p className="text-sm text-slate-200">
             {t("test.header.subtitle")}
           </p>
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
+            {stepItems.map((step, index) => {
+              const isActive = step.id === activeStep;
+              const isPast = stepItems.findIndex((item) => item.id === activeStep) > index;
+              return (
+                <React.Fragment key={step.id}>
+                  <span
+                    className={`rounded-full border px-3 py-1 transition ${
+                      isActive
+                        ? "border-brand-500/60 bg-brand-500/20 text-white"
+                        : isPast
+                          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
+                          : "border-slate-700 bg-slate-900/40 text-slate-300"
+                    }`}
+                  >
+                    {step.label}
+                  </span>
+                  {index < stepItems.length - 1 ? <span className="text-slate-500">{"->"}</span> : null}
+                </React.Fragment>
+              );
+            })}
+          </div>
         </div>
         <div className="mt-8 flex flex-col gap-6">
           <div className="flex gap-3 text-xs font-semibold">
@@ -314,6 +408,10 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             peakVolume={peakVolume}
             isRecording={isRecording}
           />
+          <div className={`rounded-xl border px-4 py-3 text-xs ${micStatusToneClass}`}>
+            <p className="font-semibold">{t("test.permission.title")}</p>
+            <p className="mt-1">{micStatusMessage}</p>
+          </div>
 
           <div className="flex flex-wrap items-center gap-4">
             <button
@@ -339,35 +437,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
               {t("test.ios.note")}
             </div>
           ) : null}
-
-          <details
-            className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"
-            onToggle={(event) => setIsRecordingDetailsOpen(event.currentTarget.open)}
-          >
-            <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
-              <span className="flex items-center justify-between">
-                {t("test.details.title")}
-                <span className="text-xs font-normal text-slate-400">
-                  {isRecordingDetailsOpen ? t("test.details.collapse") : t("test.details.expand")}
-                </span>
-              </span>
-            </summary>
-            <div className="mt-3 text-xs text-slate-200">
-              {!mediaStream ? (
-                !hasCapturedRecordingDetails ? (
-                  <p className="mb-3 text-slate-400">{t("test.details.grant_access")}</p>
-                ) : null
-              ) : null}
-              <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
-                {recordingDetailsRows.map((row) => (
-                  <React.Fragment key={row.label}>
-                    <span className="text-slate-400">{row.label}</span>
-                    <span>{row.value}</span>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          </details>
 
           <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
           <p className="text-xs text-slate-400">
@@ -411,6 +480,35 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
               </label>
             </div>
           ) : null}
+
+          <details
+            className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"
+            onToggle={(event) => setIsRecordingDetailsOpen(event.currentTarget.open)}
+          >
+            <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
+              <span className="flex items-center justify-between">
+                {t("test.details.title")}
+                <span className="text-xs font-normal text-slate-400">
+                  {isRecordingDetailsOpen ? t("test.details.collapse") : t("test.details.expand")}
+                </span>
+              </span>
+            </summary>
+            <div className="mt-3 text-xs text-slate-200">
+              {!mediaStream ? (
+                !hasCapturedRecordingDetails ? (
+                  <p className="mb-3 text-slate-400">{t("test.details.grant_access")}</p>
+                ) : null
+              ) : null}
+              <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
+                {recordingDetailsRows.map((row) => (
+                  <React.Fragment key={row.label}>
+                    <span className="text-slate-400">{row.label}</span>
+                    <span>{row.value}</span>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          </details>
 
           {error ? (
             <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">

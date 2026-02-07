@@ -33,7 +33,7 @@ export default function HomePage() {
             Record a quick sample, get an instant grade, and fix the biggest issue in
             your setup. Everything happens locally in your browser.
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               className={buttonStyles({ variant: "primary", className: "text-center" })}
               href="/test"
@@ -41,7 +41,7 @@ export default function HomePage() {
               Start Mic Test
             </Link>
             <Link
-              className={buttonStyles({ variant: "secondary", className: "text-center" })}
+              className="text-sm font-semibold text-slate-300 underline decoration-slate-500 underline-offset-4 transition hover:text-white hover:decoration-slate-300"
               href="/results"
             >
               Sample Results
@@ -58,7 +58,7 @@ export default function HomePage() {
               <div className="mt-1 h-3 w-3 rounded-full bg-emerald-400" />
               <div>
                 <p className="font-medium">Letter grade</p>
-                <p className="text-sm text-slate-400">A–F score based on the weakest category.</p>
+                <p className="text-sm text-slate-400">A-F score based on the weakest category.</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -79,12 +79,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mt-8 rounded-3xl border border-blue-200 bg-blue-50 p-6 text-center text-sm text-slate-700">
-        <strong>Your privacy is protected.</strong> Audio is processed locally in your browser.
+      <div className="mt-6 rounded-3xl border border-slate-700/70 bg-slate-900/80 p-6 text-center text-sm text-slate-200">
+        <strong className="text-slate-100">Your privacy is protected.</strong> Audio is processed locally in your browser.
         <span className="block">
           We keep your latest sample only in this browser tab so you can replay it.
         </span>
-        <Link className="mt-2 inline-flex text-xs font-semibold text-blue-700 underline" href="/privacy">
+        <Link className="mt-2 inline-flex text-xs font-semibold text-sky-300 underline decoration-sky-500/60 underline-offset-4 transition hover:text-sky-200" href="/privacy">
           Read the privacy policy
         </Link>
       </div>

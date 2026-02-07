@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "../components/Footer";
+import HeaderNavLinks from "../components/HeaderNavLinks";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://miccheck-sage.vercel.app"),
@@ -80,23 +80,8 @@ export default function RootLayout({
                 <p className="text-xs text-slate-400">7-Second Mic Quality Test</p>
               </div>
             </div>
-            <nav className="hidden gap-6 text-sm text-slate-200 md:flex">
-              <Link className="transition hover:text-white" href="/test">
-                Start Mic Test
-              </Link>
-              <Link className="transition hover:text-white" href="/results">
-                Sample Results
-              </Link>
-            </nav>
           </header>
-          <nav className="mt-4 flex gap-4 text-xs text-slate-300 md:hidden">
-            <Link className="rounded-lg border border-slate-800 px-3 py-2 transition hover:border-slate-700 hover:text-white" href="/test">
-              Start Mic Test
-            </Link>
-            <Link className="rounded-lg border border-slate-800 px-3 py-2 transition hover:border-slate-700 hover:text-white" href="/results">
-              Sample Results
-            </Link>
-          </nav>
+          <HeaderNavLinks />
           <main className="flex-1 py-10">{children}</main>
           <Footer />
         </div>
