@@ -30,9 +30,10 @@ type ViewMode = "basic" | "pro";
 
 interface TestExperiencePageProps {
   viewMode: ViewMode;
+  initialUseCase?: UseCase;
 }
 
-export default function TestExperiencePage({ viewMode }: TestExperiencePageProps) {
+export default function TestExperiencePage({ viewMode, initialUseCase }: TestExperiencePageProps) {
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCase>("meetings");
   const [detectedDeviceType, setDetectedDeviceType] = useState<DeviceType>("unknown");
@@ -77,7 +78,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
 
   useEffect(() => {
     const storedContext = loadAnalysisContext();
-    setUseCase(storedContext.use_case);
+    setUseCase(initialUseCase ?? storedContext.use_case);
 
     const storedOverride = window.localStorage.getItem(DEVICE_OVERRIDE_STORAGE_KEY);
     if (storedOverride) {
@@ -85,7 +86,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     }
 
     window.localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
-  }, [viewMode]);
+  }, [initialUseCase, viewMode]);
 
   useEffect(() => {
     saveAnalysisContext({ use_case: useCase, device_type: "unknown", mode: viewMode });

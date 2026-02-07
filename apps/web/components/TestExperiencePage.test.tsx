@@ -11,6 +11,10 @@ vi.mock("next/link", () => ({
   default: ({ children }: { children: React.ReactNode }) => <>{children}</>
 }));
 
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams()
+}));
+
 vi.mock("../hooks/useAudioRecorder", () => ({
   useAudioRecorder: (...args: unknown[]) => mockUseAudioRecorder(...args)
 }));
