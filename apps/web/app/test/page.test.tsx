@@ -9,8 +9,9 @@ vi.mock("../../components/TestExperiencePage", () => ({
 import BasicTestPage from "./page";
 
 describe("BasicTestPage", () => {
-  it("renders the basic experience", () => {
-    const html = renderToStaticMarkup(<BasicTestPage />);
+  it("renders the basic experience", async () => {
+    const page = await BasicTestPage();
+    const html = renderToStaticMarkup(page);
     expect(html).toContain('data-view-mode="basic"');
   });
 });

@@ -9,8 +9,9 @@ vi.mock("../../components/TestExperiencePage", () => ({
 import ProTestPage from "./page";
 
 describe("ProTestPage", () => {
-  it("renders the pro experience", () => {
-    const html = renderToStaticMarkup(<ProTestPage />);
+  it("renders the pro experience", async () => {
+    const page = await ProTestPage();
+    const html = renderToStaticMarkup(page);
     expect(html).toContain('data-view-mode="pro"');
     expect(html).not.toContain("Example: common home-office setup");
   });
