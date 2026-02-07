@@ -20,9 +20,9 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col gap-12">
-      <section className="grid gap-10 md:grid-cols-2">
-        <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8 md:gap-12">
+      <section className="grid gap-8 md:grid-cols-2 md:gap-10">
+        <div className="flex flex-col gap-5 md:gap-6">
           <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">
             MicCheck
           </span>
@@ -51,7 +51,7 @@ export default function HomePage() {
             We never upload audio. Review our privacy policy anytime.
           </p>
         </div>
-        <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg">
+        <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg md:p-6">
           <h2 className="text-lg font-semibold">What you&apos;ll get</h2>
           <div className="mt-4 space-y-4">
             <div className="flex items-start gap-3">
@@ -79,7 +79,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mt-6 rounded-3xl border border-slate-700/70 bg-slate-900/80 p-6 text-center text-sm text-slate-200">
+      <div className="mt-4 rounded-3xl border border-slate-700/70 bg-slate-900/80 p-5 text-center text-sm text-slate-200 md:mt-6 md:p-6">
         <strong className="text-slate-100">Your privacy is protected.</strong> Audio is processed locally in your browser.
         <span className="block">
           We keep your latest sample only in this browser tab so you can replay it.
@@ -89,11 +89,11 @@ export default function HomePage() {
         </Link>
       </div>
 
-      <section className="grid gap-6 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-3 md:gap-6">
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6"
+            className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 md:p-6"
           >
             <h3 className="text-lg font-semibold">{feature.title}</h3>
             <p className="mt-2 text-sm text-slate-400">{feature.description}</p>

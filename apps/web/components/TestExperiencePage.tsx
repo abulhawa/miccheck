@@ -27,7 +27,6 @@ const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
 const VIEW_MODE_STORAGE_KEY = "miccheck.view.mode.v1";
 
 type ViewMode = "basic" | "pro";
-type MicPermissionState = "unknown" | "granted" | "denied" | "prompt" | "unsupported";
 
 interface TestExperiencePageProps {
   viewMode: ViewMode;
@@ -41,7 +40,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [deviceRefreshSignal, setDeviceRefreshSignal] = useState("0");
   const [isRecordingDetailsOpen, setIsRecordingDetailsOpen] = useState(false);
-  const [micPermissionState, setMicPermissionState] = useState<MicPermissionState>("unknown");
   const [trackSettingsSnapshot, setTrackSettingsSnapshot] = useState<MediaTrackSettings | null>(null);
   const [audioContextSnapshot, setAudioContextSnapshot] = useState<{
     sampleRate?: number;
@@ -104,44 +102,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     setIsIOSDevice(isIOS);
-  }, []);
-
-  useEffect(() => {
-    if (typeof navigator === "undefined" || !navigator.permissions?.query) {
-      setMicPermissionState("unsupported");
-      return;
-    }
-
-    let isCancelled = false;
-    let permissionStatus: PermissionStatus | null = null;
-
-    const handlePermissionChange = () => {
-      if (isCancelled || !permissionStatus) return;
-      setMicPermissionState(permissionStatus.state as MicPermissionState);
-    };
-
-    const readPermission = async () => {
-      try {
-        permissionStatus = await navigator.permissions.query({
-          name: "microphone" as PermissionName
-        });
-        if (isCancelled) return;
-
-        setMicPermissionState(permissionStatus.state as MicPermissionState);
-        permissionStatus.addEventListener("change", handlePermissionChange);
-      } catch {
-        if (!isCancelled) {
-          setMicPermissionState("unsupported");
-        }
-      }
-    };
-
-    void readPermission();
-
-    return () => {
-      isCancelled = true;
-      permissionStatus?.removeEventListener("change", handlePermissionChange);
-    };
   }, []);
 
   useEffect(() => {
@@ -256,38 +216,6 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
   const isExcellent = analysis?.verdict.overall.grade === "A";
-  const hasResults = Boolean(analysis);
-
-  const activeStep = useMemo(() => {
-    if (hasResults) return "results";
-    if (isAnalyzing) return "analyze";
-    return "record";
-  }, [hasResults, isAnalyzing]);
-
-  const stepItems = useMemo(
-    () => [
-      { id: "record", label: t("test.steps.record") },
-      { id: "analyze", label: t("test.steps.analyze") },
-      { id: "results", label: t("test.steps.results") }
-    ],
-    []
-  );
-
-  const micStatusMessage = useMemo(() => {
-    if (isRecording) return t("audio.waveform.status_listening");
-    if (isAnalyzing) return t("test.recording.analyzing");
-    if (micPermissionState === "granted") return t("test.permission.granted");
-    if (micPermissionState === "denied") return t("test.permission.denied");
-    if (micPermissionState === "unsupported") return t("test.permission.unsupported");
-    return t("test.permission.prompt");
-  }, [isAnalyzing, isRecording, micPermissionState]);
-
-  const micStatusToneClass =
-    micPermissionState === "granted"
-      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-100"
-      : micPermissionState === "denied"
-        ? "border-rose-500/40 bg-rose-500/10 text-rose-100"
-        : "border-slate-700 bg-slate-900/60 text-slate-200";
 
   const buttonLabel = useMemo(() => {
     if (isRecording) return t("test.recording.stop");
@@ -354,38 +282,16 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const hasCapturedRecordingDetails = trackSettingsSnapshot !== null || audioContextSnapshot !== null;
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-8">
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
+    <div className="mx-auto flex max-w-4xl flex-col gap-6 md:gap-8">
+      <section>
         <div className="flex flex-col gap-3">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{t("test.header.eyebrow")}</p>
-          <h1 className="text-3xl font-semibold">{t("test.header.title")}</h1>
+          <h1 className="text-2xl font-semibold sm:text-3xl">{t("test.header.title")}</h1>
           <p className="text-sm text-slate-200">
             {t("test.header.subtitle")}
           </p>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
-            {stepItems.map((step, index) => {
-              const isActive = step.id === activeStep;
-              const isPast = stepItems.findIndex((item) => item.id === activeStep) > index;
-              return (
-                <React.Fragment key={step.id}>
-                  <span
-                    className={`rounded-full border px-3 py-1 transition ${
-                      isActive
-                        ? "border-brand-500/60 bg-brand-500/20 text-white"
-                        : isPast
-                          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-100"
-                          : "border-slate-700 bg-slate-900/40 text-slate-300"
-                    }`}
-                  >
-                    {step.label}
-                  </span>
-                  {index < stepItems.length - 1 ? <span className="text-slate-500">{"->"}</span> : null}
-                </React.Fragment>
-              );
-            })}
-          </div>
         </div>
-        <div className="mt-8 flex flex-col gap-6">
+        <div className="mt-5 flex flex-col gap-4 sm:gap-5 md:mt-6 md:gap-6">
           <div className="flex gap-3 text-xs font-semibold">
             <Link
               className={viewMode === "basic" ? "text-white underline" : "text-slate-300"}
@@ -408,12 +314,8 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             peakVolume={peakVolume}
             isRecording={isRecording}
           />
-          <div className={`rounded-xl border px-4 py-3 text-xs ${micStatusToneClass}`}>
-            <p className="font-semibold">{t("test.permission.title")}</p>
-            <p className="mt-1">{micStatusMessage}</p>
-          </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             <button
               className={buttonStyles({
                 variant: "primary",
@@ -433,7 +335,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           </div>
 
           {isIOSDevice ? (
-            <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
+            <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-100">
               {t("test.ios.note")}
             </div>
           ) : null}
@@ -526,7 +428,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
           />
 
           {analysis.specialState === "NO_SPEECH" ? (
-            <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
+            <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-5 sm:p-6 md:p-8">
               <div className="flex flex-col gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
                   {t("test.no_speech.badge")}
@@ -535,7 +437,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                 <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
               </div>
               <button
-                className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+                className="mt-5 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 sm:mt-6"
                 onClick={handleTestAgain}
                 type="button"
               >
@@ -565,7 +467,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
                   verdict={analysis.verdict}
                 />
               )}
-              <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+              <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6">
                 <div className="mt-6 flex flex-wrap gap-4">
                   <button
                     className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"

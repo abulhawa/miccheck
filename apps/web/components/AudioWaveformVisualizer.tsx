@@ -140,7 +140,7 @@ export default function AudioWaveformVisualizer({
   }, [gradientStops, height, width, isRecording]);
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
+    <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4 sm:p-5 md:p-6">
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span className="flex items-center gap-2">
           <span>{t("audio.waveform.title")}</span>
@@ -159,12 +159,10 @@ export default function AudioWaveformVisualizer({
         </span>
         <span>{isRecording ? t("audio.waveform.status_listening") : t("audio.waveform.status_idle")}</span>
       </div>
-      <div className="mt-4 rounded-2xl bg-slate-900/80 p-3">
-        <div className="relative h-28 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
-          <canvas ref={canvasRef} width={width} height={height} className="h-full w-full" />
-        </div>
+      <div className="mt-3 relative h-24 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950 sm:h-28">
+        <canvas ref={canvasRef} width={width} height={height} className="h-full w-full" />
       </div>
-      <p className="mt-3 text-xs text-slate-200">
+      <p className="mt-2 text-xs text-slate-200 sm:mt-3">
         {t("audio.waveform.caption")}
       </p>
     </div>

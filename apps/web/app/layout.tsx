@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "../components/Footer";
-import HeaderNavLinks from "../components/HeaderNavLinks";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://miccheck-sage.vercel.app"),
@@ -69,9 +69,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
-        <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
+        <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-4 sm:px-6 sm:py-8">
           <header className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <Link
+              aria-label="Go to MicCheck home page"
+              className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              href="/"
+            >
               <div aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-lg font-semibold text-white">
                 MC
               </div>
@@ -79,10 +83,9 @@ export default function RootLayout({
                 <p className="text-lg font-semibold">MicCheck</p>
                 <p className="text-xs text-slate-400">7-Second Mic Quality Test</p>
               </div>
-            </div>
+            </Link>
           </header>
-          <HeaderNavLinks />
-          <main className="flex-1 py-10">{children}</main>
+          <main className="flex-1 py-6 sm:py-10">{children}</main>
           <Footer />
         </div>
         <Analytics />
