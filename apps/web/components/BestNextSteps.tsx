@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import type { WebVerdict } from "../types";
 import { resolveCopy } from "../lib/copy";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
@@ -73,7 +73,6 @@ export default function BestNextSteps({
   const gearSteps = includeGear
     ? verdict.bestNextSteps?.filter((step) => step.kind === "gear_optional") ?? []
     : [];
-  const [showGearLinks, setShowGearLinks] = useState(false);
   const emittedKeyRef = useRef<string | null>(null);
 
   const gearRecommendations = gearSteps
@@ -155,49 +154,38 @@ export default function BestNextSteps({
 
       {gearSteps.length ? (
         <div className="mt-4 rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100">
-          <p className="font-semibold">{gearSteps[0]?.title}</p>
-          {gearRecommendations[0]?.why ? <p className="mt-1 text-blue-200">{gearRecommendations[0].why}</p> : null}
-          {shouldShowGearCta ? (
-            <button
-              className="mt-2 inline-flex items-center gap-1 underline"
-              onClick={() => setShowGearLinks((prev) => !prev)}
-              type="button"
-            >
-              {t("affiliate.view_recommended_gear")}
-            </button>
-          ) : null}
+          <p className="font-semibold">{t("affiliate.recommendation_title")}</p>
           {shouldShowGearCta ? (
             <p className="mt-2 text-xs text-blue-200">{t("affiliate.disclosure_short")}</p>
           ) : null}
-          {showGearLinks ? (
-            <div className="mt-3 space-y-3 text-xs text-blue-50">
-              {activeGearLinks.length ? (
-                activeGearLinks.map((gear) => (
-                  <div key={gear.id}>
+          <div className="mt-3 space-y-3 text-xs text-blue-50">
+            {activeGearLinks.length ? (
+              activeGearLinks.map((gear) => (
+                <div key={gear.id}>
+                  {gear.affiliateUrl ? (
+                    <a
+                      className="font-semibold underline"
+                      href={gear.affiliateUrl}
+                      rel="noopener noreferrer nofollow"
+                      target="_blank"
+                    >
+                      {gear.title}
+                    </a>
+                  ) : (
                     <p className="font-semibold">{gear.title}</p>
-                    {gear.why ? <p className="mt-1 text-blue-200">{gear.why}</p> : null}
-                    {gear.supportsIssues?.length ? (
-                      <p className="mt-1 text-blue-200">
-                        Helps with: {gear.supportsIssues.map((issue) => issueLabelMap[issue]).join(", ")}
-                      </p>
-                    ) : null}
-                    {gear.affiliateUrl ? (
-                      <a
-                        className="mt-1 inline-block underline"
-                        href={gear.affiliateUrl}
-                        rel="noopener noreferrer nofollow"
-                        target="_blank"
-                      >
-                        {t("affiliate.view_recommended_gear")}
-                      </a>
-                    ) : null}
-                  </div>
-                ))
-              ) : (
-                <p>{t("affiliate.empty_state")}</p>
-              )}
-            </div>
-          ) : null}
+                  )}
+                  {gear.why ? <p className="mt-1 text-blue-200">{gear.why}</p> : null}
+                  {gear.supportsIssues?.length ? (
+                    <p className="mt-1 text-blue-200">
+                      Helps with: {gear.supportsIssues.map((issue) => issueLabelMap[issue]).join(", ")}
+                    </p>
+                  ) : null}
+                </div>
+              ))
+            ) : (
+              <p>{t("affiliate.empty_state")}</p>
+            )}
+          </div>
         </div>
       ) : null}
     </div>

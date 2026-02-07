@@ -104,4 +104,18 @@ describe("recommendation policy", () => {
     expect(keys).toEqual(expect.arrayContaining(["speak_softer", "adjust_input_gain"]));
     expect(keys).not.toContain("consider_external_mic");
   });
+
+  it("includes advice for multiple failing categories instead of only primary issue", () => {
+    const policy = buildRecommendationPolicy(
+      levelBase,
+      clippingBase,
+      { ...noiseBase, snrDb: 20, humRatio: 0 },
+      { ...echoBase, echoScore: 0.3 },
+      { mode: "single", use_case: "meetings", device_type: "usb_mic" }
+    );
+
+    const keys = policy.adviceSteps.map((step) => step.key);
+    expect(keys).toContain("reduce_background_noise");
+    expect(keys).toContain("enable_echo_cancellation");
+  });
 });

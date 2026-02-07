@@ -50,6 +50,37 @@ const gearRelevanceFrom = (
   return "low";
 };
 
+const issueOrder: CategoryId[] = ["level", "noise", "echo"];
+
+const failingIssuesFrom = (verdict: ReturnType<typeof buildVerdict>): CategoryId[] => {
+  const primary = verdict.primaryIssue;
+  const failing = issueOrder
+    .filter((issue) => verdict.dimensions[issue].stars <= 3)
+    .sort((left, right) => verdict.dimensions[left].stars - verdict.dimensions[right].stars);
+
+  if (!primary) {
+    return failing;
+  }
+
+  const others = failing.filter((issue) => issue !== primary);
+  return [primary, ...others];
+};
+
+const dedupeAdviceSteps = (steps: AdviceStep[]): AdviceStep[] => {
+  const seen = new Set<string>();
+  const deduped: AdviceStep[] = [];
+
+  for (const step of steps) {
+    if (seen.has(step.key)) {
+      continue;
+    }
+    seen.add(step.key);
+    deduped.push(step);
+  }
+
+  return deduped;
+};
+
 const adviceStepTitle: Record<AdviceStep["key"], string> = {
   adjust_input_gain: "Adjust microphone input gain.",
   move_mic_closer: "Move closer to the microphone.",
@@ -145,7 +176,7 @@ export const buildRecommendationPolicy = (
     useCase: resolvedContext.use_case
   });
   const hasHum = noise.humRatio > 0.08;
-  const constrainedAdviceSteps = buildAdviceSteps(verdict.primaryIssue, {
+  const adviceContext = {
     isQuiet: levelInterpretation.levelAdviceEnabled && level.rmsDb < -18,
     hasHum,
     clippingDetected: clipping.clippingRatio >= 0.03,
@@ -153,7 +184,11 @@ export const buildRecommendationPolicy = (
     useCase: resolvedContext.use_case,
     deviceType: resolvedContext.device_type,
     diagnosticCertainty: certainty
-  });
+  } as const;
+  const addressedIssues = failingIssuesFrom(verdict);
+  const constrainedAdviceSteps = dedupeAdviceSteps(
+    addressedIssues.flatMap((issue) => buildAdviceSteps(issue, adviceContext))
+  );
 
   const relevance = gearRelevanceFrom(verdict.primaryIssue);
   const gearIssue: CategoryId = verdict.primaryIssue ?? "level";

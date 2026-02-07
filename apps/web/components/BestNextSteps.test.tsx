@@ -85,11 +85,11 @@ describe("BestNextSteps", () => {
 
     expect(html).toContain("Reduce background fan noise");
     expect(html).toContain("Diagnostic certainty: medium");
-    expect(html).toContain("Optional gear");
+    expect(html).toContain("Recommended gear");
     expect(html).toContain("Try moving away from reflective surfaces.");
   });
 
-  it("hides CTA when no active gear links exist", () => {
+  it("hides gear link rows when no active gear links exist", () => {
     const verdict = {
       ...baseVerdict,
       bestNextSteps: [
@@ -110,13 +110,15 @@ describe("BestNextSteps", () => {
     } satisfies WebVerdict;
 
     const html = renderToStaticMarkup(<BestNextSteps verdict={verdict} mode="pro" />);
-    expect(html).not.toContain("View recommended gear");
+    expect(html).toContain("No links available right now.");
+    expect(html).not.toContain("href=");
   });
 
-  it("shows CTA when active gear links exist", () => {
+  it("shows gear title links when active gear links exist", () => {
     const html = renderToStaticMarkup(<BestNextSteps verdict={baseVerdict} mode="pro" />);
 
-    expect(html).toContain("View recommended gear");
+    expect(html).toContain("USB dynamic mic");
+    expect(html).toContain("href=\"https://example.com/gear\"");
   });
 
   it("adds noise-first gain advice when hum gate is active", () => {
@@ -160,7 +162,7 @@ describe("BestNextSteps", () => {
     expect(failHtml).not.toContain("echo may reduce clarity in larger rooms");
   });
 
-  it("shows only active gear links when expanded", async () => {
+  it("shows only active gear links", () => {
     const verdict = {
       ...baseVerdict,
       bestNextSteps: [
@@ -196,24 +198,12 @@ describe("BestNextSteps", () => {
       ]
     } satisfies WebVerdict;
 
-    const container = document.createElement("div");
-    const root = createRoot(container);
-
-    await act(async () => {
-      root.render(<BestNextSteps verdict={verdict} mode="pro" />);
-    });
-
-    const cta = container.querySelector("button");
-    expect(cta?.textContent).toContain("View recommended gear");
-
-    await act(async () => {
-      cta?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-
-    expect(container.textContent).toContain("Active gear");
-    expect(container.textContent).toContain("Helps with: Noise, Echo");
-    expect(container.textContent).not.toContain("Disabled gear");
-    root.unmount();
+    const html = renderToStaticMarkup(<BestNextSteps verdict={verdict} mode="pro" />);
+    expect(html).toContain("Active gear");
+    expect(html).toContain("Helps with: Noise, Echo");
+    expect(html).not.toContain("Disabled gear");
+    expect(html).toContain("href=\"https://example.com/active\"");
+    expect(html).not.toContain("href=\"https://example.com/disabled\"");
   });
 
   it("fires advice event once for repeated render with same verdict", async () => {
