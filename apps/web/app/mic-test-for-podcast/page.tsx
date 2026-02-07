@@ -16,6 +16,7 @@ export default function MicTestForPodcastLandingPage() {
     <SeoLandingPage
       description="MicCheck runs a short microphone check in your browser and tells you the first adjustment to make before you hit record."
       headline="Podcast voice not sounding the way you expect?"
+      landingRoute="mic-test-for-podcast"
       useCase="podcast"
     />
   );

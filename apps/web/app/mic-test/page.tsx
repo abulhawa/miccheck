@@ -16,6 +16,7 @@ export default function MicTestLandingPage() {
     <SeoLandingPage
       description="MicCheck runs a short microphone check in your browser and shows the first fix to make your voice easier to hear."
       headline="People keep asking you to repeat yourself?"
+      landingRoute="mic-test"
       useCase="meetings"
     />
   );

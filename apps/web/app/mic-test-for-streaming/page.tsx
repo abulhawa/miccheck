@@ -16,6 +16,7 @@ export default function MicTestForStreamingLandingPage() {
     <SeoLandingPage
       description="MicCheck checks your microphone in your browser and gives one practical fix so your stream voice is easier to understand."
       headline="Stream chat says your mic sounds rough?"
+      landingRoute="mic-test-for-streaming"
       useCase="streaming"
     />
   );

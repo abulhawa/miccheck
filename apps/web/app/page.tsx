@@ -50,6 +50,16 @@ export default function HomePage() {
           <p className="text-xs text-slate-200">
             We never upload audio. Review our privacy policy anytime.
           </p>
+          <p className="text-xs text-slate-300">
+            Testing a mic for Zoom? Try our{" "}
+            <Link
+              className="underline decoration-slate-500 underline-offset-4 transition hover:text-white hover:decoration-slate-300"
+              href="/mic-test-for-zoom"
+            >
+              Zoom mic test
+            </Link>
+            .
+          </p>
         </div>
         <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg md:p-6">
           <h2 className="text-lg font-semibold">What you&apos;ll get</h2>

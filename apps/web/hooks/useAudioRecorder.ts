@@ -17,6 +17,7 @@ interface RecorderOptions {
   minDuration?: number;
   deviceId?: string | null;
   analysisContext?: ContextInput;
+  discoverySource?: string;
 }
 
 type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
@@ -34,7 +35,8 @@ export function useAudioRecorder({
   maxDuration = DEFAULT_MAX_RECORDING_DURATION_SECONDS,
   minDuration = DEFAULT_MIN_RECORDING_DURATION_SECONDS,
   deviceId = null,
-  analysisContext = DEFAULT_ANALYSIS_CONTEXT
+  analysisContext = DEFAULT_ANALYSIS_CONTEXT,
+  discoverySource = "route:pro"
 }: RecorderOptions) {
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -375,12 +377,12 @@ export function useAudioRecorder({
           }
 
           const result = analyzeRecording(audioBuffer, analysisContext);
+          const verdictPassFail = result.verdict.useCaseFit === "pass" ? "pass" : "fail";
           logEvent(ANALYTICS_EVENTS.analysisCompleted, {
-            useCase: analysisContext.use_case,
-            deviceType: analysisContext.device_type,
-            diagnosticCertainty: result.verdict.diagnosticCertainty ?? "unknown",
-            reassuranceMode: Boolean(result.verdict.reassuranceMode),
-            specialState: result.specialState
+            discovery_source: discoverySource,
+            selected_use_case: analysisContext.use_case,
+            verdict_pass_fail: verdictPassFail,
+            diagnostic_certainty: result.verdict.diagnosticCertainty ?? "unknown"
           });
           setAnalysis(result);
           setStatus("complete");
@@ -422,6 +424,7 @@ export function useAudioRecorder({
     clearRecorder,
     deviceId,
     analysisContext,
+    discoverySource,
     debugLog,
     minDuration,
     releaseMic,

@@ -19,35 +19,53 @@ describe("SEO landing pages", () => {
   it("renders mic-test with meetings preselected", () => {
     const html = renderToStaticMarkup(<MicTestLandingPage />);
     expect(html).toContain("Test your mic");
-    expect(html).toContain('href="/pro?use_case=meetings"');
+    expect(html).toContain('href="/"');
+    expect(html).toContain('href="/test"');
+    expect(html).toContain('href="/pro?use_case=meetings&amp;discovery_source=mic-test"');
     expect(micTestMetadata.title).toBe("Mic Test");
   });
 
   it("renders mic-test-for-zoom with meetings preselected", () => {
     const html = renderToStaticMarkup(<MicTestForZoomLandingPage />);
     expect(html).toContain("Test your mic");
-    expect(html).toContain('href="/pro?use_case=meetings"');
+    expect(html).toContain('href="/"');
+    expect(html).toContain('href="/test"');
+    expect(html).toContain(
+      'href="/pro?use_case=meetings&amp;discovery_source=mic-test-for-zoom"'
+    );
     expect(zoomMetadata.title).toBe("Mic Test For Zoom");
   });
 
   it("renders mic-test-for-podcast with podcast preselected", () => {
     const html = renderToStaticMarkup(<MicTestForPodcastLandingPage />);
     expect(html).toContain("Test your mic");
-    expect(html).toContain('href="/pro?use_case=podcast"');
+    expect(html).toContain('href="/"');
+    expect(html).toContain('href="/test"');
+    expect(html).toContain(
+      'href="/pro?use_case=podcast&amp;discovery_source=mic-test-for-podcast"'
+    );
     expect(podcastMetadata.title).toBe("Mic Test For Podcast");
   });
 
   it("renders mic-test-for-streaming with streaming preselected", () => {
     const html = renderToStaticMarkup(<MicTestForStreamingLandingPage />);
     expect(html).toContain("Test your mic");
-    expect(html).toContain('href="/pro?use_case=streaming"');
+    expect(html).toContain('href="/"');
+    expect(html).toContain('href="/test"');
+    expect(html).toContain(
+      'href="/pro?use_case=streaming&amp;discovery_source=mic-test-for-streaming"'
+    );
     expect(streamingMetadata.title).toBe("Mic Test For Streaming");
   });
 
   it("renders mic-test-for-music-recording with podcast preselected", () => {
     const html = renderToStaticMarkup(<MicTestForMusicRecordingLandingPage />);
     expect(html).toContain("Test your mic");
-    expect(html).toContain('href="/pro?use_case=podcast"');
+    expect(html).toContain('href="/"');
+    expect(html).toContain('href="/test"');
+    expect(html).toContain(
+      'href="/pro?use_case=podcast&amp;discovery_source=mic-test-for-music-recording"'
+    );
     expect(musicRecordingMetadata.title).toBe("Mic Test For Music Recording");
   });
 });

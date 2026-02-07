@@ -3,10 +3,15 @@ import type { ContextInput, DeviceType, UseCase } from "../types";
 
 const STORAGE_KEY = "miccheck.analysis.context.v1";
 
-const DEFAULT_CONTEXT: ContextInput = {
+export interface StoredAnalysisContext extends ContextInput {
+  discovery_source: string;
+}
+
+const DEFAULT_CONTEXT: StoredAnalysisContext = {
   use_case: "meetings",
   device_type: "unknown",
-  mode: "single"
+  mode: "single",
+  discovery_source: "route:pro"
 };
 
 const USE_CASES: UseCase[] = ["meetings", "podcast", "streaming", "voice_note"];
@@ -45,34 +50,45 @@ const isValidDeviceType = (value: string): value is DeviceType =>
 const isValidMode = (value: string): value is ContextInput["mode"] =>
   MODES.includes(value as ContextInput["mode"]);
 
-export const getDefaultAnalysisContext = (): ContextInput => ({ ...DEFAULT_CONTEXT });
+export const getDefaultAnalysisContext = (): StoredAnalysisContext => ({ ...DEFAULT_CONTEXT });
 
-export const loadAnalysisContext = (): ContextInput => {
+export const loadAnalysisContext = (): StoredAnalysisContext => {
   if (typeof window === "undefined") return getDefaultAnalysisContext();
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return getDefaultAnalysisContext();
-    const parsed = JSON.parse(raw) as Partial<ContextInput>;
+    const parsed = JSON.parse(raw) as Partial<StoredAnalysisContext>;
 
     const useCase = parsed.use_case;
     const deviceType = parsed.device_type;
     const mode = parsed.mode;
+    const discoverySource =
+      typeof parsed.discovery_source === "string" ? parsed.discovery_source : null;
 
     return {
       use_case: useCase && isValidUseCase(useCase) ? useCase : DEFAULT_CONTEXT.use_case,
       device_type:
         deviceType && isValidDeviceType(deviceType) ? deviceType : DEFAULT_CONTEXT.device_type,
-      mode: mode && isValidMode(mode) ? mode : DEFAULT_CONTEXT.mode
+      mode: mode && isValidMode(mode) ? mode : DEFAULT_CONTEXT.mode,
+      discovery_source: discoverySource || DEFAULT_CONTEXT.discovery_source
     };
   } catch {
     return getDefaultAnalysisContext();
   }
 };
 
-export const saveAnalysisContext = (context: ContextInput): void => {
+export const saveAnalysisContext = (
+  context: ContextInput & { discovery_source?: string }
+): void => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(context));
+  window.localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      ...context,
+      discovery_source: context.discovery_source ?? DEFAULT_CONTEXT.discovery_source
+    })
+  );
 };
 
 export const ANALYSIS_CONTEXT_OPTIONS = {

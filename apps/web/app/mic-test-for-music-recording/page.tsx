@@ -16,6 +16,7 @@ export default function MicTestForMusicRecordingLandingPage() {
     <SeoLandingPage
       description="MicCheck runs a short microphone check in your browser and gives one practical fix before your next recording."
       headline="Your recording takes sound off?"
+      landingRoute="mic-test-for-music-recording"
       useCase="podcast"
     />
   );

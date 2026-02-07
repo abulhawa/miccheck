@@ -16,6 +16,7 @@ export default function MicTestForZoomLandingPage() {
     <SeoLandingPage
       description="MicCheck gives you a quick browser test and points to the one change that improves meeting call clarity first."
       headline="Zoom calls keep sounding unclear?"
+      landingRoute="mic-test-for-zoom"
       useCase="meetings"
     />
   );

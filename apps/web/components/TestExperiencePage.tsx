@@ -31,11 +31,17 @@ type ViewMode = "basic" | "pro";
 interface TestExperiencePageProps {
   viewMode: ViewMode;
   initialUseCase?: UseCase;
+  initialDiscoverySource?: string;
 }
 
-export default function TestExperiencePage({ viewMode, initialUseCase }: TestExperiencePageProps) {
+export default function TestExperiencePage({
+  viewMode,
+  initialUseCase,
+  initialDiscoverySource
+}: TestExperiencePageProps) {
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCase>("meetings");
+  const [discoverySource, setDiscoverySource] = useState("route:pro");
   const [detectedDeviceType, setDetectedDeviceType] = useState<DeviceType>("unknown");
   const [deviceTypeOverride, setDeviceTypeOverride] = useState<DeviceType | null>(null);
   const [isIOSDevice, setIsIOSDevice] = useState(false);
@@ -66,7 +72,7 @@ export default function TestExperiencePage({ viewMode, initialUseCase }: TestExp
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext });
+  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext, discoverySource });
 
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
@@ -79,6 +85,7 @@ export default function TestExperiencePage({ viewMode, initialUseCase }: TestExp
   useEffect(() => {
     const storedContext = loadAnalysisContext();
     setUseCase(initialUseCase ?? storedContext.use_case);
+    setDiscoverySource(initialDiscoverySource ?? storedContext.discovery_source);
 
     const storedOverride = window.localStorage.getItem(DEVICE_OVERRIDE_STORAGE_KEY);
     if (storedOverride) {
@@ -86,11 +93,16 @@ export default function TestExperiencePage({ viewMode, initialUseCase }: TestExp
     }
 
     window.localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
-  }, [initialUseCase, viewMode]);
+  }, [initialDiscoverySource, initialUseCase, viewMode]);
 
   useEffect(() => {
-    saveAnalysisContext({ use_case: useCase, device_type: "unknown", mode: viewMode });
-  }, [useCase, viewMode]);
+    saveAnalysisContext({
+      use_case: useCase,
+      device_type: "unknown",
+      mode: viewMode,
+      discovery_source: discoverySource
+    });
+  }, [discoverySource, useCase, viewMode]);
 
   useEffect(() => {
     if (deviceTypeOverride) {
