@@ -7,6 +7,7 @@ import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import BestNextSteps from "../../components/BestNextSteps";
 import ResultsNotice from "../../components/ResultsNotice";
+import { buttonStyles } from "../../components/buttonStyles";
 import { clearRecording, loadRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
 import { t } from "../../lib/i18n";
@@ -156,7 +157,10 @@ export default function ResultsPage() {
             <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
           </div>
           <button
-            className="mt-6 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+            className={buttonStyles({
+              variant: "primary",
+              className: "mt-6 w-full"
+            })}
             onClick={handleTestAgain}
             type="button"
           >
@@ -171,17 +175,18 @@ export default function ResultsPage() {
             highlightedCategoryId={sampleResult.verdict.primaryIssue}
           />
 
-          <BestNextSteps verdict={sampleResult.verdict} mode="pro" includeGear={true} includeSecondaryNotes={true} showDiagnosticCertainty={true} trackAdviceEvent={false} />
+          <button
+            className={buttonStyles({
+              variant: "primary",
+              className: "w-full"
+            })}
+            onClick={handleTestAgain}
+            type="button"
+          >
+            {t("results.cta.run_another_test")}
+          </button>
 
-          <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-200">
-            <button
-              className="inline-flex rounded-xl bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700"
-              onClick={handleTestAgain}
-              type="button"
-            >
-              {t("results.cta.run_another_test")}
-            </button>
-          </section>
+          <BestNextSteps verdict={sampleResult.verdict} mode="pro" includeGear={true} includeSecondaryNotes={true} showDiagnosticCertainty={true} trackAdviceEvent={false} />
 
           {recordingBlob ? (
             <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />

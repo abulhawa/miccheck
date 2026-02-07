@@ -454,7 +454,10 @@ export default function TestExperiencePage({
                 <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
               </div>
               <button
-                className="mt-5 inline-flex w-full justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-700 sm:mt-6"
+                className={buttonStyles({
+                  variant: "primary",
+                  className: "mt-5 w-full sm:mt-6"
+                })}
                 onClick={handleTestAgain}
                 type="button"
               >
@@ -463,11 +466,23 @@ export default function TestExperiencePage({
             </section>
           ) : (
             <section className="grid gap-6 md:grid-cols-2">
-              <ScoreCard
-                highlightedCategoryId={analysis.verdict.primaryIssue}
-                metrics={analysis.metrics}
-                verdict={analysis.verdict}
-              />
+              <div className="flex flex-col gap-4">
+                <ScoreCard
+                  highlightedCategoryId={analysis.verdict.primaryIssue}
+                  metrics={analysis.metrics}
+                  verdict={analysis.verdict}
+                />
+                <button
+                  className={buttonStyles({
+                    variant: "primary",
+                    className: "w-full"
+                  })}
+                  onClick={handleTestAgain}
+                  type="button"
+                >
+                  {t("results.cta.run_another_test")}
+                </button>
+              </div>
               {isExcellent ? (
                 <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
                   <h2 className="text-lg font-semibold">{t("results.excellent.title")}</h2>
@@ -484,16 +499,6 @@ export default function TestExperiencePage({
                   verdict={analysis.verdict}
                 />
               )}
-              <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6">
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <button
-                    className="rounded-xl border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
-                    onClick={handleTestAgain}
-                  >
-                    {t("results.cta.run_another_test")}
-                  </button>
-                </div>
-              </div>
             </section>
           )}
         </>

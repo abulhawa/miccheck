@@ -151,7 +151,9 @@ describe("TestExperiencePage", () => {
 
     const html = renderToStaticMarkup(<TestExperiencePage viewMode="pro" />);
 
+    expect(html).toContain("Run Another Test");
     expect(html).toContain("BestNextSteps");
+    expect(html.indexOf("Run Another Test")).toBeLessThan(html.indexOf("BestNextSteps"));
     expect(html).not.toContain("You are good to go");
   });
 });
