@@ -18,6 +18,7 @@ import {
   saveAnalysisContext
 } from "../lib/analysisContextStorage";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
+import { isIOSPlatform } from "../lib/browserUtils";
 import { resolveNoSpeechCopy } from "../lib/copy";
 import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
@@ -113,8 +114,7 @@ export default function TestExperiencePage({
   }, [deviceTypeOverride]);
 
   useEffect(() => {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    setIsIOSDevice(isIOS);
+    setIsIOSDevice(isIOSPlatform());
   }, []);
 
   useEffect(() => {
