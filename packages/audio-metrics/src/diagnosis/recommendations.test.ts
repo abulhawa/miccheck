@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildRecommendationPolicy } from "./recommendations";
+import { buildRecommendationPolicy, buildVerdictNextSteps } from "./recommendations";
 
 const levelBase = { rms: 0.1, rmsDb: -16 };
 const clippingBase = { clippingRatio: 0, peak: 0.5 };
@@ -87,8 +87,10 @@ describe("recommendation policy", () => {
       { mode: "single", use_case: "meetings", device_type: "unknown" }
     );
 
-    expect(policy.adviceSteps.length).toBeGreaterThanOrEqual(2);
-    expect(policy.adviceSteps.length).toBeLessThanOrEqual(3);
+    const keys = policy.adviceSteps.map((step) => step.key);
+    expect(keys).toContain("check_system_mic_level");
+    expect(keys).toContain("check_app_input_level");
+    expect(keys).not.toContain("consider_external_mic");
   });
 
   it("keeps clipping guidance action-only when gear relevance is low", () => {
@@ -134,5 +136,20 @@ describe("recommendation policy", () => {
     const keys = policy.adviceSteps.map((step) => step.key);
     expect(keys).toContain("reduce_background_noise");
     expect(keys).toContain("enable_echo_cancellation");
+  });
+
+  it("creates a visible action anchor for each failing category", () => {
+    const policy = buildRecommendationPolicy(
+      levelBase,
+      clippingBase,
+      { ...noiseBase, snrDb: 20, humRatio: 0 },
+      { ...echoBase, echoScore: 0.3 },
+      { mode: "single", use_case: "meetings", device_type: "usb_mic" }
+    );
+
+    const steps = buildVerdictNextSteps(policy).filter((step) => step.kind === "action");
+    const titles = steps.map((step) => step.title);
+    expect(titles.some((title) => title.startsWith("Noise:"))).toBe(true);
+    expect(titles.some((title) => title.startsWith("Echo:"))).toBe(true);
   });
 });

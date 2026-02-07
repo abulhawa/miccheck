@@ -13,7 +13,7 @@ export interface RecommendationPolicyOutput {
   category: Recommendation["category"];
   messageKey: Recommendation["messageKey"];
   confidence: number;
-  adviceSteps: Array<AdviceStep | GearStep>;
+  adviceSteps: Array<AdviceStepWithCoverage | GearStep>;
 }
 
 const fitFromGrade = (grade: string): "pass" | "warn" | "fail" => {
@@ -86,6 +86,11 @@ const dedupeAdviceSteps = (steps: AdviceStep[]): AdviceStep[] => {
   return deduped;
 };
 
+interface AdviceStepWithCoverage extends AdviceStep {
+  issue?: CategoryId;
+  issueScoped?: boolean;
+}
+
 const adviceStepTitle: Record<AdviceStep["key"], string> = {
   adjust_input_gain: "Adjust microphone input gain.",
   move_mic_closer: "Move closer to the microphone.",
@@ -109,7 +114,10 @@ const adviceStepTitle: Record<AdviceStep["key"], string> = {
   consider_external_mic: "Consider an external microphone."
 };
 
-const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextStep[] =>
+const issueLabelFor = (issue: CategoryId): string =>
+  issue === "level" ? "Level" : issue === "noise" ? "Noise" : "Echo";
+
+const toBestNextSteps = (steps: Array<AdviceStepWithCoverage | GearStep>): VerdictBestNextStep[] =>
   steps.map((step) => {
     if (step.key === "consider_external_mic" && "category" in step && "rationale" in step) {
       return {
@@ -132,7 +140,10 @@ const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextSt
 
     return {
       kind: "action",
-      title: adviceStepTitle[step.key]
+      title:
+        "issueScoped" in step && step.issueScoped && step.issue
+          ? `${issueLabelFor(step.issue)}: ${adviceStepTitle[step.key]}`
+          : adviceStepTitle[step.key]
     } satisfies VerdictBestNextStep;
   });
 
@@ -191,9 +202,22 @@ export const buildRecommendationPolicy = (
     diagnosticCertainty: certainty
   } as const;
   const addressedIssues = failingIssuesFrom(verdict);
-  const constrainedAdviceSteps = dedupeAdviceSteps(
-    addressedIssues.flatMap((issue) => buildAdviceSteps(issue, adviceContext))
+  const issueScopedAdvice = addressedIssues.flatMap((issue) =>
+    buildAdviceSteps(issue, adviceContext).map((step) => ({ ...step, issue }))
   );
+
+  const issueAnchors: AdviceStepWithCoverage[] = addressedIssues.flatMap((issue) => {
+    const firstStep = issueScopedAdvice.find((step) => step.issue === issue);
+    return firstStep ? [{ ...firstStep, issueScoped: true }] : [];
+  });
+  const anchoredKeys = new Set(issueAnchors.map((step) => step.key));
+
+  const constrainedAdviceSteps: AdviceStepWithCoverage[] = [
+    ...issueAnchors,
+    ...dedupeAdviceSteps(issueScopedAdvice)
+      .filter((step) => !anchoredKeys.has(step.key))
+      .map((step) => ({ ...step, issueScoped: false }))
+  ];
 
   const relevance = gearRelevanceFrom(verdict.primaryIssue, {
     isQuiet: adviceContext.isQuiet,
