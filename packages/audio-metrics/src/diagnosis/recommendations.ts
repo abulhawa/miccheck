@@ -43,10 +43,15 @@ const severityFrom = (verdict: ReturnType<typeof buildVerdict>): "low" | "medium
 };
 
 const gearRelevanceFrom = (
-  primaryIssue: ReturnType<typeof buildVerdict>["primaryIssue"]
+  primaryIssue: ReturnType<typeof buildVerdict>["primaryIssue"],
+  options: { isQuiet: boolean; clippingDetected: boolean }
 ): GearRelevance => {
   if (primaryIssue === "echo") return "high";
   if (primaryIssue === "noise") return "medium";
+  if (primaryIssue === "level") {
+    if (options.clippingDetected) return "low";
+    return options.isQuiet ? "medium" : "low";
+  }
   return "low";
 };
 
@@ -190,7 +195,10 @@ export const buildRecommendationPolicy = (
     addressedIssues.flatMap((issue) => buildAdviceSteps(issue, adviceContext))
   );
 
-  const relevance = gearRelevanceFrom(verdict.primaryIssue);
+  const relevance = gearRelevanceFrom(verdict.primaryIssue, {
+    isQuiet: adviceContext.isQuiet,
+    clippingDetected: adviceContext.clippingDetected
+  });
   const gearIssue: CategoryId = verdict.primaryIssue ?? "level";
   const allowGear =
     !(certainty === "low" && resolvedContext.device_type === "unknown") &&

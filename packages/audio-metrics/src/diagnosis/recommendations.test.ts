@@ -105,6 +105,23 @@ describe("recommendation policy", () => {
     expect(keys).not.toContain("consider_external_mic");
   });
 
+  it("recommends mic arm gear for low-level failures", () => {
+    const policy = buildRecommendationPolicy(
+      { ...levelBase, rmsDb: -35 },
+      clippingBase,
+      noiseBase,
+      echoBase,
+      { mode: "single", use_case: "podcast", device_type: "usb_mic" }
+    );
+
+    const gearStep = policy.adviceSteps.find((step) => step.key === "consider_external_mic");
+    expect(gearStep).toBeDefined();
+    if (!gearStep || !("id" in gearStep)) {
+      return;
+    }
+    expect(gearStep.id).toBe("microphone-arm");
+  });
+
   it("includes advice for multiple failing categories instead of only primary issue", () => {
     const policy = buildRecommendationPolicy(
       levelBase,
