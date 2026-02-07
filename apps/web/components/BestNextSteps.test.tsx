@@ -174,6 +174,7 @@ describe("BestNextSteps", () => {
             category: "USB dynamic mic",
             relevance: "high",
             rationale: "Active rationale",
+            supportsIssues: ["noise", "echo"],
             affiliateUrl: "https://example.com/active",
             linkStatus: "active"
           }
@@ -210,6 +211,7 @@ describe("BestNextSteps", () => {
     });
 
     expect(container.textContent).toContain("Active gear");
+    expect(container.textContent).toContain("Helps with: Noise, Echo");
     expect(container.textContent).not.toContain("Disabled gear");
     root.unmount();
   });

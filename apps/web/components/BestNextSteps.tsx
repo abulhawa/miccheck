@@ -39,6 +39,12 @@ const certaintyValueKeyMap = {
   unknown: "results.certainty.unknown"
 } as const;
 
+const issueLabelMap = {
+  level: "Level",
+  noise: "Noise",
+  echo: "Echo"
+} as const;
+
 const resolveActionTitle = (step?: { title: string; titleKey?: string }) => {
   if (!step) {
     return null;
@@ -170,6 +176,11 @@ export default function BestNextSteps({
                   <div key={gear.id}>
                     <p className="font-semibold">{gear.title}</p>
                     {gear.why ? <p className="mt-1 text-blue-200">{gear.why}</p> : null}
+                    {gear.supportsIssues?.length ? (
+                      <p className="mt-1 text-blue-200">
+                        Helps with: {gear.supportsIssues.map((issue) => issueLabelMap[issue]).join(", ")}
+                      </p>
+                    ) : null}
                     {gear.affiliateUrl ? (
                       <a
                         className="mt-1 inline-block underline"

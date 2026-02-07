@@ -1,39 +1,35 @@
 import type { AdviceStep } from "./adviceSteps";
-import type { AffiliateLinkStatus } from "../types";
+import type { AffiliateLinkStatus, CategoryId } from "../types";
+import { getPrimaryGearRecommendation, type GearCategory } from "../gearCatalog";
 
 export type GearRelevance = "low" | "medium" | "high";
 
 export interface GearStep extends AdviceStep {
   key: "consider_external_mic";
   relevance: GearRelevance;
-  category: "USB dynamic mic" | "USB condenser mic";
+  category: GearCategory;
   rationale: string;
   affiliateUrl?: string;
   id: string;
   title: string;
   why: string;
+  supportsIssues: CategoryId[];
   linkStatus: AffiliateLinkStatus;
 }
-
-const DEFAULT_AFFILIATE_URLS: Record<GearStep["category"], string | undefined> = {
-  "USB dynamic mic": "https://amzn.to/4qTnyHf",
-  "USB condenser mic": "https://amzn.to/4qTnyHf"
-};
-
-const gearIdFor = (category: GearStep["category"]): string =>
-  category === "USB dynamic mic" ? "usb-dynamic-mic" : "usb-condenser-mic";
-
-const gearTitleFor = (category: GearStep["category"]): string => category;
 
 const linkStatusFor = (affiliateUrl?: string): AffiliateLinkStatus =>
   affiliateUrl ? "active" : "missing";
 
 export const buildGearStep = (
   relevance: GearRelevance,
-  category: GearStep["category"],
+  issue: CategoryId,
   rationale: string
 ): GearStep[] => {
   if (relevance === "low") {
+    return [];
+  }
+  const recommendation = getPrimaryGearRecommendation(issue);
+  if (!recommendation) {
     return [];
   }
 
@@ -42,13 +38,14 @@ export const buildGearStep = (
       kind: "gear_optional",
       key: "consider_external_mic",
       relevance,
-      category,
+      category: recommendation.category,
       rationale,
-      affiliateUrl: DEFAULT_AFFILIATE_URLS[category],
-      id: gearIdFor(category),
-      title: gearTitleFor(category),
+      affiliateUrl: recommendation.affiliateUrl,
+      id: recommendation.id,
+      title: recommendation.title,
       why: rationale,
-      linkStatus: linkStatusFor(DEFAULT_AFFILIATE_URLS[category])
+      supportsIssues: [...recommendation.supportsIssues],
+      linkStatus: linkStatusFor(recommendation.affiliateUrl)
     }
   ];
 };

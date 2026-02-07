@@ -173,6 +173,7 @@ export interface VerdictBestNextStep {
     category: string;
     relevance: GearRelevance;
     rationale: string;
+    supportsIssues?: CategoryId[];
     affiliateUrl?: string;
     linkStatus: AffiliateLinkStatus;
   };

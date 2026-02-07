@@ -2,7 +2,7 @@ import type { ClippingMetrics } from "../metrics/clipping";
 import type { NoiseMetrics } from "../metrics/noise";
 import type { EchoMetrics } from "../metrics/echo";
 import type { LevelMetrics } from "../metrics/level";
-import type { ContextInput, Recommendation, VerdictBestNextStep } from "../types";
+import type { CategoryId, ContextInput, Recommendation, VerdictBestNextStep } from "../types";
 import { buildVerdict } from "../policy/buildVerdict";
 import { recommendationMessageFor } from "../policy/copy";
 import { buildAdviceSteps, type AdviceStep } from "../policy/adviceSteps";
@@ -78,7 +78,7 @@ const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextSt
     if (step.key === "consider_external_mic" && "category" in step && "rationale" in step) {
       return {
         kind: "gear_optional",
-        title: `Optional gear: ${step.category}`,
+        title: `Optional gear: ${step.title}`,
         description: step.rationale,
         gear: {
           id: step.id,
@@ -87,6 +87,7 @@ const toBestNextSteps = (steps: Array<AdviceStep | GearStep>): VerdictBestNextSt
           category: step.category,
           relevance: step.relevance,
           rationale: step.rationale,
+          supportsIssues: step.supportsIssues,
           ...(step.affiliateUrl ? { affiliateUrl: step.affiliateUrl } : {}),
           linkStatus: step.linkStatus
         }
@@ -155,6 +156,7 @@ export const buildRecommendationPolicy = (
   });
 
   const relevance = gearRelevanceFrom(verdict.primaryIssue);
+  const gearIssue: CategoryId = verdict.primaryIssue ?? "level";
   const allowGear =
     !(certainty === "low" && resolvedContext.device_type === "unknown") &&
     (resolvedContext.use_case !== "meetings" ||
@@ -162,7 +164,7 @@ export const buildRecommendationPolicy = (
   const gearSteps = allowGear
     ? buildGearStep(
         relevance,
-        verdict.primaryIssue === "noise" ? "USB dynamic mic" : "USB condenser mic",
+        gearIssue,
         verdict.primaryIssue === "noise"
           ? "Improves background rejection when noise is limiting clarity"
           : "Improves speech pickup consistency for this failing metric"

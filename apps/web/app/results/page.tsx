@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getPrimaryGearRecommendation } from "@miccheck/audio-metrics/src/gearCatalog";
 import AudioPlayer from "../../components/AudioPlayer";
 import ScoreCard from "../../components/ScoreCard";
 import BestNextSteps from "../../components/BestNextSteps";
@@ -46,20 +47,30 @@ const sampleResult = {
     reassuranceMode: false,
     bestNextSteps: [
       { kind: "action", title: "recommendation.reduce_echo", titleKey: "recommendation.reduce_echo" },
-      {
-        kind: "gear_optional",
-        title: "Acoustic panels",
-        gear: {
-          id: "usb-dynamic-mic",
-          title: "USB dynamic mic",
-          why: "Reduces room pickup and reflections for clearer speech.",
-          category: "USB dynamic mic",
-          relevance: "high",
-          rationale: "Reduces room pickup and reflections for clearer speech.",
-          affiliateUrl: "https://amzn.to/4qTnyHf",
-          linkStatus: "active"
+      ...(() => {
+        const sampleGear = getPrimaryGearRecommendation("echo");
+        if (!sampleGear) {
+          return [];
         }
-      }
+
+        return [
+          {
+            kind: "gear_optional" as const,
+            title: sampleGear.title,
+            gear: {
+              id: sampleGear.id,
+              title: sampleGear.title,
+              why: "Reduces room pickup and reflections for clearer speech.",
+              category: sampleGear.category,
+              relevance: "high" as const,
+              rationale: "Reduces room pickup and reflections for clearer speech.",
+              supportsIssues: sampleGear.supportsIssues,
+              ...(sampleGear.affiliateUrl ? { affiliateUrl: sampleGear.affiliateUrl } : {}),
+              linkStatus: sampleGear.affiliateUrl ? ("active" as const) : ("missing" as const)
+            }
+          }
+        ];
+      })()
     ],
     copyKeys: {
       explanationKey: "overall.echo.impact_some",

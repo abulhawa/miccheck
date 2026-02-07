@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { CategoryId } from "@miccheck/audio-metrics";
+import { getPrimaryGearRecommendation } from "@miccheck/audio-metrics/src/gearCatalog";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import { t } from "../lib/i18n";
 
@@ -9,29 +10,8 @@ interface AffiliateRecommendationProps {
   issueCategory: CategoryId | null;
 }
 
-const affiliateRecommendations: Record<
-  CategoryId,
-  { name: string; url: string; description: string }
-> = {
-  echo: {
-    name: "Acoustic Foam Panels",
-    url: "https://amzn.to/4qTnyHf",
-    description: "To reduce echo, consider acoustic panels that absorb sound reflections."
-  },
-  noise: {
-    name: "FIFINE USB Microphone",
-    url: "https://amzn.to/4rpWH5l",
-    description: "A directional USB mic can help reject background noise and focus on your voice."
-  },
-  level: {
-    name: "Microphone Arm",
-    url: "https://amzn.to/4anIYpX",
-    description: "A mic arm makes it easy to keep a consistent distance and angle."
-  }
-};
-
 export default function AffiliateRecommendation({ issueCategory }: AffiliateRecommendationProps) {
-  const recommendation = issueCategory ? affiliateRecommendations[issueCategory] : null;
+  const recommendation = issueCategory ? getPrimaryGearRecommendation(issueCategory) : null;
   const affiliatesEnabled = process.env.NEXT_PUBLIC_AFFILIATES_ENABLED === "true";
 
   if (!recommendation) {
@@ -40,7 +20,7 @@ export default function AffiliateRecommendation({ issueCategory }: AffiliateReco
 
   const handleAffiliateClick = () => {
     logEvent(ANALYTICS_EVENTS.affiliateClick, {
-      product_name: recommendation.name,
+      product_name: recommendation.title,
       issue_category: issueCategory ?? "unknown"
     });
   };
@@ -50,13 +30,13 @@ export default function AffiliateRecommendation({ issueCategory }: AffiliateReco
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
         {t("affiliate.recommendation_title")}
       </p>
-      <h3 className="mt-2 text-sm font-semibold text-slate-100">{recommendation.name}</h3>
+      <h3 className="mt-2 text-sm font-semibold text-slate-100">{recommendation.title}</h3>
       <p className="mt-2 text-xs text-slate-400">{recommendation.description}</p>
-      {affiliatesEnabled ? (
+      {affiliatesEnabled && recommendation.affiliateUrl ? (
         <>
           <a
             className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-amber-300 underline"
-            href={recommendation.url}
+            href={recommendation.affiliateUrl}
             onClick={handleAffiliateClick}
             rel="noopener noreferrer nofollow"
             target="_blank"

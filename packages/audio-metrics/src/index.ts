@@ -13,6 +13,12 @@ export * from "./types";
 export * from "./useCaseLabels";
 export { getContextualExplanation } from "./scoring/contextHelp";
 export { getVerdict } from "./scoring/verdict";
+export {
+  GEAR_CATALOG,
+  getGearCatalogItemById,
+  getGearRecommendationsForIssue,
+  getPrimaryGearRecommendation
+} from "./gearCatalog";
 
 const DEFAULT_CONTEXT: ContextInput = {
   use_case: "meetings",
