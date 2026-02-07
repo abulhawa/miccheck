@@ -39,6 +39,14 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
   const [deviceTypeOverride, setDeviceTypeOverride] = useState<DeviceType | null>(null);
   const hasShownIOSAlert = useRef(false);
   const [deviceRefreshSignal, setDeviceRefreshSignal] = useState("0");
+  const [isRecordingDetailsOpen, setIsRecordingDetailsOpen] = useState(false);
+  const [trackSettingsSnapshot, setTrackSettingsSnapshot] = useState<MediaTrackSettings | null>(null);
+  const [audioContextSnapshot, setAudioContextSnapshot] = useState<{
+    sampleRate?: number;
+    baseLatency?: number;
+    outputLatency?: number;
+  } | null>(null);
+  const detailsProbeRequestIdRef = useRef(0);
 
   const resolvedDeviceType = deviceTypeOverride ?? detectedDeviceType;
   const analysisContext = useMemo(
@@ -51,6 +59,7 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     error,
     duration,
     mediaStream,
+    audioContext,
     recordingBlob,
     analysis,
     startRecording,
@@ -104,6 +113,108 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
     }
   }, [status]);
 
+  useEffect(() => {
+    if (!mediaStream) {
+      return;
+    }
+    const track = mediaStream.getAudioTracks()[0];
+    if (!track || typeof track.getSettings !== "function") {
+      return;
+    }
+    setTrackSettingsSnapshot(track.getSettings());
+  }, [deviceId, mediaStream]);
+
+  useEffect(() => {
+    if (!audioContext) {
+      return;
+    }
+    setAudioContextSnapshot({
+      sampleRate: audioContext.sampleRate,
+      baseLatency: "baseLatency" in audioContext ? audioContext.baseLatency : undefined,
+      outputLatency: "outputLatency" in audioContext ? audioContext.outputLatency : undefined
+    });
+  }, [audioContext]);
+
+  useEffect(() => {
+    if (mediaStream || status === "recording" || status === "analyzing") {
+      return;
+    }
+    if (
+      typeof navigator === "undefined" ||
+      !navigator.mediaDevices?.getUserMedia ||
+      !navigator.permissions?.query
+    ) {
+      return;
+    }
+
+    let isCancelled = false;
+    let probeStream: MediaStream | null = null;
+    const requestId = ++detailsProbeRequestIdRef.current;
+
+    const stopProbeStream = () => {
+      if (!probeStream) return;
+      probeStream.getTracks().forEach((track) => track.stop());
+      probeStream = null;
+    };
+
+    const probeDetails = async () => {
+      try {
+        const permissionStatus = await navigator.permissions.query({
+          name: "microphone" as PermissionName
+        });
+        if (permissionStatus.state !== "granted") {
+          return;
+        }
+
+        probeStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: false,
+            autoGainControl: false,
+            ...(deviceId ? { deviceId: { exact: deviceId } } : {})
+          }
+        });
+        if (isCancelled || requestId !== detailsProbeRequestIdRef.current) {
+          stopProbeStream();
+          return;
+        }
+
+        const track = probeStream.getAudioTracks()[0];
+        if (track && typeof track.getSettings === "function") {
+          setTrackSettingsSnapshot(track.getSettings());
+        }
+
+        const AudioContextClass =
+          window.AudioContext ||
+          (window as typeof window & { webkitAudioContext?: typeof AudioContext })
+            .webkitAudioContext;
+        if (!AudioContextClass) {
+          return;
+        }
+        const probeAudioContext = new AudioContextClass();
+        setAudioContextSnapshot({
+          sampleRate: probeAudioContext.sampleRate,
+          baseLatency:
+            "baseLatency" in probeAudioContext ? probeAudioContext.baseLatency : undefined,
+          outputLatency:
+            "outputLatency" in probeAudioContext ? probeAudioContext.outputLatency : undefined
+        });
+        await probeAudioContext.close();
+      } catch {
+        // Keep previously captured details when probing fails.
+      } finally {
+        stopProbeStream();
+      }
+    };
+
+    void probeDetails();
+
+    return () => {
+      isCancelled = true;
+      stopProbeStream();
+    };
+  }, [deviceId, mediaStream, status]);
+
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
@@ -138,6 +249,40 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
 
     reset();
   }, [analysis, reset, viewMode]);
+
+  const formatValue = useCallback((value: unknown) => {
+    if (value === undefined || value === null || value === "") {
+      return "Not available";
+    }
+    if (typeof value === "boolean") {
+      return value ? "Enabled" : "Disabled";
+    }
+    if (typeof value === "number") {
+      return Number.isFinite(value) ? `${value}` : "Not available";
+    }
+    return String(value);
+  }, []);
+
+  const recordingDetailsRows = useMemo(() => {
+    const trackLatency =
+      trackSettingsSnapshot && "latency" in trackSettingsSnapshot
+        ? (trackSettingsSnapshot as MediaTrackSettings & { latency?: number }).latency
+        : undefined;
+    return [
+      { label: "Auto gain control", value: formatValue(trackSettingsSnapshot?.autoGainControl) },
+      { label: "Echo cancellation", value: formatValue(trackSettingsSnapshot?.echoCancellation) },
+      { label: "Noise suppression", value: formatValue(trackSettingsSnapshot?.noiseSuppression) },
+      { label: "Channel count", value: formatValue(trackSettingsSnapshot?.channelCount) },
+      { label: "Sample rate", value: formatValue(trackSettingsSnapshot?.sampleRate) },
+      { label: "Sample size", value: formatValue(trackSettingsSnapshot?.sampleSize) },
+      { label: "Latency", value: formatValue(trackLatency) },
+      { label: "AudioContext sample rate", value: formatValue(audioContextSnapshot?.sampleRate) },
+      { label: "AudioContext base latency", value: formatValue(audioContextSnapshot?.baseLatency) },
+      { label: "AudioContext output latency", value: formatValue(audioContextSnapshot?.outputLatency) }
+    ];
+  }, [audioContextSnapshot, formatValue, trackSettingsSnapshot]);
+
+  const hasCapturedRecordingDetails = trackSettingsSnapshot !== null || audioContextSnapshot !== null;
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-8">
@@ -189,6 +334,35 @@ export default function TestExperiencePage({ viewMode }: TestExperiencePageProps
             </button>
             <div className="text-sm text-slate-400">Duration: {duration.toFixed(1)}s</div>
           </div>
+
+          <details
+            className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3"
+            onToggle={(event) => setIsRecordingDetailsOpen(event.currentTarget.open)}
+          >
+            <summary className="cursor-pointer list-none text-sm font-semibold text-slate-200">
+              <span className="flex items-center justify-between">
+                Recording details
+                <span className="text-xs font-normal text-slate-400">
+                  {isRecordingDetailsOpen ? "Collapse" : "Expand"}
+                </span>
+              </span>
+            </summary>
+            <div className="mt-3 text-xs text-slate-200">
+              {!mediaStream ? (
+                !hasCapturedRecordingDetails ? (
+                  <p className="mb-3 text-slate-400">Grant mic access to view details.</p>
+                ) : null
+              ) : null}
+              <div className="grid gap-x-6 gap-y-2 sm:grid-cols-[auto,1fr]">
+                {recordingDetailsRows.map((row) => (
+                  <React.Fragment key={row.label}>
+                    <span className="text-slate-400">{row.label}</span>
+                    <span>{row.value}</span>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          </details>
 
           <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
           <p className="text-xs text-slate-400">Detected device type: {formatDeviceTypeLabel(detectedDeviceType)}</p>

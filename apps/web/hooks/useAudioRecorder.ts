@@ -43,6 +43,7 @@ export function useAudioRecorder({
   const [duration, setDuration] = useState(0);
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -128,6 +129,7 @@ export function useAudioRecorder({
       void audioContextRef.current.close();
       audioContextRef.current = null;
     }
+    setAudioContext(null);
   }, []);
 
   const clearVideoElements = useCallback((stream: MediaStream | null) => {
@@ -293,6 +295,7 @@ export function useAudioRecorder({
         return;
       }
       audioContextRef.current = audioContext;
+      setAudioContext(audioContext);
       const source = audioContext.createMediaStreamSource(stream);
       meterSourceNodeRef.current = source;
       const analyser = audioContext.createAnalyser();
@@ -484,6 +487,7 @@ export function useAudioRecorder({
     duration,
     mediaStream,
     recordingBlob,
+    audioContext,
     initializeRecorder,
     startRecording,
     stopRecording,
