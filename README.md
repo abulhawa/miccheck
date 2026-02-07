@@ -44,7 +44,7 @@ Then visit `http://localhost:3000`.
 
 ## Tech Stack
 
-- Next.js 14 (App Router) + TypeScript
+- Next.js 16 (App Router) + TypeScript
 - Tailwind CSS
 - Turborepo workspaces
 - Vitest
