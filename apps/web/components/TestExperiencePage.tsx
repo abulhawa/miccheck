@@ -303,6 +303,10 @@ export default function TestExperiencePage({
           <p className="text-sm text-slate-200">
             {t("test.header.subtitle")}
           </p>
+          <p className="text-sm text-slate-300">
+            <span className="font-semibold text-slate-200">{t("test.header.read_prompt")}</span>{" "}
+            <span className="text-slate-100">“{t("test.header.read_prompt_sample")}”</span>
+          </p>
         </div>
         <div className="mt-5 flex flex-col gap-4 sm:gap-5 md:mt-6 md:gap-6">
           <div className="flex gap-3 text-xs font-semibold">

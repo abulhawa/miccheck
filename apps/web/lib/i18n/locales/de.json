@@ -158,6 +158,8 @@
   "test.details.sample_size": "Sample-Groesse",
   "test.details.title": "Technische Details",
   "test.header.eyebrow": "MicCheck Test",
+  "test.header.read_prompt": "Brauchst du einen Beispielsatz? Probier:",
+  "test.header.read_prompt_sample": "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.",
   "test.header.subtitle": "Wir erfassen 5-7 Sekunden, um Pegel, Rauschen und Echo zu analysieren.",
   "test.header.title": "Kurze Probe aufnehmen",
   "test.permission.denied": "Mikrofonzugriff ist blockiert. Bitte in den Browser-Einstellungen erlauben und erneut versuchen.",

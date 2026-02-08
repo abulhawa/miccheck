@@ -158,6 +158,8 @@
   "test.details.sample_size": "Sample size",
   "test.details.title": "Technical details",
   "test.header.eyebrow": "MicCheck Test",
+  "test.header.read_prompt": "Need something to read? Try:",
+  "test.header.read_prompt_sample": "The quick brown fox jumps over the lazy dog.",
   "test.header.subtitle": "We will capture 5-7 seconds to analyze level, noise, and echo.",
   "test.header.title": "Record a quick sample",
   "test.permission.denied": "Microphone access is blocked. Enable it in browser settings and retry.",
