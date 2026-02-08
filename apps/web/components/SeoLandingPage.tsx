@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buttonStyles } from "./buttonStyles";
 import { buildUseCaseTestHref } from "../lib/useCaseRouting";
 import type { UseCase } from "../types";
+import { t } from "../lib/i18n";
 
 interface SeoLandingPageProps {
   headline: string;
@@ -26,7 +27,7 @@ export default function SeoLandingPage({
           className={buttonStyles({ variant: "primary" })}
           href={buildUseCaseTestHref(useCase, landingRoute)}
         >
-          Test your mic
+          {t("cta.test_your_mic")}
         </Link>
       </div>
       <p className="text-xs text-slate-400">
@@ -34,14 +35,14 @@ export default function SeoLandingPage({
           className="underline decoration-slate-600 underline-offset-4 transition hover:text-slate-200"
           href="/"
         >
-          Home
+          {t("nav.home")}
         </Link>{" "}
         /{" "}
         <Link
           className="underline decoration-slate-600 underline-offset-4 transition hover:text-slate-200"
           href="/test"
         >
-          Start mic test
+          {t("cta.start_mic_test")}
         </Link>
       </p>
     </section>

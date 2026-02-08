@@ -2,19 +2,20 @@ import Link from "next/link";
 
 import BrowserSupport from "../components/BrowserSupport";
 import { buttonStyles } from "../components/buttonStyles";
+import { t } from "../lib/i18n";
 
 const features = [
   {
-    title: "Local analysis",
-    description: "All audio processing stays on-device for privacy and speed."
+    titleKey: "home.features.local_analysis.title",
+    descriptionKey: "home.features.local_analysis.description"
   },
   {
-    title: "Actionable feedback",
-    description: "Get a letter grade plus the single best fix to improve quality."
+    titleKey: "home.features.actionable_feedback.title",
+    descriptionKey: "home.features.actionable_feedback.description"
   },
   {
-    title: "Browser-friendly",
-    description: "Supports Chrome, Edge, Firefox, and Safari on desktop + mobile."
+    titleKey: "home.features.browser_friendly.title",
+    descriptionKey: "home.features.browser_friendly.description"
   }
 ];
 
@@ -27,62 +28,61 @@ export default function HomePage() {
             MicCheck
           </span>
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
-            Check your microphone quality in 7 seconds.
+            {t("home.hero.title")}
           </h1>
           <p className="text-base text-slate-200 md:text-lg">
-            Record a quick sample, get an instant grade, and fix the biggest issue in
-            your setup. Everything happens locally in your browser.
+            {t("home.hero.description")}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               className={buttonStyles({ variant: "primary", className: "text-center" })}
               href="/test"
             >
-              Start Mic Test
+              {t("cta.start_mic_test")}
             </Link>
             <Link
               className="text-sm font-semibold text-slate-300 underline decoration-slate-500 underline-offset-4 transition hover:text-white hover:decoration-slate-300"
               href="/results"
             >
-              Sample Results
+              {t("nav.sample_results")}
             </Link>
           </div>
           <p className="text-xs text-slate-200">
-            We never upload audio. Review our privacy policy anytime.
+            {t("home.hero.privacy_note")}
           </p>
           <p className="text-xs text-slate-300">
-            Testing a mic for Zoom? Try our{" "}
+            {t("home.hero.zoom_intro")}{" "}
             <Link
               className="underline decoration-slate-500 underline-offset-4 transition hover:text-white hover:decoration-slate-300"
               href="/mic-test-for-zoom"
             >
-              Zoom mic test
+              {t("home.hero.zoom_link")}
             </Link>
             .
           </p>
         </div>
         <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg md:p-6">
-          <h2 className="text-lg font-semibold">What you&apos;ll get</h2>
+          <h2 className="text-lg font-semibold">{t("home.panel.title")}</h2>
           <div className="mt-4 space-y-4">
             <div className="flex items-start gap-3">
               <div className="mt-1 h-3 w-3 rounded-full bg-emerald-400" />
               <div>
-                <p className="font-medium">Letter grade</p>
-                <p className="text-sm text-slate-400">A-F score based on the weakest category.</p>
+                <p className="font-medium">{t("home.panel.grade_title")}</p>
+                <p className="text-sm text-slate-400">{t("home.panel.grade_description")}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 h-3 w-3 rounded-full bg-amber-400" />
               <div>
-                <p className="font-medium">Category stars</p>
-                <p className="text-sm text-slate-400">Level, noise, and echo performance.</p>
+                <p className="font-medium">{t("home.panel.stars_title")}</p>
+                <p className="text-sm text-slate-400">{t("home.panel.stars_description")}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 h-3 w-3 rounded-full bg-sky-400" />
               <div>
-                <p className="font-medium">One fix</p>
-                <p className="text-sm text-slate-400">Focused recommendation to improve fast.</p>
+                <p className="font-medium">{t("home.panel.fix_title")}</p>
+                <p className="text-sm text-slate-400">{t("home.panel.fix_description")}</p>
               </div>
             </div>
           </div>
@@ -90,23 +90,26 @@ export default function HomePage() {
       </section>
 
       <div className="mt-4 rounded-3xl border border-slate-700/70 bg-slate-900/80 p-5 text-center text-sm text-slate-200 md:mt-6 md:p-6">
-        <strong className="text-slate-100">Your privacy is protected.</strong> Audio is processed locally in your browser.
+        <strong className="text-slate-100">{t("home.privacy.title")}</strong> {t("home.privacy.body")}
         <span className="block">
-          We keep your latest sample only in this browser tab so you can replay it.
+          {t("home.privacy.detail")}
         </span>
-        <Link className="mt-2 inline-flex text-xs font-semibold text-sky-300 underline decoration-sky-500/60 underline-offset-4 transition hover:text-sky-200" href="/privacy">
-          Read the privacy policy
+        <Link
+          className="mt-2 inline-flex text-xs font-semibold text-sky-300 underline decoration-sky-500/60 underline-offset-4 transition hover:text-sky-200"
+          href="/privacy"
+        >
+          {t("home.privacy.link")}
         </Link>
       </div>
 
       <section className="grid gap-4 md:grid-cols-3 md:gap-6">
         {features.map((feature) => (
           <div
-            key={feature.title}
+            key={feature.titleKey}
             className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 md:p-6"
           >
-            <h3 className="text-lg font-semibold">{feature.title}</h3>
-            <p className="mt-2 text-sm text-slate-400">{feature.description}</p>
+            <h3 className="text-lg font-semibold">{t(feature.titleKey)}</h3>
+            <p className="mt-2 text-sm text-slate-400">{t(feature.descriptionKey)}</p>
           </div>
         ))}
       </section>
