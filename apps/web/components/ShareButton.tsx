@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { t } from "../lib/i18n";
+import { SITE_URL } from "../lib/site";
 
 interface ShareButtonProps {
   grade: string;
@@ -10,10 +11,7 @@ interface ShareButtonProps {
 export default function ShareButton({ grade }: ShareButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL ??
-    (typeof window !== "undefined" ? window.location.origin : "https://miccheck-sage.vercel.app");
-  const shareText = `My microphone scored ${grade} on MicCheck! Test yours: ${baseUrl}`;
+  const shareText = `My microphone scored ${grade} on MicCheck! Test yours: ${SITE_URL}`;
   const shareLabel = grade === "A" ? t("results.share.excellent") : "Share";
 
   useEffect(

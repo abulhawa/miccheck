@@ -4,12 +4,13 @@ import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "../components/Footer";
+import { SITE_NAME, SITE_URL_OBJECT, toAbsoluteUrl } from "../lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://miccheck-sage.vercel.app"),
+  metadataBase: SITE_URL_OBJECT,
   title: {
-    default: "MicCheck - 7-Second Mic Quality Test",
-    template: "%s | MicCheck"
+    default: `${SITE_NAME} - 7-Second Mic Quality Test`,
+    template: `%s | ${SITE_NAME}`
   },
   description: "Find out why your audio sounds bad. Free, private, no sign-up.",
   other: {
@@ -32,10 +33,10 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"],
   },
   openGraph: {
-    title: "MicCheck - 7-Second Mic Quality Test",
+    title: `${SITE_NAME} - 7-Second Mic Quality Test`,
     description: "Find out why your audio sounds bad. Free, private, no sign-up.",
-    url: "https://miccheck-sage.vercel.app/",
-    siteName: "MicCheck",
+    url: toAbsoluteUrl("/"),
+    siteName: SITE_NAME,
     images: [
       {
         url: "/og-image.png",

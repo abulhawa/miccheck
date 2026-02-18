@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Learn how MicCheck handles your microphone recordings and privacy.",
+  alternates: {
+    canonical: "/privacy"
+  }
+};
+
 const privacyItems = [
   "No audio uploads. All recording, analysis, and scoring happen locally in your browser.",
   "No account is required and we do not send recorded audio to our servers.",

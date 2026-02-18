@@ -1,6 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import TestExperiencePage from "../../components/TestExperiencePage";
 import { resolveDiscoverySource, resolveUseCaseFromQueryParam } from "../../lib/useCaseRouting";
+
+export const metadata: Metadata = {
+  title: "Pro Mic Test",
+  description: "Run a detailed MicCheck test tailored to your recording use case.",
+  alternates: {
+    canonical: "/pro"
+  }
+};
 
 interface ProTestPageProps {
   searchParams?: Promise<{
