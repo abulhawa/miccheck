@@ -11,8 +11,8 @@ interface ShareButtonProps {
 export default function ShareButton({ grade }: ShareButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shareText = `My microphone scored ${grade} on MicCheck! Test yours: ${SITE_URL}`;
-  const shareLabel = grade === "A" ? t("results.share.excellent") : "Share";
+  const shareText = t("results.share.text", { grade, url: SITE_URL });
+  const shareLabel = grade === "A" ? t("results.share.excellent") : t("results.share.button");
 
   useEffect(
     () => () => {
@@ -53,10 +53,10 @@ export default function ShareButton({ grade }: ShareButtonProps) {
         {shareLabel}
       </button>
       {status === "copied" ? (
-        <span className="text-xs font-medium text-emerald-300">Copied</span>
+        <span className="text-xs font-medium text-emerald-300">{t("results.share.copied")}</span>
       ) : null}
       {status === "error" ? (
-        <span className="text-xs font-medium text-red-300">Copy failed</span>
+        <span className="text-xs font-medium text-red-300">{t("results.share.copy_failed")}</span>
       ) : null}
     </div>
   );

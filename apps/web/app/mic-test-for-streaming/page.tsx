@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import SeoLandingPage from "../../components/SeoLandingPage";
+import { t } from "../../lib/i18n";
 
 export const metadata: Metadata = {
   title: "Mic Test For Streaming",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
 export default function MicTestForStreamingLandingPage() {
   return (
     <SeoLandingPage
-      description="MicCheck checks your microphone in your browser and gives one practical fix so your stream voice is easier to understand."
-      headline="Stream chat says your mic sounds rough?"
+      description={t("seo.mic_test_for_streaming.description")}
+      headline={t("seo.mic_test_for_streaming.headline")}
       landingRoute="mic-test-for-streaming"
       useCase="streaming"
     />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { t } from "../lib/i18n";
 
 export interface AudioVisualizerProps {
   level: number;
@@ -14,7 +15,7 @@ export default function AudioVisualizer({ level, isRecording }: AudioVisualizerP
   const clampedLevel = useMemo(() => clamp(level), [level]);
   const hasAudio = clampedLevel > 0;
   const height = !isRecording && !hasAudio ? 5 : clampedLevel * 100;
-  const label = isRecording ? "Listening…" : "Idle";
+  const label = isRecording ? t("audio.visualizer.status_listening") : t("audio.visualizer.status_idle");
   const barClasses = hasAudio
     ? "bg-gradient-to-t from-emerald-400 via-emerald-500 to-emerald-200"
     : "bg-gray-300";
@@ -23,7 +24,7 @@ export default function AudioVisualizer({ level, isRecording }: AudioVisualizerP
     <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-6">
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span className="flex items-center gap-2">
-          <span>Input level</span>
+          <span>{t("audio.visualizer.input_level")}</span>
           <span className={!hasAudio ? "animate-pulse text-slate-200" : "text-emerald-300"}>
             <svg
               aria-hidden="true"
@@ -48,7 +49,7 @@ export default function AudioVisualizer({ level, isRecording }: AudioVisualizerP
         </div>
       </div>
       <p className="mt-3 text-xs text-slate-200">
-        Aim for peaks in the upper green zone without hitting the top.
+        {t("audio.visualizer.tip")}
       </p>
     </div>
   );

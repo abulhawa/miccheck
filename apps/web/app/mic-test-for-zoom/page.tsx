@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import SeoLandingPage from "../../components/SeoLandingPage";
+import { t } from "../../lib/i18n";
 
 export const metadata: Metadata = {
   title: "Mic Test For Zoom",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
 export default function MicTestForZoomLandingPage() {
   return (
     <SeoLandingPage
-      description="MicCheck gives you a quick browser test and points to the one change that improves meeting call clarity first."
-      headline="Zoom calls keep sounding unclear?"
+      description={t("seo.mic_test_for_zoom.description")}
+      headline={t("seo.mic_test_for_zoom.headline")}
       landingRoute="mic-test-for-zoom"
       useCase="meetings"
     />
