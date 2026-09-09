@@ -11,7 +11,8 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "predev": "npm run build -- --filter=@miccheck/audio-metrics"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.18",

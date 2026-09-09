@@ -1,6 +1,6 @@
 # MicCheck
 
-[![CI](https://github.com/miccheck/miccheck/actions/workflows/ci.yml/badge.svg)](https://github.com/miccheck/miccheck/actions/workflows/ci.yml)
+[![CI](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml/badge.svg)](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml)
 
 MicCheck is a browser-based microphone quality analyzer that records a short sample locally, analyzes it in the browser, and provides actionable feedback.
 

@@ -4,29 +4,13 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "lint": "echo 'no lint configured'",
+    "lint": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run --coverage"
-  },
-  "vitest": {
-    "test": {
-      "include": [
-        "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
-        "test/**/*.{test,spec}.?(c|m)[jt]s?(x)"
-      ],
-      "exclude": ["dist/**", "node_modules/**"]
-    },
-    "coverage": {
-      "reporter": ["text", "html"],
-      "thresholds": {
-        "lines": 60,
-        "functions": 60,
-        "branches": 50,
-        "statements": 60
-      }
-    }
   },
   "dependencies": {
     "@miccheck/audio-core": "file:../audio-core"
