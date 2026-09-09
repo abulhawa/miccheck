@@ -179,7 +179,7 @@ export interface VerdictBestNextStep {
   };
 }
 
-export type AnalysisSpecialState = "NO_SPEECH" | "TOO_SHORT" | "SILENT" | "ERROR";
+export type AnalysisSpecialState = "NO_SPEECH" | "INSUFFICIENT_EVIDENCE" | "TOO_SHORT" | "SILENT" | "ERROR";
 
 export interface Verdict {
   version: "1.0";

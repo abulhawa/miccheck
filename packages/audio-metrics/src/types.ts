@@ -30,4 +30,5 @@ export interface AnalysisSummary {
   metrics: MetricsSummary;
   recommendation: Recommendation;
   specialState?: AnalysisSpecialState;
+  evidence?: import("./guided").MeasurementEvidence;
 }

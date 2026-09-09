@@ -32,15 +32,11 @@ const fitFromGrade = (grade: string): UseCaseFit => {
   return "fail";
 };
 
-const certaintyFrom = (fit: UseCaseFit, deviceType: ContextInput["device_type"]): DiagnosticCertainty => {
-  const base: DiagnosticCertainty = fit === "pass" ? "high" : fit === "warn" ? "medium" : "low";
-  if (deviceType === "unknown" && base === "high") return "medium";
-  return base;
-};
+const certaintyFrom = (): DiagnosticCertainty => "low";
 
 const withVerdictExtensions = (verdict: Verdict, context: ContextInput): Verdict => {
   const fit = fitFromGrade(verdict.overall.grade);
-  const diagnosticCertainty = certaintyFrom(fit, context.device_type);
+  const diagnosticCertainty = certaintyFrom();
   const reassuranceMode = fit === "pass";
 
   return {
@@ -152,3 +148,6 @@ export const analyzeSamples = (
     recommendation
   };
 };
+
+export { analyzeGuidedSamples } from "./guided";
+export type { CaptureEvidence, GuidedEvidence, MeasurementEvidence, SpeechSegment } from "./guided";
