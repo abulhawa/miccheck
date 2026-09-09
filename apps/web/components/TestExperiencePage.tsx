@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "./AudioPlayer";
 import AudioWaveformVisualizer from "./AudioWaveformVisualizer";
@@ -8,7 +8,6 @@ import DeviceSelector from "./DeviceSelector";
 import ScoreCard from "./ScoreCard";
 import BestNextSteps from "./BestNextSteps";
 import ResultsNotice from "./ResultsNotice";
-import { useAudioMeter } from "../hooks/useAudioMeter";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
 import {
   ANALYSIS_CONTEXT_OPTIONS,
@@ -55,7 +54,6 @@ export default function TestExperiencePage({
     baseLatency?: number;
     outputLatency?: number;
   } | null>(null);
-  const detailsProbeRequestIdRef = useRef(0);
 
   const resolvedDeviceType = deviceTypeOverride ?? detectedDeviceType;
   const analysisContext = useMemo(
@@ -67,6 +65,9 @@ export default function TestExperiencePage({
     status,
     error,
     duration,
+    audioDataArray,
+    currentVolume,
+    peakVolume,
     mediaStream,
     audioContext,
     recordingBlob,
@@ -79,10 +80,7 @@ export default function TestExperiencePage({
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
 
-  const { audioDataArray, currentVolume, peakVolume } = useAudioMeter({
-    stream: mediaStream,
-    isActive: isRecording
-  });
+  const isRequesting = status === "requesting";
 
   useEffect(() => {
     const storedContext = loadAnalysisContext();
@@ -146,96 +144,17 @@ export default function TestExperiencePage({
     });
   }, [audioContext]);
 
-  useEffect(() => {
-    if (mediaStream || status === "recording" || status === "analyzing") {
-      return;
-    }
-    if (
-      typeof navigator === "undefined" ||
-      !navigator.mediaDevices?.getUserMedia ||
-      !navigator.permissions?.query
-    ) {
-      return;
-    }
-
-    let isCancelled = false;
-    let probeStream: MediaStream | null = null;
-    const requestId = ++detailsProbeRequestIdRef.current;
-
-    const stopProbeStream = () => {
-      if (!probeStream) return;
-      probeStream.getTracks().forEach((track) => track.stop());
-      probeStream = null;
-    };
-
-    const probeDetails = async () => {
-      try {
-        const permissionStatus = await navigator.permissions.query({
-          name: "microphone" as PermissionName
-        });
-        if (permissionStatus.state !== "granted") {
-          return;
-        }
-
-        probeStream = await navigator.mediaDevices.getUserMedia({
-          audio: {
-            echoCancellation: true,
-            noiseSuppression: false,
-            autoGainControl: false,
-            ...(deviceId ? { deviceId: { exact: deviceId } } : {})
-          }
-        });
-        if (isCancelled || requestId !== detailsProbeRequestIdRef.current) {
-          stopProbeStream();
-          return;
-        }
-
-        const track = probeStream.getAudioTracks()[0];
-        if (track && typeof track.getSettings === "function") {
-          setTrackSettingsSnapshot(track.getSettings());
-        }
-
-        const AudioContextClass =
-          window.AudioContext ||
-          (window as typeof window & { webkitAudioContext?: typeof AudioContext })
-            .webkitAudioContext;
-        if (!AudioContextClass) {
-          return;
-        }
-        const probeAudioContext = new AudioContextClass();
-        setAudioContextSnapshot({
-          sampleRate: probeAudioContext.sampleRate,
-          baseLatency:
-            "baseLatency" in probeAudioContext ? probeAudioContext.baseLatency : undefined,
-          outputLatency:
-            "outputLatency" in probeAudioContext ? probeAudioContext.outputLatency : undefined
-        });
-        await probeAudioContext.close();
-      } catch {
-        // Keep previously captured details when probing fails.
-      } finally {
-        stopProbeStream();
-      }
-    };
-
-    void probeDetails();
-
-    return () => {
-      isCancelled = true;
-      stopProbeStream();
-    };
-  }, [deviceId, mediaStream, status]);
-
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
   const isExcellent = analysis?.verdict.overall.grade === "A";
 
   const buttonLabel = useMemo(() => {
+    if (isRequesting) return "Waiting for microphone…";
     if (isRecording) return t("test.recording.stop");
     if (isAnalyzing) return t("test.recording.analyzing");
     return t("test.recording.start");
-  }, [isRecording, isAnalyzing]);
+  }, [isRecording, isAnalyzing, isRequesting]);
 
   const handleDeviceChange = useCallback(
     (nextDeviceId: string | null, meta?: { detectedType: DeviceType }) => {
@@ -341,7 +260,7 @@ export default function TestExperiencePage({
                     variant: "primary",
                     className: "min-w-[11rem]"
                   })}
-                  disabled={isAnalyzing}
+                  disabled={isAnalyzing || isRequesting}
                   onClick={isRecording ? stopRecording : startRecording}
                 >
                   <span className="inline-flex min-w-[8rem] items-center justify-center gap-2">
@@ -349,7 +268,7 @@ export default function TestExperiencePage({
                     {buttonLabel}
                   </span>
                 </button>
-                <div className="text-sm text-slate-400">
+                <div role="status" className="text-sm text-slate-400">
                   {t("test.recording.duration", { seconds: duration.toFixed(1) })}
                 </div>
               </div>
@@ -433,7 +352,7 @@ export default function TestExperiencePage({
               </details>
 
               {error ? (
-                <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
+                <div role="alert" className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
                   {error}
                 </div>
               ) : null}

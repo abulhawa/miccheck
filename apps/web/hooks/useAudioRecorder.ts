@@ -20,7 +20,7 @@ interface RecorderOptions {
   discoverySource?: string;
 }
 
-type RecorderStatus = "idle" | "recording" | "analyzing" | "complete" | "error";
+type RecorderStatus = "idle" | "requesting" | "recording" | "analyzing" | "complete" | "error";
 
 const DEFAULT_ANALYSIS_CONTEXT: ContextInput = {
   use_case: "meetings",
@@ -38,6 +38,10 @@ export function useAudioRecorder({
   analysisContext = DEFAULT_ANALYSIS_CONTEXT,
   discoverySource = "route:pro"
 }: RecorderOptions) {
+  const generationRef = useRef(0);
+  const busyRef = useRef(false);
+  const [audioDataArray, setAudioDataArray] = useState<Float32Array | null>(null);
+  const [peakVolume, setPeakVolume] = useState(0);
   const [status, setStatus] = useState<RecorderStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -201,6 +205,8 @@ export function useAudioRecorder({
   );
 
   const clearRecorder = useCallback(() => {
+    generationRef.current += 1;
+    busyRef.current = false;
     releaseMic("clear_recorder");
   }, [releaseMic]);
 
@@ -210,6 +216,8 @@ export function useAudioRecorder({
     setError(null);
     setAnalysis(null);
     setLevel(0);
+    setAudioDataArray(null);
+    setPeakVolume(0);
     setDuration(0);
     setRecordingBlob(null);
     clearRecording();
@@ -229,6 +237,8 @@ export function useAudioRecorder({
     const rms = Math.sqrt(sum / buffer.length);
     const normalized = Math.min(1, rms * METER_NORMALIZATION_MULTIPLIER);
     setLevel(normalized);
+    setAudioDataArray(buffer);
+    setPeakVolume((previous) => Math.max(previous, normalized));
 
     if (startTimeRef.current) {
       setDuration((performance.now() - startTimeRef.current) / 1000);
@@ -242,7 +252,11 @@ export function useAudioRecorder({
   }, [updateMeter]);
 
   const initializeRecorder = useCallback(async (overrideDeviceId?: string | null) => {
+    if (busyRef.current) return;
     clearRecorder();
+    busyRef.current = true;
+    const request = generationRef.current;
+    setStatus("requesting");
     if (typeof window !== "undefined" && window.isSecureContext === false) {
       setStatus("error");
       setError("Recording requires a secure (HTTPS) context.");
@@ -266,6 +280,10 @@ export function useAudioRecorder({
           ...(activeDeviceId ? { deviceId: { exact: activeDeviceId } } : {})
         }
       });
+      if (request !== generationRef.current) {
+        stopMediaStreamTracksOnce(stream, "stale_permission");
+        return;
+      }
       recordStreamRef.current = stream;
       setMediaStream(stream);
       debugLog("acquired_stream", {
@@ -324,6 +342,7 @@ export function useAudioRecorder({
       };
 
       recorder.onstop = async () => {
+        if (request !== generationRef.current) return;
         const recordedChunks = [...audioChunksRef.current];
         releaseMic("recorder_onstop");
         setStatus("analyzing");
@@ -332,10 +351,6 @@ export function useAudioRecorder({
           if (blob.size > 0) {
             logEvent(ANALYTICS_EVENTS.recordingCompleted);
           }
-          setRecordingBlob(blob);
-          saveRecording(blob).catch(() => {
-            // Non-blocking storage failure: playback can still use in-memory blob.
-          });
           const arrayBuffer =
             typeof blob.arrayBuffer === "function"
               ? await blob.arrayBuffer()
@@ -366,6 +381,7 @@ export function useAudioRecorder({
             }
           }
 
+          if (request !== generationRef.current) return;
           if (!audioBuffer) {
             throw new Error("Unable to decode the recorded audio.");
           }
@@ -384,9 +400,12 @@ export function useAudioRecorder({
             verdict_pass_fail: verdictPassFail,
             diagnostic_certainty: result.verdict.diagnosticCertainty ?? "unknown"
           });
+          setRecordingBlob(blob);
+          void saveRecording(blob).catch(() => {});
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {
+          if (request !== generationRef.current) return;
           setStatus("error");
           setError(
             analysisError instanceof Error
@@ -394,11 +413,14 @@ export function useAudioRecorder({
               : "Unable to analyze recording."
           );
           logEvent(ANALYTICS_EVENTS.recordingFailed, { reason: "unknown" });
+        } finally {
+          if (request === generationRef.current) busyRef.current = false;
         }
       };
-      updateMeter();
       setStatus("idle");
+      return request;
     } catch (permissionError) {
+      if (request !== generationRef.current) return;
       releaseMic("permission_or_stream_error");
       setStatus("error");
       if (permissionError instanceof DOMException) {
@@ -427,23 +449,37 @@ export function useAudioRecorder({
     discoverySource,
     debugLog,
     minDuration,
+    stopMediaStreamTracksOnce,
     releaseMic,
     updateMeter
   ]);
 
   const startRecording = useCallback(async () => {
+    if (busyRef.current) return;
     logEvent(ANALYTICS_EVENTS.startRecording);
     reset();
     setError(null);
     releasePreviewMic("start_recording");
-    await initializeRecorder();
+    const expectedRequest = generationRef.current + 1;
+    const request = await initializeRecorder();
+    if (request === undefined || request !== generationRef.current) {
+      if (request === undefined && generationRef.current === expectedRequest) busyRef.current = false;
+      return;
+    }
 
     const recorder = mediaRecorderRef.current;
     if (!recorder || recorder.state !== "inactive") {
       return;
     }
 
-    recorder.start();
+    try {
+      recorder.start();
+    } catch (startError) {
+      clearRecorder();
+      setStatus("error");
+      setError(startError instanceof Error ? startError.message : "Unable to start recording.");
+      return;
+    }
     startTimeRef.current = performance.now();
     setStatus("recording");
     updateMeter();
@@ -453,7 +489,7 @@ export function useAudioRecorder({
         mediaRecorderRef.current.stop();
       }
     }, maxDuration * 1000);
-  }, [initializeRecorder, maxDuration, releasePreviewMic, reset, updateMeter]);
+  }, [clearRecorder, initializeRecorder, maxDuration, releasePreviewMic, reset, updateMeter]);
 
   const stopRecording = useCallback(() => {
     clearStopTimeout();
@@ -467,8 +503,6 @@ export function useAudioRecorder({
 
   useEffect(() => {
     return () => {
-      releasePreviewMic("unmount");
-      releaseRecordMic("unmount");
       clearRecorder();
     };
   }, [clearRecorder, releasePreviewMic, releaseRecordMic]);
@@ -485,6 +519,9 @@ export function useAudioRecorder({
     error,
     analysis,
     level,
+    audioDataArray,
+    currentVolume: level,
+    peakVolume,
     duration,
     mediaStream,
     recordingBlob,

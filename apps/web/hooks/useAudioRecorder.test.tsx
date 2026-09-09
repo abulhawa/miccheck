@@ -553,4 +553,25 @@ describe("useAudioRecorder", () => {
     expect(track.stop).toHaveBeenCalledTimes(1);
   });
 
+
+  it.each(['reset', 'unmount'])('releases late permission streams after %s and prevents duplicate starts', async (action) => {
+    let resolve!: (stream: MediaStream) => void;
+    const pending = new Promise<MediaStream>((r) => { resolve = r; });
+    const getUserMedia = vi.fn(() => pending);
+    Object.defineProperty(navigator, 'mediaDevices', {value: {getUserMedia}, configurable: true});
+    const stop = vi.fn();
+    const stream = {getTracks: () => [{stop}]} as unknown as MediaStream;
+    const root = createRoot(document.createElement('div'));
+    let recorder!: RecorderHook;
+    await act(async () => root.render(<HookHarness onReady={(value) => {recorder = value;}} />));
+    let start!: Promise<void>;
+    await act(async () => {start = recorder.startRecording();});
+    expect(recorder.status).toBe('requesting');
+    await act(async () => {await recorder.startRecording();});
+    expect(getUserMedia).toHaveBeenCalledTimes(1);
+    await act(async () => {if(action === 'reset') recorder.reset(); else root.unmount();});
+    await act(async () => {resolve(stream); await start;});
+    expect(stop).toHaveBeenCalledTimes(1);
+    if(action === 'reset') {expect(recorder.status).toBe('idle'); await act(async () => root.unmount());}
+  });
 });
