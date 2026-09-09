@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPcmCapture, type PcmCapture } from "../lib/pcmCapture";
 import { analyzeRecording } from "../lib/analysis";
 import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
@@ -38,6 +39,7 @@ export function useAudioRecorder({
   analysisContext = DEFAULT_ANALYSIS_CONTEXT,
   discoverySource = "route:pro"
 }: RecorderOptions) {
+  const pcmCaptureRef = useRef<PcmCapture | null>(null);
   const generationRef = useRef(0);
   const busyRef = useRef(false);
   const [audioDataArray, setAudioDataArray] = useState<Float32Array | null>(null);
@@ -117,6 +119,8 @@ export function useAudioRecorder({
   }, []);
 
   const stopMeter = useCallback(() => {
+    pcmCaptureRef.current?.dispose();
+    pcmCaptureRef.current = null;
     if (animationRef.current !== null) {
       cancelAnimationFrame(animationRef.current);
       animationRef.current = null;
@@ -274,7 +278,7 @@ export function useAudioRecorder({
       const activeDeviceId = overrideDeviceId ?? deviceId;
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          echoCancellation: true,
+          echoCancellation: false,
           noiseSuppression: false,
           autoGainControl: false,
           ...(activeDeviceId ? { deviceId: { exact: activeDeviceId } } : {})
@@ -320,6 +324,10 @@ export function useAudioRecorder({
       analyser.fftSize = 2048;
       source.connect(analyser);
       meterNodeRef.current = analyser;
+      const pcmCapture = await createPcmCapture(audioContext, source).catch(() => null);
+      if (request !== generationRef.current) {pcmCapture?.dispose(); return;}
+      pcmCaptureRef.current = pcmCapture;
+      await audioContext.resume?.();
 
       if (typeof MediaRecorder === "undefined") {
         releaseMic("media_recorder_unavailable");
@@ -344,8 +352,11 @@ export function useAudioRecorder({
       recorder.onstop = async () => {
         if (request !== generationRef.current) return;
         const recordedChunks = [...audioChunksRef.current];
-        releaseMic("recorder_onstop");
         setStatus("analyzing");
+        const pcm = await pcmCaptureRef.current?.finish();
+        if (request !== generationRef.current) return;
+        const capturedRate = audioContext.sampleRate;
+        releaseMic("recorder_onstop");
         try {
           const blob = new Blob(recordedChunks, { type: recorder.mimeType });
           if (blob.size > 0) {
@@ -365,8 +376,12 @@ export function useAudioRecorder({
           let decodeContext: AudioContext | null = null;
           let audioBuffer: AudioBuffer | null = null;
           try {
-            decodeContext = new AudioContextClass();
-            audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
+            if (pcm?.length) {
+              audioBuffer = {numberOfChannels: 1, length: pcm.length, sampleRate: capturedRate, duration: pcm.length / capturedRate, getChannelData: () => pcm} as unknown as AudioBuffer;
+            } else {
+              decodeContext = new AudioContextClass();
+              audioBuffer = await decodeContext.decodeAudioData(arrayBuffer.slice(0));
+            }
           } catch (decodeError) {
             throw decodeError instanceof Error
               ? decodeError
@@ -474,6 +489,7 @@ export function useAudioRecorder({
 
     try {
       recorder.start();
+      pcmCaptureRef.current?.start();
     } catch (startError) {
       clearRecorder();
       setStatus("error");
