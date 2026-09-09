@@ -8,8 +8,8 @@ vi.mock("@miccheck/audio-core", () => ({
   describeBrowserSupport: () => ({ isSupported: true, issues: [] })
 }));
 
-vi.mock("../lib/analysis", () => ({
-  analyzeRecording: () => ({
+vi.mock("../lib/localAnalysis", () => ({
+  analyzeLocally: async () => ({
     verdict: {
       version: "1.0",
       overall: {
@@ -243,7 +243,7 @@ describe("useAudioRecorder", () => {
           disconnect: vi.fn()
         };
       }
-      decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
+      decodeAudioData = vi.fn().mockResolvedValue({ duration: 6, sampleRate: 48000, getChannelData: () => new Float32Array(48000 * 6) });
       close = vi.fn().mockResolvedValue(undefined);
     }
 
@@ -308,7 +308,7 @@ describe("useAudioRecorder", () => {
       configurable: true
     });
 
-    const decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
+    const decodeAudioData = vi.fn().mockResolvedValue({ duration: 6, sampleRate: 48000, getChannelData: () => new Float32Array(48000 * 6) });
 
     class MockAudioContext {
       createMediaStreamSource() {
@@ -392,7 +392,7 @@ describe("useAudioRecorder", () => {
       configurable: true
     });
 
-    const decodeAudioData = vi.fn().mockResolvedValue({ duration: 6 });
+    const decodeAudioData = vi.fn().mockResolvedValue({ duration: 6, sampleRate: 48000, getChannelData: () => new Float32Array(48000 * 6) });
 
     class MockAudioContext {
       createMediaStreamSource() {

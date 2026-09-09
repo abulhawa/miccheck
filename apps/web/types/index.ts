@@ -36,4 +36,12 @@ export interface AnalysisResult {
   verdict: WebVerdict;
   metrics: MetricsSummary;
   specialState?: AnalysisSpecialState;
+  evidence?: import('@miccheck/audio-metrics').MeasurementEvidence;
+  ai?: {
+    segments: import('@miccheck/audio-metrics').SpeechSegment[];
+    background: import('../lib/ai/sounds').SoundHint | null;
+    noiseStatus: 'off' | 'ready' | 'unavailable';
+    engine: string;
+    elapsedMs: number;
+  };
 }

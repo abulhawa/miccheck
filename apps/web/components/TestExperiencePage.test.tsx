@@ -76,7 +76,7 @@ const baseAnalysis: AnalysisResult = {
     copyKeys: {
       explanationKey: "overall.label.excellent",
       fixKey: "fix.keep_setup",
-      impactKey: "impact.no_major_issues",
+      impactKey: "impact.overall",
       impactSummaryKey: "impact.biggest_opportunity"
     }
   },

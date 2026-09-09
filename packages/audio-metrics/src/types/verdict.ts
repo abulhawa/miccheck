@@ -74,6 +74,7 @@ export type OverallSummaryKey =
   | "overall.summary.no_speech";
 
 export type ExplanationCopyKey =
+  | "overall.label.excellent"
   | "explanation.clipping_distortion"
   | "explanation.extremely_quiet"
   | "explanation.extremely_loud"

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPcmCapture, type PcmCapture } from "../lib/pcmCapture";
-import { analyzeRecording } from "../lib/analysis";
+import { analyzeLocally } from "../lib/localAnalysis";
 import { clearRecording, saveRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
@@ -19,6 +19,7 @@ interface RecorderOptions {
   deviceId?: string | null;
   analysisContext?: ContextInput;
   discoverySource?: string;
+  classifyNoise?: boolean;
 }
 
 type RecorderStatus = "idle" | "requesting" | "recording" | "analyzing" | "complete" | "error";
@@ -37,8 +38,11 @@ export function useAudioRecorder({
   minDuration = DEFAULT_MIN_RECORDING_DURATION_SECONDS,
   deviceId = null,
   analysisContext = DEFAULT_ANALYSIS_CONTEXT,
+  classifyNoise = false,
   discoverySource = "route:pro"
 }: RecorderOptions) {
+  const analysisAbortRef = useRef<AbortController | null>(null);
+  const [analysisStatus, setAnalysisStatus] = useState("");
   const pcmCaptureRef = useRef<PcmCapture | null>(null);
   const generationRef = useRef(0);
   const busyRef = useRef(false);
@@ -209,6 +213,7 @@ export function useAudioRecorder({
   );
 
   const clearRecorder = useCallback(() => {
+    analysisAbortRef.current?.abort();
     generationRef.current += 1;
     busyRef.current = false;
     releaseMic("clear_recorder");
@@ -318,6 +323,7 @@ export function useAudioRecorder({
       }
       audioContextRef.current = audioContext;
       setAudioContext(audioContext);
+      const captureSettings = stream.getAudioTracks?.()[0]?.getSettings?.() ?? {};
       const source = audioContext.createMediaStreamSource(stream);
       meterSourceNodeRef.current = source;
       const analyser = audioContext.createAnalyser();
@@ -407,7 +413,10 @@ export function useAudioRecorder({
             return;
           }
 
-          const result = analyzeRecording(audioBuffer, analysisContext);
+          const abort = new AbortController();
+          analysisAbortRef.current = abort;
+          const result = await analyzeLocally(audioBuffer.getChannelData(0), audioBuffer.sampleRate, analysisContext, {format: pcm?.length ? "pcm" : "encoded",echoCancellation:captureSettings.echoCancellation,noiseSuppression:captureSettings.noiseSuppression,autoGainControl:captureSettings.autoGainControl}, classifyNoise, abort.signal, setAnalysisStatus);
+          if (request !== generationRef.current) return;
           const verdictPassFail = result.verdict.useCaseFit === "pass" ? "pass" : "fail";
           logEvent(ANALYTICS_EVENTS.analysisCompleted, {
             discovery_source: discoverySource,
@@ -462,6 +471,7 @@ export function useAudioRecorder({
     deviceId,
     analysisContext,
     discoverySource,
+    classifyNoise,
     debugLog,
     minDuration,
     stopMediaStreamTracksOnce,
@@ -532,6 +542,7 @@ export function useAudioRecorder({
 
   return {
     status,
+    analysisStatus,
     error,
     analysis,
     level,

@@ -12,6 +12,7 @@ import {
 import ShareButton from "./ShareButton";
 
 interface ScoreCardProps {
+  experimentalEcho?: boolean;
   verdict: WebVerdict;
   metrics: MetricsSummary;
   highlightedCategoryId?: WebVerdict["primaryIssue"];
@@ -19,7 +20,7 @@ interface ScoreCardProps {
 
 const renderStars = (count: number): string => "★".repeat(count) + "☆".repeat(5 - count);
 
-export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
+export default function ScoreCard({ experimentalEcho = false, verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
   const activeHighlight = highlightedCategoryId ?? verdict.primaryIssue;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = resolveCopy(verdict.overall.labelKey);
@@ -65,8 +66,8 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
           <p className="mt-2 text-sm text-slate-200">{resolveCopy(verdict.overall.summaryKey)}</p>
         </div>
       </div>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {categoryEntries.map(([categoryKey, category]) => {
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        {categoryEntries.filter(([key]) => !experimentalEcho || key !== "echo").map(([categoryKey, category]) => {
           const rating = toStarRating({
             stars: category.stars,
             descriptionKey: category.descriptionKey
@@ -101,6 +102,7 @@ export default function ScoreCard({ verdict, metrics, highlightedCategoryId }: S
           );
         })}
       </div>
+      {experimentalEcho ? <p className="mt-4 text-xs text-slate-400">Room echo estimate (experimental): {metrics.echoScore.toFixed(2)}. Excluded from the grade.</p> : null}
       <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
         <p className="text-sm font-semibold text-slate-100">{resolveCopy("ui.metric.clipping")}</p>
         <p className="mt-2 text-xs font-medium text-slate-200">{clippingText}</p>

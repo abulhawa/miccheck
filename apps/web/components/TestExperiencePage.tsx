@@ -40,6 +40,7 @@ export default function TestExperiencePage({
   initialUseCase,
   initialDiscoverySource
 }: TestExperiencePageProps) {
+  const [classifyNoise, setClassifyNoise] = useState(false);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCase>("meetings");
   const [discoverySource, setDiscoverySource] = useState("route:pro");
@@ -63,6 +64,7 @@ export default function TestExperiencePage({
 
   const {
     status,
+    analysisStatus,
     error,
     duration,
     audioDataArray,
@@ -75,7 +77,7 @@ export default function TestExperiencePage({
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext, discoverySource });
+  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext, discoverySource, classifyNoise });
 
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
@@ -147,6 +149,7 @@ export default function TestExperiencePage({
   const noSpeechCopy = analysis
     ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
     : { title: "", description: "" };
+  const needsRetry = analysis?.specialState === "NO_SPEECH" || analysis?.specialState === "INSUFFICIENT_EVIDENCE";
   const isExcellent = analysis?.verdict.overall.grade === "A";
 
   const buttonLabel = useMemo(() => {
@@ -221,7 +224,7 @@ export default function TestExperiencePage({
           <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{t("test.header.eyebrow")}</p>
           <h1 className="text-2xl font-semibold sm:text-3xl">{t("test.header.title")}</h1>
           <p className="text-sm text-slate-200">
-            {t("test.header.subtitle")}
+            Stay quiet for 2 seconds, then read the sentence aloud for 5 seconds.
           </p>
           <p className="text-sm text-slate-300">
             <span className="font-semibold text-slate-200">{t("test.header.read_prompt")}</span>{" "}
@@ -247,6 +250,13 @@ export default function TestExperiencePage({
 
           {!analysis ? (
             <>
+              <div className="rounded-2xl border border-sky-500/30 bg-sky-500/10 p-4" role="status" aria-live="polite">
+                {isRequesting ? 'Allow microphone access to begin. Your audio stays on this device.' : isAnalyzing ? analysisStatus || 'Preparing local analysis…' : isRecording ? duration < 2 ? 'Stay quiet — measuring your room…' : 'Speak now — read the sentence above.' : 'Local AI speech detection • No account, API key, or subscription.'}
+              </div>
+              <label className="flex items-start gap-3 text-sm text-slate-300">
+                <input type="checkbox" checked={classifyNoise} disabled={isRecording || isRequesting || isAnalyzing} onChange={(event) => setClassifyNoise(event.target.checked)} className="mt-1" />
+                <span>Identify background sounds with local AI <span className="block text-xs text-slate-400">Experimental. Downloads an additional 16 MB model once; no audio is uploaded.</span></span>
+              </label>
               <AudioWaveformVisualizer
                 audioDataArray={audioDataArray}
                 currentVolume={currentVolume}
@@ -279,7 +289,7 @@ export default function TestExperiencePage({
                 </div>
               ) : null}
 
-              <DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} />
+              <fieldset disabled={isRecording || isRequesting || isAnalyzing}><DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} /></fieldset>
               <p className="text-xs text-slate-400">
                 {t("test.detected_device_type", { type: formatDeviceTypeLabel(detectedDeviceType) })}
               </p>
@@ -290,6 +300,7 @@ export default function TestExperiencePage({
                     {t("test.controls.use_case")}
                     <select
                       className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                      disabled={isRecording || isRequesting || isAnalyzing}
                       onChange={(event) => setUseCase(event.target.value as UseCase)}
                       value={useCase}
                     >
@@ -304,6 +315,7 @@ export default function TestExperiencePage({
                     {t("test.controls.device_type")}
                     <select
                       className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
+                      disabled={isRecording || isRequesting || isAnalyzing}
                       onChange={(event) =>
                         setDeviceTypeOverride(
                           event.target.value === "auto" ? null : (event.target.value as DeviceType)
@@ -368,14 +380,14 @@ export default function TestExperiencePage({
             specialState={analysis.specialState}
           />
 
-          {analysis.specialState === "NO_SPEECH" ? (
+          {needsRetry ? (
             <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-5 sm:p-6 md:p-8">
               <div className="flex flex-col gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
                   {t("test.no_speech.badge")}
                 </p>
-                <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
-                <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
+                <h2 className="text-2xl font-semibold text-white">{analysis.specialState === "INSUFFICIENT_EVIDENCE" ? "Not enough evidence for a grade" : noSpeechCopy.title}</h2>
+                <p className="text-sm text-rose-100">{analysis.specialState === "INSUFFICIENT_EVIDENCE" ? "Keep the first two seconds free of speech, then speak clearly for at least one second. Try again to get a reliable comparison." : noSpeechCopy.description}</p>
               </div>
               <button
                 className={buttonStyles({
@@ -392,6 +404,7 @@ export default function TestExperiencePage({
             <section className="grid gap-6 md:grid-cols-2">
               <div className="flex flex-col gap-4">
                 <ScoreCard
+                  experimentalEcho={Boolean(analysis.evidence?.echoExperimental)}
                   highlightedCategoryId={analysis.verdict.primaryIssue}
                   metrics={analysis.metrics}
                   verdict={analysis.verdict}
@@ -415,7 +428,7 @@ export default function TestExperiencePage({
                 </div>
               ) : (
                 <BestNextSteps
-                  includeGear={viewMode === "pro"}
+                  includeGear={false}
                   includeSecondaryNotes={viewMode === "pro"}
                   maxActionSteps={viewMode === "basic" ? 1 : undefined}
                   mode={viewMode}
@@ -428,6 +441,18 @@ export default function TestExperiencePage({
         </>
       ) : null}
 
+      {analysis?.evidence ? (
+        <section className="rounded-2xl border border-slate-800 p-5 text-sm text-slate-300">
+          <h2 className="font-semibold text-white">What this result is based on</h2>
+          <p className="mt-2">{analysis.evidence.speechSeconds.toFixed(1)} seconds of detected speech · {analysis.evidence.quietSeconds.toFixed(1)} seconds of room calibration · {analysis.evidence.capture.format === 'pcm' ? 'Raw PCM capture' : 'Encoded audio fallback'}</p>
+          <p className="mt-2">{analysis.ai?.engine ?? 'Speech detector'} runs locally. Echo is experimental and excluded from your grade. Results describe this recording, not your microphone in every setting.</p>
+          {analysis.evidence.capture.echoCancellation !== false || analysis.evidence.capture.noiseSuppression !== false || analysis.evidence.capture.autoGainControl !== false ? <p className="mt-2 text-amber-200">Your browser may be processing the signal. Compare recordings made with the same settings.</p> : null}
+          {analysis.ai?.noiseStatus === 'ready' ? <p className="mt-3">{analysis.ai.background ? 'Possible background sound: ' + analysis.ai.background.label + '. ' + analysis.ai.background.advice : 'No supported background sound was identified confidently.'} Sound labels are experimental suggestions.</p> : null}
+          {analysis.ai?.noiseStatus === 'unavailable' ? <p className="mt-3">Sound classification was unavailable. Speech and level measurements are still shown.</p> : null}
+          {analysis.ai?.segments.length ? <div className="mt-3"><p className="text-xs">Detected speech intervals</p><div className="relative mt-2 h-3 overflow-hidden rounded bg-slate-800" role="img" aria-label={analysis.ai.segments.map((segment) => segment.start.toFixed(1) + ' to ' + segment.end.toFixed(1) + ' seconds').join(', ')}>{analysis.ai.segments.map((segment, index) => <span key={index} className="absolute h-3 bg-sky-400" style={{left: Math.min(100,segment.start / 7 * 100) + '%',width: Math.min(100,(segment.end - segment.start) / 7 * 100) + '%'}} />)}</div></div> : null}
+        </section>
+      ) : null}
+      {(isRequesting || isAnalyzing) ? <button type="button" onClick={reset} className="text-sm underline">Cancel</button> : null}
       {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
     </div>
   );

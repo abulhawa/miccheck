@@ -9,3 +9,6 @@ coverage
 .env.*.local
 npm-debug.log*
 .turbo/
+apps/web/public/models/runtime/
+apps/web/public/audio-analysis.worker.js
+apps/web/public/audio-analysis.worker.js.LEGAL.txt
