@@ -3,30 +3,11 @@ import de from "./locales/de.json";
 
 export type Locale = "en" | "de";
 
-const STORAGE_KEY = "miccheck_locale";
 const localeMaps: Record<Locale, Record<string, string>> = { en, de };
 
-const isBrowser = () => typeof window !== "undefined";
-
-export const getLocale = (): Locale => {
-  if (isBrowser()) {
-    const stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (stored && stored in localeMaps) {
-      return stored;
-    }
-    const preferred = window.navigator.language?.toLowerCase() ?? "";
-    if (preferred.startsWith("de")) {
-      return "de";
-    }
-  }
-  return "en";
-};
-
-export const setLocale = (locale: Locale) => {
-  if (isBrowser()) {
-    window.localStorage.setItem(STORAGE_KEY, locale);
-  }
-};
+// The public UI has one explicit locale until locale routes are introduced.
+// Never read browser preferences during render: SSR must match hydration.
+export const getLocale = (): Locale => "en";
 
 const substituteParams = (text: string, params?: Record<string, string>) => {
   if (!params) return text;
