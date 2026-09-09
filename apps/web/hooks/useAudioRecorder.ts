@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPcmCapture, type PcmCapture } from "../lib/pcmCapture";
+import { clearSession, loadSession, saveSession } from "../lib/recordingSession";
 import { analyzeLocally } from "../lib/localAnalysis";
-import { clearRecording, saveRecording } from "../lib/audioStorage";
+import { clearRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import type { AnalysisResult, ContextInput } from "../types";
@@ -230,6 +231,7 @@ export function useAudioRecorder({
     setDuration(0);
     setRecordingBlob(null);
     clearRecording();
+    clearSession();
     hasLoggedResultsRef.current = false;
   }, [clearRecorder]);
 
@@ -254,6 +256,11 @@ export function useAudioRecorder({
     }
 
     animationRef.current = requestAnimationFrame(() => updateMeterRef.current());
+  }, []);
+
+  useEffect(() => {
+    const saved = loadSession();
+    if (saved) {setAnalysis(saved.analysis);setRecordingBlob(saved.blob);setStatus("complete");}
   }, []);
 
   useEffect(() => {
@@ -425,7 +432,7 @@ export function useAudioRecorder({
             diagnostic_certainty: result.verdict.diagnosticCertainty ?? "unknown"
           });
           setRecordingBlob(blob);
-          void saveRecording(blob).catch(() => {});
+          void saveSession({id:crypto.randomUUID(),createdAt:Date.now(),analysis:result,blob,deviceId:activeDeviceId});
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {

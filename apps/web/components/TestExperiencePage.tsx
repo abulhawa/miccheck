@@ -21,6 +21,7 @@ import { isIOSPlatform } from "../lib/browserUtils";
 import { resolveNoSpeechCopy } from "../lib/copy";
 import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
+import { clearSession, loadSession, saveSession, comparableTakes, type RecordingSession } from "../lib/recordingSession";
 import { readStorage, writeStorage } from "../lib/safeStorage";
 import type { DeviceType, UseCase } from "../types";
 
@@ -40,6 +41,7 @@ export default function TestExperiencePage({
   initialUseCase,
   initialDiscoverySource
 }: TestExperiencePageProps) {
+  const [baseline, setBaseline] = useState<RecordingSession | null>(null);
   const [classifyNoise, setClassifyNoise] = useState(false);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCase>("meetings");
@@ -85,6 +87,7 @@ export default function TestExperiencePage({
   const isRequesting = status === "requesting";
 
   useEffect(() => {
+    setBaseline(loadSession("baseline"));
     const storedContext = loadAnalysisContext();
     setUseCase(initialUseCase ?? storedContext.use_case);
     setDiscoverySource(initialDiscoverySource ?? storedContext.discovery_source);
@@ -180,6 +183,11 @@ export default function TestExperiencePage({
       adviceCount: viewMode === "basic" ? Math.min(shownAdviceCount, 1) : shownAdviceCount
     });
 
+    const current = loadSession();
+    if (current && !current.analysis.specialState) {
+      setBaseline(current);
+      void saveSession(current, "baseline");
+    }
     reset();
   }, [analysis, reset, viewMode]);
 
@@ -441,6 +449,16 @@ export default function TestExperiencePage({
         </>
       ) : null}
 
+      {baseline && analysis && !needsRetry ? (
+        <section className="rounded-2xl border border-sky-500/30 p-5">
+          <h2 className="text-lg font-semibold">Before and after</h2>
+          {(() => {const current=loadSession();return current && comparableTakes(baseline,current) ? <p className="mt-2 text-sm text-slate-300">Speech level: {(analysis.metrics.speechRmsDb-baseline.analysis.metrics.speechRmsDb).toFixed(1)} dB change · SNR: {(analysis.metrics.snrDb-baseline.analysis.metrics.snrDb).toFixed(1)} dB change · Clipping: {((analysis.metrics.clippingRatio-baseline.analysis.metrics.clippingRatio)*100).toFixed(2)} percentage points change. A higher level is not always better; aim for the recommended range.</p> : <p className="mt-2 text-sm text-amber-200">Capture settings or evidence differ. Listen to both takes; numerical changes may not be directly comparable.</p>;})()}
+          <p className="mt-4 text-sm font-medium">Before · {baseline.analysis.verdict.overall.grade}</p>
+          <AudioPlayer audioBlob={baseline.blob} />
+          <p className="mt-3 text-sm font-medium">After · {analysis.verdict.overall.grade} — playback below</p>
+          <button type="button" className="mt-3 text-sm underline" onClick={()=>{clearSession('baseline');setBaseline(null);}}>Clear comparison</button>
+        </section>
+      ) : null}
       {analysis?.evidence ? (
         <section className="rounded-2xl border border-slate-800 p-5 text-sm text-slate-300">
           <h2 className="font-semibold text-white">What this result is based on</h2>
