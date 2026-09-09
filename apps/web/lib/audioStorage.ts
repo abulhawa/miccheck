@@ -1,5 +1,9 @@
 "use client";
 
+import { readStorage, writeStorage } from "./safeStorage";
+
+let generation = 0;
+
 const STORAGE_KEY = "miccheck-last-recording";
 
 const isBrowser = typeof window !== "undefined";
@@ -24,6 +28,7 @@ const dataUrlToBlob = (dataUrl: string): Blob => {
  */
 export const saveRecording = async (blob: Blob): Promise<void> => {
   if (!isBrowser) return;
+  const request = ++generation;
   inMemoryRecording = blob;
 
   await new Promise<void>((resolve, reject) => {
@@ -31,7 +36,7 @@ export const saveRecording = async (blob: Blob): Promise<void> => {
     reader.onloadend = () => {
       const dataUrl = reader.result;
       if (typeof dataUrl === "string") {
-        sessionStorage.setItem(STORAGE_KEY, dataUrl);
+        if (request === generation) writeStorage("sessionStorage", STORAGE_KEY, dataUrl);
         resolve();
       } else {
         reject(new Error("Unable to serialize recording."));
@@ -48,7 +53,7 @@ export const saveRecording = async (blob: Blob): Promise<void> => {
 export const loadRecording = (): Blob | null => {
   if (!isBrowser) return null;
   if (inMemoryRecording) return inMemoryRecording;
-  const stored = sessionStorage.getItem(STORAGE_KEY);
+  const stored = readStorage("sessionStorage", STORAGE_KEY);
   if (!stored) return null;
   try {
     const restored = dataUrlToBlob(stored);
@@ -64,6 +69,7 @@ export const loadRecording = (): Blob | null => {
  */
 export const clearRecording = (): void => {
   if (!isBrowser) return;
+  generation += 1;
   inMemoryRecording = null;
-  sessionStorage.removeItem(STORAGE_KEY);
+  writeStorage("sessionStorage", STORAGE_KEY, null);
 };

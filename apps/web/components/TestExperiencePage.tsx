@@ -22,6 +22,7 @@ import { isIOSPlatform } from "../lib/browserUtils";
 import { resolveNoSpeechCopy } from "../lib/copy";
 import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
+import { readStorage, writeStorage } from "../lib/safeStorage";
 import type { DeviceType, UseCase } from "../types";
 
 const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
@@ -88,12 +89,12 @@ export default function TestExperiencePage({
     setUseCase(initialUseCase ?? storedContext.use_case);
     setDiscoverySource(initialDiscoverySource ?? storedContext.discovery_source);
 
-    const storedOverride = window.localStorage.getItem(DEVICE_OVERRIDE_STORAGE_KEY);
-    if (storedOverride) {
+    const storedOverride = readStorage("localStorage", DEVICE_OVERRIDE_STORAGE_KEY);
+    if (storedOverride && ANALYSIS_CONTEXT_OPTIONS.deviceTypes.includes(storedOverride as DeviceType)) {
       setDeviceTypeOverride(storedOverride as DeviceType);
     }
 
-    window.localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
+    writeStorage("localStorage", VIEW_MODE_STORAGE_KEY, viewMode);
   }, [initialDiscoverySource, initialUseCase, viewMode]);
 
   useEffect(() => {
@@ -107,10 +108,10 @@ export default function TestExperiencePage({
 
   useEffect(() => {
     if (deviceTypeOverride) {
-      window.localStorage.setItem(DEVICE_OVERRIDE_STORAGE_KEY, deviceTypeOverride);
+      writeStorage("localStorage", DEVICE_OVERRIDE_STORAGE_KEY, deviceTypeOverride);
       return;
     }
-    window.localStorage.removeItem(DEVICE_OVERRIDE_STORAGE_KEY);
+    writeStorage("localStorage", DEVICE_OVERRIDE_STORAGE_KEY, null);
   }, [deviceTypeOverride]);
 
   useEffect(() => {

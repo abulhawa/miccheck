@@ -1,3 +1,4 @@
+import { readStorage, writeStorage } from "./safeStorage";
 import { UI_USE_CASE_LABEL } from "@miccheck/audio-metrics";
 import type { ContextInput, DeviceType, UseCase } from "../types";
 
@@ -56,7 +57,7 @@ export const loadAnalysisContext = (): StoredAnalysisContext => {
   if (typeof window === "undefined") return getDefaultAnalysisContext();
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = readStorage("localStorage", STORAGE_KEY);
     if (!raw) return getDefaultAnalysisContext();
     const parsed = JSON.parse(raw) as Partial<StoredAnalysisContext>;
 
@@ -82,7 +83,8 @@ export const saveAnalysisContext = (
   context: ContextInput & { discovery_source?: string }
 ): void => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(
+  writeStorage(
+    "localStorage",
     STORAGE_KEY,
     JSON.stringify({
       ...context,
