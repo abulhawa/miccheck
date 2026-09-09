@@ -1,3 +1,4 @@
+import { measureHum } from "./hum";
 import { detectVoiceActivity } from "@miccheck/audio-core";
 
 export interface NoiseMetrics {
@@ -26,22 +27,6 @@ const computePercentile = (values: number[], percentile: number): number => {
   return sorted[index];
 };
 
-const goertzel = (samples: Float32Array, sampleRate: number, freq: number): number => {
-  if (samples.length === 0) return 0;
-  const k = Math.round((0.5 + (samples.length * freq) / sampleRate));
-  const omega = (2 * Math.PI * k) / samples.length;
-  const coeff = 2 * Math.cos(omega);
-  let s0 = 0;
-  let s1 = 0;
-  let s2 = 0;
-  for (const sample of samples) {
-    s0 = sample + coeff * s1 - s2;
-    s2 = s1;
-    s1 = s0;
-  }
-  const power = s1 * s1 + s2 * s2 - coeff * s1 * s2;
-  return power / samples.length;
-};
 
 /**
  * Estimate noise floor, SNR, and hum ratio.
@@ -63,10 +48,7 @@ export const measureNoise = (
     return { noiseFloor: 0, snrDb: 0, humRatio: 0, confidence: "low" };
   }
 
-  const hum50 = goertzel(samples, sampleRate, 50);
-  const hum60 = goertzel(samples, sampleRate, 60);
-  const totalEnergy = samples.reduce((sum, sample) => sum + sample * sample, 0) / samples.length;
-  const humRatio = totalEnergy > 0 ? Math.max(hum50, hum60) / totalEnergy : 0;
+  const humRatio = measureHum(samples, sampleRate);
 
   const speechFrames: number[] = [];
   const noiseFrames: number[] = [];
