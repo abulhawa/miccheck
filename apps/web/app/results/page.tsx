@@ -1,21 +1,18 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { getPrimaryGearRecommendation } from "@miccheck/audio-metrics/src/gearCatalog";
-import AudioPlayer from "../../components/AudioPlayer";
+
 import ScoreCard from "../../components/ScoreCard";
 import BestNextSteps from "../../components/BestNextSteps";
 import ResultsNotice from "../../components/ResultsNotice";
 import { buttonStyles } from "../../components/buttonStyles";
-import { clearRecording, loadRecording } from "../../lib/audioStorage";
+import { clearRecording } from "../../lib/audioStorage";
 import { resolveNoSpeechCopy } from "../../lib/copy";
 import { t } from "../../lib/i18n";
 import type { AnalysisResult } from "../../types";
-import {
-  STORAGE_SYNC_MAX_ATTEMPTS,
-  STORAGE_SYNC_RETRY_DELAY_MS
-} from "../../src/domain/recording/constants";
+
 
 const sampleResult = {
   verdict: {
@@ -92,40 +89,14 @@ const sampleResult = {
 
 export default function ResultsPage() {
   const router = useRouter();
-  const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
+
 
   const handleTestAgain = useCallback(() => {
     clearRecording();
     router.push("/test");
   }, [router]);
 
-  useEffect(() => {
-    let attempts = 0;
-    let timeoutId: number | null = null;
-    const maxAttempts = STORAGE_SYNC_MAX_ATTEMPTS;
-    const retryDelay = STORAGE_SYNC_RETRY_DELAY_MS;
 
-    const syncRecording = () => {
-      const stored = loadRecording();
-      if (stored) {
-        setRecordingBlob(stored);
-        return;
-      }
-
-      attempts += 1;
-      if (attempts < maxAttempts) {
-        timeoutId = window.setTimeout(syncRecording, retryDelay);
-      }
-    };
-
-    syncRecording();
-
-    return () => {
-      if (timeoutId !== null) {
-        window.clearTimeout(timeoutId);
-      }
-    };
-  }, []);
 
   const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
   const noSpeechCopy = resolveNoSpeechCopy(sampleResult.verdict.copyKeys);
@@ -188,13 +159,7 @@ export default function ResultsPage() {
 
           <BestNextSteps verdict={sampleResult.verdict} mode="pro" includeGear={true} includeSecondaryNotes={true} showDiagnosticCertainty={true} trackAdviceEvent={false} />
 
-          {recordingBlob ? (
-            <AudioPlayer audioBlob={recordingBlob} showWaveform={true} />
-          ) : (
-            <section className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-6 text-sm text-slate-400">
-              {t("results.sample.playback_locked")}
-            </section>
-          )}
+          <p className="text-sm text-slate-400">These illustrative scores are not linked to a microphone recording. Run a test to get your own results.</p>
         </>
       )}
     </div>
