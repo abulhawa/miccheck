@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import AudioPlayer from "./AudioPlayer";
 import AudioWaveformVisualizer from "./AudioWaveformVisualizer";
@@ -44,6 +44,7 @@ export default function TestExperiencePage({
   initialDiscoverySource
 }: TestExperiencePageProps) {
   const [baseline, setBaseline] = useState<RecordingSession | null>(null);
+  const playbackRef = useRef<HTMLDivElement>(null);
   const [classifyNoise, setClassifyNoise] = useState(false);
   const [deviceId, setDeviceId] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCase>("meetings");
@@ -92,6 +93,10 @@ export default function TestExperiencePage({
   const isCheckingRoom = status === "checking_room";
   const isReady = status === "ready";
   const setupLocked = isRecording || isRequesting || isAnalyzing || isCalibrating || isCheckingRoom || isReady;
+
+  useEffect(() => {
+    if (analysis && recordingBlob) playbackRef.current?.scrollIntoView({block:'start',behavior:'smooth'});
+  }, [analysis, recordingBlob]);
 
   useEffect(() => {
     setBaseline(loadSession("baseline"));
@@ -238,9 +243,9 @@ export default function TestExperiencePage({
       <section>
         <div className="flex flex-col gap-3">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{t("test.header.eyebrow")}</p>
-          <h1 className="text-2xl font-semibold sm:text-3xl">{t("test.header.title")}</h1>
+          <h1 className="text-2xl font-semibold sm:text-3xl">{analysis ? 'Your microphone result' : t("test.header.title")}</h1>
           <p className="text-sm text-slate-200">
-            First measure your room, then record your voice when you are ready. There is no rush between steps.
+            {analysis ? 'Listen to your recording, then review the measurements and suggested next steps.' : 'First measure your room, then record your voice when you are ready. There is no rush between steps.'}
           </p>
         </div>
         <div className="mt-5 flex flex-col gap-4 sm:gap-5 md:mt-6 md:gap-6">
@@ -403,6 +408,29 @@ export default function TestExperiencePage({
         </div>
       </section>
 
+      {recordingBlob && analysis ? (
+        <div ref={playbackRef} className="scroll-mt-6">
+          {baseline && !needsRetry ? (
+            <section className="rounded-2xl border border-sky-500/30 p-5">
+              <h2 className="text-lg font-semibold">Before and after</h2>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="mb-2 text-sm font-medium">Before · {baseline.analysis.verdict.overall.grade}</p>
+                  <AudioPlayer audioBlob={baseline.blob} showWaveform={false} />
+                </div>
+                <div>
+                  <p className="mb-2 text-sm font-medium">After · {analysis.verdict.overall.grade}</p>
+                  <AudioPlayer audioBlob={recordingBlob} showWaveform={false} />
+                </div>
+              </div>
+              {(() => {const current=loadSession();return current && comparableTakes(baseline,current) ? <p className="mt-2 text-sm text-slate-300">Speech level: {(analysis.metrics.speechRmsDb-baseline.analysis.metrics.speechRmsDb).toFixed(1)} dB change · SNR: {(analysis.metrics.snrDb-baseline.analysis.metrics.snrDb).toFixed(1)} dB change · Clipping: {((analysis.metrics.clippingRatio-baseline.analysis.metrics.clippingRatio)*100).toFixed(2)} percentage points change. A higher level is not always better; aim for the recommended range.</p> : <p className="mt-2 text-sm text-amber-200">Capture settings or evidence differ. Listen to both takes; numerical changes may not be directly comparable.</p>;})()}
+              <button type="button" className="mt-3 text-sm underline" onClick={()=>{clearSession('baseline');setBaseline(null);}}>Clear comparison</button>
+            </section>
+          ) : null}
+          {(!baseline || needsRetry) ? <AudioPlayer audioBlob={recordingBlob} showWaveform={false} /> : null}
+        </div>
+      ) : null}
+
       {analysis ? (
         <>
           {!needsRetry && <ResultsNotice
@@ -471,17 +499,6 @@ export default function TestExperiencePage({
         </>
       ) : null}
 
-      {baseline && analysis && !needsRetry ? (
-        <section className="rounded-2xl border border-sky-500/30 p-5">
-          <h2 className="text-lg font-semibold">Before and after</h2>
-          {(() => {const current=loadSession();return current && comparableTakes(baseline,current) ? <p className="mt-2 text-sm text-slate-300">Speech level: {(analysis.metrics.speechRmsDb-baseline.analysis.metrics.speechRmsDb).toFixed(1)} dB change · SNR: {(analysis.metrics.snrDb-baseline.analysis.metrics.snrDb).toFixed(1)} dB change · Clipping: {((analysis.metrics.clippingRatio-baseline.analysis.metrics.clippingRatio)*100).toFixed(2)} percentage points change. A higher level is not always better; aim for the recommended range.</p> : <p className="mt-2 text-sm text-amber-200">Capture settings or evidence differ. Listen to both takes; numerical changes may not be directly comparable.</p>;})()}
-          <p className="mt-4 text-sm font-medium">Before · {baseline.analysis.verdict.overall.grade}</p>
-          <AudioPlayer audioBlob={baseline.blob} />
-          <p className="mt-3 text-sm font-medium">After · {analysis.verdict.overall.grade}</p>
-          {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} /> : null}
-          <button type="button" className="mt-3 text-sm underline" onClick={()=>{clearSession('baseline');setBaseline(null);}}>Clear comparison</button>
-        </section>
-      ) : null}
       {analysis?.evidence ? (
         <section className="rounded-2xl border border-slate-800 p-5 text-sm text-slate-300">
           <h2 className="font-semibold text-white">What this result is based on</h2>
@@ -494,7 +511,6 @@ export default function TestExperiencePage({
         </section>
       ) : null}
       {(isRequesting || isAnalyzing) ? <button type="button" onClick={reset} className="text-sm underline">Cancel</button> : null}
-      {recordingBlob && (!baseline || needsRetry) ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
     </div>
   );
 }

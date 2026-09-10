@@ -44,7 +44,10 @@ for (const fixture of ['6930-75918-0000.flac', '6930-75918-0007.flac']) {
             analysis:result, audio:`data:audio/flac;base64,${encoded}`,
           }));
         }, {result,encoded});
+        await page.setViewportSize({width:390,height:844});
         await page.reload();
+        await expect(page.getByRole('button', {name:'Play recording',exact:true})).toBeInViewport();
+        await expect(page.getByRole('button', {name:'Replay recording',exact:true})).toBeInViewport();
         await expect(page.getByRole('heading', {name:'Speech detected during room calibration'})).toBeVisible();
         await expect(page.getByText('No speech detected', {exact:true})).toHaveCount(0);
       } else {
