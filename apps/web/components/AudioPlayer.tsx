@@ -56,6 +56,8 @@ export default function AudioPlayer({
 
     const decodeWaveform = async () => {
       setWaveformError(null);
+      setDerivedWaveform(null);
+      let audioContext: AudioContext | undefined;
       try {
         const arrayBuffer = await audioBlob.arrayBuffer();
         const AudioContextClass = window.AudioContext ||
@@ -64,10 +66,10 @@ export default function AudioPlayer({
           setWaveformError(t("audio.playback.waveform_unavailable"));
           return;
         }
-        const audioContext = new AudioContextClass();
+        if (!isActive) return;
+        audioContext = new AudioContextClass();
         const decoded = await audioContext.decodeAudioData(arrayBuffer.slice(0));
         const waveform = createWaveformData(decoded);
-        await audioContext.close();
 
         if (isActive) {
           setDerivedWaveform(waveform);
@@ -80,6 +82,8 @@ export default function AudioPlayer({
               : t("audio.playback.waveform_failed")
           );
         }
+      } finally {
+        await audioContext?.close().catch(() => {});
       }
     };
 

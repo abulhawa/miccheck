@@ -38,6 +38,12 @@ test('records PCM, restores a paired result, compares takes, and releases tracks
   await page.getByRole('button',{name:'Run Another Test',exact:true}).click();
   await page.getByRole('button',{name:'Start recording',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Before and after'})).toBeVisible({timeout:30000});
+  const players = page.getByRole('button',{name:'Play recording',exact:true});
+  await expect(players).toHaveCount(2);
+  await players.first().click();
+  await expect(page.getByRole('button',{name:'Pause playback',exact:true})).toHaveCount(1);
+  await players.click();
+  await expect(page.getByRole('button',{name:'Pause playback',exact:true})).toHaveCount(1);
   await page.getByRole('button',{name:'Clear comparison'}).click();
   await expect(page.getByRole('heading',{name:'Before and after'})).toHaveCount(0);
 });

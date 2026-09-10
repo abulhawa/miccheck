@@ -34,6 +34,8 @@ export const useAudioPlayback = ({
   const animationRef = useRef<number | null>(null);
   const objectUrlRef = useRef<string | null>(null);
   const updateCurrentTimeRef = useRef<() => void>(() => {});
+  const callbacks = useRef({ onTimeUpdate, onPlaybackEnd });
+  useEffect(() => { callbacks.current = { onTimeUpdate, onPlaybackEnd }; }, [onTimeUpdate, onPlaybackEnd]);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -57,12 +59,12 @@ export const useAudioPlayback = ({
     if (!audio) return;
     const nextTime = audio.currentTime;
     setCurrentTime(nextTime);
-    onTimeUpdate?.(nextTime);
+    callbacks.current.onTimeUpdate?.(nextTime);
 
     if (!audio.paused) {
       animationRef.current = requestAnimationFrame(() => updateCurrentTimeRef.current());
     }
-  }, [onTimeUpdate]);
+  }, []);
 
   useEffect(() => {
     updateCurrentTimeRef.current = updateCurrentTime;
@@ -78,7 +80,7 @@ export const useAudioPlayback = ({
 
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
-      onTimeUpdate?.(audio.currentTime);
+      callbacks.current.onTimeUpdate?.(audio.currentTime);
     };
 
     const handleEnded = () => {
@@ -86,12 +88,20 @@ export const useAudioPlayback = ({
       cancelAnimation();
       audio.currentTime = 0;
       setCurrentTime(0);
-      onPlaybackEnd?.();
+      callbacks.current.onPlaybackEnd?.();
     };
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("ended", handleEnded);
+    const handlePause = () => { setIsPlaying(false); cancelAnimation(); };
+    const handleOtherPlay = (event: Event) => {
+      if ((event as CustomEvent).detail !== audio) audio.pause();
+    };
+    const handlePlay = () => window.dispatchEvent(new CustomEvent("miccheck:play", { detail: audio }));
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    window.addEventListener("miccheck:play", handleOtherPlay);
 
     return () => {
       cancelAnimation();
@@ -99,13 +109,19 @@ export const useAudioPlayback = ({
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      window.removeEventListener("miccheck:play", handleOtherPlay);
+      audioRef.current = null;
     };
-  }, [cancelAnimation, onPlaybackEnd, onTimeUpdate]);
+  }, [cancelAnimation]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
+    audio.pause();
+    cancelAnimation();
     if (!audioBlob) {
       audio.removeAttribute("src");
       audio.load();
@@ -125,13 +141,14 @@ export const useAudioPlayback = ({
         objectUrlRef.current = null;
       }
     };
-  }, [audioBlob, resetPlaybackState]);
+  }, [audioBlob, resetPlaybackState, cancelAnimation]);
 
   const play = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio) return;
     try {
       await audio.play();
+      if (audioRef.current !== audio || audio.paused) return;
       setIsPlaying(true);
       cancelAnimation();
       animationRef.current = requestAnimationFrame(() => updateCurrentTimeRef.current());
