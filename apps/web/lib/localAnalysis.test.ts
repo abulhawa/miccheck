@@ -4,10 +4,8 @@ import {analyzeLocally} from './localAnalysis';
 let worker: {onmessage: ((event: {data: unknown}) => void) | null; onerror:(() => void) | null; terminate:ReturnType<typeof vi.fn>; postMessage:ReturnType<typeof vi.fn>};
 const context = {use_case:'meetings' as const,device_type:'unknown' as const,mode:'basic' as const};
 function start(controller = new AbortController(), status = vi.fn()) {
-  vi.stubGlobal('Worker',class {
-    onmessage = null; onerror = null; terminate = vi.fn(); postMessage = vi.fn();
-    constructor(){worker=this;}
-  });
+  worker = {onmessage:null,onerror:null,terminate:vi.fn(),postMessage:vi.fn()};
+  vi.stubGlobal('Worker',vi.fn(function () {return worker;}));
   return analyzeLocally(new Float32Array(160),16000,context,{format:'pcm'},false,controller.signal,status);
 }
 afterEach(()=>{vi.unstubAllGlobals();vi.useRealTimers();});

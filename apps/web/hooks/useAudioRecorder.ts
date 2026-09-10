@@ -482,8 +482,7 @@ export function useAudioRecorder({
     debugLog,
     minDuration,
     stopMediaStreamTracksOnce,
-    releaseMic,
-    updateMeter
+    releaseMic
   ]);
 
   const startRecording = useCallback(async () => {

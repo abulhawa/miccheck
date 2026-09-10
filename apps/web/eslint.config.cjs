@@ -5,6 +5,6 @@ module.exports = [
   ...nextCoreWebVitals,
   ...nextTypeScript,
   {
-    ignores: ["coverage/**", "eslint.config.cjs"]
+    ignores: ["coverage/**", "eslint.config.cjs", "public/models/runtime/**", "public/audio-analysis.worker.js", ".next/**"]
   }
 ];
