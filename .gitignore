@@ -12,3 +12,6 @@ npm-debug.log*
 apps/web/public/models/runtime/
 apps/web/public/audio-analysis.worker.js
 apps/web/public/audio-analysis.worker.js.LEGAL.txt
+apps/web/.test-assets/
+apps/web/test-results/
+apps/web/playwright-report/
