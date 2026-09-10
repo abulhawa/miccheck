@@ -14,6 +14,18 @@ The baseline is the actual `detectVoiceActivity` implementation at its default -
 
 These are synthetic smoke results, not a labeled speech corpus, accuracy percentage, or representative latency benchmark. Segment boundaries are not manually annotated. Times are one sequential run per case, including worker startup and local model requests; cache warm-up differs between rows. No RAM, mobile battery, real microphone, or cold internet-download measurements are claimed. YAMNet classification is independently exercised by the recording browser test; its accuracy is not established here.
 
+## Recorded human speech regression coverage
+
+`apps/web/e2e/real-speech.spec.ts` additionally runs two LibriSpeech human audiobook
+recordings through the production worker. Both recordings pass with a two-second
+quiet start and at 10% amplitude. Starting speech during calibration instead
+returns `INSUFFICIENT_EVIDENCE` with reason `calibration_speech`; the restored UI
+explains this without claiming no speech was detected. All six cases passed on
+September 10, 2026. Sources, license, and hashes are in
+[`e2e/fixtures/README.md`](../apps/web/e2e/fixtures/README.md).
+
+These cover one speaker and do not establish accuracy across devices or rooms.
+
 ## Asset budget
 
 Uncompressed files in this checkout: Silero model 2.33 MB, ONNX WASM 12.36 MB plus a 24 KB module; optional YAMNet weights 16.04 MB plus graph metadata. Actual network transfer depends on hosting compression and caching. JavaScript worker code is additional. These assets are served by the application origin, not fetched from third-party model providers at runtime.

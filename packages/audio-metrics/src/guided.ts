@@ -21,6 +21,7 @@ export interface GuidedEvidence {
   capture: CaptureEvidence;
 }
 export interface MeasurementEvidence {
+  retryReason?: 'no_speech' | 'speech_too_short' | 'calibration_speech' | 'calibration_too_short' | 'speech_detection_unavailable';
   speechSeconds: number;
   quietSeconds: number;
   speechDetection: 'silero' | 'energy';
@@ -64,7 +65,17 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   const echo = measureEcho(speechSamples, sampleRate);
   const metrics = {clippingRatio: clipping.clippingRatio, rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echo.echoScore};
   if (speechSeconds < 1 || !noiseReliable) {
-    const noSpeech = speechSeconds < 1 && input.speechDetection === 'silero';
+    const retryReason: MeasurementEvidence['retryReason'] = input.speechDetection !== 'silero'
+      ? 'speech_detection_unavailable'
+      : speechSeconds === 0 && calibrationSpeech === 0
+        ? 'no_speech'
+        : calibrationSpeech / sampleRate >= 0.15
+          ? 'calibration_speech'
+          : quietSeconds < 1
+            ? 'calibration_too_short'
+            : 'speech_too_short';
+    evidence.retryReason = retryReason;
+    const noSpeech = retryReason === 'no_speech';
     return {metrics, evidence, specialState: noSpeech ? 'NO_SPEECH' : 'INSUFFICIENT_EVIDENCE', verdict: {...getNoSpeechVerdict(context), diagnosticCertainty: 'low', bestNextSteps: []}, recommendation: {category: 'General', messageKey: 'recommendation.no_speech', confidence: 0}};
   }
   // Echo is experimental and cannot lower the grade or drive purchase advice.

@@ -18,7 +18,6 @@ import {
 } from "../lib/analysisContextStorage";
 import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import { isIOSPlatform } from "../lib/browserUtils";
-import { resolveNoSpeechCopy } from "../lib/copy";
 import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
 import { clearSession, loadSession, saveSession, comparableTakes, type RecordingSession } from "../lib/recordingSession";
@@ -149,10 +148,8 @@ export default function TestExperiencePage({
     });
   }, [audioContext]);
 
-  const noSpeechCopy = analysis
-    ? resolveNoSpeechCopy(analysis.verdict.copyKeys)
-    : { title: "", description: "" };
   const needsRetry = analysis?.specialState === "NO_SPEECH" || analysis?.specialState === "INSUFFICIENT_EVIDENCE";
+  const retryReason = analysis?.evidence?.retryReason ?? (analysis?.specialState === "NO_SPEECH" ? "no_speech" : "insufficient_evidence");
   const isExcellent = analysis?.verdict.overall.grade === "A";
 
   const buttonLabel = useMemo(() => {
@@ -383,19 +380,19 @@ export default function TestExperiencePage({
 
       {analysis ? (
         <>
-          <ResultsNotice
+          {!needsRetry && <ResultsNotice
             diagnosticCertainty={analysis.verdict.diagnosticCertainty}
             specialState={analysis.specialState}
-          />
+          />}
 
           {needsRetry ? (
             <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-5 sm:p-6 md:p-8">
               <div className="flex flex-col gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
-                  {t("test.no_speech.badge")}
+                  {t(`test.retry.${retryReason}.badge`)}
                 </p>
-                <h2 className="text-2xl font-semibold text-white">{analysis.specialState === "INSUFFICIENT_EVIDENCE" ? "Not enough evidence for a grade" : noSpeechCopy.title}</h2>
-                <p className="text-sm text-rose-100">{analysis.specialState === "INSUFFICIENT_EVIDENCE" ? "Keep the first two seconds free of speech, then speak clearly for at least one second. Try again to get a reliable comparison." : noSpeechCopy.description}</p>
+                <h2 className="text-2xl font-semibold text-white">{t(`test.retry.${retryReason}.title`)}</h2>
+                <p className="text-sm text-rose-100">{t(`test.retry.${retryReason}.description`)}</p>
               </div>
               <button
                 className={buttonStyles({

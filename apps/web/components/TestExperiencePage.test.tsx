@@ -91,6 +91,26 @@ const baseAnalysis: AnalysisResult = {
 };
 
 describe("TestExperiencePage", () => {
+  it.each([
+    ['calibration_speech', 'Speech detected during room calibration'],
+    ['speech_too_short', 'Speech detected, but the sample is too short'],
+    ['speech_detection_unavailable', 'Could not verify speech reliably'],
+    ['calibration_too_short', 'Room calibration was too short'],
+    [undefined, 'Not enough evidence for a grade'],
+  ] as const)("explains %s without claiming no speech", (retryReason, title) => {
+    mockUseAudioRecorder.mockReturnValue({
+      status: 'complete', duration: 7,
+      analysis: {...baseAnalysis, specialState:'INSUFFICIENT_EVIDENCE', evidence:{
+        speechSeconds:3, quietSeconds:2, speechDetection:'silero', capture:{format:'pcm'},
+        noiseReliable:false, echoExperimental:true, retryReason,
+      }},
+      startRecording:vi.fn(), stopRecording:vi.fn(), reset:vi.fn(),
+    });
+    const html = renderToStaticMarkup(<TestExperiencePage viewMode="pro" />);
+    expect(html).toContain(title);
+    expect(html).not.toContain('No speech detected');
+    expect(html).not.toContain('You are good to go');
+  });
   beforeEach(() => {
     mockUseAudioMeter.mockReturnValue({
       audioDataArray: new Float32Array(),

@@ -22,6 +22,20 @@ describe('guided evidence', () => {
   it('does not claim detected speech for a negative neural result', () => {
     expect(analyzeGuidedSamples(fixture(), rate, context, {...evidence,segments:[]}).specialState).toBe('NO_SPEECH');
   });
+  it('explains detected speech instead of reporting no speech', () => {
+    const short = analyzeGuidedSamples(fixture(), rate, context, {...evidence, segments:[{start:2,end:2.5}]});
+    expect(short.specialState).toBe('INSUFFICIENT_EVIDENCE');
+    expect(short.evidence?.retryReason).toBe('speech_too_short');
+    for (const segments of [[{start:0,end:5}], [{start:0,end:1}]]) {
+      const early = analyzeGuidedSamples(fixture(), rate, context, {...evidence, segments});
+      expect(early.specialState).toBe('INSUFFICIENT_EVIDENCE');
+      expect(early.evidence?.retryReason).toBe('calibration_speech');
+    }
+    const unavailable = analyzeGuidedSamples(fixture(), rate, context, {...evidence, speechDetection:'energy'});
+    expect(unavailable.evidence?.retryReason).toBe('speech_detection_unavailable');
+    const silence = analyzeGuidedSamples(fixture(), rate, context, {...evidence, segments:[]});
+    expect(silence.evidence?.retryReason).toBe('no_speech');
+  });
   it('bases certainty on capture evidence, independently of grade', () => {
     for (const amplitude of [0.02,0.1,1.5]) {
       expect(analyzeGuidedSamples(fixture(amplitude),rate,context,evidence).verdict.diagnosticCertainty).toBe('medium');
