@@ -78,6 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-sky-200 focus:px-4 focus:py-2 focus:text-slate-950">Skip to content</a>
         <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-4 sm:px-6 sm:py-8">
           <header className="flex items-center justify-between">
             <Link
@@ -93,12 +94,12 @@ export default function RootLayout({
                 <p className="text-xs text-slate-400">7-Second Mic Quality Test</p>
               </div>
             </Link>
+            <nav aria-label="Main navigation" className="flex gap-4 text-sm"><Link href="/results" className="text-slate-300 hover:text-white">Demo</Link><Link href="/test" className="font-semibold text-sky-300">Mic test</Link></nav>
           </header>
-          <main className="flex-1 py-6 sm:py-10">{children}</main>
+          <main id="main-content" className="flex-1 py-6 sm:py-10">{children}</main>
           <Footer />
         </div>
-        <Analytics />
-        <SpeedInsights />
+        {process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" ? <><Analytics /><SpeedInsights /></> : null}
       </body>
     </html>
   );

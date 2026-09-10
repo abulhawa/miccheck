@@ -160,7 +160,7 @@ export default function AudioWaveformVisualizer({
         <span>{isRecording ? t("audio.waveform.status_listening") : t("audio.waveform.status_idle")}</span>
       </div>
       <div className="mt-3 relative h-24 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950 sm:h-28">
-        <canvas ref={canvasRef} width={width} height={height} className="h-full w-full" />
+        <canvas aria-label="Live microphone waveform" role="img" ref={canvasRef} width={width} height={height} className="h-full w-full" />
       </div>
       <p className="mt-2 text-xs text-slate-200 sm:mt-3">
         {t("audio.waveform.caption")}

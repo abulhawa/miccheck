@@ -25,7 +25,7 @@ export default function HomePage() {
       <section className="grid gap-8 md:grid-cols-2 md:gap-10">
         <div className="flex flex-col gap-5 md:gap-6">
           <span className="w-fit rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">
-            MicCheck
+            Free · private · local AI
           </span>
           <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
             {t("home.hero.title")}

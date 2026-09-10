@@ -78,7 +78,7 @@ const sanitizeAnalyticsProps = (props: Record<string, unknown>) => {
 };
 
 export const logEvent = (name: AnalyticsEventName, props: AnalyticsProps = {}) => {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || process.env.NEXT_PUBLIC_ANALYTICS_ENABLED !== "true") return;
   const context = getAnalyticsContext();
   track(name, sanitizeAnalyticsProps({ ...context, ...props }));
 };

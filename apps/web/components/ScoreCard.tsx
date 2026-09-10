@@ -62,9 +62,9 @@ export default function ScoreCard({ showShare = true, experimentalEcho = false, 
             <ShareButton grade={verdict.overall.grade} />
           </div> : null}
           <p className="mt-2 text-sm text-slate-200">
-            {resolveCopy(verdict.copyKeys.impactSummaryKey, { impact: impactLabel })}
+            {experimentalEcho ? "Grade based on speech level, background noise, and clipping." : resolveCopy(verdict.copyKeys.impactSummaryKey, { impact: impactLabel })}
           </p>
-          <p className="mt-2 text-sm text-slate-200">{resolveCopy(verdict.overall.summaryKey)}</p>
+          {!experimentalEcho ? <p className="mt-2 text-sm text-slate-200">{resolveCopy(verdict.overall.summaryKey)}</p> : null}
         </div>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -97,7 +97,7 @@ export default function ScoreCard({ showShare = true, experimentalEcho = false, 
                 {renderStars(rating.stars)}
               </p>
               <p className="mt-1 text-xs font-medium text-slate-300">{rating.label}</p>
-              <p className="mt-2 text-xs text-slate-400">{resolveCopy(category.descriptionKey)}</p>
+              {resolveCopy(category.descriptionKey) !== rating.label ? <p className="mt-2 text-xs text-slate-400">{resolveCopy(category.descriptionKey)}</p> : null}
               <p className="mt-2 text-xs font-medium text-slate-200">{metricText}</p>
             </div>
           );

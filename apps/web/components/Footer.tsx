@@ -7,11 +7,11 @@ export default function Footer() {
         <div className="flex flex-col gap-0.5 sm:gap-1">
           <span>MicCheck runs 100% in your browser.</span>
           <span>Audio is analyzed locally and never uploaded.</span>
-          <span>As an Amazon Associate I earn from qualifying purchases.</span>
+
         </div>
-        <Link className="text-slate-200 transition hover:text-white" href="/privacy">
+        <div className="flex flex-wrap gap-4"><a href="https://github.com/abulhawa/miccheck" className="text-slate-200 hover:text-white">Source code</a><Link className="text-slate-200 transition hover:text-white" href="/privacy">
           Privacy policy
-        </Link>
+        </Link></div>
       </div>
     </footer>
   );

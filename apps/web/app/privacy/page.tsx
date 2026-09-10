@@ -11,13 +11,14 @@ export const metadata: Metadata = {
 const privacyItems = [
   "No audio uploads. All recording, analysis, and scoring happen locally in your browser.",
   "No account is required and we do not send recorded audio to our servers.",
-  "Anonymous product analytics events are collected to measure app usage and reliability."
+  "Product analytics are disabled by default. A deployment can explicitly enable Vercel Analytics and Speed Insights; recordings are never included."
 ];
 
 const audioUseItems = [
-  "The app captures 5-7 seconds of audio to analyze quality.",
-  "Audio is processed locally and your latest sample is stored in sessionStorage so playback survives navigation and refresh in the same tab.",
-  "Stored audio is cleared when you start a new test or close the tab."
+  "The guided test captures seven seconds: two seconds of quiet followed by speech. Local AI models run in your browser without an account or API key.",
+  "Your latest take and a comparison baseline can be stored with their results in sessionStorage. If storage is unavailable, the app keeps them in memory for the current page.",
+  "Starting another test replaces the latest take and preserves a comparison baseline. Clear comparison removes that baseline. Browser session storage normally ends when the tab closes; restored browser sessions may retain it. Saved takes older than 24 hours are not restored.",
+  "Model files are served by the same site. Hosting providers may retain ordinary request logs, but the app does not send them your microphone audio."
 ];
 
 export default function PrivacyPage() {

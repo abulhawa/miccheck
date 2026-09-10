@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Sample Results",
-  description: "View a sample MicCheck report with scoring and actionable next steps.",
+  title: "Interactive Audio Demo",
+  description: "Run local AI on matching synthetic audio examples without microphone permission.",
   alternates: {
     canonical: "/results"
   }

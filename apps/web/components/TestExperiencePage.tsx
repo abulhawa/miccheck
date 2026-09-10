@@ -263,7 +263,7 @@ export default function TestExperiencePage({
               </div>
               <label className="flex items-start gap-3 text-sm text-slate-300">
                 <input type="checkbox" checked={classifyNoise} disabled={isRecording || isRequesting || isAnalyzing} onChange={(event) => setClassifyNoise(event.target.checked)} className="mt-1" />
-                <span>Identify background sounds with local AI <span className="block text-xs text-slate-400">Experimental. Downloads an additional 16 MB model once; no audio is uploaded.</span></span>
+                <span>Identify background sounds with local AI <span className="block text-xs text-slate-400">Experimental. Downloads an additional 16 MB model; no audio is uploaded.</span></span>
               </label>
               <AudioWaveformVisualizer
                 audioDataArray={audioDataArray}
@@ -286,7 +286,7 @@ export default function TestExperiencePage({
                     {buttonLabel}
                   </span>
                 </button>
-                <div role="status" className="text-sm text-slate-400">
+                <div aria-live="off" className="text-sm text-slate-400">
                   {t("test.recording.duration", { seconds: duration.toFixed(1) })}
                 </div>
               </div>
@@ -409,7 +409,7 @@ export default function TestExperiencePage({
               </button>
             </section>
           ) : (
-            <section className="grid gap-6 md:grid-cols-2">
+            <section className="flex flex-col gap-5">
               <div className="flex flex-col gap-4">
                 <ScoreCard
                   experimentalEcho={Boolean(analysis.evidence?.echoExperimental)}
@@ -455,7 +455,8 @@ export default function TestExperiencePage({
           {(() => {const current=loadSession();return current && comparableTakes(baseline,current) ? <p className="mt-2 text-sm text-slate-300">Speech level: {(analysis.metrics.speechRmsDb-baseline.analysis.metrics.speechRmsDb).toFixed(1)} dB change · SNR: {(analysis.metrics.snrDb-baseline.analysis.metrics.snrDb).toFixed(1)} dB change · Clipping: {((analysis.metrics.clippingRatio-baseline.analysis.metrics.clippingRatio)*100).toFixed(2)} percentage points change. A higher level is not always better; aim for the recommended range.</p> : <p className="mt-2 text-sm text-amber-200">Capture settings or evidence differ. Listen to both takes; numerical changes may not be directly comparable.</p>;})()}
           <p className="mt-4 text-sm font-medium">Before · {baseline.analysis.verdict.overall.grade}</p>
           <AudioPlayer audioBlob={baseline.blob} />
-          <p className="mt-3 text-sm font-medium">After · {analysis.verdict.overall.grade} — playback below</p>
+          <p className="mt-3 text-sm font-medium">After · {analysis.verdict.overall.grade}</p>
+          {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} /> : null}
           <button type="button" className="mt-3 text-sm underline" onClick={()=>{clearSession('baseline');setBaseline(null);}}>Clear comparison</button>
         </section>
       ) : null}
@@ -471,7 +472,7 @@ export default function TestExperiencePage({
         </section>
       ) : null}
       {(isRequesting || isAnalyzing) ? <button type="button" onClick={reset} className="text-sm underline">Cancel</button> : null}
-      {recordingBlob ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
+      {recordingBlob && (!baseline || needsRetry) ? <AudioPlayer audioBlob={recordingBlob} showWaveform={true} /> : null}
     </div>
   );
 }
