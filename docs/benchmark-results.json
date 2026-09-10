@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-10T07:43:34.898Z",
+  "browser": "153.0.8010.12",
+  "platform": "win32",
+  "description": "Synthetic smoke benchmark; one run per input, not an accuracy evaluation or representative device timing.",
+  "rows": [
+    {
+      "name": "silence",
+      "energySpeechSeconds": 0,
+      "neuralSpeechSeconds": 0,
+      "wallMs": 812,
+      "state": "NO_SPEECH"
+    },
+    {
+      "name": "50 Hz hum",
+      "energySpeechSeconds": 7,
+      "neuralSpeechSeconds": 0,
+      "wallMs": 540,
+      "state": "NO_SPEECH"
+    },
+    {
+      "name": "white noise",
+      "energySpeechSeconds": 7,
+      "neuralSpeechSeconds": 0,
+      "wallMs": 540,
+      "state": "NO_SPEECH"
+    },
+    {
+      "name": "synthetic speech",
+      "energySpeechSeconds": 3.5,
+      "neuralSpeechSeconds": 3.992,
+      "wallMs": 556,
+      "state": "graded"
+    },
+    {
+      "name": "quiet synthetic speech",
+      "energySpeechSeconds": 0.209,
+      "neuralSpeechSeconds": 3.96,
+      "wallMs": 679,
+      "state": "graded"
+    }
+  ]
+}
