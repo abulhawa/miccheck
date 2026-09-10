@@ -7,6 +7,9 @@
       ],
       "outputs": [
         ".next/**",
+        "!.next/cache/**",
+        "public/audio-analysis.worker.js",
+        "public/models/runtime/**",
         "dist/**"
       ]
     },

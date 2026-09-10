@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/prepare-audio.mjs && next dev",
+    "dev": "node scripts/prepare-audio.mjs --dev",
     "build": "node scripts/prepare-audio.mjs && next build",
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
