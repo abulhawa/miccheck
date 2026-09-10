@@ -12,6 +12,7 @@ self.onmessage = async ({
   context: ContextInput;
   capture: CaptureEvidence;
   classifyNoise: boolean;
+  quietSeconds?: number;
 }>) => {
   const started = performance.now();
   try {
@@ -25,7 +26,7 @@ self.onmessage = async ({
       data.context,
       {
         segments,
-        quietSeconds: 2,
+        quietSeconds: data.quietSeconds ?? 2,
         speechDetection: "silero",
         capture: data.capture,
       },
@@ -36,7 +37,7 @@ self.onmessage = async ({
       self.postMessage({ status: "Identifying background sounds locally…" });
       try {
         background = await classifyBackground(
-          resampled.subarray(0, 32000),
+          resampled.subarray(0, Math.floor((data.quietSeconds ?? 2) * 16000)),
           assetBase,
         );
         noiseStatus = "ready";

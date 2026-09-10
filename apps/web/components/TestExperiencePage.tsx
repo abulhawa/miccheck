@@ -9,6 +9,7 @@ import ScoreCard from "./ScoreCard";
 import BestNextSteps from "./BestNextSteps";
 import ResultsNotice from "./ResultsNotice";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
+import { ROOM_CALIBRATION_SECONDS } from "../src/domain/recording/constants";
 import {
   ANALYSIS_CONTEXT_OPTIONS,
   formatDeviceTypeLabel,
@@ -26,6 +27,8 @@ import type { DeviceType, UseCase } from "../types";
 
 const DEVICE_OVERRIDE_STORAGE_KEY = "miccheck.analysis.deviceOverride.v1";
 const VIEW_MODE_STORAGE_KEY = "miccheck.view.mode.v1";
+const VOICE_RECORDING_SECONDS = 20;
+const MIN_VOICE_SECONDS = 3;
 
 type ViewMode = "basic" | "pro";
 
@@ -75,15 +78,20 @@ export default function TestExperiencePage({
     audioContext,
     recordingBlob,
     analysis,
+    startCalibration,
     startRecording,
     stopRecording,
     reset
-  } = useAudioRecorder({ maxDuration: 7, deviceId, analysisContext, discoverySource, classifyNoise });
+  } = useAudioRecorder({ staged: true, maxDuration: VOICE_RECORDING_SECONDS, minDuration: MIN_VOICE_SECONDS, deviceId, analysisContext, discoverySource, classifyNoise });
 
   const isRecording = status === "recording";
   const isAnalyzing = status === "analyzing";
 
   const isRequesting = status === "requesting";
+  const isCalibrating = status === "calibrating";
+  const isCheckingRoom = status === "checking_room";
+  const isReady = status === "ready";
+  const setupLocked = isRecording || isRequesting || isAnalyzing || isCalibrating || isCheckingRoom || isReady;
 
   useEffect(() => {
     setBaseline(loadSession("baseline"));
@@ -121,7 +129,7 @@ export default function TestExperiencePage({
   }, []);
 
   useEffect(() => {
-    if (status === "recording") {
+    if (status === "calibrating") {
       setDeviceRefreshSignal((current) => `${Number(current) + 1}`);
     }
   }, [status]);
@@ -154,10 +162,13 @@ export default function TestExperiencePage({
 
   const buttonLabel = useMemo(() => {
     if (isRequesting) return "Waiting for microphone…";
-    if (isRecording) return t("test.recording.stop");
+    if (isCalibrating) return "Measuring room…";
+    if (isCheckingRoom) return "Checking room sample…";
+    if (isReady) return "Start voice recording";
+    if (isRecording) return "Finish recording";
     if (isAnalyzing) return t("test.recording.analyzing");
-    return t("test.recording.start");
-  }, [isRecording, isAnalyzing, isRequesting]);
+    return "Measure my room";
+  }, [isRecording, isAnalyzing, isRequesting, isCalibrating, isCheckingRoom, isReady]);
 
   const handleDeviceChange = useCallback(
     (nextDeviceId: string | null, meta?: { detectedType: DeviceType }) => {
@@ -229,11 +240,7 @@ export default function TestExperiencePage({
           <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{t("test.header.eyebrow")}</p>
           <h1 className="text-2xl font-semibold sm:text-3xl">{t("test.header.title")}</h1>
           <p className="text-sm text-slate-200">
-            Stay quiet for 2 seconds, then read the sentence aloud for 5 seconds.
-          </p>
-          <p className="text-sm text-slate-300">
-            <span className="font-semibold text-slate-200">{t("test.header.read_prompt")}</span>{" "}
-            <span className="text-slate-100">“{t("test.header.read_prompt_sample")}”</span>
+            First measure your room, then record your voice when you are ready. There is no rush between steps.
           </p>
         </div>
         <div className="mt-5 flex flex-col gap-4 sm:gap-5 md:mt-6 md:gap-6">
@@ -255,38 +262,56 @@ export default function TestExperiencePage({
 
           {!analysis ? (
             <>
+              <ol aria-label="Microphone test steps" className="grid gap-3 sm:grid-cols-2">
+                <li aria-current={!isReady && !isRecording && !isAnalyzing ? 'step' : undefined} className={`rounded-2xl border p-4 ${!isReady && !isRecording && !isAnalyzing ? 'border-sky-400 bg-sky-500/10' : 'border-slate-700 bg-slate-900/50'}`}>
+                  <h2 className="text-lg font-semibold text-white">1. Measure your room</h2>
+                  <p className="mt-1 text-sm text-slate-300">Stay quiet for {ROOM_CALIBRATION_SECONDS} seconds. We measure background noise separately from your voice.</p>
+                </li>
+                <li aria-current={isReady || isRecording ? 'step' : undefined} className={`rounded-2xl border p-4 ${isReady || isRecording ? 'border-sky-400 bg-sky-500/10' : 'border-slate-700 bg-slate-900/50'}`}>
+                  <h2 className="text-lg font-semibold text-white">2. Record your voice</h2>
+                  <p className="mt-1 text-sm text-slate-300">Start when you are ready. Read at your own pace, then finish. You have up to {VOICE_RECORDING_SECONDS} seconds.</p>
+                </li>
+              </ol>
               <div className="rounded-2xl border border-sky-500/30 bg-sky-500/10 p-4" role="status" aria-live="polite">
-                {isRequesting ? 'Allow microphone access to begin. Your audio stays on this device.' : isAnalyzing ? analysisStatus || 'Preparing local analysis…' : isRecording ? duration < 2 ? 'Stay quiet — measuring your room…' : 'Speak now — read the sentence above.' : 'Local AI speech detection • No account, API key, or subscription.'}
+                {isRequesting ? 'Allow microphone access. The room check will begin once your microphone is ready; please stay quiet.' : isCalibrating ? 'Stay quiet while we measure your room. Voice recording will not start automatically.' : isCheckingRoom ? 'Checking that the room sample is free of speech…' : isReady ? 'Room check complete. Take your time to read the passage, then start voice recording. The microphone stays connected, but nothing is being recorded while you prepare.' : isAnalyzing ? analysisStatus || 'Preparing local analysis…' : isRecording ? 'Recording your voice. Read the passage below naturally, then choose Finish recording.' : 'Choose Measure my room when you are ready to stay quiet for three seconds. Your audio stays on this device.'}
               </div>
-              <label className="flex items-start gap-3 text-sm text-slate-300">
-                <input type="checkbox" checked={classifyNoise} disabled={isRecording || isRequesting || isAnalyzing} onChange={(event) => setClassifyNoise(event.target.checked)} className="mt-1" />
-                <span>Identify background sounds with local AI <span className="block text-xs text-slate-400">Experimental. Downloads an additional 16 MB model; no audio is uploaded.</span></span>
-              </label>
-              <AudioWaveformVisualizer
-                audioDataArray={audioDataArray}
-                currentVolume={currentVolume}
-                peakVolume={peakVolume}
-                isRecording={isRecording}
-              />
-
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <button
                   className={buttonStyles({
                     variant: "primary",
                     className: "min-w-[11rem]"
                   })}
-                  disabled={isAnalyzing || isRequesting}
-                  onClick={isRecording ? stopRecording : startRecording}
+                  disabled={isAnalyzing || isRequesting || isCalibrating || isCheckingRoom || (isRecording && duration < MIN_VOICE_SECONDS)}
+                  onClick={isRecording ? stopRecording : isReady ? startRecording : startCalibration}
                 >
                   <span className="inline-flex min-w-[8rem] items-center justify-center gap-2">
                     {isAnalyzing ? <span aria-hidden="true" className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : null}
                     {buttonLabel}
                   </span>
                 </button>
+                {setupLocked && <button type="button" className={buttonStyles({variant:'secondary'})} onClick={reset}>{isReady ? 'Start over' : 'Cancel'}</button>}
                 <div aria-live="off" className="text-sm text-slate-400">
-                  {t("test.recording.duration", { seconds: duration.toFixed(1) })}
+                  {isCalibrating ? `${Math.max(0, ROOM_CALIBRATION_SECONDS - duration).toFixed(0)} seconds remaining` : isRecording ? `${duration.toFixed(1)} / ${VOICE_RECORDING_SECONDS} seconds${duration < MIN_VOICE_SECONDS ? ' · Keep speaking…' : ''}` : isReady ? 'Voice recording starts only when you choose.' : ''}
                 </div>
               </div>
+
+              <section aria-labelledby="reading-passage-title" className={`rounded-2xl border-2 p-5 sm:p-7 ${isReady || isRecording ? 'border-sky-300 bg-slate-800' : 'border-slate-600 bg-slate-900'}`}>
+                <h2 id="reading-passage-title" className="text-sm font-semibold uppercase tracking-wider text-sky-200">Read this aloud in step 2</h2>
+                <blockquote className="mt-4 text-xl font-medium leading-relaxed text-white sm:text-2xl sm:leading-relaxed">
+                  “{t("test.header.read_prompt_sample")}”
+                </blockquote>
+                <p className="mt-4 text-sm text-slate-300">Use your normal speaking voice and usual microphone distance. Aim for 10–15 seconds; you can also say a few sentences of your own.</p>
+              </section>
+              <label className="flex items-start gap-3 text-sm text-slate-300">
+                <input type="checkbox" checked={classifyNoise} disabled={setupLocked} onChange={(event) => setClassifyNoise(event.target.checked)} className="mt-1" />
+                <span>Identify background sounds with local AI <span className="block text-xs text-slate-400">Experimental. Downloads an additional 16 MB model; no audio is uploaded.</span></span>
+              </label>
+              <AudioWaveformVisualizer
+                audioDataArray={audioDataArray}
+                currentVolume={currentVolume}
+                peakVolume={peakVolume}
+                isRecording={isRecording || isCalibrating}
+              />
 
               {isIOSDevice ? (
                 <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-100">
@@ -294,7 +319,7 @@ export default function TestExperiencePage({
                 </div>
               ) : null}
 
-              <fieldset disabled={isRecording || isRequesting || isAnalyzing}><DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} /></fieldset>
+              <fieldset disabled={setupLocked}><DeviceSelector onDeviceChange={handleDeviceChange} refreshSignal={deviceRefreshSignal} /></fieldset>
               <p className="text-xs text-slate-400">
                 {t("test.detected_device_type", { type: formatDeviceTypeLabel(detectedDeviceType) })}
               </p>
@@ -305,7 +330,7 @@ export default function TestExperiencePage({
                     {t("test.controls.use_case")}
                     <select
                       className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
-                      disabled={isRecording || isRequesting || isAnalyzing}
+                      disabled={setupLocked}
                       onChange={(event) => setUseCase(event.target.value as UseCase)}
                       value={useCase}
                     >
@@ -320,7 +345,7 @@ export default function TestExperiencePage({
                     {t("test.controls.device_type")}
                     <select
                       className="rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm"
-                      disabled={isRecording || isRequesting || isAnalyzing}
+                      disabled={setupLocked}
                       onChange={(event) =>
                         setDeviceTypeOverride(
                           event.target.value === "auto" ? null : (event.target.value as DeviceType)

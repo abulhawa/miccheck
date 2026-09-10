@@ -9,7 +9,7 @@ import { SITE_NAME, SITE_URL_OBJECT, toAbsoluteUrl } from "../lib/site";
 export const metadata: Metadata = {
   metadataBase: SITE_URL_OBJECT,
   title: {
-    default: `${SITE_NAME} - 7-Second Mic Quality Test`,
+    default: `${SITE_NAME} - Guided Mic Quality Test`,
     template: `%s | ${SITE_NAME}`
   },
   description: "Find out why your audio sounds bad. Free, private, no sign-up.",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"],
   },
   openGraph: {
-    title: `${SITE_NAME} - 7-Second Mic Quality Test`,
+    title: `${SITE_NAME} - Guided Mic Quality Test`,
     description: "Find out why your audio sounds bad. Free, private, no sign-up.",
     url: toAbsoluteUrl("/"),
     siteName: SITE_NAME,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1024,
         height: 1024,
-        alt: "MicCheck - 7-Second Mic Quality Test"
+        alt: "MicCheck - Guided Mic Quality Test"
       }
     ],
     locale: 'en_US',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MicCheck - 7-Second Mic Quality Test",
+    title: "MicCheck - Guided Mic Quality Test",
     description: "Find out why your audio sounds bad. Free, private, no sign-up.",
     images: ["/og-image.png"]
   },
@@ -91,7 +91,7 @@ export default function RootLayout({
               </div>
               <div>
                 <p className="text-lg font-semibold">MicCheck</p>
-                <p className="text-xs text-slate-400">7-Second Mic Quality Test</p>
+                <p className="text-xs text-slate-400">Guided Mic Quality Test</p>
               </div>
             </Link>
             <nav aria-label="Main navigation" className="flex gap-4 text-sm"><Link href="/results" className="text-slate-300 hover:text-white">Demo</Link><Link href="/test" className="font-semibold text-sky-300">Mic test</Link></nav>

@@ -22,7 +22,7 @@ export async function createPcmCapture(context: AudioContext, source: MediaStrea
     if (disposed) return;
     if (data.samples) {
       // Bound memory even when background-tab timers are throttled.
-      if (length + data.samples.length <= context.sampleRate * 15) {
+      if (length + data.samples.length <= context.sampleRate * 30) {
         chunks.push(data.samples);
         length += data.samples.length;
       }

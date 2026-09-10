@@ -1,5 +1,22 @@
 import { test, expect } from "@playwright/test";
 
+test('two-stage recording instructions and reading passage fit desktop and mobile', async ({page}, testInfo) => {
+  const errors:string[]=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  for (const width of [1280,390]) {
+    await page.setViewportSize({width,height:900});
+    await page.goto('/test');
+    await expect(page.getByRole('heading',{name:'1. Measure your room'})).toBeVisible();
+    await expect(page.getByRole('heading',{name:'2. Record your voice'})).toBeVisible();
+    await expect(page.getByRole('region',{name:'Read this aloud in step 2'})).toContainText('Hello, this is a check of my microphone.');
+    await expect(page.getByRole('button',{name:'Measure my room',exact:true})).toBeEnabled();
+    await expect(page.getByRole('button',{name:'Start voice recording',exact:true})).toHaveCount(0);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.screenshot({path:testInfo.outputPath(`recording-${width}.png`),fullPage:true});
+  }
+  expect(errors).toEqual([]);
+});
+
 test("demo runs real models with matching playable examples and no external model requests", async ({
   page,
 }) => {
@@ -57,6 +74,9 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
     Object.assign(window, { __testTracks: tracks });
     navigator.mediaDevices.getUserMedia = async (constraints) => {
       const stream = await original(constraints);
+      // The fake file loops continuously. Gate it during the room check, then
+      // enable speech only after the production UI reaches the ready stage.
+      stream.getTracks().forEach(track => {track.enabled = false;});
       tracks.push(...stream.getTracks());
       return stream;
     };
@@ -66,8 +86,18 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
     .getByRole("checkbox", { name: /Identify background sounds/ })
     .check();
   await page
-    .getByRole("button", { name: "Start recording", exact: true })
+    .getByRole("button", { name: "Measure my room", exact: true })
     .click();
+  const startVoice = page.getByRole('button', {name:'Start voice recording',exact:true});
+  await expect(startVoice).toBeEnabled({timeout:15000});
+  await page.evaluate(() => (window as unknown as {__testTracks:MediaStreamTrack[]}).__testTracks.forEach(track => {track.enabled=true;}));
+  // Speech while preparing must not contaminate the saved room sample.
+  await page.waitForTimeout(4000);
+  await expect(startVoice).toBeEnabled();
+  await expect(page.getByRole('heading',{name:'Read this aloud in step 2'})).toBeVisible();
+  await startVoice.click();
+  await page.waitForTimeout(9000);
+  await page.getByRole('button',{name:'Finish recording',exact:true}).click();
   await expect(
     page.getByRole("heading", { name: "What this result is based on" }),
   ).toBeVisible({ timeout: 30000 });
@@ -112,8 +142,13 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
     .getByRole("button", { name: "Run Another Test", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Start recording", exact: true })
+    .getByRole("button", { name: "Measure my room", exact: true })
     .click();
+  await expect(startVoice).toBeEnabled({timeout:15000});
+  await page.evaluate(() => (window as unknown as {__testTracks:MediaStreamTrack[]}).__testTracks.forEach(track => {track.enabled=true;}));
+  await startVoice.click();
+  await page.waitForTimeout(9000);
+  await page.getByRole('button',{name:'Finish recording',exact:true}).click();
   await expect(
     page.getByRole("heading", { name: "Before and after" }),
   ).toBeVisible({ timeout: 30000 });

@@ -3,6 +3,8 @@
  */
 export const DEFAULT_MAX_RECORDING_DURATION_SECONDS = 6;
 
+export const ROOM_CALIBRATION_SECONDS = 3;
+
 /**
  * Default minimum recording duration in seconds required before analysis.
  */

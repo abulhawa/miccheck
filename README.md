@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml/badge.svg)](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml)
 
-A private microphone setup coach: record seven seconds, inspect the evidence, make one adjustment, and compare your next take. Neural speech detection and optional background sound classification run locally in a browser worker.
+A private microphone setup coach: measure your room, record your voice at your own pace, inspect the evidence, make one adjustment, and compare your next take. Neural speech detection and optional background sound classification run locally in a browser worker.
 
 ![MicCheck home page](docs/images/home-page.png)
 
@@ -13,7 +13,7 @@ npm ci
 npm run dev
 ```
 
-Use Node.js 22 or 24 and npm 11.8.0. Open http://localhost:3000. `/results` runs clean, noisy, clipped, and reverberant synthetic examples without microphone access. `/test` records two seconds of quiet followed by five seconds of speech. Microphone access requires localhost or HTTPS.
+Use Node.js 22 or 24 and npm 11.8.0. Open http://localhost:3000. `/results` runs clean, noisy, clipped, and reverberant synthetic examples without microphone access. `/test` first measures three seconds of room sound, then waits for the user to start voice recording (up to twenty seconds, with an explicit finish button). The preparation pause is excluded. Microphone access requires localhost or HTTPS.
 
 The root development command builds workspace dependencies and then watches their TypeScript output and the AI worker. Refresh and re-run analysis after changing worker code. Production: `npm run build`, then `npm --workspace apps/web run start`.
 

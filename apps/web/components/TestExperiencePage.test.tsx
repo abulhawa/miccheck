@@ -92,6 +92,22 @@ const baseAnalysis: AnalysisResult = {
 
 describe("TestExperiencePage", () => {
   it.each([
+    ['idle', 'Measure my room'],
+    ['calibrating', 'Measuring room…'],
+    ['ready', 'Start voice recording'],
+    ['recording', 'Finish recording'],
+  ])('shows the explicit %s step and a recognizable reading passage', (status, button) => {
+    mockUseAudioRecorder.mockReturnValue({status,duration:10,analysis:null,startCalibration:vi.fn(),startRecording:vi.fn(),stopRecording:vi.fn(),reset:vi.fn()});
+    const html = renderToStaticMarkup(<TestExperiencePage viewMode="basic" />);
+    expect(html).toContain('1. Measure your room');
+    expect(html).toContain('2. Record your voice');
+    expect(html).toContain('Read this aloud in step 2');
+    expect(html).toContain('Hello, this is a check of my microphone.');
+    expect(html).toContain(button);
+    expect(html).toContain('up to 20 seconds');
+    if (status === 'ready') expect(html).toContain('nothing is being recorded while you prepare');
+  });
+  it.each([
     ['calibration_speech', 'Speech detected during room calibration'],
     ['speech_too_short', 'Speech detected, but the sample is too short'],
     ['speech_detection_unavailable', 'Could not verify speech reliably'],

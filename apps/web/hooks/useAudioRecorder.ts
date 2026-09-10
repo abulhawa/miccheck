@@ -12,6 +12,7 @@ import type { AnalysisResult, ContextInput } from "../types";
 import {
   DEFAULT_MAX_RECORDING_DURATION_SECONDS,
   DEFAULT_MIN_RECORDING_DURATION_SECONDS,
+  ROOM_CALIBRATION_SECONDS,
   METER_NORMALIZATION_MULTIPLIER
 } from "../src/domain/recording/constants";
 
@@ -22,9 +23,11 @@ interface RecorderOptions {
   analysisContext?: ContextInput;
   discoverySource?: string;
   classifyNoise?: boolean;
+  staged?: boolean;
 }
 
-type RecorderStatus = "idle" | "requesting" | "recording" | "analyzing" | "complete" | "error";
+type RecorderStatus = "idle" | "requesting" | "calibrating" | "checking_room" | "ready" | "recording" | "analyzing" | "complete" | "error";
+
 
 const DEFAULT_ANALYSIS_CONTEXT: ContextInput = {
   use_case: "meetings",
@@ -41,6 +44,7 @@ export function useAudioRecorder({
   deviceId = null,
   analysisContext = DEFAULT_ANALYSIS_CONTEXT,
   classifyNoise = false,
+  staged = false,
   discoverySource = "route:pro"
 }: RecorderOptions) {
   const analysisAbortRef = useRef<AbortController | null>(null);
@@ -48,6 +52,8 @@ export function useAudioRecorder({
   const pcmCaptureRef = useRef<PcmCapture | null>(null);
   const generationRef = useRef(0);
   const busyRef = useRef(false);
+  const captureStageRef = useRef<'calibration' | 'ready' | 'speech' | null>(null);
+  const roomSampleRef = useRef<{samples:Float32Array; sampleRate:number; format:'pcm' | 'encoded'} | null>(null);
   const [audioDataArray, setAudioDataArray] = useState<Float32Array | null>(null);
   const [peakVolume, setPeakVolume] = useState(0);
   const [status, setStatus] = useState<RecorderStatus>("idle");
@@ -219,6 +225,8 @@ export function useAudioRecorder({
     analysisAbortRef.current?.abort();
     generationRef.current += 1;
     busyRef.current = false;
+    captureStageRef.current = null;
+    roomSampleRef.current = null;
     releaseMic("clear_recorder");
   }, [releaseMic]);
 
@@ -379,12 +387,15 @@ export function useAudioRecorder({
 
       recorder.onstop = async () => {
         if (request !== generationRef.current) return;
+        clearStopTimeout();
+        const isCalibration = captureStageRef.current === 'calibration';
         const recordedChunks = [...audioChunksRef.current];
-        setStatus("analyzing");
+        setStatus(isCalibration ? "checking_room" : "analyzing");
         const pcm = await pcmCaptureRef.current?.finish();
         if (request !== generationRef.current) return;
         const capturedRate = audioContext.sampleRate;
-        releaseMic("recorder_onstop");
+        if (!isCalibration) releaseMic("recorder_onstop");
+        startTimeRef.current = null;
         try {
           const blob = new Blob(recordedChunks, { type: recorder.mimeType });
           if (blob.size > 0) {
@@ -429,6 +440,24 @@ export function useAudioRecorder({
             throw new Error("Unable to decode the recorded audio.");
           }
 
+          const capture = {format: pcm?.length ? "pcm" as const : "encoded" as const,echoCancellation:captureSettings.echoCancellation,noiseSuppression:captureSettings.noiseSuppression,autoGainControl:captureSettings.autoGainControl};
+          if (isCalibration) {
+            if (audioBuffer.duration < 2) throw new Error('The room sample was interrupted. Please measure the room again.');
+            // Keep an exact, bounded room interval; delayed timers must not capture the preparation pause.
+            const samples = audioBuffer.getChannelData(0).slice(0, Math.floor(ROOM_CALIBRATION_SECONDS * audioBuffer.sampleRate));
+            const abort = new AbortController();
+            analysisAbortRef.current = abort;
+            const roomResult = await analyzeLocally(samples, audioBuffer.sampleRate, analysisContext, capture, false, abort.signal, setAnalysisStatus, samples.length / audioBuffer.sampleRate);
+            if (request !== generationRef.current) return;
+            if (!roomResult.evidence?.noiseReliable) throw new Error('Speech was detected during the room check. Measure the room again and stay quiet until it finishes.');
+            roomSampleRef.current = {samples, sampleRate:audioBuffer.sampleRate, format:capture.format};
+            captureStageRef.current = 'ready';
+            audioChunksRef.current = [];
+            setDuration(0);
+            setStatus('ready');
+            return;
+          }
+
           if (audioBuffer.duration < minDuration) {
             setStatus("error");
             setError(`Recording was too short. Please capture at least ${minDuration} seconds.`);
@@ -437,7 +466,18 @@ export function useAudioRecorder({
 
           const abort = new AbortController();
           analysisAbortRef.current = abort;
-          const result = await analyzeLocally(audioBuffer.getChannelData(0), audioBuffer.sampleRate, analysisContext, {format: pcm?.length ? "pcm" : "encoded",echoCancellation:captureSettings.echoCancellation,noiseSuppression:captureSettings.noiseSuppression,autoGainControl:captureSettings.autoGainControl}, classifyNoise, abort.signal, setAnalysisStatus);
+          const room = roomSampleRef.current;
+          let samples = audioBuffer.getChannelData(0);
+          if (staged && !room) throw new Error('Please measure the room before recording your voice.');
+          if (room) {
+            if (room.format === 'encoded') capture.format = 'encoded';
+            if (room.sampleRate !== audioBuffer.sampleRate) throw new Error('The microphone format changed. Please measure the room again.');
+            const combined = new Float32Array(room.samples.length + samples.length);
+            combined.set(room.samples);
+            combined.set(samples, room.samples.length);
+            samples = combined;
+          }
+          const result = await analyzeLocally(samples, audioBuffer.sampleRate, analysisContext, capture, classifyNoise, abort.signal, setAnalysisStatus, room ? room.samples.length / room.sampleRate : 2);
           if (request !== generationRef.current) return;
           const verdictPassFail = result.verdict.useCaseFit === "pass" ? "pass" : "fail";
           logEvent(ANALYTICS_EVENTS.analysisCompleted, {
@@ -446,13 +486,17 @@ export function useAudioRecorder({
             verdict_pass_fail: verdictPassFail,
             diagnostic_certainty: result.verdict.diagnosticCertainty ?? "unknown"
           });
-          const playbackBlob = pcm?.length ? pcmWav(pcm, capturedRate) : blob;
+          const playbackBlob = room || pcm?.length ? pcmWav(samples, audioBuffer.sampleRate) : blob;
+          roomSampleRef.current = null;
           setRecordingBlob(playbackBlob);
           void saveSession({id:crypto.randomUUID(),createdAt:Date.now(),analysis:result,blob:playbackBlob,deviceId:activeDeviceId});
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {
           if (request !== generationRef.current) return;
+          releaseMic('analysis_error');
+          roomSampleRef.current = null;
+          captureStageRef.current = null;
           setStatus("error");
           setError(
             analysisError instanceof Error
@@ -495,13 +539,15 @@ export function useAudioRecorder({
     analysisContext,
     discoverySource,
     classifyNoise,
+    staged,
+    clearStopTimeout,
     debugLog,
     minDuration,
     stopMediaStreamTracksOnce,
     releaseMic
   ]);
 
-  const startRecording = useCallback(async () => {
+  const beginCapture = useCallback(async (stage: 'calibration' | 'speech') => {
     if (busyRef.current) return;
     logEvent(ANALYTICS_EVENTS.startRecording);
     reset();
@@ -520,6 +566,7 @@ export function useAudioRecorder({
     }
 
     try {
+      captureStageRef.current = stage;
       recorder.start();
       pcmCaptureRef.current?.start();
     } catch (startError) {
@@ -529,15 +576,41 @@ export function useAudioRecorder({
       return;
     }
     startTimeRef.current = performance.now();
-    setStatus("recording");
+    setStatus(stage === 'calibration' ? "calibrating" : "recording");
     updateMeter();
 
     stopTimeoutRef.current = window.setTimeout(() => {
       if (mediaRecorderRef.current?.state === "recording") {
         mediaRecorderRef.current.stop();
       }
-    }, maxDuration * 1000);
+    }, (stage === 'calibration' ? ROOM_CALIBRATION_SECONDS : maxDuration) * 1000);
   }, [clearRecorder, initializeRecorder, maxDuration, releasePreviewMic, reset, updateMeter]);
+
+  const startCalibration = useCallback(() => beginCapture('calibration'), [beginCapture]);
+
+  const startRecording = useCallback(async () => {
+    if (!staged) return beginCapture('speech');
+    const recorder = mediaRecorderRef.current;
+    if (busyRef.current || captureStageRef.current !== 'ready' || !roomSampleRef.current || !recorder || recorder.state !== 'inactive') return;
+    busyRef.current = true;
+    captureStageRef.current = 'speech';
+    audioChunksRef.current = [];
+    try {
+      recorder.start();
+      pcmCaptureRef.current?.start();
+      startTimeRef.current = performance.now();
+      setDuration(0);
+      setPeakVolume(0);
+      setStatus('recording');
+      stopTimeoutRef.current = window.setTimeout(() => {
+        if (recorder.state === 'recording') recorder.stop();
+      }, maxDuration * 1000);
+    } catch {
+      clearRecorder();
+      setStatus('error');
+      setError('Unable to start voice recording. Please measure the room again.');
+    }
+  }, [staged, beginCapture, maxDuration, clearRecorder]);
 
   const stopRecording = useCallback(() => {
     clearStopTimeout();
@@ -576,6 +649,7 @@ export function useAudioRecorder({
     recordingBlob,
     audioContext,
     initializeRecorder,
+    startCalibration,
     startRecording,
     stopRecording,
     reset

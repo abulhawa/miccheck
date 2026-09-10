@@ -15,7 +15,7 @@ const privacyItems = [
 ];
 
 const audioUseItems = [
-  "The guided test captures seven seconds: two seconds of quiet followed by speech. Local AI models run in your browser without an account or API key.",
+  "The guided test first captures three seconds of room sound, then up to twenty seconds of speech when you choose to start voice recording. The preparation pause is not recorded. Local AI models run in your browser without an account or API key.",
   "Your latest take and a comparison baseline can be stored with their results in sessionStorage. If storage is unavailable, the app keeps them in memory for the current page.",
   "Starting another test replaces the latest take and preserves a comparison baseline. Clear comparison removes that baseline. Browser session storage normally ends when the tab closes; restored browser sessions may retain it. Saved takes older than 24 hours are not restored.",
   "Model files are served by the same site. Hosting providers may retain ordinary request logs, but the app does not send them your microphone audio."

@@ -1,7 +1,7 @@
 import type { CaptureEvidence, ContextInput } from '@miccheck/audio-metrics';
 import type { AnalysisResult } from '../types';
 
-export function analyzeLocally(samples: Float32Array, sampleRate: number, context: ContextInput, capture: CaptureEvidence, classifyNoise: boolean, signal: AbortSignal, onStatus: (status: string) => void): Promise<AnalysisResult> {
+export function analyzeLocally(samples: Float32Array, sampleRate: number, context: ContextInput, capture: CaptureEvidence, classifyNoise: boolean, signal: AbortSignal, onStatus: (status: string) => void, quietSeconds = 2): Promise<AnalysisResult> {
   return new Promise((resolve, reject) => {
     if (signal.aborted) {reject(new DOMException('Cancelled','AbortError')); return;}
     const worker = new Worker('/audio-analysis.worker.js', {type:'module'});
@@ -16,6 +16,6 @@ export function analyzeLocally(samples: Float32Array, sampleRate: number, contex
     };
     worker.onerror = () => {finish();reject(new Error('Local analysis is unavailable in this browser. Try Chrome or Edge.'));};
     const copy = samples.slice();
-    worker.postMessage({samples:copy,sampleRate,context,capture,classifyNoise},[copy.buffer]);
+    worker.postMessage({samples:copy,sampleRate,context,capture,classifyNoise,quietSeconds},[copy.buffer]);
   });
 }

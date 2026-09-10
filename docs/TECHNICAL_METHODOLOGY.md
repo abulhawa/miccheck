@@ -4,7 +4,7 @@ The production flow uses `analyzeGuidedSamples` in `packages/audio-metrics/src/g
 
 ## Capture and speech detection
 
-The guided capture contains two seconds of quiet and five seconds of speech. AudioWorklet provides raw mono PCM. The app requests echo cancellation, noise suppression, and automatic gain control to be disabled and records the actual track settings. If raw capture is unavailable, decoded MediaRecorder audio is a lower-certainty fallback.
+The guided capture has two explicit stages: a three-second room check, then up to twenty seconds of voice recording started by the user. The room check is validated for speech before offering the voice step. Capture stops during the preparation pause; the same microphone stream stays connected until completion, cancellation, or an error. The two captured intervals are concatenated for analysis and playback, with the measured room interval duration passed to the worker. No preparation audio is included. AudioWorklet provides raw mono PCM. The app requests echo cancellation, noise suppression, and automatic gain control to be disabled and records the actual track settings. If raw capture is unavailable, decoded MediaRecorder audio is a lower-certainty fallback.
 
 A windowed-sinc low-pass resampler converts a copy to 16 kHz for Silero VAD v5 in a Web Worker. Inference uses 512-sample frames, 64 samples of context, and recurrent state. The speech threshold is 0.5; segments must last at least 160 ms, with short gaps merged. The original sample-rate PCM is used for measurements.
 
