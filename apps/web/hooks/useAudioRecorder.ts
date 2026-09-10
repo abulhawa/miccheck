@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPcmCapture, type PcmCapture } from "../lib/pcmCapture";
 import { clearSession, loadSession, saveSession } from "../lib/recordingSession";
+import { pcmWav } from "../lib/wavEncoding";
 import { analyzeLocally } from "../lib/localAnalysis";
 import { clearRecording } from "../lib/audioStorage";
 import { describeBrowserSupport } from "@miccheck/audio-core";
@@ -197,6 +198,7 @@ export function useAudioRecorder({
       if (recorder) {
         recorder.ondataavailable = null;
         recorder.onstop = null;
+        recorder.onerror = null;
         if (recorder.state !== "inactive") {
           try {
             recorder.stop();
@@ -341,6 +343,7 @@ export function useAudioRecorder({
       if (request !== generationRef.current) {pcmCapture?.dispose(); return;}
       pcmCaptureRef.current = pcmCapture;
       await audioContext.resume?.();
+      if (request !== generationRef.current) {pcmCapture?.dispose(); return;}
 
       if (typeof MediaRecorder === "undefined") {
         releaseMic("media_recorder_unavailable");
@@ -354,6 +357,18 @@ export function useAudioRecorder({
       const mimeType = preferredTypes.find((type) => MediaRecorder.isTypeSupported(type));
       const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
       mediaRecorderRef.current = recorder;
+      recorder.onerror = () => {
+        if (request !== generationRef.current) return;
+        clearRecorder();
+        setStatus("error");
+        setError("Recording was interrupted. Reconnect your microphone and try again.");
+      };
+      stream.getTracks().forEach((track) => track.addEventListener?.("ended", () => {
+        if (request !== generationRef.current || mediaRecorderRef.current !== recorder) return;
+        clearRecorder();
+        setStatus("error");
+        setError("The microphone disconnected. Reconnect it and try again.");
+      }, {once: true}));
       audioChunksRef.current = [];
 
       recorder.ondataavailable = (event) => {
@@ -431,8 +446,9 @@ export function useAudioRecorder({
             verdict_pass_fail: verdictPassFail,
             diagnostic_certainty: result.verdict.diagnosticCertainty ?? "unknown"
           });
-          setRecordingBlob(blob);
-          void saveSession({id:crypto.randomUUID(),createdAt:Date.now(),analysis:result,blob,deviceId:activeDeviceId});
+          const playbackBlob = pcm?.length ? pcmWav(pcm, capturedRate) : blob;
+          setRecordingBlob(playbackBlob);
+          void saveSession({id:crypto.randomUUID(),createdAt:Date.now(),analysis:result,blob:playbackBlob,deviceId:activeDeviceId});
           setAnalysis(result);
           setStatus("complete");
         } catch (analysisError) {
