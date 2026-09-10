@@ -12,6 +12,7 @@ import {
 import ShareButton from "./ShareButton";
 
 interface ScoreCardProps {
+  showShare?: boolean;
   experimentalEcho?: boolean;
   verdict: WebVerdict;
   metrics: MetricsSummary;
@@ -20,7 +21,7 @@ interface ScoreCardProps {
 
 const renderStars = (count: number): string => "★".repeat(count) + "☆".repeat(5 - count);
 
-export default function ScoreCard({ experimentalEcho = false, verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
+export default function ScoreCard({ showShare = true, experimentalEcho = false, verdict, metrics, highlightedCategoryId }: ScoreCardProps) {
   const activeHighlight = highlightedCategoryId ?? verdict.primaryIssue;
   const hasHighlight = Boolean(activeHighlight);
   const gradeLabel = resolveCopy(verdict.overall.labelKey);
@@ -57,9 +58,9 @@ export default function ScoreCard({ experimentalEcho = false, verdict, metrics, 
               <span className="text-sm font-medium text-slate-200">– {explanationLabel}</span>
             ) : null}
           </p>
-          <div className="mt-3">
+          {showShare ? <div className="mt-3">
             <ShareButton grade={verdict.overall.grade} />
-          </div>
+          </div> : null}
           <p className="mt-2 text-sm text-slate-200">
             {resolveCopy(verdict.copyKeys.impactSummaryKey, { impact: impactLabel })}
           </p>

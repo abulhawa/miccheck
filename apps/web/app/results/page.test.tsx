@@ -13,8 +13,10 @@ vi.mock("../../components/ShareButton", () => ({
 import ResultsPage from "./page";
 
 describe("ResultsPage", () => {
-  it("shows the sample tag on the demo page", () => {
+  it("shows runnable synthetic examples without reading a private recording", () => {
     const html = renderToStaticMarkup(<ResultsPage />);
-    expect(html).toContain("Example: common home-office setup");
+    expect(html).toContain("Interactive demo");
+    expect(html).toContain("No microphone permission needed");
+    expect(html).toContain("Too much gain");
   });
 });

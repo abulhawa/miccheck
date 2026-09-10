@@ -1,167 +1,70 @@
 "use client";
 
-import React, { useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { getPrimaryGearRecommendation } from "@miccheck/audio-metrics/src/gearCatalog";
+import React, {useEffect,useRef,useState} from 'react';
+import Link from 'next/link';
+import AudioPlayer from '../../components/AudioPlayer';
+import ScoreCard from '../../components/ScoreCard';
+import BestNextSteps from '../../components/BestNextSteps';
+import {buttonStyles} from '../../components/buttonStyles';
+import {analyzeLocally} from '../../lib/localAnalysis';
+import {makeDemoSamples,pcmWav,type DemoKind} from '../../lib/demoAudio';
+import type {AnalysisResult} from '../../types';
 
-import ScoreCard from "../../components/ScoreCard";
-import BestNextSteps from "../../components/BestNextSteps";
-import ResultsNotice from "../../components/ResultsNotice";
-import { buttonStyles } from "../../components/buttonStyles";
-import { clearRecording } from "../../lib/audioStorage";
-import { resolveNoSpeechCopy } from "../../lib/copy";
-import { t } from "../../lib/i18n";
-import type { AnalysisResult } from "../../types";
-
-
-const sampleResult = {
-  verdict: {
-    version: "1.0",
-    overall: {
-      grade: "B",
-      labelKey: "overall.label.good",
-      summaryKey: "overall.summary.strong"
-    },
-    dimensions: {
-      level: {
-        stars: 4,
-        labelKey: "category.level",
-        descriptionKey: "level.slightly_off_target",
-      },
-      noise: {
-        stars: 5,
-        labelKey: "category.noise",
-        descriptionKey: "noise.very_clean",
-      },
-      echo: {
-        stars: 3,
-        labelKey: "category.echo",
-        descriptionKey: "echo.some_room_echo",
-      }
-    },
-    primaryIssue: "echo",
-    useCaseFit: "warn",
-    diagnosticCertainty: "medium",
-    reassuranceMode: false,
-    bestNextSteps: [
-      { kind: "action", title: "recommendation.reduce_echo", titleKey: "recommendation.reduce_echo" },
-      ...(() => {
-        const sampleGear = getPrimaryGearRecommendation("echo");
-        if (!sampleGear) {
-          return [];
-        }
-
-        return [
-          {
-            kind: "gear_optional" as const,
-            title: sampleGear.title,
-            gear: {
-              id: sampleGear.id,
-              title: sampleGear.title,
-              why: "Reduces room pickup and reflections for clearer speech.",
-              category: sampleGear.category,
-              relevance: "high" as const,
-              rationale: "Reduces room pickup and reflections for clearer speech.",
-              supportsIssues: sampleGear.supportsIssues,
-              ...(sampleGear.affiliateUrl ? { affiliateUrl: sampleGear.affiliateUrl } : {}),
-              linkStatus: sampleGear.affiliateUrl ? ("active" as const) : ("missing" as const)
-            }
-          }
-        ];
-      })()
-    ],
-    copyKeys: {
-      explanationKey: "overall.echo.impact_some",
-      fixKey: "fix.add_soft_furnishings_move_closer",
-      impactKey: "impact.echo",
-      impactSummaryKey: "impact.biggest_opportunity"
-    }
-  },
-  metrics: {
-    clippingRatio: 0.003,
-    rmsDb: -16.5,
-    speechRmsDb: -15.2,
-    snrDb: 26.2,
-    humRatio: 0.04,
-    echoScore: 0.32
-  }
-} as AnalysisResult;
+const examples: {kind:DemoKind;title:string;description:string}[] = [
+  {kind:'clean',title:'Clean speech',description:'A quiet background and a comfortable speech level.'},
+  {kind:'noisy',title:'Background noise',description:'The same voice mixed with deterministic broadband noise.'},
+  {kind:'clipped',title:'Too much gain',description:'The voice amplified until peaks are clipped.'},
+  {kind:'reverberant',title:'Room reflections',description:'A delayed copy of the voice. Echo remains experimental.'},
+];
 
 export default function ResultsPage() {
-  const router = useRouter();
+  const [result,setResult] = useState<{analysis:AnalysisResult;blob:Blob;title:string}|null>(null);
+  const [status,setStatus] = useState('');
+  const [busy,setBusy] = useState(false);
+  const [error,setError] = useState('');
+  const controller = useRef<AbortController|null>(null);
+  useEffect(()=>()=>controller.current?.abort(),[]);
 
+  async function runExample(example: typeof examples[number]) {
+    controller.current?.abort();
+    const abort = new AbortController();controller.current=abort;
+    setBusy(true);setError('');setResult(null);setStatus('Preparing synthetic speech…');
+    let audioContext: AudioContext|null=null;
+    try {
+      audioContext = new AudioContext({sampleRate:16000});
+      const response = await fetch('/demo/speech.wav',{signal:abort.signal});
+      if (!response.ok) throw new Error('Demo audio is unavailable. Please retry.');
+      const buffer = await audioContext.decodeAudioData(await response.arrayBuffer());
+      if (abort.signal.aborted) return;
+      const samples = makeDemoSamples(buffer.getChannelData(0),example.kind,buffer.sampleRate);
+      const analysis = await analyzeLocally(samples,buffer.sampleRate,{use_case:'meetings',device_type:'unknown',mode:'basic'},{format:'pcm',echoCancellation:false,noiseSuppression:false,autoGainControl:false},false,abort.signal,setStatus);
+      if(!abort.signal.aborted) setResult({analysis,blob:pcmWav(samples,buffer.sampleRate),title:example.title});
+    } catch(cause) {if(!abort.signal.aborted) setError(cause instanceof Error ? cause.message : 'Demo could not run.');}
+    finally {await audioContext?.close();if(!abort.signal.aborted) setBusy(false);}
+  }
 
-  const handleTestAgain = useCallback(() => {
-    clearRecording();
-    router.push("/test");
-  }, [router]);
-
-
-
-  const isNoSpeech = sampleResult.specialState === "NO_SPEECH";
-  const noSpeechCopy = resolveNoSpeechCopy(sampleResult.verdict.copyKeys);
-
-  return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-8">
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
-        <h1 className="text-3xl font-semibold">{t("results.sample.title")}</h1>
-        <p className="mt-2 text-sm text-slate-200">
-          {t("results.sample.subtitle")}
-        </p>
-        <span className="mt-3 inline-flex rounded-full border border-slate-700/60 bg-slate-900/70 px-3 py-1 text-xs text-slate-300">
-          {t("sample.tag")}
-        </span>
-      </section>
-
-      <ResultsNotice
-        specialState={sampleResult.specialState}
-        diagnosticCertainty={sampleResult.verdict.diagnosticCertainty}
-      />
-
-      {isNoSpeech ? (
-        <section className="rounded-3xl border border-rose-500/40 bg-rose-500/10 p-8">
-          <div className="flex flex-col gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-200">
-              {t("results.no_speech.badge")}
-            </p>
-            <h2 className="text-2xl font-semibold text-white">{noSpeechCopy.title}</h2>
-            <p className="text-sm text-rose-100">{noSpeechCopy.description}</p>
-          </div>
-          <button
-            className={buttonStyles({
-              variant: "primary",
-              className: "mt-6 w-full"
-            })}
-            onClick={handleTestAgain}
-            type="button"
-          >
-            {t("results.cta.run_another_test")}
-          </button>
-        </section>
-      ) : (
-        <>
-          <ScoreCard
-            verdict={sampleResult.verdict}
-            metrics={sampleResult.metrics}
-            highlightedCategoryId={sampleResult.verdict.primaryIssue}
-          />
-
-          <button
-            className={buttonStyles({
-              variant: "primary",
-              className: "w-full"
-            })}
-            onClick={handleTestAgain}
-            type="button"
-          >
-            {t("results.cta.run_another_test")}
-          </button>
-
-          <BestNextSteps verdict={sampleResult.verdict} mode="pro" includeGear={true} includeSecondaryNotes={true} showDiagnosticCertainty={true} trackAdviceEvent={false} />
-
-          <p className="text-sm text-slate-400">These illustrative scores are not linked to a microphone recording. Run a test to get your own results.</p>
-        </>
-      )}
+  return <div className="mx-auto flex max-w-4xl flex-col gap-6">
+    <section>
+      <p className="text-xs font-semibold uppercase tracking-widest text-sky-300">Interactive demo</p>
+      <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">Hear the problem. See the evidence.</h1>
+      <p className="mt-3 max-w-2xl text-slate-300">Try the actual local AI pipeline with synthetic speech. Each result is computed from the audio you hear. No microphone permission needed.</p>
+    </section>
+    <div className="grid gap-3 sm:grid-cols-2">
+      {examples.map((example)=><button key={example.kind} disabled={busy} onClick={()=>void runExample(example)} className="rounded-2xl border border-slate-700 bg-slate-900/50 p-5 text-left transition hover:border-sky-400 disabled:opacity-50">
+        <span className="font-semibold">{example.title}</span><span className="mt-2 block text-sm text-slate-400">{example.description}</span>
+      </button>)}
     </div>
-  );
+    {busy ? <div role="status" className="text-sky-200">{status} <button className="ml-3 underline" onClick={()=>{controller.current?.abort();setBusy(false);}}>Cancel</button></div> : null}
+    {error ? <p role="alert" className="text-rose-300">{error}</p> : null}
+    {result ? <section className="flex flex-col gap-4" aria-label="Demo result">
+      <h2 className="text-xl font-semibold">{result.title} · synthetic example</h2>
+      {result.analysis.specialState ? <p>Not enough speech evidence was detected. Try another example.</p> : <>
+        <ScoreCard verdict={result.analysis.verdict} metrics={result.analysis.metrics} experimentalEcho showShare={false}/>
+        <BestNextSteps verdict={result.analysis.verdict} mode="basic" maxActionSteps={1} includeGear={false} trackAdviceEvent={false}/>
+      </>}
+      <AudioPlayer audioBlob={result.blob} showWaveform />
+      <p className="text-xs text-slate-400">Silero detected {result.analysis.evidence?.speechSeconds.toFixed(1)} seconds of speech. This controlled example demonstrates behavior; it does not establish accuracy on real microphones.</p>
+    </section> : null}
+    <Link href="/test" className={buttonStyles({variant:'primary',className:'self-start'})}>Test my microphone</Link>
+  </div>;
 }
