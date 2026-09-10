@@ -1,20 +1,21 @@
-# MicCheck Privacy Policy
+# Privacy
 
-MicCheck is designed to keep your audio private.
+MicCheck processes microphone audio locally. It does not upload audio or transcripts, and does not require an account.
 
-## What We Collect
+## Recording and retention
 
-- **No audio uploads.** All recording, analysis, and scoring happen locally in your browser.
-- **No account required.** We do not send recorded audio to our servers.
-- **Anonymous product analytics.** We collect non-audio analytics events to understand usage and reliability.
+A guided test records seven seconds: two seconds of quiet, then speech. Raw PCM is analyzed when AudioWorklet is available and encoded as WAV for playback. An encoded MediaRecorder fallback has lower diagnostic certainty. Microphone tracks are stopped after capture, cancellation, or errors.
 
-## How Audio Is Used
+The latest take and an optional comparison baseline are saved as paired audio, measurements, timestamp, capture settings, and device identifier in this tab's `sessionStorage`. Starting another test replaces the latest take and preserves a baseline. Clear comparison removes the baseline. Storage normally ends when the tab closes, although browser session restoration may preserve it. Takes older than 24 hours are not restored from storage. Denied or full storage falls back to memory; that fallback does not survive page reload.
 
-- The app captures 5-7 seconds of audio to analyze quality.
-- Audio is processed locally in your browser.
-- To keep playback available across navigation and refresh in the same tab, the latest recording is stored in `sessionStorage`.
-- Stored audio is cleared when you start a new test or close the tab.
+Test preferences can be stored locally. You can remove all saved MicCheck data through your browser's site-data controls. No cross-device sync is provided.
 
-## Browser Permissions
+## Models and network traffic
 
-MicCheck requests access to your microphone solely to record the sample. You can revoke access at any time through your browser settings.
+Silero and optional YAMNet model assets are served by the same site and run on the visitor's device. Ordinary page, model, and asset requests reach the host, which may retain normal access logs. The app sends no microphone audio in those requests. Browser caching can reuse model downloads; availability after going offline is not guaranteed.
+
+## Optional analytics
+
+Vercel Analytics, Speed Insights, and custom usage events are disabled by default. A site operator can opt in at build time using `NEXT_PUBLIC_ANALYTICS_ENABLED=true`; enabling them requires reviewing that deployment's privacy disclosures and requirements. Analytics payloads do not contain recorded audio. The public privacy page describes this optional configuration.
+
+Microphone permission can be revoked in browser settings at any time.

@@ -1,57 +1,32 @@
-# Technical Methodology: Audio Analysis
+# Audio analysis methodology
 
-This page explains, in plain English, exactly how our current audio analysis works. It is based on the production code in `@miccheck/audio-metrics` and `@miccheck/audio-core`.
+The production flow uses `analyzeGuidedSamples` in `packages/audio-metrics/src/guided.ts`. The legacy energy detector remains for baseline tests and package compatibility; it does not decide speech in the web recording flow.
 
-## 1) Clipping
+## Capture and speech detection
 
-**What we measure**
-- We scan every sample and check its absolute value (how close it is to full scale). If a sample is at or above **0.98**, we count it as clipped. That 0.98 threshold is a **soft threshold**, not true digital 0 dBFS.
-- We then compute a **clipping ratio**: the number of “clipped” samples divided by the total sample count.
+The guided capture contains two seconds of quiet and five seconds of speech. AudioWorklet provides raw mono PCM. The app requests echo cancellation, noise suppression, and automatic gain control to be disabled and records the actual track settings. If raw capture is unavailable, decoded MediaRecorder audio is a lower-certainty fallback.
 
-**Key takeaways**
-- **Soft threshold, not true 0 dB:** we use 0.98 instead of 1.0, so clipping can be flagged slightly before a signal reaches full scale.
-- **We count samples, not just the max peak:** the result is a ratio (percentage of samples), not a single peak value.
+A windowed-sinc low-pass resampler converts a copy to 16 kHz for Silero VAD v5 in a Web Worker. Inference uses 512-sample frames, 64 samples of context, and recurrent state. The speech threshold is 0.5; segments must last at least 160 ms, with short gaps merged. The original sample-rate PCM is used for measurements.
 
-**Simple math**
-```
-clippingRatio = (# of samples where |sample| >= 0.98) / (total samples)
-```
+A grade requires at least one second of detected speech after calibration, at least one second of quiet calibration, and less than 150 ms of detected speech in that interval. Missing speech or contaminated calibration returns an explicit insufficient-evidence state. A model failure returns an error rather than substituting an invented grade.
 
-## 2) Noise / SNR
+## Measurements
 
-**Do we use a VAD?**
-Yes — but it’s a **simple energy-based VAD**, not a complex AI model. We split the audio into short frames and mark a frame as “speech” if its RMS level is above a fixed threshold (about **-35 dBFS**).
+- **Speech level:** RMS of samples in detected speech intervals after calibration, expressed in dBFS. It measures digital signal level, not physical sound pressure.
+- **Noise floor:** RMS of the initial quiet interval. This assumes the room noise stays reasonably stationary during the following speech.
+- **SNR:** subtract quiet power from speech-interval power, then compare the remaining estimated signal power with quiet power. `signalRms = sqrt(max(0, speechRms² - quietRms²))`; SNR is `20 log10(signalRms / quietRms)`, bounded to -20 through 80 dB with numerical floors. Unusable quiet evidence withholds a grade.
+- **Clipping:** fraction of post-calibration samples with absolute amplitude at least 0.98. This is a near-full-scale heuristic, not proof of every kind of analog distortion.
+- **Hum:** the dominant Hann-windowed sinusoid near 50 or 60 Hz (±2 Hz, 0.5 Hz steps), normalized by coherent window gain and quiet-interval power, bounded to [0, 1]. This estimates narrowband mains-like energy, not its physical cause.
+- **Echo:** the legacy autocorrelation estimator is experimental. It can confuse periodic voice structure with reflections. It is excluded from grading and actionable recommendations.
 
-**How we estimate noise and speech**
-- We compute RMS for each frame.
-- Frames above the VAD threshold are “speech frames.” Frames below it are “noise frames.”
-- The **noise floor** is taken as the 20th percentile of the noise frames. (If we can’t find any noise frames, we fall back to the 10th percentile of *all* frames.)
-- The **speech level** is the median (50th percentile) of the speech frames.
+## Grade and certainty
 
-**SNR math**
-```
-SNR (dB) = 20*log10(speechLevel) - 20*log10(noiseFloor)
-```
+Existing context-dependent deterministic thresholds turn speech level, clipping, and SNR into category ratings; the weakest applicable rating controls the grade. Thresholds live in `packages/audio-metrics/src/config.ts` and scoring modules. Recommendations favor free adjustments. The grade is not learned, professionally calibrated, or a universal microphone-quality measure.
 
-**Plain-English summary**
-- We are **not** just comparing the loudest frame to the quietest frame.
-- We **do** separate speech from non‑speech using a basic RMS threshold (energy VAD).
-- The SNR is based on **typical speech vs. typical noise**, not the single max peak.
+Certainty describes available evidence, not whether the grade is good. It is at most medium for raw PCM with all three processing settings explicitly false; encoded, processed, or unknown settings produce low certainty. Representative speaker/room/device evaluation remains outstanding.
 
-## 3) Grading (Overall Letter Grade)
+## Optional background classification
 
-**How the grade is chosen**
-- We compute category scores (1–5 stars) for **Level**, **Noise**, and **Echo**.
-- The **overall grade is the worst (lowest) star rating** among those categories.
-- That means a single weak area (like heavy clipping or very poor SNR) **drags the whole grade down**.
+YAMNet runs on the quiet interval only when that interval is usable. The UI exposes a small subset (typing/keyboard, air conditioning, music) only when its mean model score exceeds 0.35 and exceeds speech/silence scores. Otherwise it returns unknown. These are tentative labels, not calibrated probabilities or validated source attribution. Classification failure does not discard successful speech analysis.
 
-**Important detail: clipping affects the Level score**
-- If the clipping ratio exceeds the warning threshold, the Level category is forced to **1 star**, even if the RMS volume is otherwise “good.”
-
-**Plain-English summary**
-- **Not an average:** we don’t average scores across categories.
-- **Worst-offender logic:** the grade reflects the weakest category.
-
----
-
-If you want more detail on thresholds (like exact SNR cutoffs or clipping warning levels), see the configuration values in `packages/audio-metrics/src/config.ts`.
+See `apps/web/public/models` for pinned model artifacts, hashes, and license notices, and [BENCHMARK.md](BENCHMARK.md) for the reproducible synthetic smoke evaluation.

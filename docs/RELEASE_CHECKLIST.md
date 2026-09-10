@@ -1,26 +1,23 @@
-# Release Checklist
+# Release checklist
 
-Use this checklist before public launch or significant updates.
+## Automated gates
 
-## Privacy and Legal
+- [ ] `npm ci` on a clean checkout with Node.js 22 or 24.
+- [ ] `npm run test` passes all workspaces and coverage thresholds.
+- [ ] `npm run build` succeeds, including model checksum validation.
+- [ ] `npm run lint` passes.
+- [ ] `npm audit` reviewed; CI rejects high-severity advisories.
+- [ ] `npx playwright install chromium`, then `npm --workspace apps/web run test:e2e`.
 
-- Confirm all privacy copy matches real behavior in `apps/web` and `docs/PRIVACY.md`.
-- Verify no recorded audio is uploaded to backend services.
-- Verify temporary audio storage behavior (`sessionStorage`) is documented and intentional.
-- Confirm affiliate disclosure text is visible where recommendations/links appear.
-- Verify policy links are present and functional on all primary routes.
+## Manual validation before a public release
 
-## Analytics and Consent
+- [ ] Physical microphones: built-in, USB, Bluetooth; quiet speech, fan, typing, clipping, silence, and changed device.
+- [ ] Permission denied, slow permission, device disconnected, background tab, interrupted capture, and storage blocked.
+- [ ] Chrome/Edge, Firefox, and Safari on real desktop/mobile devices; record versions and limitations in COMPATIBILITY.md.
+- [ ] Keyboard and screen-reader review of recording status, results, sliders, and comparison controls.
+- [ ] Inspect `/`, `/test`, `/pro`, `/results`, and `/privacy` on the deployed HTTPS origin.
+- [ ] Confirm model assets and runtime are served from that origin, and network requests contain no microphone audio.
+- [ ] Keep analytics disabled unless the deployment's disclosures and configuration have been reviewed.
+- [ ] Run the synthetic benchmark and collect a separate representative speaker/room/device evaluation before claiming accuracy.
 
-- Inventory analytics providers and events (Vercel Analytics, Speed Insights, custom events).
-- Confirm analytics payloads never include raw audio, transcripts, or direct identifiers.
-- Confirm consent requirements for target regions (for example GDPR/EEA and CPRA) and implement gating if required.
-- Verify analytics can be disabled in non-production or privacy-sensitive deployments.
-
-## Test and Coverage Gating
-
-- Run `npm run lint` at repo root and resolve warnings intended to block release.
-- Run `npm run test` at repo root and ensure all workspace suites pass.
-- Run `npm run build` at repo root and ensure all workspace builds pass.
-- Verify coverage thresholds are actually enforced in CI (not only configured in package metadata).
-- Perform a manual smoke test of `/`, `/test`, `/pro`, `/results`, and `/privacy` on desktop and mobile.
+The automated suite uses generated voice and a fake microphone. It does not replace the unchecked physical-device and accessibility evaluations above. Deployment and publishing are separate from local verification.

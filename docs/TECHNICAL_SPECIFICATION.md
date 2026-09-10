@@ -1,4 +1,6 @@
-# MicCheck Audio Analysis Technical Specification
+# MicCheck Audio Analysis Technical Specification (historical)
+
+> This document describes the pre-neural legacy analysis engine. Its line references and fallback descriptions are historical. The production guided pipeline is documented in [TECHNICAL_METHODOLOGY.md](TECHNICAL_METHODOLOGY.md); use that document for current behavior.
 
 ## 1. Overview
 MicCheck computes audio quality metrics from PCM samples, using shared utilities in `audio-core` and metric implementations in `audio-metrics`, then translates metrics into category scores and an overall grade. The system evaluates clipping, level (RMS), noise/SNR (with VAD and hum detection), and echo (autocorrelation). Source-of-truth implementation references are embedded throughout this document with exact file/line citations.

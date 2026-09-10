@@ -2,62 +2,72 @@
 
 [![CI](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml/badge.svg)](https://github.com/abulhawa/miccheck/actions/workflows/ci.yml)
 
-MicCheck is a browser-based microphone quality analyzer that records a short sample locally, analyzes it in the browser, and provides actionable feedback.
+A private microphone setup coach: record seven seconds, inspect the evidence, make one adjustment, and compare your next take. Neural speech detection and optional background sound classification run locally in a browser worker.
 
-![MicCheck results page screenshot](docs/images/results-page.png)
+![MicCheck home page](docs/images/home-page.png)
 
-## How It Works
-
-Record -> Analyze -> Fix
-
-- **Record:** Capture a 5-7 second microphone sample in the browser.
-- **Analyze:** Measure clipping, volume, noise floor, and room echo locally.
-- **Fix:** Get a letter grade and the single most impactful improvement.
-
-## Features
-
-- 5-7 second recording flow with real-time meter
-- Local analysis for clipping, volume, noise, and room echo
-- A-F grade with one prioritized fix
-- Works across modern desktop and mobile browsers
-
-## Supported Browsers
-
-| Browser | Status | Notes |
-| --- | --- | --- |
-| Chrome / Edge (desktop) | Full | Best experience |
-| Firefox (desktop) | Partial | Minor quirks possible |
-| Safari (macOS) | Limited | System processing may override |
-| Safari (iOS) | Degraded | Basic analysis only |
-
-## Privacy
-
-MicCheck analyzes audio locally in your browser and does not upload recorded audio to our servers.
-The latest sample is temporarily stored in `sessionStorage` to support playback after navigation/refresh in the same tab.
-Review the full policy in [docs/PRIVACY.md](docs/PRIVACY.md).
-
-## Release Readiness
-
-Use [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) before any public release.
-
-## Local Development
+## Try it
 
 ```bash
-npm install && npm run dev
+npm ci
+npm run dev
 ```
 
-Then visit `http://localhost:3000`.
+Use Node.js 22 or 24 and npm 11.8.0. Open http://localhost:3000. `/results` runs clean, noisy, clipped, and reverberant synthetic examples without microphone access. `/test` records two seconds of quiet followed by five seconds of speech. Microphone access requires localhost or HTTPS.
 
-## Tech Stack
+The root development command builds workspace dependencies and then watches their TypeScript output and the AI worker. Refresh and re-run analysis after changing worker code. Production: `npm run build`, then `npm --workspace apps/web run start`.
 
-- Next.js 16 (App Router) + TypeScript
-- Tailwind CSS
-- Turborepo workspaces
-- Vitest
+## What it does
 
-## Project Structure
+- Captures raw mono PCM through AudioWorklet where available; requests disabled browser audio processing and reports the settings actually supplied.
+- Uses **Silero VAD v5** to find speech. It withholds grades when speech or the quiet calibration interval is insufficient.
+- Estimates speech level, background noise, SNR, clipping, and mains hum; gives a grade and practical setup advice.
+- Optionally uses **YAMNet** for a small set of background sound hints, with an unknown outcome instead of forcing a label.
+- Keeps audio and results paired across refresh; supports before/after metric comparison and exclusive A/B playback.
+- Includes keyboard focus, reduced-motion support, mobile layout checks, and a microphone-free demo with matching audio and computed results.
 
-- `apps/web`: Next.js frontend
-- `packages/audio-core`: low-level PCM utilities and browser helpers
-- `packages/audio-metrics`: analysis and scoring engine
-- `docs`: privacy and compatibility docs
+![Actual local-model demo result](docs/images/results-page.png)
+
+## Free AI and privacy
+
+No AI subscription, paid API, account, or key is needed. Model files and their licenses are included; build preparation verifies their SHA-256 checksums and copies the pinned ONNX runtime. Models load from the same site and inference uses the visitor's CPU. Hosting and bandwidth can still cost the person deploying the site; running locally does not require a paid service.
+
+Audio is never uploaded by the application. The latest take and a comparison baseline stay in this tab's session storage, with an in-memory fallback when storage is denied. Analytics are off by default. [Privacy details](docs/PRIVACY.md) · [model provenance and licenses](apps/web/public/models/README.md).
+
+## Architecture
+
+```mermaid
+flowchart LR
+  Mic[Microphone] --> Capture[AudioWorklet PCM]
+  Demo[Synthetic demo] --> Worker
+  Capture --> Worker[Web Worker]
+  Worker --> VAD[Resample to 16 kHz + Silero]
+  VAD --> DSP[Guided DSP measurements]
+  Worker --> YAM[YAMNet: optional quiet-interval hints]
+  DSP --> UI[Evidence + grade + one action]
+  YAM --> UI
+  Capture --> Pair[Audio/result session pair]
+  UI --> Pair
+  Pair --> Compare[Before/after + playback]
+```
+
+Next.js 16 / React / TypeScript / Tailwind provide the interface; Turborepo manages `apps/web`, `packages/audio-core`, and `packages/audio-metrics`. ONNX Runtime Web and TensorFlow.js execute the models. There is no audio-processing backend.
+
+## Verification
+
+```bash
+npm run test
+npm run build
+npm run lint
+npm audit
+npx playwright install chromium
+npm --workspace apps/web run test:e2e
+```
+
+Vitest enforces coverage thresholds. Playwright exercises real local models, synthetic microphone capture, released tracks, paired refresh recovery, comparison playback, and mobile layout. CI runs the checks and retains browser traces on failure. See the [synthetic benchmark](docs/BENCHMARK.md), [methodology](docs/TECHNICAL_METHODOLOGY.md), and [original audit with resolution status](docs/PORTFOLIO_REVIEW.md).
+
+## Limits
+
+This is a portfolio prototype, not a calibrated acoustic instrument. The grade reflects heuristic level/noise/clipping thresholds, not microphone price or professional certification. Echo remains experimental and cannot affect the grade or recommend purchases. Diagnostic certainty is at most medium and drops with processed, encoded, or unknown capture settings. Background labels are tentative and are not probability estimates.
+
+Automated Chromium tests use synthetic audio. Real microphone hardware, speakers, rooms, Firefox, and Safari still need manual evaluation. No cross-browser or real-world accuracy claim is made. See [compatibility](docs/COMPATIBILITY.md) and the [release checklist](docs/RELEASE_CHECKLIST.md).

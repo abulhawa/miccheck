@@ -1,5 +1,7 @@
 # MicCheck technical and portfolio review
 
+> Historical audit, followed by implementation on September 9–10, 2026. Findings 1–8 have been addressed in separate commits: normalized hum, neural guided evidence, PCM capture, lifecycle cancellation, paired demo/session data, deterministic locale, guarded storage, and working test/build/lint gates. Added free local Silero/YAMNet, comparison playback, runnable demos, UI accessibility improvements, and dependency updates. Root checks and Chromium flows are now executable; the original environment limitations below describe the initial audit only. See README, BENCHMARK.md, and COMPATIBILITY.md for current evidence and remaining physical-device evaluation.
+
 Reviewed September 9, 2026. Scope: source, configuration, CI, documentation, and direct execution of selected audio functions. No application code was changed. This is not a completed browser, accessibility, dependency-security, or physical microphone audit.
 
 ## Assessment
