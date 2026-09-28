@@ -103,3 +103,77 @@ $env:FIXTURE_ACCEPTANCE = '1'
 node scripts/benchmark-human-speech.mjs
 Remove-Item Env:FIXTURE_ACCEPTANCE
 ```
+
+## Short trailing pauses
+
+September 28, 2026: a completed 100 ms noise burst in a short trailing pause
+could retain a calibration-based grade. The estimator skipped the entire run
+when fewer than two guarded 250 ms windows fit, including the separate brief
+event detector. Positive evidence of a completed burst should invalidate
+calibration even when the quiet duration cannot establish stable noise.
+
+`test/shortTailNoise.test.ts` defines exact speech [2, 4) s and added-noise
+burst [4.5, 4.6) s. Development uses 16 kHz, a 750 ms tail, and seed 91.
+Evaluation uses 44.1/48 kHz, 720/780 ms tails, and seeds 812/731, frozen before
+the fix. Each condition includes stationary noise, a 10 ms spike, an unfinished
+increase, and 280 ms boundary residue. These are generated capture conditions
+with exact component labels; they are not held-out human speakers or devices.
+
+Before: 3 missed bursts and no unsupported unstable assessments among 12
+negative controls. After: zero misses and zero false alarms. Brief events now
+run independently of the sustained-window duration gate; a completed event
+also takes precedence over insufficient later quiet duration. Short runs still
+contribute no sustained usable seconds and cannot establish stable noise.
+The fix withholds grading and requests `noise_unstable` for the three bursts;
+all controls retain an unassessed result and low diagnostic certainty.
+Window lengths, guards, 6 dB threshold, and -60 dBFS floor are unchanged.
+
+The focused worker run pairs twelve licensed source clips with 750 ms tails,
+with/without a burst 500–600 ms after the complete source waveform, plus the
+existing one-second stationary control. Frozen Groq-assisted consensus source
+labels are used as the authorized substitute for human review; exact injected
+noise intervals supply event ground truth. Uncertain source intervals remain
+excluded. [Before](short-tail-noise-baseline.json) and
+[after](short-tail-noise-results.json) preserve per-clip metrics, advice, source
+speech-selection agreement, and the annotation hash. These speakers are
+existing development data; this comparison is regression evidence, not a
+representative threshold-tuning result. Source waveform silence and VAD timing
+can provide more guarded quiet time than the exact-end controlled cases.
+
+Both worker versions detect all twelve bursts, with zero stationary false
+alarms. In each of the three scenarios, pooled missed candidate speech is
+0.056 s and extra candidate nonspeech is 0 s, unchanged before/after. No
+worker accuracy improvement is claimed. The baseline report records the Git
+revision whose `guided.ts` was substituted into the current worker bundle;
+all other sources, generated samples and frozen annotations were identical.
+
+Decision: separate positive brief-event evidence from the minimum duration
+needed to assess sustained stability. Retain all provisional parameters;
+physical-microphone capture, processing on/off, broader noise shapes and
+independent evaluation speakers remain actionable under backlog item 2.
+Groq transcription does not establish original room-noise ground truth.
+
+Reproduce the controlled tests from `packages/audio-metrics`:
+
+```powershell
+node ../../node_modules/vitest/vitest.mjs run test/shortTailNoise.test.ts
+```
+
+Reproduce the annotated worker comparison from the repository root (cached
+annotations require no new API calls):
+
+```powershell
+$env:SHORT_TAIL_EVALUATION = '1'
+node apps/web/scripts/benchmark-human-speech.mjs
+Remove-Item Env:SHORT_TAIL_EVALUATION
+```
+
+Verification: 480 audio-metrics tests (including the 320-condition estimator
+benchmark and 15 short-tail cases), 21 audio-core tests, 106 web tests with
+coverage, the web production build, and all 12 browser tests passed. Browser
+coverage includes 156 production-worker acceptance variants and the complete
+fake-microphone recording/playback/comparison flow. The separate 36-case
+Groq-assisted worker comparison passed. Root `npm run test` and `npm run build`
+were attempted but could not start because npm is absent from PATH. Direct
+Node test/build entrypoints were used; standalone audio-metrics npm commands
+were skipped per the documented workspace-resolution limitation.

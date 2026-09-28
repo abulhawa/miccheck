@@ -59,7 +59,6 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     while (i < mask.length && !mask[i]) i++;
     const start = runStart + (runStart > quietEnd && mask[runStart - 1] ? guard : 0);
     const end = i - (i < mask.length ? guard : 0);
-    if (end - start < window * 2) continue;
     // A brief burst can fit inside one 250 ms window and be missed by the
     // sustained-change rule. Require 100 ms of overlapping 50 ms evidence.
     // Reset at every speech/quiet boundary so disjoint spikes cannot accumulate.
@@ -87,6 +86,9 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
       }
     }
     if (eventHasEvidence) unfinishedNoiseEvent = true;
+    // Lack of sustained evidence cannot erase a completed brief event. Keep
+    // short runs out of the sustained assessment and its usable-time count.
+    if (end - start < window * 2) continue;
     for (let offset = start; offset + window <= end; offset += window) {
       const changeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(offset, offset + window))));
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
@@ -95,7 +97,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     }
   }
   const laterNoiseSeconds = windows * window / rate;
-  const noiseStability = laterNoiseSeconds < 0.5 ? 'unassessed' : changedWindows >= 2 || briefNoiseEvent ? 'unstable' : unfinishedNoiseEvent ? 'unassessed' : 'stable';
+  const noiseStability = changedWindows >= 2 || briefNoiseEvent ? 'unstable' : laterNoiseSeconds < 0.5 || unfinishedNoiseEvent ? 'unassessed' : 'stable';
   return {noiseStability, laterNoiseSeconds, maxNoiseChangeDb} as const;
 }
 
