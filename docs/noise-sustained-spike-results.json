@@ -1,0 +1,1020 @@
+{
+  "description": "Exact-label sustained-window spike diagnostic; generated sample-grid evaluation, no human or physical capture accuracy claim.",
+  "parameters": {
+    "calibrationSeconds": 2,
+    "speechInterval": [
+      2,
+      4
+    ],
+    "burstSeconds": 0.1,
+    "burstRiseDb": 7,
+    "spikeSeconds": 0.01,
+    "spikeRiseDb": 30,
+    "noiseRms": 0.003,
+    "onsetSeconds": 4.535
+  },
+  "misses": 0,
+  "falseAlarms": 0,
+  "rows": [
+    {
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "burst",
+      "eventSamples": [
+        72560,
+        74160
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "spike",
+      "eventSamples": [
+        72560,
+        72720
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 5,
+      "condition": "burst",
+      "eventSamples": [
+        72640,
+        74240
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 5,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 5,
+      "condition": "spike",
+      "eventSamples": [
+        72640,
+        72800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 5,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 10,
+      "condition": "burst",
+      "eventSamples": [
+        72720,
+        74320
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 10,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 10,
+      "condition": "spike",
+      "eventSamples": [
+        72720,
+        72880
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 10,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 15,
+      "condition": "burst",
+      "eventSamples": [
+        72800,
+        74400
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 15,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 15,
+      "condition": "spike",
+      "eventSamples": [
+        72800,
+        72960
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 15,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 20,
+      "condition": "burst",
+      "eventSamples": [
+        72880,
+        74480
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 20,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 20,
+      "condition": "spike",
+      "eventSamples": [
+        72880,
+        73040
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 16000,
+      "phaseMs": 20,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "burst",
+      "eventSamples": [
+        99997,
+        102202
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "spike",
+      "eventSamples": [
+        99997,
+        100218
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 5,
+      "condition": "burst",
+      "eventSamples": [
+        100107,
+        102312
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 5,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 5,
+      "condition": "spike",
+      "eventSamples": [
+        100107,
+        100328
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 5,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 10,
+      "condition": "burst",
+      "eventSamples": [
+        100217,
+        102422
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 10,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 10,
+      "condition": "spike",
+      "eventSamples": [
+        100217,
+        100438
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 10,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 15,
+      "condition": "burst",
+      "eventSamples": [
+        100328,
+        102533
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 15,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 15,
+      "condition": "spike",
+      "eventSamples": [
+        100328,
+        100549
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 15,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 20,
+      "condition": "burst",
+      "eventSamples": [
+        100438,
+        102643
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 20,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 20,
+      "condition": "spike",
+      "eventSamples": [
+        100438,
+        100659
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 22050,
+      "phaseMs": 20,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "burst",
+      "eventSamples": [
+        199994,
+        204404
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "spike",
+      "eventSamples": [
+        199994,
+        200435
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 5,
+      "condition": "burst",
+      "eventSamples": [
+        200214,
+        204624
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 5,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 5,
+      "condition": "spike",
+      "eventSamples": [
+        200214,
+        200655
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 5,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 10,
+      "condition": "burst",
+      "eventSamples": [
+        200435,
+        204845
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 10,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 10,
+      "condition": "spike",
+      "eventSamples": [
+        200435,
+        200876
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 10,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 15,
+      "condition": "burst",
+      "eventSamples": [
+        200655,
+        205065
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 15,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 15,
+      "condition": "spike",
+      "eventSamples": [
+        200655,
+        201096
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 15,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 20,
+      "condition": "burst",
+      "eventSamples": [
+        200876,
+        205286
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 20,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 20,
+      "condition": "spike",
+      "eventSamples": [
+        200876,
+        201317
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 44100,
+      "phaseMs": 20,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "burst",
+      "eventSamples": [
+        217680,
+        222480
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "spike",
+      "eventSamples": [
+        217680,
+        218160
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 5,
+      "condition": "burst",
+      "eventSamples": [
+        217920,
+        222720
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 5,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 5,
+      "condition": "spike",
+      "eventSamples": [
+        217920,
+        218400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 5,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 10,
+      "condition": "burst",
+      "eventSamples": [
+        218160,
+        222960
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 10,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 10,
+      "condition": "spike",
+      "eventSamples": [
+        218160,
+        218640
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 10,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 15,
+      "condition": "burst",
+      "eventSamples": [
+        218400,
+        223200
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 15,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 15,
+      "condition": "spike",
+      "eventSamples": [
+        218400,
+        218880
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 15,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 20,
+      "condition": "burst",
+      "eventSamples": [
+        218640,
+        223440
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 20,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 20,
+      "condition": "spike",
+      "eventSamples": [
+        218640,
+        219120
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "rate": 48000,
+      "phaseMs": 20,
+      "condition": "boundary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    }
+  ]
+}

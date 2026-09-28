@@ -31,6 +31,12 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [sustained-spike fix](NOISE_SUSTAINED_SPIKE_BENCHMARK.md) prevents
+250 ms windows from treating an isolated loud spike as a sustained noise change.
+Four controlled false alarms and nine recorded-source retries are resolved.
+The subsequent [tonal recovery fix](NOISE_TONE_BENCHMARK.md) resolves five
+low-frequency burst misses, retaining spike guards and acoustic thresholds.
+
 The [envelope investigation](NOISE_ENVELOPE_BENCHMARK.md) retains current
 parameters after 250 labeled controlled and 24 recorded-source worker cases.
 Fifty tapered short transients remain exploratory pending an independently

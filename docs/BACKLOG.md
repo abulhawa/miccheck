@@ -28,6 +28,23 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Tonal recovery follow-up: five missed 55 Hz, 100 ms +7 dB bursts now request
+noise retry. Coverage can complete when the recovery window's first hop still
+corroborates duration; thresholds and spike guards are retained. All 600
+development and 720 additional parameter-evaluation conditions pass, alongside
+24 recorded-worker regression cases. See the
+[tonal decision](NOISE_TONE_BENCHMARK.md). Short tapered-event policy and
+independent physical/listening evidence remain open; this does not complete
+representative threshold tuning.
+
+Sustained-window follow-up: an isolated loud 10 ms spike crossing adjacent
+250 ms windows caused four estimator false alarms and nine recorded-source
+retries. Per-window disjoint-hop corroboration resolves these without losing
+the tested 100 ms bursts or stationary controls. See the
+[sustained-spike decision](NOISE_SUSTAINED_SPIKE_BENCHMARK.md). The five
+55 Hz burst misses identified there are resolved by the tonal recovery
+follow-up above. Broader tuning and physical validation remain open.
+
 Envelope follow-up: 250 exact-label conditions retain completed 100 ms burst
 detection with square/linear/cosine edges and stationary/subthreshold/spike
 controls; all 24 recorded-source worker cases pass. Fifty tapered short-spike

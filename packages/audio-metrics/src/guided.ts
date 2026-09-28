@@ -83,6 +83,9 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
       // event contains at least three full hops regardless of onset phase.
       const hopIncreaseDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + eventHop)));
       elevatedHops = hopIncreaseDb > 6 ? elevatedHops + 1 : 0;
+      // A recovery window can average the elevated first hop with quiet audio.
+      // Preserve coverage when that hop still corroborates the event duration.
+      if (elevatedStart >= 0 && elevatedHops >= 3 && offset + eventWindow - elevatedStart >= eventCoverage) eventHasCoverage = true;
       if (eventHasCoverage && elevatedHops >= 3) eventHasEvidence = true;
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(increaseDb));
       if (increaseDb > 6) {
@@ -105,7 +108,16 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     for (let offset = start; offset + window <= end; offset += window) {
       const changeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(offset, offset + window))));
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
-      if (changeDb > 6) changedWindows++;
+      // A loud spike can contaminate two adjacent 250 ms windows. Corroborate
+      // each candidate independently so residue elsewhere cannot support it.
+      if (changeDb > 6) {
+        let changedHops = 0;
+        for (let hop = offset; hop + eventHop <= offset + window; hop += eventHop) {
+          const hopChangeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(hop, hop + eventHop))));
+          changedHops = hopChangeDb > 6 ? changedHops + 1 : 0;
+          if (changedHops >= 3) { changedWindows++; break; }
+        }
+      }
       windows++;
     }
   }

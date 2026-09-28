@@ -15,6 +15,10 @@ const manifest = JSON.parse(await readFile(path.join(fixtures, 'manifest.json'),
 const noiseGridEvaluation = process.env.NOISE_GRID_EVALUATION === '1';
 const noisePhaseEvaluation = process.env.NOISE_PHASE_EVALUATION === '1';
 const noiseEnvelopeEvaluation = process.env.NOISE_ENVELOPE_EVALUATION === '1';
+const noiseSpikeEvaluation = process.env.NOISE_SUSTAINED_SPIKE_EVALUATION === '1';
+const noiseToneEvaluation = process.env.NOISE_TONE_WORKER_EVALUATION === '1';
+if (noiseToneEvaluation && (!noiseGridEvaluation || noisePhaseEvaluation || noiseEnvelopeEvaluation || noiseSpikeEvaluation)) throw new Error('Tone evaluation requires grid mode alone');
+if (noiseSpikeEvaluation && (!noiseGridEvaluation || noisePhaseEvaluation || noiseEnvelopeEvaluation)) throw new Error('Sustained-spike evaluation requires grid mode alone');
 if (noiseEnvelopeEvaluation && (!noiseGridEvaluation || noisePhaseEvaluation)) throw new Error('Envelope evaluation requires grid mode without phase mode');
 if (noisePhaseEvaluation && !noiseGridEvaluation) throw new Error('Noise-phase evaluation requires NOISE_GRID_EVALUATION=1');
 const baselineRef = process.env.NOISE_GRID_BASELINE_REF
@@ -62,7 +66,7 @@ try {
   for (const clip of manifest.clips) {
     const bytes = await readFile(path.join(fixtures, clip.file));
     if (createHash('sha256').update(bytes).digest('hex') !== clip.sha256) throw new Error(`Checksum mismatch: ${clip.file}`);
-    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation}) => {
+    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation, noiseSpikeEvaluation, noiseToneEvaluation}) => {
       const rate = noiseGridEvaluation ? 22050 : 16000;
       const ctx = new AudioContext({ sampleRate: rate });
       const decoded = await ctx.decodeAudioData(await (await fetch(`/fixtures/${clip.file}`)).arrayBuffer());
@@ -72,7 +76,7 @@ try {
       for (const x of voice) { power += x*x; peak = Math.max(peak, Math.abs(x)); if (Math.abs(x) >= .98) nearFullScale++; }
       const rms = Math.sqrt(power / voice.length);
       const results = [];
-      const scenarios = noiseGridEvaluation ? ['grid-burst', 'grid-stationary'] : shortTailEvaluation ? ['low-noise', 'short-tail-burst', 'short-tail-stationary'] : annotationEvaluation ? ['original', 'low-noise', 'noisy', 'quiet-source'] : ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise', 'low-floor-rise', 'low-floor-stationary', 'short-tail-burst', 'short-tail-stationary'] : [])];
+      const scenarios = noiseSpikeEvaluation ? ['grid-stationary', 'grid-burst'] : noiseGridEvaluation ? ['grid-burst', 'grid-stationary'] : shortTailEvaluation ? ['low-noise', 'short-tail-burst', 'short-tail-stationary'] : annotationEvaluation ? ['original', 'low-noise', 'noisy', 'quiet-source'] : ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise', 'low-floor-rise', 'low-floor-stationary', 'short-tail-burst', 'short-tail-stationary'] : [])];
       for (const scenario of scenarios) {
         const tail = scenario.startsWith('short-tail') ? Math.round(rate*.75) : scenario === 'clipped-plus-silence' ? rate*10 : scenario.startsWith('low-floor') ? rate*2 : rate;
         const samples = new Float32Array(rate*2 + voice.length + tail);
@@ -84,6 +88,15 @@ try {
         // residual noise. This is injected-mixture SNR, not original room SNR.
         const mixtureAmplitude = Math.sqrt(sourcePower / voice.length) * Math.sqrt(3) / 10;
         let seed = 12345, signalPower = 0, noisePower = 0;
+        // Align the exact injected spike to a sustained-window boundary from
+        // the stationary control. This is a targeted development reproducer.
+        const tailStartSample = rate * 2 + voice.length;
+        const lastSpeech = results[0]?.segments.at(-1)?.end ?? tailStartSample / rate;
+        const sustainedStart = Math.ceil(lastSpeech * rate) + Math.ceil(rate * .3);
+        const sustainedWindow = Math.floor(rate * .25);
+        const boundary = sustainedStart + Math.ceil((tailStartSample + rate * .55 - sustainedStart) / sustainedWindow) * sustainedWindow;
+        const spikeStartSample = boundary - Math.round(rate * .005);
+        const spikeEndSample = spikeStartSample + Math.round(rate * .01);
         for (let i = 0; i < samples.length; i++) {
           seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
           const position = i-rate*2;
@@ -101,11 +114,11 @@ try {
           if ((scenario === 'brief-noise' || scenario === 'short-tail-burst') && i >= tailStart + rate*.5 && i < tailStart + rate*.6) amplitude = .065;
           // Appended silence changes only the denominator, not the clipped samples.
           const appended = scenario === 'clipped-plus-silence' && i >= rate*2+voice.length+rate;
-          const gridStart = noisePhaseEvaluation ? .57 : .5;
-          const gridDuration = noisePhaseEvaluation ? .01 : .1;
+          const gridStart = noiseToneEvaluation ? .565 : noiseSpikeEvaluation ? .545 : noisePhaseEvaluation ? .57 : .5;
+          const gridDuration = noiseSpikeEvaluation || noisePhaseEvaluation ? .01 : .1;
           const envelope = noiseEnvelopeEvaluation ? Math.max(0, Math.min(1, (i/rate - tailStart/rate - .55)/.025, (.7 - (i/rate - tailStart/rate))/.025)) : 0;
-          const gridGain = noiseEnvelopeEvaluation ? (scenario === 'grid-burst' ? 1 + envelope * (10 ** (7 / 20) - 1) : 1) : scenario === 'grid-burst' && i >= tailStart + rate*gridStart && i < tailStart + rate*(gridStart + gridDuration) ? 10 ** ((noisePhaseEvaluation ? 18 : 7) / 20) : 1;
-          const noise = noiseGridEvaluation ? .003 * (i % 2 ? -1 : 1) * gridGain : appended ? 0 : (seed/4294967296*2-1)*amplitude;
+          const gridGain = noiseSpikeEvaluation ? (scenario === 'grid-burst' && i >= spikeStartSample && i < spikeEndSample ? 10 ** (30 / 20) : 1) : noiseEnvelopeEvaluation ? (scenario === 'grid-burst' ? 1 + envelope * (10 ** (7 / 20) - 1) : 1) : scenario === 'grid-burst' && i >= tailStart + rate*gridStart && i < tailStart + rate*(gridStart + gridDuration) ? 10 ** ((noiseSpikeEvaluation ? 30 : noisePhaseEvaluation ? 18 : 7) / 20) : 1;
+          const noise = noiseGridEvaluation ? .003 * (noiseToneEvaluation ? Math.SQRT2 * Math.sin(2 * Math.PI * 55 * i / rate) : i % 2 ? -1 : 1) * gridGain : appended ? 0 : (seed/4294967296*2-1)*amplitude;
           const reflected = scenario === 'echo' && position >= 1920 && position-1920 < voice.length ? voice[position-1920]*.65 : 0;
           const gain = scenario.startsWith('clipped') ? 12 : scenario === 'quiet-source' ? .1 : 1;
           samples[i] = Math.max(-1, Math.min(1, source*gain + noise + reflected));
@@ -140,6 +153,8 @@ try {
           if (selected[i]) { selectedSignalPower += signalComponent[i]**2; selectedNoisePower += noiseComponent[i]**2; }
         }
         results.push({scenario, durationSeconds:samples.length/rate,
+          ...(noiseToneEvaluation && scenario === 'grid-burst' ? { injectedToneSamples: [Math.ceil((rate * 2 + voice.length) + rate * .565), Math.ceil((rate * 2 + voice.length) + rate * .665)] } : {}),
+          ...(noiseSpikeEvaluation && scenario === 'grid-burst' ? { injectedSpikeSamples: [spikeStartSample, spikeEndSample], sustainedBoundarySample: boundary } : {}),
           ...(scenario === 'known-mixture' ? {referenceMixtureSnrDb:10*Math.log10(selectedSignalPower/selectedNoisePower), saturated} : {}),
           addedNoiseSnrDb: noisePower > 0 ? 10*Math.log10(signalPower/noisePower) : null,
           metrics:result.metrics, grade:result.specialState ? null : result.verdict.overall.grade,
@@ -148,7 +163,7 @@ try {
       }
       return {file:clip.file,speaker:clip.speaker, source:{durationSeconds:voice.length/rate,
         rmsDb:20*Math.log10(Math.max(rms,1e-8)),peak,nearFullScaleSamples:nearFullScale}, results};
-    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation});
+    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation, noiseSpikeEvaluation, noiseToneEvaluation});
     if (annotationEvaluation || shortTailEvaluation || noiseGridEvaluation) {
       const annotation = annotations.clips.find(a => a.file === clip.file);
       for (const result of row.results) result.annotationAgreement = evaluateSpeechAnnotations(annotation, result.segments, 2);
@@ -162,9 +177,20 @@ try {
   if (noiseGridEvaluation) {
     report.description = '22.05 kHz production-worker diagnostic with exact injected square-noise labels and frozen AI-assisted source candidates. Existing development speakers; no physical capture or human boundary accuracy claim.';
     report.annotationsSha256 = createHash('sha256').update(await readFile(path.join(fixtures, 'annotations.consensus.ai.json'))).digest('hex');
-    report.parameters = { sampleRate: 22050, calibrationSeconds: 2, tailSeconds: 1, noiseRms: .003, burstRiseDb: noisePhaseEvaluation ? 18 : 7, burstAfterSourceSeconds: noisePhaseEvaluation ? [.57, .58] : [.5, .6] };
+    report.parameters = { sampleRate: 22050, calibrationSeconds: 2, tailSeconds: 1, noiseRms: .003, burstRiseDb: noiseSpikeEvaluation ? 30 : noisePhaseEvaluation ? 18 : 7, burstAfterSourceSeconds: noisePhaseEvaluation ? [.57, .58] : [.5, .6] };
     if (baselineRef) report.baselineGuidedRef = baselineRef;
-    const reportPrefix = noiseEnvelopeEvaluation ? 'noise-envelope-worker' : noisePhaseEvaluation ? 'noise-phase-worker' : 'noise-grid-worker';
+    const reportPrefix = noiseToneEvaluation ? 'noise-tone-worker' : noiseSpikeEvaluation ? 'noise-sustained-spike-worker' : noiseEnvelopeEvaluation ? 'noise-envelope-worker' : noisePhaseEvaluation ? 'noise-phase-worker' : 'noise-grid-worker';
+    if (noiseToneEvaluation) {
+      report.description = 'Production-worker diagnostic: exact added 55 Hz, 100 ms +7 dB burst and stationary controls on existing speakers; no human boundary or physical capture accuracy claim.';
+      report.parameters.burstAfterSourceSeconds = [.565, .665];
+      report.parameters.carrierFrequencyHz = 55;
+    }
+    if (noiseSpikeEvaluation) {
+      report.description = 'Production-worker diagnostic: exact 10 ms +30 dB spike crossing a sustained-window boundary on existing speakers; no physical capture or human accuracy claim.';
+      delete report.parameters.burstAfterSourceSeconds;
+      report.parameters.spikeSeconds = .01;
+      report.parameters.alignment = '5 ms before sustained-window boundary after source + 550 ms; stationary control supplies VAD boundary';
+    }
     if (noiseEnvelopeEvaluation) {
       report.description = 'Production-worker regression diagnostic: exact 100 ms +7 dB plateau with 25 ms linear amplitude ramps on existing speakers; no physical capture or boundary accuracy claim.';
       report.parameters.burstAfterSourceSeconds = [.55, .7];
@@ -173,7 +199,7 @@ try {
     }
     if (noisePhaseEvaluation) report.description = 'Production-worker development diagnostic: exact injected 10 ms spike and stationary controls on existing speakers; no human or physical capture accuracy claim.';
     await writeFile(path.join(root, `docs/${reportPrefix}-${baselineRef ? 'baseline' : 'results'}.json`), JSON.stringify(report,null,2)+'\n');
-    const misses = rows.filter(row => noisePhaseEvaluation
+    const misses = rows.filter(row => noiseSpikeEvaluation || noisePhaseEvaluation
       ? row.results.find(r => r.scenario === 'grid-burst').state !== 'graded'
       : row.results.find(r => r.scenario === 'grid-burst').evidence.retryReason !== 'noise_unstable').length;
     const falseAlarms = rows.filter(row => row.results.find(r => r.scenario === 'grid-stationary').state !== 'graded').length;
