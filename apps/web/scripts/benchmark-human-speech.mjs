@@ -14,6 +14,8 @@ const fixtures = path.join(web, 'e2e/fixtures/human-speech');
 const manifest = JSON.parse(await readFile(path.join(fixtures, 'manifest.json'), 'utf8'));
 const noiseGridEvaluation = process.env.NOISE_GRID_EVALUATION === '1';
 const noisePhaseEvaluation = process.env.NOISE_PHASE_EVALUATION === '1';
+const noiseEnvelopeEvaluation = process.env.NOISE_ENVELOPE_EVALUATION === '1';
+if (noiseEnvelopeEvaluation && (!noiseGridEvaluation || noisePhaseEvaluation)) throw new Error('Envelope evaluation requires grid mode without phase mode');
 if (noisePhaseEvaluation && !noiseGridEvaluation) throw new Error('Noise-phase evaluation requires NOISE_GRID_EVALUATION=1');
 const baselineRef = process.env.NOISE_GRID_BASELINE_REF
   ? execFileSync('git', ['rev-parse', '--verify', `${process.env.NOISE_GRID_BASELINE_REF}^{commit}`], { cwd: root, encoding: 'utf8' }).trim()
@@ -60,7 +62,7 @@ try {
   for (const clip of manifest.clips) {
     const bytes = await readFile(path.join(fixtures, clip.file));
     if (createHash('sha256').update(bytes).digest('hex') !== clip.sha256) throw new Error(`Checksum mismatch: ${clip.file}`);
-    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation}) => {
+    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation}) => {
       const rate = noiseGridEvaluation ? 22050 : 16000;
       const ctx = new AudioContext({ sampleRate: rate });
       const decoded = await ctx.decodeAudioData(await (await fetch(`/fixtures/${clip.file}`)).arrayBuffer());
@@ -101,7 +103,8 @@ try {
           const appended = scenario === 'clipped-plus-silence' && i >= rate*2+voice.length+rate;
           const gridStart = noisePhaseEvaluation ? .57 : .5;
           const gridDuration = noisePhaseEvaluation ? .01 : .1;
-          const gridGain = scenario === 'grid-burst' && i >= tailStart + rate*gridStart && i < tailStart + rate*(gridStart + gridDuration) ? 10 ** ((noisePhaseEvaluation ? 18 : 7) / 20) : 1;
+          const envelope = noiseEnvelopeEvaluation ? Math.max(0, Math.min(1, (i/rate - tailStart/rate - .55)/.025, (.7 - (i/rate - tailStart/rate))/.025)) : 0;
+          const gridGain = noiseEnvelopeEvaluation ? (scenario === 'grid-burst' ? 1 + envelope * (10 ** (7 / 20) - 1) : 1) : scenario === 'grid-burst' && i >= tailStart + rate*gridStart && i < tailStart + rate*(gridStart + gridDuration) ? 10 ** ((noisePhaseEvaluation ? 18 : 7) / 20) : 1;
           const noise = noiseGridEvaluation ? .003 * (i % 2 ? -1 : 1) * gridGain : appended ? 0 : (seed/4294967296*2-1)*amplitude;
           const reflected = scenario === 'echo' && position >= 1920 && position-1920 < voice.length ? voice[position-1920]*.65 : 0;
           const gain = scenario.startsWith('clipped') ? 12 : scenario === 'quiet-source' ? .1 : 1;
@@ -145,7 +148,7 @@ try {
       }
       return {file:clip.file,speaker:clip.speaker, source:{durationSeconds:voice.length/rate,
         rmsDb:20*Math.log10(Math.max(rms,1e-8)),peak,nearFullScaleSamples:nearFullScale}, results};
-    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation});
+    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation, noisePhaseEvaluation, noiseEnvelopeEvaluation});
     if (annotationEvaluation || shortTailEvaluation || noiseGridEvaluation) {
       const annotation = annotations.clips.find(a => a.file === clip.file);
       for (const result of row.results) result.annotationAgreement = evaluateSpeechAnnotations(annotation, result.segments, 2);
@@ -161,7 +164,13 @@ try {
     report.annotationsSha256 = createHash('sha256').update(await readFile(path.join(fixtures, 'annotations.consensus.ai.json'))).digest('hex');
     report.parameters = { sampleRate: 22050, calibrationSeconds: 2, tailSeconds: 1, noiseRms: .003, burstRiseDb: noisePhaseEvaluation ? 18 : 7, burstAfterSourceSeconds: noisePhaseEvaluation ? [.57, .58] : [.5, .6] };
     if (baselineRef) report.baselineGuidedRef = baselineRef;
-    const reportPrefix = noisePhaseEvaluation ? 'noise-phase-worker' : 'noise-grid-worker';
+    const reportPrefix = noiseEnvelopeEvaluation ? 'noise-envelope-worker' : noisePhaseEvaluation ? 'noise-phase-worker' : 'noise-grid-worker';
+    if (noiseEnvelopeEvaluation) {
+      report.description = 'Production-worker regression diagnostic: exact 100 ms +7 dB plateau with 25 ms linear amplitude ramps on existing speakers; no physical capture or boundary accuracy claim.';
+      report.parameters.burstAfterSourceSeconds = [.55, .7];
+      report.parameters.plateauAfterSourceSeconds = [.575, .675];
+      report.parameters.envelope = 'linear amplitude ramps';
+    }
     if (noisePhaseEvaluation) report.description = 'Production-worker development diagnostic: exact injected 10 ms spike and stationary controls on existing speakers; no human or physical capture accuracy claim.';
     await writeFile(path.join(root, `docs/${reportPrefix}-${baselineRef ? 'baseline' : 'results'}.json`), JSON.stringify(report,null,2)+'\n');
     const misses = rows.filter(row => noisePhaseEvaluation

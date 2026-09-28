@@ -28,6 +28,14 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Envelope follow-up: 250 exact-label conditions retain completed 100 ms burst
+detection with square/linear/cosine edges and stationary/subthreshold/spike
+controls; all 24 recorded-source worker cases pass. Fifty tapered short-spike
+cases remain explicitly unlabeled (30 stable, 20 unstable). The
+[envelope decision](NOISE_ENVELOPE_BENCHMARK.md) retains current parameters;
+listening/capture evidence must define short-event retry policy before tuning.
+This is supporting regression evidence, not a completed app improvement.
+
 Phase-sensitivity follow-up: shifted 10 ms spikes exposed four estimator false
 alarms and two unnecessary retries on existing recorded speakers. Brief-event
 duration now requires disjoint-hop corroboration as well as overlapping-window

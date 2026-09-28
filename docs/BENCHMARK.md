@@ -31,6 +31,12 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [envelope investigation](NOISE_ENVELOPE_BENCHMARK.md) retains current
+parameters after 250 labeled controlled and 24 recorded-source worker cases.
+Fifty tapered short transients remain exploratory pending an independently
+supported duration/retry policy. This adds regression evidence, not an app
+optimization or completed threshold tuning.
+
 The [short-spike phase decision](NOISE_PHASE_BENCHMARK.md) fixes unsupported
 noise retries when overlapping windows count one 10 ms spike repeatedly.
 Eighty exact-label conditions and a before/after worker comparison retain
