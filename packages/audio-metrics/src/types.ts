@@ -6,8 +6,10 @@ export interface MetricsSummary {
   clippingRatio: number;
   /** Guided analysis: fraction of detected speech samples near full scale. */
   speechClippingRatio?: number;
-  /** Near-full-scale sample duration across the entire recording, including calibration. */
+  /** Sum of near-full-scale sample durations (count / sample rate), including calibration and excluding gaps. */
   clippedDurationSeconds?: number;
+  /** Consecutive near-full-scale runs in recording PCM, including calibration; indicates possible clipping. */
+  clippingEventCount?: number;
   rmsDb: number;
   speechRmsDb: number;
   snrDb: number;

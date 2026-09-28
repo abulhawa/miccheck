@@ -99,7 +99,8 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   const recordingClipping = measureClipping(samples);
   const echo = measureEcho(speechSamples, sampleRate);
   const metrics = {clippingRatio: clipping.clippingRatio, speechClippingRatio: clipping.clippingRatio,
-    clippedDurationSeconds: recordingClipping.clippingRatio * samples.length / sampleRate,
+    clippedDurationSeconds: recordingClipping.nearFullScaleSampleCount / sampleRate,
+    clippingEventCount: recordingClipping.clippingEventCount,
     rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echo.echoScore};
   if (speechSeconds < 1 || !noiseReliable) {
     const retryReason: MeasurementEvidence['retryReason'] = input.speechDetection !== 'silero'

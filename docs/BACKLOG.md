@@ -7,10 +7,10 @@ Work in this order: clipping invariance, noise-stability evidence, a focused ben
 ## 1. Make clipping independent of pauses — high priority
 
 - [x] Report speech-only clipping and use it for grading and clipping advice. Retain recording-wide clipped duration so events outside detected speech remain visible.
-- [ ] Define clipped-event grouping and duration explicitly. Describe threshold crossings as an indicator of clipping, not proof of distortion.
+- [x] Define clipped-event grouping and duration explicitly. Describe threshold crossings as an indicator of clipping, not proof of distortion.
 - [x] Update metric types, exports, UI labels, and regression coverage for scoring/recommendation invariance together.
 
-Implemented duration is the sum of near-full-scale sample durations across the entire recording, including calibration. It does not yet group samples into clipped events. The [current benchmark](HUMAN_SPEECH_BENCHMARK.md) verifies unchanged speech clipping, total clipped duration, and grade for all twelve appended-silence pairs.
+Implemented duration is the sum of near-full-scale sample durations across the entire recording, including calibration. Events now count maximal consecutive near-full-scale runs in recording PCM, with no gap merging or minimum length; see [methodology](TECHNICAL_METHODOLOGY.md) for the exact definition and capture-join limitation. The [current benchmark](HUMAN_SPEECH_BENCHMARK.md) verifies unchanged speech clipping, total clipped duration, and grade for all twelve appended-silence pairs.
 
 Acceptance: appending nonspeech silence to the same clipped speech does not reduce speech clipping or improve its clipping grade/advice; recording-wide clipped duration remains unchanged. Include regressions for clipping outside detected speech and recordings with no speech.
 
@@ -22,6 +22,8 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.
 - [x] Surface unstable-noise evidence and define how it limits SNR confidence, grading, and retry guidance.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
+
+Progress September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) adds 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It confirms the current behavior and demonstrates missed 100 ms bursts and floor-suppressed low-level changes. Human annotation and representative threshold tuning remain pending; production thresholds are unchanged.
 
 Acceptance: controlled stationary noise remains reliable; meaningful increases/decreases and intermittent noise are flagged; short gaps and speech-boundary contamination do not cause unsupported stability claims. Missing later quiet windows receive an explicit unknown assessment.
 

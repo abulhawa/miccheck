@@ -57,7 +57,7 @@ const copyMap: Partial<Record<CopyKey, string>> = {
   "overall.label.unusable": "Unusable",
   "overall.summary.excellent": "Excellent clarity with minimal issues.",
   "overall.summary.no_speech": "No clear speech detected.",
-  "explanation.clipping_distortion": "Clipping is distorting the audio signal.",
+  "explanation.clipping_distortion": "Near-full-scale samples indicate possible clipping and distortion.",
   "explanation.extremely_quiet": "The recording is extremely quiet and hard to understand.",
   "explanation.extremely_loud": "The recording is extremely loud and likely distorting.",
   "explanation.too_quiet": "The recording is too quiet to be clear.",
