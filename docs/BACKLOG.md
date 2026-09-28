@@ -24,6 +24,8 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.
 - [x] Surface unstable-noise evidence and define how it limits SNR confidence, grading, and retry guidance.
 - [ ] Address missed brief noise events demonstrated by the controlled benchmark. Distinguish intermittent events from sustained changes and connect the result to confidence or guidance; verify against stationary noise and speech-boundary residue before changing grading or retry behavior.
+
+The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
 Progress September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) adds 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It confirms the current behavior and demonstrates missed 100 ms bursts and floor-suppressed low-level changes. Human annotation and representative threshold tuning remain pending; production thresholds are unchanged.

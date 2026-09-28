@@ -38,7 +38,10 @@ describe('controlled noise stability benchmark', () => {
             });
             // Below-floor changes are intentionally suppressed. A -70 -> -58 dBFS
             // increase is only 2 dB above the comparison floor.
-            const changed = condition === 'burst' || (['increase', 'decrease'].includes(condition) && floorDb > -60);
+            // Acceptance requirement: brief +18 dB events must also be detected.
+            // The current implementation misses these; keep the tests failing
+            // until detection improves, rather than asserting the known miss.
+            const changed = ['burst', 'short-burst'].includes(condition) || (['increase', 'decrease'].includes(condition) && floorDb > -60);
             const expected = condition === 'short-gap' ? 'unassessed' : changed ? 'unstable' : 'stable';
             rows.push({rate, shape, floorDb, condition, expected, actual: result.evidence?.noiseStability,
               usableSeconds: result.evidence?.laterNoiseSeconds, maxChangeDb: result.evidence?.maxNoiseChangeDb});

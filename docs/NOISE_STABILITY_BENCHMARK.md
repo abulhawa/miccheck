@@ -23,6 +23,8 @@ This evaluates `analyzeGuidedSamples` with exact generated speech intervals. It 
 
 All 144 assessments matched the documented behavior. Retry guidance and noise reliability matched each assessment. This is a regression agreement count, not an accuracy percentage: the short-burst cases explicitly demonstrate a missed change. Together with guided and clipping regressions, 161 tests passed.
 
+That historical run predates acceptance assertions. The current test now requires short-burst cases to be detected as unstable, so these cases fail until the implementation meets that requirement. The committed JSON remains a baseline of observed behavior; it is not the desired-result oracle. Human-recording acceptance also runs in `apps/web/e2e/fixture-acceptance.spec.ts` with explicit injected-mixture SNR and reflection expectations.
+
 ## Threshold implications
 
 The 200 ms guard excludes the tested 180 ms boundary residue. The 500 ms usable-run requirement leaves the shorter gap unassessed. The 6 dB threshold tolerates the tested 5 dB shift. Flooring both levels at -60 dBFS suppresses the -70 to -58 dBFS increase (only a 2 dB comparison change) and the -70 to -82 decrease; it still detects the -70 to -52 burst.

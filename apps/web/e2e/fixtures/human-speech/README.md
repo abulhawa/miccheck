@@ -2,6 +2,20 @@
 
 These recordings support improvements to the mic checker. Select clips and controlled transformations to reproduce a specific measurement or guidance failure, evaluate a production fix, and retain regression coverage. Follow the [benchmark improvement workflow](../../../../../docs/BENCHMARK.md#improvement-workflow); collection size and passing cases alone are not improvement outcomes. Keep tuning and evaluation speakers separate when selecting thresholds, and add speech annotations where correctness depends on boundaries.
 
+`e2e/fixture-acceptance.spec.ts` includes all twelve recordings in the normal Playwright suite. It runs the production worker and Silero with checksum verification and fails on unmet expectations. Run through `npm --workspace apps/web run test:e2e -- fixture-acceptance.spec.ts` after building, or run the self-contained worker acceptance runner without Next.js:
+
+```powershell
+$env:FIXTURE_ACCEPTANCE = '1'
+node apps/web/scripts/benchmark-human-speech.mjs
+Remove-Item Env:FIXTURE_ACCEPTANCE
+```
+
+Acceptance mode does not rewrite historical benchmark results. It asserts stationary-noise controls, sustained-change retry guidance, clipping invariance, detection of a 100 ms high-noise burst, and a >= 0.2 experimental echo-score increase for the injected 120 ms reflection at gain 0.65. That echo margin is a declared acceptance target for a strong simulated reflection, not a calibrated echo amount or permission to include echo in grades.
+
+For SNR, seeded independent noise is added with a nominal whole-clip 20 dB ratio. The reference is computed directly from the separately retained signal and noise components over the worker-selected speech samples; estimated SNR must be within 2 dB and the mixture must not saturate. This checks estimator recovery for known injected components, not speech-boundary accuracy or original room SNR. The entire original waveform, including residual source noise, is explicitly the reference signal. The 2 dB tolerance is an engineering acceptance requirement, not an uncertainty claim. Source room SNR and true echo labels remain unknown.
+
+Acceptance run September 28, 2026: SNR, reflection, stationary/sustained-noise controls, and clipping invariance passed for all twelve clips. Brief-noise detection failed for `5639-40744-0033`, `260-123440-0018`, `7729-102255-0045`, and `3575-170457-0020`. The acceptance runner exits nonzero for these failures. The controlled estimator suite also fails its eighteen short-burst acceptance cases. These failures establish work to improve the app, not reasons to weaken the expectations.
+
 Twelve unmodified human audiobook recordings from six additional LibriSpeech test-clean speakers, retrieved September 28, 2026. These are recorded people, not synthesized voices. Each clip is 3–12 seconds long, in 16 kHz FLAC format. Total duration is about 81 seconds.
 
 Source: [LibriSpeech / OpenSLR](https://www.openslr.org/12/).
