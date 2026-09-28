@@ -68,6 +68,14 @@ evaluation conditions. Keep this broader item open.
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Low-frequency decrease investigation: 324 exact-label conditions detect all
+81 completed 600 ms, −9 dB decreases at 20/55/120 Hz with square, linear and
+cosine edges, with zero false alarms in 243 controls. The
+[decision](NOISE_LOW_FREQUENCY_DECREASE_BENCHMARK.md) retains current parameters;
+this is regression evidence, not a new app improvement. Borderline durations,
+near-floor levels, tonal/tapered worker selection on independently annotated
+held-out sources, native retry truth and physical capture remain open.
+
 Sustained-decrease follow-up: 600 ms, −9 dB decreases exposed eight missed
 changes across window alignments and two missed retries on recorded sources.
 Consecutive disjoint-hop duration evidence now resolves these, with no false

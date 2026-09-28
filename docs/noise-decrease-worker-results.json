@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-28T13:54:53.135Z",
+  "date": "2026-09-28T20:40:07.435Z",
   "browser": "153.0.8010.12",
   "platform": "win32",
   "description": "Production-worker diagnostic: exact 600 ms -9 dB noise decreases and stationary controls on existing speakers. Frozen AI-assisted annotations; no physical capture or human boundary accuracy claim. grid-burst denotes a decrease in this mode.",
@@ -38,16 +38,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.25445633564117,
-            "speechRmsDb": -23.25445633564117,
-            "snrDb": 16.652676083642696,
+            "rmsDb": -23.278774821625117,
+            "speechRmsDb": -23.278774821625117,
+            "snrDb": 16.627830474894015,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.03367874528238792
+            "echoScore": 0.033756960585397254
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 5.568027210884353,
+            "speechSeconds": 5.600045351473923,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -66,7 +66,7 @@
           "segments": [
             {
               "start": 2.368,
-              "end": 7.936
+              "end": 7.968
             }
           ],
           "recommendation": {
@@ -74,7 +74,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1119,
+          "wallMs": 1183,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -91,7 +91,7 @@
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.3679999999999999,
-              "lastEndSeconds": -0.3639999999999999,
+              "lastEndSeconds": -0.33199999999999985,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -105,16 +105,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.25445633564117,
-            "speechRmsDb": -23.25445633564117,
-            "snrDb": 16.652676083642696,
+            "rmsDb": -23.278774821625117,
+            "speechRmsDb": -23.278774821625117,
+            "snrDb": 16.627830474894015,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.03367874528238792
+            "echoScore": 0.033756960585397254
           },
           "grade": "C",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 5.568027210884353,
+            "speechSeconds": 5.600045351473923,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -126,13 +126,13 @@
             "noiseReliable": true,
             "noiseStability": "stable",
             "laterNoiseSeconds": 1.9998185941043083,
-            "maxNoiseChangeDb": 0.08699839379880103,
+            "maxNoiseChangeDb": 0.012827754452132467,
             "echoExperimental": true
           },
           "segments": [
             {
               "start": 2.368,
-              "end": 7.936
+              "end": 7.968
             }
           ],
           "recommendation": {
@@ -140,7 +140,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 1054,
+          "wallMs": 1142,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -157,7 +157,7 @@
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.3679999999999999,
-              "lastEndSeconds": -0.3639999999999999,
+              "lastEndSeconds": -0.33199999999999985,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -223,7 +223,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1152,
+          "wallMs": 1225,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -289,7 +289,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 1157,
+          "wallMs": 1247,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -336,16 +336,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -27.118777512854724,
-            "speechRmsDb": -27.118777512854724,
-            "snrDb": 12.651557749865798,
+            "rmsDb": -27.259450115461842,
+            "speechRmsDb": -27.259450115461842,
+            "snrDb": 12.503113825847464,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.0443118157185726
+            "echoScore": 0.03605832198254382
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 7.360181405895692,
+            "speechSeconds": 7.616145124716553,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -364,18 +364,14 @@
           "segments": [
             {
               "start": 2.368,
-              "end": 4
+              "end": 4.032
             },
             {
               "start": 4.224,
-              "end": 6.176
+              "end": 6.208
             },
             {
               "start": 6.496,
-              "end": 8.8
-            },
-            {
-              "start": 8.992,
               "end": 10.464
             }
           ],
@@ -384,7 +380,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1255,
+          "wallMs": 1364,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -415,16 +411,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -27.118777512854724,
-            "speechRmsDb": -27.118777512854724,
-            "snrDb": 12.651557749865798,
+            "rmsDb": -27.259450115461842,
+            "speechRmsDb": -27.259450115461842,
+            "snrDb": 12.503113825847464,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.0443118157185726
+            "echoScore": 0.03605832198254382
           },
           "grade": "D",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 7.360181405895692,
+            "speechSeconds": 7.616145124716553,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -442,18 +438,14 @@
           "segments": [
             {
               "start": 2.368,
-              "end": 4
+              "end": 4.032
             },
             {
               "start": 4.224,
-              "end": 6.176
+              "end": 6.208
             },
             {
               "start": 6.496,
-              "end": 8.8
-            },
-            {
-              "start": 8.992,
               "end": 10.464
             }
           ],
@@ -462,7 +454,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.6
           },
-          "wallMs": 1265,
+          "wallMs": 1322,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -509,16 +501,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -28.747282937356232,
-            "speechRmsDb": -28.747282937356232,
-            "snrDb": 10.914404463455046,
+            "rmsDb": -28.76385402621157,
+            "speechRmsDb": -28.76385402621157,
+            "snrDb": 10.896488113206228,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.04717971377757187
+            "echoScore": 0.047149255331428344
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 7.744172335600907,
+            "speechSeconds": 7.776190476190476,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -537,7 +529,7 @@
           "segments": [
             {
               "start": 2.592,
-              "end": 6.176
+              "end": 6.208
             },
             {
               "start": 6.496,
@@ -553,7 +545,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1251,
+          "wallMs": 1350,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -584,16 +576,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -28.747282937356232,
-            "speechRmsDb": -28.747282937356232,
-            "snrDb": 10.914404463455046,
+            "rmsDb": -28.76385402621157,
+            "speechRmsDb": -28.76385402621157,
+            "snrDb": 10.896488113206228,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.04717971377757187
+            "echoScore": 0.047149255331428344
           },
           "grade": "D",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 7.744172335600907,
+            "speechSeconds": 7.776190476190476,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -611,7 +603,7 @@
           "segments": [
             {
               "start": 2.592,
-              "end": 6.176
+              "end": 6.208
             },
             {
               "start": 6.496,
@@ -627,7 +619,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.6
           },
-          "wallMs": 1294,
+          "wallMs": 1539,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -710,7 +702,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 900,
+          "wallMs": 1145,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -776,7 +768,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 900,
+          "wallMs": 1201,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -859,7 +851,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 904,
+          "wallMs": 1142,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -925,7 +917,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 878,
+          "wallMs": 1157,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1012,7 +1004,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1100,
+          "wallMs": 1370,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1082,7 +1074,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 1137,
+          "wallMs": 1414,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1129,16 +1121,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.023134247882343,
-            "speechRmsDb": -23.023134247882343,
-            "snrDb": 16.888864387529622,
+            "rmsDb": -23.06064633501196,
+            "speechRmsDb": -23.06064633501196,
+            "snrDb": 16.850581041290706,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.023969211370473576
+            "echoScore": 0.02400468603054023
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 3.6160090702947847,
+            "speechSeconds": 3.648027210884354,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1157,7 +1149,7 @@
           "segments": [
             {
               "start": 2.3040000000000003,
-              "end": 5.92
+              "end": 5.952
             }
           ],
           "recommendation": {
@@ -1165,7 +1157,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 930,
+          "wallMs": 1216,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1182,7 +1174,7 @@
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.2640000000000003,
-              "lastEndSeconds": 0.17999999999999972,
+              "lastEndSeconds": 0.21199999999999974,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -1196,16 +1188,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.023134247882343,
-            "speechRmsDb": -23.023134247882343,
-            "snrDb": 16.888864387529622,
+            "rmsDb": -23.06064633501196,
+            "speechRmsDb": -23.06064633501196,
+            "snrDb": 16.850581041290706,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.023969211370473576
+            "echoScore": 0.02400468603054023
           },
           "grade": "C",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 3.6160090702947847,
+            "speechSeconds": 3.648027210884354,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1223,7 +1215,7 @@
           "segments": [
             {
               "start": 2.3040000000000003,
-              "end": 5.92
+              "end": 5.952
             }
           ],
           "recommendation": {
@@ -1231,7 +1223,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 944,
+          "wallMs": 1220,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1248,7 +1240,7 @@
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.2640000000000003,
-              "lastEndSeconds": 0.17999999999999972,
+              "lastEndSeconds": 0.21199999999999974,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -1278,16 +1270,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.570274757424308,
-            "speechRmsDb": -23.570274757424308,
-            "snrDb": 16.3297715056815,
+            "rmsDb": -23.67886392400451,
+            "speechRmsDb": -23.67886392400451,
+            "snrDb": 16.21862152439584,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.02689461599685626
+            "echoScore": 0.021937239764105138
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 8.512154195011338,
+            "speechSeconds": 8.73609977324263,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1310,10 +1302,6 @@
             },
             {
               "start": 4.5760000000000005,
-              "end": 8.384
-            },
-            {
-              "start": 8.608,
               "end": 11.584
             }
           ],
@@ -1322,7 +1310,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1444,
+          "wallMs": 1628,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1353,16 +1341,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -23.570274757424308,
-            "speechRmsDb": -23.570274757424308,
-            "snrDb": 16.3297715056815,
+            "rmsDb": -23.67886392400451,
+            "speechRmsDb": -23.67886392400451,
+            "snrDb": 16.21862152439584,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.02689461599685626
+            "echoScore": 0.021937239764105138
           },
           "grade": "C",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 8.512154195011338,
+            "speechSeconds": 8.73609977324263,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1384,10 +1372,6 @@
             },
             {
               "start": 4.5760000000000005,
-              "end": 8.384
-            },
-            {
-              "start": 8.608,
               "end": 11.584
             }
           ],
@@ -1396,7 +1380,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 1334,
+          "wallMs": 1615,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1479,7 +1463,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 875,
+          "wallMs": 1094,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1545,7 +1529,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 865,
+          "wallMs": 1096,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1592,16 +1576,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -25.152167032668057,
-            "speechRmsDb": -25.152167032668057,
-            "snrDb": 14.703218723954038,
+            "rmsDb": -25.20191718039806,
+            "speechRmsDb": -25.20191718039806,
+            "snrDb": 14.651774054629971,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.02294587262853119
+            "echoScore": 0.02293970908428491
           },
           "grade": null,
           "state": "INSUFFICIENT_EVIDENCE",
           "evidence": {
-            "speechSeconds": 8.032063492063491,
+            "speechSeconds": 8.128027210884353,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1620,7 +1604,7 @@
           "segments": [
             {
               "start": 2.592,
-              "end": 10.624
+              "end": 10.72
             }
           ],
           "recommendation": {
@@ -1628,24 +1612,24 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1284,
+          "wallMs": 1584,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
             "seconds": {
               "truePositive": 3.8299999999999996,
-              "falsePositive": 0,
+              "falsePositive": 0.08999999999999986,
               "falseNegative": 0,
-              "trueNegative": 0.35999999999999943,
+              "trueNegative": 0.2699999999999996,
               "excludedUncertain": 4.905000000000002
             },
             "evaluatedCoverage": 0.4606926882902692,
-            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementPrecision": 0.9770408163265306,
             "pseudoLabelAgreementRecall": 1,
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.13200000000000006,
-              "lastEndSeconds": 0.18400000000000105,
+              "lastEndSeconds": 0.28000000000000114,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -1659,16 +1643,16 @@
             "speechClippingRatio": 0,
             "clippedDurationSeconds": 0,
             "clippingEventCount": 0,
-            "rmsDb": -25.152167032668057,
-            "speechRmsDb": -25.152167032668057,
-            "snrDb": 14.703218723954038,
+            "rmsDb": -25.20191718039806,
+            "speechRmsDb": -25.20191718039806,
+            "snrDb": 14.651774054629971,
             "humRatio": 1.3231585797273276e-28,
-            "echoScore": 0.02294587262853119
+            "echoScore": 0.02293970908428491
           },
           "grade": "D",
           "state": "graded",
           "evidence": {
-            "speechSeconds": 8.032063492063491,
+            "speechSeconds": 8.128027210884353,
             "quietSeconds": 2,
             "speechDetection": "silero",
             "capture": {
@@ -1680,13 +1664,13 @@
             "noiseReliable": true,
             "noiseStability": "stable",
             "laterNoiseSeconds": 1.9998185941043083,
-            "maxNoiseChangeDb": 0.18865813073831106,
+            "maxNoiseChangeDb": 0.07666149287432944,
             "echoExperimental": true
           },
           "segments": [
             {
               "start": 2.592,
-              "end": 10.624
+              "end": 10.72
             }
           ],
           "recommendation": {
@@ -1694,24 +1678,24 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.6
           },
-          "wallMs": 1327,
+          "wallMs": 1578,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
             "seconds": {
               "truePositive": 3.8299999999999996,
-              "falsePositive": 0,
+              "falsePositive": 0.08999999999999986,
               "falseNegative": 0,
-              "trueNegative": 0.35999999999999943,
+              "trueNegative": 0.2699999999999996,
               "excludedUncertain": 4.905000000000002
             },
             "evaluatedCoverage": 0.4606926882902692,
-            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementPrecision": 0.9770408163265306,
             "pseudoLabelAgreementRecall": 1,
             "candidateBoundaryDifferences": {
               "status": "model_word_timing_comparison_not_boundary_error",
               "firstStartSeconds": 0.13200000000000006,
-              "lastEndSeconds": 0.18400000000000105,
+              "lastEndSeconds": 0.28000000000000114,
               "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
             }
           }
@@ -1777,7 +1761,7 @@
             "messageKey": "recommendation.no_speech",
             "confidence": 0
           },
-          "wallMs": 1216,
+          "wallMs": 1558,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",
@@ -1843,7 +1827,7 @@
             "messageKey": "recommendation.reduce_noise",
             "confidence": 0.78
           },
-          "wallMs": 1267,
+          "wallMs": 1513,
           "annotationAgreement": {
             "status": "provisional_pseudo_label_agreement_not_accuracy",
             "scope": "original_source_clip_only",

@@ -29,6 +29,11 @@ The baseline is the actual `detectVoiceActivity` implementation at its default -
 
 These are synthetic smoke results, not a labeled speech corpus, accuracy percentage, or representative latency benchmark. Segment boundaries are not manually annotated. Times are one sequential run per case, including worker startup and local model requests; cache warm-up differs between rows. No RAM, mobile battery, real microphone, or cold internet-download measurements are claimed. YAMNet classification is independently exercised by the recording browser test; its accuracy is not established here.
 
+The [low-frequency decrease investigation](NOISE_LOW_FREQUENCY_DECREASE_BENCHMARK.md)
+retains current parameters after 324 exact-label conditions with tonal carriers
+and tapered edges. All 81 decreases and 243 controls pass; this is supporting
+regression evidence, not an implemented optimization or completed tuning.
+
 ## Recorded human speech regression coverage
 
 The [confirmed-continuation improvement](VAD_CONTINUATION_BENCHMARK.md) retains

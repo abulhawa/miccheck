@@ -1,0 +1,6673 @@
+{
+  "description": "Exact generated noise-component labels and supplied speech intervals; estimator regression evidence, not physical capture or VAD validation.",
+  "guidedSha256": "40c55a39f0c3e6eaf1f2341abc811eb8eb9a0173914b8905a55b04195a372cf6",
+  "parameters": {
+    "noiseRms": 0.01,
+    "decreaseDb": 9,
+    "plateauSeconds": 0.6,
+    "rampSeconds": 0.1,
+    "calibrationSeconds": 2,
+    "speechInterval": [
+      2,
+      4
+    ]
+  },
+  "summaries": [
+    {
+      "split": "development",
+      "conditions": 108,
+      "misses": 0,
+      "falseAlarms": 0
+    },
+    {
+      "split": "evaluation",
+      "conditions": 216,
+      "misses": 0,
+      "falseAlarms": 0
+    }
+  ],
+  "rows": [
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        76000
+      ],
+      "plateauSamples": [
+        74400,
+        76000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        76592
+      ],
+      "plateauSamples": [
+        74992,
+        76592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        77808
+      ],
+      "plateauSamples": [
+        76208,
+        77808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        76000
+      ],
+      "plateauSamples": [
+        74400,
+        76000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        76592
+      ],
+      "plateauSamples": [
+        74992,
+        76592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        77808
+      ],
+      "plateauSamples": [
+        76208,
+        77808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        84000
+      ],
+      "plateauSamples": [
+        74400,
+        84000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        76000
+      ],
+      "plateauSamples": [
+        74400,
+        76000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74400,
+        87200
+      ],
+      "plateauSamples": [
+        76000,
+        85600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74400,
+        79200
+      ],
+      "plateauSamples": [
+        76000,
+        77600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        84592
+      ],
+      "plateauSamples": [
+        74992,
+        84592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        76592
+      ],
+      "plateauSamples": [
+        74992,
+        76592
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        74992,
+        87792
+      ],
+      "plateauSamples": [
+        76592,
+        86192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        74992,
+        79792
+      ],
+      "plateauSamples": [
+        76592,
+        78192
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        85808
+      ],
+      "plateauSamples": [
+        76208,
+        85808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        77808
+      ],
+      "plateauSamples": [
+        76208,
+        77808
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        76208,
+        89008
+      ],
+      "plateauSamples": [
+        77808,
+        87408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        76208,
+        81008
+      ],
+      "plateauSamples": [
+        77808,
+        79408
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        104738
+      ],
+      "plateauSamples": [
+        102533,
+        104738
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        105553
+      ],
+      "plateauSamples": [
+        103348,
+        105553
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        107229
+      ],
+      "plateauSamples": [
+        105024,
+        107229
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        104738
+      ],
+      "plateauSamples": [
+        102533,
+        104738
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        105553
+      ],
+      "plateauSamples": [
+        103348,
+        105553
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        107229
+      ],
+      "plateauSamples": [
+        105024,
+        107229
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        115763
+      ],
+      "plateauSamples": [
+        102533,
+        115763
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        104738
+      ],
+      "plateauSamples": [
+        102533,
+        104738
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        102533,
+        120173
+      ],
+      "plateauSamples": [
+        104738,
+        117968
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        102533,
+        109148
+      ],
+      "plateauSamples": [
+        104738,
+        106943
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        116578
+      ],
+      "plateauSamples": [
+        103348,
+        116578
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        105553
+      ],
+      "plateauSamples": [
+        103348,
+        105553
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        103348,
+        120988
+      ],
+      "plateauSamples": [
+        105553,
+        118783
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        103348,
+        109963
+      ],
+      "plateauSamples": [
+        105553,
+        107758
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        118254
+      ],
+      "plateauSamples": [
+        105024,
+        118254
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        107229
+      ],
+      "plateauSamples": [
+        105024,
+        107229
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        105024,
+        122664
+      ],
+      "plateauSamples": [
+        107229,
+        120459
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        105024,
+        111639
+      ],
+      "plateauSamples": [
+        107229,
+        109434
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        228000
+      ],
+      "plateauSamples": [
+        223200,
+        228000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        229776
+      ],
+      "plateauSamples": [
+        224976,
+        229776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        233424
+      ],
+      "plateauSamples": [
+        228624,
+        233424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 20,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        228000
+      ],
+      "plateauSamples": [
+        223200,
+        228000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        229776
+      ],
+      "plateauSamples": [
+        224976,
+        229776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        233424
+      ],
+      "plateauSamples": [
+        228624,
+        233424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 55,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        252000
+      ],
+      "plateauSamples": [
+        223200,
+        252000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        228000
+      ],
+      "plateauSamples": [
+        223200,
+        228000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        223200,
+        261600
+      ],
+      "plateauSamples": [
+        228000,
+        256800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        223200,
+        237600
+      ],
+      "plateauSamples": [
+        228000,
+        232800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        253776
+      ],
+      "plateauSamples": [
+        224976,
+        253776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        229776
+      ],
+      "plateauSamples": [
+        224976,
+        229776
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        224976,
+        263376
+      ],
+      "plateauSamples": [
+        229776,
+        258576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        224976,
+        239376
+      ],
+      "plateauSamples": [
+        229776,
+        234576
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        257424
+      ],
+      "plateauSamples": [
+        228624,
+        257424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "square",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        233424
+      ],
+      "plateauSamples": [
+        228624,
+        233424
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "linear",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "decrease",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "stationary",
+      "eventSamples": null,
+      "plateauSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "subthreshold",
+      "eventSamples": [
+        228624,
+        267024
+      ],
+      "plateauSamples": [
+        233424,
+        262224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "envelope": "cosine",
+      "condition": "short-dip",
+      "eventSamples": [
+        228624,
+        243024
+      ],
+      "plateauSamples": [
+        233424,
+        238224
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C",
+      "passed": true
+    }
+  ]
+}
