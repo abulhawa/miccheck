@@ -41,6 +41,9 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
   const window = Math.max(1, Math.floor(rate * 0.25));
   const eventWindow = Math.max(1, Math.floor(rate * 0.05));
   const eventHop = Math.max(1, Math.round(rate * 0.025));
+  // Quantize the nominal 100 ms coverage on the window/hop grid itself.
+  // At 22.05 kHz, 50 ms + two 25 ms hops is 2204 samples, not 2205.
+  const eventCoverage = eventWindow + 2 * eventHop;
   // Ignore differences wholly below -60 dBFS, including appended digital silence.
   // For rises reaching that floor, compare against actual calibration: flooring
   // the reference too would hide a -70 to -58 dBFS increase.
@@ -76,7 +79,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(increaseDb));
       if (increaseDb > 6) {
         if (elevatedStart < 0) elevatedStart = offset;
-        if ((offset + eventWindow - elevatedStart) / rate >= 0.1) eventHasEvidence = true;
+        if (offset + eventWindow - elevatedStart >= eventCoverage) eventHasEvidence = true;
       } else {
         // A completed burst needs a return to the room level. Otherwise a
         // truncated utterance at capture end can look like a noise event.

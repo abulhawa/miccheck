@@ -1,0 +1,560 @@
+{
+  "description": "Exact generated noise-component labels; no human boundary or physical capture accuracy claim.",
+  "speechInterval": [
+    2,
+    4
+  ],
+  "burstInterval": [
+    4.5,
+    4.6
+  ],
+  "calibrationRms": 0.003,
+  "burstRiseDb": 7,
+  "controlRiseDb": 18,
+  "seeds": {
+    "development": 91,
+    "evaluation": 812
+  },
+  "rows": [
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "square",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "tone",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "development",
+      "rate": 22050,
+      "shape": "broadband",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "square",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "tone",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 24000,
+      "shape": "broadband",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "square",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "tone",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "spike",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "unfinished",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "boundary",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    },
+    {
+      "split": "evaluation",
+      "rate": 96000,
+      "shape": "broadband",
+      "condition": "below-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded"
+    }
+  ]
+}

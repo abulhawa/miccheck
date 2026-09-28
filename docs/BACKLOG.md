@@ -28,6 +28,15 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Sample-grid follow-up: a 54-condition exact-label expansion found three missed
+100 ms, +7 dB bursts at 22.05 kHz. Brief-event coverage now uses the quantized
+window/hop grid, resolving those misses without false alarms in 45 controls;
+24/96 kHz evaluation conditions remain correct. See the
+[sample-grid decision](NOISE_SAMPLE_GRID_BENCHMARK.md).
+This is a rounding correction, not representative threshold tuning. The item
+remains open for independent annotation, held-out devices/rooms, and physical
+capture validation.
+
 Short-tail follow-up: completed 100 ms bursts are now checked even when a
 quiet run is too short for sustained stability assessment. Fifteen exact-label
 cases reproduce three misses before the fix and zero afterward, with twelve

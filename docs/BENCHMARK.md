@@ -31,6 +31,12 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [sample-grid decision](NOISE_SAMPLE_GRID_BENCHMARK.md) corrects missed
+100 ms, +7 dB noise bursts at 22.05 kHz. Exact-label estimator cases and a
+24-case recorded-speech worker comparison show the resulting retry/grade
+improvement. Acoustic thresholds remain provisional; generated capture
+conditions and existing speakers do not complete representative tuning.
+
 [Independent AI-assisted annotations](AI_SPEECH_ANNOTATIONS.md) now supply
 provisional source speech/nonspeech/uncertain intervals for all twelve clips,
 exact injected-noise component labels, and 48 source-only worker comparisons.

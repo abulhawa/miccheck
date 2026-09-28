@@ -3,6 +3,7 @@ import { build } from 'esbuild';
 import { createServer } from 'node:http';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { evaluateSpeechAnnotations } from './evaluate-speech-annotations.mjs';
@@ -11,9 +12,18 @@ const root = fileURLToPath(new URL('../../../', import.meta.url));
 const web = path.join(root, 'apps/web');
 const fixtures = path.join(web, 'e2e/fixtures/human-speech');
 const manifest = JSON.parse(await readFile(path.join(fixtures, 'manifest.json'), 'utf8'));
+const noiseGridEvaluation = process.env.NOISE_GRID_EVALUATION === '1';
+const baselineRef = process.env.NOISE_GRID_BASELINE_REF;
+if (baselineRef && !noiseGridEvaluation) throw new Error('Noise-grid baseline requires NOISE_GRID_EVALUATION=1');
 // Bundle current production sources, rather than relying on a potentially stale build.
 const bundle = await build({ entryPoints: [path.join(web, 'lib/ai/audioAnalysis.worker.ts')], bundle: true,
   write: false, format: 'esm', platform: 'browser', target: 'es2022',
+  plugins: baselineRef ? [{ name: 'noise-grid-baseline', setup(builder) {
+    builder.onLoad({ filter: /[/\\]audio-metrics[/\\]src[/\\]guided\.ts$/ }, () => ({
+      contents: execFileSync('git', ['show', `${baselineRef}:packages/audio-metrics/src/guided.ts`], { cwd: root, encoding: 'utf8' }),
+      loader: 'ts',
+    }));
+  } }] : [],
   alias: { '@miccheck/audio-core': path.join(root, 'packages/audio-core/src/index.ts'),
     '@miccheck/audio-metrics': path.join(root, 'packages/audio-metrics/src/index.ts') } });
 const server = createServer(async (req, res) => {
@@ -35,8 +45,8 @@ const rows = [];
 const acceptance = process.env.FIXTURE_ACCEPTANCE === '1';
 const shortTailEvaluation = process.env.SHORT_TAIL_EVALUATION === '1';
 const annotationEvaluation = process.env.ANNOTATION_EVALUATION === '1';
-if ((annotationEvaluation || shortTailEvaluation) && acceptance) throw new Error('Run annotation evaluation and fixture acceptance separately');
-const annotations = (annotationEvaluation || shortTailEvaluation) ? JSON.parse(await readFile(path.join(fixtures, shortTailEvaluation ? 'annotations.consensus.ai.json' : 'annotations.ai.json'), 'utf8')) : null;
+if ([acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation].filter(Boolean).length > 1) throw new Error('Run benchmark evaluation modes separately');
+const annotations = (annotationEvaluation || shortTailEvaluation || noiseGridEvaluation) ? JSON.parse(await readFile(path.join(fixtures, annotationEvaluation ? 'annotations.ai.json' : 'annotations.consensus.ai.json'), 'utf8')) : null;
 if (annotations && (annotations.clips.length !== manifest.clips.length || manifest.clips.some(clip =>
   annotations.clips.find(a => a.file === clip.file)?.sha256 !== clip.sha256))) throw new Error('Annotation provenance mismatch');
 try {
@@ -46,8 +56,8 @@ try {
   for (const clip of manifest.clips) {
     const bytes = await readFile(path.join(fixtures, clip.file));
     if (createHash('sha256').update(bytes).digest('hex') !== clip.sha256) throw new Error(`Checksum mismatch: ${clip.file}`);
-    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation}) => {
-      const rate = 16000;
+    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation}) => {
+      const rate = noiseGridEvaluation ? 22050 : 16000;
       const ctx = new AudioContext({ sampleRate: rate });
       const decoded = await ctx.decodeAudioData(await (await fetch(`/fixtures/${clip.file}`)).arrayBuffer());
       const voice = decoded.getChannelData(0).slice();
@@ -56,7 +66,7 @@ try {
       for (const x of voice) { power += x*x; peak = Math.max(peak, Math.abs(x)); if (Math.abs(x) >= .98) nearFullScale++; }
       const rms = Math.sqrt(power / voice.length);
       const results = [];
-      const scenarios = shortTailEvaluation ? ['low-noise', 'short-tail-burst', 'short-tail-stationary'] : annotationEvaluation ? ['original', 'low-noise', 'noisy', 'quiet-source'] : ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise', 'low-floor-rise', 'low-floor-stationary', 'short-tail-burst', 'short-tail-stationary'] : [])];
+      const scenarios = noiseGridEvaluation ? ['grid-burst', 'grid-stationary'] : shortTailEvaluation ? ['low-noise', 'short-tail-burst', 'short-tail-stationary'] : annotationEvaluation ? ['original', 'low-noise', 'noisy', 'quiet-source'] : ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise', 'low-floor-rise', 'low-floor-stationary', 'short-tail-burst', 'short-tail-stationary'] : [])];
       for (const scenario of scenarios) {
         const tail = scenario.startsWith('short-tail') ? Math.round(rate*.75) : scenario === 'clipped-plus-silence' ? rate*10 : scenario.startsWith('low-floor') ? rate*2 : rate;
         const samples = new Float32Array(rate*2 + voice.length + tail);
@@ -85,7 +95,8 @@ try {
           if ((scenario === 'brief-noise' || scenario === 'short-tail-burst') && i >= tailStart + rate*.5 && i < tailStart + rate*.6) amplitude = .065;
           // Appended silence changes only the denominator, not the clipped samples.
           const appended = scenario === 'clipped-plus-silence' && i >= rate*2+voice.length+rate;
-          const noise = appended ? 0 : (seed/4294967296*2-1)*amplitude;
+          const gridGain = scenario === 'grid-burst' && i >= tailStart + rate*.5 && i < tailStart + rate*.6 ? 10 ** (7 / 20) : 1;
+          const noise = noiseGridEvaluation ? .003 * (i % 2 ? -1 : 1) * gridGain : appended ? 0 : (seed/4294967296*2-1)*amplitude;
           const reflected = scenario === 'echo' && position >= 1920 && position-1920 < voice.length ? voice[position-1920]*.65 : 0;
           const gain = scenario.startsWith('clipped') ? 12 : scenario === 'quiet-source' ? .1 : 1;
           samples[i] = Math.max(-1, Math.min(1, source*gain + noise + reflected));
@@ -128,8 +139,8 @@ try {
       }
       return {file:clip.file,speaker:clip.speaker, source:{durationSeconds:voice.length/rate,
         rmsDb:20*Math.log10(Math.max(rms,1e-8)),peak,nearFullScaleSamples:nearFullScale}, results};
-    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation});
-    if (annotationEvaluation || shortTailEvaluation) {
+    }, {clip, acceptance, annotationEvaluation, shortTailEvaluation, noiseGridEvaluation});
+    if (annotationEvaluation || shortTailEvaluation || noiseGridEvaluation) {
       const annotation = annotations.clips.find(a => a.file === clip.file);
       for (const result of row.results) result.annotationAgreement = evaluateSpeechAnnotations(annotation, result.segments, 2);
     }
@@ -139,7 +150,17 @@ try {
   const report = {date:new Date().toISOString(),browser:browser.version(),platform:process.platform,
     description:'Human speech production-worker diagnostic benchmark. No manual speech boundaries or listening review; source residual noise is unknown. Added-noise SNR uses whole-clip source power, not annotated speech-only power, and is not an SNR accuracy ground truth.',
     parameters:{sampleRate:16000,calibrationSeconds:2,normalTailSeconds:1,extendedTailSeconds:10,seed:12345,lowNoiseAmplitude:.0008,highNoiseAmplitude:.065,clippingGain:12,echoDelayMs:120,echoGain:.65}, rows};
-  if (shortTailEvaluation) {
+  if (noiseGridEvaluation) {
+    report.description = '22.05 kHz production-worker diagnostic with exact injected square-noise labels and frozen AI-assisted source candidates. Existing development speakers; no physical capture or human boundary accuracy claim.';
+    report.annotationsSha256 = createHash('sha256').update(await readFile(path.join(fixtures, 'annotations.consensus.ai.json'))).digest('hex');
+    report.parameters = { sampleRate: 22050, calibrationSeconds: 2, tailSeconds: 1, noiseRms: .003, burstRiseDb: 7, burstAfterSourceSeconds: [.5, .6] };
+    if (baselineRef) report.baselineGuidedRef = baselineRef;
+    await writeFile(path.join(root, baselineRef ? 'docs/noise-grid-worker-baseline.json' : 'docs/noise-grid-worker-results.json'), JSON.stringify(report,null,2)+'\n');
+    const misses = rows.filter(row => row.results.find(r => r.scenario === 'grid-burst').evidence.retryReason !== 'noise_unstable').length;
+    const falseAlarms = rows.filter(row => row.results.find(r => r.scenario === 'grid-stationary').state !== 'graded').length;
+    console.log(`Noise-grid evaluation: ${misses} misses, ${falseAlarms} stationary false alarms`);
+    if (misses || falseAlarms) process.exitCode = 1;
+  } else if (shortTailEvaluation) {
     report.description = 'Short-tail noise-event evaluation with exact injected event labels and frozen Groq-assisted source speech candidates; uncertain speech excluded. Existing development speakers, new tail conditions; no physical microphone claim.';
     report.annotationsSha256 = createHash('sha256').update(await readFile(path.join(fixtures, 'annotations.consensus.ai.json'))).digest('hex');
     report.parameters.shortTailSeconds = .75;
