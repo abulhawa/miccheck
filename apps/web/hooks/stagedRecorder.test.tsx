@@ -103,7 +103,7 @@ it('rejects speech in the room check before asking the user to record a passage'
     await act(async()=>h.current.startCalibration());
     await act(async()=>vi.advanceTimersByTimeAsync(3000));
     expect(h.current.status).toBe('error');
-    expect(h.current.error).toContain('Speech was detected during the room check');
+    expect(h.current.error).toContain('Speech-like sounds can trigger the detector');
     expect(h.track.stop).toHaveBeenCalledOnce();
   } finally {await act(async()=>h.root.unmount());vi.restoreAllMocks();}
 });

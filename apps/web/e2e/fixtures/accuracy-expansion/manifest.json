@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "protocol": "Frozen before worker output: AMI first eligible annotation window on .5 s grid; FLEURS first two WAV tar members in each language. No tuning on evaluation outputs.",
+  "amiAnnotationUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip",
+  "amiAnnotationSha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+  "fleursRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+  "annotationSnapshotSha256": {
+    "ami-meetings.xml": "8ab6cdcf03ed863e839418f31c7380392397a2eed892d73b9bc1b438c7ec520a",
+    "AMI_00README_MANUAL.txt": "001292e9082f0f403a155dd5e7e4a8d5ac6542dbf37b19a12c7b6030fabdd350",
+    "AMI_LICENCE.txt": "d52fd9c7c19eec9f0bec3107554c10937203e261259d73b01637a61501fec7f7",
+    "ES2002a.A.words.xml": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+    "ES2002a.B.words.xml": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+    "ES2002a.C.words.xml": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+    "ES2002a.D.words.xml": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05",
+    "FLEURS_README.md": "688f79f2a5c731af3796e9f683eb02f9b3f09d040decd8c5625d0f37098e71c6",
+    "IS1001a.A.words.xml": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+    "IS1001a.B.words.xml": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+    "IS1001a.C.words.xml": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+    "IS1001a.D.words.xml": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+  },
+  "clips": [
+    {
+      "file": "ami-ES2002a-A-headset.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "development",
+      "language": "en",
+      "device": "headset",
+      "meeting": "ES2002a",
+      "participantIds": [
+        "FEE005",
+        "MEE006",
+        "MEE007",
+        "MEE008"
+      ],
+      "targetParticipant": "MEE006",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2002a/audio/ES2002a.Headset-0.wav",
+      "sourceStartSample": 4864000,
+      "sourceEndSample": 5216000,
+      "sourceRangeSha256": "ba20f6aa58288568199ba8b2a0129d4dd380e4298659b8290016fff6cc222bd4",
+      "sourceHeaderSha256": "3121a4d873fcdcb717924da488550381637864127d56f6e73d52f89fb6f55763",
+      "sampleRate": 16000,
+      "sha256": "aaa7b1d6acbfa34d558b2c6949800cd3637a2602d118795916c559f6f6c074ec",
+      "speechIntervals": [
+        [
+          3.0600000000000023,
+          3.8999999999999773
+        ],
+        [
+          5.3799999999999955,
+          6.850000000000023
+        ],
+        [
+          8.050000000000011,
+          11.129999999999995
+        ],
+        [
+          14.579999999999984,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-ES2002a-A-distant-array.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "development",
+      "language": "en",
+      "device": "distant-array",
+      "meeting": "ES2002a",
+      "participantIds": [
+        "FEE005",
+        "MEE006",
+        "MEE007",
+        "MEE008"
+      ],
+      "targetParticipant": "MEE006",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2002a/audio/ES2002a.Array1-01.wav",
+      "sourceStartSample": 4864000,
+      "sourceEndSample": 5216000,
+      "sourceRangeSha256": "4ca4f9efddcba69c672507fac28bd8add3f6b0ed81c0e7fa0d39580c4d1aca13",
+      "sourceHeaderSha256": "59fabb502ed68718bf4d42d64c53262036097789a771e7ab296367f3f224978d",
+      "sampleRate": 16000,
+      "sha256": "b7c9380f75b8ccca8bdcd616b3f08bfefdc28b800013e35652b695adee112e7d",
+      "speechIntervals": [
+        [
+          3.0600000000000023,
+          3.8999999999999773
+        ],
+        [
+          5.3799999999999955,
+          6.850000000000023
+        ],
+        [
+          8.050000000000011,
+          11.129999999999995
+        ],
+        [
+          14.579999999999984,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-ES2002a-B-headset.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "development",
+      "language": "en",
+      "device": "headset",
+      "meeting": "ES2002a",
+      "participantIds": [
+        "FEE005",
+        "MEE006",
+        "MEE007",
+        "MEE008"
+      ],
+      "targetParticipant": "FEE005",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2002a/audio/ES2002a.Headset-1.wav",
+      "sourceStartSample": 696000,
+      "sourceEndSample": 1048000,
+      "sourceRangeSha256": "2b37f143cae19a25f6f167bfb5898cef76ce3b80121786d1643fec1dc9f61769",
+      "sourceHeaderSha256": "c35c25e77ed9b881f41e8314f8e4a5e82f0a3262fde771f35bfa1502c1d24903",
+      "sampleRate": 16000,
+      "sha256": "4b5c91e1aa943b18e85276e0e54e4ebc94e3fec59671d4fc9c38ac8fafde5fe4",
+      "speechIntervals": [
+        [
+          6.920000000000002,
+          7.490000000000002
+        ],
+        [
+          10.060000000000002,
+          10.46
+        ],
+        [
+          12.479999999999997,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-ES2002a-B-distant-array.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "development",
+      "language": "en",
+      "device": "distant-array",
+      "meeting": "ES2002a",
+      "participantIds": [
+        "FEE005",
+        "MEE006",
+        "MEE007",
+        "MEE008"
+      ],
+      "targetParticipant": "FEE005",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2002a/audio/ES2002a.Array1-01.wav",
+      "sourceStartSample": 696000,
+      "sourceEndSample": 1048000,
+      "sourceRangeSha256": "29bea7ae47b2cd01564c2e0277b269ecdb92c3bc39a7e1a923855100ffafc002",
+      "sourceHeaderSha256": "59fabb502ed68718bf4d42d64c53262036097789a771e7ab296367f3f224978d",
+      "sampleRate": 16000,
+      "sha256": "be8ff08cda13a6a4d957f3353368089afb07d2402f47528554450d7baf7dc237",
+      "speechIntervals": [
+        [
+          6.920000000000002,
+          7.490000000000002
+        ],
+        [
+          10.060000000000002,
+          10.46
+        ],
+        [
+          12.479999999999997,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-IS1001a-A-headset.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "evaluation",
+      "language": "en",
+      "device": "headset",
+      "meeting": "IS1001a",
+      "participantIds": [
+        "FIO074",
+        "MIO012",
+        "MIO020",
+        "MIO043"
+      ],
+      "targetParticipant": "MIO043",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1001a/audio/IS1001a.Headset-0.wav",
+      "sourceStartSample": 1088000,
+      "sourceEndSample": 1440000,
+      "sourceRangeSha256": "7e217d5841be4af0797b056d2ee97c268eab65a3c001ec47740d20e9a0b70fe6",
+      "sourceHeaderSha256": "4bf07d0fec4bdd589db0438878404625f8d374e15fda8238cb5ea5ffc35a4217",
+      "sampleRate": 16000,
+      "sha256": "87a85f153a062fdb07c17b7367e56c6316f7f57874d824c95e85446005f84b0a",
+      "speechIntervals": [
+        [
+          10.739999999999995,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-IS1001a-A-distant-array.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "evaluation",
+      "language": "en",
+      "device": "distant-array",
+      "meeting": "IS1001a",
+      "participantIds": [
+        "FIO074",
+        "MIO012",
+        "MIO020",
+        "MIO043"
+      ],
+      "targetParticipant": "MIO043",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1001a/audio/IS1001a.Array1-01.wav",
+      "sourceStartSample": 1088000,
+      "sourceEndSample": 1440000,
+      "sourceRangeSha256": "591035cb81b30e323b8984bb6d68d09db89ad1d8eb17d8597d102a72f0706d2f",
+      "sourceHeaderSha256": "ac0a7fc888d672b551ec6f1d086d9e16c1fb28352694482f8d48a9dee771803f",
+      "sampleRate": 16000,
+      "sha256": "4d8589c0be2417fe2ce008b2be1f07ac9e2ccd8696da449bba94340febddf227",
+      "speechIntervals": [
+        [
+          10.739999999999995,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "evaluation",
+      "language": "en",
+      "device": "headset",
+      "meeting": "IS1001a",
+      "participantIds": [
+        "FIO074",
+        "MIO012",
+        "MIO020",
+        "MIO043"
+      ],
+      "targetParticipant": "MIO012",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1001a/audio/IS1001a.Headset-1.wav",
+      "sourceStartSample": 7816000,
+      "sourceEndSample": 8168000,
+      "sourceRangeSha256": "ffd38618baf4fadc073d5b4dd3e8f33fdf8b6469d5e74559db4b120c56d516de",
+      "sourceHeaderSha256": "55cd874f1804fbbfee506d4d8894d4453f55bbf165517c1163c94ebb1559c023",
+      "sampleRate": 16000,
+      "sha256": "d47af4ee102f8dafa2f97d6eab6628468f4348a73e315757bbea4dc97fa33300",
+      "speechIntervals": [
+        [
+          2.829999999999984,
+          9.730000000000018
+        ],
+        [
+          10.649999999999977,
+          19.589999999999975
+        ],
+        [
+          20.720000000000027,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "ami-IS1001a-B-distant-array.wav",
+      "corpus": "AMI",
+      "license": "CC-BY-4.0",
+      "split": "evaluation",
+      "language": "en",
+      "device": "distant-array",
+      "meeting": "IS1001a",
+      "participantIds": [
+        "FIO074",
+        "MIO012",
+        "MIO020",
+        "MIO043"
+      ],
+      "targetParticipant": "MIO012",
+      "sourceUrl": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/IS1001a/audio/IS1001a.Array1-01.wav",
+      "sourceStartSample": 7816000,
+      "sourceEndSample": 8168000,
+      "sourceRangeSha256": "606b07e1723575b64c12ae66379174c9eaf614694b7eeb061f150690fe57ea90",
+      "sourceHeaderSha256": "ac0a7fc888d672b551ec6f1d086d9e16c1fb28352694482f8d48a9dee771803f",
+      "sampleRate": 16000,
+      "sha256": "957d1a56872ed0e07dfc4e2d843315bae848e01c8bc3bf361d3237af0ff5acd1",
+      "speechIntervals": [
+        [
+          2.829999999999984,
+          9.730000000000018
+        ],
+        [
+          10.649999999999977,
+          19.589999999999975
+        ],
+        [
+          20.720000000000027,
+          22.0
+        ]
+      ],
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "calibrationKind": "Native room interval without annotated vocal activity; absence of labels is not verified silence."
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "de_de",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/de_de/audio/test.tar.gz",
+      "sourceMember": "10004059102127011984.wav",
+      "sourceSha256": "1603ed8fcea31a7f32f51d137eaa3516d15aca947898b81a136f4a9732f08ad2",
+      "sourceStartSample": 0,
+      "sourceEndSample": 287040,
+      "sampleRate": 16000,
+      "sha256": "2be3c0c3c38cfe6d193a340034cb13ed924a256f506fb4e7a0ad85735ab06272",
+      "transcript": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+      "truncated": false,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "de_de",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/de_de/audio/test.tar.gz",
+      "sourceMember": "10009182821551087671.wav",
+      "sourceSha256": "90d0470adf728783e98cc8dddd51e2c2cbf0d6bf360da65f7d2ac5c3e65876aa",
+      "sourceStartSample": 0,
+      "sourceEndSample": 178560,
+      "sampleRate": 16000,
+      "sha256": "46e6d27b7f57e8df293489f9169b86938a7941403df6e60beb9e9db0ba278b56",
+      "transcript": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+      "truncated": false,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/fr_fr/audio/test.tar.gz",
+      "sourceMember": "10043298898524273336.wav",
+      "sourceSha256": "c834367fd212902124bdd0e0f6c1f16b5561af6386600f145e5aec50008b298d",
+      "sourceStartSample": 0,
+      "sourceEndSample": 163200,
+      "sampleRate": 16000,
+      "sha256": "134778929482432ef2b97550cb8293fa26dec2ecff8e0e92b7ad437e22fad98e",
+      "transcript": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+      "truncated": false,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/fr_fr/audio/test.tar.gz",
+      "sourceMember": "10097171356371990207.wav",
+      "sourceSha256": "9b9450e1cb9ea3badb2223f726adabb754cd6ff2278b9fc4dc2ad86c73791db7",
+      "sourceStartSample": 0,
+      "sourceEndSample": 320000,
+      "sampleRate": 16000,
+      "sha256": "5083201f5b1180c164c3e0f0560e6a03676870efc9b110611e9273e25255b42c",
+      "transcript": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+      "truncated": true,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "es_419",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/es_419/audio/test.tar.gz",
+      "sourceMember": "1001146817223348054.wav",
+      "sourceSha256": "861ceedc4d50fbe52fc89b6d0c0fa740b9cd6fa668388e754064847386af0faf",
+      "sourceStartSample": 0,
+      "sourceEndSample": 205440,
+      "sampleRate": 16000,
+      "sha256": "cfbb5ac0a772ab77d56b9b5ccc0dcd1f3ced7c55d78f051cc64273ad0cfe1a82",
+      "transcript": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+      "truncated": false,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "corpus": "FLEURS",
+      "license": "CC-BY-4.0",
+      "split": "supplementary",
+      "language": "es_419",
+      "device": "unspecified",
+      "participantIds": null,
+      "sourceUrl": "https://huggingface.co/datasets/google/fleurs/resolve/70bb2e84b976b7e960aa89f1c648e09c59f894dd/data/es_419/audio/test.tar.gz",
+      "sourceMember": "10050510856477907332.wav",
+      "sourceSha256": "5b0fcf5b42064d33a36d26dab527cb230b4751587b4066ef11157ea603586d8d",
+      "sourceStartSample": 0,
+      "sourceEndSample": 320000,
+      "sampleRate": 16000,
+      "sha256": "e5e58eb2d3f37f71ff8843ae768a5e38483e0f6fc03da5499c135800b547cf7d",
+      "transcript": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+      "truncated": true,
+      "conversion": "IEEE float32 to PCM16: round-to-even(x*32768), clamp to [-32768,32767]; prepend 2 s zeros",
+      "speechIntervals": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "calibrationKind": "Inserted digital silence; not native room calibration."
+    }
+  ]
+}

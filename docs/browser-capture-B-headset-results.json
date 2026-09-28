@@ -1,0 +1,280 @@
+{
+  "limits": "Chromium virtual microphone replay. Live timer scheduling and resampling vary. Alignment is diagnostic; it does not calibrate DSP gain. Physical ADC, acoustic path, operating-system processing, Safari and Firefox remain unvalidated. AEC on is a processing setting, not an echo-accuracy test.",
+  "rows": [
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "sourceSha256": "d47af4ee102f8dafa2f97d6eab6628468f4348a73e315757bbea4dc97fa33300",
+      "replaySha256": "84e48b187936bc6ed3bc865226feec01dca1b3902f07008b5191ae7c6ff52da9",
+      "replayProtocol": "Prepend two repeats of the native first 2 s room sample (4 s added); retain original speech PCM",
+      "browserVersion": "153.0.8010.12",
+      "enabled": false,
+      "actualSettings": {
+        "autoGainControl": false,
+        "channelCount": 2,
+        "deviceId": "default",
+        "echoCancellation": false,
+        "groupId": "1fee9c8fbbe68a50eff071214e3e1006a74aac0289eeec09e1579ffc58e187e8",
+        "latency": 0.01,
+        "noiseSuppression": false,
+        "sampleRate": 44100,
+        "sampleSize": 16,
+        "voiceIsolation": false
+      },
+      "captureSha256": "d7330838e5039c56f00e2e77e7358481c646cb32c651604960194d9dca6a956c",
+      "capturedRate": 44100,
+      "capturedSeconds": 21.072108843537414,
+      "alignment": {
+        "offset": 4.491140625,
+        "correlation": 0.9998148756454558,
+        "gain": 1.0019741002458329,
+        "residualRms": 0.0002730303249535233
+      },
+      "analysis": {
+        "metrics": {
+          "clippingRatio": 0.000011203289285734291,
+          "speechClippingRatio": 0.000011203289285734291,
+          "clippedDurationSeconds": 0.00013605442176870748,
+          "clippingEventCount": 2,
+          "unselectedClippedDurationSeconds": 0,
+          "rmsDb": -24.34083092200126,
+          "speechRmsDb": -24.34083092200126,
+          "snrDb": 28.844813560379947,
+          "humRatio": 0.018031118113385952,
+          "echoScore": 0.02715013346541626
+        },
+        "verdict": {
+          "version": "1.0",
+          "overall": {
+            "grade": "C",
+            "labelKey": "overall.label.fair",
+            "summaryKey": "overall.summary.fair"
+          },
+          "dimensions": {
+            "level": {
+              "stars": 3,
+              "labelKey": "category.level",
+              "descriptionKey": "level.noticeably_off_target"
+            },
+            "noise": {
+              "stars": 4,
+              "labelKey": "category.noise",
+              "descriptionKey": "noise.clean_background"
+            },
+            "echo": {
+              "stars": 5,
+              "labelKey": "category.echo",
+              "descriptionKey": "echo.minimal"
+            }
+          },
+          "primaryIssue": "level",
+          "copyKeys": {
+            "explanationKey": "explanation.noticeably_off_target",
+            "fixKey": "fix.nudge_gain",
+            "impactKey": "impact.level",
+            "impactSummaryKey": "impact.biggest_opportunity"
+          },
+          "context": {
+            "use_case": "meetings",
+            "device_type": "unknown",
+            "mode": "basic"
+          },
+          "useCaseFit": "warn",
+          "reassuranceMode": false,
+          "diagnosticCertainty": "medium",
+          "bestNextSteps": [
+            {
+              "kind": "action",
+              "title": "Level: Move closer to the microphone."
+            },
+            {
+              "kind": "action",
+              "title": "Check your system microphone level."
+            }
+          ]
+        },
+        "evidence": {
+          "speechSeconds": 12.144149659863945,
+          "quietSeconds": 2.972154195011338,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm",
+            "echoCancellation": false,
+            "noiseSuppression": false,
+            "autoGainControl": false
+          },
+          "noiseReliable": true,
+          "noiseStability": "stable",
+          "laterNoiseSeconds": 2.5,
+          "maxNoiseChangeDb": 8.310170837752636,
+          "echoExperimental": true
+        },
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.78
+        },
+        "ai": {
+          "segments": [
+            {
+              "start": 5.408,
+              "end": 8.032
+            },
+            {
+              "start": 9.216000000000001,
+              "end": 12.16
+            },
+            {
+              "start": 13.184000000000001,
+              "end": 16.16
+            },
+            {
+              "start": 16.672,
+              "end": 18.752
+            },
+            {
+              "start": 19.552,
+              "end": 21.0720625
+            }
+          ],
+          "background": null,
+          "noiseStatus": "off",
+          "engine": "Silero VAD v5",
+          "elapsedMs": 3442.0999999940395
+        }
+      }
+    },
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "sourceSha256": "d47af4ee102f8dafa2f97d6eab6628468f4348a73e315757bbea4dc97fa33300",
+      "replaySha256": "84e48b187936bc6ed3bc865226feec01dca1b3902f07008b5191ae7c6ff52da9",
+      "replayProtocol": "Prepend two repeats of the native first 2 s room sample (4 s added); retain original speech PCM",
+      "browserVersion": "153.0.8010.12",
+      "enabled": true,
+      "actualSettings": {
+        "autoGainControl": true,
+        "channelCount": 1,
+        "deviceId": "default",
+        "echoCancellation": true,
+        "groupId": "9ca7ef66e5409b65d380a0b9e55bff4017a1c0f44d517d8858b4ea4061085106",
+        "latency": 0.01,
+        "noiseSuppression": true,
+        "sampleRate": 48000,
+        "sampleSize": 16,
+        "voiceIsolation": false
+      },
+      "captureSha256": "429ff971a632d48fca7789ba83f6c70afe4652a183abea996be331864e5fa917",
+      "capturedRate": 44100,
+      "capturedSeconds": 21.04018140589569,
+      "alignment": {
+        "offset": 4.5164374999999986,
+        "correlation": 0.4068846346041595,
+        "gain": 1.8287264520446498,
+        "residualRms": 0.05854175969515663
+      },
+      "analysis": {
+        "metrics": {
+          "clippingRatio": 0.0001641772737137088,
+          "speechClippingRatio": 0.0001641772737137088,
+          "clippedDurationSeconds": 0.0019727891156462586,
+          "clippingEventCount": 33,
+          "unselectedClippedDurationSeconds": 0,
+          "rmsDb": -18.762827637867453,
+          "speechRmsDb": -18.762827637867453,
+          "snrDb": 37.336868254385706,
+          "humRatio": 0.00578482503019786,
+          "echoScore": 0.03843476737902126
+        },
+        "verdict": {
+          "version": "1.0",
+          "overall": {
+            "grade": "A",
+            "labelKey": "overall.label.excellent",
+            "summaryKey": "overall.summary.excellent"
+          },
+          "dimensions": {
+            "level": {
+              "stars": 5,
+              "labelKey": "category.level",
+              "descriptionKey": "level.excellent"
+            },
+            "noise": {
+              "stars": 5,
+              "labelKey": "category.noise",
+              "descriptionKey": "noise.very_clean"
+            },
+            "echo": {
+              "stars": 5,
+              "labelKey": "category.echo",
+              "descriptionKey": "echo.minimal"
+            }
+          },
+          "primaryIssue": null,
+          "copyKeys": {
+            "explanationKey": "level.excellent",
+            "fixKey": "fix.keep_setup",
+            "impactKey": "impact.overall",
+            "impactSummaryKey": "impact.no_major_issues"
+          },
+          "context": {
+            "use_case": "meetings",
+            "device_type": "unknown",
+            "mode": "basic"
+          },
+          "useCaseFit": "pass",
+          "reassuranceMode": true,
+          "diagnosticCertainty": "low",
+          "bestNextSteps": []
+        },
+        "evidence": {
+          "speechSeconds": 12.016213151927438,
+          "quietSeconds": 2.980861678004535,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm",
+            "echoCancellation": true,
+            "noiseSuppression": true,
+            "autoGainControl": true
+          },
+          "noiseReliable": true,
+          "noiseStability": "stable",
+          "laterNoiseSeconds": 2.5,
+          "maxNoiseChangeDb": 18.93522091414694,
+          "echoExperimental": true
+        },
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.keep_consistent",
+          "confidence": 0.78
+        },
+        "ai": {
+          "segments": [
+            {
+              "start": 5.408,
+              "end": 8
+            },
+            {
+              "start": 9.216000000000001,
+              "end": 12.096
+            },
+            {
+              "start": 13.184000000000001,
+              "end": 16.16
+            },
+            {
+              "start": 16.672,
+              "end": 18.752
+            },
+            {
+              "start": 19.552,
+              "end": 21.040125
+            }
+          ],
+          "background": null,
+          "noiseStatus": "off",
+          "engine": "Silero VAD v5",
+          "elapsedMs": 3332.5
+        }
+      }
+    }
+  ]
+}

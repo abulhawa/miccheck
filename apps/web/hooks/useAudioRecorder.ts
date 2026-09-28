@@ -449,7 +449,7 @@ export function useAudioRecorder({
             analysisAbortRef.current = abort;
             const roomResult = await analyzeLocally(samples, audioBuffer.sampleRate, analysisContext, capture, false, abort.signal, setAnalysisStatus, samples.length / audioBuffer.sampleRate);
             if (request !== generationRef.current) return;
-            if (!roomResult.evidence?.noiseReliable) throw new Error('Speech was detected during the room check. Measure the room again and stay quiet until it finishes.');
+            if (!roomResult.evidence?.noiseReliable) throw new Error('The room sample could not provide a reliable background measurement. Speech-like sounds can trigger the detector. Measure the room again and stay quiet until it finishes.');
             roomSampleRef.current = {samples, sampleRate:audioBuffer.sampleRate, format:capture.format};
             captureStageRef.current = 'ready';
             audioChunksRef.current = [];

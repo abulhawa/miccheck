@@ -23,3 +23,9 @@ docs/starss22-app-length-*-results.json text eol=lf
 apps/web/e2e/fixtures/clipping-selection/** -text whitespace=cr-at-eol
 apps/web/e2e/fixtures/clipping-selection-evaluation/** -text whitespace=cr-at-eol
 apps/web/e2e/fixtures/clipping-selection-evaluation/UPSTREAM_README.md -whitespace
+
+# Paired AMI and multilingual FLEURS sources/annotations are byte-pinned.
+apps/web/e2e/fixtures/accuracy-expansion/** -text whitespace=cr-at-eol
+apps/web/e2e/fixtures/accuracy-expansion/FLEURS_README.md -whitespace
+apps/web/e2e/fixtures/accuracy-expansion/AMI_00README_MANUAL.txt -whitespace
+apps/web/e2e/fixtures/accuracy-expansion/AMI_LICENCE.txt -whitespace

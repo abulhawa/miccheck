@@ -1,0 +1,5968 @@
+{
+  "sourceManifestSha256": "85b40a5f99f708ac5074ebe9f162cf7469a33b91ccdd3772a3d963a1f8b16c12",
+  "workerSha256": "02d8901ead4c0a23e819d9442dc7f68160fa552523ab8345aa4a42b564ed583f",
+  "modelManifestSha256": "ad6efd1c5e4c351a97bc1b5184c3ad25ab365faf2f02f69fc93ae351f80649d6",
+  "limits": "AMI forced-alignment agreement is diagnostic, not independently verified boundary truth. FLEURS has no timing labels. Retained-component SNR includes source background. Native retry truth unknown. Known changes are generated, not physical. No thresholds tuned on evaluation outputs.",
+  "summary": {
+    "cases": 94,
+    "failures": 1,
+    "clippingFailures": 0,
+    "snrFailures": 0,
+    "stabilityFailures": 0,
+    "confidenceFailures": 0,
+    "noSpeechFailures": 1,
+    "stationaryWorkerDisagreements": [
+      {
+        "file": "fleurs-de_de-10004059102127011984.wav",
+        "condition": "white-20db"
+      },
+      {
+        "file": "fleurs-de_de-10004059102127011984.wav",
+        "condition": "fan-tone-20db"
+      }
+    ],
+    "nativeNoSpeech": []
+  },
+  "rows": [
+    {
+      "file": "ami-ES2002a-A-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "2c82cb6dbd601bd6d9e4b1a83fd7daa38d966d700aa84839256ecf8e9a7d307b",
+      "segments": [
+        {
+          "start": 9.152000000000001,
+          "end": 9.44
+        },
+        {
+          "start": 16.256,
+          "end": 16.448
+        },
+        {
+          "start": 17.664,
+          "end": 20.736
+        },
+        {
+          "start": 21.024,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.3534686748339944,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 8.2821875,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": 1.1019999999999897,
+            "offsetError": -1.689999999999996
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": 1.6760000000000161,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 31.504811846076514,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-A-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "dc495298a73d71800eff57422737e9881f606585681fb066b90228f5ce3f9d77",
+      "segments": [],
+      "agreement": {
+        "precision": null,
+        "recall": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 12.8101875,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": null,
+            "offsetError": null
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-A-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "1c1bbe9a9e0e4158efd6aba421c7129e8980b634d5d7a1a2166bc453f4142397",
+      "segments": [
+        {
+          "start": 3.2960000000000003,
+          "end": 4
+        },
+        {
+          "start": 5.408,
+          "end": 6.08
+        },
+        {
+          "start": 6.336,
+          "end": 6.688000000000001
+        },
+        {
+          "start": 8.128,
+          "end": 10.496
+        },
+        {
+          "start": 14.816,
+          "end": 15.808
+        },
+        {
+          "start": 16.096,
+          "end": 16.8
+        },
+        {
+          "start": 17.568,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.9902191521227497,
+        "recall": 0.7903133736332899,
+        "falsePositiveSeconds": 0.1,
+        "falseNegativeSeconds": 2.686125,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": 0.235999999999998,
+            "offsetError": 0.10000000000002274
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": 0.02800000000000491,
+            "offsetError": -0.16200000000002213
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": 0.07799999999998875,
+            "offsetError": -0.633999999999995
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": 0.23600000000001664,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.3235,
+        "clippingEventCount": 787,
+        "speechClippingRatio": 0.03092581838188098,
+        "unselectedClippedDurationSeconds": 0.0073125
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.3235,
+        "clippingEventCount": 787,
+        "speechClippingRatio": 0.025253338407419876,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.005672479974461103,
+      "referenceSnrDb": null,
+      "actualSnrDb": 71.3046798935528,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-A-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "be783583015c1a89445b5326c49550f60cdbdff4f1f3143c0dc1ce288fc9db0e",
+      "segments": [
+        {
+          "start": 3.3280000000000003,
+          "end": 3.872
+        },
+        {
+          "start": 8.416,
+          "end": 8.832
+        },
+        {
+          "start": 9.152000000000001,
+          "end": 9.984
+        },
+        {
+          "start": 10.304,
+          "end": 10.592
+        },
+        {
+          "start": 17.824,
+          "end": 20.256
+        },
+        {
+          "start": 21.056,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.42591101808619114,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 7.3541875,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": 0.267999999999998,
+            "offsetError": -0.027999999999977376
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": 0.365999999999989,
+            "offsetError": -0.5379999999999949
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": 3.2440000000000175,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 14.968373142652155,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-A-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "fcb19cffc93218c36264d6d15d3867732ba216eb23c0d8653059f440a541c7d6",
+      "segments": [],
+      "agreement": {
+        "precision": null,
+        "recall": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 12.8101875,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": null,
+            "offsetError": null
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-A-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "006ccbdb501951a819f1897efd667837231505f04145cecd4b022af2a35128d4",
+      "segments": [
+        {
+          "start": 3.104,
+          "end": 4.032
+        },
+        {
+          "start": 5.44,
+          "end": 6.048
+        },
+        {
+          "start": 6.336,
+          "end": 6.976
+        },
+        {
+          "start": 8.096,
+          "end": 8.928
+        },
+        {
+          "start": 9.120000000000001,
+          "end": 10.112
+        },
+        {
+          "start": 10.304,
+          "end": 10.816
+        },
+        {
+          "start": 14.752,
+          "end": 15.264000000000001
+        },
+        {
+          "start": 16.128,
+          "end": 16.64
+        },
+        {
+          "start": 17.632,
+          "end": 20.672
+        },
+        {
+          "start": 21.024,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.9729966695674364,
+        "recall": 0.7255260705590765,
+        "falsePositiveSeconds": 0.2579375,
+        "falseNegativeSeconds": 3.5160625,
+        "boundaryErrors": [
+          {
+            "start": 3.0600000000000023,
+            "end": 3.8999999999999773,
+            "onsetError": 0.04399999999999782,
+            "offsetError": 0.13200000000002277
+          },
+          {
+            "start": 5.3799999999999955,
+            "end": 6.850000000000023,
+            "onsetError": 0.06000000000000494,
+            "offsetError": 0.12599999999997724
+          },
+          {
+            "start": 8.050000000000011,
+            "end": 11.129999999999995,
+            "onsetError": 0.04599999999998872,
+            "offsetError": -0.31399999999999473
+          },
+          {
+            "start": 14.579999999999984,
+            "end": 22,
+            "onsetError": 0.17200000000001658,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.0200625,
+        "clippingEventCount": 164,
+        "speechClippingRatio": 0.001007635785465181,
+        "unselectedClippedDurationSeconds": 0.0104375
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.0200625,
+        "clippingEventCount": 164,
+        "speechClippingRatio": 0.0015661363270443934,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": -0.0005585005415792124,
+      "referenceSnrDb": null,
+      "actualSnrDb": 44.71520370898563,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "021a236912026d74a8f49bc2025052961bc13f6cafbb676c44b4df627fda4807",
+      "segments": [
+        {
+          "start": 4.96,
+          "end": 5.184
+        },
+        {
+          "start": 6.976,
+          "end": 7.6160000000000005
+        },
+        {
+          "start": 10.176,
+          "end": 10.464
+        },
+        {
+          "start": 12.544,
+          "end": 14.912
+        },
+        {
+          "start": 15.104000000000001,
+          "end": 15.936
+        },
+        {
+          "start": 16.448,
+          "end": 17.056
+        },
+        {
+          "start": 18.752,
+          "end": 19.904
+        },
+        {
+          "start": 20.736,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.9520069142581153,
+        "recall": 0.6693974094684286,
+        "falsePositiveSeconds": 0.354,
+        "falseNegativeSeconds": 3.4680625,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": 0.05599999999999827,
+            "offsetError": 0.12599999999999856
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": 0.11599999999999788,
+            "offsetError": 0.0039999999999995595
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": 0.06400000000000361,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 37.980126957188766,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "86fdbd39d696dc6c0e9b608ec802acbe7589383781162989f6320cfb8ada4351",
+      "segments": [
+        {
+          "start": 13.152000000000001,
+          "end": 14.912
+        },
+        {
+          "start": 15.104000000000001,
+          "end": 15.904
+        },
+        {
+          "start": 16.448,
+          "end": 17.024
+        },
+        {
+          "start": 18.784,
+          "end": 19.904
+        },
+        {
+          "start": 20.736,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.5262091729126201,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 4.970125,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": 0.6720000000000041,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 38.60960909657358,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-headset.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "eef864aeda70d9cdcf23773db271ac1e7d9fa1f17178da1aa14511d3272b0ae6",
+      "segments": [
+        {
+          "start": 4.864,
+          "end": 5.248
+        },
+        {
+          "start": 6.976,
+          "end": 7.680000000000001
+        },
+        {
+          "start": 10.112,
+          "end": 10.496
+        },
+        {
+          "start": 12.512,
+          "end": 14.88
+        },
+        {
+          "start": 15.104000000000001,
+          "end": 17.152
+        },
+        {
+          "start": 18.752,
+          "end": 19.936
+        },
+        {
+          "start": 20.704,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.92710379493461,
+        "recall": 0.7395586325234447,
+        "falsePositiveSeconds": 0.61,
+        "falseNegativeSeconds": 2.7320625,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": 0.05599999999999827,
+            "offsetError": 0.18999999999999861
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": 0.051999999999997826,
+            "offsetError": 0.03599999999999959
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": 0.03200000000000358,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.4936875,
+        "clippingEventCount": 945,
+        "speechClippingRatio": 0.058996631538065114,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.4936875,
+        "clippingEventCount": 945,
+        "speechClippingRatio": 0.0470621179442571,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.011934513593808017,
+      "referenceSnrDb": null,
+      "actualSnrDb": 66.27134790084399,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "f6353211ca4da495d135446ecd96054f58f69ad2728e4c265eb5da2b433beeb2",
+      "segments": [
+        {
+          "start": 1.3760000000000001,
+          "end": 1.76
+        },
+        {
+          "start": 2.08,
+          "end": 2.368
+        },
+        {
+          "start": 4.736,
+          "end": 5.696
+        },
+        {
+          "start": 14.048,
+          "end": 14.912
+        },
+        {
+          "start": 15.456,
+          "end": 15.776
+        },
+        {
+          "start": 16.704,
+          "end": 17.056
+        },
+        {
+          "start": 18.976,
+          "end": 19.84
+        },
+        {
+          "start": 20.736,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.745928338762215,
+        "recall": 0.34928087129562324,
+        "falsePositiveSeconds": 1.248,
+        "falseNegativeSeconds": 6.826125,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": 1.5680000000000032,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 10.384359490276069,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "calibration_speech",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "9cfa327b5063d3567b1488e4e31ded983baa61cba6da7b13fa5b775516030fee",
+      "segments": [
+        {
+          "start": 4.864,
+          "end": 5.216
+        }
+      ],
+      "agreement": {
+        "precision": 0,
+        "recall": 0,
+        "falsePositiveSeconds": 0.352,
+        "falseNegativeSeconds": 10.490125,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": null,
+            "offsetError": null
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": null,
+            "offsetError": null
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 6.328509844388748,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "speech_too_short",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-ES2002a-B-distant-array.wav",
+      "split": "development",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "ccc9a8677fe9b4ddbd6f01dbc816a40f9fc821d38e33022ebf8b7a14fb972483",
+      "segments": [
+        {
+          "start": 1.3760000000000001,
+          "end": 1.76
+        },
+        {
+          "start": 2.08,
+          "end": 2.624
+        },
+        {
+          "start": 4.736,
+          "end": 5.728
+        },
+        {
+          "start": 6.976,
+          "end": 7.5840000000000005
+        },
+        {
+          "start": 10.304,
+          "end": 10.528
+        },
+        {
+          "start": 13.024000000000001,
+          "end": 15.936
+        },
+        {
+          "start": 16.448,
+          "end": 17.504
+        },
+        {
+          "start": 18.752,
+          "end": 20.032
+        },
+        {
+          "start": 20.704,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.8094717131977025,
+        "recall": 0.687700337221911,
+        "falsePositiveSeconds": 1.698,
+        "falseNegativeSeconds": 3.2760625,
+        "boundaryErrors": [
+          {
+            "start": 6.920000000000002,
+            "end": 7.490000000000002,
+            "onsetError": 0.05599999999999827,
+            "offsetError": 0.09399999999999853
+          },
+          {
+            "start": 10.060000000000002,
+            "end": 10.46,
+            "onsetError": 0.243999999999998,
+            "offsetError": 0.06799999999999962
+          },
+          {
+            "start": 12.479999999999997,
+            "end": 22,
+            "onsetError": 0.544000000000004,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.0398125,
+        "clippingEventCount": 70,
+        "speechClippingRatio": 0.0007012966975938511,
+        "unselectedClippedDurationSeconds": 0.0335625
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.0398125,
+        "clippingEventCount": 70,
+        "speechClippingRatio": 0.0005957984294753399,
+        "unselectedClippedDurationSeconds": 0.0335625
+      },
+      "annotationSpeechClippingError": 0.00010549826811851121,
+      "referenceSnrDb": null,
+      "actualSnrDb": 39.55080538078575,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "calibration_speech",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "a268305599a808937b65d106ba6fc38f024ee663c4eb086649a28cb98f170a42",
+      "segments": [
+        {
+          "start": 10.784,
+          "end": 11.904
+        },
+        {
+          "start": 14.016,
+          "end": 15.84
+        },
+        {
+          "start": 16.608,
+          "end": 18.848
+        },
+        {
+          "start": 19.264,
+          "end": 21.088
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.683477556185856,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 3.5640625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 0.04400000000000581,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.000875,
+        "clippingEventCount": 11,
+        "speechClippingRatio": 0.0001136954261954262,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.000875,
+        "clippingEventCount": 11,
+        "speechClippingRatio": 0.00007770827204555925,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.00003598715414986695,
+      "referenceSnrDb": null,
+      "actualSnrDb": 30.499884742381937,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "04cdfd4617f94202b01e58fc9a867cfbd1fd8813b0aea0b801f7ae7c6e1d0338",
+      "segments": [
+        {
+          "start": 10.784,
+          "end": 11.872
+        },
+        {
+          "start": 14.048,
+          "end": 15.936
+        },
+        {
+          "start": 16.608,
+          "end": 18.848
+        },
+        {
+          "start": 19.264,
+          "end": 21.12
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.6891613612269026,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 3.5000625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 0.04400000000000581,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 30.460594001212097,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "a7bc61e74a21e20755def083656955ac4bcea4559e43859637510194d3d2ea1a",
+      "segments": [
+        {
+          "start": 10.784,
+          "end": 11.936
+        },
+        {
+          "start": 14.048,
+          "end": 15.936
+        },
+        {
+          "start": 16.608,
+          "end": 18.912
+        },
+        {
+          "start": 19.264,
+          "end": 21.12
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.7005289713089958,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 3.3720625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 0.04400000000000581,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.893375,
+        "clippingEventCount": 1694,
+        "speechClippingRatio": 0.11313862829614604,
+        "unselectedClippedDurationSeconds": 0.0009375
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.893375,
+        "clippingEventCount": 1694,
+        "speechClippingRatio": 0.079340145758516,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.03379848253763004,
+      "referenceSnrDb": null,
+      "actualSnrDb": 39.57839942407854,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "8a6e47cc7d0ee2fcbe56749861cc5d214efc61e0e6853b7f462e8d4bad6e5f6b",
+      "segments": [
+        {
+          "start": 14.176,
+          "end": 15.904
+        },
+        {
+          "start": 16.64,
+          "end": 18.88
+        },
+        {
+          "start": 19.264,
+          "end": 21.088
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.5754852604059703,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 4.7800625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 3.4360000000000053,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 12.508460478289877,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "d0bc87370dc7f035dc7cf8b745366636c5524222e5e0c786be41707e5ee55152",
+      "segments": [
+        {
+          "start": 14.208,
+          "end": 15.904
+        },
+        {
+          "start": 16.64,
+          "end": 18.88
+        },
+        {
+          "start": 19.584,
+          "end": 21.024
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.5385405276391672,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 5.1960625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 3.4680000000000053,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 12.593469495207813,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-A-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "423968e8827a79ef3bbbf5c548cf1d03e864cb443a64d5f3bd17a104a3d9e9aa",
+      "segments": [
+        {
+          "start": 14.176,
+          "end": 15.904
+        },
+        {
+          "start": 16.608,
+          "end": 18.88
+        },
+        {
+          "start": 19.264,
+          "end": 21.12
+        },
+        {
+          "start": 21.312,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 1,
+        "recall": 0.5811690654470169,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 4.7160625,
+        "boundaryErrors": [
+          {
+            "start": 10.739999999999995,
+            "end": 22,
+            "onsetError": 3.4360000000000053,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.0234375,
+        "clippingEventCount": 98,
+        "speechClippingRatio": 0.0034382640586797064,
+        "unselectedClippedDurationSeconds": 0.0009375
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.0234375,
+        "clippingEventCount": 98,
+        "speechClippingRatio": 0.002031516254905335,
+        "unselectedClippedDurationSeconds": 0.0005625
+      },
+      "annotationSpeechClippingError": 0.0014067478037743716,
+      "referenceSnrDb": null,
+      "actualSnrDb": 34.27545401056675,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "ae28fb1c2cec09e36460d47d41c5442efee809240b6d48543f8e0f880a77c9a5",
+      "segments": [
+        {
+          "start": 2.944,
+          "end": 5.5360000000000005
+        },
+        {
+          "start": 6.72,
+          "end": 9.696
+        },
+        {
+          "start": 10.688,
+          "end": 13.696
+        },
+        {
+          "start": 14.208,
+          "end": 16.288
+        },
+        {
+          "start": 17.056,
+          "end": 19.712
+        },
+        {
+          "start": 20.768,
+          "end": 21.984
+        }
+      ],
+      "agreement": {
+        "precision": 0.9916024590340247,
+        "recall": 0.8414663974912658,
+        "falsePositiveSeconds": 0.122,
+        "falseNegativeSeconds": 2.714125,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.11400000000001587,
+            "offsetError": -0.03400000000001846
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.03800000000002335,
+            "offsetError": 0.12200000000002476
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.0479999999999734,
+            "offsetError": -0.015999999999998238
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.000125,
+        "clippingEventCount": 1,
+        "speechClippingRatio": 0.000008604037874974725,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.000125,
+        "clippingEventCount": 1,
+        "speechClippingRatio": 0.000007301321904330779,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.0000013027159706439462,
+      "referenceSnrDb": null,
+      "actualSnrDb": 28.388637995211816,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "f746aab590385fee0cef40d74c217cc1b388136eee0e2ee69f21ff4b4d9f9edc",
+      "segments": [
+        {
+          "start": 2.976,
+          "end": 5.5360000000000005
+        },
+        {
+          "start": 6.752,
+          "end": 9.696
+        },
+        {
+          "start": 10.688,
+          "end": 13.76
+        },
+        {
+          "start": 14.208,
+          "end": 16.288
+        },
+        {
+          "start": 17.056,
+          "end": 19.712
+        },
+        {
+          "start": 20.768,
+          "end": 21.92
+        }
+      ],
+      "agreement": {
+        "precision": 0.9915653019336718,
+        "recall": 0.8377281206762485,
+        "falsePositiveSeconds": 0.122,
+        "falseNegativeSeconds": 2.778125,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.1460000000000159,
+            "offsetError": -0.03400000000001846
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.03800000000002335,
+            "offsetError": 0.12200000000002476
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.0479999999999734,
+            "offsetError": -0.0799999999999983
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 28.404306789684412,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-headset.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "headset",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "a072e5c87cb08b52643efd9c6a6e85a65a92698f6408f18bc804dfc798d709d0",
+      "segments": [
+        {
+          "start": 2.944,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 6.72,
+          "end": 9.728
+        },
+        {
+          "start": 10.688,
+          "end": 13.696
+        },
+        {
+          "start": 14.208,
+          "end": 16.288
+        },
+        {
+          "start": 17.056,
+          "end": 19.712
+        },
+        {
+          "start": 20.768,
+          "end": 21.952
+        }
+      ],
+      "agreement": {
+        "precision": 0.9916209150887917,
+        "recall": 0.8433355358987745,
+        "falsePositiveSeconds": 0.122,
+        "falseNegativeSeconds": 2.682125,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.11400000000001587,
+            "offsetError": -0.0020000000000184315
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.03800000000002335,
+            "offsetError": 0.12200000000002476
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.0479999999999734,
+            "offsetError": -0.047999999999998266
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.1348125,
+        "clippingEventCount": 445,
+        "speechClippingRatio": 0.009259060529444843,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.1348125,
+        "clippingEventCount": 445,
+        "speechClippingRatio": 0.007874475673820745,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.0013845848556240988,
+      "referenceSnrDb": null,
+      "actualSnrDb": 39.65761351961659,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "5b368bbfe9b190f8a0c4662045c2df221dccd551fe3448316cbd9e9512b7c106",
+      "segments": [
+        {
+          "start": 2.976,
+          "end": 5.632000000000001
+        },
+        {
+          "start": 6.752,
+          "end": 9.76
+        },
+        {
+          "start": 10.784,
+          "end": 13.792
+        },
+        {
+          "start": 14.432,
+          "end": 16.288
+        },
+        {
+          "start": 17.088,
+          "end": 19.648
+        },
+        {
+          "start": 20.768,
+          "end": 21.984
+        }
+      ],
+      "agreement": {
+        "precision": 0.993852270989448,
+        "recall": 0.8303720388576352,
+        "falsePositiveSeconds": 0.0879375,
+        "falseNegativeSeconds": 2.9040625,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.1460000000000159,
+            "offsetError": 0.029999999999981597
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.13400000000002343,
+            "offsetError": 0.0580000000000247
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.0479999999999734,
+            "offsetError": -0.015999999999998238
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 13.928221616707539,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "47f3a42b33de733c6d0057db66c581686153d446edda3f73547148eb67740f9e",
+      "segments": [
+        {
+          "start": 2.976,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 6.752,
+          "end": 9.76
+        },
+        {
+          "start": 11.104000000000001,
+          "end": 13.824
+        },
+        {
+          "start": 14.464,
+          "end": 16.288
+        },
+        {
+          "start": 17.088,
+          "end": 19.648
+        },
+        {
+          "start": 20.8,
+          "end": 21.984
+        }
+      ],
+      "agreement": {
+        "precision": 0.9936681232533335,
+        "recall": 0.8060732395600223,
+        "falsePositiveSeconds": 0.0879375,
+        "falseNegativeSeconds": 3.3200625,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.1460000000000159,
+            "offsetError": 0.029999999999981597
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.4540000000000237,
+            "offsetError": 0.0580000000000247
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.07999999999997343,
+            "offsetError": -0.015999999999998238
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": 14.012795716822751,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "ami-IS1001a-B-distant-array.wav",
+      "split": "evaluation",
+      "corpus": "AMI",
+      "language": "en",
+      "device": "distant-array",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "2fc3699efe075584383d9805dd37172c75e5c48cbbf49d8189db1bfb6bf1aff6",
+      "segments": [
+        {
+          "start": 2.976,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 6.72,
+          "end": 9.76
+        },
+        {
+          "start": 10.72,
+          "end": 13.824
+        },
+        {
+          "start": 14.208,
+          "end": 16.288
+        },
+        {
+          "start": 17.056,
+          "end": 19.712
+        },
+        {
+          "start": 20.768,
+          "end": 22
+        }
+      ],
+      "agreement": {
+        "precision": 0.9896669712876969,
+        "recall": 0.8499979921364763,
+        "falsePositiveSeconds": 0.1519375,
+        "falseNegativeSeconds": 2.5680625,
+        "boundaryErrors": [
+          {
+            "start": 2.829999999999984,
+            "end": 9.730000000000018,
+            "onsetError": 0.1460000000000159,
+            "offsetError": 0.029999999999981597
+          },
+          {
+            "start": 10.649999999999977,
+            "end": 19.589999999999975,
+            "onsetError": 0.07000000000002338,
+            "offsetError": 0.12200000000002476
+          },
+          {
+            "start": 20.720000000000027,
+            "end": 22,
+            "onsetError": 0.0479999999999734,
+            "offsetError": 0
+          }
+        ]
+      },
+      "annotationKind": "Human transcript; automatically forced-aligned word timings. All speakers, including possible headset bleed.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.2120625,
+        "clippingEventCount": 618,
+        "speechClippingRatio": 0.014422034726797442,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0.2120625,
+        "clippingEventCount": 618,
+        "speechClippingRatio": 0.012386692610697166,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0.002035342116100276,
+      "referenceSnrDb": null,
+      "actualSnrDb": 37.47577968113637,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "57a4f30212d287f5e48d30f2c9a4205962c6d6fdff41d5c87adb08aa36ebbff5",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.824
+        },
+        {
+          "start": 14.112,
+          "end": 15.904
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "c2b41468cb13237694b1cb8eeec615489747c6b0ec376c34ddafdf356d37a323",
+      "segments": [
+        {
+          "start": 6.464,
+          "end": 13.664
+        },
+        {
+          "start": 14.112,
+          "end": 15.136000000000001
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 15.744
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "bb67b9df99cc394aec18ae3782a797cf31951f4423d692c03b03a0e2fa5a16bf",
+      "segments": [
+        {
+          "start": 6.336,
+          "end": 13.856
+        },
+        {
+          "start": 14.112,
+          "end": 15.104000000000001
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 15.904
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.380375,
+        "clippingEventCount": 609,
+        "speechClippingRatio": 0.041462357900817697,
+        "unselectedClippedDurationSeconds": 0.0035625
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "cb3ef93434a622f6afff61b6b1ea615d33db6e5f5a77ef01fc33dfa818601132",
+      "segments": [
+        {
+          "start": 6.336,
+          "end": 13.728
+        },
+        {
+          "start": 14.112,
+          "end": 15.904
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.778681105445308,
+      "actualSnrDb": 2.8104438764191073,
+      "selectedSnrErrorDb": 0.03176277097379909,
+      "estimatorSnrErrorDb": 0.03062791053712388,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "79b1f046addba905d87686beeb0eb0787aac42ec4eacb48aa6635cd02891808a",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.696
+        },
+        {
+          "start": 14.112,
+          "end": 15.872
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.830072561477287,
+      "actualSnrDb": 12.83926402597913,
+      "selectedSnrErrorDb": 0.009191464501842717,
+      "estimatorSnrErrorDb": 0.009785602695309592,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "fe3b99dd703823a70ccbbdfcf50053ee1b2f86bc88050fa902cc2404c8631d15",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.696
+        },
+        {
+          "start": 14.112,
+          "end": 15.872
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.830072561477287,
+      "actualSnrDb": 12.83926402597913,
+      "selectedSnrErrorDb": 0.009191464501842717,
+      "estimatorSnrErrorDb": 0.009785602695309592,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "2eb6f39ff40d27e208d3f9c89a628e2a29b962d6c3298e2c060fe32b274d633c",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.696
+        },
+        {
+          "start": 14.112,
+          "end": 15.872
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.830072561477287,
+      "actualSnrDb": 12.83926402597913,
+      "selectedSnrErrorDb": 0.009191464501842717,
+      "estimatorSnrErrorDb": 0.009785602695309592,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "335ada558c5a1cd9608c4d7e754e4bc48c2ce391471e2562ceb4d79b8ca10db8",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.6
+        },
+        {
+          "start": 14.112,
+          "end": 15.104000000000001
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 15.84
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.994496766431695,
+      "actualSnrDb": 22.99704883638167,
+      "selectedSnrErrorDb": 0.002552069949974367,
+      "estimatorSnrErrorDb": 0.0031045560373073045,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": false,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "2e853fac5ae1738d1cab11818e9e30b0170681799d90b31c565ea5fe7736ac38",
+      "segments": [
+        {
+          "start": 6.4,
+          "end": 13.792
+        },
+        {
+          "start": 14.112,
+          "end": 15.808
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.7862082704009152,
+      "actualSnrDb": 2.7510206831715465,
+      "selectedSnrErrorDb": -0.035187587229368766,
+      "estimatorSnrErrorDb": -0.03063078505941874,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "581f0da08ab195887e7751dde8d244732a8edf894f5f99bfef17f243390df41a",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.888
+        },
+        {
+          "start": 14.112,
+          "end": 15.84
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.755627770102198,
+      "actualSnrDb": 12.74492238604359,
+      "selectedSnrErrorDb": -0.010705384058606882,
+      "estimatorSnrErrorDb": -0.00963260952367051,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10004059102127011984.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "be34af04594508ed0c9cc0bff356e4897f4163a0185e65c75e6b5e941409df35",
+      "segments": [
+        {
+          "start": 6.304,
+          "end": 13.888
+        },
+        {
+          "start": 14.112,
+          "end": 15.136000000000001
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 15.872
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.830015374498053,
+      "actualSnrDb": 22.826078309666695,
+      "selectedSnrErrorDb": -0.003937064831358583,
+      "estimatorSnrErrorDb": -0.003040752135536451,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": false,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "2e5c24efabc7eaa4e399253f29c806b84ada0dc3e38a553985ae9d20991c2594",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 5.6000000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 6.848
+        },
+        {
+          "start": 7.36,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "aae2af9f0e46079e8601a1d52a9fcb679e781b42eb4775dc383cc3dfd5b77b90",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 5.6000000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 6.848
+        },
+        {
+          "start": 7.36,
+          "end": 10.88
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "5deaadd2b4f923e07dbc373f28f6fa7adaccbc6a74c0666d12806edc48abc5ce",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.848
+        },
+        {
+          "start": 7.328,
+          "end": 10.88
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0.4101875,
+        "clippingEventCount": 1108,
+        "speechClippingRatio": 0.06676228841145833,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "302beecd8793bfcfe45023b1be7327e94c855f740eba961a09efc10e0fcc2ea9",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.912
+        },
+        {
+          "start": 7.392,
+          "end": 10.784
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.6568575110262764,
+      "actualSnrDb": 2.6656273898423244,
+      "selectedSnrErrorDb": 0.00876987881604796,
+      "estimatorSnrErrorDb": 0.005426975115820909,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "49e7dc1a1a12b709b2530c4b7f505b51b087a4ab92133e93fbe558c6fe21d3fa",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.88
+        },
+        {
+          "start": 7.392,
+          "end": 10.816
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.658042092512183,
+      "actualSnrDb": 12.660950472703412,
+      "selectedSnrErrorDb": 0.0029083801912292984,
+      "estimatorSnrErrorDb": 0.0018588442893694435,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "1ca3d34157e1d1c11bef451f40c17edced9edf3750b20f7f4fcd54ddbed79c4e",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.88
+        },
+        {
+          "start": 7.392,
+          "end": 10.816
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.658042092512183,
+      "actualSnrDb": 12.660950472703412,
+      "selectedSnrErrorDb": 0.0029083801912292984,
+      "estimatorSnrErrorDb": 0.0018588442893694435,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "723ab4ddb4893d318ff2db703a740ed96e93ecc3b982d160d97a8d91c75eb671",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.88
+        },
+        {
+          "start": 7.392,
+          "end": 10.816
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.658042092512183,
+      "actualSnrDb": 12.660950472703412,
+      "selectedSnrErrorDb": 0.0029083801912292984,
+      "estimatorSnrErrorDb": 0.0018588442893694435,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "6acd8d53a10413e688852df4993574ce52a775df001b57babc83c783872b8574",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 6.848
+        },
+        {
+          "start": 7.392,
+          "end": 10.88
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.63494378944455,
+      "actualSnrDb": 22.63699478894216,
+      "selectedSnrErrorDb": 0.002050999497612338,
+      "estimatorSnrErrorDb": 0.0006020976040375103,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "6d8b5ac754eb184137de8e23be00d7130cb383cb35d9c16e083d56a6d2f81634",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 5.6000000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 6.848
+        },
+        {
+          "start": 7.36,
+          "end": 10.784
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.869739416970501,
+      "actualSnrDb": 2.92298119170351,
+      "selectedSnrErrorDb": 0.05324177473300917,
+      "estimatorSnrErrorDb": 0.04921374280952051,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "d1b6b02826148d059c0c322018fc3afd9666b5ff52583fb9983e8e194702d808",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 5.6000000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 6.848
+        },
+        {
+          "start": 7.36,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.822823534228291,
+      "actualSnrDb": 12.838782699938555,
+      "selectedSnrErrorDb": 0.01595916571026379,
+      "estimatorSnrErrorDb": 0.015586856295129792,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-de_de-10009182821551087671.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "de_de",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "41c92b1a702d93ced5e3c3e4b63556619ff3ebadb0615ae97e0b16a19f0b8b11",
+      "segments": [
+        {
+          "start": 4.256,
+          "end": 5.6000000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 6.816
+        },
+        {
+          "start": 7.36,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.845537747326343,
+      "actualSnrDb": 22.851551128225072,
+      "selectedSnrErrorDb": 0.006013380898728826,
+      "estimatorSnrErrorDb": 0.0049314191191669465,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "7a3fc1b2c9337cc5dc181750fbc378681abfa4b9e025dac798e1dc083c795824",
+      "segments": [
+        {
+          "start": 4.6080000000000005,
+          "end": 6.5280000000000005
+        },
+        {
+          "start": 7.072,
+          "end": 10.72
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "a9f1fc5a69e47a669da81735a20e7cbcb42a1de73ef8f1d3239e73be0410a18c",
+      "segments": [],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "c3cbe722f2188738161e8ea3c22548f758159ab3588735089e2d6d4a064e59f8",
+      "segments": [
+        {
+          "start": 4.16,
+          "end": 6.72
+        },
+        {
+          "start": 6.944,
+          "end": 10.816
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 1.529125,
+        "clippingEventCount": 1753,
+        "speechClippingRatio": 0.23773709577114427,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "78f27bedfbfd76dad2c57cca2821c5a50b04a017345cf6e426b140f66f39899f",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.656000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.752
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.1559308548609137,
+      "actualSnrDb": 2.1723889132004146,
+      "selectedSnrErrorDb": 0.01645805833950087,
+      "estimatorSnrErrorDb": 0.019840089314485,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "b60a4189e85b6b6aa5f361c573ad2f5f2e5239af418adae9b74abf352df9dcd6",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.688000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.066090190242472,
+      "actualSnrDb": 12.07128104351105,
+      "selectedSnrErrorDb": 0.005190853268578266,
+      "estimatorSnrErrorDb": 0.006364255397741658,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "6f1891c4325b3f7403acfda449aeda698e053387c63f2d1faa9b85fe13576933",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.688000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.066090190242472,
+      "actualSnrDb": 12.07128104351105,
+      "selectedSnrErrorDb": 0.005190853268578266,
+      "estimatorSnrErrorDb": 0.006364255397741658,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "eefa97b7efd308b9c3a117644a654edba1813fdb8976dbc3a963a8afa73da6d3",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.688000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.848
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.066090190242472,
+      "actualSnrDb": 12.07128104351105,
+      "selectedSnrErrorDb": 0.005190853268578266,
+      "estimatorSnrErrorDb": 0.006364255397741658,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "77351af3db530ba0daa4687362329227c6834d15a481eb0f7991bb8a008766fe",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.656000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.784
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.133684640385365,
+      "actualSnrDb": 22.133156568691632,
+      "selectedSnrErrorDb": -0.0005280716937328123,
+      "estimatorSnrErrorDb": 0.002021612480202606,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "a1bd928aba8a5c79a99a7033ab12f0cd0e2a37bf72f7d4409169ee4de4ac5337",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.656000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.72
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 2.1760602049780564,
+      "actualSnrDb": 2.2170944635282233,
+      "selectedSnrErrorDb": 0.04103425855016685,
+      "estimatorSnrErrorDb": 0.04225164851415286,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "90fde44204263e330a971219f2180ce11e9a640a91e40f169f7934a37a984b2c",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.72
+        },
+        {
+          "start": 7.008,
+          "end": 10.72
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 12.130025270964788,
+      "actualSnrDb": 12.144325788879918,
+      "selectedSnrErrorDb": 0.014300517915129873,
+      "estimatorSnrErrorDb": 0.013405646030406615,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10043298898524273336.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "2311a938a4d7238580651ccb63ed6994b95338be9cec750c433692c2478d8288",
+      "segments": [
+        {
+          "start": 4.192,
+          "end": 6.688000000000001
+        },
+        {
+          "start": 7.008,
+          "end": 10.72
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 22.15322024160703,
+      "actualSnrDb": 22.157543119363044,
+      "selectedSnrErrorDb": 0.00432287775601381,
+      "estimatorSnrErrorDb": 0.0042437188685866545,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "b92371d41cb516124aafd237757ac32c981cfbe19c9d60e9e358ad22cd13a458",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 14.752
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 16.288
+        },
+        {
+          "start": 16.512,
+          "end": 21.216
+        },
+        {
+          "start": 21.472,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "965e9f033ddc04d73e7bcc0f65fe218d677208b69ab2d036eba1e9a18e25528c",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 8.896
+        },
+        {
+          "start": 9.28,
+          "end": 14.752
+        },
+        {
+          "start": 15.36,
+          "end": 16.288
+        },
+        {
+          "start": 16.512,
+          "end": 21.216
+        },
+        {
+          "start": 21.472,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "38b654540d54d99c1b8c169f38e24503f272b4c6db20489d7d6977a9f8737ca1",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.2
+        },
+        {
+          "start": 7.456,
+          "end": 14.816
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 21.28
+        },
+        {
+          "start": 21.472,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 3.6935625,
+        "clippingEventCount": 4551,
+        "speechClippingRatio": 0.231078734984985,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "96523668333d8ff881da8fac605cccf661d7cf18e388ef1b23b0429e2af67c06",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 9.056000000000001
+        },
+        {
+          "start": 9.376,
+          "end": 14.912
+        },
+        {
+          "start": 15.424,
+          "end": 22.240000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 0.9482432410329055,
+      "actualSnrDb": 0.9626124920812416,
+      "selectedSnrErrorDb": 0.014369251048336085,
+      "estimatorSnrErrorDb": 0.011580720538240996,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "4bb33ae4ed78acb061ea253c2c4d58010b729cd06ec499ab1bbe3e425adb1cb1",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 8.928
+        },
+        {
+          "start": 9.376,
+          "end": 13.280000000000001
+        },
+        {
+          "start": 13.504,
+          "end": 14.848
+        },
+        {
+          "start": 15.424,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.097498063321732,
+      "actualSnrDb": 11.103130980025337,
+      "selectedSnrErrorDb": 0.005632916703605773,
+      "estimatorSnrErrorDb": 0.0036654892165017827,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "60841dba36b2025e3793c70851a0888f4fc9dd97332e74abce0a653d77cb671d",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 8.928
+        },
+        {
+          "start": 9.376,
+          "end": 13.280000000000001
+        },
+        {
+          "start": 13.504,
+          "end": 14.848
+        },
+        {
+          "start": 15.424,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.097498063321732,
+      "actualSnrDb": 11.103130980025337,
+      "selectedSnrErrorDb": 0.005632916703605773,
+      "estimatorSnrErrorDb": 0.0036654892165017827,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "211027b7da34ff32439cd0a10a2c6a9be0ec6d4b0486b734b9a27adc23a717e8",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 8.928
+        },
+        {
+          "start": 9.376,
+          "end": 13.280000000000001
+        },
+        {
+          "start": 13.504,
+          "end": 14.848
+        },
+        {
+          "start": 15.424,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.097498063321732,
+      "actualSnrDb": 11.103130980025337,
+      "selectedSnrErrorDb": 0.005632916703605773,
+      "estimatorSnrErrorDb": 0.0036654892165017827,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "884b36d35eb7b08090d7dbbb42e24072f5fcdb3b15929445b8614da37d1c516d",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.136
+        },
+        {
+          "start": 7.456,
+          "end": 8.896
+        },
+        {
+          "start": 9.376,
+          "end": 11.936
+        },
+        {
+          "start": 12.128,
+          "end": 13.184000000000001
+        },
+        {
+          "start": 13.504,
+          "end": 14.784
+        },
+        {
+          "start": 15.424,
+          "end": 16.32
+        },
+        {
+          "start": 16.512,
+          "end": 21.216
+        },
+        {
+          "start": 21.472,
+          "end": 22.080000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 21.35328823992478,
+      "actualSnrDb": 21.358449088016684,
+      "selectedSnrErrorDb": 0.005160848091904313,
+      "estimatorSnrErrorDb": 0.0011594639842442689,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "ad79408b7bf3101216a0c14fe0446294cb213db5331a35b74e7034a0f0c81f5c",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.424,
+          "end": 8.864
+        },
+        {
+          "start": 9.28,
+          "end": 11.904
+        },
+        {
+          "start": 12.128,
+          "end": 13.184000000000001
+        },
+        {
+          "start": 13.504,
+          "end": 14.752
+        },
+        {
+          "start": 15.36,
+          "end": 16.288
+        },
+        {
+          "start": 16.512,
+          "end": 21.184
+        },
+        {
+          "start": 21.472,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 1.3498800137277813,
+      "actualSnrDb": 1.3727898142219352,
+      "selectedSnrErrorDb": 0.02290980049415392,
+      "estimatorSnrErrorDb": 0.02303599365319542,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "c8a9f3f76e9ec58c96af1462f26757b6bd207a9d6e6043afe763820188ebe792",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 14.752
+        },
+        {
+          "start": 15.36,
+          "end": 16.288
+        },
+        {
+          "start": 16.512,
+          "end": 21.184
+        },
+        {
+          "start": 21.472,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.082223385724298,
+      "actualSnrDb": 11.090260162927763,
+      "selectedSnrErrorDb": 0.008036777203464851,
+      "estimatorSnrErrorDb": 0.007297855503729522,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-fr_fr-10097171356371990207.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "fr_fr",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "b8fc5c4df1a0cf195c30b52c9902649e85983be4710fb10c2b43b4fde08eae18",
+      "segments": [
+        {
+          "start": 5.056,
+          "end": 7.168
+        },
+        {
+          "start": 7.456,
+          "end": 14.752
+        },
+        {
+          "start": 15.328000000000001,
+          "end": 16.288
+        },
+        {
+          "start": 16.512,
+          "end": 21.216
+        },
+        {
+          "start": 21.472,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 21.064399683787233,
+      "actualSnrDb": 21.067247993391522,
+      "selectedSnrErrorDb": 0.0028483096042890566,
+      "estimatorSnrErrorDb": 0.0023091251284519387,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "3cd816a6b19967824f159acd76af002db232e271315627912883edf62e4ce7cf",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 7.264
+        },
+        {
+          "start": 7.456,
+          "end": 9.792
+        },
+        {
+          "start": 9.984,
+          "end": 13.952
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "d96303ffd5d70da47fa4ab520807e4c32881de22ebcde8f16780316ad47f5f1d",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 7.264
+        },
+        {
+          "start": 7.456,
+          "end": 9.792
+        },
+        {
+          "start": 9.984,
+          "end": 13.952
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "1c281807dc9cb02b81b6b9dc2025ab4b142167d138fccf2ff8fa1ce0d6cbe594",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 14.016
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 1.00225,
+        "clippingEventCount": 2942,
+        "speechClippingRatio": 0.09974621815286625,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "00275e42982273852a2098d3372ccf93e51a3e135cbea4f1aed71b8ecd14cbbc",
+      "segments": [
+        {
+          "start": 4.032,
+          "end": 14.048
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 1.0750198369023671,
+      "actualSnrDb": 1.0674840533283714,
+      "selectedSnrErrorDb": -0.007535783573995758,
+      "estimatorSnrErrorDb": -0.007327810172284899,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "95643c1db3be63e6fcfa85ccda22bb6ac78e2d694fc88f0774f36d409ff057af",
+      "segments": [
+        {
+          "start": 4.032,
+          "end": 7.328
+        },
+        {
+          "start": 7.5200000000000005,
+          "end": 14.048
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.156760856399202,
+      "actualSnrDb": 11.15531786805105,
+      "selectedSnrErrorDb": -0.0014429883481525962,
+      "estimatorSnrErrorDb": -0.0022421108211787555,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "fc12f5ed8abbc84dd8e764fe130bd770be32c289ae913f7fe50cb98aa153fbc6",
+      "segments": [
+        {
+          "start": 4.032,
+          "end": 7.328
+        },
+        {
+          "start": 7.5200000000000005,
+          "end": 14.048
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.156760856399202,
+      "actualSnrDb": 11.15531786805105,
+      "selectedSnrErrorDb": -0.0014429883481525962,
+      "estimatorSnrErrorDb": -0.0022421108211787555,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "53b5312f57a7ce3a3ef3c8204abfa5ac2ecbb9b17640719e11ce858921903738",
+      "segments": [
+        {
+          "start": 4.032,
+          "end": 7.328
+        },
+        {
+          "start": 7.5200000000000005,
+          "end": 14.048
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.156760856399202,
+      "actualSnrDb": 11.15531786805105,
+      "selectedSnrErrorDb": -0.0014429883481525962,
+      "estimatorSnrErrorDb": -0.0022421108211787555,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "c7f2fe52a03c60b22dcb50be36ed188b895c1f7b2cdfec1300fc6ec253d5534e",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 7.264
+        },
+        {
+          "start": 7.488,
+          "end": 13.984
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 21.174670621319045,
+      "actualSnrDb": 21.174650624642553,
+      "selectedSnrErrorDb": -0.000019996676492439747,
+      "estimatorSnrErrorDb": -0.0007015183963936522,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "e9ef1bdbed6b9aa56e08b89c6eca703e63e5066e9d25239633427aeb3f8ac309",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 7.264
+        },
+        {
+          "start": 7.456,
+          "end": 9.792
+        },
+        {
+          "start": 9.984,
+          "end": 11.296
+        },
+        {
+          "start": 11.488,
+          "end": 13.952
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 1.3449952423214981,
+      "actualSnrDb": 1.3414661641107593,
+      "selectedSnrErrorDb": -0.0035290782107388896,
+      "estimatorSnrErrorDb": -0.004906558427443031,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "fb238e2760660e6be26adbb37582f0d51231ea942db42f1759561c9e956d560f",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 13.952
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 11.091410599959797,
+      "actualSnrDb": 11.0901133511679,
+      "selectedSnrErrorDb": -0.0012972487918965214,
+      "estimatorSnrErrorDb": -0.0015086477734698178,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-1001146817223348054.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "68874881f661846a32bafefee88108bda4cd308a7ffe6b2955ca9326fd1023c4",
+      "segments": [
+        {
+          "start": 3.968,
+          "end": 13.952
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 21.0914105952333,
+      "actualSnrDb": 21.091247264958255,
+      "selectedSnrErrorDb": -0.00016333027504344955,
+      "estimatorSnrErrorDb": -0.00047277645777299426,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "native",
+      "sampleRate": 16000,
+      "pcmSha256": "d3f9fd59a75094734b7cf7e45311dd2057454530b2a5503613855acc60ad3f60",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 9.376
+        },
+        {
+          "start": 9.6,
+          "end": 20.352
+        },
+        {
+          "start": 20.896,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "quiet-minus12db",
+      "sampleRate": 16000,
+      "pcmSha256": "0cd71ce5b513b4c9aa9fc0e954cefc1a20c61aba6530b5950ab6afdbd3c09806",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 9.28
+        },
+        {
+          "start": 9.632,
+          "end": 12.672
+        },
+        {
+          "start": 12.896,
+          "end": 20.544
+        },
+        {
+          "start": 20.896,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "hard-clipped",
+      "sampleRate": 16000,
+      "pcmSha256": "a0ec1aa9bc87e859ec01a6c9d6116016d4cfa11449091cf9b1c1f10b046dc877",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 9.28
+        },
+        {
+          "start": 9.6,
+          "end": 12.576
+        },
+        {
+          "start": 12.896,
+          "end": 20.64
+        },
+        {
+          "start": 20.864,
+          "end": 22
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 1.2210625,
+        "clippingEventCount": 2524,
+        "speechClippingRatio": 0.06995087648945922,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": null,
+      "actualSnrDb": 80,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "d8b4edb8f4632c64ff3f341860aee2c1f0abd7d499725adbe3ce026028b91538",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 5.152
+        },
+        {
+          "start": 5.408,
+          "end": 9.248000000000001
+        },
+        {
+          "start": 9.632,
+          "end": 12.544
+        },
+        {
+          "start": 12.896,
+          "end": 20.288
+        },
+        {
+          "start": 20.896,
+          "end": 22.144000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 0.736030337238843,
+      "actualSnrDb": 0.7366639511522095,
+      "selectedSnrErrorDb": 0.0006336139133664709,
+      "estimatorSnrErrorDb": 0.00016542885850867606,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "288f2c397a2f894747afa2f89c866b78fb44d87db47ffe0f563ebd4118202a79",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 5.152
+        },
+        {
+          "start": 5.376,
+          "end": 9.184000000000001
+        },
+        {
+          "start": 9.6,
+          "end": 12.384
+        },
+        {
+          "start": 12.896,
+          "end": 16.544
+        },
+        {
+          "start": 16.8,
+          "end": 18.72
+        },
+        {
+          "start": 18.944,
+          "end": 20.352
+        },
+        {
+          "start": 20.896,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 10.897491156170975,
+      "actualSnrDb": 10.897660972672949,
+      "selectedSnrErrorDb": 0.00016981650197323006,
+      "estimatorSnrErrorDb": 0.000052317454816375175,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db-increase",
+      "sampleRate": 16000,
+      "pcmSha256": "11b02dc52bfe673ff44fcb469814ded7c91d75974c3da44ad65ca7dbb299f1aa",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 5.152
+        },
+        {
+          "start": 5.376,
+          "end": 9.184000000000001
+        },
+        {
+          "start": 9.6,
+          "end": 12.384
+        },
+        {
+          "start": 12.896,
+          "end": 16.544
+        },
+        {
+          "start": 16.8,
+          "end": 18.72
+        },
+        {
+          "start": 18.944,
+          "end": 20.352
+        },
+        {
+          "start": 20.896,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 10.897491156170975,
+      "actualSnrDb": 10.897660972672949,
+      "selectedSnrErrorDb": 0.00016981650197323006,
+      "estimatorSnrErrorDb": 0.000052317454816375175,
+      "snrPass": "increase",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-10db-decrease",
+      "sampleRate": 16000,
+      "pcmSha256": "ff0787706c81f0715328330ed21822d37e6f237062fd5b357f1e8ba104fcb0b2",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 5.152
+        },
+        {
+          "start": 5.376,
+          "end": 9.184000000000001
+        },
+        {
+          "start": 9.6,
+          "end": 12.384
+        },
+        {
+          "start": 12.896,
+          "end": 16.544
+        },
+        {
+          "start": 16.8,
+          "end": 18.72
+        },
+        {
+          "start": 18.944,
+          "end": 20.352
+        },
+        {
+          "start": 20.896,
+          "end": 22.112000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 10.897491156170975,
+      "actualSnrDb": 10.897660972672949,
+      "selectedSnrErrorDb": 0.00016981650197323006,
+      "estimatorSnrErrorDb": 0.000052317454816375175,
+      "snrPass": "decrease",
+      "estimatorStability": "unstable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": null,
+      "stability": "unstable",
+      "stabilityPass": true,
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "white-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "ba32aff5083b226831406a44443b3d973bbeb39190ff24b8c20d1ac31402bc09",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 5.12
+        },
+        {
+          "start": 5.376,
+          "end": 9.120000000000001
+        },
+        {
+          "start": 9.6,
+          "end": 12.352
+        },
+        {
+          "start": 12.896,
+          "end": 16.48
+        },
+        {
+          "start": 16.8,
+          "end": 18.688
+        },
+        {
+          "start": 18.944,
+          "end": 20.288
+        },
+        {
+          "start": 20.896,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 20.99084087168302,
+      "actualSnrDb": 20.992550687121117,
+      "selectedSnrErrorDb": 0.0017098154380974506,
+      "estimatorSnrErrorDb": 0.000016541654826340846,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-0db",
+      "sampleRate": 16000,
+      "pcmSha256": "675cd5a3a9b6197dbe307cbc493bdaf433d3a1860319deb08aa3faf6aba07077",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 9.184000000000001
+        },
+        {
+          "start": 9.6,
+          "end": 12.352
+        },
+        {
+          "start": 12.896,
+          "end": 16.608
+        },
+        {
+          "start": 16.8,
+          "end": 18.592
+        },
+        {
+          "start": 18.944,
+          "end": 20.32
+        },
+        {
+          "start": 20.896,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 0.8891924064533117,
+      "actualSnrDb": 0.9947869624633938,
+      "selectedSnrErrorDb": 0.10559455601008216,
+      "estimatorSnrErrorDb": 0.10403271037331052,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-10db",
+      "sampleRate": 16000,
+      "pcmSha256": "b79f768b23c225219a8b5f9f16b919ad9ed1cc7353512cb953a7dde3b47f1ac3",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 9.376
+        },
+        {
+          "start": 9.6,
+          "end": 12.704
+        },
+        {
+          "start": 12.896,
+          "end": 20.32
+        },
+        {
+          "start": 20.896,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 10.609022283390122,
+      "actualSnrDb": 10.642743733363204,
+      "selectedSnrErrorDb": 0.033721449973082684,
+      "estimatorSnrErrorDb": 0.03316826102693682,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "file": "fleurs-es_419-10050510856477907332.wav",
+      "split": "supplementary",
+      "corpus": "FLEURS",
+      "language": "es_419",
+      "device": "unspecified",
+      "condition": "fan-tone-20db",
+      "sampleRate": 16000,
+      "pcmSha256": "b2c050fbb52bbc49bf11b5da859a1ddee28a9c0ead2d0d21ecd8cbc71f4420b3",
+      "segments": [
+        {
+          "start": 3.68,
+          "end": 12.704
+        },
+        {
+          "start": 12.896,
+          "end": 20.352
+        },
+        {
+          "start": 20.896,
+          "end": 22.048000000000002
+        }
+      ],
+      "agreement": null,
+      "annotationKind": "Transcript only; no speech-boundary truth or speaker split claim.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": null,
+      "annotationSpeechClippingError": null,
+      "referenceSnrDb": 20.54554180348616,
+      "actualSnrDb": 20.556443187551004,
+      "selectedSnrErrorDb": 0.010901384064844422,
+      "estimatorSnrErrorDb": 0.010516149084224935,
+      "snrPass": true,
+      "estimatorStability": "stable",
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": true,
+      "stationaryWorkerTruth": "Unknown native source background; constant injected component only",
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": null,
+      "state": "graded",
+      "certainty": "medium",
+      "grade": "C",
+      "passed": true
+    },
+    {
+      "file": "generated-white",
+      "split": "controlled",
+      "corpus": "Generated",
+      "language": null,
+      "device": null,
+      "condition": "no-speech-control",
+      "sampleRate": 16000,
+      "pcmSha256": "37ff30ccd447b030f7909e7379394e96f7f3bbe51a9a6c5899de0c5ec85348e3",
+      "segments": [],
+      "agreement": {
+        "precision": null,
+        "recall": null,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "boundaryErrors": []
+      },
+      "annotationKind": "Exact no-speech by construction; idealized sound, not a real fan, keyboard or music recording.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "generated-fan-tone",
+      "split": "controlled",
+      "corpus": "Generated",
+      "language": null,
+      "device": null,
+      "condition": "no-speech-control",
+      "sampleRate": 16000,
+      "pcmSha256": "533c48c971f79ff3a06e64630e73be99721ae4141c7cfe988488f3bf7f41f954",
+      "segments": [],
+      "agreement": {
+        "precision": null,
+        "recall": null,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "boundaryErrors": []
+      },
+      "annotationKind": "Exact no-speech by construction; idealized sound, not a real fan, keyboard or music recording.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "generated-typing-clicks",
+      "split": "controlled",
+      "corpus": "Generated",
+      "language": null,
+      "device": null,
+      "condition": "no-speech-control",
+      "sampleRate": 16000,
+      "pcmSha256": "489f8c13ea27b2c30b8f06383d0ec28c95ea9b85bf263528c3acb904c9c3a225",
+      "segments": [],
+      "agreement": {
+        "precision": null,
+        "recall": null,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "boundaryErrors": []
+      },
+      "annotationKind": "Exact no-speech by construction; idealized sound, not a real fan, keyboard or music recording.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": true,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "certainty": "low",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "file": "generated-instrumental-tones",
+      "split": "controlled",
+      "corpus": "Generated",
+      "language": null,
+      "device": null,
+      "condition": "no-speech-control",
+      "sampleRate": 16000,
+      "pcmSha256": "563fb401788183b1d85714aa6fe5e759e921cdc942d3f56c13c60f5467a86ec2",
+      "segments": [
+        {
+          "start": 0,
+          "end": 0.224
+        }
+      ],
+      "agreement": {
+        "precision": null,
+        "recall": null,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "boundaryErrors": []
+      },
+      "annotationKind": "Exact no-speech by construction; idealized sound, not a real fan, keyboard or music recording.",
+      "referenceClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "clippingPass": true,
+      "confidencePass": true,
+      "noSpeechPass": false,
+      "annotationClipping": {
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0,
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0
+      },
+      "annotationSpeechClippingError": 0,
+      "referenceSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedSnrErrorDb": null,
+      "estimatorSnrErrorDb": null,
+      "snrPass": true,
+      "estimatorStability": null,
+      "estimatorStabilityPass": true,
+      "workerStabilityAgreement": null,
+      "stationaryWorkerTruth": null,
+      "stability": "stable",
+      "stabilityPass": true,
+      "retry": "calibration_speech",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "certainty": "low",
+      "grade": null,
+      "passed": false
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # Recorded human speech fixtures
 
+The [licensed device/language expansion](accuracy-expansion/README.md) adds
+paired AMI headset/distant-array crops and German/French/Spanish FLEURS clips.
+Its metadata distinguishes human transcripts, forced-aligned timing diagnostics,
+transcript-only language checks and exact generated references. Full Chromium
+capture replay is covered separately from physical-microphone validation.
+
 A further twelve recordings from six speakers, with transcripts and checksums, are available in [human-speech](human-speech/README.md). They are collected source material and are not yet included in `real-speech.spec.ts`.
 
 These two unmodified FLAC recordings come from the LibriSpeech test-clean corpus,

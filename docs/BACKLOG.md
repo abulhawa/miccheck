@@ -208,6 +208,21 @@ independent boundaries, untouched speakers/devices and physical overdrive
 captures are required before changing VAD or grading. This is implemented
 uncertainty handling and room expansion, not completion of point 3.
 
+September 29 alternatives: [licensed recordings, exact component references and
+browser replay](ACCURACY_ALTERNATIVES.md) now implement all three alternatives
+agreed while physical capture stays open. Fourteen new AMI/FLEURS fixtures add
+two microphone classes, disjoint AMI participant/room splits and German/French/
+Spanish coverage. Ninety recorded-input measurement gates pass; four exact
+nonspeech controls retain one confirmed instrumental calibration false positive.
+Two stationary-added-noise cases retain unresolved worker retries because native
+source background is not independently decomposed. Actual Chromium capture now
+checks processing off/on, settings, PCM, analysis, saved playback and track
+release. Calibration advice now discloses possible speech-like sounds/music;
+detector accuracy is unchanged. Fine independent boundaries, native retry truth,
+multilingual participant/device metadata, representative appliance/typing/music
+negatives, other browsers and physical captures remain open. These alternatives
+reduce the validation gap; they do not complete point 3 or justify threshold tuning.
+
 - [x] First add annotated speech and known signal/noise mixtures covering clipping and noise stability, with reproducible expected measurements.
 - [ ] Expand to consented/licensed recordings across speakers, languages, devices, rooms, quiet speech, fans, typing, music, and browser processing on/off.
 - [ ] Separate tuning and evaluation data by speaker and capture conditions; record provenance, licenses, annotations, and reproducible generation settings.

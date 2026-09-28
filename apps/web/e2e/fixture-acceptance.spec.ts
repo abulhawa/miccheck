@@ -67,3 +67,16 @@ test('unselected clipping is disclosed with conservative certainty on regression
     expect(summary.unsupportedMediumAfter).toBe(0);
   }
 });
+
+test('licensed device/language expansion retains exact measurement and introduced-change gates', async () => {
+  test.setTimeout(420000);
+  const { stdout } = await promisify(execFile)(process.execPath, ['scripts/benchmark-accuracy-expansion.mjs', '--recorded-only', '--check'], {
+    timeout: 410000, maxBuffer: 1024 * 1024,
+  });
+  const summary = JSON.parse(stdout.trim().split(/\r?\n/).at(-1)!);
+  expect(summary.cases).toBe(90);
+  expect(summary.failures).toBe(0);
+  // Native background is not independently decomposed. Stationary-injected
+  // mixture disagreements stay in the report; they are not assigned false-alarm
+  // truth. Exact generated negatives run separately and exit nonzero on failure.
+});

@@ -2,6 +2,13 @@
 
 The purpose of these benchmarks and recording artifacts is to improve the mic checker. Use them to find measurement and advice failures, make targeted production changes, and demonstrate better behavior without introducing false alarms.
 
+The [physical-testing alternatives](ACCURACY_ALTERNATIVES.md) add licensed AMI
+headset/array and multilingual FLEURS recordings, independent retained-component
+references, and actual Chromium WAV capture with processing disabled/enabled.
+The report preserves a confirmed instrumental detector false positive and two
+unresolved native-background disagreements; it distinguishes passing arithmetic
+gates from detection accuracy and records the resulting calibration-advice fix.
+
 ## Improvement workflow
 
 1. Name the user-visible failure and intended improvement in measurements, grading, confidence, or advice.

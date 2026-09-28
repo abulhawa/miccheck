@@ -108,7 +108,7 @@ describe("TestExperiencePage", () => {
     if (status === 'ready') expect(html).toContain('nothing is being recorded while you prepare');
   });
   it.each([
-    ['calibration_speech', 'Speech detected during room calibration'],
+    ['calibration_speech', 'Speech-like sound detected during room calibration'],
     ['speech_too_short', 'Speech detected, but the sample is too short'],
     ['speech_detection_unavailable', 'Could not verify speech reliably'],
     ['calibration_too_short', 'Room calibration was too short'],
