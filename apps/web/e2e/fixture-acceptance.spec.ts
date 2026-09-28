@@ -38,3 +38,19 @@ test('annotated component references meet clipping, SNR and noise-stability gate
   });
   expect(JSON.parse(stdout.trim()).failures).toBe(0);
 });
+
+test("production worker preserves recording clipping and known selected-component SNR", async () => {
+  test.setTimeout(240000);
+  const { stdout } = await promisify(execFile)(
+    process.execPath,
+    ["scripts/benchmark-annotated-accuracy.mjs", "--worker", "--check"],
+    {
+      timeout: 230000,
+      maxBuffer: 1024 * 1024,
+    },
+  );
+  const summary = JSON.parse(stdout.trim().split(/\r?\n/)[0]);
+  expect(summary.cases).toBe(34);
+  expect(summary.recordingClippingFailures).toBe(0);
+  expect(summary.selectedSnrFailures).toBe(0);
+});

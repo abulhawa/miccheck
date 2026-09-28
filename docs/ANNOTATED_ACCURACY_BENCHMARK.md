@@ -109,3 +109,8 @@ provenance verification and web production build pass. Root `npm run test` and
 `npm run build` were attempted but npm is unavailable in this runtime; direct
 Node entrypoints ran the web/core checks. Standalone audio-metrics build/test
 remain skipped under the repository's documented workspace-resolution limitation.
+
+The [production-worker continuation](WORKER_ACCURACY_BENCHMARK.md) now runs these
+same 34 inputs with actual Silero selection, reports reference errors and retains
+speech-clipping misses as explicit improvement targets. This supplies the next
+verification stage without claiming broader accuracy or a production fix.

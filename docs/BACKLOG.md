@@ -185,6 +185,17 @@ worker noise cases pass. This completes the first stage only. Source recordings
 are existing regression evidence; model-selected clipping/SNR accuracy, broader
 coverage, untouched evaluation conditions and physical app capture remain open.
 
+The [production-worker accuracy continuation](WORKER_ACCURACY_BENCHMARK.md)
+now runs all 34 frozen first-stage inputs through actual Silero selection,
+reporting speech-bin precision/recall, diagnostic boundary offsets, clipping error
+and selected-component SNR error. All recording-wide clipping and six SNR gates
+pass; eight speech-clipping ratios disagree. Three sources miss the inserted
+speech crossings, including a graded room6 case. Preserve these as accuracy
+failures: compare natural and inserted-crossing speech with finer independent
+boundaries and untouched evaluation controls before changing VAD or confidence.
+This implements missing worker verification, not a production accuracy fix.
+Broader corpus/splits and the complete physical capture path remain open.
+
 - [x] First add annotated speech and known signal/noise mixtures covering clipping and noise stability, with reproducible expected measurements.
 - [ ] Expand to consented/licensed recordings across speakers, languages, devices, rooms, quiet speech, fans, typing, music, and browser processing on/off.
 - [ ] Separate tuning and evaluation data by speaker and capture conditions; record provenance, licenses, annotations, and reproducible generation settings.

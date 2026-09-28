@@ -138,3 +138,9 @@ Remove-Item Env:UPDATE_BENCHMARK
 `UPDATE_SCREENSHOTS=1` similarly refreshes the checked-in home, result, and mobile screenshots. The tests use a fake microphone and never request physical microphone input.
 
 A future accuracy evaluation should use consented, manually annotated recordings split by speaker, room, and device. Include quiet speech, fans, typing, music, processing on/off, and known signal/noise mixtures; report missed speech, false speech, SNR error, model latency, and memory by device. Until then, results stay explicitly heuristic and diagnostic certainty is capped.
+
+The [worker accuracy continuation](WORKER_ACCURACY_BENCHMARK.md) measures all
+34 frozen first-stage inputs using actual Silero selection. Exact recording
+clipping and known selected-component SNR pass, while speech-clipping misses
+remain explicit improvement targets. This adds verification, not threshold tuning
+or a completed representative accuracy benchmark.

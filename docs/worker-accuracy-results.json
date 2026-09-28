@@ -1,0 +1,2053 @@
+{
+  "protocol": "worker-accuracy-v1",
+  "productionWorkerSha256": "8cfc69d50173026b08549876eb03e3a7e9e96c13f486d9c9bf808dfbe58866b2",
+  "modelManifestSha256": "ad6efd1c5e4c351a97bc1b5184c3ad25ab365faf2f02f69fc93ae351f80649d6",
+  "estimatorBundleSha256": "b9f43892897bb034b8554536a986712e80b3d5dec29763d675c1febbcfbdca6f",
+  "provenance": [
+    {
+      "file": "AirConditioner_1.wav",
+      "sha256": "3fe55d7035d7ef2599841738f818dc4463f5ef983eb4b5fefeee153d8caa2110"
+    },
+    {
+      "file": "clnsp0.wav",
+      "sha256": "be5c2c6578f085ac3e95bd42fb0cbda8f6f2bbda0d03bb5b19fbe60d67e079f7"
+    },
+    {
+      "file": "clnsp1.wav",
+      "sha256": "53906dc2f3da62041ec81c37c175ad4c6b89b9e444bf3c9e5c4a4b7cecfe3238"
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "sha256": "98899e2eb439f405cec157881c6a46225aedd4da73e9b77076c23d1d93b5f68f"
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "sha256": "ef32da3fa20e87ba700c72b782ee2ed24e434fac54bd352e4e956a4cd8447f0f"
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "sha256": "6e9292abd3afbf24e244514723a57b8577c8d87704b7c20929b075bf559298ac"
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "sha256": "47f3df22125266a745e7c037c2e53faffa39a2ef4e78e184ffe3e18400ab5865"
+    }
+  ],
+  "limitations": [
+    "MS-SNSD clean designation and whole-source interval are reference components, not human speech boundaries.",
+    "Constructed mixtures and inserted threshold crossings are not native physical SNR or distortion ground truth.",
+    "All sources previously inspected: regression split only; no new held-out tuning claim.",
+    "Raw capture flags exercise estimator confidence only; no actual browser processing or microphone validation.",
+    "Worker runs actual Silero. Full-bin speech agreement includes 100 ms annotation boundary uncertainty and all overlapping classes; not verified false alarms.",
+    "Selected-component SNR uses independently retained signal and noise on worker-selected samples, distinct from whole-source target SNR.",
+    "Accuracy disagreements are reported, not silently accepted as accuracy gates; recording-wide clipping remains an exact acceptance gate."
+  ],
+  "summary": {
+    "cases": 34,
+    "recordingClippingFailures": 0,
+    "speechClippingDisagreements": 8,
+    "selectedSnrFailures": 0,
+    "selectedSnrOverOneDb": 0
+  },
+  "rows": [
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 0,
+      "pcmSha256": "1f2ecc2214d02c7fc0387d2074bcd49ee7e8e775ebe082ae7cde69a830c8ec46",
+      "selectedIntervals": [
+        {
+          "start": 2.24,
+          "end": 9.792
+        },
+        {
+          "start": 10.144,
+          "end": 13.216000000000001
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 0.48854863118149483,
+      "actualSnrDb": 0.42534067154931066,
+      "selectedComponentSnrErrorDb": -0.06320795963218417,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 10,
+      "pcmSha256": "6c9c4c4eb2b873648b5632a4e7537a6e7d40d0e51307ac54c8cdcbfffb11a6b8",
+      "selectedIntervals": [
+        {
+          "start": 2.208,
+          "end": 9.728
+        },
+        {
+          "start": 10.112,
+          "end": 13.216000000000001
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 10.500376414375658,
+      "actualSnrDb": 10.499053327967047,
+      "selectedComponentSnrErrorDb": -0.0013230864086111183,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "D",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 20,
+      "pcmSha256": "2df60d61b8e4c9a300beb77b6dbd83eb2f541b13ea10fbe3038d32079de0fd33",
+      "selectedIntervals": [
+        {
+          "start": 2.208,
+          "end": 3.168
+        },
+        {
+          "start": 3.392,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.832,
+          "end": 5.92
+        },
+        {
+          "start": 6.144,
+          "end": 9.728
+        },
+        {
+          "start": 10.112,
+          "end": 13.024000000000001
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 20.89080483356021,
+      "actualSnrDb": 20.884434281876523,
+      "selectedComponentSnrErrorDb": -0.006370551683687609,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "C",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 0,
+      "pcmSha256": "f8fe3a08b9a1571850f1c5fb835c9876c680b481b63a2968c51d5cd042c133ea",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 13.536
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 0.15376158379115637,
+      "actualSnrDb": 0.2584071916139479,
+      "selectedComponentSnrErrorDb": 0.1046456078227915,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 10,
+      "pcmSha256": "54c84164e7ed92ca78b49b69058e089bb45f4ad701a7a65e266087f16709697f",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 11.584
+        },
+        {
+          "start": 11.776,
+          "end": 13.280000000000001
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 10.288016577159082,
+      "actualSnrDb": 10.371740531339874,
+      "selectedComponentSnrErrorDb": 0.08372395418079215,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "D",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 20,
+      "pcmSha256": "78e65611fa1f1c7df71cf27d78dc7b840b1264fa2ac64b4af84aa3b61de71fcc",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 6.5920000000000005
+        },
+        {
+          "start": 6.848,
+          "end": 11.424
+        },
+        {
+          "start": 11.744,
+          "end": 13.280000000000001
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 14
+        }
+      ],
+      "referenceIntervalKind": "Whole padded clean component; not speech truth",
+      "agreement": null,
+      "boundaryDistances": null,
+      "referenceClipping": null,
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": null,
+      "selectedComponentSnrDb": 20.456799349148767,
+      "actualSnrDb": 20.508100749700763,
+      "selectedComponentSnrErrorDb": 0.05130140055199561,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "C",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "stationary",
+      "pcmSha256": "0bc5f64d08210b63e687234b46fbdb48d5e6e33358ff9ce91995a428f40d4d5f",
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.644,
+        "falsePositiveSeconds": 0.08404166666666667,
+        "falseNegativeSeconds": 0.856,
+        "precision": 0.9513659489306295,
+        "recall": 0.6576
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.1599999999999997,
+          "offsetErrorSeconds": 0.07600000000000051
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": -0.008000000000000007,
+          "offsetErrorSeconds": -0.5039999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 4.483290587434539,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "increase",
+      "pcmSha256": "b86de81aeec04735c277fcf1e0d0f62aebfb37062c336278438afa150088b1d2",
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.644,
+        "falsePositiveSeconds": 0.08404166666666667,
+        "falseNegativeSeconds": 0.856,
+        "precision": 0.9513659489306295,
+        "recall": 0.6576
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.1599999999999997,
+          "offsetErrorSeconds": 0.07600000000000051
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": -0.008000000000000007,
+          "offsetErrorSeconds": -0.5039999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 4.483290587434539,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "decrease",
+      "pcmSha256": "cc6f5327e829e76dd46dc12862919c559804bb57ae428b93a3139c7b3795b544",
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.644,
+        "falsePositiveSeconds": 0.08404166666666667,
+        "falseNegativeSeconds": 0.856,
+        "precision": 0.9513659489306295,
+        "recall": 0.6576
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.1599999999999997,
+          "offsetErrorSeconds": 0.07600000000000051
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": -0.008000000000000007,
+          "offsetErrorSeconds": -0.5039999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 4.483290587434539,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "speech-clipping",
+      "pcmSha256": "d8db244ddd4f9cd7e07bf60d42daf83a62e71f2aa8722dedcbcb53f4f646499c",
+      "selectedIntervals": [
+        {
+          "start": 5.824,
+          "end": 6.432
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0.608,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 1.892,
+        "precision": 1,
+        "recall": 0.2432
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 0,
+          "onsetErrorSeconds": null,
+          "offsetErrorSeconds": null
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": 0.02400000000000002,
+          "offsetErrorSeconds": -0.5679999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.008,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.957329959786463,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "speech_too_short",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "speech-clipping-plus-pause",
+      "pcmSha256": "a92343334a8078400f0d9f28358e1cc3dc5a000b49cccdea26c5c61e3b7bc90e",
+      "selectedIntervals": [
+        {
+          "start": 5.824,
+          "end": 6.432
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0.608,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 1.892,
+        "precision": 1,
+        "recall": 0.2432
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 0,
+          "onsetErrorSeconds": null,
+          "offsetErrorSeconds": null
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": 0.02400000000000002,
+          "offsetErrorSeconds": -0.5679999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.008,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.957329959786463,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "speech_too_short",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "calibration-clipping",
+      "pcmSha256": "a38c70326d1560f93c92c9bd900051b3aa2c761f21b743b93d8cc308b945bdc5",
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.644,
+        "falsePositiveSeconds": 0.08404166666666667,
+        "falseNegativeSeconds": 0.856,
+        "precision": 0.9513659489306295,
+        "recall": 0.6576
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.2,
+            "end": 4.5
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.1599999999999997,
+          "offsetErrorSeconds": 0.07600000000000051
+        },
+        {
+          "reference": {
+            "start": 5.8,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": -0.008000000000000007,
+          "offsetErrorSeconds": -0.5039999999999996
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "no-speech-clipping",
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "selectedIntervals": [],
+      "referenceIntervals": [],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "precision": null,
+        "recall": null
+      },
+      "boundaryDistances": [],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "NO_SPEECH",
+      "retry": "no_speech",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "stationary",
+      "pcmSha256": "6bf542a410f66ddf0c295faa423fa54ebfcda03885c6896d5fd2287d00487958",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.831158728197167,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "increase",
+      "pcmSha256": "0d6085208a9dc3d5dddf62f1b8b7b3021a1e933cdf26ac9997d4fc29a8985141",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.831158728197167,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "decrease",
+      "pcmSha256": "d378a853876c03db0d51bec0536749e98f93ada61a69e4d465cf0121f6d9d578",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.831158728197167,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "speech-clipping",
+      "pcmSha256": "f29f9145857bacc05201b4a345f8379766cb5d814d5f06d289c83fb832ec0656",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.005714285714285714,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.831158728197167,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "speech-clipping-plus-pause",
+      "pcmSha256": "f79bea3b5c362e9a562974db1c9d08a8a13998ebf4dcd888fd50acd981786bec",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.005714285714285714,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 6.831158728197167,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "calibration-clipping",
+      "pcmSha256": "ff3cbd88845e2a1a29b84f7a9406c71bf5bf78aab72e7c4aae5cd489c52b6944",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 2.624041666666667,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0.8759583333333333,
+        "precision": 1,
+        "recall": 0.7497261904761905
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": -0.15200000000000014
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "no-speech-clipping",
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "selectedIntervals": [],
+      "referenceIntervals": [],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "precision": null,
+        "recall": null
+      },
+      "boundaryDistances": [],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "NO_SPEECH",
+      "retry": "no_speech",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "stationary",
+      "pcmSha256": "340488e7f80b7c7b9367fbd567c9327acf7bbc093cd1a67aa8af179e3fda9dbb",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.28,
+        "falsePositiveSeconds": 0.072,
+        "falseNegativeSeconds": 0.72,
+        "precision": 0.9834558823529411,
+        "recall": 0.856
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 7.648802463892693,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "increase",
+      "pcmSha256": "22dbdb10b3dc544322946a40c7796d550473c74732f231146cbfda6700c8a49a",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        },
+        {
+          "start": 7.776,
+          "end": 8.864
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.28,
+        "falsePositiveSeconds": 1.1600416666666666,
+        "falseNegativeSeconds": 0.72,
+        "precision": 0.7867586798507977,
+        "recall": 0.856
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 8.802661575550182,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "decrease",
+      "pcmSha256": "3f65a73cc765798b467fdf62d7444bdb7f54fa3dbb9f98d9658c6aa7bafd2897",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.28,
+        "falsePositiveSeconds": 0.072,
+        "falseNegativeSeconds": 0.72,
+        "precision": 0.9834558823529411,
+        "recall": 0.856
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 7.648802463892693,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "speech-clipping",
+      "pcmSha256": "c81528050a661fbb2039943801730697669c8bbe7a8f35cb4463c40e7e464a2a",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7840000000000003
+        },
+        {
+          "start": 3.2,
+          "end": 5.728
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.152,
+        "falsePositiveSeconds": 0.072,
+        "falseNegativeSeconds": 0.848,
+        "precision": 0.9829545454545454,
+        "recall": 0.8304
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.004734848484848485,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0.0007348484848484849,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 23.675082399891565,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "C",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "speech-clipping-plus-pause",
+      "pcmSha256": "f1d69f5aa70254d479af6292af441aeaf5610fcb5c330d4c741af61609b18815",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7840000000000003
+        },
+        {
+          "start": 3.2,
+          "end": 5.728
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.152,
+        "falsePositiveSeconds": 0.072,
+        "falseNegativeSeconds": 0.848,
+        "precision": 0.9829545454545454,
+        "recall": 0.8304
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.004734848484848485,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0.0007348484848484849,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 23.675082399891565,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "C",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "calibration-clipping",
+      "pcmSha256": "1ff030b5ce4377d371c6c2cad350d418943eb933c7b4e26182ab301ac9e48d2a",
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 4.28,
+        "falsePositiveSeconds": 0.072,
+        "falseNegativeSeconds": 0.72,
+        "precision": 0.9834558823529411,
+        "recall": 0.856
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 2,
+            "end": 7
+          },
+          "overlappingSelections": 3,
+          "onsetErrorSeconds": 0.016000000000000014,
+          "offsetErrorSeconds": 0.07200000000000006
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "no-speech-clipping",
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "selectedIntervals": [],
+      "referenceIntervals": [],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "precision": null,
+        "recall": null
+      },
+      "boundaryDistances": [],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "NO_SPEECH",
+      "retry": "no_speech",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "stationary",
+      "pcmSha256": "fc5891518e83f6225785de5fcadab4091bae81e552857b4debc61a441584c96b",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.368,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.132,
+        "precision": 0.9715909090909091,
+        "recall": 0.39085714285714285
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 5.699523819875175,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "graded",
+      "retry": null,
+      "grade": "F",
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "increase",
+      "pcmSha256": "4145c9965b8024d38f616e1236d7e5d199ca5c0eca224cab6b7b5f502ed8fcdf",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.368,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.132,
+        "precision": 0.9715909090909091,
+        "recall": 0.39085714285714285
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 5.699523819875175,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "decrease",
+      "pcmSha256": "19e49248f62269898f5e11c088c86d3d43cfd837d132cd1cb7923efa3da7c0a1",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.368,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.132,
+        "precision": 0.9715909090909091,
+        "recall": 0.39085714285714285
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 5.699523819875175,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "speech-clipping",
+      "pcmSha256": "089b12664778f3190bdb54399547ea4c34930aa1e01cf5eb02160e8621ae417e",
+      "selectedIntervals": [
+        {
+          "start": 6.208,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0.792,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.708,
+        "precision": 0.9519230769230769,
+        "recall": 0.22628571428571428
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": 2.708,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.005714285714285714,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 4.786756844616029,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "speech_too_short",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "speech-clipping-plus-pause",
+      "pcmSha256": "41227582bf12164841fc8ff26a4b92ef1e32a12e012537efe9b47939142d6b19",
+      "selectedIntervals": [
+        {
+          "start": 6.208,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0.792,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.708,
+        "precision": 0.9519230769230769,
+        "recall": 0.22628571428571428
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 1,
+          "onsetErrorSeconds": 2.708,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": -0.005714285714285714,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": 4.786756844616029,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "speech_too_short",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "calibration-clipping",
+      "pcmSha256": "8a64db3921e34da977f9e06fb993509c6cda4dcf9b8395f72277200b33c84716",
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "referenceIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 1.368,
+        "falsePositiveSeconds": 0.04,
+        "falseNegativeSeconds": 2.132,
+        "precision": 0.9715909090909091,
+        "recall": 0.39085714285714285
+      },
+      "boundaryDistances": [
+        {
+          "reference": {
+            "start": 3.5,
+            "end": 7
+          },
+          "overlappingSelections": 2,
+          "onsetErrorSeconds": 0.43599999999999994,
+          "offsetErrorSeconds": 0.040000000000000036
+        }
+      ],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "INSUFFICIENT_EVIDENCE",
+      "retry": "noise_unstable",
+      "grade": null,
+      "recordingClippingPass": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "no-speech-clipping",
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "selectedIntervals": [],
+      "referenceIntervals": [],
+      "referenceIntervalKind": "Upstream human 100 ms speech bins; boundaries quantized",
+      "agreement": {
+        "truePositiveSeconds": 0,
+        "falsePositiveSeconds": 0,
+        "falseNegativeSeconds": 0,
+        "precision": null,
+        "recall": null
+      },
+      "boundaryDistances": [],
+      "referenceClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "speechClippingError": 0,
+      "selectedComponentSnrDb": null,
+      "actualSnrDb": -20,
+      "selectedComponentSnrErrorDb": null,
+      "selectedSnrPass": true,
+      "state": "NO_SPEECH",
+      "retry": "no_speech",
+      "grade": null,
+      "recordingClippingPass": true
+    }
+  ],
+  "starssReferenceSha256": "dfed88c24951d2e03f4e12e2bbfa8567bbd31868adb0cab35b4c6ec9c2129333"
+}
