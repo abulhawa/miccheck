@@ -1,0 +1,942 @@
+{
+  "protocol": "starss22-pilot-v1",
+  "manifestSha256": "4f8ec55a5f2fe30b4fa972751e474704c45dc9d75b71c7b452adbe24019483ac",
+  "definition": "Constructed component comparison, not contiguous real capture: recorded first 2 s noise repeated through 2 s calibration, 5 s source excerpt, and 4.5 s tail. Tail gain changes only from 0.75 to 3.25 s after excerpt. Entire source excerpt, including residual noise, is the signal component. No normalization, limiting, or source SNR claim.",
+  "noiseEventLocalSeconds": [
+    7.75,
+    10.25
+  ],
+  "speechLocalSeconds": [
+    2,
+    7
+  ],
+  "clips": [
+    {
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "sha256": "98899e2eb439f405cec157881c6a46225aedd4da73e9b77076c23d1d93b5f68f",
+      "metadataSha256": "c1842397492b297a6da6f259fed4f827576b09a7efa94e86341f5869a7f67e3f",
+      "noiseSourceSamples": [
+        0,
+        48000
+      ],
+      "speechSourceSamples": [
+        1310400,
+        1430400
+      ],
+      "annotatedSpeechSeconds": 2.5,
+      "nativeCalibrationDbfs": -41.931090137846276,
+      "nativeEventBlocks": [
+        {
+          "interval": [
+            23.0,
+            24.0
+          ],
+          "rmsDbfs": -43.57787641077546
+        },
+        {
+          "interval": [
+            24.0,
+            25.0
+          ],
+          "rmsDbfs": -43.399329764132574
+        },
+        {
+          "interval": [
+            25.0,
+            26.0
+          ],
+          "rmsDbfs": -42.931081723320034
+        },
+        {
+          "interval": [
+            26.0,
+            27.0
+          ],
+          "rmsDbfs": -43.005510111249485
+        },
+        {
+          "interval": [
+            27.0,
+            28.0
+          ],
+          "rmsDbfs": -38.99791511001056
+        },
+        {
+          "interval": [
+            28.0,
+            29.0
+          ],
+          "rmsDbfs": -43.04749855388845
+        },
+        {
+          "interval": [
+            29.0,
+            30.0
+          ],
+          "rmsDbfs": -41.82706978278571
+        },
+        {
+          "interval": [
+            30.0,
+            31.0
+          ],
+          "rmsDbfs": -41.12280787392195
+        },
+        {
+          "interval": [
+            31.0,
+            32.0
+          ],
+          "rmsDbfs": -43.79180703246505
+        },
+        {
+          "interval": [
+            32.0,
+            33.0
+          ],
+          "rmsDbfs": -41.316864467024175
+        },
+        {
+          "interval": [
+            33.0,
+            34.0
+          ],
+          "rmsDbfs": -42.36482445424193
+        },
+        {
+          "interval": [
+            34.0,
+            35.0
+          ],
+          "rmsDbfs": -44.21348063035318
+        },
+        {
+          "interval": [
+            35.0,
+            36.0
+          ],
+          "rmsDbfs": -43.3645112231097
+        },
+        {
+          "interval": [
+            36.0,
+            37.0
+          ],
+          "rmsDbfs": -41.54015327795702
+        },
+        {
+          "interval": [
+            37.0,
+            38.0
+          ],
+          "rmsDbfs": -41.54582068158368
+        },
+        {
+          "interval": [
+            38.0,
+            39.0
+          ],
+          "rmsDbfs": -38.72727587047261
+        },
+        {
+          "interval": [
+            39.0,
+            40.0
+          ],
+          "rmsDbfs": -42.329904818483904
+        },
+        {
+          "interval": [
+            40.0,
+            41.0
+          ],
+          "rmsDbfs": -39.72981104470183
+        },
+        {
+          "interval": [
+            41.0,
+            42.0
+          ],
+          "rmsDbfs": -40.78136918061625
+        },
+        {
+          "interval": [
+            42.0,
+            43.0
+          ],
+          "rmsDbfs": -42.43084682857534
+        },
+        {
+          "interval": [
+            43.0,
+            44.0
+          ],
+          "rmsDbfs": -40.75011418213628
+        },
+        {
+          "interval": [
+            44.0,
+            45.0
+          ],
+          "rmsDbfs": -42.18789759736935
+        },
+        {
+          "interval": [
+            45.0,
+            46.0
+          ],
+          "rmsDbfs": -39.29826799706868
+        },
+        {
+          "interval": [
+            46.0,
+            47.0
+          ],
+          "rmsDbfs": -38.66772730408727
+        },
+        {
+          "interval": [
+            47.0,
+            48.0
+          ],
+          "rmsDbfs": -39.47002898894948
+        },
+        {
+          "interval": [
+            48.0,
+            49.0
+          ],
+          "rmsDbfs": -39.29216066046566
+        },
+        {
+          "interval": [
+            49.0,
+            50.0
+          ],
+          "rmsDbfs": -42.153509189081475
+        },
+        {
+          "interval": [
+            50.0,
+            51.0
+          ],
+          "rmsDbfs": -41.80856398812928
+        },
+        {
+          "interval": [
+            51.0,
+            52.0
+          ],
+          "rmsDbfs": -41.927318287556545
+        },
+        {
+          "interval": [
+            52.0,
+            53.0
+          ],
+          "rmsDbfs": -42.126742535148125
+        }
+      ],
+      "nativeExpectedNoiseRetry": null,
+      "nativeExpectationReason": "Event presence and 1 s mixture levels do not label all quiet intervals or exclude unannotated interference; no full-recording stable/unstable ground truth.",
+      "cases": [
+        {
+          "name": "stationary",
+          "tailGainDb": 0,
+          "expectedStability": "stable",
+          "expectedRetry": null
+        },
+        {
+          "name": "increase",
+          "tailGainDb": 12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        },
+        {
+          "name": "decrease",
+          "tailGainDb": -12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        }
+      ]
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "sha256": "ef32da3fa20e87ba700c72b782ee2ed24e434fac54bd352e4e956a4cd8447f0f",
+      "metadataSha256": "fe2d0c27b199f6b05403b9bb8654fde75d285ad4dc21b026a57fe27e79adbc72",
+      "noiseSourceSamples": [
+        0,
+        48000
+      ],
+      "speechSourceSamples": [
+        336000,
+        456000
+      ],
+      "annotatedSpeechSeconds": 3.5,
+      "nativeCalibrationDbfs": -41.95615084646715,
+      "nativeEventBlocks": [
+        {
+          "interval": [
+            32.0,
+            33.0
+          ],
+          "rmsDbfs": -42.02323938119629
+        },
+        {
+          "interval": [
+            33.0,
+            34.0
+          ],
+          "rmsDbfs": -41.81496797758068
+        },
+        {
+          "interval": [
+            34.0,
+            35.0
+          ],
+          "rmsDbfs": -41.13827116187139
+        },
+        {
+          "interval": [
+            35.0,
+            36.0
+          ],
+          "rmsDbfs": -42.81672826128795
+        },
+        {
+          "interval": [
+            36.0,
+            37.0
+          ],
+          "rmsDbfs": -42.70710116833812
+        },
+        {
+          "interval": [
+            37.0,
+            38.0
+          ],
+          "rmsDbfs": -41.68763981642911
+        },
+        {
+          "interval": [
+            38.0,
+            39.0
+          ],
+          "rmsDbfs": -42.647637927553404
+        },
+        {
+          "interval": [
+            39.0,
+            40.0
+          ],
+          "rmsDbfs": -42.00060834540612
+        },
+        {
+          "interval": [
+            40.0,
+            41.0
+          ],
+          "rmsDbfs": -42.796103713555354
+        },
+        {
+          "interval": [
+            41.0,
+            42.0
+          ],
+          "rmsDbfs": -41.511847098543186
+        },
+        {
+          "interval": [
+            42.0,
+            43.0
+          ],
+          "rmsDbfs": -41.49044091861704
+        },
+        {
+          "interval": [
+            43.0,
+            44.0
+          ],
+          "rmsDbfs": -41.195923650873844
+        },
+        {
+          "interval": [
+            44.0,
+            45.0
+          ],
+          "rmsDbfs": -42.494669305287786
+        },
+        {
+          "interval": [
+            45.0,
+            46.0
+          ],
+          "rmsDbfs": -42.143329217354676
+        },
+        {
+          "interval": [
+            46.0,
+            47.0
+          ],
+          "rmsDbfs": -42.797529333599876
+        },
+        {
+          "interval": [
+            47.0,
+            48.0
+          ],
+          "rmsDbfs": -42.477848052735084
+        },
+        {
+          "interval": [
+            48.0,
+            49.0
+          ],
+          "rmsDbfs": -42.433082147102105
+        },
+        {
+          "interval": [
+            49.0,
+            50.0
+          ],
+          "rmsDbfs": -36.20837677437784
+        },
+        {
+          "interval": [
+            50.0,
+            51.0
+          ],
+          "rmsDbfs": -34.875915192307595
+        },
+        {
+          "interval": [
+            51.0,
+            52.0
+          ],
+          "rmsDbfs": -36.31840772296047
+        },
+        {
+          "interval": [
+            52.0,
+            53.0
+          ],
+          "rmsDbfs": -35.96544166120932
+        },
+        {
+          "interval": [
+            53.0,
+            54.0
+          ],
+          "rmsDbfs": -33.365801436782526
+        },
+        {
+          "interval": [
+            54.0,
+            55.0
+          ],
+          "rmsDbfs": -32.68122598861464
+        },
+        {
+          "interval": [
+            55.0,
+            56.0
+          ],
+          "rmsDbfs": -34.08930270026083
+        },
+        {
+          "interval": [
+            56.0,
+            57.0
+          ],
+          "rmsDbfs": -35.999351578922756
+        },
+        {
+          "interval": [
+            57.0,
+            58.0
+          ],
+          "rmsDbfs": -34.833546257694266
+        },
+        {
+          "interval": [
+            58.0,
+            59.0
+          ],
+          "rmsDbfs": -36.53279456205985
+        }
+      ],
+      "nativeExpectedNoiseRetry": null,
+      "nativeExpectationReason": "Event presence and 1 s mixture levels do not label all quiet intervals or exclude unannotated interference; no full-recording stable/unstable ground truth.",
+      "cases": [
+        {
+          "name": "stationary",
+          "tailGainDb": 0,
+          "expectedStability": "stable",
+          "expectedRetry": null
+        },
+        {
+          "name": "increase",
+          "tailGainDb": 12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        },
+        {
+          "name": "decrease",
+          "tailGainDb": -12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        }
+      ]
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "sha256": "6e9292abd3afbf24e244514723a57b8577c8d87704b7c20929b075bf559298ac",
+      "metadataSha256": "5d6bade7576030bb038cb7cd0c3fde02efd038ef5ab39724e0863bc73014ba84",
+      "noiseSourceSamples": [
+        0,
+        48000
+      ],
+      "speechSourceSamples": [
+        309600,
+        429600
+      ],
+      "annotatedSpeechSeconds": 5.0,
+      "nativeCalibrationDbfs": -46.899359684561034,
+      "nativeEventBlocks": [
+        {
+          "interval": [
+            30.4,
+            31.4
+          ],
+          "rmsDbfs": -44.51350414942944
+        },
+        {
+          "interval": [
+            31.4,
+            32.4
+          ],
+          "rmsDbfs": -43.6632755627273
+        },
+        {
+          "interval": [
+            32.4,
+            33.4
+          ],
+          "rmsDbfs": -44.5932691271263
+        },
+        {
+          "interval": [
+            33.4,
+            34.4
+          ],
+          "rmsDbfs": -44.81816079701309
+        },
+        {
+          "interval": [
+            34.4,
+            35.4
+          ],
+          "rmsDbfs": -44.779721567611695
+        },
+        {
+          "interval": [
+            35.4,
+            36.4
+          ],
+          "rmsDbfs": -44.486828594098675
+        },
+        {
+          "interval": [
+            36.4,
+            37.4
+          ],
+          "rmsDbfs": -44.70830147884763
+        },
+        {
+          "interval": [
+            37.4,
+            38.4
+          ],
+          "rmsDbfs": -44.776652684879025
+        },
+        {
+          "interval": [
+            38.4,
+            39.4
+          ],
+          "rmsDbfs": -44.737105681947114
+        },
+        {
+          "interval": [
+            39.4,
+            40.4
+          ],
+          "rmsDbfs": -45.0006291998274
+        },
+        {
+          "interval": [
+            40.4,
+            41.4
+          ],
+          "rmsDbfs": -44.31748669783653
+        },
+        {
+          "interval": [
+            41.4,
+            42.4
+          ],
+          "rmsDbfs": -45.005441638609895
+        },
+        {
+          "interval": [
+            42.4,
+            43.4
+          ],
+          "rmsDbfs": -45.298944057804825
+        },
+        {
+          "interval": [
+            43.4,
+            44.4
+          ],
+          "rmsDbfs": -44.23524994389071
+        },
+        {
+          "interval": [
+            44.4,
+            45.4
+          ],
+          "rmsDbfs": -44.807140155762475
+        },
+        {
+          "interval": [
+            45.4,
+            46.4
+          ],
+          "rmsDbfs": -45.24451047449123
+        },
+        {
+          "interval": [
+            46.4,
+            47.4
+          ],
+          "rmsDbfs": -44.10880317654515
+        },
+        {
+          "interval": [
+            47.4,
+            48.4
+          ],
+          "rmsDbfs": -45.190601766620695
+        }
+      ],
+      "nativeExpectedNoiseRetry": null,
+      "nativeExpectationReason": "Event presence and 1 s mixture levels do not label all quiet intervals or exclude unannotated interference; no full-recording stable/unstable ground truth.",
+      "cases": [
+        {
+          "name": "stationary",
+          "tailGainDb": 0,
+          "expectedStability": "stable",
+          "expectedRetry": null
+        },
+        {
+          "name": "increase",
+          "tailGainDb": 12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        },
+        {
+          "name": "decrease",
+          "tailGainDb": -12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        }
+      ]
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "sha256": "47f3df22125266a745e7c037c2e53faffa39a2ef4e78e184ffe3e18400ab5865",
+      "metadataSha256": "6bf7d59e448ebd65a2615df34e38c719eec63753d8b15ce79e3460e41853d24b",
+      "noiseSourceSamples": [
+        0,
+        48000
+      ],
+      "speechSourceSamples": [
+        1068000,
+        1188000
+      ],
+      "annotatedSpeechSeconds": 3.5,
+      "nativeCalibrationDbfs": -53.77097695193705,
+      "nativeEventBlocks": [
+        {
+          "interval": [
+            8.5,
+            9.5
+          ],
+          "rmsDbfs": -53.47966477176894
+        },
+        {
+          "interval": [
+            9.5,
+            10.5
+          ],
+          "rmsDbfs": -54.03477553592794
+        },
+        {
+          "interval": [
+            10.5,
+            11.5
+          ],
+          "rmsDbfs": -53.042413413449616
+        },
+        {
+          "interval": [
+            11.5,
+            12.5
+          ],
+          "rmsDbfs": -53.17121691503043
+        },
+        {
+          "interval": [
+            12.5,
+            13.5
+          ],
+          "rmsDbfs": -53.55237920712998
+        },
+        {
+          "interval": [
+            13.5,
+            14.5
+          ],
+          "rmsDbfs": -52.806456914395284
+        },
+        {
+          "interval": [
+            14.5,
+            15.5
+          ],
+          "rmsDbfs": -53.60809790698624
+        },
+        {
+          "interval": [
+            15.5,
+            16.5
+          ],
+          "rmsDbfs": -54.95428955419095
+        },
+        {
+          "interval": [
+            16.5,
+            17.5
+          ],
+          "rmsDbfs": -52.668819393553186
+        },
+        {
+          "interval": [
+            17.5,
+            18.5
+          ],
+          "rmsDbfs": -52.79327328094788
+        },
+        {
+          "interval": [
+            18.5,
+            19.5
+          ],
+          "rmsDbfs": -53.74850540769486
+        },
+        {
+          "interval": [
+            19.5,
+            20.5
+          ],
+          "rmsDbfs": -52.40775449224239
+        },
+        {
+          "interval": [
+            20.5,
+            21.5
+          ],
+          "rmsDbfs": -53.19543430682152
+        },
+        {
+          "interval": [
+            21.5,
+            22.5
+          ],
+          "rmsDbfs": -53.56687487540797
+        },
+        {
+          "interval": [
+            22.5,
+            23.5
+          ],
+          "rmsDbfs": -53.82178471383235
+        },
+        {
+          "interval": [
+            23.5,
+            24.5
+          ],
+          "rmsDbfs": -53.100556454310215
+        },
+        {
+          "interval": [
+            24.5,
+            25.5
+          ],
+          "rmsDbfs": -53.950265094087996
+        },
+        {
+          "interval": [
+            25.5,
+            26.5
+          ],
+          "rmsDbfs": -52.39300857464202
+        },
+        {
+          "interval": [
+            26.5,
+            27.5
+          ],
+          "rmsDbfs": -54.770336047780376
+        },
+        {
+          "interval": [
+            27.5,
+            28.5
+          ],
+          "rmsDbfs": -54.25222537255757
+        },
+        {
+          "interval": [
+            28.5,
+            29.5
+          ],
+          "rmsDbfs": -52.97400850920771
+        },
+        {
+          "interval": [
+            29.5,
+            30.5
+          ],
+          "rmsDbfs": -51.5088974136938
+        },
+        {
+          "interval": [
+            30.5,
+            31.5
+          ],
+          "rmsDbfs": -52.61562669927771
+        },
+        {
+          "interval": [
+            31.5,
+            32.5
+          ],
+          "rmsDbfs": -52.63254000875007
+        },
+        {
+          "interval": [
+            32.5,
+            33.5
+          ],
+          "rmsDbfs": -51.968931832091336
+        },
+        {
+          "interval": [
+            33.5,
+            34.5
+          ],
+          "rmsDbfs": -52.93922299976589
+        },
+        {
+          "interval": [
+            34.5,
+            35.5
+          ],
+          "rmsDbfs": -54.361826823828814
+        },
+        {
+          "interval": [
+            35.5,
+            36.5
+          ],
+          "rmsDbfs": -53.205406695618365
+        },
+        {
+          "interval": [
+            36.5,
+            37.5
+          ],
+          "rmsDbfs": -52.76524853570492
+        },
+        {
+          "interval": [
+            37.5,
+            38.5
+          ],
+          "rmsDbfs": -53.66211815687926
+        },
+        {
+          "interval": [
+            38.5,
+            39.5
+          ],
+          "rmsDbfs": -55.02477224964104
+        },
+        {
+          "interval": [
+            39.5,
+            40.5
+          ],
+          "rmsDbfs": -53.126429489362934
+        },
+        {
+          "interval": [
+            40.5,
+            41.5
+          ],
+          "rmsDbfs": -53.81156101129437
+        },
+        {
+          "interval": [
+            41.5,
+            42.5
+          ],
+          "rmsDbfs": -51.96962484359335
+        }
+      ],
+      "nativeExpectedNoiseRetry": null,
+      "nativeExpectationReason": "Event presence and 1 s mixture levels do not label all quiet intervals or exclude unannotated interference; no full-recording stable/unstable ground truth.",
+      "cases": [
+        {
+          "name": "stationary",
+          "tailGainDb": 0,
+          "expectedStability": "stable",
+          "expectedRetry": null
+        },
+        {
+          "name": "increase",
+          "tailGainDb": 12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        },
+        {
+          "name": "decrease",
+          "tailGainDb": -12,
+          "expectedStability": "unstable",
+          "expectedRetry": "noise_unstable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "protocol": "starss22-pilot-v1",
+  "split": "evaluation",
+  "referenceSha256": "dfed88c24951d2e03f4e12e2bbfa8567bbd31868adb0cab35b4c6ec9c2129333",
+  "manifestSha256": "4f8ec55a5f2fe30b4fa972751e474704c45dc9d75b71c7b452adbe24019483ac",
+  "browser": "153.0.8010.12",
+  "productionWorkerSha256": "2a3cd1a9e9d2032ccc6de99a774047cb201c4cc85663397bef4debf0d7bb8b42",
+  "annotationEstimatorSha256": "b9f43892897bb034b8554536a986712e80b3d5dec29763d675c1febbcfbdca6f",
+  "description": "Native recorded-room diagnostics plus exactly defined component gain changes. Native full-recording retry ground truth remains unknown; annotated estimator uses upstream frames instead of VAD, not a second real worker.",
+  "counts": {
+    "workerMisses": 0,
+    "workerStationaryFailures": 0,
+    "estimatorMisses": 0,
+    "estimatorStationaryFailures": 0
+  },
+  "rows": [
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "results": [
+        {
+          "scenario": "native",
+          "expected": null,
+          "worker": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 12.128041666666666,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 31.75,
+              "maxNoiseChangeDb": 12.098365287991612,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 16.100041666666666,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 27.25,
+              "maxNoiseChangeDb": 12.436643680684448,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "workerMeetsExpectation": null,
+          "estimatorMeetsExpectation": null,
+          "segments": [
+            {
+              "start": 7.744,
+              "end": 10.528
+            },
+            {
+              "start": 10.72,
+              "end": 12.224
+            },
+            {
+              "start": 12.864,
+              "end": 13.792
+            },
+            {
+              "start": 14.08,
+              "end": 16.576
+            },
+            {
+              "start": 17.024,
+              "end": 19.392
+            },
+            {
+              "start": 20.544,
+              "end": 21.376
+            },
+            {
+              "start": 21.632,
+              "end": 22.56
+            },
+            {
+              "start": 26.400000000000002,
+              "end": 26.688
+            }
+          ],
+          "annotationAgreement": {
+            "truePositiveSeconds": 10.5,
+            "missedSpeechSeconds": 2.7,
+            "noiseDisagreementSeconds": 0,
+            "agreedNoiseSeconds": 22.6,
+            "uncertainSeconds": 14.3,
+            "precisionOnCandidates": 1,
+            "recallOnSpeechInteriors": 0.7954545454545454,
+            "limitation": "Human 100 ms target annotations with conservative guards. Unknown interference excluded where possible; candidate disagreements, not verified physical false speech."
+          }
+        },
+        {
+          "scenario": "stationary",
+          "expected": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded"
+          },
+          "worker": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 4.192,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 4,
+              "maxNoiseChangeDb": 2.7437966002205485,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Noise",
+              "messageKey": "recommendation.reduce_noise",
+              "confidence": 0.6
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 4,
+              "maxNoiseChangeDb": 2.543757422062349,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Noise",
+              "messageKey": "recommendation.reduce_noise",
+              "confidence": 0.6
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 2.016,
+              "end": 2.8160000000000003
+            },
+            {
+              "start": 3.2,
+              "end": 5.728
+            },
+            {
+              "start": 6.144,
+              "end": 7.008
+            }
+          ]
+        },
+        {
+          "scenario": "increase",
+          "expected": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE"
+          },
+          "worker": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 4.832,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 2.75,
+              "maxNoiseChangeDb": 14.851863045985212,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 4,
+              "maxNoiseChangeDb": 14.543757400836547,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 2.016,
+              "end": 2.8160000000000003
+            },
+            {
+              "start": 3.2,
+              "end": 5.728
+            },
+            {
+              "start": 6.144,
+              "end": 7.008
+            },
+            {
+              "start": 7.776,
+              "end": 8.416
+            }
+          ]
+        },
+        {
+          "scenario": "decrease",
+          "expected": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE"
+          },
+          "worker": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 4.192,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 4,
+              "maxNoiseChangeDb": 13.100640315438966,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 4,
+              "maxNoiseChangeDb": 13.100640315438966,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 2.016,
+              "end": 2.8160000000000003
+            },
+            {
+              "start": 3.2,
+              "end": 5.728
+            },
+            {
+              "start": 6.144,
+              "end": 7.008
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "results": [
+        {
+          "scenario": "native",
+          "expected": null,
+          "worker": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 1.216,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 54.5,
+              "maxNoiseChangeDb": 7.807518400971993,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Volume",
+              "messageKey": "recommendation.raise_volume",
+              "confidence": 0.6
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 7,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 48.5,
+              "maxNoiseChangeDb": 7.906177541340874,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Volume",
+              "messageKey": "recommendation.raise_volume",
+              "confidence": 0.6
+            }
+          },
+          "workerMeetsExpectation": null,
+          "estimatorMeetsExpectation": null,
+          "segments": [
+            {
+              "start": 48.736000000000004,
+              "end": 49.44
+            },
+            {
+              "start": 53.344,
+              "end": 53.663999999999994
+            },
+            {
+              "start": 57.376,
+              "end": 57.568
+            }
+          ],
+          "annotationAgreement": {
+            "truePositiveSeconds": 1.2,
+            "missedSpeechSeconds": 4.6,
+            "noiseDisagreementSeconds": 0,
+            "agreedNoiseSeconds": 0,
+            "uncertainSeconds": 54.2,
+            "precisionOnCandidates": 1,
+            "recallOnSpeechInteriors": 0.20689655172413793,
+            "limitation": "Human 100 ms target annotations with conservative guards. Unknown interference excluded where possible; candidate disagreements, not verified physical false speech."
+          }
+        },
+        {
+          "scenario": "stationary",
+          "expected": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded"
+          },
+          "worker": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 1.376,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 6.5,
+              "maxNoiseChangeDb": 7.867557237955289,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Volume",
+              "messageKey": "recommendation.raise_volume",
+              "confidence": 0.6
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "stable",
+            "retry": null,
+            "state": "graded",
+            "grade": "F",
+            "evidence": {
+              "speechSeconds": 3.5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": true,
+              "noiseStability": "stable",
+              "laterNoiseSeconds": 5,
+              "maxNoiseChangeDb": 6.229023048062949,
+              "echoExperimental": true
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "Volume",
+              "messageKey": "recommendation.raise_volume",
+              "confidence": 0.6
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 3.936,
+              "end": 4.224
+            },
+            {
+              "start": 5.952,
+              "end": 7.04
+            }
+          ]
+        },
+        {
+          "scenario": "increase",
+          "expected": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE"
+          },
+          "worker": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 1.376,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 6.5,
+              "maxNoiseChangeDb": 17.268883094985412,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 3.5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 5,
+              "maxNoiseChangeDb": 17.969357232235396,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 3.936,
+              "end": 4.224
+            },
+            {
+              "start": 5.952,
+              "end": 7.04
+            }
+          ]
+        },
+        {
+          "scenario": "decrease",
+          "expected": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE"
+          },
+          "worker": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 1.376,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 6.5,
+              "maxNoiseChangeDb": 7.867557237955289,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "annotationDrivenEstimator": {
+            "stability": "unstable",
+            "retry": "noise_unstable",
+            "state": "INSUFFICIENT_EVIDENCE",
+            "grade": null,
+            "evidence": {
+              "speechSeconds": 3.5,
+              "quietSeconds": 2,
+              "speechDetection": "silero",
+              "capture": {
+                "format": "pcm"
+              },
+              "noiseReliable": false,
+              "noiseStability": "unstable",
+              "laterNoiseSeconds": 5,
+              "maxNoiseChangeDb": 6.229023048062949,
+              "echoExperimental": true,
+              "retryReason": "noise_unstable"
+            },
+            "certainty": "low",
+            "recommendation": {
+              "category": "General",
+              "messageKey": "recommendation.no_speech",
+              "confidence": 0
+            }
+          },
+          "workerMeetsExpectation": true,
+          "estimatorMeetsExpectation": true,
+          "segments": [
+            {
+              "start": 3.936,
+              "end": 4.224
+            },
+            {
+              "start": 5.952,
+              "end": 7.04
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

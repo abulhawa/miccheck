@@ -11,3 +11,13 @@ test('human recording fixtures meet measurement acceptance expectations', async 
   }).then(({stdout, stderr}) => ({code: 0, stdout, stderr}), error => ({code: error.code, stdout: error.stdout, stderr: error.stderr}));
   expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
 });
+
+test('STARSS22 recorded-room components meet frozen stability and retry expectations', async () => {
+  test.setTimeout(240000);
+  for (const args of [[], ['--evaluation']]) {
+    const result = await promisify(execFile)(process.execPath, ['scripts/benchmark-starss22.mjs', ...args], {
+      env: { ...process.env, STARSS22_NO_REPORT: '1' }, timeout: 110000, maxBuffer: 1024 * 1024,
+    }).then(({ stdout, stderr }) => ({ code: 0, stdout, stderr }), error => ({ code: error.code, stdout: error.stdout, stderr: error.stderr }));
+    expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
+  }
+});

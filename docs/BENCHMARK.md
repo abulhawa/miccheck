@@ -31,6 +31,19 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [STARSS22 comparison](STARSS22_NOISE_BENCHMARK.md) adds physical room
+recordings with upstream human event annotations. Twelve independently labeled
+recorded-component comparisons pass in development and separate evaluation
+rooms; parameters are retained. Native speech-selection disagreements remain
+actionable and native full-recording noise-retry truth is explicitly unknown.
+These results do not complete representative threshold tuning.
+
+The [sustained-decrease decision](NOISE_DECREASE_BENCHMARK.md) fixes noise
+decreases missed when fixed analysis windows dilute both event edges. Eight
+controlled misses and two recorded-worker missed retries are resolved without
+false alarms in the tested controls. This is an alignment improvement;
+representative threshold tuning and physical capture validation remain open.
+
 The [sustained-spike fix](NOISE_SUSTAINED_SPIKE_BENCHMARK.md) prevents
 250 ms windows from treating an isolated loud spike as a sustained noise change.
 Four controlled false alarms and nine recorded-source retries are resolved.

@@ -55,6 +55,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
   let maxNoiseChangeDb = 0;
   let changedWindows = 0;
   let briefNoiseEvent = false;
+  let sustainedNoiseDecrease = false;
   let unfinishedNoiseEvent = false;
   for (let i = quietEnd; i < mask.length;) {
     if (mask[i]) { i++; continue; }
@@ -105,6 +106,16 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     // Lack of sustained evidence cannot erase a completed brief event. Keep
     // short runs out of the sustained assessment and its usable-time count.
     if (end - start < window * 2) continue;
+    // Nonoverlapping 250 ms windows can dilute both edges of a sustained
+    // decrease, leaving only one changed window. Independently corroborate
+    // at least 500 ms of consecutive disjoint hops below calibration. Keep
+    // the sustained boundary guard and floor; short dips cannot accumulate.
+    let decreasedHops = 0;
+    for (let offset = start; offset + eventHop <= end; offset += eventHop) {
+      const changeDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + eventHop)));
+      decreasedHops = changeDb < -6 ? decreasedHops + 1 : 0;
+      if (decreasedHops * eventHop >= 2 * window) sustainedNoiseDecrease = true;
+    }
     for (let offset = start; offset + window <= end; offset += window) {
       const changeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(offset, offset + window))));
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
@@ -122,7 +133,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     }
   }
   const laterNoiseSeconds = windows * window / rate;
-  const noiseStability = changedWindows >= 2 || briefNoiseEvent ? 'unstable' : laterNoiseSeconds < 0.5 || unfinishedNoiseEvent ? 'unassessed' : 'stable';
+  const noiseStability = changedWindows >= 2 || briefNoiseEvent || sustainedNoiseDecrease ? 'unstable' : laterNoiseSeconds < 0.5 || unfinishedNoiseEvent ? 'unassessed' : 'stable';
   return {noiseStability, laterNoiseSeconds, maxNoiseChangeDb} as const;
 }
 

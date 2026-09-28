@@ -1,0 +1,2058 @@
+{
+  "description": "Exact generated component intervals; evaluation sample grids/carriers, not held-out devices or human annotations.",
+  "baselineGuidedRef": "2b859fccfc04ccaa7829aa08ad968b63b93e8fc1",
+  "parameters": {
+    "calibrationSeconds": 2,
+    "speechInterval": [
+      2,
+      4
+    ],
+    "decreaseSeconds": 0.6,
+    "decreaseDb": 9,
+    "noiseRms": 0.01
+  },
+  "misses": 8,
+  "falseAlarms": 0,
+  "rows": [
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "decrease",
+      "eventSamples": [
+        76800,
+        86400
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "subthreshold",
+      "eventSamples": [
+        76800,
+        86400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "short-dip",
+      "eventSamples": [
+        76800,
+        78400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "split-dips",
+      "eventSamples": [
+        76800,
+        86400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "below-floor",
+      "eventSamples": [
+        76800,
+        86400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": [
+        64000,
+        68480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "decrease",
+      "eventSamples": [
+        77600,
+        87200
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "subthreshold",
+      "eventSamples": [
+        77600,
+        87200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "short-dip",
+      "eventSamples": [
+        77600,
+        79200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "split-dips",
+      "eventSamples": [
+        77600,
+        87200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "below-floor",
+      "eventSamples": [
+        77600,
+        87200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 50,
+      "condition": "boundary",
+      "eventSamples": [
+        64000,
+        68480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "decrease",
+      "eventSamples": [
+        78400,
+        88000
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "subthreshold",
+      "eventSamples": [
+        78400,
+        88000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "short-dip",
+      "eventSamples": [
+        78400,
+        80000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "split-dips",
+      "eventSamples": [
+        78400,
+        88000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "below-floor",
+      "eventSamples": [
+        78400,
+        88000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 100,
+      "condition": "boundary",
+      "eventSamples": [
+        64000,
+        68480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "decrease",
+      "eventSamples": [
+        79200,
+        88800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "subthreshold",
+      "eventSamples": [
+        79200,
+        88800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "short-dip",
+      "eventSamples": [
+        79200,
+        80800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "split-dips",
+      "eventSamples": [
+        79200,
+        88800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "below-floor",
+      "eventSamples": [
+        79200,
+        88800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 150,
+      "condition": "boundary",
+      "eventSamples": [
+        64000,
+        68480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "decrease",
+      "eventSamples": [
+        80000,
+        89600
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "subthreshold",
+      "eventSamples": [
+        80000,
+        89600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "short-dip",
+      "eventSamples": [
+        80000,
+        81600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "split-dips",
+      "eventSamples": [
+        80000,
+        89600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "below-floor",
+      "eventSamples": [
+        80000,
+        89600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "development",
+      "rate": 16000,
+      "phaseMs": 200,
+      "condition": "boundary",
+      "eventSamples": [
+        64000,
+        68480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "decrease",
+      "eventSamples": [
+        105840,
+        119070
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "subthreshold",
+      "eventSamples": [
+        105840,
+        119070
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "short-dip",
+      "eventSamples": [
+        105840,
+        108045
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "split-dips",
+      "eventSamples": [
+        105840,
+        119070
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "below-floor",
+      "eventSamples": [
+        105840,
+        119070
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": [
+        88200,
+        94374
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "decrease",
+      "eventSamples": [
+        106942,
+        120172
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "subthreshold",
+      "eventSamples": [
+        106942,
+        120172
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "short-dip",
+      "eventSamples": [
+        106942,
+        109147
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "split-dips",
+      "eventSamples": [
+        106942,
+        120172
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "below-floor",
+      "eventSamples": [
+        106942,
+        120172
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 50,
+      "condition": "boundary",
+      "eventSamples": [
+        88200,
+        94374
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "decrease",
+      "eventSamples": [
+        108045,
+        121275
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "subthreshold",
+      "eventSamples": [
+        108045,
+        121275
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "short-dip",
+      "eventSamples": [
+        108045,
+        110250
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "split-dips",
+      "eventSamples": [
+        108045,
+        121275
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "below-floor",
+      "eventSamples": [
+        108045,
+        121275
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 100,
+      "condition": "boundary",
+      "eventSamples": [
+        88200,
+        94374
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "decrease",
+      "eventSamples": [
+        109148,
+        122378
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "subthreshold",
+      "eventSamples": [
+        109148,
+        122378
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "short-dip",
+      "eventSamples": [
+        109148,
+        111353
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "split-dips",
+      "eventSamples": [
+        109148,
+        122378
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "below-floor",
+      "eventSamples": [
+        109148,
+        122378
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 150,
+      "condition": "boundary",
+      "eventSamples": [
+        88200,
+        94374
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "decrease",
+      "eventSamples": [
+        110250,
+        123480
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "subthreshold",
+      "eventSamples": [
+        110250,
+        123480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "short-dip",
+      "eventSamples": [
+        110250,
+        112455
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "split-dips",
+      "eventSamples": [
+        110250,
+        123480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "below-floor",
+      "eventSamples": [
+        110250,
+        123480
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 22050,
+      "phaseMs": 200,
+      "condition": "boundary",
+      "eventSamples": [
+        88200,
+        94374
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "decrease",
+      "eventSamples": [
+        211680,
+        238140
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "subthreshold",
+      "eventSamples": [
+        211680,
+        238140
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "short-dip",
+      "eventSamples": [
+        211680,
+        216090
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "split-dips",
+      "eventSamples": [
+        211680,
+        238140
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "below-floor",
+      "eventSamples": [
+        211680,
+        238140
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": [
+        176400,
+        188748
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "decrease",
+      "eventSamples": [
+        213885,
+        240345
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "subthreshold",
+      "eventSamples": [
+        213885,
+        240345
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "short-dip",
+      "eventSamples": [
+        213885,
+        218295
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "split-dips",
+      "eventSamples": [
+        213885,
+        240345
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "below-floor",
+      "eventSamples": [
+        213885,
+        240345
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 50,
+      "condition": "boundary",
+      "eventSamples": [
+        176400,
+        188748
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "decrease",
+      "eventSamples": [
+        216090,
+        242550
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "subthreshold",
+      "eventSamples": [
+        216090,
+        242550
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "short-dip",
+      "eventSamples": [
+        216090,
+        220500
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "split-dips",
+      "eventSamples": [
+        216090,
+        242550
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "below-floor",
+      "eventSamples": [
+        216090,
+        242550
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 100,
+      "condition": "boundary",
+      "eventSamples": [
+        176400,
+        188748
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "decrease",
+      "eventSamples": [
+        218295,
+        244755
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "subthreshold",
+      "eventSamples": [
+        218295,
+        244755
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "short-dip",
+      "eventSamples": [
+        218295,
+        222705
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "split-dips",
+      "eventSamples": [
+        218295,
+        244755
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "below-floor",
+      "eventSamples": [
+        218295,
+        244755
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 150,
+      "condition": "boundary",
+      "eventSamples": [
+        176400,
+        188748
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "decrease",
+      "eventSamples": [
+        220500,
+        246960
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "subthreshold",
+      "eventSamples": [
+        220500,
+        246960
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "short-dip",
+      "eventSamples": [
+        220500,
+        224910
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "split-dips",
+      "eventSamples": [
+        220500,
+        246960
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "below-floor",
+      "eventSamples": [
+        220500,
+        246960
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 44100,
+      "phaseMs": 200,
+      "condition": "boundary",
+      "eventSamples": [
+        176400,
+        188748
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "decrease",
+      "eventSamples": [
+        230400,
+        259200
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "subthreshold",
+      "eventSamples": [
+        230400,
+        259200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "short-dip",
+      "eventSamples": [
+        230400,
+        235200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "split-dips",
+      "eventSamples": [
+        230400,
+        259200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "below-floor",
+      "eventSamples": [
+        230400,
+        259200
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 0,
+      "condition": "boundary",
+      "eventSamples": [
+        192000,
+        205440
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "decrease",
+      "eventSamples": [
+        232800,
+        261600
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "subthreshold",
+      "eventSamples": [
+        232800,
+        261600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "short-dip",
+      "eventSamples": [
+        232800,
+        237600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "split-dips",
+      "eventSamples": [
+        232800,
+        261600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "below-floor",
+      "eventSamples": [
+        232800,
+        261600
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 50,
+      "condition": "boundary",
+      "eventSamples": [
+        192000,
+        205440
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "decrease",
+      "eventSamples": [
+        235200,
+        264000
+      ],
+      "expected": "unstable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "subthreshold",
+      "eventSamples": [
+        235200,
+        264000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "short-dip",
+      "eventSamples": [
+        235200,
+        240000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "split-dips",
+      "eventSamples": [
+        235200,
+        264000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "below-floor",
+      "eventSamples": [
+        235200,
+        264000
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 100,
+      "condition": "boundary",
+      "eventSamples": [
+        192000,
+        205440
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "decrease",
+      "eventSamples": [
+        237600,
+        266400
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "subthreshold",
+      "eventSamples": [
+        237600,
+        266400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "short-dip",
+      "eventSamples": [
+        237600,
+        242400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "split-dips",
+      "eventSamples": [
+        237600,
+        266400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "below-floor",
+      "eventSamples": [
+        237600,
+        266400
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 150,
+      "condition": "boundary",
+      "eventSamples": [
+        192000,
+        205440
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "decrease",
+      "eventSamples": [
+        240000,
+        268800
+      ],
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "stationary",
+      "eventSamples": null,
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "subthreshold",
+      "eventSamples": [
+        240000,
+        268800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "short-dip",
+      "eventSamples": [
+        240000,
+        244800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "split-dips",
+      "eventSamples": [
+        240000,
+        268800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "below-floor",
+      "eventSamples": [
+        240000,
+        268800
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "B"
+    },
+    {
+      "split": "evaluation",
+      "rate": 48000,
+      "phaseMs": 200,
+      "condition": "boundary",
+      "eventSamples": [
+        192000,
+        205440
+      ],
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "C"
+    }
+  ]
+}

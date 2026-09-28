@@ -1,0 +1,124 @@
+{
+  "source": "https://zenodo.org/records/6387880",
+  "version": "1.0.0",
+  "audio_archive_url": "https://zenodo.org/records/6387880/files/mic_dev.zip?download=1",
+  "upstream_archive_md5": "46b55d0be507afa986cd29120e42b188",
+  "metadata_sha256": "4390567df522e634234a30d209e812dc270e317da6a4156e001b3cc890dd1633",
+  "selection": "One recording per site/split: longest speech-free domestic/water/music run in <=60 s crop with 2 s initial absence of annotated target events and >=2 s later speech. Tie by path, crop onset, then event onset. No app outputs used.",
+  "channel": 0,
+  "annotations": "Upstream human-validated event frames at 100 ms resolution; absence of labels is not verified silence.",
+  "clips": [
+    {
+      "metadata_path": "metadata_dev/dev-train-sony/fold3_room21_mix023.csv",
+      "event_class": 5,
+      "event_frames": [
+        328,
+        649
+      ],
+      "crop_frames": [
+        108,
+        708
+      ],
+      "score": 321,
+      "speech_frames": 28,
+      "source_split": "dev-train-sony",
+      "split": "development",
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "archive_path": "mic_dev/dev-train-sony/fold3_room21_mix023.wav",
+      "source_sha256": "d2baf2f86723a96c1ac4834b91743b31614de0fe6d8d1cc88c60f4990e4c3f66",
+      "source_samples": [
+        259200,
+        1699200
+      ],
+      "sample_rate": 24000,
+      "duration_seconds": 60.0,
+      "sha256": "98899e2eb439f405cec157881c6a46225aedd4da73e9b77076c23d1d93b5f68f",
+      "metadata_sha256": "c1842397492b297a6da6f259fed4f827576b09a7efa94e86341f5869a7f67e3f"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-tau/fold3_room6_mix007.csv",
+      "event_class": 5,
+      "event_frames": [
+        805,
+        1095
+      ],
+      "crop_frames": [
+        495,
+        1095
+      ],
+      "score": 290,
+      "speech_frames": 125,
+      "source_split": "dev-train-tau",
+      "split": "development",
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "archive_path": "mic_dev/dev-train-tau/fold3_room6_mix007.wav",
+      "source_sha256": "1949708590eff4f1b320b1dc3c0606be689f158b52dbbcf97369bfdb507b9c24",
+      "source_samples": [
+        1188000,
+        2628000
+      ],
+      "sample_rate": 24000,
+      "duration_seconds": 60.0,
+      "sha256": "ef32da3fa20e87ba700c72b782ee2ed24e434fac54bd352e4e956a4cd8447f0f",
+      "metadata_sha256": "fe2d0c27b199f6b05403b9bb8654fde75d285ad4dc21b026a57fe27e79adbc72"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-sony/fold4_room24_mix011.csv",
+      "event_class": 5,
+      "event_frames": [
+        426,
+        633
+      ],
+      "crop_frames": [
+        132,
+        732
+      ],
+      "score": 207,
+      "speech_frames": 161,
+      "source_split": "dev-test-sony",
+      "split": "evaluation",
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "archive_path": "mic_dev/dev-test-sony/fold4_room24_mix011.wav",
+      "source_sha256": "9781505c3c5ac6312e04777d4d0c28f74a845a4cdd792c1b70ad514fdf56aeda",
+      "source_samples": [
+        316800,
+        1519200
+      ],
+      "sample_rate": 24000,
+      "duration_seconds": 50.1,
+      "sha256": "6e9292abd3afbf24e244514723a57b8577c8d87704b7c20929b075bf559298ac",
+      "metadata_sha256": "5d6bade7576030bb038cb7cd0c3fde02efd038ef5ab39724e0863bc73014ba84"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room10_mix003.csv",
+      "event_class": 8,
+      "event_frames": [
+        75,
+        440
+      ],
+      "crop_frames": [
+        0,
+        600
+      ],
+      "score": 365,
+      "speech_frames": 70,
+      "source_split": "dev-test-tau",
+      "split": "evaluation",
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "archive_path": "mic_dev/dev-test-tau/fold4_room10_mix003.wav",
+      "source_sha256": "caf0625b7a38aaf702eec17665a7f652fe913aac8ebbf9a7f4b5ac6127595a93",
+      "source_samples": [
+        0,
+        1440000
+      ],
+      "sample_rate": 24000,
+      "duration_seconds": 60.0,
+      "sha256": "47f3df22125266a745e7c037c2e53faffa39a2ef4e78e184ffe3e18400ab5865",
+      "metadata_sha256": "6bf7d59e448ebd65a2615df34e38c719eec63753d8b15ce79e3460e41853d24b"
+    }
+  ]
+}

@@ -20,6 +20,28 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 
 ## 2. Assess background-noise stability — high priority
 
+Status September 28, 2026: **open**, by user decision. Implemented behavior
+passes the available controlled and recorded-fixture acceptance gates. Keep
+the remaining validation checkbox open until broader independently supported
+annotations and real-microphone validation are completed. The
+[acceptance review](NOISE_STABILITY_ACCEPTANCE.md) consolidates evidence,
+provisional parameter decisions, and the concrete remaining validation tasks.
+
+A [STARSS22 real-room pilot](../apps/web/e2e/fixtures/starss22/README.md) now
+provides four human-annotated physical room recordings (230.1 s), including
+domestic noise and music with nearby speech. Two rooms are reserved for
+evaluation and two for development; selection uses upstream annotations before
+app outputs. No parameter tuning or improved detection result is claimed yet.
+The [production-worker comparison](STARSS22_NOISE_BENCHMARK.md) now passes all
+twelve frozen recorded-component stationary/+12/−12 dB cases, in both the worker
+and annotation-driven estimator. No threshold change is justified. Native
+whole-recording retry truth remains unknown; event presence alone is not a
+change label. Room21 returns no speech despite upstream speech labels, and
+room10 misses substantial speech interiors. Investigate app-length contiguous
+excerpts before changing VAD or noise guards. The 100 ms grid cannot settle
+short-transient policy; broader device/processing and native retry validation
+remain open.
+
 - [x] Compare calibration noise with sufficiently long later nonspeech windows. Exclude speech boundaries to reduce contamination from breaths, missed speech, and reverberation.
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.
 - [x] Surface unstable-noise evidence and define how it limits SNR confidence, grading, and retry guidance.
@@ -27,6 +49,13 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
+
+Sustained-decrease follow-up: 600 ms, −9 dB decreases exposed eight missed
+changes across window alignments and two missed retries on recorded sources.
+Consecutive disjoint-hop duration evidence now resolves these, with no false
+alarms in 120 controlled negatives or twelve stationary worker controls. See
+the [decrease decision](NOISE_DECREASE_BENCHMARK.md). Acoustic thresholds remain
+provisional; held-out physical captures and independent listening remain open.
 
 Tonal recovery follow-up: five missed 55 Hz, 100 ms +7 dB bursts now request
 noise retry. Coverage can complete when the recovery window's first hop still

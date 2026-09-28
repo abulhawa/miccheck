@@ -7,3 +7,6 @@ apps/web/e2e/fixtures/human-speech/annotations*.json text eol=lf
 apps/web/e2e/fixtures/human-speech/groq-large-v3-responses.json text eol=lf
 docs/ai-annotation-evaluation.json text eol=lf
 docs/groq-annotation-evaluation.json text eol=lf
+
+# Preserve exact STARSS22 fixture and provenance bytes on every OS.
+apps/web/e2e/fixtures/starss22/** -text
