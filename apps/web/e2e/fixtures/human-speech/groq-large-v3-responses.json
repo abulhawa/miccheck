@@ -1,0 +1,2072 @@
+{
+  "schemaVersion": 1,
+  "provider": "Groq",
+  "parameters": {
+    "model": "whisper-large-v3",
+    "language": "en",
+    "response_format": "verbose_json",
+    "temperature": 0,
+    "timestamp_granularities": [
+      "word",
+      "segment"
+    ],
+    "prompt": null
+  },
+  "settingsHash": "c43a8580520150d939d69640c0db93d8181085de06ec0037aed54cffd4962c73",
+  "note": "Source-only annotation calls; API model version is provider-managed. Credentials are not stored.",
+  "clips": [
+    {
+      "file": "1320-122617-0003.flac",
+      "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594",
+      "speaker": "1320",
+      "durationSeconds": 6.285,
+      "retrievedAt": "2026-09-28T10:05:13.223Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7194",
+        "x-ratelimit-remaining-requests": "1999",
+        "x-ratelimit-reset-audio-seconds": "3s",
+        "x-ratelimit-reset-requests": "43.2s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 6.28499968,
+        "text": " There was something in his air and manner that betrayed to the scout the utter confusion of the state of his mind.",
+        "words": [
+          {
+            "word": "There",
+            "start": 0,
+            "end": 0.48
+          },
+          {
+            "word": "was",
+            "start": 0.48,
+            "end": 0.64
+          },
+          {
+            "word": "something",
+            "start": 0.64,
+            "end": 0.96
+          },
+          {
+            "word": "in",
+            "start": 0.96,
+            "end": 1.16
+          },
+          {
+            "word": "his",
+            "start": 1.16,
+            "end": 1.32
+          },
+          {
+            "word": "air",
+            "start": 1.32,
+            "end": 1.56
+          },
+          {
+            "word": "and",
+            "start": 1.56,
+            "end": 1.78
+          },
+          {
+            "word": "manner",
+            "start": 1.78,
+            "end": 2.12
+          },
+          {
+            "word": "that",
+            "start": 2.12,
+            "end": 2.36
+          },
+          {
+            "word": "betrayed",
+            "start": 2.36,
+            "end": 2.72
+          },
+          {
+            "word": "to",
+            "start": 2.72,
+            "end": 2.94
+          },
+          {
+            "word": "the",
+            "start": 2.94,
+            "end": 3.12
+          },
+          {
+            "word": "scout",
+            "start": 3.12,
+            "end": 3.4
+          },
+          {
+            "word": "the",
+            "start": 3.4,
+            "end": 3.74
+          },
+          {
+            "word": "utter",
+            "start": 3.74,
+            "end": 4
+          },
+          {
+            "word": "confusion",
+            "start": 4,
+            "end": 4.52
+          },
+          {
+            "word": "of",
+            "start": 4.52,
+            "end": 4.8
+          },
+          {
+            "word": "the",
+            "start": 4.8,
+            "end": 4.92
+          },
+          {
+            "word": "state",
+            "start": 4.92,
+            "end": 5.2
+          },
+          {
+            "word": "of",
+            "start": 5.2,
+            "end": 5.34
+          },
+          {
+            "word": "his",
+            "start": 5.34,
+            "end": 5.44
+          },
+          {
+            "word": "mind.",
+            "start": 5.44,
+            "end": 6.3
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 5.8199997,
+            "text": " There was something in his air and manner that betrayed to the scout the utter confusion of the state of his mind.",
+            "tokens": [
+              50365,
+              821,
+              390,
+              746,
+              294,
+              702,
+              1988,
+              293,
+              9060,
+              300,
+              29515,
+              281,
+              264,
+              34392,
+              264,
+              17567,
+              15075,
+              295,
+              264,
+              1785,
+              295,
+              702,
+              1575,
+              13,
+              50656
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.09189171,
+            "compression_ratio": 1.2637362,
+            "no_speech_prob": 0.000004708767
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqkgwnez9brvs9rh3yn3jv"
+        }
+      }
+    },
+    {
+      "file": "1320-122617-0012.flac",
+      "sha256": "6b5cd2c31ee61665ea0d81f2c76a1f2c32cb4f46e5ec5861bd9157e262785252",
+      "speaker": "1320",
+      "durationSeconds": 7.59,
+      "retrievedAt": "2026-09-28T10:05:40.490Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7193",
+        "x-ratelimit-remaining-requests": "1998",
+        "x-ratelimit-reset-audio-seconds": "3.5s",
+        "x-ratelimit-reset-requests": "1m26.4s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 7.590000128,
+        "text": " Four or five of the latter only lingered about the door of the prison of Uncas, wary but close observers of the manner of their captive.",
+        "words": [
+          {
+            "word": "Four",
+            "start": 0.32,
+            "end": 0.54
+          },
+          {
+            "word": "or",
+            "start": 0.54,
+            "end": 0.78
+          },
+          {
+            "word": "five",
+            "start": 0.78,
+            "end": 0.98
+          },
+          {
+            "word": "of",
+            "start": 0.98,
+            "end": 1.1
+          },
+          {
+            "word": "the",
+            "start": 1.1,
+            "end": 1.24
+          },
+          {
+            "word": "latter",
+            "start": 1.24,
+            "end": 1.48
+          },
+          {
+            "word": "only",
+            "start": 1.48,
+            "end": 1.76
+          },
+          {
+            "word": "lingered",
+            "start": 1.76,
+            "end": 2.06
+          },
+          {
+            "word": "about",
+            "start": 2.06,
+            "end": 2.32
+          },
+          {
+            "word": "the",
+            "start": 2.32,
+            "end": 2.52
+          },
+          {
+            "word": "door",
+            "start": 2.52,
+            "end": 2.76
+          },
+          {
+            "word": "of",
+            "start": 2.76,
+            "end": 2.9
+          },
+          {
+            "word": "the",
+            "start": 2.9,
+            "end": 2.98
+          },
+          {
+            "word": "prison",
+            "start": 2.98,
+            "end": 3.28
+          },
+          {
+            "word": "of",
+            "start": 3.28,
+            "end": 3.48
+          },
+          {
+            "word": "Uncas,",
+            "start": 3.48,
+            "end": 4.02
+          },
+          {
+            "word": "wary",
+            "start": 4.02,
+            "end": 4.3
+          },
+          {
+            "word": "but",
+            "start": 4.3,
+            "end": 4.56
+          },
+          {
+            "word": "close",
+            "start": 4.26,
+            "end": 4.98
+          },
+          {
+            "word": "observers",
+            "start": 4.98,
+            "end": 5.56
+          },
+          {
+            "word": "of",
+            "start": 5.56,
+            "end": 5.78
+          },
+          {
+            "word": "the",
+            "start": 5.78,
+            "end": 5.9
+          },
+          {
+            "word": "manner",
+            "start": 5.9,
+            "end": 6.18
+          },
+          {
+            "word": "of",
+            "start": 6.18,
+            "end": 6.34
+          },
+          {
+            "word": "their",
+            "start": 6.34,
+            "end": 6.42
+          },
+          {
+            "word": "captive.",
+            "start": 6.42,
+            "end": 7
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 4.56,
+            "text": " Four or five of the latter only lingered about the door of the prison of Uncas, wary but",
+            "tokens": [
+              50365,
+              7451,
+              420,
+              1732,
+              295,
+              264,
+              18481,
+              787,
+              22949,
+              4073,
+              466,
+              264,
+              2853,
+              295,
+              264,
+              6168,
+              295,
+              1156,
+              16369,
+              11,
+              46585,
+              457,
+              50593
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.07588369,
+            "compression_ratio": 1.3047619,
+            "no_speech_prob": 0.00051927567
+          },
+          {
+            "id": 1,
+            "seek": 0,
+            "start": 4.56,
+            "end": 7.6,
+            "text": " close observers of the manner of their captive.",
+            "tokens": [
+              50593,
+              1998,
+              48090,
+              295,
+              264,
+              9060,
+              295,
+              641,
+              41762,
+              13,
+              50745
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.07588369,
+            "compression_ratio": 1.3047619,
+            "no_speech_prob": 0.00051927567
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqmbcwe8xarhjfs4ya9age"
+        }
+      }
+    },
+    {
+      "file": "5639-40744-0002.flac",
+      "sha256": "111c6b8b19d093736570bced344035b48f75c770aacc60103da9d9a20f904fb2",
+      "speaker": "5639",
+      "durationSeconds": 8.91,
+      "retrievedAt": "2026-09-28T10:05:46.955Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7192",
+        "x-ratelimit-remaining-requests": "1997",
+        "x-ratelimit-reset-audio-seconds": "4s",
+        "x-ratelimit-reset-requests": "2m9.6s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 8.910000128,
+        "text": " Rodolfo and his companions, with their faces muffled in their cloaks, stared rudely and insolently at the mother, the daughter, and the servant-maid.",
+        "words": [
+          {
+            "word": "Rodolfo",
+            "start": 0.4,
+            "end": 0.84
+          },
+          {
+            "word": "and",
+            "start": 0.84,
+            "end": 1
+          },
+          {
+            "word": "his",
+            "start": 1,
+            "end": 1.14
+          },
+          {
+            "word": "companions,",
+            "start": 1.14,
+            "end": 1.92
+          },
+          {
+            "word": "with",
+            "start": 1.92,
+            "end": 2.34
+          },
+          {
+            "word": "their",
+            "start": 2.34,
+            "end": 2.42
+          },
+          {
+            "word": "faces",
+            "start": 2.42,
+            "end": 2.84
+          },
+          {
+            "word": "muffled",
+            "start": 2.84,
+            "end": 3.26
+          },
+          {
+            "word": "in",
+            "start": 3.26,
+            "end": 3.44
+          },
+          {
+            "word": "their",
+            "start": 3.44,
+            "end": 3.6
+          },
+          {
+            "word": "cloaks,",
+            "start": 3.6,
+            "end": 4.6
+          },
+          {
+            "word": "stared",
+            "start": 4.6,
+            "end": 4.86
+          },
+          {
+            "word": "rudely",
+            "start": 4.86,
+            "end": 5.32
+          },
+          {
+            "word": "and",
+            "start": 5.32,
+            "end": 5.56
+          },
+          {
+            "word": "insolently",
+            "start": 5,
+            "end": 6.16
+          },
+          {
+            "word": "at",
+            "start": 6.16,
+            "end": 6.32
+          },
+          {
+            "word": "the",
+            "start": 6.32,
+            "end": 6.5
+          },
+          {
+            "word": "mother,",
+            "start": 6.5,
+            "end": 7
+          },
+          {
+            "word": "the",
+            "start": 7,
+            "end": 7.12
+          },
+          {
+            "word": "daughter,",
+            "start": 7.12,
+            "end": 7.44
+          },
+          {
+            "word": "and",
+            "start": 7.44,
+            "end": 7.64
+          },
+          {
+            "word": "the",
+            "start": 7.64,
+            "end": 7.72
+          },
+          {
+            "word": "servant-maid.",
+            "start": 7.72,
+            "end": 8.48
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 5.5,
+            "text": " Rodolfo and his companions, with their faces muffled in their cloaks, stared rudely and",
+            "tokens": [
+              50365,
+              11097,
+              7491,
+              78,
+              293,
+              702,
+              28009,
+              11,
+              365,
+              641,
+              8475,
+              22635,
+              1493,
+              294,
+              641,
+              20123,
+              5461,
+              11,
+              44738,
+              32109,
+              736,
+              293,
+              50640
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.093931265,
+            "compression_ratio": 1.3274336,
+            "no_speech_prob": 0.0022907257
+          },
+          {
+            "id": 1,
+            "seek": 0,
+            "start": 5.5,
+            "end": 8.92,
+            "text": " insolently at the mother, the daughter, and the servant-maid.",
+            "tokens": [
+              50640,
+              1028,
+              401,
+              2276,
+              412,
+              264,
+              2895,
+              11,
+              264,
+              4653,
+              11,
+              293,
+              264,
+              17896,
+              12,
+              1696,
+              327,
+              13,
+              50811
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.093931265,
+            "compression_ratio": 1.3274336,
+            "no_speech_prob": 0.0022907257
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqmhwke5jt15vjpsczb8yt"
+        }
+      }
+    },
+    {
+      "file": "5639-40744-0033.flac",
+      "sha256": "3cf3d1325b9a643f43f503a3be74b29e081e2a233774f39a48fe40e0040258cf",
+      "speaker": "5639",
+      "durationSeconds": 9.15,
+      "retrievedAt": "2026-09-28T10:05:53.609Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7191",
+        "x-ratelimit-remaining-requests": "1996",
+        "x-ratelimit-reset-audio-seconds": "4.5s",
+        "x-ratelimit-reset-requests": "2m52.8s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 9.150000128,
+        "text": " her bearing was graceful and animated she led her son by the hand and before her walked two maids with wax-lights and silver candlesticks",
+        "words": [
+          {
+            "word": "her",
+            "start": 0,
+            "end": 0.68
+          },
+          {
+            "word": "bearing",
+            "start": 0.68,
+            "end": 1.02
+          },
+          {
+            "word": "was",
+            "start": 1.02,
+            "end": 1.26
+          },
+          {
+            "word": "graceful",
+            "start": 1.26,
+            "end": 1.74
+          },
+          {
+            "word": "and",
+            "start": 1.74,
+            "end": 1.96
+          },
+          {
+            "word": "animated",
+            "start": 1.96,
+            "end": 2.4
+          },
+          {
+            "word": "she",
+            "start": 2.4,
+            "end": 2.86
+          },
+          {
+            "word": "led",
+            "start": 2.86,
+            "end": 3.08
+          },
+          {
+            "word": "her",
+            "start": 3.08,
+            "end": 3.26
+          },
+          {
+            "word": "son",
+            "start": 3.26,
+            "end": 3.54
+          },
+          {
+            "word": "by",
+            "start": 3.54,
+            "end": 3.74
+          },
+          {
+            "word": "the",
+            "start": 3.74,
+            "end": 3.84
+          },
+          {
+            "word": "hand",
+            "start": 3.84,
+            "end": 4.14
+          },
+          {
+            "word": "and",
+            "start": 4.14,
+            "end": 4.62
+          },
+          {
+            "word": "before",
+            "start": 4.62,
+            "end": 5
+          },
+          {
+            "word": "her",
+            "start": 5,
+            "end": 5.2
+          },
+          {
+            "word": "walked",
+            "start": 5.2,
+            "end": 5.54
+          },
+          {
+            "word": "two",
+            "start": 5.54,
+            "end": 5.82
+          },
+          {
+            "word": "maids",
+            "start": 5.82,
+            "end": 6.24
+          },
+          {
+            "word": "with",
+            "start": 6.24,
+            "end": 6.74
+          },
+          {
+            "word": "wax-lights",
+            "start": 6.74,
+            "end": 7.38
+          },
+          {
+            "word": "and",
+            "start": 7.38,
+            "end": 7.62
+          },
+          {
+            "word": "silver",
+            "start": 7.62,
+            "end": 8.04
+          },
+          {
+            "word": "candlesticks",
+            "start": 8.04,
+            "end": 8.84
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 9.139999,
+            "text": " her bearing was graceful and animated she led her son by the hand and before her walked two maids with wax-lights and silver candlesticks",
+            "tokens": [
+              50365,
+              720,
+              17350,
+              390,
+              10042,
+              906,
+              293,
+              18947,
+              750,
+              4684,
+              720,
+              1872,
+              538,
+              264,
+              1011,
+              293,
+              949,
+              720,
+              7628,
+              732,
+              463,
+              3742,
+              365,
+              17352,
+              12,
+              20827,
+              293,
+              8753,
+              3955,
+              35745,
+              7663,
+              50822
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.081634544,
+            "compression_ratio": 1.3142858,
+            "no_speech_prob": 0.000008285046
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqmr5ae9tag7kzhm3pr4nf"
+        }
+      }
+    },
+    {
+      "file": "260-123440-0018.flac",
+      "sha256": "a80d66d866b8f9114094301a965a7b6d0a62d9467c96885ff1098a27f5b02cb4",
+      "speaker": "260",
+      "durationSeconds": 3.64,
+      "retrievedAt": "2026-09-28T10:06:01.160Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7197",
+        "x-ratelimit-remaining-requests": "1995",
+        "x-ratelimit-reset-audio-seconds": "1.5s",
+        "x-ratelimit-reset-requests": "3m36s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 3.64,
+        "text": " I am very tired of swimming about here. Oh, Mouse!",
+        "words": [
+          {
+            "word": "I",
+            "start": 0.18,
+            "end": 0.3
+          },
+          {
+            "word": "am",
+            "start": 0.3,
+            "end": 0.4
+          },
+          {
+            "word": "very",
+            "start": 0.4,
+            "end": 0.64
+          },
+          {
+            "word": "tired",
+            "start": 0.64,
+            "end": 0.98
+          },
+          {
+            "word": "of",
+            "start": 0.98,
+            "end": 1.12
+          },
+          {
+            "word": "swimming",
+            "start": 1.12,
+            "end": 1.4
+          },
+          {
+            "word": "about",
+            "start": 1.4,
+            "end": 1.74
+          },
+          {
+            "word": "here.",
+            "start": 1.74,
+            "end": 2.14
+          },
+          {
+            "word": "Oh,",
+            "start": 2.38,
+            "end": 2.54
+          },
+          {
+            "word": "Mouse!",
+            "start": 2.54,
+            "end": 2.82
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 2.1399999,
+            "text": " I am very tired of swimming about here.",
+            "tokens": [
+              50365,
+              286,
+              669,
+              588,
+              5868,
+              295,
+              11989,
+              466,
+              510,
+              13,
+              50472
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.20723261,
+            "compression_ratio": 0.86440676,
+            "no_speech_prob": 0.0072364807
+          },
+          {
+            "id": 1,
+            "seek": 0,
+            "start": 2.36,
+            "end": 2.9399998,
+            "text": " Oh, Mouse!",
+            "tokens": [
+              50483,
+              876,
+              11,
+              29383,
+              0,
+              50512
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.20723261,
+            "compression_ratio": 0.86440676,
+            "no_speech_prob": 0.0072364807
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqmynte6fv7me8tdfnm7kv"
+        }
+      }
+    },
+    {
+      "file": "260-123440-0007.flac",
+      "sha256": "87cb8fbcddb28a25deeb6ce7a889312eaede1ef07d26ebfdafe86c2a400ab493",
+      "speaker": "260",
+      "durationSeconds": 3.385,
+      "retrievedAt": "2026-09-28T10:06:07.526Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7197",
+        "x-ratelimit-remaining-requests": "1994",
+        "x-ratelimit-reset-audio-seconds": "1.5s",
+        "x-ratelimit-reset-requests": "4m19.2s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 3.384999936,
+        "text": " I almost think I can remember feeling a little different.",
+        "words": [
+          {
+            "word": "I",
+            "start": 0.32,
+            "end": 0.48
+          },
+          {
+            "word": "almost",
+            "start": 0.48,
+            "end": 0.82
+          },
+          {
+            "word": "think",
+            "start": 0.82,
+            "end": 1.12
+          },
+          {
+            "word": "I",
+            "start": 1.12,
+            "end": 1.3
+          },
+          {
+            "word": "can",
+            "start": 1.3,
+            "end": 1.44
+          },
+          {
+            "word": "remember",
+            "start": 1.44,
+            "end": 1.72
+          },
+          {
+            "word": "feeling",
+            "start": 1.72,
+            "end": 2.16
+          },
+          {
+            "word": "a",
+            "start": 2.16,
+            "end": 2.34
+          },
+          {
+            "word": "little",
+            "start": 2.34,
+            "end": 2.7
+          },
+          {
+            "word": "different.",
+            "start": 2.7,
+            "end": 3.58
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 3.1,
+            "text": " I almost think I can remember feeling a little different.",
+            "tokens": [
+              50365,
+              286,
+              1920,
+              519,
+              286,
+              393,
+              1604,
+              2633,
+              257,
+              707,
+              819,
+              13,
+              50520
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.15890837,
+            "compression_ratio": 0.9830508,
+            "no_speech_prob": 0.027023315
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqn618ewsrvht7rwwdmth4"
+        }
+      }
+    },
+    {
+      "file": "7729-102255-0045.flac",
+      "sha256": "52b2863422cf066b046facaf8c9608e81179a61be437b8e321c2832b2119805c",
+      "speaker": "7729",
+      "durationSeconds": 6.805,
+      "retrievedAt": "2026-09-28T10:06:14.029Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7194",
+        "x-ratelimit-remaining-requests": "1993",
+        "x-ratelimit-reset-audio-seconds": "3s",
+        "x-ratelimit-reset-requests": "5m2.4s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 6.80499968,
+        "text": " Captain Martin said, I shall give you a pistol to help protect yourself if worse comes to worst.",
+        "words": [
+          {
+            "word": "Captain",
+            "start": 0,
+            "end": 0.58
+          },
+          {
+            "word": "Martin",
+            "start": 0.58,
+            "end": 1.08
+          },
+          {
+            "word": "said,",
+            "start": 1.08,
+            "end": 2.02
+          },
+          {
+            "word": "I",
+            "start": 2.02,
+            "end": 2.1
+          },
+          {
+            "word": "shall",
+            "start": 2.1,
+            "end": 2.32
+          },
+          {
+            "word": "give",
+            "start": 2.32,
+            "end": 2.6
+          },
+          {
+            "word": "you",
+            "start": 2.6,
+            "end": 2.74
+          },
+          {
+            "word": "a",
+            "start": 2.74,
+            "end": 2.92
+          },
+          {
+            "word": "pistol",
+            "start": 2.92,
+            "end": 3.22
+          },
+          {
+            "word": "to",
+            "start": 3.22,
+            "end": 3.54
+          },
+          {
+            "word": "help",
+            "start": 3.54,
+            "end": 3.74
+          },
+          {
+            "word": "protect",
+            "start": 3.74,
+            "end": 4.14
+          },
+          {
+            "word": "yourself",
+            "start": 4.14,
+            "end": 4.6
+          },
+          {
+            "word": "if",
+            "start": 4.6,
+            "end": 5.3
+          },
+          {
+            "word": "worse",
+            "start": 5.3,
+            "end": 5.6
+          },
+          {
+            "word": "comes",
+            "start": 5.6,
+            "end": 5.92
+          },
+          {
+            "word": "to",
+            "start": 5.92,
+            "end": 6.06
+          },
+          {
+            "word": "worst.",
+            "start": 6.06,
+            "end": 6.38
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 6.42,
+            "text": " Captain Martin said, I shall give you a pistol to help protect yourself if worse comes to worst.",
+            "tokens": [
+              50365,
+              10873,
+              9184,
+              848,
+              11,
+              286,
+              4393,
+              976,
+              291,
+              257,
+              25385,
+              281,
+              854,
+              2371,
+              1803,
+              498,
+              5324,
+              1487,
+              281,
+              5855,
+              13,
+              50686
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.12135166,
+            "compression_ratio": 1.1149426,
+            "no_speech_prob": 0.0000034570694
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqnc8eeft926m6rcjsfs9m"
+        }
+      }
+    },
+    {
+      "file": "7729-102255-0012.flac",
+      "sha256": "438b540a2a84f8a9ffcec80aae8ab08dd95a1d9f829eeb89164192978d5672cd",
+      "speaker": "7729",
+      "durationSeconds": 4.075,
+      "retrievedAt": "2026-09-28T10:06:20.366Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7196",
+        "x-ratelimit-remaining-requests": "1992",
+        "x-ratelimit-reset-audio-seconds": "2s",
+        "x-ratelimit-reset-requests": "5m45.6s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 4.074999808,
+        "text": " Several hundred Free State men promptly responded to the summons.",
+        "words": [
+          {
+            "word": "Several",
+            "start": 0.04,
+            "end": 0.58
+          },
+          {
+            "word": "hundred",
+            "start": 0.58,
+            "end": 1.02
+          },
+          {
+            "word": "Free",
+            "start": 1.02,
+            "end": 1.36
+          },
+          {
+            "word": "State",
+            "start": 1.36,
+            "end": 1.54
+          },
+          {
+            "word": "men",
+            "start": 1.54,
+            "end": 1.8
+          },
+          {
+            "word": "promptly",
+            "start": 1.8,
+            "end": 2.28
+          },
+          {
+            "word": "responded",
+            "start": 2.28,
+            "end": 2.94
+          },
+          {
+            "word": "to",
+            "start": 2.94,
+            "end": 3.2
+          },
+          {
+            "word": "the",
+            "start": 3.2,
+            "end": 3.34
+          },
+          {
+            "word": "summons.",
+            "start": 3.34,
+            "end": 3.74
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 4.08,
+            "text": " Several hundred Free State men promptly responded to the summons.",
+            "tokens": [
+              50365,
+              22246,
+              3262,
+              11551,
+              4533,
+              1706,
+              48594,
+              15806,
+              281,
+              264,
+              8367,
+              892,
+              13,
+              50569
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.0904751,
+            "compression_ratio": 0.95652175,
+            "no_speech_prob": 0.000010728836
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqnjjfee5sa61jxgkw3m9k"
+        }
+      }
+    },
+    {
+      "file": "2094-142345-0059.flac",
+      "sha256": "d9e10be49f95d6c601d63e3c229eeda6cf29a03a040d10078bf6cd0975964554",
+      "speaker": "2094",
+      "durationSeconds": 10.01,
+      "retrievedAt": "2026-09-28T10:06:26.902Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7190",
+        "x-ratelimit-remaining-requests": "1991",
+        "x-ratelimit-reset-audio-seconds": "5s",
+        "x-ratelimit-reset-requests": "6m28.799s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 10.010000384,
+        "text": " this mrs poycer said blushing and believing that the captain was really interested in her milk-pans and would adjust his opinion of her to the appearance of her dairy",
+        "words": [
+          {
+            "word": "this",
+            "start": 0.38,
+            "end": 0.68
+          },
+          {
+            "word": "mrs",
+            "start": 0.68,
+            "end": 1
+          },
+          {
+            "word": "poycer",
+            "start": 1,
+            "end": 1.34
+          },
+          {
+            "word": "said",
+            "start": 1.34,
+            "end": 1.62
+          },
+          {
+            "word": "blushing",
+            "start": 1.62,
+            "end": 2.02
+          },
+          {
+            "word": "and",
+            "start": 2.02,
+            "end": 2.74
+          },
+          {
+            "word": "believing",
+            "start": 2.74,
+            "end": 3.02
+          },
+          {
+            "word": "that",
+            "start": 3.02,
+            "end": 3.24
+          },
+          {
+            "word": "the",
+            "start": 3.24,
+            "end": 3.32
+          },
+          {
+            "word": "captain",
+            "start": 3.32,
+            "end": 3.72
+          },
+          {
+            "word": "was",
+            "start": 3.72,
+            "end": 4.2
+          },
+          {
+            "word": "really",
+            "start": 4.2,
+            "end": 4.46
+          },
+          {
+            "word": "interested",
+            "start": 4.46,
+            "end": 5.02
+          },
+          {
+            "word": "in",
+            "start": 5.02,
+            "end": 5.18
+          },
+          {
+            "word": "her",
+            "start": 5.18,
+            "end": 5.32
+          },
+          {
+            "word": "milk-pans",
+            "start": 5.32,
+            "end": 5.94
+          },
+          {
+            "word": "and",
+            "start": 5.94,
+            "end": 6.72
+          },
+          {
+            "word": "would",
+            "start": 6.72,
+            "end": 6.9
+          },
+          {
+            "word": "adjust",
+            "start": 6.9,
+            "end": 7.22
+          },
+          {
+            "word": "his",
+            "start": 7.22,
+            "end": 7.42
+          },
+          {
+            "word": "opinion",
+            "start": 7.42,
+            "end": 7.76
+          },
+          {
+            "word": "of",
+            "start": 7.76,
+            "end": 7.9
+          },
+          {
+            "word": "her",
+            "start": 7.9,
+            "end": 8.14
+          },
+          {
+            "word": "to",
+            "start": 8.14,
+            "end": 8.4
+          },
+          {
+            "word": "the",
+            "start": 8.4,
+            "end": 8.52
+          },
+          {
+            "word": "appearance",
+            "start": 8.52,
+            "end": 8.88
+          },
+          {
+            "word": "of",
+            "start": 8.88,
+            "end": 9.02
+          },
+          {
+            "word": "her",
+            "start": 9.02,
+            "end": 9.16
+          },
+          {
+            "word": "dairy",
+            "start": 9.16,
+            "end": 9.62
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 10.0199995,
+            "text": " this mrs poycer said blushing and believing that the captain was really interested in her milk-pans and would adjust his opinion of her to the appearance of her dairy",
+            "tokens": [
+              50365,
+              341,
+              275,
+              22943,
+              714,
+              88,
+              1776,
+              848,
+              888,
+              5371,
+              293,
+              16594,
+              300,
+              264,
+              14871,
+              390,
+              534,
+              3102,
+              294,
+              720,
+              5392,
+              12,
+              79,
+              599,
+              293,
+              576,
+              4369,
+              702,
+              4800,
+              295,
+              720,
+              281,
+              264,
+              8967,
+              295,
+              720,
+              21276,
+              50866
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.057748813,
+            "compression_ratio": 1.3916667,
+            "no_speech_prob": 0.00015366077
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqnrtdetzafgncc6ram0ps"
+        }
+      }
+    },
+    {
+      "file": "2094-142345-0045.flac",
+      "sha256": "1d62c5f9b72822a151674a2d6df7e11829ffd140b4bb12a9090b3df763ea7d9d",
+      "speaker": "2094",
+      "durationSeconds": 3.005,
+      "retrievedAt": "2026-09-28T10:06:33.333Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7197",
+        "x-ratelimit-remaining-requests": "1990",
+        "x-ratelimit-reset-audio-seconds": "1.5s",
+        "x-ratelimit-reset-requests": "7m12s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 3.005000192,
+        "text": " \"'Oh, sir, don't mention it,' said Mrs. Poyser.",
+        "words": [
+          {
+            "word": "\"'Oh,",
+            "start": 0.02,
+            "end": 0.58
+          },
+          {
+            "word": "sir,",
+            "start": 0.58,
+            "end": 0.9
+          },
+          {
+            "word": "don't",
+            "start": 0.9,
+            "end": 1.06
+          },
+          {
+            "word": "mention",
+            "start": 1.06,
+            "end": 1.36
+          },
+          {
+            "word": "it,'",
+            "start": 1.36,
+            "end": 1.68
+          },
+          {
+            "word": "said",
+            "start": 1.68,
+            "end": 2.04
+          },
+          {
+            "word": "Mrs.",
+            "start": 2.04,
+            "end": 2.34
+          },
+          {
+            "word": "Poyser.",
+            "start": 2.34,
+            "end": 2.7
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 2.72,
+            "text": " \"'Oh, sir, don't mention it,' said Mrs. Poyser.",
+            "tokens": [
+              50365,
+              24543,
+              3756,
+              11,
+              4735,
+              11,
+              500,
+              380,
+              2152,
+              309,
+              12529,
+              848,
+              9814,
+              13,
+              6165,
+              749,
+              260,
+              13,
+              50501
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.08669483,
+            "compression_ratio": 0.85714287,
+            "no_speech_prob": 0.00009697676
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqnz79ebv93xxs1egtpbgz"
+        }
+      }
+    },
+    {
+      "file": "3575-170457-0023.flac",
+      "sha256": "2a062109a1c67a7b724649ce0e0d43c8e06c992a43fc9e21758db2c7ec83fc1d",
+      "speaker": "3575",
+      "durationSeconds": 9.095,
+      "retrievedAt": "2026-09-28T10:06:39.755Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7191",
+        "x-ratelimit-remaining-requests": "1989",
+        "x-ratelimit-reset-audio-seconds": "4.5s",
+        "x-ratelimit-reset-requests": "7m55.2s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 9.095000064,
+        "text": " I carefully avoid any appearance of preoccupation and eccentricity, which might lead those I live amongst to suspect the nature of my pursuits.",
+        "words": [
+          {
+            "word": "I",
+            "start": 0.46,
+            "end": 0.6
+          },
+          {
+            "word": "carefully",
+            "start": 0.6,
+            "end": 1
+          },
+          {
+            "word": "avoid",
+            "start": 1,
+            "end": 1.38
+          },
+          {
+            "word": "any",
+            "start": 1.38,
+            "end": 1.66
+          },
+          {
+            "word": "appearance",
+            "start": 1.66,
+            "end": 2
+          },
+          {
+            "word": "of",
+            "start": 2,
+            "end": 2.26
+          },
+          {
+            "word": "preoccupation",
+            "start": 2.26,
+            "end": 3.04
+          },
+          {
+            "word": "and",
+            "start": 3.04,
+            "end": 3.44
+          },
+          {
+            "word": "eccentricity,",
+            "start": 3.44,
+            "end": 5
+          },
+          {
+            "word": "which",
+            "start": 4.98,
+            "end": 5.1
+          },
+          {
+            "word": "might",
+            "start": 5.1,
+            "end": 5.36
+          },
+          {
+            "word": "lead",
+            "start": 5.36,
+            "end": 5.66
+          },
+          {
+            "word": "those",
+            "start": 5.66,
+            "end": 5.94
+          },
+          {
+            "word": "I",
+            "start": 5.94,
+            "end": 6.14
+          },
+          {
+            "word": "live",
+            "start": 6.14,
+            "end": 6.36
+          },
+          {
+            "word": "amongst",
+            "start": 6.36,
+            "end": 6.64
+          },
+          {
+            "word": "to",
+            "start": 6.64,
+            "end": 6.86
+          },
+          {
+            "word": "suspect",
+            "start": 6.86,
+            "end": 7.24
+          },
+          {
+            "word": "the",
+            "start": 7.24,
+            "end": 7.42
+          },
+          {
+            "word": "nature",
+            "start": 7.42,
+            "end": 7.68
+          },
+          {
+            "word": "of",
+            "start": 7.68,
+            "end": 7.84
+          },
+          {
+            "word": "my",
+            "start": 7.84,
+            "end": 7.98
+          },
+          {
+            "word": "pursuits.",
+            "start": 7.98,
+            "end": 8.44
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 4.7,
+            "text": " I carefully avoid any appearance of preoccupation and eccentricity,",
+            "tokens": [
+              50365,
+              286,
+              7500,
+              5042,
+              604,
+              8967,
+              295,
+              44388,
+              399,
+              293,
+              42629,
+              507,
+              11,
+              50600
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.10097238,
+            "compression_ratio": 1.2631578,
+            "no_speech_prob": 0.08105469
+          },
+          {
+            "id": 1,
+            "seek": 0,
+            "start": 4.88,
+            "end": 8.48,
+            "text": " which might lead those I live amongst to suspect the nature of my pursuits.",
+            "tokens": [
+              50609,
+              597,
+              1062,
+              1477,
+              729,
+              286,
+              1621,
+              12918,
+              281,
+              9091,
+              264,
+              3687,
+              295,
+              452,
+              7088,
+              7688,
+              13,
+              50789
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.10097238,
+            "compression_ratio": 1.2631578,
+            "no_speech_prob": 0.08105469
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqp5f7evyvtnbzn79e45z0"
+        }
+      }
+    },
+    {
+      "file": "3575-170457-0020.flac",
+      "sha256": "39daa9ebbb087564cf6b1cb1c7edcc21fc5bbac1060d4ffd04eb8c7fea427dc4",
+      "speaker": "3575",
+      "durationSeconds": 8.645,
+      "retrievedAt": "2026-09-28T10:06:46.231Z",
+      "rateLimits": {
+        "x-ratelimit-limit-audio-seconds": "7200",
+        "x-ratelimit-limit-requests": "2000",
+        "x-ratelimit-remaining-audio-seconds": "7192",
+        "x-ratelimit-remaining-requests": "1988",
+        "x-ratelimit-reset-audio-seconds": "4s",
+        "x-ratelimit-reset-requests": "8m38.4s"
+      },
+      "response": {
+        "task": "transcribe",
+        "language": "English",
+        "duration": 8.645000192,
+        "text": " I know the first letter I wrote to you is all senseless trash from beginning to end, but I am not altogether the idle dreaming being it would seem to denote.",
+        "words": [
+          {
+            "word": "I",
+            "start": 0.2,
+            "end": 0.38
+          },
+          {
+            "word": "know",
+            "start": 0.38,
+            "end": 0.5
+          },
+          {
+            "word": "the",
+            "start": 0.5,
+            "end": 0.64
+          },
+          {
+            "word": "first",
+            "start": 0.64,
+            "end": 0.88
+          },
+          {
+            "word": "letter",
+            "start": 0.88,
+            "end": 1.12
+          },
+          {
+            "word": "I",
+            "start": 1.12,
+            "end": 1.26
+          },
+          {
+            "word": "wrote",
+            "start": 1.26,
+            "end": 1.44
+          },
+          {
+            "word": "to",
+            "start": 1.44,
+            "end": 1.68
+          },
+          {
+            "word": "you",
+            "start": 1.68,
+            "end": 1.82
+          },
+          {
+            "word": "is",
+            "start": 1.82,
+            "end": 1.98
+          },
+          {
+            "word": "all",
+            "start": 1.98,
+            "end": 2.26
+          },
+          {
+            "word": "senseless",
+            "start": 2.26,
+            "end": 2.78
+          },
+          {
+            "word": "trash",
+            "start": 2.78,
+            "end": 3.2
+          },
+          {
+            "word": "from",
+            "start": 3.2,
+            "end": 3.36
+          },
+          {
+            "word": "beginning",
+            "start": 3.36,
+            "end": 3.62
+          },
+          {
+            "word": "to",
+            "start": 3.62,
+            "end": 3.86
+          },
+          {
+            "word": "end,",
+            "start": 3.86,
+            "end": 4.56
+          },
+          {
+            "word": "but",
+            "start": 4.56,
+            "end": 4.66
+          },
+          {
+            "word": "I",
+            "start": 4.66,
+            "end": 4.82
+          },
+          {
+            "word": "am",
+            "start": 4.82,
+            "end": 4.88
+          },
+          {
+            "word": "not",
+            "start": 4.88,
+            "end": 5.12
+          },
+          {
+            "word": "altogether",
+            "start": 5.12,
+            "end": 5.5
+          },
+          {
+            "word": "the",
+            "start": 5.5,
+            "end": 5.74
+          },
+          {
+            "word": "idle",
+            "start": 5.74,
+            "end": 6.08
+          },
+          {
+            "word": "dreaming",
+            "start": 6.08,
+            "end": 6.48
+          },
+          {
+            "word": "being",
+            "start": 6.48,
+            "end": 6.86
+          },
+          {
+            "word": "it",
+            "start": 6.86,
+            "end": 7.16
+          },
+          {
+            "word": "would",
+            "start": 7.16,
+            "end": 7.3
+          },
+          {
+            "word": "seem",
+            "start": 7.3,
+            "end": 7.5
+          },
+          {
+            "word": "to",
+            "start": 7.5,
+            "end": 7.72
+          },
+          {
+            "word": "denote.",
+            "start": 7.72,
+            "end": 8.02
+          }
+        ],
+        "segments": [
+          {
+            "id": 0,
+            "seek": 0,
+            "start": 0,
+            "end": 4.12,
+            "text": " I know the first letter I wrote to you is all senseless trash from beginning to end,",
+            "tokens": [
+              50365,
+              286,
+              458,
+              264,
+              700,
+              5063,
+              286,
+              4114,
+              281,
+              291,
+              307,
+              439,
+              2923,
+              4272,
+              11321,
+              490,
+              2863,
+              281,
+              917,
+              11,
+              50571
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.11803446,
+            "compression_ratio": 1.3504274,
+            "no_speech_prob": 0.014442444
+          },
+          {
+            "id": 1,
+            "seek": 0,
+            "start": 4.46,
+            "end": 8.059999,
+            "text": " but I am not altogether the idle dreaming being it would seem to denote.",
+            "tokens": [
+              50588,
+              457,
+              286,
+              669,
+              406,
+              19051,
+              264,
+              30650,
+              21475,
+              885,
+              309,
+              576,
+              1643,
+              281,
+              45708,
+              13,
+              50768
+            ],
+            "temperature": 0,
+            "avg_logprob": -0.11803446,
+            "compression_ratio": 1.3504274,
+            "no_speech_prob": 0.014442444
+          }
+        ],
+        "x_groq": {
+          "id": "req_01m3kqpbppeg1ad0q47p3ft4pb"
+        }
+      }
+    }
+  ]
+}

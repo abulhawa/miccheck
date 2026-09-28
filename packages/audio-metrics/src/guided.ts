@@ -40,9 +40,14 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
   const guard = Math.ceil(rate * 0.3);
   const window = Math.max(1, Math.floor(rate * 0.25));
   const eventWindow = Math.max(1, Math.floor(rate * 0.05));
-  const eventHop = Math.max(1, Math.floor(rate * 0.025));
+  const eventHop = Math.max(1, Math.round(rate * 0.025));
   // Ignore differences wholly below -60 dBFS, including appended digital silence.
+  // For rises reaching that floor, compare against actual calibration: flooring
+  // the reference too would hide a -70 to -58 dBFS increase.
   const referenceDb = db(Math.max(noiseFloor, 0.001));
+  const changeFromCalibration = (rms: number) => db(rms) > -60 && rms > noiseFloor
+    ? db(rms) - db(noiseFloor)
+    : db(Math.max(rms, 0.001)) - referenceDb;
   let windows = 0;
   let maxNoiseChangeDb = 0;
   let changedWindows = 0;
@@ -68,8 +73,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     // The leading voice interval can contain a soft onset missed by VAD.
     // Reserve this sensitive check for pauses following detected speech.
     for (let offset = eventStart; runStart > quietEnd && offset + eventWindow <= eventEnd; offset += eventHop) {
-      const levelDb = db(Math.max(computeRms(samples.subarray(offset, offset + eventWindow)), 0.001));
-      const increaseDb = levelDb - referenceDb;
+      const increaseDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + eventWindow)));
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(increaseDb));
       if (increaseDb > 6) {
         if (elevatedStart < 0) elevatedStart = offset;
@@ -84,8 +88,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     }
     if (eventHasEvidence) unfinishedNoiseEvent = true;
     for (let offset = start; offset + window <= end; offset += window) {
-      const levelDb = db(Math.max(computeRms(samples.subarray(offset, offset + window)), 0.001));
-      const changeDb = Math.abs(levelDb - referenceDb);
+      const changeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(offset, offset + window))));
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
       if (changeDb > 6) changedWindows++;
       windows++;

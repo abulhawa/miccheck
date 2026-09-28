@@ -1,3 +1,9 @@
 # Pinned model assets are verified byte-for-byte against manifest.json.
 # Preserve upstream bytes (including CSV/license line endings) on every OS.
 apps/web/public/models/** -text
+
+# Hashed annotation snapshots use identical LF bytes on every OS.
+apps/web/e2e/fixtures/human-speech/annotations*.json text eol=lf
+apps/web/e2e/fixtures/human-speech/groq-large-v3-responses.json text eol=lf
+docs/ai-annotation-evaluation.json text eol=lf
+docs/groq-annotation-evaluation.json text eol=lf

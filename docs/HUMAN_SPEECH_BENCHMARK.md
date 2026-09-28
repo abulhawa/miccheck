@@ -1,5 +1,10 @@
 # Human speech diagnostic benchmark
 
+This historical run predates the
+[independent AI-assisted annotation report](AI_SPEECH_ANNOTATIONS.md), which adds
+provisional source labels and 48 new worker comparisons. No human listening or
+verified speech-boundary ground truth is claimed by either report.
+
 Recorded 2026-09-28T07:56:01.498Z; win32, Chromium 153.0.8010.12.
 
 The purpose of these recordings and results is to improve mic-checker measurements and guidance. Follow the [improvement workflow](BENCHMARK.md#improvement-workflow): reproduce a concrete failure, implement a fix, and compare missed failures and false alarms before and after. This report verifies earlier clipping and sustained-noise fixes; further passing cases alone do not establish a new optimization. The later brief-noise fix and independent SNR reference tests are documented in the [controlled evaluation](NOISE_STABILITY_BENCHMARK.md); this historical run does not contain those acceptance variants.

@@ -1,5 +1,23 @@
 # Human speech collection
 
+Provisional independent AI-assisted annotations are now in
+[annotations.ai.json](annotations.ai.json), with source hashes, Whisper word
+timestamps, WebRTC timelines, uncertain regions, and exact injected-noise
+component labels. Open [annotations-review.html](annotations-review.html) for
+source audio and seekable labeled timelines. A separate AI reviewed the protocol
+and transcript disagreements; no listening review was performed. See the
+[annotation report](../../../../../docs/AI_SPEECH_ANNOTATIONS.md) for coverage,
+48 worker comparisons, specific unresolved disagreements, and reproduction.
+These are candidate labels, not human ground truth. The historical notes below
+refer to earlier runs before these labels existed.
+
+[Groq Large V3 comparison](../../../../../docs/GROQ_ANNOTATION_COMPARISON.md)
+adds cached source transcriptions and a separate downgrade-only consensus
+version in `annotations.consensus.ai.json`. Its
+[review page](annotations-consensus-review.html) flags disagreements and
+out-of-source word timestamps. Normal app tests and offline report generation
+make no Groq calls. Original small.en annotations remain unchanged.
+
 These recordings support improvements to the mic checker. Select clips and controlled transformations to reproduce a specific measurement or guidance failure, evaluate a production fix, and retain regression coverage. Follow the [benchmark improvement workflow](../../../../../docs/BENCHMARK.md#improvement-workflow); collection size and passing cases alone are not improvement outcomes. Keep tuning and evaluation speakers separate when selecting thresholds, and add speech annotations where correctness depends on boundaries.
 
 `e2e/fixture-acceptance.spec.ts` includes all twelve recordings in the normal Playwright suite. It runs the production worker and Silero with checksum verification and fails on unmet expectations. Run through `npm --workspace apps/web run test:e2e -- fixture-acceptance.spec.ts` after building, or run the self-contained worker acceptance runner without Next.js:

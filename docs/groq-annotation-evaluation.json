@@ -1,0 +1,1184 @@
+{
+  "description": "Offline re-evaluation of the same saved 48 production-worker results with frozen downgrade-only consensus labels. No additional Groq or worker requests; related-model agreement is not ground truth.",
+  "sourceWorkerReportSha256": "20114ab40178d1c0293354580ed4c711c707eb80299ca052903a2b4523218a87",
+  "workerRecordedAt": "2026-09-28T09:54:08.933Z",
+  "consensusAnnotationsSha256": "7ec997ba651c150a84d33e243c268a5aa5b997deecb0432dc299a7bdb8ea4519",
+  "rows": [
+    {
+      "file": "1320-122617-0003.flac",
+      "speaker": "1320",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.8600000000000008,
+              "falsePositive": 0,
+              "falseNegative": 0.010000000000000009,
+              "trueNegative": 0,
+              "excludedUncertain": 4.414999999999999
+            },
+            "evaluatedCoverage": 0.29753381066030243,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9946524064171123,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.3679999999999999,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.8600000000000008,
+              "falsePositive": 0,
+              "falseNegative": 0.010000000000000009,
+              "trueNegative": 0,
+              "excludedUncertain": 4.414999999999999
+            },
+            "evaluatedCoverage": 0.29753381066030243,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9946524064171123,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.3679999999999999,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.8600000000000008,
+              "falsePositive": 0,
+              "falseNegative": 0.010000000000000009,
+              "trueNegative": 0,
+              "excludedUncertain": 4.414999999999999
+            },
+            "evaluatedCoverage": 0.29753381066030243,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9946524064171123,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.3679999999999999,
+              "lastEndSeconds": -0.33199999999999985,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.8500000000000008,
+              "falsePositive": 0,
+              "falseNegative": 0.019999999999999907,
+              "trueNegative": 0,
+              "excludedUncertain": 4.414999999999999
+            },
+            "evaluatedCoverage": 0.29753381066030243,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9893048128342247,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.3999999999999999,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "1320-122617-0012.flac",
+      "speaker": "1320",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1499999999999995,
+              "falsePositive": 0,
+              "falseNegative": 0.009999999999999898,
+              "trueNegative": 0.3700000000000001,
+              "excludedUncertain": 5.0600000000000005
+            },
+            "evaluatedCoverage": 0.33333333333333326,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9953703703703705,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.0799999999999999,
+              "lastEndSeconds": 0.15200000000000102,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1499999999999995,
+              "falsePositive": 0,
+              "falseNegative": 0.009999999999999898,
+              "trueNegative": 0.3700000000000001,
+              "excludedUncertain": 5.0600000000000005
+            },
+            "evaluatedCoverage": 0.33333333333333326,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9953703703703705,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.0799999999999999,
+              "lastEndSeconds": 0.15200000000000102,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1499999999999995,
+              "falsePositive": 0,
+              "falseNegative": 0.009999999999999898,
+              "trueNegative": 0.3700000000000001,
+              "excludedUncertain": 5.0600000000000005
+            },
+            "evaluatedCoverage": 0.33333333333333326,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9953703703703705,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.0799999999999999,
+              "lastEndSeconds": 0.05600000000000094,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1179999999999994,
+              "falsePositive": 0,
+              "falseNegative": 0.041999999999999926,
+              "trueNegative": 0.3700000000000001,
+              "excludedUncertain": 5.0600000000000005
+            },
+            "evaluatedCoverage": 0.33333333333333326,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9805555555555556,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.11199999999999993,
+              "lastEndSeconds": 0.05600000000000094,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "5639-40744-0002.flac",
+      "speaker": "5639",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.859999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.4900000000000007,
+              "excludedUncertain": 5.5600000000000005
+            },
+            "evaluatedCoverage": 0.37598204264870927,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": -0.03200000000000014,
+              "lastEndSeconds": -0.016000000000000014,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.859999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.4900000000000007,
+              "excludedUncertain": 5.5600000000000005
+            },
+            "evaluatedCoverage": 0.37598204264870927,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": -0.03200000000000014,
+              "lastEndSeconds": -0.016000000000000014,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.852,
+              "falsePositive": 0,
+              "falseNegative": 0.007999999999999119,
+              "trueNegative": 0.4900000000000007,
+              "excludedUncertain": 5.5600000000000005
+            },
+            "evaluatedCoverage": 0.37598204264870927,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9972027972027975,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": -0.03200000000000014,
+              "lastEndSeconds": -0.20800000000000018,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.859999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.4900000000000007,
+              "excludedUncertain": 5.5600000000000005
+            },
+            "evaluatedCoverage": 0.37598204264870927,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": -1.1102230246251565e-16,
+              "lastEndSeconds": -0.08000000000000007,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "5639-40744-0033.flac",
+      "speaker": "5639",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.067999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0.002000000000000113,
+              "trueNegative": 0.07000000000000028,
+              "excludedUncertain": 6.010000000000001
+            },
+            "evaluatedCoverage": 0.3431693989071038,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9993485342019544,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.5920000000000001,
+              "lastEndSeconds": 0.040000000000000924,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.067999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0.002000000000000113,
+              "trueNegative": 0.07000000000000028,
+              "excludedUncertain": 6.010000000000001
+            },
+            "evaluatedCoverage": 0.3431693989071038,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9993485342019544,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.5920000000000001,
+              "lastEndSeconds": 0.040000000000000924,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.979999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0.09000000000000019,
+              "trueNegative": 0.07000000000000028,
+              "excludedUncertain": 6.010000000000001
+            },
+            "evaluatedCoverage": 0.3431693989071038,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9706840390879478,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.5920000000000001,
+              "lastEndSeconds": -0.08799999999999919,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.067999999999999,
+              "falsePositive": 0,
+              "falseNegative": 0.002000000000000113,
+              "trueNegative": 0.07000000000000028,
+              "excludedUncertain": 6.010000000000001
+            },
+            "evaluatedCoverage": 0.3431693989071038,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9993485342019544,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.5920000000000001,
+              "lastEndSeconds": -0.05599999999999916,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "260-123440-0018.flac",
+      "speaker": "260",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.9100000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.38000000000000034,
+              "excludedUncertain": 2.3499999999999996
+            },
+            "evaluatedCoverage": 0.3543956043956045,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.02800000000000019,
+              "lastEndSeconds": 0.3320000000000003,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.9100000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.38000000000000034,
+              "excludedUncertain": 2.3499999999999996
+            },
+            "evaluatedCoverage": 0.3543956043956045,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.02800000000000019,
+              "lastEndSeconds": 0.3320000000000003,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.9100000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.38000000000000034,
+              "excludedUncertain": 2.3499999999999996
+            },
+            "evaluatedCoverage": 0.3543956043956045,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.02800000000000019,
+              "lastEndSeconds": 0.20400000000000018,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.9100000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.38000000000000034,
+              "excludedUncertain": 2.3499999999999996
+            },
+            "evaluatedCoverage": 0.3543956043956045,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.02800000000000019,
+              "lastEndSeconds": 0.30000000000000027,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "260-123440-0007.flac",
+      "speaker": "260",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.0200000000000002,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0,
+              "excludedUncertain": 2.3649999999999998
+            },
+            "evaluatedCoverage": 0.3013293943870015,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.047999999999999876,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.0200000000000002,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0,
+              "excludedUncertain": 2.3649999999999998
+            },
+            "evaluatedCoverage": 0.3013293943870015,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.015999999999999848,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.0000000000000002,
+              "falsePositive": 0,
+              "falseNegative": 0.019999999999999907,
+              "trueNegative": 0,
+              "excludedUncertain": 2.3649999999999998
+            },
+            "evaluatedCoverage": 0.3013293943870015,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9803921568627453,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.0799999999999999,
+              "lastEndSeconds": -0.33199999999999985,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.0200000000000002,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0,
+              "excludedUncertain": 2.3649999999999998
+            },
+            "evaluatedCoverage": 0.3013293943870015,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.047999999999999876,
+              "lastEndSeconds": -0.3639999999999999,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "7729-102255-0045.flac",
+      "speaker": "7729",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.206,
+              "falsePositive": 0,
+              "falseNegative": 0.004000000000000281,
+              "trueNegative": 0.16000000000000014,
+              "excludedUncertain": 4.435
+            },
+            "evaluatedCoverage": 0.3482733284349743,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9981900452488686,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.30400000000000027,
+              "lastEndSeconds": 0.1640000000000006,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.21,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.16000000000000014,
+              "excludedUncertain": 4.435
+            },
+            "evaluatedCoverage": 0.3482733284349743,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.27200000000000024,
+              "lastEndSeconds": 0.13200000000000056,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1740000000000004,
+              "falsePositive": 0,
+              "falseNegative": 0.035999999999999865,
+              "trueNegative": 0.16000000000000014,
+              "excludedUncertain": 4.435
+            },
+            "evaluatedCoverage": 0.3482733284349743,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.983710407239819,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.33599999999999985,
+              "lastEndSeconds": 0.13200000000000056,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.1740000000000004,
+              "falsePositive": 0,
+              "falseNegative": 0.035999999999999865,
+              "trueNegative": 0.16000000000000014,
+              "excludedUncertain": 4.435
+            },
+            "evaluatedCoverage": 0.3482733284349743,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.983710407239819,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.33599999999999985,
+              "lastEndSeconds": 0.13200000000000056,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "7729-102255-0012.flac",
+      "speaker": "7729",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.5859999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0.004000000000000281,
+              "trueNegative": 0.05000000000000071,
+              "excludedUncertain": 2.4349999999999996
+            },
+            "evaluatedCoverage": 0.40245398773006147,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9974842767295596,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.2640000000000003,
+              "lastEndSeconds": 0.17999999999999972,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.5859999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0.004000000000000281,
+              "trueNegative": 0.05000000000000071,
+              "excludedUncertain": 2.4349999999999996
+            },
+            "evaluatedCoverage": 0.40245398773006147,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9974842767295596,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.2640000000000003,
+              "lastEndSeconds": 0.17999999999999972,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.49,
+              "falsePositive": 0,
+              "falseNegative": 0.09999999999999992,
+              "trueNegative": 0.05000000000000071,
+              "excludedUncertain": 2.4349999999999996
+            },
+            "evaluatedCoverage": 0.40245398773006147,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9371069182389938,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.35999999999999993,
+              "lastEndSeconds": 0.11599999999999966,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 1.522,
+              "falsePositive": 0,
+              "falseNegative": 0.0679999999999999,
+              "trueNegative": 0.05000000000000071,
+              "excludedUncertain": 2.4349999999999996
+            },
+            "evaluatedCoverage": 0.40245398773006147,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9572327044025158,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.3279999999999999,
+              "lastEndSeconds": 0.17999999999999972,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "2094-142345-0059.flac",
+      "speaker": "2094",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.089999999999998,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.28999999999999915,
+              "excludedUncertain": 7.630000000000003
+            },
+            "evaluatedCoverage": 0.23776223776223748,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.019999999999999907,
+              "lastEndSeconds": -0.03599999999999959,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.089999999999998,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.28999999999999915,
+              "excludedUncertain": 7.630000000000003
+            },
+            "evaluatedCoverage": 0.23776223776223748,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.019999999999999907,
+              "lastEndSeconds": -0.03599999999999959,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.089999999999998,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.28999999999999915,
+              "excludedUncertain": 7.630000000000003
+            },
+            "evaluatedCoverage": 0.23776223776223748,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.019999999999999907,
+              "lastEndSeconds": 0.09200000000000053,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.089999999999998,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.28999999999999915,
+              "excludedUncertain": 7.630000000000003
+            },
+            "evaluatedCoverage": 0.23776223776223748,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.051999999999999935,
+              "lastEndSeconds": -0.0039999999999995595,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "2094-142345-0045.flac",
+      "speaker": "2094",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.43000000000000016,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.06999999999999984,
+              "excludedUncertain": 2.505
+            },
+            "evaluatedCoverage": 0.1663893510815308,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.476,
+              "lastEndSeconds": 0.13199999999999967,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.43000000000000016,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.06999999999999984,
+              "excludedUncertain": 2.505
+            },
+            "evaluatedCoverage": 0.1663893510815308,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.476,
+              "lastEndSeconds": 0.13199999999999967,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.43000000000000016,
+              "falsePositive": 0.06199999999999983,
+              "falseNegative": 0,
+              "trueNegative": 0.008000000000000007,
+              "excludedUncertain": 2.505
+            },
+            "evaluatedCoverage": 0.1663893510815308,
+            "pseudoLabelAgreementPrecision": 0.8739837398373987,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.476,
+              "lastEndSeconds": 0.2919999999999998,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 0.43000000000000016,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.06999999999999984,
+              "excludedUncertain": 2.505
+            },
+            "evaluatedCoverage": 0.1663893510815308,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.476,
+              "lastEndSeconds": 0.1639999999999997,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "3575-170457-0023.flac",
+      "speaker": "3575",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.8299999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.35999999999999943,
+              "excludedUncertain": 4.905000000000002
+            },
+            "evaluatedCoverage": 0.4606926882902692,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.13200000000000006,
+              "lastEndSeconds": 0.18400000000000105,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.8299999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.35999999999999943,
+              "excludedUncertain": 4.905000000000002
+            },
+            "evaluatedCoverage": 0.4606926882902692,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.13200000000000006,
+              "lastEndSeconds": 0.18400000000000105,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.8299999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.35999999999999943,
+              "excludedUncertain": 4.905000000000002
+            },
+            "evaluatedCoverage": 0.4606926882902692,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.10000000000000003,
+              "lastEndSeconds": 0.120000000000001,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 3.8299999999999996,
+              "falsePositive": 0,
+              "falseNegative": 0,
+              "trueNegative": 0.35999999999999943,
+              "excludedUncertain": 4.905000000000002
+            },
+            "evaluatedCoverage": 0.4606926882902692,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 1,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.10000000000000003,
+              "lastEndSeconds": 0.15200000000000102,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "3575-170457-0020.flac",
+      "speaker": "3575",
+      "results": [
+        {
+          "scenario": "original",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.9500000000000015,
+              "falsePositive": 0,
+              "falseNegative": 0.030000000000000027,
+              "trueNegative": 0.2400000000000002,
+              "excludedUncertain": 5.424999999999998
+            },
+            "evaluatedCoverage": 0.37246963562753055,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9899328859060403,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.13599999999999984,
+              "lastEndSeconds": 0.2840000000000007,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "low-noise",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.9500000000000015,
+              "falsePositive": 0,
+              "falseNegative": 0.030000000000000027,
+              "trueNegative": 0.2400000000000002,
+              "excludedUncertain": 5.424999999999998
+            },
+            "evaluatedCoverage": 0.37246963562753055,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9899328859060403,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.13599999999999984,
+              "lastEndSeconds": 0.2840000000000007,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "noisy",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.966000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0.01400000000000029,
+              "trueNegative": 0.2400000000000002,
+              "excludedUncertain": 5.424999999999998
+            },
+            "evaluatedCoverage": 0.37246963562753055,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9953020134228188,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.10400000000000026,
+              "lastEndSeconds": 0.25200000000000067,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        },
+        {
+          "scenario": "quiet-source",
+          "annotationAgreement": {
+            "status": "provisional_pseudo_label_agreement_not_accuracy",
+            "scope": "original_source_clip_only",
+            "seconds": {
+              "truePositive": 2.966000000000001,
+              "falsePositive": 0,
+              "falseNegative": 0.01400000000000029,
+              "trueNegative": 0.2400000000000002,
+              "excludedUncertain": 5.424999999999998
+            },
+            "evaluatedCoverage": 0.37246963562753055,
+            "pseudoLabelAgreementPrecision": 1,
+            "pseudoLabelAgreementRecall": 0.9953020134228188,
+            "candidateBoundaryDifferences": {
+              "status": "model_word_timing_comparison_not_boundary_error",
+              "firstStartSeconds": 0.10400000000000026,
+              "lastEndSeconds": 0.2840000000000007,
+              "uncertainty": "Word timestamps are model estimates; collars and all uncertain intervals are excluded from agreement metrics."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

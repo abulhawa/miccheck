@@ -5,7 +5,7 @@
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "attribution": "LibriSpeech: Vassil Panayotov, Guoguo Chen, Daniel Povey, Sanjeev Khudanpur; source audiobooks from LibriVox",
   "selection": "First six archive speakers other than 6930, first two clips per speaker lasting 3\u201312 seconds",
-  "speech_boundaries": "Not manually annotated",
+  "speech_boundaries": "Provisional independent AI-assisted intervals in annotations.ai.json; no human listening or verified boundary ground truth",
   "clips": [
     {
       "file": "1320-122617-0003.flac",

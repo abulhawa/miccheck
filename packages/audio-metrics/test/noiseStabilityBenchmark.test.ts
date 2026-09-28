@@ -7,9 +7,9 @@ import { analyzeGuidedSamples } from '../src/guided';
 const context = {use_case: 'meetings' as const, device_type: 'unknown' as const, mode: 'basic' as const};
 const rows: object[] = [];
 describe('controlled noise stability benchmark', () => {
-  for (const rate of [8000, 16000, 48000]) {
+  for (const rate of [8000, 16000, 44100, 48000]) {
     for (const shape of ['broadband', 'tone'] as const) {
-      for (const floorDb of [-70, -50, -30]) {
+      for (const floorDb of [-80, -70, -65, -50, -30]) {
         for (const condition of ['stationary', 'increase', 'decrease', 'short-gap', 'boundary-residue', 'burst', 'short-burst', 'near-threshold'] as const) {
           it(`${rate} Hz ${shape} ${floorDb} dBFS ${condition}`, () => {
             const tail = condition === 'short-gap' ? 0.6 : 1.2;
@@ -36,12 +36,13 @@ describe('controlled noise stability benchmark', () => {
               quietSeconds: 2, speechDetection: 'silero', segments: [{start: 2, end: 4}],
               capture: {format: 'pcm', echoCancellation: false, noiseSuppression: false, autoGainControl: false}
             });
-            // Below-floor changes are intentionally suppressed. A -70 -> -58 dBFS
-            // increase is only 2 dB above the comparison floor.
-            // Acceptance requirement: brief +18 dB events must also be detected.
-            // The current implementation misses these; keep the tests failing
-            // until detection improves, rather than asserting the known miss.
-            const changed = ['burst', 'short-burst'].includes(condition) || (['increase', 'decrease'].includes(condition) && floorDb > -60);
+            // Independent acceptance: >6 dB rises reaching above -60 dBFS
+            // invalidate calibration, even when calibration was below the floor.
+            // Entirely sub-floor changes and decreases from sub-floor levels do
+            // not establish a meaningful change for the app's SNR guidance.
+            const changed = (['burst', 'short-burst'].includes(condition) && floorDb + 18 > -60)
+              || (condition === 'increase' && floorDb + 12 > -60)
+              || (condition === 'decrease' && floorDb > -60);
             const expected = condition === 'short-gap' ? 'unassessed' : changed ? 'unstable' : 'stable';
             rows.push({rate, shape, floorDb, condition, expected, actual: result.evidence?.noiseStability,
               usableSeconds: result.evidence?.laterNoiseSeconds, maxChangeDb: result.evidence?.maxNoiseChangeDb});
@@ -54,12 +55,12 @@ describe('controlled noise stability benchmark', () => {
     }
   }
   it('exports reproducible diagnostic results when requested', () => {
-    expect(rows).toHaveLength(144);
+    expect(rows).toHaveLength(320);
     if (process.env.UPDATE_NOISE_BENCHMARK === '1') {
       writeFileSync(new URL('../../../docs/noise-stability-results.json', import.meta.url), JSON.stringify({
         description: 'Controlled synthetic estimator evaluation with exact generated intervals; no human annotation or VAD accuracy claim.',
         seed: 12345, calibrationSeconds: 2, speechInterval: [2, 4],
-        parameters: {sustainedWindowMs:250, sustainedGuardMs:300, eventWindowMs:50, eventHopMs:25, eventGuardMs:500, eventCoverageMs:100, eventRequiresRecovery:true, eventAfterSpeechOnly:true, changeDb:6, floorDb:-60}, rows
+        parameters: {sustainedWindowMs:250, sustainedGuardMs:300, eventWindowMs:50, eventHopMs:25, eventHopRounding:'nearest sample', eventGuardMs:500, eventCoverageMs:100, eventRequiresRecovery:true, eventAfterSpeechOnly:true, changeDb:6, floorDb:-60, aboveFloorRisesUseActualCalibration:true}, rows
       }, null, 2) + '\n');
     }
   });

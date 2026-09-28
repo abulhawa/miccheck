@@ -11,14 +11,96 @@
     "sustainedGuardMs": 300,
     "eventWindowMs": 50,
     "eventHopMs": 25,
+    "eventHopRounding": "nearest sample",
     "eventGuardMs": 500,
     "eventCoverageMs": 100,
     "eventRequiresRecovery": true,
     "eventAfterSpeechOnly": true,
     "changeDb": 6,
-    "floorDb": -60
+    "floorDb": -60,
+    "aboveFloorRisesUseActualCalibration": true
   },
   "rows": [
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
     {
       "rate": 8000,
       "shape": "broadband",
@@ -34,10 +116,10 @@
       "shape": "broadband",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.3824527550432606
+      "maxChangeDb": 12.383058569117594
     },
     {
       "rate": 8000,
@@ -77,7 +159,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.3824527799975
+      "maxChangeDb": 18.383058594071834
     },
     {
       "rate": 8000,
@@ -87,7 +169,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.253178885504155
+      "maxChangeDb": 18.25378469957849
     },
     {
       "rate": 8000,
@@ -98,6 +180,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.383058603791305
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.383058581426248
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.25378467442294
+    },
+    {
+      "rate": 8000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.383058581597929
     },
     {
       "rate": 8000,
@@ -262,6 +424,86 @@
     {
       "rate": 8000,
       "shape": "tone",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
       "floorDb": -70,
       "condition": "stationary",
       "expected": "stable",
@@ -274,10 +516,10 @@
       "shape": "tone",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.012285395044458
+      "maxChangeDb": 12.012285400359175
     },
     {
       "rate": 8000,
@@ -317,7 +559,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.012285409391353
+      "maxChangeDb": 18.01228541470607
     },
     {
       "rate": 8000,
@@ -327,7 +569,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 7.998080707182602
+      "maxChangeDb": 17.99808071249732
     },
     {
       "rate": 8000,
@@ -338,6 +580,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.012285392496707
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.01228538977741
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 17.998080688748175
+    },
+    {
+      "rate": 8000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.012285393584236
     },
     {
       "rate": 8000,
@@ -502,6 +824,86 @@
     {
       "rate": 16000,
       "shape": "broadband",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
       "floorDb": -70,
       "condition": "stationary",
       "expected": "stable",
@@ -514,10 +916,10 @@
       "shape": "broadband",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.213524352276302
+      "maxChangeDb": 12.240181874191045
     },
     {
       "rate": 16000,
@@ -557,7 +959,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.213524377105628
+      "maxChangeDb": 18.24018189902037
     },
     {
       "rate": 16000,
@@ -567,7 +969,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.198625773745725
+      "maxChangeDb": 18.225283295660468
     },
     {
       "rate": 16000,
@@ -578,6 +980,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.240181876531835
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.240181893141845
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.225283290272323
+    },
+    {
+      "rate": 16000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.240181892633153
     },
     {
       "rate": 16000,
@@ -742,6 +1224,86 @@
     {
       "rate": 16000,
       "shape": "tone",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
       "floorDb": -70,
       "condition": "stationary",
       "expected": "stable",
@@ -754,10 +1316,10 @@
       "shape": "tone",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.011459754335604
+      "maxChangeDb": 12.011459757970144
     },
     {
       "rate": 16000,
@@ -797,7 +1359,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.011459766396015
+      "maxChangeDb": 18.011459770030555
     },
     {
       "rate": 16000,
@@ -807,7 +1369,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.00269914855528
+      "maxChangeDb": 18.00269915218982
     },
     {
       "rate": 16000,
@@ -818,6 +1380,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.011459750007148
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.011459746578304
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.00269913219291
+    },
+    {
+      "rate": 16000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.011459763759085
     },
     {
       "rate": 16000,
@@ -980,6 +1622,886 @@
       "maxChangeDb": 5.011459780403072
     },
     {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.113302331743583
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.113302339278547
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.111210830081056
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -70,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.113302335990376
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.113302331276124
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.111210826897555
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.113302324222595
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.12084086612932055
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.1133023213795
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "decrease",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 9.999654721934313
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.12084086612932055
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.113302342568833
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.111210826945168
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -50,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.113302337036522
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.12084085898225538
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.113302326466002
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "decrease",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.120840864289185
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.12084085898225538
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.113302345344643
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.11121082403958
+    },
+    {
+      "rate": 44100,
+      "shape": "broadband",
+      "floorDb": -30,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.113302336514703
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.0111051752544
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.010816386085402
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.005256790063868
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -70,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.011105164470663
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.010816380958808
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.00525678324947
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.011105175466199
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.011105172510305295
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.01110516998775
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "decrease",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 10.000000000115378
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.011105172510305295
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.010816386224086
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.005256787647326
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -50,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.011105170524701
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.011105167985284936
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.011105165120963
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "decrease",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.011008428227328
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0.011105167985284936
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.01081638621363
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.005256799312548
+    },
+    {
+      "rate": 44100,
+      "shape": "tone",
+      "floorDb": -30,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.011105182749194
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
       "rate": 48000,
       "shape": "broadband",
       "floorDb": -70,
@@ -994,10 +2516,10 @@
       "shape": "broadband",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.088824904270055
+      "maxChangeDb": 12.08791422771236
     },
     {
       "rate": 48000,
@@ -1037,7 +2559,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.088824905937216
+      "maxChangeDb": 18.08791422937952
     },
     {
       "rate": 48000,
@@ -1047,7 +2569,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.004716269799843
+      "maxChangeDb": 18.00380559324215
     },
     {
       "rate": 48000,
@@ -1058,6 +2580,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.08791422976089
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.087914225671064
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.00380559496287
+    },
+    {
+      "rate": 48000,
+      "shape": "broadband",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.08791422536094
     },
     {
       "rate": 48000,
@@ -1222,6 +2824,86 @@
     {
       "rate": 48000,
       "shape": "tone",
+      "floorDb": -80,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "increase",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "short-burst",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -80,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
       "floorDb": -70,
       "condition": "stationary",
       "expected": "stable",
@@ -1234,10 +2916,10 @@
       "shape": "tone",
       "floorDb": -70,
       "condition": "increase",
-      "expected": "stable",
-      "actual": "stable",
+      "expected": "unstable",
+      "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 2.011139473857483
+      "maxChangeDb": 12.01113947305275
     },
     {
       "rate": 48000,
@@ -1277,7 +2959,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.011046194244742
+      "maxChangeDb": 18.01104619344001
     },
     {
       "rate": 48000,
@@ -1287,7 +2969,7 @@
       "expected": "unstable",
       "actual": "unstable",
       "usableSeconds": 0.75,
-      "maxChangeDb": 8.005368330277477
+      "maxChangeDb": 18.005368329472745
     },
     {
       "rate": 48000,
@@ -1298,6 +2980,86 @@
       "actual": "stable",
       "usableSeconds": 0.75,
       "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "stationary",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "increase",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 12.011139453315536
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "decrease",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-gap",
+      "expected": "unassessed",
+      "actual": "unassessed",
+      "usableSeconds": 0,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "boundary-residue",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 0
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.01104618344452
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "short-burst",
+      "expected": "unstable",
+      "actual": "unstable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 18.005368319812447
+    },
+    {
+      "rate": 48000,
+      "shape": "tone",
+      "floorDb": -65,
+      "condition": "near-threshold",
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 0.75,
+      "maxChangeDb": 5.011139467755669
     },
     {
       "rate": 48000,

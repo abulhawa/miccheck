@@ -28,6 +28,35 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Partial progress: a 320-condition controlled expansion reproduced eight missed
+−70 to −58 dBFS increases and two missed 100 ms bursts at 44.1 kHz. Above-floor
+increases now use actual calibration RMS, and brief-window hops round to the
+nearest sample. All 320 conditions pass, including sub-floor and stationary
+controls; see [results and limits](NOISE_STABILITY_BENCHMARK.md#low-level-increases-and-441-khz).
+This remains open for independent human annotation, held-out capture conditions,
+and physical-microphone validation; these generated development cases do not
+justify representative threshold tuning.
+
+Independent AI-assisted source annotations are now available for all twelve
+recordings, using Whisper small.en plus WebRTC and a separate Codex protocol/
+candidate review. [Annotation report](AI_SPEECH_ANNOTATIONS.md) includes exact
+added-noise event labels and 48 worker comparisons. Only 44.2% of source audio
+receives conservative candidate labels; the rest is explicitly uncertain.
+Listening review remains pending. Investigate the possible missed opening in
+`1320-122617-0012` and noisy-speech disagreements in `5639-40744-0033`,
+`260-123440-0007`, and `7729-102255-0012` using the source-time review regions
+before changing VAD thresholds or noise guards. These are actionable model
+disagreements, not established speech errors or held-out accuracy claims.
+
+Groq Large V3 now corroborates the source recordings through twelve paced,
+cached API calls. [Comparison](GROQ_ANNOTATION_COMPARISON.md) shows pooled
+transcript WER improving from 2.95% to 2.11%, but timing disagreements remain.
+A separate downgrade-only consensus version withdraws unsupported labels;
+coverage falls from 44.2% to 34.1%. Preserve both versions and review shifted
+opening words and provider timestamps beyond source duration before tuning.
+This strengthens provenance/uncertainty handling, not demonstrated boundary
+accuracy or an app optimization.
+
 Initial baseline September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) added 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It demonstrated missed 100 ms bursts and floor-suppressed low-level changes before the following implementation update.
 
 Implementation update: overlapping 50 ms windows now catch the tested 100 ms increases; the sustained 250 ms check remains for increases/decreases. Guards are 300 ms for sustained measurements and 500 ms for the more sensitive brief-event check. The 18 controlled misses now pass, and all twelve human recordings pass the burst and stationary controls. Six [MS-SNSD reference mixtures](../apps/web/e2e/fixtures/reference-noise/README.md) additionally verify independently defined 0/10/20 dB SNR within 1 dB. These fixes do not complete representative threshold tuning or manual human annotation.

@@ -1,0 +1,7609 @@
+{
+  "schemaVersion": 1,
+  "status": "provisional_model_assisted_not_human_ground_truth",
+  "independence": "Original candidates and Groq source-word agreement frozen before comparison with saved Miccheck worker outputs.",
+  "models": {
+    "whisper": {
+      "repo": "Systran/faster-whisper-small.en",
+      "revision": "d1d751a5f8271d482d14ca55d9e2deeebbae577f",
+      "files": {
+        "config.json": "666a9605530ac1f61fa8177f3702b4dacec9966749e42610839fcc32661d5fae",
+        "model.bin": "62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a",
+        "tokenizer.json": "929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df",
+        "vocabulary.txt": "ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf"
+      }
+    },
+    "packages": {
+      "faster-whisper": "1.2.1",
+      "ctranslate2": "4.8.2",
+      "webrtcvad-wheels": "2.0.14",
+      "soundfile": "0.14.0",
+      "numpy": "2.5.3"
+    },
+    "groq": {
+      "model": "whisper-large-v3",
+      "providerManagedVersion": true,
+      "parameters": {
+        "model": "whisper-large-v3",
+        "language": "en",
+        "response_format": "verbose_json",
+        "temperature": 0,
+        "timestamp_granularities": [
+          "word",
+          "segment"
+        ],
+        "prompt": null
+      },
+      "wordProbabilities": "not supplied"
+    }
+  },
+  "protocol": {
+    "frameMs": 10,
+    "wordBoundaryCollarMs": 60,
+    "nonspeechExclusionCollarMs": 100,
+    "wordProbabilityMinimum": 0.5,
+    "transcriptWerMaximum": 0.25,
+    "webrtcModes": [
+      1,
+      3
+    ],
+    "whisper": {
+      "language": "en",
+      "beam_size": 5,
+      "word_timestamps": true,
+      "vad_filter": false,
+      "condition_on_previous_text": false
+    },
+    "speech": "Frame entirely inside a >=0.5 probability word after 60 ms erosion AND both WebRTC modes positive.",
+    "nonspeech": "Both WebRTC modes negative AND no word within 100 ms; not proof of absence of breaths/noise.",
+    "uncertain": "All other frames; entire clip uncertain if transcript WER >0.25.",
+    "sourceNoise": "Unknown/unreviewed; no inferred fan, typing, music, or clean-room labels.",
+    "refinement": "Downgrade-only. Exact lexical-token LCS (compound words retain shared time extent). Speech needs same bounded nonempty word core in both Whisper timelines (60 ms eroded); nonspeech must be outside both timelines padded100ms. Out-of-source words exclude speech support locally and retain raw bounds as nonspeech exclusions; nonfinite/reversed bounds make the clip uncertain. Original uncertain remains uncertain. Groq has no word probabilities. No threshold tuning."
+  },
+  "clips": [
+    {
+      "file": "1320-122617-0003.flac",
+      "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594",
+      "speaker": "1320",
+      "durationSeconds": 6.285,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "THERE WAS SOMETHING IN HIS AIR AND MANNER THAT BETRAYED TO THE SCOUT THE UTTER CONFUSION OF THE STATE OF HIS MIND",
+      "recognizedTranscript": " There was something in his air and manner that betrayed to the scout the utter confusion of the state of his mind.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "There",
+          "start": 0,
+          "end": 0.48
+        },
+        {
+          "text": "was",
+          "start": 0.48,
+          "end": 0.64
+        },
+        {
+          "text": "something",
+          "start": 0.64,
+          "end": 0.96
+        },
+        {
+          "text": "in",
+          "start": 0.96,
+          "end": 1.16
+        },
+        {
+          "text": "his",
+          "start": 1.16,
+          "end": 1.32
+        },
+        {
+          "text": "air",
+          "start": 1.32,
+          "end": 1.56
+        },
+        {
+          "text": "and",
+          "start": 1.56,
+          "end": 1.78
+        },
+        {
+          "text": "manner",
+          "start": 1.78,
+          "end": 2.12
+        },
+        {
+          "text": "that",
+          "start": 2.12,
+          "end": 2.36
+        },
+        {
+          "text": "betrayed",
+          "start": 2.36,
+          "end": 2.72
+        },
+        {
+          "text": "to",
+          "start": 2.72,
+          "end": 2.94
+        },
+        {
+          "text": "the",
+          "start": 2.94,
+          "end": 3.12
+        },
+        {
+          "text": "scout",
+          "start": 3.12,
+          "end": 3.4
+        },
+        {
+          "text": "the",
+          "start": 3.4,
+          "end": 3.74
+        },
+        {
+          "text": "utter",
+          "start": 3.74,
+          "end": 4
+        },
+        {
+          "text": "confusion",
+          "start": 4,
+          "end": 4.52
+        },
+        {
+          "text": "of",
+          "start": 4.52,
+          "end": 4.8
+        },
+        {
+          "text": "the",
+          "start": 4.8,
+          "end": 4.92
+        },
+        {
+          "text": "state",
+          "start": 4.92,
+          "end": 5.2
+        },
+        {
+          "text": "of",
+          "start": 5.2,
+          "end": 5.34
+        },
+        {
+          "text": "his",
+          "start": 5.34,
+          "end": 5.44
+        },
+        {
+          "text": "mind.",
+          "start": 5.44,
+          "end": 6.3
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.09,
+            "label": "speech"
+          },
+          {
+            "start": 0.09,
+            "end": 0.33,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.33,
+            "end": 6.08,
+            "label": "speech"
+          },
+          {
+            "start": 6.08,
+            "end": 6.285,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.07,
+            "label": "speech"
+          },
+          {
+            "start": 0.07,
+            "end": 0.39,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.39,
+            "end": 0.7,
+            "label": "speech"
+          },
+          {
+            "start": 0.7,
+            "end": 0.72,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.72,
+            "end": 3.13,
+            "label": "speech"
+          },
+          {
+            "start": 3.13,
+            "end": 3.19,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.19,
+            "end": 3.54,
+            "label": "speech"
+          },
+          {
+            "start": 3.54,
+            "end": 3.68,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.68,
+            "end": 4.99,
+            "label": "speech"
+          },
+          {
+            "start": 4.99,
+            "end": 5.06,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.06,
+            "end": 5.99,
+            "label": "speech"
+          },
+          {
+            "start": 5.99,
+            "end": 6.285,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.06,
+          "end": 0.07,
+          "label": "speech"
+        },
+        {
+          "start": 0.07,
+          "end": 0.39,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.39,
+          "end": 0.4,
+          "label": "speech"
+        },
+        {
+          "start": 0.4,
+          "end": 0.54,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.54,
+          "end": 0.56,
+          "label": "speech"
+        },
+        {
+          "start": 0.56,
+          "end": 0.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.72,
+          "end": 0.86,
+          "label": "speech"
+        },
+        {
+          "start": 0.86,
+          "end": 1.02,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.02,
+          "end": 1.07,
+          "label": "speech"
+        },
+        {
+          "start": 1.07,
+          "end": 1.38,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.38,
+          "end": 1.5,
+          "label": "speech"
+        },
+        {
+          "start": 1.5,
+          "end": 1.62,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.62,
+          "end": 1.7,
+          "label": "speech"
+        },
+        {
+          "start": 1.7,
+          "end": 1.84,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.84,
+          "end": 2.06,
+          "label": "speech"
+        },
+        {
+          "start": 2.06,
+          "end": 2.18,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.18,
+          "end": 2.27,
+          "label": "speech"
+        },
+        {
+          "start": 2.27,
+          "end": 2.42,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.42,
+          "end": 2.66,
+          "label": "speech"
+        },
+        {
+          "start": 2.66,
+          "end": 2.78,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.78,
+          "end": 2.88,
+          "label": "speech"
+        },
+        {
+          "start": 2.88,
+          "end": 3.0,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.0,
+          "end": 3.02,
+          "label": "speech"
+        },
+        {
+          "start": 3.02,
+          "end": 3.46,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.46,
+          "end": 3.54,
+          "label": "speech"
+        },
+        {
+          "start": 3.54,
+          "end": 3.82,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.82,
+          "end": 3.94,
+          "label": "speech"
+        },
+        {
+          "start": 3.94,
+          "end": 4.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.08,
+          "end": 4.42,
+          "label": "speech"
+        },
+        {
+          "start": 4.42,
+          "end": 4.58,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.58,
+          "end": 4.74,
+          "label": "speech"
+        },
+        {
+          "start": 4.74,
+          "end": 4.98,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.98,
+          "end": 4.99,
+          "label": "speech"
+        },
+        {
+          "start": 4.99,
+          "end": 5.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.06,
+          "end": 5.12,
+          "label": "speech"
+        },
+        {
+          "start": 5.12,
+          "end": 6.285,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 1.87,
+        "nonspeech": 0,
+        "uncertain": 4.415
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 10.285,
+          "regions": [
+            {
+              "start": 0,
+              "end": 10.285,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 10.285,
+          "regions": [
+            {
+              "start": 0,
+              "end": 8.785,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 8.785,
+              "end": 10.285,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 9.285,
+          "regions": [
+            {
+              "start": 0,
+              "end": 8.785,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 8.785,
+              "end": 8.885,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 8.885,
+              "end": 9.285,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied",
+        "provider_timestamp_out_of_bounds"
+      ],
+      "refinement": {
+        "matchedWordCount": 22,
+        "downgradedSeconds": {
+          "speech": 0.54,
+          "nonspeech": 0.2
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "There",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "was",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "something",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "in",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "his",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "air",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "and",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "manner",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "that",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "betrayed",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "to",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "the",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "scout",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "the",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "utter",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "confusion",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "of",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "the",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "state",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "of",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "his",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 21,
+            "text": "mind.",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.54
+          }
+        ]
+      }
+    },
+    {
+      "file": "1320-122617-0012.flac",
+      "sha256": "6b5cd2c31ee61665ea0d81f2c76a1f2c32cb4f46e5ec5861bd9157e262785252",
+      "speaker": "1320",
+      "durationSeconds": 7.59,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "FOUR OR FIVE OF THE LATTER ONLY LINGERED ABOUT THE DOOR OF THE PRISON OF UNCAS WARY BUT CLOSE OBSERVERS OF THE MANNER OF THEIR CAPTIVE",
+      "recognizedTranscript": " Four or five of the latter only lingered about the door of the prison of Uncas, wary but close observers of the manner of their captive.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "Four",
+          "start": 0.32,
+          "end": 0.54
+        },
+        {
+          "text": "or",
+          "start": 0.54,
+          "end": 0.78
+        },
+        {
+          "text": "five",
+          "start": 0.78,
+          "end": 0.98
+        },
+        {
+          "text": "of",
+          "start": 0.98,
+          "end": 1.1
+        },
+        {
+          "text": "the",
+          "start": 1.1,
+          "end": 1.24
+        },
+        {
+          "text": "latter",
+          "start": 1.24,
+          "end": 1.48
+        },
+        {
+          "text": "only",
+          "start": 1.48,
+          "end": 1.76
+        },
+        {
+          "text": "lingered",
+          "start": 1.76,
+          "end": 2.06
+        },
+        {
+          "text": "about",
+          "start": 2.06,
+          "end": 2.32
+        },
+        {
+          "text": "the",
+          "start": 2.32,
+          "end": 2.52
+        },
+        {
+          "text": "door",
+          "start": 2.52,
+          "end": 2.76
+        },
+        {
+          "text": "of",
+          "start": 2.76,
+          "end": 2.9
+        },
+        {
+          "text": "the",
+          "start": 2.9,
+          "end": 2.98
+        },
+        {
+          "text": "prison",
+          "start": 2.98,
+          "end": 3.28
+        },
+        {
+          "text": "of",
+          "start": 3.28,
+          "end": 3.48
+        },
+        {
+          "text": "Uncas,",
+          "start": 3.48,
+          "end": 4.02
+        },
+        {
+          "text": "wary",
+          "start": 4.02,
+          "end": 4.3
+        },
+        {
+          "text": "but",
+          "start": 4.3,
+          "end": 4.56
+        },
+        {
+          "text": "close",
+          "start": 4.26,
+          "end": 4.98
+        },
+        {
+          "text": "observers",
+          "start": 4.98,
+          "end": 5.56
+        },
+        {
+          "text": "of",
+          "start": 5.56,
+          "end": 5.78
+        },
+        {
+          "text": "the",
+          "start": 5.78,
+          "end": 5.9
+        },
+        {
+          "text": "manner",
+          "start": 5.9,
+          "end": 6.18
+        },
+        {
+          "text": "of",
+          "start": 6.18,
+          "end": 6.34
+        },
+        {
+          "text": "their",
+          "start": 6.34,
+          "end": 6.42
+        },
+        {
+          "text": "captive.",
+          "start": 6.42,
+          "end": 7
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 7.22,
+            "label": "speech"
+          },
+          {
+            "start": 7.22,
+            "end": 7.59,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.16,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.16,
+            "end": 0.23,
+            "label": "speech"
+          },
+          {
+            "start": 0.23,
+            "end": 0.39,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.39,
+            "end": 3.04,
+            "label": "speech"
+          },
+          {
+            "start": 3.04,
+            "end": 3.05,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.05,
+            "end": 3.89,
+            "label": "speech"
+          },
+          {
+            "start": 3.89,
+            "end": 3.98,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.98,
+            "end": 4.65,
+            "label": "speech"
+          },
+          {
+            "start": 4.65,
+            "end": 4.68,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.68,
+            "end": 5.0,
+            "label": "speech"
+          },
+          {
+            "start": 5.0,
+            "end": 5.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.01,
+            "end": 6.75,
+            "label": "speech"
+          },
+          {
+            "start": 6.75,
+            "end": 6.79,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.79,
+            "end": 7.03,
+            "label": "speech"
+          },
+          {
+            "start": 7.03,
+            "end": 7.59,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.39,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.39,
+          "end": 0.48,
+          "label": "speech"
+        },
+        {
+          "start": 0.48,
+          "end": 0.84,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.84,
+          "end": 0.86,
+          "label": "speech"
+        },
+        {
+          "start": 0.86,
+          "end": 1.3,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.3,
+          "end": 1.42,
+          "label": "speech"
+        },
+        {
+          "start": 1.42,
+          "end": 1.54,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.54,
+          "end": 1.7,
+          "label": "speech"
+        },
+        {
+          "start": 1.7,
+          "end": 1.84,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.84,
+          "end": 2.0,
+          "label": "speech"
+        },
+        {
+          "start": 2.0,
+          "end": 2.16,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.16,
+          "end": 2.26,
+          "label": "speech"
+        },
+        {
+          "start": 2.26,
+          "end": 2.4,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.4,
+          "end": 2.44,
+          "label": "speech"
+        },
+        {
+          "start": 2.44,
+          "end": 2.58,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.58,
+          "end": 2.66,
+          "label": "speech"
+        },
+        {
+          "start": 2.66,
+          "end": 2.82,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.82,
+          "end": 2.84,
+          "label": "speech"
+        },
+        {
+          "start": 2.84,
+          "end": 3.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.08,
+          "end": 3.21,
+          "label": "speech"
+        },
+        {
+          "start": 3.21,
+          "end": 3.34,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.34,
+          "end": 3.4,
+          "label": "speech"
+        },
+        {
+          "start": 3.4,
+          "end": 4.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.2,
+          "end": 4.22,
+          "label": "speech"
+        },
+        {
+          "start": 4.22,
+          "end": 4.36,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.36,
+          "end": 4.5,
+          "label": "speech"
+        },
+        {
+          "start": 4.5,
+          "end": 4.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.68,
+          "end": 4.9,
+          "label": "speech"
+        },
+        {
+          "start": 4.9,
+          "end": 5.04,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.04,
+          "end": 5.42,
+          "label": "speech"
+        },
+        {
+          "start": 5.42,
+          "end": 5.62,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.62,
+          "end": 5.7,
+          "label": "speech"
+        },
+        {
+          "start": 5.7,
+          "end": 5.96,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.96,
+          "end": 6.04,
+          "label": "speech"
+        },
+        {
+          "start": 6.04,
+          "end": 6.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.5,
+          "end": 6.75,
+          "label": "speech"
+        },
+        {
+          "start": 6.75,
+          "end": 6.79,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.79,
+          "end": 6.8,
+          "label": "speech"
+        },
+        {
+          "start": 6.8,
+          "end": 7.22,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.22,
+          "end": 7.59,
+          "label": "nonspeech"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 2.16,
+        "nonspeech": 0.37,
+        "uncertain": 5.06
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 11.59,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.59,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 11.59,
+          "regions": [
+            {
+              "start": 0,
+              "end": 10.09,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 10.09,
+              "end": 11.59,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 10.59,
+          "regions": [
+            {
+              "start": 0,
+              "end": 10.09,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 10.09,
+              "end": 10.19,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 10.19,
+              "end": 10.59,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 25,
+        "downgradedSeconds": {
+          "speech": 0.95,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "Four",
+            "startDifferenceSeconds": 0.32,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "or",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "five",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "of",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "the",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "latter",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "only",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "lingered",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "about",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "the",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "door",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "of",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "the",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "prison",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "of",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "wary",
+            "startDifferenceSeconds": -0.12,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "but",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.06
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "close",
+            "startDifferenceSeconds": -0.36,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "observers",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "of",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 21,
+            "text": "the",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 22,
+            "text": "manner",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 23,
+            "largeIndex": 23,
+            "text": "of",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 24,
+            "largeIndex": 24,
+            "text": "their",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 25,
+            "largeIndex": 25,
+            "text": "captive.",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.14
+          }
+        ]
+      }
+    },
+    {
+      "file": "5639-40744-0002.flac",
+      "sha256": "111c6b8b19d093736570bced344035b48f75c770aacc60103da9d9a20f904fb2",
+      "speaker": "5639",
+      "durationSeconds": 8.91,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "RODOLFO AND HIS COMPANIONS WITH THEIR FACES MUFFLED IN THEIR CLOAKS STARED RUDELY AND INSOLENTLY AT THE MOTHER THE DAUGHTER AND THE SERVANT MAID",
+      "recognizedTranscript": " Rodolfo and his companions, with their faces muffled in their cloaks, stared rudely and insolently at the mother, the daughter, and the servant-maid.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "Rodolfo",
+          "start": 0.4,
+          "end": 0.84
+        },
+        {
+          "text": "and",
+          "start": 0.84,
+          "end": 1
+        },
+        {
+          "text": "his",
+          "start": 1,
+          "end": 1.14
+        },
+        {
+          "text": "companions,",
+          "start": 1.14,
+          "end": 1.92
+        },
+        {
+          "text": "with",
+          "start": 1.92,
+          "end": 2.34
+        },
+        {
+          "text": "their",
+          "start": 2.34,
+          "end": 2.42
+        },
+        {
+          "text": "faces",
+          "start": 2.42,
+          "end": 2.84
+        },
+        {
+          "text": "muffled",
+          "start": 2.84,
+          "end": 3.26
+        },
+        {
+          "text": "in",
+          "start": 3.26,
+          "end": 3.44
+        },
+        {
+          "text": "their",
+          "start": 3.44,
+          "end": 3.6
+        },
+        {
+          "text": "cloaks,",
+          "start": 3.6,
+          "end": 4.6
+        },
+        {
+          "text": "stared",
+          "start": 4.6,
+          "end": 4.86
+        },
+        {
+          "text": "rudely",
+          "start": 4.86,
+          "end": 5.32
+        },
+        {
+          "text": "and",
+          "start": 5.32,
+          "end": 5.56
+        },
+        {
+          "text": "insolently",
+          "start": 5,
+          "end": 6.16
+        },
+        {
+          "text": "at",
+          "start": 6.16,
+          "end": 6.32
+        },
+        {
+          "text": "the",
+          "start": 6.32,
+          "end": 6.5
+        },
+        {
+          "text": "mother,",
+          "start": 6.5,
+          "end": 7
+        },
+        {
+          "text": "the",
+          "start": 7,
+          "end": 7.12
+        },
+        {
+          "text": "daughter,",
+          "start": 7.12,
+          "end": 7.44
+        },
+        {
+          "text": "and",
+          "start": 7.44,
+          "end": 7.64
+        },
+        {
+          "text": "the",
+          "start": 7.64,
+          "end": 7.72
+        },
+        {
+          "text": "servant-maid.",
+          "start": 7.72,
+          "end": 8.48
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.11,
+            "label": "speech"
+          },
+          {
+            "start": 0.11,
+            "end": 0.37,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.37,
+            "end": 2.06,
+            "label": "speech"
+          },
+          {
+            "start": 2.06,
+            "end": 2.22,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.22,
+            "end": 4.28,
+            "label": "speech"
+          },
+          {
+            "start": 4.28,
+            "end": 4.47,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.47,
+            "end": 6.89,
+            "label": "speech"
+          },
+          {
+            "start": 6.89,
+            "end": 6.99,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.99,
+            "end": 8.61,
+            "label": "speech"
+          },
+          {
+            "start": 8.61,
+            "end": 8.91,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.38,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.38,
+            "end": 1.17,
+            "label": "speech"
+          },
+          {
+            "start": 1.17,
+            "end": 1.19,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.19,
+            "end": 1.88,
+            "label": "speech"
+          },
+          {
+            "start": 1.88,
+            "end": 2.23,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.23,
+            "end": 2.53,
+            "label": "speech"
+          },
+          {
+            "start": 2.53,
+            "end": 2.55,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.55,
+            "end": 3.98,
+            "label": "speech"
+          },
+          {
+            "start": 3.98,
+            "end": 4.57,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.57,
+            "end": 6.36,
+            "label": "speech"
+          },
+          {
+            "start": 6.36,
+            "end": 6.38,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.38,
+            "end": 6.81,
+            "label": "speech"
+          },
+          {
+            "start": 6.81,
+            "end": 7.0,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.0,
+            "end": 8.19,
+            "label": "speech"
+          },
+          {
+            "start": 8.19,
+            "end": 8.21,
+            "label": "nonspeech"
+          },
+          {
+            "start": 8.21,
+            "end": 8.4,
+            "label": "speech"
+          },
+          {
+            "start": 8.4,
+            "end": 8.91,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.11,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.11,
+          "end": 0.3,
+          "label": "nonspeech"
+        },
+        {
+          "start": 0.3,
+          "end": 0.54,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.54,
+          "end": 0.78,
+          "label": "speech"
+        },
+        {
+          "start": 0.78,
+          "end": 1.22,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.22,
+          "end": 1.54,
+          "label": "speech"
+        },
+        {
+          "start": 1.54,
+          "end": 2.24,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.24,
+          "end": 2.25,
+          "label": "speech"
+        },
+        {
+          "start": 2.25,
+          "end": 2.52,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.52,
+          "end": 2.53,
+          "label": "speech"
+        },
+        {
+          "start": 2.53,
+          "end": 2.55,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.55,
+          "end": 2.73,
+          "label": "speech"
+        },
+        {
+          "start": 2.73,
+          "end": 2.9,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.9,
+          "end": 3.2,
+          "label": "speech"
+        },
+        {
+          "start": 3.2,
+          "end": 3.34,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.34,
+          "end": 3.38,
+          "label": "speech"
+        },
+        {
+          "start": 3.38,
+          "end": 3.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.5,
+          "end": 3.54,
+          "label": "speech"
+        },
+        {
+          "start": 3.54,
+          "end": 3.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.68,
+          "end": 3.98,
+          "label": "speech"
+        },
+        {
+          "start": 3.98,
+          "end": 4.92,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.92,
+          "end": 5.26,
+          "label": "speech"
+        },
+        {
+          "start": 5.26,
+          "end": 5.46,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.46,
+          "end": 5.48,
+          "label": "speech"
+        },
+        {
+          "start": 5.48,
+          "end": 5.6,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.6,
+          "end": 6.06,
+          "label": "speech"
+        },
+        {
+          "start": 6.06,
+          "end": 6.22,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.22,
+          "end": 6.26,
+          "label": "speech"
+        },
+        {
+          "start": 6.26,
+          "end": 6.38,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.38,
+          "end": 6.4,
+          "label": "speech"
+        },
+        {
+          "start": 6.4,
+          "end": 6.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.56,
+          "end": 6.6,
+          "label": "speech"
+        },
+        {
+          "start": 6.6,
+          "end": 7.18,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.18,
+          "end": 7.3,
+          "label": "speech"
+        },
+        {
+          "start": 7.3,
+          "end": 7.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.5,
+          "end": 7.54,
+          "label": "speech"
+        },
+        {
+          "start": 7.54,
+          "end": 7.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.8,
+          "end": 7.94,
+          "label": "speech"
+        },
+        {
+          "start": 7.94,
+          "end": 8.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.06,
+          "end": 8.19,
+          "label": "speech"
+        },
+        {
+          "start": 8.19,
+          "end": 8.21,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.21,
+          "end": 8.28,
+          "label": "speech"
+        },
+        {
+          "start": 8.28,
+          "end": 8.61,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.61,
+          "end": 8.91,
+          "label": "nonspeech"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 2.86,
+        "nonspeech": 0.49,
+        "uncertain": 5.56
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 12.91,
+          "regions": [
+            {
+              "start": 0,
+              "end": 12.91,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 12.91,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.41,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 11.41,
+              "end": 12.91,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 11.91,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.41,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 11.41,
+              "end": 11.51,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 11.51,
+              "end": 11.91,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 24,
+        "downgradedSeconds": {
+          "speech": 0.42,
+          "nonspeech": 0.33
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "Rodolfo",
+            "startDifferenceSeconds": -0.08,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "and",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "his",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "companions,",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.32
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "with",
+            "startDifferenceSeconds": -0.26,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "their",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "faces",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "muffled",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "in",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "their",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "cloaks,",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.46
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "stared",
+            "startDifferenceSeconds": -0.14,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "rudely",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.08
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "and",
+            "startDifferenceSeconds": -0.08,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "insolently",
+            "startDifferenceSeconds": -0.54,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "at",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "the",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "mother,",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.34
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "the",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "daughter,",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "and",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 21,
+            "text": "the",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 22,
+            "text": "servant-maid.",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.48
+          },
+          {
+            "smallIndex": 23,
+            "largeIndex": 22,
+            "text": "servant-maid.",
+            "startDifferenceSeconds": -0.28,
+            "endDifferenceSeconds": 0.14
+          }
+        ]
+      }
+    },
+    {
+      "file": "5639-40744-0033.flac",
+      "sha256": "3cf3d1325b9a643f43f503a3be74b29e081e2a233774f39a48fe40e0040258cf",
+      "speaker": "5639",
+      "durationSeconds": 9.15,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "HER BEARING WAS GRACEFUL AND ANIMATED SHE LED HER SON BY THE HAND AND BEFORE HER WALKED TWO MAIDS WITH WAX LIGHTS AND SILVER CANDLESTICKS",
+      "recognizedTranscript": " her bearing was graceful and animated she led her son by the hand and before her walked two maids with wax-lights and silver candlesticks",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "her",
+          "start": 0,
+          "end": 0.68
+        },
+        {
+          "text": "bearing",
+          "start": 0.68,
+          "end": 1.02
+        },
+        {
+          "text": "was",
+          "start": 1.02,
+          "end": 1.26
+        },
+        {
+          "text": "graceful",
+          "start": 1.26,
+          "end": 1.74
+        },
+        {
+          "text": "and",
+          "start": 1.74,
+          "end": 1.96
+        },
+        {
+          "text": "animated",
+          "start": 1.96,
+          "end": 2.4
+        },
+        {
+          "text": "she",
+          "start": 2.4,
+          "end": 2.86
+        },
+        {
+          "text": "led",
+          "start": 2.86,
+          "end": 3.08
+        },
+        {
+          "text": "her",
+          "start": 3.08,
+          "end": 3.26
+        },
+        {
+          "text": "son",
+          "start": 3.26,
+          "end": 3.54
+        },
+        {
+          "text": "by",
+          "start": 3.54,
+          "end": 3.74
+        },
+        {
+          "text": "the",
+          "start": 3.74,
+          "end": 3.84
+        },
+        {
+          "text": "hand",
+          "start": 3.84,
+          "end": 4.14
+        },
+        {
+          "text": "and",
+          "start": 4.14,
+          "end": 4.62
+        },
+        {
+          "text": "before",
+          "start": 4.62,
+          "end": 5
+        },
+        {
+          "text": "her",
+          "start": 5,
+          "end": 5.2
+        },
+        {
+          "text": "walked",
+          "start": 5.2,
+          "end": 5.54
+        },
+        {
+          "text": "two",
+          "start": 5.54,
+          "end": 5.82
+        },
+        {
+          "text": "maids",
+          "start": 5.82,
+          "end": 6.24
+        },
+        {
+          "text": "with",
+          "start": 6.24,
+          "end": 6.74
+        },
+        {
+          "text": "wax-lights",
+          "start": 6.74,
+          "end": 7.38
+        },
+        {
+          "text": "and",
+          "start": 7.38,
+          "end": 7.62
+        },
+        {
+          "text": "silver",
+          "start": 7.62,
+          "end": 8.04
+        },
+        {
+          "text": "candlesticks",
+          "start": 8.04,
+          "end": 8.84
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.16,
+            "label": "speech"
+          },
+          {
+            "start": 0.16,
+            "end": 0.53,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.53,
+            "end": 2.6,
+            "label": "speech"
+          },
+          {
+            "start": 2.6,
+            "end": 2.71,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.71,
+            "end": 4.29,
+            "label": "speech"
+          },
+          {
+            "start": 4.29,
+            "end": 4.49,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.49,
+            "end": 6.51,
+            "label": "speech"
+          },
+          {
+            "start": 6.51,
+            "end": 6.6,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.6,
+            "end": 9.08,
+            "label": "speech"
+          },
+          {
+            "start": 9.08,
+            "end": 9.15,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.59,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.59,
+            "end": 1.59,
+            "label": "speech"
+          },
+          {
+            "start": 1.59,
+            "end": 1.63,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.63,
+            "end": 2.43,
+            "label": "speech"
+          },
+          {
+            "start": 2.43,
+            "end": 2.72,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.72,
+            "end": 4.21,
+            "label": "speech"
+          },
+          {
+            "start": 4.21,
+            "end": 4.51,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.51,
+            "end": 5.64,
+            "label": "speech"
+          },
+          {
+            "start": 5.64,
+            "end": 5.66,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.66,
+            "end": 6.24,
+            "label": "speech"
+          },
+          {
+            "start": 6.24,
+            "end": 6.61,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.61,
+            "end": 7.74,
+            "label": "speech"
+          },
+          {
+            "start": 7.74,
+            "end": 7.78,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.78,
+            "end": 8.41,
+            "label": "speech"
+          },
+          {
+            "start": 8.41,
+            "end": 8.56,
+            "label": "nonspeech"
+          },
+          {
+            "start": 8.56,
+            "end": 8.67,
+            "label": "speech"
+          },
+          {
+            "start": 8.67,
+            "end": 9.15,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.59,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.59,
+          "end": 0.6,
+          "label": "speech"
+        },
+        {
+          "start": 0.6,
+          "end": 0.74,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.74,
+          "end": 0.91,
+          "label": "speech"
+        },
+        {
+          "start": 0.91,
+          "end": 1.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.08,
+          "end": 1.13,
+          "label": "speech"
+        },
+        {
+          "start": 1.13,
+          "end": 1.32,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.32,
+          "end": 1.57,
+          "label": "speech"
+        },
+        {
+          "start": 1.57,
+          "end": 2.02,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.02,
+          "end": 2.25,
+          "label": "speech"
+        },
+        {
+          "start": 2.25,
+          "end": 2.92,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.92,
+          "end": 2.98,
+          "label": "speech"
+        },
+        {
+          "start": 2.98,
+          "end": 3.14,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.14,
+          "end": 3.19,
+          "label": "speech"
+        },
+        {
+          "start": 3.19,
+          "end": 3.32,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.32,
+          "end": 3.44,
+          "label": "speech"
+        },
+        {
+          "start": 3.44,
+          "end": 3.6,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.6,
+          "end": 3.64,
+          "label": "speech"
+        },
+        {
+          "start": 3.64,
+          "end": 3.9,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.9,
+          "end": 4.04,
+          "label": "speech"
+        },
+        {
+          "start": 4.04,
+          "end": 4.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.68,
+          "end": 4.9,
+          "label": "speech"
+        },
+        {
+          "start": 4.9,
+          "end": 5.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.06,
+          "end": 5.12,
+          "label": "speech"
+        },
+        {
+          "start": 5.12,
+          "end": 5.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.26,
+          "end": 5.44,
+          "label": "speech"
+        },
+        {
+          "start": 5.44,
+          "end": 5.6,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.6,
+          "end": 5.64,
+          "label": "speech"
+        },
+        {
+          "start": 5.64,
+          "end": 5.66,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.66,
+          "end": 5.76,
+          "label": "speech"
+        },
+        {
+          "start": 5.76,
+          "end": 5.88,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.88,
+          "end": 6.18,
+          "label": "speech"
+        },
+        {
+          "start": 6.18,
+          "end": 6.61,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.61,
+          "end": 6.64,
+          "label": "speech"
+        },
+        {
+          "start": 6.64,
+          "end": 6.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.8,
+          "end": 6.92,
+          "label": "speech"
+        },
+        {
+          "start": 6.92,
+          "end": 7.04,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.04,
+          "end": 7.26,
+          "label": "speech"
+        },
+        {
+          "start": 7.26,
+          "end": 7.44,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.44,
+          "end": 7.56,
+          "label": "speech"
+        },
+        {
+          "start": 7.56,
+          "end": 7.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.68,
+          "end": 7.74,
+          "label": "speech"
+        },
+        {
+          "start": 7.74,
+          "end": 7.78,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.78,
+          "end": 7.92,
+          "label": "speech"
+        },
+        {
+          "start": 7.92,
+          "end": 8.1,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.1,
+          "end": 8.41,
+          "label": "speech"
+        },
+        {
+          "start": 8.41,
+          "end": 8.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.56,
+          "end": 8.61,
+          "label": "speech"
+        },
+        {
+          "start": 8.61,
+          "end": 9.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 9.08,
+          "end": 9.15,
+          "label": "nonspeech"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 3.07,
+        "nonspeech": 0.07,
+        "uncertain": 6.01
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 13.15,
+          "regions": [
+            {
+              "start": 0,
+              "end": 13.15,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 13.15,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.65,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 11.65,
+              "end": 13.15,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 12.15,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.65,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 11.65,
+              "end": 11.75,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 11.75,
+              "end": 12.15,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 25,
+        "downgradedSeconds": {
+          "speech": 0.73,
+          "nonspeech": 0.22
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "her",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "bearing",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "was",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "graceful",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "and",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "animated",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "she",
+            "startDifferenceSeconds": -0.38,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "led",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "her",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "son",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "by",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "the",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "hand",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "and",
+            "startDifferenceSeconds": -0.4,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "before",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "her",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "walked",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "two",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "maids",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.2
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "with",
+            "startDifferenceSeconds": -0.2,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "wax-lights",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.4
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 20,
+            "text": "wax-lights",
+            "startDifferenceSeconds": -0.24,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 21,
+            "text": "and",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 23,
+            "largeIndex": 22,
+            "text": "silver",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 24,
+            "largeIndex": 23,
+            "text": "candlesticks",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.16
+          }
+        ]
+      }
+    },
+    {
+      "file": "260-123440-0018.flac",
+      "sha256": "a80d66d866b8f9114094301a965a7b6d0a62d9467c96885ff1098a27f5b02cb4",
+      "speaker": "260",
+      "durationSeconds": 3.64,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "I AM VERY TIRED OF SWIMMING ABOUT HERE O MOUSE",
+      "recognizedTranscript": " I am very tired of swimming about here. Oh, Mouse!",
+      "transcriptWer": 0.1,
+      "words": [
+        {
+          "text": "I",
+          "start": 0.18,
+          "end": 0.3
+        },
+        {
+          "text": "am",
+          "start": 0.3,
+          "end": 0.4
+        },
+        {
+          "text": "very",
+          "start": 0.4,
+          "end": 0.64
+        },
+        {
+          "text": "tired",
+          "start": 0.64,
+          "end": 0.98
+        },
+        {
+          "text": "of",
+          "start": 0.98,
+          "end": 1.12
+        },
+        {
+          "text": "swimming",
+          "start": 1.12,
+          "end": 1.4
+        },
+        {
+          "text": "about",
+          "start": 1.4,
+          "end": 1.74
+        },
+        {
+          "text": "here.",
+          "start": 1.74,
+          "end": 2.14
+        },
+        {
+          "text": "Oh,",
+          "start": 2.38,
+          "end": 2.54
+        },
+        {
+          "text": "Mouse!",
+          "start": 2.54,
+          "end": 2.82
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.1,
+            "label": "speech"
+          },
+          {
+            "start": 0.1,
+            "end": 0.16,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.16,
+            "end": 2.36,
+            "label": "speech"
+          },
+          {
+            "start": 2.36,
+            "end": 2.37,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.37,
+            "end": 3.26,
+            "label": "speech"
+          },
+          {
+            "start": 3.26,
+            "end": 3.64,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.07,
+            "label": "speech"
+          },
+          {
+            "start": 0.07,
+            "end": 0.21,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.21,
+            "end": 2.29,
+            "label": "speech"
+          },
+          {
+            "start": 2.29,
+            "end": 2.38,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.38,
+            "end": 3.12,
+            "label": "speech"
+          },
+          {
+            "start": 3.12,
+            "end": 3.64,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.46,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.46,
+          "end": 0.58,
+          "label": "speech"
+        },
+        {
+          "start": 0.58,
+          "end": 0.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.72,
+          "end": 0.87,
+          "label": "speech"
+        },
+        {
+          "start": 0.87,
+          "end": 1.04,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.04,
+          "end": 1.06,
+          "label": "speech"
+        },
+        {
+          "start": 1.06,
+          "end": 1.19,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.19,
+          "end": 1.31,
+          "label": "speech"
+        },
+        {
+          "start": 1.31,
+          "end": 1.46,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.46,
+          "end": 1.68,
+          "label": "speech"
+        },
+        {
+          "start": 1.68,
+          "end": 1.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.8,
+          "end": 2.08,
+          "label": "speech"
+        },
+        {
+          "start": 2.08,
+          "end": 3.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.26,
+          "end": 3.64,
+          "label": "nonspeech"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 0.91,
+        "nonspeech": 0.38,
+        "uncertain": 2.35
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 7.640000000000001,
+          "regions": [
+            {
+              "start": 0,
+              "end": 7.640000000000001,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 7.640000000000001,
+          "regions": [
+            {
+              "start": 0,
+              "end": 6.140000000000001,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 6.140000000000001,
+              "end": 7.640000000000001,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 6.640000000000001,
+          "regions": [
+            {
+              "start": 0,
+              "end": 6.140000000000001,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 6.140000000000001,
+              "end": 6.24,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 6.24,
+              "end": 6.640000000000001,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 10,
+        "downgradedSeconds": {
+          "speech": 0.16,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "I",
+            "startDifferenceSeconds": 0.18,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "am",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "very",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "tired",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "of",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "swimming",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "about",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "here.",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "Oh,",
+            "startDifferenceSeconds": -0.06,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "Mouse!",
+            "startDifferenceSeconds": -0.2,
+            "endDifferenceSeconds": 0.04
+          }
+        ]
+      }
+    },
+    {
+      "file": "260-123440-0007.flac",
+      "sha256": "87cb8fbcddb28a25deeb6ce7a889312eaede1ef07d26ebfdafe86c2a400ab493",
+      "speaker": "260",
+      "durationSeconds": 3.385,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "I ALMOST THINK I CAN REMEMBER FEELING A LITTLE DIFFERENT",
+      "recognizedTranscript": " I almost think I can remember feeling a little different.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "I",
+          "start": 0.32,
+          "end": 0.48
+        },
+        {
+          "text": "almost",
+          "start": 0.48,
+          "end": 0.82
+        },
+        {
+          "text": "think",
+          "start": 0.82,
+          "end": 1.12
+        },
+        {
+          "text": "I",
+          "start": 1.12,
+          "end": 1.3
+        },
+        {
+          "text": "can",
+          "start": 1.3,
+          "end": 1.44
+        },
+        {
+          "text": "remember",
+          "start": 1.44,
+          "end": 1.72
+        },
+        {
+          "text": "feeling",
+          "start": 1.72,
+          "end": 2.16
+        },
+        {
+          "text": "a",
+          "start": 2.16,
+          "end": 2.34
+        },
+        {
+          "text": "little",
+          "start": 2.34,
+          "end": 2.7
+        },
+        {
+          "text": "different.",
+          "start": 2.7,
+          "end": 3.58
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.11,
+            "label": "speech"
+          },
+          {
+            "start": 0.11,
+            "end": 0.33,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.33,
+            "end": 3.34,
+            "label": "speech"
+          },
+          {
+            "start": 3.34,
+            "end": 3.385,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.33,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.33,
+            "end": 1.91,
+            "label": "speech"
+          },
+          {
+            "start": 1.91,
+            "end": 1.93,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.93,
+            "end": 3.25,
+            "label": "speech"
+          },
+          {
+            "start": 3.25,
+            "end": 3.385,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.38,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.38,
+          "end": 0.42,
+          "label": "speech"
+        },
+        {
+          "start": 0.42,
+          "end": 0.59,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.59,
+          "end": 0.76,
+          "label": "speech"
+        },
+        {
+          "start": 0.76,
+          "end": 0.88,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.88,
+          "end": 1.02,
+          "label": "speech"
+        },
+        {
+          "start": 1.02,
+          "end": 1.18,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.18,
+          "end": 1.22,
+          "label": "speech"
+        },
+        {
+          "start": 1.22,
+          "end": 1.36,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.36,
+          "end": 1.37,
+          "label": "speech"
+        },
+        {
+          "start": 1.37,
+          "end": 1.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.5,
+          "end": 1.66,
+          "label": "speech"
+        },
+        {
+          "start": 1.66,
+          "end": 1.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.8,
+          "end": 1.91,
+          "label": "speech"
+        },
+        {
+          "start": 1.91,
+          "end": 1.93,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.93,
+          "end": 2.1,
+          "label": "speech"
+        },
+        {
+          "start": 2.1,
+          "end": 2.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.26,
+          "end": 2.28,
+          "label": "speech"
+        },
+        {
+          "start": 2.28,
+          "end": 2.44,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.44,
+          "end": 2.6,
+          "label": "speech"
+        },
+        {
+          "start": 2.6,
+          "end": 3.385,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 1.02,
+        "nonspeech": 0,
+        "uncertain": 2.365
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 7.385,
+          "regions": [
+            {
+              "start": 0,
+              "end": 7.385,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 7.385,
+          "regions": [
+            {
+              "start": 0,
+              "end": 5.885,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 5.885,
+              "end": 7.385,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 6.385,
+          "regions": [
+            {
+              "start": 0,
+              "end": 5.885,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 5.885,
+              "end": 5.984999999999999,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 5.984999999999999,
+              "end": 6.385,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied",
+        "provider_timestamp_out_of_bounds"
+      ],
+      "refinement": {
+        "matchedWordCount": 10,
+        "downgradedSeconds": {
+          "speech": 0.53,
+          "nonspeech": 0.04
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "I",
+            "startDifferenceSeconds": 0.32,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "almost",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "think",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "I",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "can",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "remember",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "feeling",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "a",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "little",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "different.",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.52
+          }
+        ]
+      }
+    },
+    {
+      "file": "7729-102255-0045.flac",
+      "sha256": "52b2863422cf066b046facaf8c9608e81179a61be437b8e321c2832b2119805c",
+      "speaker": "7729",
+      "durationSeconds": 6.805,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "CAPTAIN MARTIN SAID I SHALL GIVE YOU A PISTOL TO HELP PROTECT YOURSELF IF WORSE COMES TO WORST",
+      "recognizedTranscript": " Captain Martin said, I shall give you a pistol to help protect yourself if worse comes to worst.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "Captain",
+          "start": 0,
+          "end": 0.58
+        },
+        {
+          "text": "Martin",
+          "start": 0.58,
+          "end": 1.08
+        },
+        {
+          "text": "said,",
+          "start": 1.08,
+          "end": 2.02
+        },
+        {
+          "text": "I",
+          "start": 2.02,
+          "end": 2.1
+        },
+        {
+          "text": "shall",
+          "start": 2.1,
+          "end": 2.32
+        },
+        {
+          "text": "give",
+          "start": 2.32,
+          "end": 2.6
+        },
+        {
+          "text": "you",
+          "start": 2.6,
+          "end": 2.74
+        },
+        {
+          "text": "a",
+          "start": 2.74,
+          "end": 2.92
+        },
+        {
+          "text": "pistol",
+          "start": 2.92,
+          "end": 3.22
+        },
+        {
+          "text": "to",
+          "start": 3.22,
+          "end": 3.54
+        },
+        {
+          "text": "help",
+          "start": 3.54,
+          "end": 3.74
+        },
+        {
+          "text": "protect",
+          "start": 3.74,
+          "end": 4.14
+        },
+        {
+          "text": "yourself",
+          "start": 4.14,
+          "end": 4.6
+        },
+        {
+          "text": "if",
+          "start": 4.6,
+          "end": 5.3
+        },
+        {
+          "text": "worse",
+          "start": 5.3,
+          "end": 5.6
+        },
+        {
+          "text": "comes",
+          "start": 5.6,
+          "end": 5.92
+        },
+        {
+          "text": "to",
+          "start": 5.92,
+          "end": 6.06
+        },
+        {
+          "text": "worst.",
+          "start": 6.06,
+          "end": 6.38
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.11,
+            "label": "speech"
+          },
+          {
+            "start": 0.11,
+            "end": 0.27,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.27,
+            "end": 1.65,
+            "label": "speech"
+          },
+          {
+            "start": 1.65,
+            "end": 2.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.01,
+            "end": 4.99,
+            "label": "speech"
+          },
+          {
+            "start": 4.99,
+            "end": 5.13,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.13,
+            "end": 6.64,
+            "label": "speech"
+          },
+          {
+            "start": 6.64,
+            "end": 6.805,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.3,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.3,
+            "end": 1.56,
+            "label": "speech"
+          },
+          {
+            "start": 1.56,
+            "end": 2.02,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.02,
+            "end": 2.99,
+            "label": "speech"
+          },
+          {
+            "start": 2.99,
+            "end": 3.0,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.0,
+            "end": 3.5,
+            "label": "speech"
+          },
+          {
+            "start": 3.5,
+            "end": 3.51,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.51,
+            "end": 3.81,
+            "label": "speech"
+          },
+          {
+            "start": 3.81,
+            "end": 3.84,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.84,
+            "end": 4.25,
+            "label": "speech"
+          },
+          {
+            "start": 4.25,
+            "end": 4.28,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.28,
+            "end": 4.49,
+            "label": "speech"
+          },
+          {
+            "start": 4.49,
+            "end": 4.52,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.52,
+            "end": 4.81,
+            "label": "speech"
+          },
+          {
+            "start": 4.81,
+            "end": 5.15,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.15,
+            "end": 5.68,
+            "label": "speech"
+          },
+          {
+            "start": 5.68,
+            "end": 5.69,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.69,
+            "end": 6.45,
+            "label": "speech"
+          },
+          {
+            "start": 6.45,
+            "end": 6.805,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.3,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.3,
+          "end": 0.52,
+          "label": "speech"
+        },
+        {
+          "start": 0.52,
+          "end": 0.7,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.7,
+          "end": 0.91,
+          "label": "speech"
+        },
+        {
+          "start": 0.91,
+          "end": 1.14,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.14,
+          "end": 1.35,
+          "label": "speech"
+        },
+        {
+          "start": 1.35,
+          "end": 2.22,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.22,
+          "end": 2.26,
+          "label": "speech"
+        },
+        {
+          "start": 2.26,
+          "end": 2.4,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.4,
+          "end": 2.48,
+          "label": "speech"
+        },
+        {
+          "start": 2.48,
+          "end": 2.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.8,
+          "end": 2.82,
+          "label": "speech"
+        },
+        {
+          "start": 2.82,
+          "end": 2.98,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.98,
+          "end": 2.99,
+          "label": "speech"
+        },
+        {
+          "start": 2.99,
+          "end": 3.0,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.0,
+          "end": 3.16,
+          "label": "speech"
+        },
+        {
+          "start": 3.16,
+          "end": 3.3,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.3,
+          "end": 3.48,
+          "label": "speech"
+        },
+        {
+          "start": 3.48,
+          "end": 3.64,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.64,
+          "end": 3.68,
+          "label": "speech"
+        },
+        {
+          "start": 3.68,
+          "end": 3.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.8,
+          "end": 3.81,
+          "label": "speech"
+        },
+        {
+          "start": 3.81,
+          "end": 3.84,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.84,
+          "end": 4.08,
+          "label": "speech"
+        },
+        {
+          "start": 4.08,
+          "end": 4.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.2,
+          "end": 4.25,
+          "label": "speech"
+        },
+        {
+          "start": 4.25,
+          "end": 4.28,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.28,
+          "end": 4.49,
+          "label": "speech"
+        },
+        {
+          "start": 4.49,
+          "end": 4.52,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.52,
+          "end": 4.54,
+          "label": "speech"
+        },
+        {
+          "start": 4.54,
+          "end": 4.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.72,
+          "end": 4.81,
+          "label": "speech"
+        },
+        {
+          "start": 4.81,
+          "end": 5.15,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.15,
+          "end": 5.24,
+          "label": "speech"
+        },
+        {
+          "start": 5.24,
+          "end": 5.66,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.66,
+          "end": 5.68,
+          "label": "speech"
+        },
+        {
+          "start": 5.68,
+          "end": 5.69,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.69,
+          "end": 5.82,
+          "label": "speech"
+        },
+        {
+          "start": 5.82,
+          "end": 5.98,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.98,
+          "end": 6.0,
+          "label": "speech"
+        },
+        {
+          "start": 6.0,
+          "end": 6.16,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.16,
+          "end": 6.32,
+          "label": "speech"
+        },
+        {
+          "start": 6.32,
+          "end": 6.64,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.64,
+          "end": 6.8,
+          "label": "nonspeech"
+        },
+        {
+          "start": 6.8,
+          "end": 6.805,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 2.21,
+        "nonspeech": 0.16,
+        "uncertain": 4.435
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 10.805,
+          "regions": [
+            {
+              "start": 0,
+              "end": 10.805,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 10.805,
+          "regions": [
+            {
+              "start": 0,
+              "end": 9.305,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 9.305,
+              "end": 10.805,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 9.805,
+          "regions": [
+            {
+              "start": 0,
+              "end": 9.305,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 9.305,
+              "end": 9.405,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 9.405,
+              "end": 9.805,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 18,
+        "downgradedSeconds": {
+          "speech": 0.73,
+          "nonspeech": 0.11
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "Captain",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.06
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "Martin",
+            "startDifferenceSeconds": -0.06,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "said,",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.6
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "I",
+            "startDifferenceSeconds": 0.16,
+            "endDifferenceSeconds": -0.06
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "shall",
+            "startDifferenceSeconds": -0.06,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "give",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "you",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "a",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "pistol",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "to",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "help",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "protect",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "yourself",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.06
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "if",
+            "startDifferenceSeconds": -0.06,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "worse",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "comes",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "to",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "worst.",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": -0.16
+          }
+        ]
+      }
+    },
+    {
+      "file": "7729-102255-0012.flac",
+      "sha256": "438b540a2a84f8a9ffcec80aae8ab08dd95a1d9f829eeb89164192978d5672cd",
+      "speaker": "7729",
+      "durationSeconds": 4.075,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "SEVERAL HUNDRED FREE STATE MEN PROMPTLY RESPONDED TO THE SUMMONS",
+      "recognizedTranscript": " Several hundred Free State men promptly responded to the summons.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "Several",
+          "start": 0.04,
+          "end": 0.58
+        },
+        {
+          "text": "hundred",
+          "start": 0.58,
+          "end": 1.02
+        },
+        {
+          "text": "Free",
+          "start": 1.02,
+          "end": 1.36
+        },
+        {
+          "text": "State",
+          "start": 1.36,
+          "end": 1.54
+        },
+        {
+          "text": "men",
+          "start": 1.54,
+          "end": 1.8
+        },
+        {
+          "text": "promptly",
+          "start": 1.8,
+          "end": 2.28
+        },
+        {
+          "text": "responded",
+          "start": 2.28,
+          "end": 2.94
+        },
+        {
+          "text": "to",
+          "start": 2.94,
+          "end": 3.2
+        },
+        {
+          "text": "the",
+          "start": 3.2,
+          "end": 3.34
+        },
+        {
+          "text": "summons.",
+          "start": 3.34,
+          "end": 3.74
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.11,
+            "label": "speech"
+          },
+          {
+            "start": 0.11,
+            "end": 0.27,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.27,
+            "end": 4.02,
+            "label": "speech"
+          },
+          {
+            "start": 4.02,
+            "end": 4.075,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.3,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.3,
+            "end": 1.09,
+            "label": "speech"
+          },
+          {
+            "start": 1.09,
+            "end": 1.15,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.15,
+            "end": 1.96,
+            "label": "speech"
+          },
+          {
+            "start": 1.96,
+            "end": 2.02,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.02,
+            "end": 2.61,
+            "label": "speech"
+          },
+          {
+            "start": 2.61,
+            "end": 2.7,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.7,
+            "end": 3.12,
+            "label": "speech"
+          },
+          {
+            "start": 3.12,
+            "end": 3.15,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.15,
+            "end": 3.42,
+            "label": "speech"
+          },
+          {
+            "start": 3.42,
+            "end": 3.43,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.43,
+            "end": 3.84,
+            "label": "speech"
+          },
+          {
+            "start": 3.84,
+            "end": 4.075,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.3,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.3,
+          "end": 0.52,
+          "label": "speech"
+        },
+        {
+          "start": 0.52,
+          "end": 0.66,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.66,
+          "end": 0.89,
+          "label": "speech"
+        },
+        {
+          "start": 0.89,
+          "end": 1.42,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.42,
+          "end": 1.46,
+          "label": "speech"
+        },
+        {
+          "start": 1.46,
+          "end": 1.6,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.6,
+          "end": 1.74,
+          "label": "speech"
+        },
+        {
+          "start": 1.74,
+          "end": 1.88,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.88,
+          "end": 1.96,
+          "label": "speech"
+        },
+        {
+          "start": 1.96,
+          "end": 2.02,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.02,
+          "end": 2.22,
+          "label": "speech"
+        },
+        {
+          "start": 2.22,
+          "end": 2.36,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.36,
+          "end": 2.61,
+          "label": "speech"
+        },
+        {
+          "start": 2.61,
+          "end": 2.7,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.7,
+          "end": 2.84,
+          "label": "speech"
+        },
+        {
+          "start": 2.84,
+          "end": 3.0,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.0,
+          "end": 3.12,
+          "label": "speech"
+        },
+        {
+          "start": 3.12,
+          "end": 3.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.26,
+          "end": 3.28,
+          "label": "speech"
+        },
+        {
+          "start": 3.28,
+          "end": 3.43,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.43,
+          "end": 3.58,
+          "label": "speech"
+        },
+        {
+          "start": 3.58,
+          "end": 4.02,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.02,
+          "end": 4.07,
+          "label": "nonspeech"
+        },
+        {
+          "start": 4.07,
+          "end": 4.075,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 1.59,
+        "nonspeech": 0.05,
+        "uncertain": 2.435
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 8.075,
+          "regions": [
+            {
+              "start": 0,
+              "end": 8.075,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 8.075,
+          "regions": [
+            {
+              "start": 0,
+              "end": 6.575,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 6.575,
+              "end": 8.075,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 7.075,
+          "regions": [
+            {
+              "start": 0,
+              "end": 6.575,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 6.575,
+              "end": 6.675000000000001,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 6.675000000000001,
+              "end": 7.075,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 10,
+        "downgradedSeconds": {
+          "speech": 0.22,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "Several",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "hundred",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "Free",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "State",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "men",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "promptly",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "responded",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "to",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "the",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "summons.",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.1
+          }
+        ]
+      }
+    },
+    {
+      "file": "2094-142345-0059.flac",
+      "sha256": "d9e10be49f95d6c601d63e3c229eeda6cf29a03a040d10078bf6cd0975964554",
+      "speaker": "2094",
+      "durationSeconds": 10.01,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "THIS MISSUS POYSER SAID BLUSHING AND BELIEVING THAT THE CAPTAIN WAS REALLY INTERESTED IN HER MILK PANS AND WOULD ADJUST HIS OPINION OF HER TO THE APPEARANCE OF HER DAIRY",
+      "recognizedTranscript": " this mrs poycer said blushing and believing that the captain was really interested in her milk-pans and would adjust his opinion of her to the appearance of her dairy",
+      "transcriptWer": 0.066667,
+      "words": [
+        {
+          "text": "this",
+          "start": 0.38,
+          "end": 0.68
+        },
+        {
+          "text": "mrs",
+          "start": 0.68,
+          "end": 1
+        },
+        {
+          "text": "poycer",
+          "start": 1,
+          "end": 1.34
+        },
+        {
+          "text": "said",
+          "start": 1.34,
+          "end": 1.62
+        },
+        {
+          "text": "blushing",
+          "start": 1.62,
+          "end": 2.02
+        },
+        {
+          "text": "and",
+          "start": 2.02,
+          "end": 2.74
+        },
+        {
+          "text": "believing",
+          "start": 2.74,
+          "end": 3.02
+        },
+        {
+          "text": "that",
+          "start": 3.02,
+          "end": 3.24
+        },
+        {
+          "text": "the",
+          "start": 3.24,
+          "end": 3.32
+        },
+        {
+          "text": "captain",
+          "start": 3.32,
+          "end": 3.72
+        },
+        {
+          "text": "was",
+          "start": 3.72,
+          "end": 4.2
+        },
+        {
+          "text": "really",
+          "start": 4.2,
+          "end": 4.46
+        },
+        {
+          "text": "interested",
+          "start": 4.46,
+          "end": 5.02
+        },
+        {
+          "text": "in",
+          "start": 5.02,
+          "end": 5.18
+        },
+        {
+          "text": "her",
+          "start": 5.18,
+          "end": 5.32
+        },
+        {
+          "text": "milk-pans",
+          "start": 5.32,
+          "end": 5.94
+        },
+        {
+          "text": "and",
+          "start": 5.94,
+          "end": 6.72
+        },
+        {
+          "text": "would",
+          "start": 6.72,
+          "end": 6.9
+        },
+        {
+          "text": "adjust",
+          "start": 6.9,
+          "end": 7.22
+        },
+        {
+          "text": "his",
+          "start": 7.22,
+          "end": 7.42
+        },
+        {
+          "text": "opinion",
+          "start": 7.42,
+          "end": 7.76
+        },
+        {
+          "text": "of",
+          "start": 7.76,
+          "end": 7.9
+        },
+        {
+          "text": "her",
+          "start": 7.9,
+          "end": 8.14
+        },
+        {
+          "text": "to",
+          "start": 8.14,
+          "end": 8.4
+        },
+        {
+          "text": "the",
+          "start": 8.4,
+          "end": 8.52
+        },
+        {
+          "text": "appearance",
+          "start": 8.52,
+          "end": 8.88
+        },
+        {
+          "text": "of",
+          "start": 8.88,
+          "end": 9.02
+        },
+        {
+          "text": "her",
+          "start": 9.02,
+          "end": 9.16
+        },
+        {
+          "text": "dairy",
+          "start": 9.16,
+          "end": 9.62
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.1,
+            "label": "speech"
+          },
+          {
+            "start": 0.1,
+            "end": 0.41,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.41,
+            "end": 2.23,
+            "label": "speech"
+          },
+          {
+            "start": 2.23,
+            "end": 2.56,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.56,
+            "end": 3.99,
+            "label": "speech"
+          },
+          {
+            "start": 3.99,
+            "end": 4.06,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.06,
+            "end": 6.12,
+            "label": "speech"
+          },
+          {
+            "start": 6.12,
+            "end": 6.14,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.14,
+            "end": 6.46,
+            "label": "speech"
+          },
+          {
+            "start": 6.46,
+            "end": 6.61,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.61,
+            "end": 9.66,
+            "label": "speech"
+          },
+          {
+            "start": 9.66,
+            "end": 10.01,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.42,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.42,
+            "end": 0.79,
+            "label": "speech"
+          },
+          {
+            "start": 0.79,
+            "end": 0.8,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.8,
+            "end": 2.17,
+            "label": "speech"
+          },
+          {
+            "start": 2.17,
+            "end": 2.59,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.59,
+            "end": 3.94,
+            "label": "speech"
+          },
+          {
+            "start": 3.94,
+            "end": 4.07,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.07,
+            "end": 4.94,
+            "label": "speech"
+          },
+          {
+            "start": 4.94,
+            "end": 4.97,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.97,
+            "end": 5.55,
+            "label": "speech"
+          },
+          {
+            "start": 5.55,
+            "end": 5.56,
+            "label": "nonspeech"
+          },
+          {
+            "start": 5.56,
+            "end": 5.99,
+            "label": "speech"
+          },
+          {
+            "start": 5.99,
+            "end": 6.61,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.61,
+            "end": 7.91,
+            "label": "speech"
+          },
+          {
+            "start": 7.91,
+            "end": 7.93,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.93,
+            "end": 8.29,
+            "label": "speech"
+          },
+          {
+            "start": 8.29,
+            "end": 8.31,
+            "label": "nonspeech"
+          },
+          {
+            "start": 8.31,
+            "end": 9.61,
+            "label": "speech"
+          },
+          {
+            "start": 9.61,
+            "end": 10.01,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.44,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.44,
+          "end": 0.56,
+          "label": "speech"
+        },
+        {
+          "start": 0.56,
+          "end": 1.43,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.43,
+          "end": 1.52,
+          "label": "speech"
+        },
+        {
+          "start": 1.52,
+          "end": 1.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.68,
+          "end": 1.87,
+          "label": "speech"
+        },
+        {
+          "start": 1.87,
+          "end": 2.59,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.59,
+          "end": 2.6,
+          "label": "speech"
+        },
+        {
+          "start": 2.6,
+          "end": 2.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.8,
+          "end": 2.86,
+          "label": "speech"
+        },
+        {
+          "start": 2.86,
+          "end": 3.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.08,
+          "end": 3.16,
+          "label": "speech"
+        },
+        {
+          "start": 3.16,
+          "end": 3.78,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.78,
+          "end": 3.94,
+          "label": "speech"
+        },
+        {
+          "start": 3.94,
+          "end": 4.07,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.07,
+          "end": 4.1,
+          "label": "speech"
+        },
+        {
+          "start": 4.1,
+          "end": 4.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.26,
+          "end": 4.38,
+          "label": "speech"
+        },
+        {
+          "start": 4.38,
+          "end": 4.52,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.52,
+          "end": 4.82,
+          "label": "speech"
+        },
+        {
+          "start": 4.82,
+          "end": 5.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.08,
+          "end": 5.1,
+          "label": "speech"
+        },
+        {
+          "start": 5.1,
+          "end": 5.38,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.38,
+          "end": 5.4,
+          "label": "speech"
+        },
+        {
+          "start": 5.4,
+          "end": 5.52,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.52,
+          "end": 5.55,
+          "label": "speech"
+        },
+        {
+          "start": 5.55,
+          "end": 5.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.56,
+          "end": 5.82,
+          "label": "speech"
+        },
+        {
+          "start": 5.82,
+          "end": 6.61,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.61,
+          "end": 6.66,
+          "label": "speech"
+        },
+        {
+          "start": 6.66,
+          "end": 6.78,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.78,
+          "end": 6.8,
+          "label": "speech"
+        },
+        {
+          "start": 6.8,
+          "end": 6.96,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.96,
+          "end": 7.06,
+          "label": "speech"
+        },
+        {
+          "start": 7.06,
+          "end": 7.28,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.28,
+          "end": 7.32,
+          "label": "speech"
+        },
+        {
+          "start": 7.32,
+          "end": 7.48,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.48,
+          "end": 7.56,
+          "label": "speech"
+        },
+        {
+          "start": 7.56,
+          "end": 7.82,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.82,
+          "end": 7.84,
+          "label": "speech"
+        },
+        {
+          "start": 7.84,
+          "end": 7.96,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.96,
+          "end": 8.0,
+          "label": "speech"
+        },
+        {
+          "start": 8.0,
+          "end": 8.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.2,
+          "end": 8.29,
+          "label": "speech"
+        },
+        {
+          "start": 8.29,
+          "end": 8.31,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.31,
+          "end": 8.32,
+          "label": "speech"
+        },
+        {
+          "start": 8.32,
+          "end": 8.58,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.58,
+          "end": 8.66,
+          "label": "speech"
+        },
+        {
+          "start": 8.66,
+          "end": 9.22,
+          "label": "uncertain"
+        },
+        {
+          "start": 9.22,
+          "end": 9.29,
+          "label": "speech"
+        },
+        {
+          "start": 9.29,
+          "end": 9.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 9.72,
+          "end": 10.01,
+          "label": "nonspeech"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 2.09,
+        "nonspeech": 0.29,
+        "uncertain": 7.63
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 14.01,
+          "regions": [
+            {
+              "start": 0,
+              "end": 14.01,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 14.01,
+          "regions": [
+            {
+              "start": 0,
+              "end": 12.51,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 12.51,
+              "end": 14.01,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 13.01,
+          "regions": [
+            {
+              "start": 0,
+              "end": 12.51,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 12.51,
+              "end": 12.61,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 12.61,
+              "end": 13.01,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 29,
+        "downgradedSeconds": {
+          "speech": 1.28,
+          "nonspeech": 0.25
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "this",
+            "startDifferenceSeconds": 0.38,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "mrs",
+            "startDifferenceSeconds": -0.2,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "said",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "blushing",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "and",
+            "startDifferenceSeconds": -0.48,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "believing",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "that",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "the",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "captain",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.14
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "was",
+            "startDifferenceSeconds": 0.14,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "really",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "interested",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.14
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "in",
+            "startDifferenceSeconds": 0.14,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "her",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "milk-pans",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.48
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 15,
+            "text": "milk-pans",
+            "startDifferenceSeconds": -0.14,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 16,
+            "text": "and",
+            "startDifferenceSeconds": -0.54,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 17,
+            "text": "would",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 18,
+            "text": "adjust",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.1
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 19,
+            "text": "his",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 20,
+            "text": "opinion",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.14
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 21,
+            "text": "of",
+            "startDifferenceSeconds": 0.14,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 23,
+            "largeIndex": 22,
+            "text": "her",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 24,
+            "largeIndex": 23,
+            "text": "to",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 25,
+            "largeIndex": 24,
+            "text": "the",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 26,
+            "largeIndex": 25,
+            "text": "appearance",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.16
+          },
+          {
+            "smallIndex": 27,
+            "largeIndex": 26,
+            "text": "of",
+            "startDifferenceSeconds": 0.16,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 28,
+            "largeIndex": 27,
+            "text": "her",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 29,
+            "largeIndex": 28,
+            "text": "dairy",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.26
+          }
+        ]
+      }
+    },
+    {
+      "file": "2094-142345-0045.flac",
+      "sha256": "1d62c5f9b72822a151674a2d6df7e11829ffd140b4bb12a9090b3df763ea7d9d",
+      "speaker": "2094",
+      "durationSeconds": 3.005,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "OH SIR DON'T MENTION IT SAID MISSUS POYSER",
+      "recognizedTranscript": " \"'Oh, sir, don't mention it,' said Mrs. Poyser.",
+      "transcriptWer": 0.125,
+      "words": [
+        {
+          "text": "\"'Oh,",
+          "start": 0.02,
+          "end": 0.58
+        },
+        {
+          "text": "sir,",
+          "start": 0.58,
+          "end": 0.9
+        },
+        {
+          "text": "don't",
+          "start": 0.9,
+          "end": 1.06
+        },
+        {
+          "text": "mention",
+          "start": 1.06,
+          "end": 1.36
+        },
+        {
+          "text": "it,'",
+          "start": 1.36,
+          "end": 1.68
+        },
+        {
+          "text": "said",
+          "start": 1.68,
+          "end": 2.04
+        },
+        {
+          "text": "Mrs.",
+          "start": 2.04,
+          "end": 2.34
+        },
+        {
+          "text": "Poyser.",
+          "start": 2.34,
+          "end": 2.7
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.1,
+            "label": "speech"
+          },
+          {
+            "start": 0.1,
+            "end": 0.3,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.3,
+            "end": 0.4,
+            "label": "speech"
+          },
+          {
+            "start": 0.4,
+            "end": 0.5,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.5,
+            "end": 1.68,
+            "label": "speech"
+          },
+          {
+            "start": 1.68,
+            "end": 1.87,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.87,
+            "end": 2.93,
+            "label": "speech"
+          },
+          {
+            "start": 2.93,
+            "end": 3.005,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.5,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.5,
+            "end": 1.65,
+            "label": "speech"
+          },
+          {
+            "start": 1.65,
+            "end": 1.97,
+            "label": "nonspeech"
+          },
+          {
+            "start": 1.97,
+            "end": 2.87,
+            "label": "speech"
+          },
+          {
+            "start": 2.87,
+            "end": 3.005,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 1.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.2,
+          "end": 1.3,
+          "label": "speech"
+        },
+        {
+          "start": 1.3,
+          "end": 1.43,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.43,
+          "end": 1.62,
+          "label": "speech"
+        },
+        {
+          "start": 1.62,
+          "end": 1.97,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.97,
+          "end": 1.98,
+          "label": "speech"
+        },
+        {
+          "start": 1.98,
+          "end": 2.1,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.1,
+          "end": 2.23,
+          "label": "speech"
+        },
+        {
+          "start": 2.23,
+          "end": 2.93,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.93,
+          "end": 3.0,
+          "label": "nonspeech"
+        },
+        {
+          "start": 3.0,
+          "end": 3.005,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 0.43,
+        "nonspeech": 0.07,
+        "uncertain": 2.505
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 7.005,
+          "regions": [
+            {
+              "start": 0,
+              "end": 7.005,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 7.005,
+          "regions": [
+            {
+              "start": 0,
+              "end": 5.505,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 5.505,
+              "end": 7.005,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 6.005,
+          "regions": [
+            {
+              "start": 0,
+              "end": 5.505,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 5.505,
+              "end": 5.605,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 5.605,
+              "end": 6.005,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 7,
+        "downgradedSeconds": {
+          "speech": 0.16,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "\"'Oh,",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "sir,",
+            "startDifferenceSeconds": -0.22,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "don't",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": -0.08
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "mention",
+            "startDifferenceSeconds": -0.08,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "it,'",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.16
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "said",
+            "startDifferenceSeconds": -0.16,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "Mrs.",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.04
+          }
+        ]
+      }
+    },
+    {
+      "file": "3575-170457-0023.flac",
+      "sha256": "2a062109a1c67a7b724649ce0e0d43c8e06c992a43fc9e21758db2c7ec83fc1d",
+      "speaker": "3575",
+      "durationSeconds": 9.095,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "I CAREFULLY AVOID ANY APPEARANCE OF PREOCCUPATION AND ECCENTRICITY WHICH MIGHT LEAD THOSE I LIVE AMONGST TO SUSPECT THE NATURE OF MY PURSUITS",
+      "recognizedTranscript": " I carefully avoid any appearance of preoccupation and eccentricity, which might lead those I live amongst to suspect the nature of my pursuits.",
+      "transcriptWer": 0.0,
+      "words": [
+        {
+          "text": "I",
+          "start": 0.46,
+          "end": 0.6
+        },
+        {
+          "text": "carefully",
+          "start": 0.6,
+          "end": 1
+        },
+        {
+          "text": "avoid",
+          "start": 1,
+          "end": 1.38
+        },
+        {
+          "text": "any",
+          "start": 1.38,
+          "end": 1.66
+        },
+        {
+          "text": "appearance",
+          "start": 1.66,
+          "end": 2
+        },
+        {
+          "text": "of",
+          "start": 2,
+          "end": 2.26
+        },
+        {
+          "text": "preoccupation",
+          "start": 2.26,
+          "end": 3.04
+        },
+        {
+          "text": "and",
+          "start": 3.04,
+          "end": 3.44
+        },
+        {
+          "text": "eccentricity,",
+          "start": 3.44,
+          "end": 5
+        },
+        {
+          "text": "which",
+          "start": 4.98,
+          "end": 5.1
+        },
+        {
+          "text": "might",
+          "start": 5.1,
+          "end": 5.36
+        },
+        {
+          "text": "lead",
+          "start": 5.36,
+          "end": 5.66
+        },
+        {
+          "text": "those",
+          "start": 5.66,
+          "end": 5.94
+        },
+        {
+          "text": "I",
+          "start": 5.94,
+          "end": 6.14
+        },
+        {
+          "text": "live",
+          "start": 6.14,
+          "end": 6.36
+        },
+        {
+          "text": "amongst",
+          "start": 6.36,
+          "end": 6.64
+        },
+        {
+          "text": "to",
+          "start": 6.64,
+          "end": 6.86
+        },
+        {
+          "text": "suspect",
+          "start": 6.86,
+          "end": 7.24
+        },
+        {
+          "text": "the",
+          "start": 7.24,
+          "end": 7.42
+        },
+        {
+          "text": "nature",
+          "start": 7.42,
+          "end": 7.68
+        },
+        {
+          "text": "of",
+          "start": 7.68,
+          "end": 7.84
+        },
+        {
+          "text": "my",
+          "start": 7.84,
+          "end": 7.98
+        },
+        {
+          "text": "pursuits.",
+          "start": 7.98,
+          "end": 8.44
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.1,
+            "label": "speech"
+          },
+          {
+            "start": 0.1,
+            "end": 0.18,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.18,
+            "end": 0.28,
+            "label": "speech"
+          },
+          {
+            "start": 0.28,
+            "end": 0.54,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.54,
+            "end": 4.89,
+            "label": "speech"
+          },
+          {
+            "start": 4.89,
+            "end": 4.95,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.95,
+            "end": 8.63,
+            "label": "speech"
+          },
+          {
+            "start": 8.63,
+            "end": 8.99,
+            "label": "nonspeech"
+          },
+          {
+            "start": 8.99,
+            "end": 9.09,
+            "label": "speech"
+          },
+          {
+            "start": 9.09,
+            "end": 9.095,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.54,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.54,
+            "end": 2.33,
+            "label": "speech"
+          },
+          {
+            "start": 2.33,
+            "end": 2.4,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.4,
+            "end": 3.57,
+            "label": "speech"
+          },
+          {
+            "start": 3.57,
+            "end": 3.61,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.61,
+            "end": 3.8,
+            "label": "speech"
+          },
+          {
+            "start": 3.8,
+            "end": 3.88,
+            "label": "nonspeech"
+          },
+          {
+            "start": 3.88,
+            "end": 4.45,
+            "label": "speech"
+          },
+          {
+            "start": 4.45,
+            "end": 4.49,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.49,
+            "end": 4.81,
+            "label": "speech"
+          },
+          {
+            "start": 4.81,
+            "end": 4.95,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.95,
+            "end": 6.72,
+            "label": "speech"
+          },
+          {
+            "start": 6.72,
+            "end": 6.77,
+            "label": "nonspeech"
+          },
+          {
+            "start": 6.77,
+            "end": 7.06,
+            "label": "speech"
+          },
+          {
+            "start": 7.06,
+            "end": 7.08,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.08,
+            "end": 7.32,
+            "label": "speech"
+          },
+          {
+            "start": 7.32,
+            "end": 7.36,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.36,
+            "end": 8.23,
+            "label": "speech"
+          },
+          {
+            "start": 8.23,
+            "end": 8.25,
+            "label": "nonspeech"
+          },
+          {
+            "start": 8.25,
+            "end": 8.46,
+            "label": "speech"
+          },
+          {
+            "start": 8.46,
+            "end": 9.095,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.7,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.7,
+          "end": 0.89,
+          "label": "speech"
+        },
+        {
+          "start": 0.89,
+          "end": 1.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.06,
+          "end": 1.3,
+          "label": "speech"
+        },
+        {
+          "start": 1.3,
+          "end": 1.44,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.44,
+          "end": 1.59,
+          "label": "speech"
+        },
+        {
+          "start": 1.59,
+          "end": 1.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.72,
+          "end": 1.92,
+          "label": "speech"
+        },
+        {
+          "start": 1.92,
+          "end": 2.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.06,
+          "end": 2.2,
+          "label": "speech"
+        },
+        {
+          "start": 2.2,
+          "end": 2.4,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.4,
+          "end": 2.98,
+          "label": "speech"
+        },
+        {
+          "start": 2.98,
+          "end": 3.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.2,
+          "end": 3.38,
+          "label": "speech"
+        },
+        {
+          "start": 3.38,
+          "end": 3.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.5,
+          "end": 3.57,
+          "label": "speech"
+        },
+        {
+          "start": 3.57,
+          "end": 3.61,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.61,
+          "end": 3.8,
+          "label": "speech"
+        },
+        {
+          "start": 3.8,
+          "end": 3.88,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.88,
+          "end": 4.45,
+          "label": "speech"
+        },
+        {
+          "start": 4.45,
+          "end": 4.49,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.49,
+          "end": 4.64,
+          "label": "speech"
+        },
+        {
+          "start": 4.64,
+          "end": 5.16,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.16,
+          "end": 5.24,
+          "label": "speech"
+        },
+        {
+          "start": 5.24,
+          "end": 5.42,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.42,
+          "end": 5.54,
+          "label": "speech"
+        },
+        {
+          "start": 5.54,
+          "end": 5.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.72,
+          "end": 5.88,
+          "label": "speech"
+        },
+        {
+          "start": 5.88,
+          "end": 6.0,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.0,
+          "end": 6.06,
+          "label": "speech"
+        },
+        {
+          "start": 6.06,
+          "end": 6.2,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.2,
+          "end": 6.24,
+          "label": "speech"
+        },
+        {
+          "start": 6.24,
+          "end": 6.42,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.42,
+          "end": 6.58,
+          "label": "speech"
+        },
+        {
+          "start": 6.58,
+          "end": 6.7,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.7,
+          "end": 6.72,
+          "label": "speech"
+        },
+        {
+          "start": 6.72,
+          "end": 6.77,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.77,
+          "end": 6.8,
+          "label": "speech"
+        },
+        {
+          "start": 6.8,
+          "end": 6.94,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.94,
+          "end": 7.06,
+          "label": "speech"
+        },
+        {
+          "start": 7.06,
+          "end": 7.08,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.08,
+          "end": 7.14,
+          "label": "speech"
+        },
+        {
+          "start": 7.14,
+          "end": 7.3,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.3,
+          "end": 7.32,
+          "label": "speech"
+        },
+        {
+          "start": 7.32,
+          "end": 7.5,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.5,
+          "end": 7.54,
+          "label": "speech"
+        },
+        {
+          "start": 7.54,
+          "end": 7.74,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.74,
+          "end": 7.78,
+          "label": "speech"
+        },
+        {
+          "start": 7.78,
+          "end": 8.04,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.04,
+          "end": 8.23,
+          "label": "speech"
+        },
+        {
+          "start": 8.23,
+          "end": 8.25,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.25,
+          "end": 8.28,
+          "label": "speech"
+        },
+        {
+          "start": 8.28,
+          "end": 8.63,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.63,
+          "end": 8.99,
+          "label": "nonspeech"
+        },
+        {
+          "start": 8.99,
+          "end": 9.095,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 3.83,
+        "nonspeech": 0.36,
+        "uncertain": 4.905
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 13.095,
+          "regions": [
+            {
+              "start": 0,
+              "end": 13.095,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 13.095,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.595,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 11.595,
+              "end": 13.095,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 12.095,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.595,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 11.595,
+              "end": 11.695,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 11.695,
+              "end": 12.095,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 23,
+        "downgradedSeconds": {
+          "speech": 0.69,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "I",
+            "startDifferenceSeconds": 0.46,
+            "endDifferenceSeconds": -0.04
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "carefully",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "avoid",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "any",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "appearance",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "of",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "preoccupation",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": -0.1
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "and",
+            "startDifferenceSeconds": -0.1,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "eccentricity,",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.3
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "which",
+            "startDifferenceSeconds": 0.1,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "might",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "lead",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "those",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "I",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "live",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "amongst",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "to",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "suspect",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.04
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "the",
+            "startDifferenceSeconds": 0.04,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "nature",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "of",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 21,
+            "text": "my",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 22,
+            "text": "pursuits.",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.1
+          }
+        ]
+      }
+    },
+    {
+      "file": "3575-170457-0020.flac",
+      "sha256": "39daa9ebbb087564cf6b1cb1c7edcc21fc5bbac1060d4ffd04eb8c7fea427dc4",
+      "speaker": "3575",
+      "durationSeconds": 8.645,
+      "sourceNoise": "unknown",
+      "referenceTranscript": "I KNOW THE FIRST LETTER I WROTE TO YOU WAS ALL SENSELESS TRASH FROM BEGINNING TO END BUT I AM NOT ALTOGETHER THE IDLE DREAMING BEING IT WOULD SEEM TO DENOTE",
+      "recognizedTranscript": " I know the first letter I wrote to you is all senseless trash from beginning to end, but I am not altogether the idle dreaming being it would seem to denote.",
+      "transcriptWer": 0.032258,
+      "words": [
+        {
+          "text": "I",
+          "start": 0.2,
+          "end": 0.38
+        },
+        {
+          "text": "know",
+          "start": 0.38,
+          "end": 0.5
+        },
+        {
+          "text": "the",
+          "start": 0.5,
+          "end": 0.64
+        },
+        {
+          "text": "first",
+          "start": 0.64,
+          "end": 0.88
+        },
+        {
+          "text": "letter",
+          "start": 0.88,
+          "end": 1.12
+        },
+        {
+          "text": "I",
+          "start": 1.12,
+          "end": 1.26
+        },
+        {
+          "text": "wrote",
+          "start": 1.26,
+          "end": 1.44
+        },
+        {
+          "text": "to",
+          "start": 1.44,
+          "end": 1.68
+        },
+        {
+          "text": "you",
+          "start": 1.68,
+          "end": 1.82
+        },
+        {
+          "text": "is",
+          "start": 1.82,
+          "end": 1.98
+        },
+        {
+          "text": "all",
+          "start": 1.98,
+          "end": 2.26
+        },
+        {
+          "text": "senseless",
+          "start": 2.26,
+          "end": 2.78
+        },
+        {
+          "text": "trash",
+          "start": 2.78,
+          "end": 3.2
+        },
+        {
+          "text": "from",
+          "start": 3.2,
+          "end": 3.36
+        },
+        {
+          "text": "beginning",
+          "start": 3.36,
+          "end": 3.62
+        },
+        {
+          "text": "to",
+          "start": 3.62,
+          "end": 3.86
+        },
+        {
+          "text": "end,",
+          "start": 3.86,
+          "end": 4.56
+        },
+        {
+          "text": "but",
+          "start": 4.56,
+          "end": 4.66
+        },
+        {
+          "text": "I",
+          "start": 4.66,
+          "end": 4.82
+        },
+        {
+          "text": "am",
+          "start": 4.82,
+          "end": 4.88
+        },
+        {
+          "text": "not",
+          "start": 4.88,
+          "end": 5.12
+        },
+        {
+          "text": "altogether",
+          "start": 5.12,
+          "end": 5.5
+        },
+        {
+          "text": "the",
+          "start": 5.5,
+          "end": 5.74
+        },
+        {
+          "text": "idle",
+          "start": 5.74,
+          "end": 6.08
+        },
+        {
+          "text": "dreaming",
+          "start": 6.08,
+          "end": 6.48
+        },
+        {
+          "text": "being",
+          "start": 6.48,
+          "end": 6.86
+        },
+        {
+          "text": "it",
+          "start": 6.86,
+          "end": 7.16
+        },
+        {
+          "text": "would",
+          "start": 7.16,
+          "end": 7.3
+        },
+        {
+          "text": "seem",
+          "start": 7.3,
+          "end": 7.5
+        },
+        {
+          "text": "to",
+          "start": 7.5,
+          "end": 7.72
+        },
+        {
+          "text": "denote.",
+          "start": 7.72,
+          "end": 8.02
+        }
+      ],
+      "webrtcIntervals": [
+        [
+          {
+            "start": 0.0,
+            "end": 0.01,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.01,
+            "end": 0.1,
+            "label": "speech"
+          },
+          {
+            "start": 0.1,
+            "end": 0.28,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.28,
+            "end": 8.4,
+            "label": "speech"
+          },
+          {
+            "start": 8.4,
+            "end": 8.645,
+            "label": "nonspeech"
+          }
+        ],
+        [
+          {
+            "start": 0.0,
+            "end": 0.29,
+            "label": "nonspeech"
+          },
+          {
+            "start": 0.29,
+            "end": 2.4,
+            "label": "speech"
+          },
+          {
+            "start": 2.4,
+            "end": 2.43,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.43,
+            "end": 2.68,
+            "label": "speech"
+          },
+          {
+            "start": 2.68,
+            "end": 2.69,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.69,
+            "end": 2.87,
+            "label": "speech"
+          },
+          {
+            "start": 2.87,
+            "end": 2.89,
+            "label": "nonspeech"
+          },
+          {
+            "start": 2.89,
+            "end": 4.23,
+            "label": "speech"
+          },
+          {
+            "start": 4.23,
+            "end": 4.58,
+            "label": "nonspeech"
+          },
+          {
+            "start": 4.58,
+            "end": 7.41,
+            "label": "speech"
+          },
+          {
+            "start": 7.41,
+            "end": 7.43,
+            "label": "nonspeech"
+          },
+          {
+            "start": 7.43,
+            "end": 8.19,
+            "label": "speech"
+          },
+          {
+            "start": 8.19,
+            "end": 8.645,
+            "label": "nonspeech"
+          }
+        ]
+      ],
+      "intervals": [
+        {
+          "start": 0.0,
+          "end": 0.29,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.29,
+          "end": 0.32,
+          "label": "speech"
+        },
+        {
+          "start": 0.32,
+          "end": 0.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.56,
+          "end": 0.58,
+          "label": "speech"
+        },
+        {
+          "start": 0.58,
+          "end": 0.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.72,
+          "end": 0.76,
+          "label": "speech"
+        },
+        {
+          "start": 0.76,
+          "end": 0.94,
+          "label": "uncertain"
+        },
+        {
+          "start": 0.94,
+          "end": 1.0,
+          "label": "speech"
+        },
+        {
+          "start": 1.0,
+          "end": 1.32,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.32,
+          "end": 1.38,
+          "label": "speech"
+        },
+        {
+          "start": 1.38,
+          "end": 1.52,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.52,
+          "end": 1.61,
+          "label": "speech"
+        },
+        {
+          "start": 1.61,
+          "end": 1.74,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.74,
+          "end": 1.76,
+          "label": "speech"
+        },
+        {
+          "start": 1.76,
+          "end": 1.88,
+          "label": "uncertain"
+        },
+        {
+          "start": 1.88,
+          "end": 1.92,
+          "label": "speech"
+        },
+        {
+          "start": 1.92,
+          "end": 2.06,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.06,
+          "end": 2.19,
+          "label": "speech"
+        },
+        {
+          "start": 2.19,
+          "end": 2.32,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.32,
+          "end": 2.4,
+          "label": "speech"
+        },
+        {
+          "start": 2.4,
+          "end": 2.43,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.43,
+          "end": 2.64,
+          "label": "speech"
+        },
+        {
+          "start": 2.64,
+          "end": 2.84,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.84,
+          "end": 2.87,
+          "label": "speech"
+        },
+        {
+          "start": 2.87,
+          "end": 2.89,
+          "label": "uncertain"
+        },
+        {
+          "start": 2.89,
+          "end": 3.06,
+          "label": "speech"
+        },
+        {
+          "start": 3.06,
+          "end": 3.26,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.26,
+          "end": 3.29,
+          "label": "speech"
+        },
+        {
+          "start": 3.29,
+          "end": 3.42,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.42,
+          "end": 3.54,
+          "label": "speech"
+        },
+        {
+          "start": 3.54,
+          "end": 3.68,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.68,
+          "end": 3.79,
+          "label": "speech"
+        },
+        {
+          "start": 3.79,
+          "end": 3.92,
+          "label": "uncertain"
+        },
+        {
+          "start": 3.92,
+          "end": 4.08,
+          "label": "speech"
+        },
+        {
+          "start": 4.08,
+          "end": 4.72,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.72,
+          "end": 4.74,
+          "label": "speech"
+        },
+        {
+          "start": 4.74,
+          "end": 4.94,
+          "label": "uncertain"
+        },
+        {
+          "start": 4.94,
+          "end": 5.0,
+          "label": "speech"
+        },
+        {
+          "start": 5.0,
+          "end": 5.18,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.18,
+          "end": 5.42,
+          "label": "speech"
+        },
+        {
+          "start": 5.42,
+          "end": 5.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.56,
+          "end": 5.68,
+          "label": "speech"
+        },
+        {
+          "start": 5.68,
+          "end": 5.8,
+          "label": "uncertain"
+        },
+        {
+          "start": 5.8,
+          "end": 6.02,
+          "label": "speech"
+        },
+        {
+          "start": 6.02,
+          "end": 6.18,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.18,
+          "end": 6.4,
+          "label": "speech"
+        },
+        {
+          "start": 6.4,
+          "end": 6.54,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.54,
+          "end": 6.74,
+          "label": "speech"
+        },
+        {
+          "start": 6.74,
+          "end": 6.92,
+          "label": "uncertain"
+        },
+        {
+          "start": 6.92,
+          "end": 7.1,
+          "label": "speech"
+        },
+        {
+          "start": 7.1,
+          "end": 7.36,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.36,
+          "end": 7.41,
+          "label": "speech"
+        },
+        {
+          "start": 7.41,
+          "end": 7.43,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.43,
+          "end": 7.44,
+          "label": "speech"
+        },
+        {
+          "start": 7.44,
+          "end": 7.56,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.56,
+          "end": 7.64,
+          "label": "speech"
+        },
+        {
+          "start": 7.64,
+          "end": 7.78,
+          "label": "uncertain"
+        },
+        {
+          "start": 7.78,
+          "end": 7.96,
+          "label": "speech"
+        },
+        {
+          "start": 7.96,
+          "end": 8.4,
+          "label": "uncertain"
+        },
+        {
+          "start": 8.4,
+          "end": 8.64,
+          "label": "nonspeech"
+        },
+        {
+          "start": 8.64,
+          "end": 8.645,
+          "label": "uncertain"
+        }
+      ],
+      "secondsByLabel": {
+        "speech": 2.98,
+        "nonspeech": 0.24,
+        "uncertain": 5.425
+      },
+      "injectedNoiseAnnotations": {
+        "coordinateSystem": "recording seconds, including two-second calibration",
+        "groundTruthScope": "Exact added-component generation intervals/nominal RMS only; original source noise remains unknown.",
+        "low-floor-stationary": {
+          "durationSeconds": 12.645,
+          "regions": [
+            {
+              "start": 0,
+              "end": 12.645,
+              "addedNoiseRmsDbfs": -70
+            }
+          ],
+          "expectedAssessment": "stable"
+        },
+        "low-floor-rise": {
+          "durationSeconds": 12.645,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.145,
+              "addedNoiseRmsDbfs": -70
+            },
+            {
+              "start": 11.145,
+              "end": 12.645,
+              "addedNoiseRmsDbfs": -58
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "brief-noise": {
+          "durationSeconds": 11.645,
+          "regions": [
+            {
+              "start": 0,
+              "end": 11.145,
+              "addedNoiseUniformAmplitude": 0.0008
+            },
+            {
+              "start": 11.145,
+              "end": 11.245,
+              "addedNoiseUniformAmplitude": 0.065
+            },
+            {
+              "start": 11.245,
+              "end": 11.645,
+              "addedNoiseUniformAmplitude": 0.0008
+            }
+          ],
+          "expectedAssessment": "unstable"
+        },
+        "generator": {
+          "seed": 12345,
+          "distribution": "uniform",
+          "lcgMultiplier": 1664525,
+          "lcgIncrement": 1013904223,
+          "modulus": 4294967296,
+          "sampleRate": 16000
+        }
+      },
+      "reviewFlags": [
+        "human_listening_pending",
+        "word_timing_is_model_estimate",
+        "related_whisper_models_not_independent_ground_truth",
+        "groq_word_probability_not_supplied"
+      ],
+      "refinement": {
+        "matchedWordCount": 31,
+        "downgradedSeconds": {
+          "speech": 0.6,
+          "nonspeech": 0
+        },
+        "matchedWords": [
+          {
+            "smallIndex": 0,
+            "largeIndex": 0,
+            "text": "I",
+            "startDifferenceSeconds": 0.2,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 1,
+            "largeIndex": 1,
+            "text": "know",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 2,
+            "largeIndex": 2,
+            "text": "the",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 3,
+            "largeIndex": 3,
+            "text": "first",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 4,
+            "largeIndex": 4,
+            "text": "letter",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 5,
+            "largeIndex": 5,
+            "text": "I",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 6,
+            "largeIndex": 6,
+            "text": "wrote",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 7,
+            "largeIndex": 7,
+            "text": "to",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 8,
+            "largeIndex": 8,
+            "text": "you",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 9,
+            "largeIndex": 9,
+            "text": "is",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 10,
+            "largeIndex": 10,
+            "text": "all",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 11,
+            "largeIndex": 11,
+            "text": "senseless",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 12,
+            "largeIndex": 12,
+            "text": "trash",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.08
+          },
+          {
+            "smallIndex": 13,
+            "largeIndex": 13,
+            "text": "from",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 14,
+            "largeIndex": 14,
+            "text": "beginning",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 15,
+            "largeIndex": 15,
+            "text": "to",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 16,
+            "largeIndex": 16,
+            "text": "end,",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.42
+          },
+          {
+            "smallIndex": 17,
+            "largeIndex": 17,
+            "text": "but",
+            "startDifferenceSeconds": 0.08,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 18,
+            "largeIndex": 18,
+            "text": "I",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 19,
+            "largeIndex": 19,
+            "text": "am",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 20,
+            "largeIndex": 20,
+            "text": "not",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 21,
+            "largeIndex": 21,
+            "text": "altogether",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 22,
+            "largeIndex": 22,
+            "text": "the",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 23,
+            "largeIndex": 23,
+            "text": "idle",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 24,
+            "largeIndex": 24,
+            "text": "dreaming",
+            "startDifferenceSeconds": -0.04,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 25,
+            "largeIndex": 25,
+            "text": "being",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": 0.06
+          },
+          {
+            "smallIndex": 26,
+            "largeIndex": 26,
+            "text": "it",
+            "startDifferenceSeconds": 0.06,
+            "endDifferenceSeconds": -0.02
+          },
+          {
+            "smallIndex": 27,
+            "largeIndex": 27,
+            "text": "would",
+            "startDifferenceSeconds": -0.02,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 28,
+            "largeIndex": 28,
+            "text": "seem",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.0
+          },
+          {
+            "smallIndex": 29,
+            "largeIndex": 29,
+            "text": "to",
+            "startDifferenceSeconds": 0.0,
+            "endDifferenceSeconds": 0.02
+          },
+          {
+            "smallIndex": 30,
+            "largeIndex": 30,
+            "text": "denote.",
+            "startDifferenceSeconds": 0.02,
+            "endDifferenceSeconds": -0.02
+          }
+        ]
+      }
+    }
+  ],
+  "parentHashes": {
+    "smallAnnotationsSha256": "ee3ca5b212623a3038bdab1758b6cde87e433c2ec8b56844fac1d9a5996bc3f0",
+    "groqResponsesSha256": "6526d8d8f83a67c5c153bb000b1d80311bb0620e208bd019e2fcee6984a5864d"
+  }
+}

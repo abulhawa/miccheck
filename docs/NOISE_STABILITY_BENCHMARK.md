@@ -1,6 +1,6 @@
 # Controlled noise-stability benchmark
 
-Run September 28, 2026. [Baseline results](noise-stability-baseline.json) and [current results](noise-stability-results.json).
+Run September 28, 2026. [Historical 144-case baseline results](noise-stability-baseline.json) and [current 320-case results](noise-stability-results.json). The original protocol and historical results below precede the [low-level expansion](#low-level-increases-and-441-khz).
 
 This artifact supports improving noise detection and app guidance. The historical misses below drove an implemented brief-event fix, evaluated against sustained changes, stationary noise, and boundary residue. Follow the [improvement workflow](BENCHMARK.md#improvement-workflow) for further changes.
 
@@ -37,6 +37,52 @@ Capture-path verification exposed a cut-off utterance mistaken for a noise burst
 
 Final verification September 28, 2026: 176 focused audio tests, 101 web unit tests with coverage, all 12 Playwright browser tests (including 108 production-worker acceptance variants), and the web production build passed. Root `npm run test` and `npm run build` were attempted but Turbo was blocked by Windows Application Control (`spawn UNKNOWN`); direct web and focused audio checks were used without bypassing that policy. The known audio-metrics standalone build/test workspace-resolution limitation was not invoked. Physical microphones, manual speech annotation, and held-out conditions remain pending.
 
+## Low-level increases and 44.1 kHz
+
+The next tuning investigation targets a user-visible failure: a quiet calibration
+at −70 dBFS followed by sustained −58 dBFS noise received a stable assessment and
+a grade based on outdated calibration. The expanded exact-interval corpus adds
+44.1 kHz and calibration levels −80 and −65 dBFS, for 320 conditions. These are
+generated development conditions, not independently annotated human speech or
+held-out evaluation data. Noise shapes, seeds, speech intervals, and event
+intervals follow the protocol above.
+
+Acceptance is defined from generated levels: increases exceeding 6 dB and
+reaching above −60 dBFS invalidate calibration. Changes entirely below −60 dBFS
+remain suppressed; decreases retain the previous floor policy. Before the fix,
+eight −70 to −58 dBFS increases and two 44.1 kHz short bursts failed acceptance
+(10 misses, no false alarms across 320 conditions). The short-burst failure came
+from flooring the 25 ms hop to 1102 samples: three elevated 50 ms windows covered
+4409 samples, just short of 100 ms (4410 samples).
+
+The production estimator now compares above-floor rises with actual calibration
+RMS, while retaining floored comparisons for decreases and sub-floor changes.
+The event hop rounds to the nearest sample (1103 at 44.1 kHz). Afterward there
+are zero misses and zero false alarms against these controlled requirements.
+Detected increases now withhold grading, mark noise unreliable, and request a
+noise-stability retry; existing regression assertions verify that guidance.
+The current JSON contains all 320 rows; the historical 144-case baseline remains
+unchanged. Windows, guards, the 6 dB threshold, and the −60 dBFS absolute floor
+remain provisional. Human boundaries, processing artifacts, real capture noise,
+and independent tuning/evaluation splits are still unresolved.
+
+Production-worker acceptance also passes all twelve existing human recordings
+under eleven scenarios (132 variants). The new pair adds seeded broadband RMS
+of −70 dBFS throughout a recording, then either leaves it stationary or raises
+it to −58 dBFS 500 ms after the complete source waveform. Both use a two-second
+tail. All twelve increases withhold the grade and request `noise_unstable`;
+all twelve stationary controls remain stable and graded. This verifies the
+current worker with Silero and recorded speech, without claiming manually
+annotated speech boundaries or independent human evaluation.
+
+Verification: 344 focused audio-metrics tests, 21 audio-core tests, 101 web tests
+with coverage, the web production build, and all 12 browser tests passed. The
+expanded 132-variant acceptance script additionally passed with zero unmet
+expectations. Root `npm run test` and `npm run build` could not start because
+`npm` is unavailable in this session's PATH; direct Node entrypoints were used
+for the checks above. Standalone audio-metrics npm build/test commands were
+skipped per the known workspace-resolution limitation.
+
 ## Reproduce
 
 From `packages/audio-metrics`, with Node and dependencies available:
@@ -48,3 +94,12 @@ Remove-Item Env:UPDATE_NOISE_BENCHMARK
 ```
 
 Without the environment variable, the tests validate behavior without rewriting results. Generated input requires no downloads or external recordings. These results do not evaluate Silero boundaries, the worker, microphone capture, processing, fans, typing, or music. Listening review and human annotations are still required before selecting thresholds for those conditions.
+
+To run the recorded-speech production-worker acceptance independently, from
+`apps/web`:
+
+```powershell
+$env:FIXTURE_ACCEPTANCE = '1'
+node scripts/benchmark-human-speech.mjs
+Remove-Item Env:FIXTURE_ACCEPTANCE
+```

@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { evaluateSpeechAnnotations } from './evaluate-speech-annotations.mjs';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const web = path.join(root, 'apps/web');
@@ -32,6 +33,11 @@ await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 let browser;
 const rows = [];
 const acceptance = process.env.FIXTURE_ACCEPTANCE === '1';
+const annotationEvaluation = process.env.ANNOTATION_EVALUATION === '1';
+if (annotationEvaluation && acceptance) throw new Error('Run annotation evaluation and fixture acceptance separately');
+const annotations = annotationEvaluation ? JSON.parse(await readFile(path.join(fixtures, 'annotations.ai.json'), 'utf8')) : null;
+if (annotations && (annotations.clips.length !== manifest.clips.length || manifest.clips.some(clip =>
+  annotations.clips.find(a => a.file === clip.file)?.sha256 !== clip.sha256))) throw new Error('Annotation provenance mismatch');
 try {
   browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -39,7 +45,7 @@ try {
   for (const clip of manifest.clips) {
     const bytes = await readFile(path.join(fixtures, clip.file));
     if (createHash('sha256').update(bytes).digest('hex') !== clip.sha256) throw new Error(`Checksum mismatch: ${clip.file}`);
-    const row = await page.evaluate(async ({clip, acceptance}) => {
+    const row = await page.evaluate(async ({clip, acceptance, annotationEvaluation}) => {
       const rate = 16000;
       const ctx = new AudioContext({ sampleRate: rate });
       const decoded = await ctx.decodeAudioData(await (await fetch(`/fixtures/${clip.file}`)).arrayBuffer());
@@ -49,8 +55,9 @@ try {
       for (const x of voice) { power += x*x; peak = Math.max(peak, Math.abs(x)); if (Math.abs(x) >= .98) nearFullScale++; }
       const rms = Math.sqrt(power / voice.length);
       const results = [];
-      for (const scenario of ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise'] : [])]) {
-        const tail = scenario === 'clipped-plus-silence' ? rate*10 : rate;
+      const scenarios = annotationEvaluation ? ['original', 'low-noise', 'noisy', 'quiet-source'] : ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'changing-noise', ...(acceptance ? ['known-mixture', 'brief-noise', 'low-floor-rise', 'low-floor-stationary'] : [])];
+      for (const scenario of scenarios) {
+        const tail = scenario === 'clipped-plus-silence' ? rate*10 : scenario.startsWith('low-floor') ? rate*2 : rate;
         const samples = new Float32Array(rate*2 + voice.length + tail);
         const signalComponent = new Float32Array(samples.length);
         const noiseComponent = new Float32Array(samples.length);
@@ -69,12 +76,17 @@ try {
           if (scenario === 'changing-noise' && i >= rate*2) amplitude = .065;
           if (scenario === 'known-mixture') amplitude = mixtureAmplitude;
           const tailStart = rate*2 + voice.length;
+          // Known added-noise RMS: -70 dBFS calibration, -58 dBFS tail.
+          // Delay the step 500 ms beyond the entire source waveform so neither
+          // reference interval needs manually inferred human speech boundaries.
+          if (scenario.startsWith('low-floor')) amplitude = Math.sqrt(3) * 10 ** (-70 / 20);
+          if (scenario === 'low-floor-rise' && i >= tailStart + rate*.5) amplitude = Math.sqrt(3) * 10 ** (-58 / 20);
           if (scenario === 'brief-noise' && i >= tailStart + rate*.5 && i < tailStart + rate*.6) amplitude = .065;
           // Appended silence changes only the denominator, not the clipped samples.
           const appended = scenario === 'clipped-plus-silence' && i >= rate*2+voice.length+rate;
           const noise = appended ? 0 : (seed/4294967296*2-1)*amplitude;
           const reflected = scenario === 'echo' && position >= 1920 && position-1920 < voice.length ? voice[position-1920]*.65 : 0;
-          const gain = scenario.startsWith('clipped') ? 12 : 1;
+          const gain = scenario.startsWith('clipped') ? 12 : scenario === 'quiet-source' ? .1 : 1;
           samples[i] = Math.max(-1, Math.min(1, source*gain + noise + reflected));
           signalComponent[i] = source*gain;
           noiseComponent[i] = noise;
@@ -86,7 +98,13 @@ try {
           const cleanup = () => { clearTimeout(timer); worker.terminate(); };
           const timer = setTimeout(() => { cleanup(); reject(new Error('Worker timed out')); }, 60000);
           worker.onerror = () => { cleanup(); reject(new Error('Worker failed')); };
-          worker.onmessage = ({data}) => { if (data.result || data.error) { cleanup(); data.error ? reject(new Error(data.error)) : resolve(data.result); } };
+          worker.onmessage = ({data}) => {
+            if (data.result || data.error) {
+              cleanup();
+              if (data.error) reject(new Error(data.error));
+              else resolve(data.result);
+            }
+          };
           worker.postMessage({samples, sampleRate: rate, quietSeconds: 2,
             context: {use_case:'meetings',device_type:'unknown',mode:'basic'},
             capture: {format:'pcm',echoCancellation:false,noiseSuppression:false,autoGainControl:false}, classifyNoise:false});
@@ -109,14 +127,23 @@ try {
       }
       return {file:clip.file,speaker:clip.speaker, source:{durationSeconds:voice.length/rate,
         rmsDb:20*Math.log10(Math.max(rms,1e-8)),peak,nearFullScaleSamples:nearFullScale}, results};
-    }, {clip, acceptance});
+    }, {clip, acceptance, annotationEvaluation});
+    if (annotationEvaluation) {
+      const annotation = annotations.clips.find(a => a.file === clip.file);
+      for (const result of row.results) result.annotationAgreement = evaluateSpeechAnnotations(annotation, result.segments, 2);
+    }
     rows.push(row);
     console.log(`${clip.file}: ${row.results.map(r=>`${r.scenario}=${r.grade ?? r.state}`).join(', ')}`);
   }
   const report = {date:new Date().toISOString(),browser:browser.version(),platform:process.platform,
     description:'Human speech production-worker diagnostic benchmark. No manual speech boundaries or listening review; source residual noise is unknown. Added-noise SNR uses whole-clip source power, not annotated speech-only power, and is not an SNR accuracy ground truth.',
     parameters:{sampleRate:16000,calibrationSeconds:2,normalTailSeconds:1,extendedTailSeconds:10,seed:12345,lowNoiseAmplitude:.0008,highNoiseAmplitude:.065,clippingGain:12,echoDelayMs:120,echoGain:.65}, rows};
-  if (!acceptance) await writeFile(path.join(root,'docs/human-speech-results.json'),JSON.stringify(report,null,2)+'\n');
+  if (annotationEvaluation) {
+    report.description = 'Production-worker agreement with frozen independent model-assisted provisional labels. Uncertain source regions excluded. These are not human-ground-truth precision/recall or boundary accuracy.';
+    report.annotationsSha256 = createHash('sha256').update(await readFile(path.join(fixtures, 'annotations.ai.json'))).digest('hex');
+    report.annotationProtocol = annotations.protocol;
+    await writeFile(path.join(root,'docs/ai-annotation-evaluation.json'), JSON.stringify(report,null,2)+'\n');
+  } else if (!acceptance) await writeFile(path.join(root,'docs/human-speech-results.json'),JSON.stringify(report,null,2)+'\n');
   if (acceptance) {
     const failures = [];
     for (const row of rows) {
@@ -132,6 +159,11 @@ try {
       check(get('brief-noise').evidence.noiseStability === 'unstable',
         '100 ms high-noise burst must flag changed noise evidence');
       check(get('low-noise').evidence.noiseStability === 'stable', 'stationary control must remain stable');
+      check(get('low-floor-stationary').evidence.noiseStability === 'stable', 'sub-floor stationary control must remain stable');
+      check(get('low-floor-stationary').state === 'graded', 'sub-floor stationary control must retain grading');
+      check(get('low-floor-rise').evidence.noiseStability === 'unstable', '-70 to -58 dBFS tail increase must invalidate calibration');
+      check(get('low-floor-rise').evidence.retryReason === 'noise_unstable' && get('low-floor-rise').grade === null,
+        'low-floor increase must withhold grade and request noise-stability retry');
       for (const scenario of ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'known-mixture']) {
         check(get(scenario).state === 'graded', `${scenario} must not request an unsupported retry`);
       }
