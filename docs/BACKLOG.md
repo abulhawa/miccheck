@@ -196,6 +196,18 @@ boundaries and untouched evaluation controls before changing VAD or confidence.
 This implements missing worker verification, not a production accuracy fix.
 Broader corpus/splits and the complete physical capture path remain open.
 
+September 29 continuation: the [clipping-selection improvement](CLIPPING_SELECTION_BENCHMARK.md)
+adds exact unselected post-calibration crossing duration, clearer detected-speech
+labels and low certainty when attribution is unknown. Forty-one regression
+conditions and twelve conditions from two newly reserved licensed rooms pass;
+medium certainty despite unselected crossings falls from six to zero and three
+to zero respectively. Grade/gain advice remain unchanged, avoiding unsupported
+speech attribution for nonspeech crossings. Hard-clipped recorded speech still
+has selection misses in six regression sources and one reserved room. Fine
+independent boundaries, untouched speakers/devices and physical overdrive
+captures are required before changing VAD or grading. This is implemented
+uncertainty handling and room expansion, not completion of point 3.
+
 - [x] First add annotated speech and known signal/noise mixtures covering clipping and noise stability, with reproducible expected measurements.
 - [ ] Expand to consented/licensed recordings across speakers, languages, devices, rooms, quiet speech, fans, typing, music, and browser processing on/off.
 - [ ] Separate tuning and evaluation data by speaker and capture conditions; record provenance, licenses, annotations, and reproducible generation settings.

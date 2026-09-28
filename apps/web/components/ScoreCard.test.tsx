@@ -38,9 +38,20 @@ const metrics: MetricsSummary = {
 };
 
 describe("ScoreCard", () => {
+  it("qualifies zero detected-speech clipping when crossings remain unclassified", () => {
+    const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={{...metrics, speechClippingRatio:0, unselectedClippedDurationSeconds:0.02, clippedDurationSeconds:0.02}} />);
+    expect(html).toContain('Clipping in detected speech: 0.0%');
+    expect(html).toContain('0.020 seconds of near-full-scale samples occur outside detected speech after calibration');
+    expect(html).toContain('Speech clipping may be underestimated');
+  });
+  it("keeps sub-millisecond crossings visible and supports older stored results", () => {
+    const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={{...metrics, speechClippingRatio:0, unselectedClippedDurationSeconds:1/48000}} />);
+    expect(html).toContain('Less than 0.001 seconds');
+    expect(renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={metrics} />)).not.toContain('Speech clipping may be underestimated');
+  });
   it("distinguishes speech clipping from recording-wide near-full-scale duration", () => {
     const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={{...metrics, clippingRatio:0.03, speechClippingRatio:0.03, clippedDurationSeconds:0.125}} />);
-    expect(html).toContain('Speech clipping: 3.0%');
+    expect(html).toContain('Clipping in detected speech: 3.0%');
     expect(html).toContain('0.125 seconds');
     expect(html).toContain('possible clipping');
   });

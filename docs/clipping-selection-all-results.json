@@ -1,0 +1,3271 @@
+{
+  "protocol": "clipping-selection-v1",
+  "mode": "all",
+  "baselineGuidedSha256": "95fea757ea465f32f92cbd6356c71e84890cd0930b6c38c3062cd2fa9af2c7ed",
+  "productionWorkerSha256": "02d8901ead4c0a23e819d9442dc7f68160fa552523ab8345aa4a42b564ed583f",
+  "modelManifestSha256": "ad6efd1c5e4c351a97bc1b5184c3ad25ab365faf2f02f69fc93ae351f80649d6",
+  "referenceSha256": "dfed88c24951d2e03f4e12e2bbfa8567bbd31868adb0cab35b4c6ec9c2129333",
+  "provenance": [
+    {
+      "file": "fold3_room21_mix023.wav",
+      "sha256": "98899e2eb439f405cec157881c6a46225aedd4da73e9b77076c23d1d93b5f68f",
+      "metadataSha256": "c1842397492b297a6da6f259fed4f827576b09a7efa94e86341f5869a7f67e3f"
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "sha256": "ef32da3fa20e87ba700c72b782ee2ed24e434fac54bd352e4e956a4cd8447f0f",
+      "metadataSha256": "fe2d0c27b199f6b05403b9bb8654fde75d285ad4dc21b026a57fe27e79adbc72"
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "sha256": "6e9292abd3afbf24e244514723a57b8577c8d87704b7c20929b075bf559298ac",
+      "metadataSha256": "5d6bade7576030bb038cb7cd0c3fde02efd038ef5ab39724e0863bc73014ba84"
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "sha256": "47f3df22125266a745e7c037c2e53faffa39a2ef4e78e184ffe3e18400ab5865",
+      "metadataSha256": "6bf7d59e448ebd65a2615df34e38c719eec63753d8b15ce79e3460e41853d24b"
+    },
+    {
+      "file": "starss22-vad/manifest.json",
+      "sha256": "b3319f775d49550564bda12f242e226a0b6f208c20bdcfd033e13cf669fcb6d1"
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "sha256": "12058546a8395918428e28eacc9e3aff4d7969b8c02ccb481a2e1b65cdea0450",
+      "metadataSha256": "62bc0ce27da990cbd9bacb392aa1857a3744f98c748e32b9a838c29e4d3b4b71"
+    },
+    {
+      "file": "fold3_room22_mix008-noise.wav",
+      "sha256": "2f496722c2aa30fdd01db32632567a8dc8781a5669d8bdc314db7cb8f1ce8648",
+      "metadataSha256": "877bf825504090ece0b086cb99b83b9c2bab9a995db259bf6490050177b0c9d4"
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "sha256": "5dbfecf7d1275d273fb22b6aee1de530a5e3800fdfe944f0b96e1403c7fe64ee",
+      "metadataSha256": "e2a25c701e3da1bd09e7e94bdb83ac9a84df6b0e5f0088638702c7e79d912015"
+    },
+    {
+      "file": "fold4_room23_mix010-noise.wav",
+      "sha256": "acd338c824757ad6413139a0286ffcf6985f114bd170292e771aeb9bc7d6d620",
+      "metadataSha256": "d26209b8495308c9d289151a2cc36bd4e1be216e86a7b6d0bf5872a5b995b9b0"
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "sha256": "239a000e58e822f65acf374e8710322479e87c49cdd4bb59784d1dff2375bfd6",
+      "metadataSha256": "b9f8b41faaf9ea4d0d8860d57a134092b6e35d57fa859bbcd3ed6bc605dbacbe"
+    },
+    {
+      "file": "fold4_room8_mix003-noise.wav",
+      "sha256": "084a8d9fa877b2872f2c1f61d329df419802d3721eedb8549df8689c22c4705b",
+      "metadataSha256": "974dbed8fdcfd244acfd012e26edd61b8e11ffb566a23a3d809f90d0ef326958"
+    }
+  ],
+  "summary": {
+    "cases": 41,
+    "failures": 0,
+    "unsupportedMediumBefore": 6,
+    "unsupportedMediumAfter": 0,
+    "hardClippedSpeechWithMissedInteriors": 6
+  },
+  "rows": [
+    {
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "0bc5f64d08210b63e687234b46fbdb48d5e6e33358ff9ce91995a428f40d4d5f",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "d8db244ddd4f9cd7e07bf60d42daf83a62e71f2aa8722dedcbcb53f4f646499c",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 3.4,
+          "end": 3.42
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 5.824,
+          "end": 6.432
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 479,
+      "missedAnnotatedInteriorCrossings": 479,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "96a9cdc27a62c6e383d335dd256ea783c26e351c1dcc85c76d6e60e41be54521",
+      "appendedBackgroundSeconds": 0,
+      "gain": 61.651928504233304,
+      "transformIntervals": [
+        {
+          "start": 3.4000000000000004,
+          "end": 4.3
+        },
+        {
+          "start": 6,
+          "end": 6.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 3.712
+        },
+        {
+          "start": 5.824,
+          "end": 6.784
+        }
+      ],
+      "exactCounts": {
+        "total": 7674,
+        "calibration": 0,
+        "selected": 5514,
+        "unselected": 2160
+      },
+      "annotatedInteriorCrossings": 7674,
+      "missedAnnotatedInteriorCrossings": 2160,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.17511432926829268,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.17511432926829268,
+        "unselectedClippedDurationSeconds": 0.09,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "16f1b11ef1d342e05dbe0a2c7005c846787b7633eebf559b5c24238575881270",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 11.25,
+          "end": 11.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "room": "room21",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "a38c70326d1560f93c92c9bd900051b3aa2c761f21b743b93d8cc308b945bdc5",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.36,
+          "end": 4.064
+        },
+        {
+          "start": 4.256,
+          "end": 4.5760000000000005
+        },
+        {
+          "start": 5.792,
+          "end": 6.496
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "6bf542a410f66ddf0c295faa423fa54ebfcda03885c6896d5fd2287d00487958",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "f29f9145857bacc05201b4a345f8379766cb5d814d5f06d289c83fb832ec0656",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 3.7,
+          "end": 3.72
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 480,
+      "missedAnnotatedInteriorCrossings": 480,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "64020e2f1456d68f85c9fa3d201d63dd916f384cebc68d9e0fcf62a9c9a7244d",
+      "appendedBackgroundSeconds": 0,
+      "gain": 50.21915708812261,
+      "transformIntervals": [
+        {
+          "start": 3.7,
+          "end": 6.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.8080000000000003,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.208
+        },
+        {
+          "start": 6.4,
+          "end": 6.816
+        }
+      ],
+      "exactCounts": {
+        "total": 20010,
+        "calibration": 0,
+        "selected": 18114,
+        "unselected": 1896
+      },
+      "annotatedInteriorCrossings": 20010,
+      "missedAnnotatedInteriorCrossings": 1896,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0.29855125014421574,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.29855125014421574,
+        "unselectedClippedDurationSeconds": 0.079,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "5e67afc89ad19970024ccbf25add8d847467a13550d0d9f2d4eb66a33abb517f",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 11.25,
+          "end": 11.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "room": "room6",
+      "split": "development",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "ff3cbd88845e2a1a29b84f7a9406c71bf5bf78aab72e7c4aae5cd489c52b6944",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.6080000000000005
+        },
+        {
+          "start": 4.896,
+          "end": 6.848
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "340488e7f80b7c7b9367fbd567c9327acf7bbc093cd1a67aa8af179e3fda9dbb",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "c81528050a661fbb2039943801730697669c8bbe7a8f35cb4463c40e7e464a2a",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 2.22
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7840000000000003
+        },
+        {
+          "start": 3.2,
+          "end": 5.728
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 479,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "medium",
+        "speechClippingRatio": 0.004734848484848485,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "medium",
+        "speechClippingRatio": 0.004734848484848485,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "fe74216f3df006bed0570bc08ff271a9d4c38380dce4de783d39be81d3f06d77",
+      "appendedBackgroundSeconds": 0,
+      "gain": 56.79029462738301,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 6.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 5.856
+        },
+        {
+          "start": 6.144,
+          "end": 6.784
+        }
+      ],
+      "exactCounts": {
+        "total": 12192,
+        "calibration": 0,
+        "selected": 12055,
+        "unselected": 137
+      },
+      "annotatedInteriorCrossings": 12192,
+      "missedAnnotatedInteriorCrossings": 137,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0.1121186755952381,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.1121186755952381,
+        "unselectedClippedDurationSeconds": 0.0057083333333333335,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "f5d19d5585bf9ac20d5b6ee88c1113ff9e6fc07eefbf67c9d7093c322065c6cf",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 11.25,
+          "end": 11.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "room": "room24",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "1ff030b5ce4377d371c6c2cad350d418943eb933c7b4e26182ab301ac9e48d2a",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.88
+        },
+        {
+          "start": 3.2,
+          "end": 5.76
+        },
+        {
+          "start": 6.144,
+          "end": 7.072
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "fc5891518e83f6225785de5fcadab4091bae81e552857b4debc61a441584c96b",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "medium",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "089b12664778f3190bdb54399547ea4c34930aa1e01cf5eb02160e8621ae417e",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 3.7,
+          "end": 3.72
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 6.208,
+          "end": 7.04
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 480,
+      "missedAnnotatedInteriorCrossings": 480,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "47972b286b0ab173b6327e2cb05bf7985f0a57f6bbc89d0a0cd4b7da3aa5f112",
+      "appendedBackgroundSeconds": 0,
+      "gain": 175.46452476572958,
+      "transformIntervals": [
+        {
+          "start": 3.7,
+          "end": 6.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 5.5680000000000005,
+          "end": 6.816
+        }
+      ],
+      "exactCounts": {
+        "total": 12011,
+        "calibration": 0,
+        "selected": 5381,
+        "unselected": 6630
+      },
+      "annotatedInteriorCrossings": 12011,
+      "missedAnnotatedInteriorCrossings": 6630,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.17965411324786323,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.17965411324786323,
+        "unselectedClippedDurationSeconds": 0.27625,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "5bb5833fd331049c7c25e29559229bab3463436d295bca668d4159aa89cb861d",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 11.25,
+          "end": 11.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "room": "room10",
+      "split": "evaluation",
+      "role": "speech",
+      "inputKind": "Frozen repeated-noise plus five-second source excerpt",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "8a64db3921e34da977f9e06fb993509c6cda4dcf9b8395f72277200b33c84716",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 3.936,
+          "end": 4.256
+        },
+        {
+          "start": 5.952,
+          "end": 7.04
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "17ca03b187f7f47107c7175acafbb9d841d4141fa12a02c57b6deee497f31130",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 3.8
+        },
+        {
+          "start": 4,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 1.984,
+          "end": 3.744
+        },
+        {
+          "start": 4.032,
+          "end": 4.8
+        },
+        {
+          "start": 5.216,
+          "end": 10.976
+        },
+        {
+          "start": 11.616,
+          "end": 13.504
+        },
+        {
+          "start": 13.856,
+          "end": 14.464
+        },
+        {
+          "start": 14.72,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "7a91a79390930bb587accb4be01287d65621c9bebf1d2d545ed5b072b6ac4684",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 2.22
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 3.8
+        },
+        {
+          "start": 4,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 1.984,
+          "end": 3.744
+        },
+        {
+          "start": 4.032,
+          "end": 4.736
+        },
+        {
+          "start": 5.216,
+          "end": 10.976
+        },
+        {
+          "start": 11.616,
+          "end": 13.504
+        },
+        {
+          "start": 13.856,
+          "end": 14.464
+        },
+        {
+          "start": 14.72,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 479,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.001112099644128114,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.001112099644128114,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "fb8a88c277ecb4d16378d3978e8570609be0ae6fb3ffa309df2a574fd263b6a5",
+      "appendedBackgroundSeconds": 0,
+      "gain": 59.281772953414745,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 3.5999999999999996
+        },
+        {
+          "start": 4.2,
+          "end": 21.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 3.8
+        },
+        {
+          "start": 4,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 1.984,
+          "end": 3.616
+        },
+        {
+          "start": 5.056,
+          "end": 11.296
+        },
+        {
+          "start": 11.616,
+          "end": 21.824
+        }
+      ],
+      "exactCounts": {
+        "total": 9717,
+        "calibration": 0,
+        "selected": 9677,
+        "unselected": 40
+      },
+      "annotatedInteriorCrossings": 9717,
+      "missedAnnotatedInteriorCrossings": 40,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.022321047569180946,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.022321047569180946,
+        "unselectedClippedDurationSeconds": 0.0016666666666666668,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "4e8e381c945b7c655c901bf731d2f20980baa2935090095d50525109f4bb075a",
+      "appendedBackgroundSeconds": 0.5,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 22.25,
+          "end": 22.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 3.8
+        },
+        {
+          "start": 4,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 1.984,
+          "end": 3.744
+        },
+        {
+          "start": 4.032,
+          "end": 4.8
+        },
+        {
+          "start": 5.216,
+          "end": 10.976
+        },
+        {
+          "start": 11.616,
+          "end": 13.504
+        },
+        {
+          "start": 13.856,
+          "end": 14.464
+        },
+        {
+          "start": 14.72,
+          "end": 22.272000000000002
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.001091703056768559,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.001091703056768559,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "fa6aa4c78802b9f7587be61377d1ccaa60a98ec96c2bf5d31865158a4b237b31",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 3.8
+        },
+        {
+          "start": 4,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 1.984,
+          "end": 3.744
+        },
+        {
+          "start": 4.032,
+          "end": 4.768
+        },
+        {
+          "start": 5.216,
+          "end": 10.976
+        },
+        {
+          "start": 11.616,
+          "end": 13.504
+        },
+        {
+          "start": 13.856,
+          "end": 14.464
+        },
+        {
+          "start": 14.72,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix008-noise.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "18c289f7059f61455a4967d531d39dcdfa5174f940bada505f2f1097ed355b12",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold3_room22_mix008-noise.wav",
+      "room": "room22",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-noise",
+      "rate": 24000,
+      "pcmSha256": "002ffb603c595f8d558242c54266b44c552ed89a4271cf935b4e1f0403bc95c2",
+      "appendedBackgroundSeconds": 0,
+      "gain": 19.57759522031367,
+      "transformIntervals": [
+        {
+          "start": 3,
+          "end": 5
+        }
+      ],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 4563,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 4563
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.190125,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "4958b4ff7ddf3f07657aff9cdf590283290354d7d14b177805efcac67c8e68fc",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 14.9
+        },
+        {
+          "start": 15.2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7520000000000002
+        },
+        {
+          "start": 5.088,
+          "end": 11.968
+        },
+        {
+          "start": 12.288,
+          "end": 13.024000000000001
+        },
+        {
+          "start": 13.824,
+          "end": 14.432
+        },
+        {
+          "start": 14.624,
+          "end": 14.976
+        },
+        {
+          "start": 15.264000000000001,
+          "end": 19.648
+        },
+        {
+          "start": 20.096,
+          "end": 21.024
+        },
+        {
+          "start": 21.472,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "0ff005e407c8eaf2943040a2bddcbbe8e212c0f6fa07ac4944bcfe98e0535319",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 2.22
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 14.9
+        },
+        {
+          "start": 15.2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7520000000000002
+        },
+        {
+          "start": 5.088,
+          "end": 11.968
+        },
+        {
+          "start": 12.288,
+          "end": 13.024000000000001
+        },
+        {
+          "start": 13.824,
+          "end": 14.976
+        },
+        {
+          "start": 15.264000000000001,
+          "end": 19.68
+        },
+        {
+          "start": 20.096,
+          "end": 21.024
+        },
+        {
+          "start": 21.44,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 479,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.0012980269989615785,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.0012980269989615785,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "1744a472d17ebbf91bb7ba7ef0cd06a8224ee55bb2189de88a5ba19588e754a5",
+      "appendedBackgroundSeconds": 0,
+      "gain": 11.049738661271286,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 14.700000000000001
+        },
+        {
+          "start": 15.399999999999999,
+          "end": 21.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 14.9
+        },
+        {
+          "start": 15.2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 3.3600000000000003
+        },
+        {
+          "start": 4.096,
+          "end": 4.736
+        },
+        {
+          "start": 4.96,
+          "end": 12.032
+        },
+        {
+          "start": 12.288,
+          "end": 13.120000000000001
+        },
+        {
+          "start": 13.696,
+          "end": 14.816
+        },
+        {
+          "start": 15.264000000000001,
+          "end": 21.088
+        },
+        {
+          "start": 21.44,
+          "end": 21.888
+        }
+      ],
+      "exactCounts": {
+        "total": 12905,
+        "calibration": 0,
+        "selected": 12905,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 12905,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.03111730536915179,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.03111730536915179,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "c8ee3027dbc996c4ad4ee7e33c42881670665b21a9ddd0fc855e13b293e0991b",
+      "appendedBackgroundSeconds": 0.5,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 22.25,
+          "end": 22.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 14.9
+        },
+        {
+          "start": 15.2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7520000000000002
+        },
+        {
+          "start": 5.088,
+          "end": 11.968
+        },
+        {
+          "start": 12.288,
+          "end": 13.024000000000001
+        },
+        {
+          "start": 13.824,
+          "end": 14.432
+        },
+        {
+          "start": 14.624,
+          "end": 14.976
+        },
+        {
+          "start": 15.264000000000001,
+          "end": 19.648
+        },
+        {
+          "start": 20.096,
+          "end": 21.024
+        },
+        {
+          "start": 21.472,
+          "end": 22.496000000000002
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.001278118609406953,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0.001278118609406953,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "170a46fac3ee09fc3f73a99a595a19c35d5457e6828eec74471bde49a89948ce",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 14.9
+        },
+        {
+          "start": 15.2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.016,
+          "end": 2.7520000000000002
+        },
+        {
+          "start": 5.088,
+          "end": 11.968
+        },
+        {
+          "start": 12.288,
+          "end": 13.024000000000001
+        },
+        {
+          "start": 13.824,
+          "end": 14.432
+        },
+        {
+          "start": 14.624,
+          "end": 14.976
+        },
+        {
+          "start": 15.264000000000001,
+          "end": 19.648
+        },
+        {
+          "start": 20.096,
+          "end": 21.024
+        },
+        {
+          "start": 21.472,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix010-noise.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "dcbdb7029329c8893963d68d8298609ab1c19d020b3c32fdf8d077bd4513eb02",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room23_mix010-noise.wav",
+      "room": "room23",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-noise",
+      "rate": 24000,
+      "pcmSha256": "32b1f78327d8b57cac1ca84d0151d39ffd63ea0d1088bcb3aac9e92175648bd3",
+      "appendedBackgroundSeconds": 0,
+      "gain": 25.867771857114665,
+      "transformIntervals": [
+        {
+          "start": 3,
+          "end": 5
+        }
+      ],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 688,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 688
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.028666666666666667,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "244d1a38a07353c8bd72df8917df9b102a60c5123d65e8987d58d56dfd4090a2",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.56,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 11.008000000000001
+        },
+        {
+          "start": 11.264,
+          "end": 15.616
+        },
+        {
+          "start": 15.84,
+          "end": 17.696
+        },
+        {
+          "start": 17.952,
+          "end": 18.56
+        },
+        {
+          "start": 18.944,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "flat-crossing",
+      "rate": 24000,
+      "pcmSha256": "3e527709f3d71152f2a00839f6c39858571c7435522fc1c66d2c05aafeb1f178",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 2.22
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.56,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 11.008000000000001
+        },
+        {
+          "start": 11.264,
+          "end": 15.616
+        },
+        {
+          "start": 15.84,
+          "end": 17.696
+        },
+        {
+          "start": 17.952,
+          "end": 18.56
+        },
+        {
+          "start": 18.944,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 480
+      },
+      "annotatedInteriorCrossings": 479,
+      "missedAnnotatedInteriorCrossings": 479,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.02,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-speech",
+      "rate": 24000,
+      "pcmSha256": "6b4fd9dd8709bd786ee0be7b69a6b5c997ec782919de4abee6cca64cb9411f72",
+      "appendedBackgroundSeconds": 0,
+      "gain": 52.32415169660678,
+      "transformIntervals": [
+        {
+          "start": 2.2,
+          "end": 21.8
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.528,
+          "end": 21.824
+        }
+      ],
+      "exactCounts": {
+        "total": 22306,
+        "calibration": 0,
+        "selected": 22090,
+        "unselected": 216
+      },
+      "annotatedInteriorCrossings": 22306,
+      "missedAnnotatedInteriorCrossings": 216,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.047699765711879595,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0.047699765711879595,
+        "unselectedClippedDurationSeconds": 0.009,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.reduce_clipping",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "tail-crossing",
+      "rate": 24000,
+      "pcmSha256": "356cff6414a9f47714e58645b45268236956b5d088072d506760bdfd58cb77ff",
+      "appendedBackgroundSeconds": 0.5,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 22.25,
+          "end": 22.27
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.56,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 11.008000000000001
+        },
+        {
+          "start": 11.264,
+          "end": 15.616
+        },
+        {
+          "start": 15.84,
+          "end": 17.696
+        },
+        {
+          "start": 17.952,
+          "end": 18.56
+        },
+        {
+          "start": 18.944,
+          "end": 22.496000000000002
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 0,
+        "selected": 480,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.0010794448954625083,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "C",
+        "certainty": "low",
+        "speechClippingRatio": 0.0010794448954625083,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Noise",
+          "messageKey": "recommendation.reduce_noise",
+          "confidence": 0.78
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "speech",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "calibration-crossing",
+      "rate": 24000,
+      "pcmSha256": "22d2b631940f0bc4bdf3a60b50ad63bac9827e50f4daec3b26b08a8d1f3b0afd",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [
+        {
+          "start": 0.5,
+          "end": 0.52
+        }
+      ],
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 22
+        }
+      ],
+      "selectedIntervals": [
+        {
+          "start": 2.56,
+          "end": 5.5680000000000005
+        },
+        {
+          "start": 5.856,
+          "end": 11.008000000000001
+        },
+        {
+          "start": 11.264,
+          "end": 15.616
+        },
+        {
+          "start": 15.84,
+          "end": 17.696
+        },
+        {
+          "start": 17.952,
+          "end": 18.56
+        },
+        {
+          "start": 18.944,
+          "end": 22
+        }
+      ],
+      "exactCounts": {
+        "total": 480,
+        "calibration": 480,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "current": {
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix003-noise.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "original",
+      "rate": 24000,
+      "pcmSha256": "9a76e82aba2df4c3de1104443f6b594e1892f47efac2d97d3245df6d638de484",
+      "appendedBackgroundSeconds": 0,
+      "gain": null,
+      "transformIntervals": [],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 0,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 0
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    },
+    {
+      "file": "fold4_room8_mix003-noise.wav",
+      "room": "room8",
+      "split": "additional-regression",
+      "role": "noise",
+      "inputKind": "Unmodified contiguous 22 second source crop",
+      "condition": "hard-clipped-noise",
+      "rate": 24000,
+      "pcmSha256": "cfb4dec3592d7eecf3086abd75f7c80ae738d2e68326b6f7c95ea85f5f99966a",
+      "appendedBackgroundSeconds": 0,
+      "gain": 8.471561530506722,
+      "transformIntervals": [
+        {
+          "start": 3,
+          "end": 5
+        }
+      ],
+      "annotatedSpeechIntervals": [],
+      "selectedIntervals": [],
+      "exactCounts": {
+        "total": 1609,
+        "calibration": 0,
+        "selected": 0,
+        "unselected": 1609
+      },
+      "annotatedInteriorCrossings": 0,
+      "missedAnnotatedInteriorCrossings": 0,
+      "baseline": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": null,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "current": {
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "speechClippingRatio": 0,
+        "unselectedClippedDurationSeconds": 0.06704166666666667,
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        }
+      },
+      "gates": {
+        "exactRecordingClipping": true,
+        "exactUnselectedClipping": true,
+        "certaintyLimited": true,
+        "certaintyPreservedForControls": true,
+        "preservedGradeAndAdvice": true
+      }
+    }
+  ],
+  "limitations": [
+    "Frozen previous estimator evaluated on unchanged actual worker-selected intervals; no baseline VAD substitution.",
+    "Upstream speech bins are human event labels at 100 ms resolution; guarded interiors reduce but do not remove annotation uncertainty.",
+    "Digital hard clipping transforms recorded speech; not physical capture or a validated audibility threshold.",
+    "Previously inspected sources; additional rooms are regression condition transfer, not untouched evaluation.",
+    "Noise controls are upstream non-speech candidates, not exhaustive truth. Gain is derived from reference spans, never app outputs."
+  ]
+}

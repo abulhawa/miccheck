@@ -57,8 +57,8 @@ class RemoteZip(io.RawIOBase):
         return data
 
 
-def main():
-    DEST.mkdir(parents=True, exist_ok=True)
+def main(rooms=('room22', 'room23', 'room8'), destination=DEST, speech_only_rooms=()):
+    destination.mkdir(parents=True, exist_ok=True)
     CACHE.mkdir(parents=True, exist_ok=True)
     metadata_path = CACHE / 'metadata_dev.zip'
     if metadata_path.exists():
@@ -72,7 +72,11 @@ def main():
         metadata_path.write_bytes(metadata)
     labels = zipfile.ZipFile(io.BytesIO(metadata))
     selection = []
-    for room in ['room22', 'room23', 'room8']:
+    if len(set(rooms)) != len(rooms) or any(not re.fullmatch(r'room\d+', room) for room in rooms):
+        raise ValueError('Expected unique room identifiers')
+    if not set(speech_only_rooms).issubset(rooms):
+        raise ValueError('Speech-only rooms must be among selected rooms')
+    for room in rooms:
         pool = []
         for name in sorted(labels.namelist()):
             if not name.endswith('.csv') or re.search(r'room\d+', name).group() != room:
@@ -95,24 +99,30 @@ def main():
                 ns = sum(f in noise for f in range(start, start + 220))
                 pool.append(dict(metadata_path=name, startFrame=start,
                                  interiorSpeechFrames=sp, candidateNoiseFrames=ns))
+        if not pool:
+            raise ValueError('No usable upstream labels for ' + room)
         for role, score in [('speech', 'interiorSpeechFrames'), ('noise', 'candidateNoiseFrames')]:
+            if role == 'noise' and room in speech_only_rooms:
+                continue
             other = 'candidateNoiseFrames' if role == 'speech' else 'interiorSpeechFrames'
             chosen = sorted(pool, key=lambda c: (-c[score], -c[other], c['metadata_path'], c['startFrame']))[0]
             if chosen[score] < (30 if role == 'speech' else 50):
                 raise ValueError('Insufficient labels for ' + room + '/' + role)
             selection.append(dict(**chosen, room=room, role=role, split='evaluation'))
-    protocol = dict(version=1, rooms=['room22', 'room23', 'room8'],
+    protocol = dict(version=1, rooms=list(rooms),
         source='https://zenodo.org/records/6387880', channel=0, seconds=22,
         metadataSha256=hashlib.sha256(metadata).hexdigest(),
         rule='Per unused room, maximize speech interiors or domestic/water/instrument candidate noise in a contiguous 22 s crop with no annotated speech in initial 2 s; tie by other label count, metadata path, then crop onset. Freeze before VAD outputs.',
         selection=selection)
-    frozen = DEST / 'selection.json'
+    if speech_only_rooms:
+        protocol['speechOnlyRooms'] = list(speech_only_rooms)
+    frozen = destination / 'selection.json'
     if frozen.exists() and json.loads(frozen.read_text(encoding='utf-8')) != protocol:
         raise ValueError('Frozen annotation selection changed')
     frozen.write_text(json.dumps(protocol, indent=2) + '\n', encoding='utf-8')
     archive = None
     clips = []
-    previous = json.loads((DEST / 'manifest.json').read_text(encoding='utf-8')) if (DEST / 'manifest.json').exists() else {'clips': []}
+    previous = json.loads((destination / 'manifest.json').read_text(encoding='utf-8')) if (destination / 'manifest.json').exists() else {'clips': []}
     for choice in selection:
         name = choice['metadata_path']
         audio_path = name.replace('metadata_dev/', 'mic_dev/').replace('.csv', '.wav')
@@ -136,23 +146,29 @@ def main():
             w.setpos(start)
             samples = array.array('h', w.readframes(end - start))
         filename = f"{source.stem}-{choice['role']}.wav"
-        target = DEST / filename
+        target = destination / filename
         with wave.open(str(target), 'wb') as w:
             w.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
             w.writeframes(samples[::4].tobytes())
         annotation = labels.read(name)
-        (DEST / Path(name).name).write_bytes(annotation)
+        (destination / Path(name).name).write_bytes(annotation)
         clips.append(dict(**choice, file=filename, archive_path=audio_path,
             sourceSha256=source_hash, sourceSamples=[start, end], sampleRate=24000,
             sha256=hashlib.sha256(target.read_bytes()).hexdigest(),
             metadataSha256=hashlib.sha256(annotation).hexdigest()))
         # Save each completed crop so interrupted gathering resumes safely.
-        (DEST / 'manifest.json').write_text(json.dumps(dict(protocol=protocol, clips=clips), indent=2) + '\n', encoding='utf-8')
+        (destination / 'manifest.json').write_text(json.dumps(dict(protocol=protocol, clips=clips), indent=2) + '\n', encoding='utf-8')
         print(f"Collected {filename}, source {start / 24000:.1f}-{end / 24000:.1f} s", flush=True)
     for name in ['UPSTREAM_LICENSE', 'UPSTREAM_README.md']:
-        (DEST / name).write_bytes((WEB / 'e2e/fixtures/starss22' / name).read_bytes())
-    print('Frozen six evaluation crops, 132 s, three unused rooms. No model calls.')
+        (destination / name).write_bytes((WEB / 'e2e/fixtures/starss22' / name).read_bytes())
+    print(f'Frozen {len(clips)} evaluation crops, {len(clips)*22} s, {len(rooms)} rooms. No model calls.')
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--rooms', nargs='+', default=['room22', 'room23', 'room8'])
+    parser.add_argument('--output-directory', choices=['starss22-vad', 'clipping-selection-evaluation'], default='starss22-vad')
+    parser.add_argument('--speech-only-rooms', nargs='*', default=[])
+    args = parser.parse_args()
+    main(args.rooms, WEB / 'e2e/fixtures' / args.output_directory, args.speech_only_rooms)

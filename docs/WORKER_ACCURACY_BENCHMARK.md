@@ -107,3 +107,8 @@ direct Node entrypoints. Root `npm run test` and `npm run build` were attempted
 but cannot start because npm is unavailable in this runtime. Standalone
 audio-metrics build/test remain skipped under the documented workspace-resolution
 environment limitation. No production estimator or UI code changed.
+
+The September 29 [clipping-selection continuation](CLIPPING_SELECTION_BENCHMARK.md)
+now implements explicit uncertainty for omitted crossings and tests harder
+recorded-waveform transformations on new reserved rooms. The results above are
+the September 28 baseline; selection errors remain unresolved.

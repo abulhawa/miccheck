@@ -170,6 +170,11 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   const humRatio = measureHum(samples.subarray(0, quietEnd), sampleRate);
   const clipping = measureClipping(speechSamples);
   const recordingClipping = measureClipping(samples);
+  // Crossings omitted by VAD may be missed speech or actual nonspeech.
+  // Keep their attribution unknown; calibration crossings do not count here.
+  const unselectedClippedDurationSeconds = (recordingClipping.nearFullScaleSampleCount
+    - measureClipping(samples.subarray(0, quietEnd)).nearFullScaleSampleCount
+    - clipping.nearFullScaleSampleCount) / sampleRate;
   // Preserve original timing: concatenating speech across pauses creates
   // artificial autocorrelation pairs. Average eligible contiguous runs by
   // sample count; short runs with no full 200 ms lag contribute no evidence.
@@ -185,7 +190,7 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   }
   const metrics = {clippingRatio: clipping.clippingRatio, speechClippingRatio: clipping.clippingRatio,
     clippedDurationSeconds: recordingClipping.nearFullScaleSampleCount / sampleRate,
-    clippingEventCount: recordingClipping.clippingEventCount,
+    clippingEventCount: recordingClipping.clippingEventCount, unselectedClippedDurationSeconds,
     rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echoSamples ? echoWeightedScore / echoSamples : 0};
   if (speechSeconds < 1 || !noiseReliable) {
     const retryReason: MeasurementEvidence['retryReason'] = input.speechDetection !== 'silero'
@@ -212,7 +217,7 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   verdict.reassuranceMode = verdict.useCaseFit === 'pass';
   // Confidence describes evidence, never how good/bad the grade is. Until a real
   // device benchmark is published, even raw PCM findings are at most medium.
-  verdict.diagnosticCertainty = stability.noiseStability === 'stable' && input.capture.format === 'pcm' && input.capture.echoCancellation === false && input.capture.noiseSuppression === false && input.capture.autoGainControl === false ? 'medium' : 'low';
+  verdict.diagnosticCertainty = unselectedClippedDurationSeconds === 0 && stability.noiseStability === 'stable' && input.capture.format === 'pcm' && input.capture.echoCancellation === false && input.capture.noiseSuppression === false && input.capture.autoGainControl === false ? 'medium' : 'low';
   verdict.bestNextSteps = verdict.reassuranceMode ? [] : buildVerdictNextSteps(policy).filter((step) => step.kind === 'action');
   return {metrics, verdict, evidence, recommendation: recommendFix(level, clipping, noise, conservativeEcho, context)};
 }

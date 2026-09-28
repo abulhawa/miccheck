@@ -18,3 +18,8 @@ apps/web/e2e/fixtures/starss22-vad/UPSTREAM_README.md -whitespace
 # The candidate function and cached probability traces have frozen hashes.
 apps/web/lib/ai/silero.ts text eol=lf
 docs/starss22-app-length-*-results.json text eol=lf
+
+# Clipping-selection confidence evaluation preserves hashed source/protocol bytes.
+apps/web/e2e/fixtures/clipping-selection/** -text whitespace=cr-at-eol
+apps/web/e2e/fixtures/clipping-selection-evaluation/** -text whitespace=cr-at-eol
+apps/web/e2e/fixtures/clipping-selection-evaluation/UPSTREAM_README.md -whitespace

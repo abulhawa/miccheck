@@ -54,3 +54,16 @@ test("production worker preserves recording clipping and known selected-componen
   expect(summary.recordingClippingFailures).toBe(0);
   expect(summary.selectedSnrFailures).toBe(0);
 });
+
+test('unselected clipping is disclosed with conservative certainty on regression and reserved rooms', async () => {
+  test.setTimeout(360000);
+  for (const args of [[], ['--evaluation']]) {
+    const { stdout } = await promisify(execFile)(process.execPath, ['scripts/benchmark-clipping-selection.mjs', ...args, '--check'], {
+      timeout: 260000, maxBuffer: 1024 * 1024,
+    });
+    const summary = JSON.parse(stdout.trim().split(/\r?\n/).at(-1)!);
+    expect(summary.cases).toBe(args.length ? 12 : 41);
+    expect(summary.failures).toBe(0);
+    expect(summary.unsupportedMediumAfter).toBe(0);
+  }
+});

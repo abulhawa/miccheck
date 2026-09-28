@@ -144,3 +144,9 @@ The [worker accuracy continuation](WORKER_ACCURACY_BENCHMARK.md) measures all
 clipping and known selected-component SNR pass, while speech-clipping misses
 remain explicit improvement targets. This adds verification, not threshold tuning
 or a completed representative accuracy benchmark.
+
+The [clipping-selection follow-up](CLIPPING_SELECTION_BENCHMARK.md) implements
+explicit unknown attribution for post-calibration crossings outside selected
+speech. It retains speech-only grade/advice, limits certainty, and evaluates
+41 regression plus twelve newly reserved room conditions. Selection misses and
+physical capture validation remain open.

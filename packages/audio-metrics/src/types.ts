@@ -10,6 +10,8 @@ export interface MetricsSummary {
   clippedDurationSeconds?: number;
   /** Consecutive near-full-scale runs in recording PCM, including calibration; indicates possible clipping. */
   clippingEventCount?: number;
+  /** Near-full-scale sample duration after calibration outside selected speech; speech/nonspeech attribution is unknown. */
+  unselectedClippedDurationSeconds?: number;
   rmsDb: number;
   speechRmsDb: number;
   snrDb: number;

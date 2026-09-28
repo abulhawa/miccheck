@@ -5,6 +5,7 @@ import { resolveCopy } from "../lib/copy";
 import { t } from "../lib/i18n";
 import {
   formatClippingMetric,
+  formatClippingSelectionWarning,
   formatEchoMetric,
   formatLevelMetric,
   formatNoiseMetric
@@ -35,6 +36,7 @@ export default function ScoreCard({ showShare = true, experimentalEcho = false, 
   const clippingText = isNegligibleClipping
     ? t("clipping.negligible", { pct: clippingPercent.toFixed(1) })
     : formatClippingMetric(metrics);
+  const clippingSelectionWarning = formatClippingSelectionWarning(metrics);
   const categoryEntries = (
     Object.entries(verdict.dimensions) as Array<
       [
@@ -107,6 +109,7 @@ export default function ScoreCard({ showShare = true, experimentalEcho = false, 
       <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
         <p className="text-sm font-semibold text-slate-100">{resolveCopy("ui.metric.clipping")}</p>
         <p className="mt-2 text-xs font-medium text-slate-200">{clippingText}</p>
+        {clippingSelectionWarning ? <p className="mt-2 text-xs text-amber-200">{clippingSelectionWarning}</p> : null}
         {metrics.clippedDurationSeconds !== undefined ? <p className="mt-2 text-xs text-slate-400">Near-full-scale samples across the recording: {metrics.clippedDurationSeconds.toFixed(3)} seconds. This indicates possible clipping.</p> : null}
       </div>
     </div>

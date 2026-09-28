@@ -1,0 +1,105 @@
+{
+  "protocol": {
+    "version": 1,
+    "rooms": [
+      "room2",
+      "room4"
+    ],
+    "source": "https://zenodo.org/records/6387880",
+    "channel": 0,
+    "seconds": 22,
+    "metadataSha256": "4390567df522e634234a30d209e812dc270e317da6a4156e001b3cc890dd1633",
+    "rule": "Per unused room, maximize speech interiors or domestic/water/instrument candidate noise in a contiguous 22 s crop with no annotated speech in initial 2 s; tie by other label count, metadata path, then crop onset. Freeze before VAD outputs.",
+    "selection": [
+      {
+        "metadata_path": "metadata_dev/dev-test-tau/fold4_room2_mix002.csv",
+        "startFrame": 2215,
+        "interiorSpeechFrames": 198,
+        "candidateNoiseFrames": 0,
+        "room": "room2",
+        "role": "speech",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix006.csv",
+        "startFrame": 1260,
+        "interiorSpeechFrames": 175,
+        "candidateNoiseFrames": 15,
+        "room": "room4",
+        "role": "speech",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix005.csv",
+        "startFrame": 290,
+        "interiorSpeechFrames": 0,
+        "candidateNoiseFrames": 190,
+        "room": "room4",
+        "role": "noise",
+        "split": "evaluation"
+      }
+    ],
+    "speechOnlyRooms": [
+      "room2"
+    ]
+  },
+  "clips": [
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room2_mix002.csv",
+      "startFrame": 2215,
+      "interiorSpeechFrames": 198,
+      "candidateNoiseFrames": 0,
+      "room": "room2",
+      "role": "speech",
+      "split": "evaluation",
+      "file": "fold4_room2_mix002-speech.wav",
+      "archive_path": "mic_dev/dev-test-tau/fold4_room2_mix002.wav",
+      "sourceSha256": "23adb036df6e6131a07c46c7e5979aaabf990947a122fcd704347ef44b638a96",
+      "sourceSamples": [
+        5316000,
+        5844000
+      ],
+      "sampleRate": 24000,
+      "sha256": "54d67e7a39042746026ea538e9564666db899f642facd482e3f0020576c5d7ad",
+      "metadataSha256": "cf1e4be9abeb576c09c74586fd5b21e81ba9edee460a0e7ea8f13c9b8822fa31"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix006.csv",
+      "startFrame": 1260,
+      "interiorSpeechFrames": 175,
+      "candidateNoiseFrames": 15,
+      "room": "room4",
+      "role": "speech",
+      "split": "evaluation",
+      "file": "fold3_room4_mix006-speech.wav",
+      "archive_path": "mic_dev/dev-train-tau/fold3_room4_mix006.wav",
+      "sourceSha256": "d3b1f33e57976ee24cfaa5082e3736dc520a273066c38e12815d9649a32727c4",
+      "sourceSamples": [
+        3024000,
+        3552000
+      ],
+      "sampleRate": 24000,
+      "sha256": "84e959fbbc1e8914d35be792d9fc18ffe27dd4e386854063d9cec9759988e2bd",
+      "metadataSha256": "2fb56fff0fdfea6104d94e42b7f3baf131bc7f2e6d271474985a3c99551c3665"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix005.csv",
+      "startFrame": 290,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 190,
+      "room": "room4",
+      "role": "noise",
+      "split": "evaluation",
+      "file": "fold3_room4_mix005-noise.wav",
+      "archive_path": "mic_dev/dev-train-tau/fold3_room4_mix005.wav",
+      "sourceSha256": "f4437d05b9a239a89df8f7e94fc534bf2eac04632b19cd186500231ab503eeb3",
+      "sourceSamples": [
+        696000,
+        1224000
+      ],
+      "sampleRate": 24000,
+      "sha256": "1ce13f7486997f70a725952d78c41408102be76cc8a2b03464ac386b9e7c656b",
+      "metadataSha256": "eb91367464e69ce1166c784e156823f383c7ff1590176ca82c2a43ff159b68af"
+    }
+  ]
+}

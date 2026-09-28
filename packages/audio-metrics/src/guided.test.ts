@@ -89,9 +89,11 @@ describe('guided evidence', () => {
     const result = analyzeGuidedSamples(samples, rate, context, evidence);
     expect(result.metrics.clippingRatio).toBe(0);
     expect(result.metrics.clippedDurationSeconds).toBeCloseTo(0.1);
+    expect(result.metrics.unselectedClippedDurationSeconds).toBe(0);
     const noSpeech = analyzeGuidedSamples(samples, rate, context, {...evidence, segments:[]});
     expect(noSpeech.metrics.clippingRatio).toBe(0);
     expect(noSpeech.metrics.clippedDurationSeconds).toBeCloseTo(0.1);
+    expect(noSpeech.metrics.unselectedClippedDurationSeconds).toBe(0);
   });
   it.each([0.01, 0.04, 0.001])('assesses later noise amplitude %s independently of speech', amplitude => {
     const samples = new Float32Array(rate * 6);

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "rooms": [
+    "room2",
+    "room4"
+  ],
+  "source": "https://zenodo.org/records/6387880",
+  "channel": 0,
+  "seconds": 22,
+  "metadataSha256": "4390567df522e634234a30d209e812dc270e317da6a4156e001b3cc890dd1633",
+  "rule": "Per unused room, maximize speech interiors or domestic/water/instrument candidate noise in a contiguous 22 s crop with no annotated speech in initial 2 s; tie by other label count, metadata path, then crop onset. Freeze before VAD outputs.",
+  "selection": [
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room2_mix002.csv",
+      "startFrame": 2215,
+      "interiorSpeechFrames": 198,
+      "candidateNoiseFrames": 0,
+      "room": "room2",
+      "role": "speech",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix006.csv",
+      "startFrame": 1260,
+      "interiorSpeechFrames": 175,
+      "candidateNoiseFrames": 15,
+      "room": "room4",
+      "role": "speech",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-tau/fold3_room4_mix005.csv",
+      "startFrame": 290,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 190,
+      "room": "room4",
+      "role": "noise",
+      "split": "evaluation"
+    }
+  ],
+  "speechOnlyRooms": [
+    "room2"
+  ]
+}

@@ -2,10 +2,12 @@
 import hashlib
 import json
 import wave
+import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1] / 'e2e/fixtures'
-folder = root / 'starss22-vad'
+evaluation = '--clipping-evaluation' in sys.argv
+folder = root / ('clipping-selection-evaluation' if evaluation else 'starss22-vad')
 selection_bytes = (folder / 'selection.json').read_bytes()
 selection = json.loads(selection_bytes)
 manifest = json.loads((folder / 'manifest.json').read_text(encoding='utf-8'))
@@ -13,9 +15,11 @@ candidate = json.loads((folder / 'candidate.json').read_text(encoding='utf-8'))
 if manifest['protocol'] != selection or hashlib.sha256(selection_bytes).hexdigest() != candidate['selectionSha256']:
     raise ValueError('Frozen selection/protocol mismatch')
 old_rooms = {c['room'] for c in json.loads((root / 'starss22/manifest.json').read_text())['clips']}
+if evaluation:
+    old_rooms |= {c['room'] for c in json.loads((root / 'starss22-vad/manifest.json').read_text())['clips']}
 rooms = {c['room'] for c in manifest['clips']}
-if old_rooms & rooms or rooms != {'room22', 'room23', 'room8'} or len(manifest['clips']) != 6:
-    raise ValueError('Expected six crops in three previously unused rooms')
+if old_rooms & rooms or rooms != ({'room2', 'room4'} if evaluation else {'room22', 'room23', 'room8'}) or len(manifest['clips']) != (3 if evaluation else 6):
+    raise ValueError('Unexpected crop count or overlap with previous rooms')
 for clip, chosen in zip(manifest['clips'], selection['selection']):
     if any(clip[k] != v for k, v in chosen.items()):
         raise ValueError('Manifest differs from annotation-only selection')
@@ -43,4 +47,4 @@ for clip, chosen in zip(manifest['clips'], selection['selection']):
 for name in ['UPSTREAM_LICENSE', 'UPSTREAM_README.md']:
     if (folder / name).read_bytes() != (root / 'starss22' / name).read_bytes():
         raise ValueError('Upstream attribution changed')
-print('Validated six contiguous crops, 132 s, three unused rooms, frozen labels and attribution. Offline; no model calls.')
+print(f'Validated {len(manifest["clips"])} contiguous crops, {len(manifest["clips"])*22} s, {len(rooms)} unused rooms, frozen labels and attribution. Offline; no model calls.')
