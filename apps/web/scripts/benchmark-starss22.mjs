@@ -15,9 +15,21 @@ const manifest = JSON.parse(manifestBytes);
 const referenceBytes = await readFile(path.join(fixtures, 'reference.json'));
 const reference = JSON.parse(referenceBytes);
 if (reference.manifestSha256 !== hash(manifestBytes)) throw new Error('Frozen reference provenance mismatch');
+const appLength = process.argv.includes('--app-length');
+const baselineVad = process.argv.includes('--baseline-vad');
 const split = process.argv.includes('--evaluation') ? 'evaluation' : 'development';
 const alias = { '@miccheck/audio-core': path.join(root, 'packages/audio-core/src/index.ts'), '@miccheck/audio-metrics': path.join(root, 'packages/audio-metrics/src/index.ts') };
-const worker = await build({ entryPoints: [path.join(web, 'lib/ai/audioAnalysis.worker.ts')], bundle: true, write: false, format: 'esm', platform: 'browser', target: 'es2022', alias });
+const frozenVad = baselineVad ? await readFile(path.join(web, 'e2e/fixtures/starss22-vad/silero-baseline.ts'), 'utf8') : null;
+const segmentationPlugin = tap => ({ name: 'segmentation-diagnostics', setup(b) {
+  b.onLoad({ filter: /[\\/]silero\.ts$/ }, async ({ path: sourcePath }) => {
+    const source = frozenVad ?? await readFile(sourcePath, 'utf8');
+    return { contents: tap ? source.replace('return speechSegments(probabilities,', 'self.postMessage({ vadProbabilities: probabilities }); return speechSegments(probabilities,') : source, loader: 'ts' };
+  });
+} });
+const productionWorker = await build({ entryPoints: [path.join(web, 'lib/ai/audioAnalysis.worker.ts')], bundle: true, write: false, format: 'esm', platform: 'browser', target: 'es2022', alias,
+  plugins: baselineVad ? [segmentationPlugin(false)] : [] });
+const worker = appLength ? await build({ entryPoints: [path.join(web, 'lib/ai/audioAnalysis.worker.ts')], bundle: true, write: false, format: 'esm', platform: 'browser', target: 'es2022', alias,
+  plugins: [segmentationPlugin(true)] }) : productionWorker;
 const guidedBundle = await build({ entryPoints: [path.join(root, 'packages/audio-metrics/src/guided.ts')], bundle: true, write: false, format: 'esm', platform: 'node', alias });
 const { analyzeGuidedSamples } = await import(`data:text/javascript;base64,${Buffer.from(guidedBundle.outputFiles[0].text).toString('base64')}`);
 const server = createServer(async (req, res) => {
@@ -80,9 +92,11 @@ function annotationAgreement(frames, seconds, segments) {
     limitation: 'Human 100 ms target annotations with conservative guards. Unknown interference excluded where possible; candidate disagreements, not verified physical false speech.' };
 }
 
-await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 let browser;
 const rows = [];
+const nativeBaseline = appLength ? JSON.parse(await readFile(path.join(root, `docs/starss22-${split}-results.json`))) : null;
+if (nativeBaseline && (nativeBaseline.productionWorkerSha256 !== hash(productionWorker.outputFiles[0].text) || nativeBaseline.referenceSha256 !== hash(referenceBytes))) throw new Error('Native baseline differs from current worker/reference; regenerate native reports before context comparison');
+await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 try {
   browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -100,10 +114,21 @@ try {
       frames.get(local).push(cls);
     }
     const results = [];
-    for (const scenario of [{ name: 'native', tailGainDb: 0 }, ...frozen.cases]) {
+    // Freeze contiguous crops by upstream speech onsets, never worker predictions.
+    // Two seconds of context precede each onset; retain source PCM and all overlap.
+    const runs = segmentsFromFrames(f => frames.get(f)?.some(c => c === 0 || c === 1), source.length / rate);
+    const starts = [...new Set(runs.map(s => Math.min(Math.max(0, Math.round(s.start * 10) - 20), Math.floor(source.length / rate * 10) - 220)))];
+    const scenarios = appLength ? starts.map(startFrame => ({ name: `contiguous-${startFrame / 10}`, startFrame })) : [{ name: 'native', tailGainDb: 0 }, ...frozen.cases];
+    for (const scenario of scenarios) {
       let samples = source;
       let annotations = segmentsFromFrames(f => frames.get(f)?.some(c => c === 0 || c === 1), source.length / rate);
-      if (scenario.name !== 'native') {
+      let comparisonFrames = frames;
+      if (appLength) {
+        const start = scenario.startFrame;
+        samples = source.slice(start * rate / 10, (start + 220) * rate / 10);
+        comparisonFrames = new Map([...frames].map(([f, classes]) => [f - start, classes]));
+        annotations = segmentsFromFrames(f => comparisonFrames.get(f)?.some(c => c === 0 || c === 1), 22);
+      } else if (scenario.name !== 'native') {
         samples = new Float32Array(rate * 11.5);
         const [a, b] = frozen.speechSourceSamples;
         const noise = source.subarray(...frozen.noiseSourceSamples);
@@ -120,36 +145,49 @@ try {
         { quietSeconds: 2, speechDetection: 'silero', segments: annotations, capture: { format: 'pcm' } });
       const result = await page.evaluate(({ pcm, rate }) => new Promise((resolve, reject) => {
         const worker = new Worker('/worker.js', { type: 'module' });
+        let vadProbabilities;
         const timer = setTimeout(() => { worker.terminate(); reject(new Error('Worker timeout')); }, 60000);
         const finish = () => { clearTimeout(timer); worker.terminate(); };
         worker.onerror = () => { finish(); reject(new Error('Worker error')); };
-        worker.onmessage = ({ data }) => { if (data.error) { finish(); reject(new Error(data.error)); } else if (data.result) { finish(); resolve(data.result); } };
+        worker.onmessage = ({ data }) => { if (data.vadProbabilities) vadProbabilities = data.vadProbabilities; if (data.error) { finish(); reject(new Error(data.error)); } else if (data.result) { finish(); resolve({ ...data.result, vadProbabilities }); } };
         worker.postMessage({ samples: Float32Array.from(pcm), sampleRate: rate, quietSeconds: 2,
           context: { use_case: 'meetings', device_type: 'unknown', mode: 'basic' }, capture: { format: 'pcm' }, classifyNoise: false });
       }), { pcm: Array.from(samples), rate });
+      if (appLength && result.vadProbabilities?.length !== Math.ceil(samples.length / rate * 16000 / 512)) throw new Error('Incomplete diagnostic probability trace');
       const summary = r => ({ stability: r.evidence.noiseStability, retry: r.evidence.retryReason ?? null,
         state: r.specialState ?? 'graded', grade: r.specialState ? null : r.verdict.overall.grade,
         evidence: r.evidence, certainty: r.verdict.diagnosticCertainty, recommendation: r.recommendation });
-      const expected = scenario.name === 'native' ? null : { stability: scenario.expectedStability, retry: scenario.expectedRetry, state: scenario.tailGainDb ? 'INSUFFICIENT_EVIDENCE' : 'graded' };
+      const expected = appLength || scenario.name === 'native' ? null : { stability: scenario.expectedStability, retry: scenario.expectedRetry, state: scenario.tailGainDb ? 'INSUFFICIENT_EVIDENCE' : 'graded' };
       const actual = summary(result), isolated = summary(annotatedEstimator);
       const meets = r => !expected || (r.stability === expected.stability && r.retry === expected.retry && r.state === expected.state);
       results.push({ scenario: scenario.name, expected, worker: actual, annotationDrivenEstimator: isolated,
         workerMeetsExpectation: expected ? meets(actual) : null, estimatorMeetsExpectation: expected ? meets(isolated) : null,
         segments: result.ai.segments,
-        ...(scenario.name === 'native' ? { annotationAgreement: annotationAgreement(frames, clip.duration_seconds, result.ai.segments) } : {}) });
+        ...(appLength || scenario.name === 'native' ? { annotationAgreement: annotationAgreement(comparisonFrames, samples.length / rate, result.ai.segments) } : {}),
+        ...(appLength ? { sourceLocalSeconds: [scenario.startFrame / 10, scenario.startFrame / 10 + 22],
+          pcmSha256: hash(new Uint8Array(samples.buffer)),
+          calibrationAnnotatedSpeechSeconds: annotations.reduce((n, s) => n + Math.max(0, Math.min(2, s.end) - s.start), 0),
+          annotatedSpeechSegments: annotations,
+          vadFrameSeconds: 0.032, vadProbabilities: result.vadProbabilities,
+          noiseRetryTruth: 'unknown',
+          fullContextAgreementOnSameCrop: annotationAgreement(comparisonFrames, 22,
+            nativeBaseline.rows.find(r => r.file === clip.file).results.find(r => r.scenario === 'native').segments
+              .map(s => ({ start: s.start - scenario.startFrame / 10, end: s.end - scenario.startFrame / 10 }))) } : {}) });
       console.log(`${split} ${clip.file} ${scenario.name}: worker=${actual.stability}/${actual.retry ?? actual.state}, annotated=${isolated.stability}/${isolated.retry ?? isolated.state}`);
     }
     rows.push({ file: clip.file, room: clip.room, split, results });
   }
   const labeled = rows.flatMap(r => r.results).filter(r => r.expected);
-  const counts = { workerMisses: labeled.filter(r => r.expected.retry && !r.workerMeetsExpectation).length,
+  const counts = appLength ? { labeledRetryCases: 0, note: 'Diagnostic speech comparisons only; no native retry truth or pass/fail accuracy gate.' } : { workerMisses: labeled.filter(r => r.expected.retry && !r.workerMeetsExpectation).length,
     workerStationaryFailures: labeled.filter(r => !r.expected.retry && !r.workerMeetsExpectation).length,
     estimatorMisses: labeled.filter(r => r.expected.retry && !r.estimatorMeetsExpectation).length,
     estimatorStationaryFailures: labeled.filter(r => !r.expected.retry && !r.estimatorMeetsExpectation).length };
-  if (process.env.STARSS22_NO_REPORT !== '1') await writeFile(path.join(root, `docs/starss22-${split}-results.json`), JSON.stringify({ protocol: reference.protocol, split,
+  if (process.env.STARSS22_NO_REPORT !== '1') await writeFile(path.join(root, `docs/starss22-${appLength ? 'app-length-' : ''}${split}-results.json`), JSON.stringify({ protocol: appLength ? 'upstream-speech-onset-contiguous-22s-v1' : reference.protocol, split,
     referenceSha256: hash(referenceBytes), manifestSha256: hash(manifestBytes), browser: browser.version(),
-    productionWorkerSha256: hash(worker.outputFiles[0].text), annotationEstimatorSha256: hash(guidedBundle.outputFiles[0].text),
-    description: 'Native recorded-room diagnostics plus exactly defined component gain changes. Native full-recording retry ground truth remains unknown; annotated estimator uses upstream frames instead of VAD, not a second real worker.', counts, rows }, null, 2) + '\n');
+    productionWorkerSha256: hash(productionWorker.outputFiles[0].text),
+    ...(appLength ? { diagnosticWorkerSha256: hash(worker.outputFiles[0].text) } : {}), annotationEstimatorSha256: hash(guidedBundle.outputFiles[0].text),
+    diagnosticProbabilityTap: appLength,
+    description: appLength ? 'Unmodified contiguous 22 s source crops selected by upstream speech onsets. Same-crop full-context comparison; overlapping crops are not independent. Native noise retry truth unknown. Probability tap preserves detector decisions.' : 'Native recorded-room diagnostics plus exactly defined component gain changes. Native full-recording retry ground truth remains unknown; annotated estimator uses upstream frames instead of VAD, not a second real worker.', counts, rows }, null, 2) + '\n');
   console.log(JSON.stringify(counts));
-  if (Object.values(counts).some(Boolean)) process.exitCode = 1;
+  if (!appLength && Object.values(counts).some(Boolean)) process.exitCode = 1;
 } finally { await browser?.close(); await new Promise(resolve => server.close(resolve)); }

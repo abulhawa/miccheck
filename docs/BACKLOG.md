@@ -31,16 +31,34 @@ A [STARSS22 real-room pilot](../apps/web/e2e/fixtures/starss22/README.md) now
 provides four human-annotated physical room recordings (230.1 s), including
 domestic noise and music with nearby speech. Two rooms are reserved for
 evaluation and two for development; selection uses upstream annotations before
-app outputs. No parameter tuning or improved detection result is claimed yet.
+app outputs. That initial pilot did not claim parameter tuning or an improved
+detection result; the later continuation improvement is documented below.
 The [production-worker comparison](STARSS22_NOISE_BENCHMARK.md) now passes all
 twelve frozen recorded-component stationary/+12/−12 dB cases, in both the worker
 and annotation-driven estimator. No threshold change is justified. Native
 whole-recording retry truth remains unknown; event presence alone is not a
 change label. Room21 returns no speech despite upstream speech labels, and
 room10 misses substantial speech interiors. Investigate app-length contiguous
-excerpts before changing VAD or noise guards. The 100 ms grid cannot settle
+excerpts before changing VAD or noise guards. The
+[app-length investigation](STARSS22_APP_LENGTH_SPEECH.md) now reproduces both
+misses in unmodified 22 s crops: room21 misses 1.4 of 1.7 s of interiors and
+room10 misses 4.5 of 5.8 s. Low model probabilities contribute; that investigation
+alone did not justify a production parameter change. The 100 ms grid cannot settle
 short-transient policy; broader device/processing and native retry validation
 remain open.
+
+Speech-continuation follow-up: [confirmed continuation](VAD_CONTINUATION_BENCHMARK.md)
+now retains weaker model evidence after the existing minimum speech span is
+established, keeping the 0.5 onset gate. On three additional untouched rooms,
+missed speech interiors decrease from 10.0 to 8.0 s without added speech in
+66.0 s of separate domestic/instrument candidate controls. Normal fixture
+acceptance retains the labeled noise-change and stationary cases. This is a
+partial app improvement: room21 still requests longer speech and room10's
+4.5 s interior miss remains. Room10's noise retry changes to stable/F, but
+native retry truth is unknown; do not count that advice change as a verified
+improvement. Low-score onsets, noisy speech, playback music/vocals and native
+retry validation need stronger independent evidence and further untouched
+evaluation conditions. Keep this broader item open.
 
 - [x] Compare calibration noise with sufficiently long later nonspeech windows. Exclude speech boundaries to reduce contamination from breaths, missed speech, and reverberation.
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.

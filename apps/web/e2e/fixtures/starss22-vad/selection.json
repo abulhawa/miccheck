@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "rooms": [
+    "room22",
+    "room23",
+    "room8"
+  ],
+  "source": "https://zenodo.org/records/6387880",
+  "channel": 0,
+  "seconds": 22,
+  "metadataSha256": "4390567df522e634234a30d209e812dc270e317da6a4156e001b3cc890dd1633",
+  "rule": "Per unused room, maximize speech interiors or domestic/water/instrument candidate noise in a contiguous 22 s crop with no annotated speech in initial 2 s; tie by other label count, metadata path, then crop onset. Freeze before VAD outputs.",
+  "selection": [
+    {
+      "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix004.csv",
+      "startFrame": 115,
+      "interiorSpeechFrames": 192,
+      "candidateNoiseFrames": 0,
+      "room": "room22",
+      "role": "speech",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix008.csv",
+      "startFrame": 211,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room22",
+      "role": "noise",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix007.csv",
+      "startFrame": 667,
+      "interiorSpeechFrames": 191,
+      "candidateNoiseFrames": 0,
+      "room": "room23",
+      "role": "speech",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix010.csv",
+      "startFrame": 78,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room23",
+      "role": "noise",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix001.csv",
+      "startFrame": 1670,
+      "interiorSpeechFrames": 198,
+      "candidateNoiseFrames": 0,
+      "room": "room8",
+      "role": "speech",
+      "split": "evaluation"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix003.csv",
+      "startFrame": 1200,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room8",
+      "role": "noise",
+      "split": "evaluation"
+    }
+  ]
+}

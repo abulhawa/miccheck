@@ -1,0 +1,860 @@
+{
+  "protocol": {
+    "version": 1,
+    "candidate": "confirmed-continuation-0.35",
+    "onsetThreshold": 0.5,
+    "continuationThreshold": 0.35,
+    "confirmationSpanSeconds": 0.16,
+    "minimumSegmentSeconds": 0.16,
+    "silenceGapSeconds": 0.16,
+    "paddingSeconds": 0,
+    "baselineFunctionSha256": "8d3f048ae1bc931d98e1c00603212f4a739260aa42ce08af001c9be4ff356bb8",
+    "candidateFunctionSha256": "a54ec67c8a1ba2cfc99c3761bb37253e4c30028a18021909383d9b022cefcbf5",
+    "modelSha256": "2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f",
+    "selectionSha256": "2197d9b0405ad56866e511675cf1881886a7cceb2ac071d66015abc95aab73a2",
+    "acceptance": "No increased misses per labeled crop; no additional speech in candidate noise; net speech-interior gain on untouched rooms. Native retry truth remains unknown. Noise-only candidate controls must retain no-speech guidance. Existing independently labeled fixture acceptance must pass.",
+    "workerHashes": [
+      "2a3cd1a9e9d2032ccc6de99a774047cb201c4cc85663397bef4debf0d7bb8b42",
+      "8cfc69d50173026b08549876eb03e3a7e9e96c13f486d9c9bf808dfbe58866b2"
+    ]
+  },
+  "mode": "evaluation",
+  "manifestSha256": "b3319f775d49550564bda12f242e226a0b6f208c20bdcfd033e13cf669fcb6d1",
+  "estimatorSha256": "b9f43892897bb034b8554536a986712e80b3d5dec29763d675c1febbcfbdca6f",
+  "description": "Production-worker before/after on three annotation-selected previously untouched rooms. Candidate labels exclude uncertain bins; native noise retry truth unknown.",
+  "counts": {
+    "conditions": 6,
+    "worsenedSpeechConditions": 0,
+    "addedCandidateNoiseSpeechConditions": 0,
+    "guidanceFailures": 0,
+    "improvedSpeechConditions": 3,
+    "beforeMissedSpeechSeconds": 10,
+    "afterMissedSpeechSeconds": 8,
+    "beforeCandidateNoiseSpeechSeconds": 0,
+    "afterCandidateNoiseSpeechSeconds": 0
+  },
+  "rows": [
+    {
+      "file": "fold3_room22_mix004-speech.wav",
+      "room": "room22",
+      "role": "speech",
+      "sourceSamples": [
+        276000,
+        804000
+      ],
+      "sourceSha256": "b4c1b569d9f36107ca685f9f26a112129057cb78b43a4b625b83207ca2b452ac",
+      "metadataSha256": "62bc0ce27da990cbd9bacb392aa1857a3744f98c748e32b9a838c29e4d3b4b71",
+      "before": {
+        "segments": [
+          {
+            "start": 1.984,
+            "end": 3.68
+          },
+          {
+            "start": 4.032,
+            "end": 4.640000000000001
+          },
+          {
+            "start": 5.216,
+            "end": 9.120000000000001
+          },
+          {
+            "start": 9.344,
+            "end": 10.912
+          },
+          {
+            "start": 11.616,
+            "end": 13.472
+          },
+          {
+            "start": 13.856,
+            "end": 14.432
+          },
+          {
+            "start": 14.72,
+            "end": 17.536
+          },
+          {
+            "start": 17.76,
+            "end": 21.984
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -43.70307407143932,
+          "speechRmsDb": -43.70307407143932,
+          "snrDb": 1.393004146043836,
+          "humRatio": 0.015227067856606812,
+          "echoScore": 0.03817633995318448
+        },
+        "evidence": {
+          "speechSeconds": 17.232166666666668,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": true,
+          "noiseStability": "unassessed",
+          "laterNoiseSeconds": 0,
+          "maxNoiseChangeDb": 0,
+          "echoExperimental": true
+        },
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 16.7,
+          "missedSpeechSeconds": 2.5,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.8,
+          "speechInUncertainSeconds": 0.5,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [
+          {
+            "start": 1.984,
+            "end": 3.744
+          },
+          {
+            "start": 4.032,
+            "end": 4.8
+          },
+          {
+            "start": 5.216,
+            "end": 10.976
+          },
+          {
+            "start": 11.616,
+            "end": 13.504
+          },
+          {
+            "start": 13.856,
+            "end": 14.464
+          },
+          {
+            "start": 14.72,
+            "end": 22
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -43.841172758442326,
+          "speechRmsDb": -43.841172758442326,
+          "snrDb": 1.1518778640222465,
+          "humRatio": 0.015227067856606812,
+          "echoScore": 0.03505477769016026
+        },
+        "evidence": {
+          "speechSeconds": 18.048,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": true,
+          "noiseStability": "unassessed",
+          "laterNoiseSeconds": 0,
+          "maxNoiseChangeDb": 0,
+          "echoExperimental": true
+        },
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 17.6,
+          "missedSpeechSeconds": 1.6,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.8,
+          "speechInUncertainSeconds": 0.5,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "12058546a8395918428e28eacc9e3aff4d7969b8c02ccb481a2e1b65cdea0450"
+    },
+    {
+      "file": "fold3_room22_mix008-noise.wav",
+      "room": "room22",
+      "role": "noise",
+      "sourceSamples": [
+        506400,
+        1034400
+      ],
+      "sourceSha256": "56e50a5cc3975fc9281902c928ae2afd2dd047ac935ba03d19366be150f441ac",
+      "metadataSha256": "877bf825504090ece0b086cb99b83b9c2bab9a995db259bf6490050177b0c9d4",
+      "before": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.020672998985146983,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 26.94926383752721,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.020672998985146983,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 26.94926383752721,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "2f496722c2aa30fdd01db32632567a8dc8781a5669d8bdc314db7cb8f1ce8648"
+    },
+    {
+      "file": "fold4_room23_mix007-speech.wav",
+      "room": "room23",
+      "role": "speech",
+      "sourceSamples": [
+        1600800,
+        2128800
+      ],
+      "sourceSha256": "968ba3d2df882011316624d45b0b3f4faebf14884e63b4e9ff644e4e6ac0a51a",
+      "metadataSha256": "e2a25c701e3da1bd09e7e94bdb83ac9a84df6b0e5f0088638702c7e79d912015",
+      "before": {
+        "segments": [
+          {
+            "start": 2.016,
+            "end": 2.208
+          },
+          {
+            "start": 5.088,
+            "end": 11.936
+          },
+          {
+            "start": 12.288,
+            "end": 12.992
+          },
+          {
+            "start": 13.824,
+            "end": 14.4
+          },
+          {
+            "start": 14.624,
+            "end": 14.912
+          },
+          {
+            "start": 15.264000000000001,
+            "end": 19.552
+          },
+          {
+            "start": 20.096,
+            "end": 20.384
+          },
+          {
+            "start": 20.608,
+            "end": 20.992
+          },
+          {
+            "start": 21.472,
+            "end": 22
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -28.827721909518953,
+          "speechRmsDb": -28.827721909518953,
+          "snrDb": -20,
+          "humRatio": 5.491914226830249e-05,
+          "echoScore": 0.09552586552105669
+        },
+        "evidence": {
+          "speechSeconds": 14.096041666666666,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 2.25,
+          "maxNoiseChangeDb": 26.3547284237248,
+          "echoExperimental": true,
+          "retryReason": "noise_unstable"
+        },
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 13.6,
+          "missedSpeechSeconds": 5.5,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.9,
+          "speechInUncertainSeconds": 0.5,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [
+          {
+            "start": 2.016,
+            "end": 2.7520000000000002
+          },
+          {
+            "start": 5.088,
+            "end": 11.968
+          },
+          {
+            "start": 12.288,
+            "end": 13.024000000000001
+          },
+          {
+            "start": 13.824,
+            "end": 14.432
+          },
+          {
+            "start": 14.624,
+            "end": 14.976
+          },
+          {
+            "start": 15.264000000000001,
+            "end": 19.648
+          },
+          {
+            "start": 20.096,
+            "end": 21.024
+          },
+          {
+            "start": 21.472,
+            "end": 22
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -28.8811188459093,
+          "speechRmsDb": -28.8811188459093,
+          "snrDb": -20,
+          "humRatio": 5.491914226830249e-05,
+          "echoScore": 0.09686064699535382
+        },
+        "evidence": {
+          "speechSeconds": 15.152,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 1.5,
+          "maxNoiseChangeDb": 27.005070412426903,
+          "echoExperimental": true,
+          "retryReason": "noise_unstable"
+        },
+        "state": "INSUFFICIENT_EVIDENCE",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 14.5,
+          "missedSpeechSeconds": 4.6,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.9,
+          "speechInUncertainSeconds": 0.6,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "5dbfecf7d1275d273fb22b6aee1de530a5e3800fdfe944f0b96e1403c7fe64ee"
+    },
+    {
+      "file": "fold4_room23_mix010-noise.wav",
+      "room": "room23",
+      "role": "noise",
+      "sourceSamples": [
+        187200,
+        715200
+      ],
+      "sourceSha256": "131b61f95a6a0e36cc1aba810e3e9dbc27cf7911178dd894ef0ef3b6a13d454c",
+      "metadataSha256": "d26209b8495308c9d289151a2cc36bd4e1be216e86a7b6d0bf5872a5b995b9b0",
+      "before": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.041862525106308425,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 9.041122458377217,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.041862525106308425,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 9.041122458377217,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "acd338c824757ad6413139a0286ffcf6985f114bd170292e771aeb9bc7d6d620"
+    },
+    {
+      "file": "fold4_room8_mix001-speech.wav",
+      "room": "room8",
+      "role": "speech",
+      "sourceSamples": [
+        4008000,
+        4536000
+      ],
+      "sourceSha256": "90dac2f9f3b0c83063bcf2fa92acd20e0a802af835029f06a3ec5744cc8b462a",
+      "metadataSha256": "b9f8b41faaf9ea4d0d8860d57a134092b6e35d57fa859bbcd3ed6bc605dbacbe",
+      "before": {
+        "segments": [
+          {
+            "start": 2.56,
+            "end": 5.5360000000000005
+          },
+          {
+            "start": 5.856,
+            "end": 10.976
+          },
+          {
+            "start": 11.264,
+            "end": 15.552
+          },
+          {
+            "start": 15.84,
+            "end": 17.664
+          },
+          {
+            "start": 17.952,
+            "end": 18.528
+          },
+          {
+            "start": 18.944,
+            "end": 22
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -41.07280484325025,
+          "speechRmsDb": -41.07280484325025,
+          "snrDb": 5.519160580022067,
+          "humRatio": 0.0047822813316879004,
+          "echoScore": 0.09797285152775019
+        },
+        "evidence": {
+          "speechSeconds": 17.840041666666668,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": true,
+          "noiseStability": "unassessed",
+          "laterNoiseSeconds": 0,
+          "maxNoiseChangeDb": 0,
+          "echoExperimental": true
+        },
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 17.8,
+          "missedSpeechSeconds": 2,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.2,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [
+          {
+            "start": 2.56,
+            "end": 5.5680000000000005
+          },
+          {
+            "start": 5.856,
+            "end": 11.008000000000001
+          },
+          {
+            "start": 11.264,
+            "end": 15.616
+          },
+          {
+            "start": 15.84,
+            "end": 17.696
+          },
+          {
+            "start": 17.952,
+            "end": 18.56
+          },
+          {
+            "start": 18.944,
+            "end": 22
+          }
+        ],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -41.117016298399555,
+          "speechRmsDb": -41.117016298399555,
+          "snrDb": 5.462462202961092,
+          "humRatio": 0.0047822813316879004,
+          "echoScore": 0.09786595232556716
+        },
+        "evidence": {
+          "speechSeconds": 18.032041666666668,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": true,
+          "noiseStability": "unassessed",
+          "laterNoiseSeconds": 0,
+          "maxNoiseChangeDb": 0,
+          "echoExperimental": true
+        },
+        "state": "graded",
+        "grade": "F",
+        "certainty": "low",
+        "recommendation": {
+          "category": "Volume",
+          "messageKey": "recommendation.raise_volume",
+          "confidence": 0.6
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 18,
+          "missedSpeechSeconds": 1.8,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 0,
+          "uncertainSeconds": 2.2,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "239a000e58e822f65acf374e8710322479e87c49cdd4bb59784d1dff2375bfd6"
+    },
+    {
+      "file": "fold4_room8_mix003-noise.wav",
+      "room": "room8",
+      "role": "noise",
+      "sourceSamples": [
+        2880000,
+        3408000
+      ],
+      "sourceSha256": "60c0a06be7409c11d4152c33613517507c3cc0b4a26c99811776b85d6bfbbe19",
+      "metadataSha256": "974dbed8fdcfd244acfd012e26edd61b8e11ffb566a23a3d809f90d0ef326958",
+      "before": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.0001837787737849821,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 9.944797549557585,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "after": {
+        "segments": [],
+        "metrics": {
+          "clippingRatio": 0,
+          "speechClippingRatio": 0,
+          "clippedDurationSeconds": 0,
+          "clippingEventCount": 0,
+          "rmsDb": -160,
+          "speechRmsDb": -160,
+          "snrDb": -20,
+          "humRatio": 0.0001837787737849821,
+          "echoScore": 0
+        },
+        "evidence": {
+          "speechSeconds": 0,
+          "quietSeconds": 2,
+          "speechDetection": "silero",
+          "capture": {
+            "format": "pcm"
+          },
+          "noiseReliable": false,
+          "noiseStability": "unstable",
+          "laterNoiseSeconds": 20,
+          "maxNoiseChangeDb": 9.944797549557585,
+          "echoExperimental": true,
+          "retryReason": "no_speech"
+        },
+        "state": "NO_SPEECH",
+        "grade": null,
+        "certainty": "low",
+        "recommendation": {
+          "category": "General",
+          "messageKey": "recommendation.no_speech",
+          "confidence": 0
+        },
+        "agreement": {
+          "matchedSpeechSeconds": 0,
+          "missedSpeechSeconds": 0,
+          "candidateNoiseSpeechSeconds": 0,
+          "candidateNoiseSeconds": 22,
+          "uncertainSeconds": 0,
+          "speechInUncertainSeconds": 0,
+          "calibrationAnnotatedSpeechSeconds": 0
+        }
+      },
+      "acceptance": {
+        "noMoreMisses": true,
+        "noAddedNoiseSpeech": true,
+        "noiseOnlyGuidanceRetained": true,
+        "noNewCalibrationRetry": true
+      },
+      "cropSha256": "084a8d9fa877b2872f2c1f61d329df419802d3721eedb8549df8689c22c4705b"
+    }
+  ]
+}

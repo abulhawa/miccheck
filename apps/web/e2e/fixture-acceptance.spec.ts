@@ -21,3 +21,11 @@ test('STARSS22 recorded-room components meet frozen stability and retry expectat
     expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
   }
 });
+
+test('speech continuation improves frozen room crops without added candidate-noise speech', async () => {
+  test.setTimeout(180000);
+  const result = await promisify(execFile)(process.execPath, ['scripts/benchmark-vad-continuation.mjs', '--evaluation'], {
+    env: { ...process.env, VAD_NO_REPORT: '1' }, timeout: 170000, maxBuffer: 1024 * 1024,
+  }).then(({ stdout, stderr }) => ({ code: 0, stdout, stderr }), error => ({ code: error.code, stdout: error.stdout, stderr: error.stderr }));
+  expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
+});

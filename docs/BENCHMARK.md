@@ -31,6 +31,14 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [confirmed-continuation improvement](VAD_CONTINUATION_BENCHMARK.md) retains
+weaker speech evidence after the existing high-threshold segment is established.
+Actual production-worker comparisons on three additional untouched rooms reduce
+missed speech interiors from 10.0 to 8.0 s, with no speech in 66.0 s of separate
+domestic/instrument candidate controls. The original room21/room10 misses remain
+mostly unresolved; native noise retry truth and broader physical validation are
+still open. The new frozen evaluation now participates in fixture acceptance.
+
 The [STARSS22 comparison](STARSS22_NOISE_BENCHMARK.md) adds physical room
 recordings with upstream human event annotations. Twelve independently labeled
 recorded-component comparisons pass in development and separate evaluation

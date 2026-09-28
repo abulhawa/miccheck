@@ -5,6 +5,10 @@ annotations, and independently defined component-level retry expectations.
 This is supporting evidence for open backlog point 2. It does not complete
 representative window/threshold/floor tuning or establish native recording SNR.
 
+These snapshots precede the [confirmed-continuation change](VAD_CONTINUATION_BENCHMARK.md).
+Current fixture acceptance still checks all twelve frozen component expectations;
+the newer report records the implemented speech-selection improvement and limits.
+
 ## Target and independent labels
 
 The intended improvement target is missed noise changes or unnecessary retries
@@ -97,6 +101,12 @@ VAD thresholds or treating detected nonspeech as definitive background.
 The 50–60 s native clips exceed the app's current 20 s voice-stage limit; their
 context-length behavior is diagnostic, not a demonstrated failure in the real
 20 s capture flow. The 11.5 s component cases fit that duration.
+
+The [app-length follow-up](STARSS22_APP_LENGTH_SPEECH.md) now reproduces the
+room21 and room10 misses within 22 s contiguous inputs and records model
+probability traces. Shorter context recovers only 0.3 s and 0.1 s of annotated
+interiors respectively. Parameters remain unchanged; safe VAD candidate
+evaluation on additional untouched rooms is the next improvement target.
 
 ## Decision and remaining work
 

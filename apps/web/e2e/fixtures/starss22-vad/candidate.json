@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "candidate": "confirmed-continuation-0.35",
+  "onsetThreshold": 0.5,
+  "continuationThreshold": 0.35,
+  "confirmationSpanSeconds": 0.16,
+  "minimumSegmentSeconds": 0.16,
+  "silenceGapSeconds": 0.16,
+  "paddingSeconds": 0,
+  "baselineFunctionSha256": "8d3f048ae1bc931d98e1c00603212f4a739260aa42ce08af001c9be4ff356bb8",
+  "candidateFunctionSha256": "a54ec67c8a1ba2cfc99c3761bb37253e4c30028a18021909383d9b022cefcbf5",
+  "modelSha256": "2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f",
+  "selectionSha256": "2197d9b0405ad56866e511675cf1881886a7cceb2ac071d66015abc95aab73a2",
+  "acceptance": "No increased misses per labeled crop; no additional speech in candidate noise; net speech-interior gain on untouched rooms. Native retry truth remains unknown. Noise-only candidate controls must retain no-speech guidance. Existing independently labeled fixture acceptance must pass."
+}

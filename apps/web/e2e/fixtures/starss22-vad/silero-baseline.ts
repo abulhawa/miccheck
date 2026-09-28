@@ -30,21 +30,15 @@ export function speechSegments(probabilities: number[], duration: number): Speec
   const segments: SpeechSegment[] = [];
   let start: number | null = null;
   let lastVoice = 0;
-  let confirmed = false;
   for (let i = 0; i <= probabilities.length; i++) {
     const time = i * 0.032;
-    // Keep the 0.5 onset gate. Only an established segment can use weaker
-    // continuation evidence, so an isolated spike followed by weak noise cannot
-    // turn into a new speech segment. No fixed silence padding counts as evidence.
-    if ((probabilities[i] ?? 0) >= (confirmed ? 0.35 : 0.5)) {
+    if ((probabilities[i] ?? 0) >= 0.5) {
       if (start === null) start = time;
       lastVoice = Math.min(duration, time + 0.032);
-      if (lastVoice - start >= 0.16) confirmed = true;
     }
     if (start !== null && (time - lastVoice >= 0.16 || i === probabilities.length)) {
       if (lastVoice - start >= 0.16) segments.push({start, end:lastVoice});
       start = null;
-      confirmed = false;
     }
   }
   return segments;

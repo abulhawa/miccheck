@@ -1,0 +1,187 @@
+{
+  "protocol": {
+    "version": 1,
+    "rooms": [
+      "room22",
+      "room23",
+      "room8"
+    ],
+    "source": "https://zenodo.org/records/6387880",
+    "channel": 0,
+    "seconds": 22,
+    "metadataSha256": "4390567df522e634234a30d209e812dc270e317da6a4156e001b3cc890dd1633",
+    "rule": "Per unused room, maximize speech interiors or domestic/water/instrument candidate noise in a contiguous 22 s crop with no annotated speech in initial 2 s; tie by other label count, metadata path, then crop onset. Freeze before VAD outputs.",
+    "selection": [
+      {
+        "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix004.csv",
+        "startFrame": 115,
+        "interiorSpeechFrames": 192,
+        "candidateNoiseFrames": 0,
+        "room": "room22",
+        "role": "speech",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix008.csv",
+        "startFrame": 211,
+        "interiorSpeechFrames": 0,
+        "candidateNoiseFrames": 220,
+        "room": "room22",
+        "role": "noise",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix007.csv",
+        "startFrame": 667,
+        "interiorSpeechFrames": 191,
+        "candidateNoiseFrames": 0,
+        "room": "room23",
+        "role": "speech",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix010.csv",
+        "startFrame": 78,
+        "interiorSpeechFrames": 0,
+        "candidateNoiseFrames": 220,
+        "room": "room23",
+        "role": "noise",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix001.csv",
+        "startFrame": 1670,
+        "interiorSpeechFrames": 198,
+        "candidateNoiseFrames": 0,
+        "room": "room8",
+        "role": "speech",
+        "split": "evaluation"
+      },
+      {
+        "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix003.csv",
+        "startFrame": 1200,
+        "interiorSpeechFrames": 0,
+        "candidateNoiseFrames": 220,
+        "room": "room8",
+        "role": "noise",
+        "split": "evaluation"
+      }
+    ]
+  },
+  "clips": [
+    {
+      "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix004.csv",
+      "startFrame": 115,
+      "interiorSpeechFrames": 192,
+      "candidateNoiseFrames": 0,
+      "room": "room22",
+      "role": "speech",
+      "split": "evaluation",
+      "file": "fold3_room22_mix004-speech.wav",
+      "archive_path": "mic_dev/dev-train-sony/fold3_room22_mix004.wav",
+      "sourceSha256": "b4c1b569d9f36107ca685f9f26a112129057cb78b43a4b625b83207ca2b452ac",
+      "sourceSamples": [
+        276000,
+        804000
+      ],
+      "sampleRate": 24000,
+      "sha256": "12058546a8395918428e28eacc9e3aff4d7969b8c02ccb481a2e1b65cdea0450",
+      "metadataSha256": "62bc0ce27da990cbd9bacb392aa1857a3744f98c748e32b9a838c29e4d3b4b71"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-train-sony/fold3_room22_mix008.csv",
+      "startFrame": 211,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room22",
+      "role": "noise",
+      "split": "evaluation",
+      "file": "fold3_room22_mix008-noise.wav",
+      "archive_path": "mic_dev/dev-train-sony/fold3_room22_mix008.wav",
+      "sourceSha256": "56e50a5cc3975fc9281902c928ae2afd2dd047ac935ba03d19366be150f441ac",
+      "sourceSamples": [
+        506400,
+        1034400
+      ],
+      "sampleRate": 24000,
+      "sha256": "2f496722c2aa30fdd01db32632567a8dc8781a5669d8bdc314db7cb8f1ce8648",
+      "metadataSha256": "877bf825504090ece0b086cb99b83b9c2bab9a995db259bf6490050177b0c9d4"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix007.csv",
+      "startFrame": 667,
+      "interiorSpeechFrames": 191,
+      "candidateNoiseFrames": 0,
+      "room": "room23",
+      "role": "speech",
+      "split": "evaluation",
+      "file": "fold4_room23_mix007-speech.wav",
+      "archive_path": "mic_dev/dev-test-sony/fold4_room23_mix007.wav",
+      "sourceSha256": "968ba3d2df882011316624d45b0b3f4faebf14884e63b4e9ff644e4e6ac0a51a",
+      "sourceSamples": [
+        1600800,
+        2128800
+      ],
+      "sampleRate": 24000,
+      "sha256": "5dbfecf7d1275d273fb22b6aee1de530a5e3800fdfe944f0b96e1403c7fe64ee",
+      "metadataSha256": "e2a25c701e3da1bd09e7e94bdb83ac9a84df6b0e5f0088638702c7e79d912015"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-sony/fold4_room23_mix010.csv",
+      "startFrame": 78,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room23",
+      "role": "noise",
+      "split": "evaluation",
+      "file": "fold4_room23_mix010-noise.wav",
+      "archive_path": "mic_dev/dev-test-sony/fold4_room23_mix010.wav",
+      "sourceSha256": "131b61f95a6a0e36cc1aba810e3e9dbc27cf7911178dd894ef0ef3b6a13d454c",
+      "sourceSamples": [
+        187200,
+        715200
+      ],
+      "sampleRate": 24000,
+      "sha256": "acd338c824757ad6413139a0286ffcf6985f114bd170292e771aeb9bc7d6d620",
+      "metadataSha256": "d26209b8495308c9d289151a2cc36bd4e1be216e86a7b6d0bf5872a5b995b9b0"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix001.csv",
+      "startFrame": 1670,
+      "interiorSpeechFrames": 198,
+      "candidateNoiseFrames": 0,
+      "room": "room8",
+      "role": "speech",
+      "split": "evaluation",
+      "file": "fold4_room8_mix001-speech.wav",
+      "archive_path": "mic_dev/dev-test-tau/fold4_room8_mix001.wav",
+      "sourceSha256": "90dac2f9f3b0c83063bcf2fa92acd20e0a802af835029f06a3ec5744cc8b462a",
+      "sourceSamples": [
+        4008000,
+        4536000
+      ],
+      "sampleRate": 24000,
+      "sha256": "239a000e58e822f65acf374e8710322479e87c49cdd4bb59784d1dff2375bfd6",
+      "metadataSha256": "b9f8b41faaf9ea4d0d8860d57a134092b6e35d57fa859bbcd3ed6bc605dbacbe"
+    },
+    {
+      "metadata_path": "metadata_dev/dev-test-tau/fold4_room8_mix003.csv",
+      "startFrame": 1200,
+      "interiorSpeechFrames": 0,
+      "candidateNoiseFrames": 220,
+      "room": "room8",
+      "role": "noise",
+      "split": "evaluation",
+      "file": "fold4_room8_mix003-noise.wav",
+      "archive_path": "mic_dev/dev-test-tau/fold4_room8_mix003.wav",
+      "sourceSha256": "60c0a06be7409c11d4152c33613517507c3cc0b4a26c99811776b85d6bfbbe19",
+      "sourceSamples": [
+        2880000,
+        3408000
+      ],
+      "sampleRate": 24000,
+      "sha256": "084a8d9fa877b2872f2c1f61d329df419802d3721eedb8549df8689c22c4705b",
+      "metadataSha256": "974dbed8fdcfd244acfd012e26edd61b8e11ffb566a23a3d809f90d0ef326958"
+    }
+  ]
+}
