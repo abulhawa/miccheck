@@ -6,18 +6,6 @@
     2,
     4
   ],
-  "parameters": {
-    "sustainedWindowMs": 250,
-    "sustainedGuardMs": 300,
-    "eventWindowMs": 50,
-    "eventHopMs": 25,
-    "eventGuardMs": 500,
-    "eventCoverageMs": 100,
-    "eventRequiresRecovery": true,
-    "eventAfterSpeechOnly": true,
-    "changeDb": 6,
-    "floorDb": -60
-  },
   "rows": [
     {
       "rate": 8000,
@@ -26,7 +14,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -36,8 +24,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.3824527550432606
+      "usableSeconds": 1,
+      "maxChangeDb": 2.172381104168707
     },
     {
       "rate": 8000,
@@ -46,7 +34,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -66,7 +54,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -76,18 +64,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.3824527799975
+      "usableSeconds": 1,
+      "maxChangeDb": 8.172381112420013
     },
     {
       "rate": 8000,
       "shape": "broadband",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.253178885504155
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.234968475202059
     },
     {
       "rate": 8000,
@@ -96,7 +84,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -106,8 +94,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.38305858936950443
+      "usableSeconds": 1,
+      "maxChangeDb": 0.17298691877151384
     },
     {
       "rate": 8000,
@@ -116,8 +104,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.383058579084505
+      "usableSeconds": 1,
+      "maxChangeDb": 12.172986922280444
     },
     {
       "rate": 8000,
@@ -126,7 +114,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 9.999394190533515
     },
     {
@@ -146,8 +134,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.38305858936950443
+      "usableSeconds": 1,
+      "maxChangeDb": 0.17298691877151384
     },
     {
       "rate": 8000,
@@ -156,18 +144,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.383058598056138
+      "usableSeconds": 1,
+      "maxChangeDb": 18.17298691854825
     },
     {
       "rate": 8000,
       "shape": "broadband",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.253784647538982
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.235574264765447
     },
     {
       "rate": 8000,
@@ -176,8 +164,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.383058592340227
+      "usableSeconds": 1,
+      "maxChangeDb": 5.172986908814188
     },
     {
       "rate": 8000,
@@ -186,8 +174,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.3830585932879913
+      "usableSeconds": 1,
+      "maxChangeDb": 0.17298692186378162
     },
     {
       "rate": 8000,
@@ -196,8 +184,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.38305858013143
+      "usableSeconds": 1,
+      "maxChangeDb": 12.172986921487038
     },
     {
       "rate": 8000,
@@ -206,8 +194,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.343669995376395
+      "usableSeconds": 1,
+      "maxChangeDb": 12.01615778157965
     },
     {
       "rate": 8000,
@@ -226,8 +214,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.3830585932879913
+      "usableSeconds": 1,
+      "maxChangeDb": 0.17298692186378162
     },
     {
       "rate": 8000,
@@ -236,18 +224,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.383058582936883
+      "usableSeconds": 1,
+      "maxChangeDb": 18.172986913009673
     },
     {
       "rate": 8000,
       "shape": "broadband",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.25378466680207
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.235574273648204
     },
     {
       "rate": 8000,
@@ -256,8 +244,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.383058595443057
+      "usableSeconds": 1,
+      "maxChangeDb": 5.172986919512745
     },
     {
       "rate": 8000,
@@ -266,7 +254,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -276,8 +264,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.012285395044458
+      "usableSeconds": 1,
+      "maxChangeDb": 2.0027450977219274
     },
     {
       "rate": 8000,
@@ -286,7 +274,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -306,7 +294,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -316,18 +304,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.012285409391353
+      "usableSeconds": 1,
+      "maxChangeDb": 8.002745099856298
     },
     {
       "rate": 8000,
       "shape": "tone",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 7.998080707182602
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.116479019296975
     },
     {
       "rate": 8000,
@@ -336,7 +324,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -346,8 +334,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.012320228218968055
+      "usableSeconds": 1,
+      "maxChangeDb": 0.002746836750681325
     },
     {
       "rate": 8000,
@@ -356,8 +344,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.01228539636125
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002745090549254
     },
     {
       "rate": 8000,
@@ -366,7 +354,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 10.000000001227022
     },
     {
@@ -386,8 +374,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.012320228218968055
+      "usableSeconds": 1,
+      "maxChangeDb": 0.002746836750681325
     },
     {
       "rate": 8000,
@@ -396,18 +384,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.012285418620316
+      "usableSeconds": 1,
+      "maxChangeDb": 18.00274511375676
     },
     {
       "rate": 8000,
       "shape": "tone",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 17.998080728453488
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.116479035288137
     },
     {
       "rate": 8000,
@@ -416,8 +404,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.012285403296119
+      "usableSeconds": 1,
+      "maxChangeDb": 5.002745103147966
     },
     {
       "rate": 8000,
@@ -426,8 +414,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.012320223107636252
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027468355855759796
     },
     {
       "rate": 8000,
@@ -436,8 +424,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.01228536243682
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002745096287946
     },
     {
       "rate": 8000,
@@ -446,8 +434,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.012320242554289
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002746841135185
     },
     {
       "rate": 8000,
@@ -466,8 +454,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.012320223107636252
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027468355855759796
     },
     {
       "rate": 8000,
@@ -476,18 +464,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.01228537504842
+      "usableSeconds": 1,
+      "maxChangeDb": 18.002745097943958
     },
     {
       "rate": 8000,
       "shape": "tone",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 17.998080706432017
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.116479034848716
     },
     {
       "rate": 8000,
@@ -496,8 +484,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.01228540765613
+      "usableSeconds": 1,
+      "maxChangeDb": 5.0027451089680355
     },
     {
       "rate": 16000,
@@ -506,7 +494,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -516,8 +504,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.213524352276302
+      "usableSeconds": 1,
+      "maxChangeDb": 2.178050404641013
     },
     {
       "rate": 16000,
@@ -526,7 +514,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -546,7 +534,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -556,18 +544,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.213524377105628
+      "usableSeconds": 1,
+      "maxChangeDb": 8.178050410672611
     },
     {
       "rate": 16000,
       "shape": "broadband",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.198625773745725
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.305837949081365
     },
     {
       "rate": 16000,
@@ -576,7 +564,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -586,8 +574,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.2401818853091271
+      "usableSeconds": 1,
+      "maxChangeDb": 0.20470792655680725
     },
     {
       "rate": 16000,
@@ -596,8 +584,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.240181886663272
+      "usableSeconds": 1,
+      "maxChangeDb": 12.204707925145811
     },
     {
       "rate": 16000,
@@ -606,7 +594,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 9.973342480251233
     },
     {
@@ -626,8 +614,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.2401818853091271
+      "usableSeconds": 1,
+      "maxChangeDb": 0.20470792655680725
     },
     {
       "rate": 16000,
@@ -636,18 +624,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.24018188283787
+      "usableSeconds": 1,
+      "maxChangeDb": 18.204707923697622
     },
     {
       "rate": 16000,
       "shape": "broadband",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.22528327992818
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.332495459914199
     },
     {
       "rate": 16000,
@@ -656,8 +644,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.2401818910039
+      "usableSeconds": 1,
+      "maxChangeDb": 5.204707930796502
     },
     {
       "rate": 16000,
@@ -666,8 +654,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.24018189097147058
+      "usableSeconds": 1,
+      "maxChangeDb": 0.20470792205957267
     },
     {
       "rate": 16000,
@@ -676,8 +664,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.240181878218547
+      "usableSeconds": 1,
+      "maxChangeDb": 12.204707918532609
     },
     {
       "rate": 16000,
@@ -686,8 +674,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.20011331303984
+      "usableSeconds": 1,
+      "maxChangeDb": 12.078061026678728
     },
     {
       "rate": 16000,
@@ -706,8 +694,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.24018189097147058
+      "usableSeconds": 1,
+      "maxChangeDb": 0.20470792205957267
     },
     {
       "rate": 16000,
@@ -716,18 +704,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.240181873537317
+      "usableSeconds": 1,
+      "maxChangeDb": 18.204707917757183
     },
     {
       "rate": 16000,
       "shape": "broadband",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.2252832849312
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.332495455296746
     },
     {
       "rate": 16000,
@@ -736,8 +724,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.240181877399163
+      "usableSeconds": 1,
+      "maxChangeDb": 5.204707924026138
     },
     {
       "rate": 16000,
@@ -746,7 +734,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -756,8 +744,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.011459754335604
+      "usableSeconds": 1,
+      "maxChangeDb": 2.0028358191502207
     },
     {
       "rate": 16000,
@@ -766,7 +754,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -786,7 +774,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -796,18 +784,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.011459766396015
+      "usableSeconds": 1,
+      "maxChangeDb": 8.002835828209847
     },
     {
       "rate": 16000,
       "shape": "tone",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.00269914855528
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.118528510841635
     },
     {
       "rate": 16000,
@@ -816,7 +804,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -826,8 +814,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011490074690449603
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0028376769508611233
     },
     {
       "rate": 16000,
@@ -836,8 +824,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011459763509457
+      "usableSeconds": 1,
+      "maxChangeDb": 12.00283582174815
     },
     {
       "rate": 16000,
@@ -846,7 +834,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 10.000000001649695
     },
     {
@@ -866,8 +854,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011490074690449603
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0028376769508611233
     },
     {
       "rate": 16000,
@@ -876,18 +864,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.011459768054166
+      "usableSeconds": 1,
+      "maxChangeDb": 18.00283582289717
     },
     {
       "rate": 16000,
       "shape": "tone",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.002699136002704
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.11852850966413
     },
     {
       "rate": 16000,
@@ -896,8 +884,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.011459745692335
+      "usableSeconds": 1,
+      "maxChangeDb": 5.002835818425268
     },
     {
       "rate": 16000,
@@ -906,8 +894,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.01149008719013267
+      "usableSeconds": 1,
+      "maxChangeDb": 0.002837673153759823
     },
     {
       "rate": 16000,
@@ -916,8 +904,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011459755656055
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002835816881614
     },
     {
       "rate": 16000,
@@ -926,8 +914,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011490077871464
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002837678632282
     },
     {
       "rate": 16000,
@@ -946,8 +934,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.01149008719013267
+      "usableSeconds": 1,
+      "maxChangeDb": 0.002837673153759823
     },
     {
       "rate": 16000,
@@ -956,18 +944,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.011459749285088
+      "usableSeconds": 1,
+      "maxChangeDb": 18.002835825219915
     },
     {
       "rate": 16000,
       "shape": "tone",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.002699144702156
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.118528517967551
     },
     {
       "rate": 16000,
@@ -976,8 +964,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.011459780403072
+      "usableSeconds": 1,
+      "maxChangeDb": 5.002835825373175
     },
     {
       "rate": 48000,
@@ -986,7 +974,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -996,8 +984,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.088824904270055
+      "usableSeconds": 1,
+      "maxChangeDb": 2.0057485129840202
     },
     {
       "rate": 48000,
@@ -1006,7 +994,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1026,7 +1014,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1036,18 +1024,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.088824905937216
+      "usableSeconds": 1,
+      "maxChangeDb": 7.983323221852132
     },
     {
       "rate": 48000,
       "shape": "broadband",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.004716269799843
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.0683540064411545
     },
     {
       "rate": 48000,
@@ -1056,7 +1044,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1066,8 +1054,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.22458013748475025
+      "usableSeconds": 1,
+      "maxChangeDb": 0.06471558837233005
     },
     {
       "rate": 48000,
@@ -1076,8 +1064,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.08791423865378
+      "usableSeconds": 1,
+      "maxChangeDb": 12.004837832669068
     },
     {
       "rate": 48000,
@@ -1086,7 +1074,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 10.00091067686212
     },
     {
@@ -1106,8 +1094,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.22458013748475025
+      "usableSeconds": 1,
+      "maxChangeDb": 0.06471558837233005
     },
     {
       "rate": 48000,
@@ -1116,18 +1104,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.08791423041126
+      "usableSeconds": 1,
+      "maxChangeDb": 17.982412543696313
     },
     {
       "rate": 48000,
       "shape": "broadband",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.00380558553874
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.067443328436376
     },
     {
       "rate": 48000,
@@ -1136,8 +1124,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.087914223890493
+      "usableSeconds": 1,
+      "maxChangeDb": 5.004837833979586
     },
     {
       "rate": 48000,
@@ -1146,8 +1134,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.22458013290492218
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0647155884798103
     },
     {
       "rate": 48000,
@@ -1156,8 +1144,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.087914227529229
+      "usableSeconds": 1,
+      "maxChangeDb": 12.004837833191782
     },
     {
       "rate": 48000,
@@ -1166,8 +1154,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.224580143651135
+      "usableSeconds": 1,
+      "maxChangeDb": 12.064715590536249
     },
     {
       "rate": 48000,
@@ -1186,8 +1174,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.22458013290492218
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0647155884798103
     },
     {
       "rate": 48000,
@@ -1196,18 +1184,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.087914235040905
+      "usableSeconds": 1,
+      "maxChangeDb": 17.982412550288842
     },
     {
       "rate": 48000,
       "shape": "broadband",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.003805591638823
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.067443333906333
     },
     {
       "rate": 48000,
@@ -1216,8 +1204,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.087914223241764
+      "usableSeconds": 1,
+      "maxChangeDb": 5.004837834177998
     },
     {
       "rate": 48000,
@@ -1226,7 +1214,7 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1236,8 +1224,8 @@
       "condition": "increase",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 2.011139473857483
+      "usableSeconds": 1,
+      "maxChangeDb": 2.002733381075579
     },
     {
       "rate": 48000,
@@ -1246,7 +1234,7 @@
       "condition": "decrease",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1266,7 +1254,7 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1276,18 +1264,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.011046194244742
+      "usableSeconds": 1,
+      "maxChangeDb": 8.002733386278244
     },
     {
       "rate": 48000,
       "shape": "tone",
       "floorDb": -70,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 8.005368330277477
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 4.120009123399228
     },
     {
       "rate": 48000,
@@ -1296,7 +1284,7 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 0
     },
     {
@@ -1306,8 +1294,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011168120627694123
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027351074835806344
     },
     {
       "rate": 48000,
@@ -1316,8 +1304,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011139465123605
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002733385007701
     },
     {
       "rate": 48000,
@@ -1326,7 +1314,7 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
+      "usableSeconds": 1,
       "maxChangeDb": 9.999999997230177
     },
     {
@@ -1346,8 +1334,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011168120627694123
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027351074835806344
     },
     {
       "rate": 48000,
@@ -1356,18 +1344,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.011046188347496
+      "usableSeconds": 1,
+      "maxChangeDb": 18.002733384536548
     },
     {
       "rate": 48000,
       "shape": "tone",
       "floorDb": -50,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.005368326623838
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.12000912595785
     },
     {
       "rate": 48000,
@@ -1376,8 +1364,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.011139459319708
+      "usableSeconds": 1,
+      "maxChangeDb": 5.002733381234876
     },
     {
       "rate": 48000,
@@ -1386,8 +1374,8 @@
       "condition": "stationary",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011168110097703021
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027351037521405885
     },
     {
       "rate": 48000,
@@ -1396,8 +1384,8 @@
       "condition": "increase",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011139452644187
+      "usableSeconds": 1,
+      "maxChangeDb": 12.002733380047005
     },
     {
       "rate": 48000,
@@ -1406,8 +1394,8 @@
       "condition": "decrease",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 12.011168109527706
+      "usableSeconds": 1,
+      "maxChangeDb": 12.00273510658597
     },
     {
       "rate": 48000,
@@ -1426,8 +1414,8 @@
       "condition": "boundary-residue",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 0.011168110097703021
+      "usableSeconds": 1,
+      "maxChangeDb": 0.0027351037521405885
     },
     {
       "rate": 48000,
@@ -1436,18 +1424,18 @@
       "condition": "burst",
       "expected": "unstable",
       "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.011046189021588
+      "usableSeconds": 1,
+      "maxChangeDb": 18.002733385124586
     },
     {
       "rate": 48000,
       "shape": "tone",
       "floorDb": -30,
       "condition": "short-burst",
-      "expected": "unstable",
-      "actual": "unstable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 18.00536832613537
+      "expected": "stable",
+      "actual": "stable",
+      "usableSeconds": 1,
+      "maxChangeDb": 14.120009126027135
     },
     {
       "rate": 48000,
@@ -1456,8 +1444,8 @@
       "condition": "near-threshold",
       "expected": "stable",
       "actual": "stable",
-      "usableSeconds": 0.75,
-      "maxChangeDb": 5.011139460562102
+      "usableSeconds": 1,
+      "maxChangeDb": 5.002733384310563
     }
   ]
 }

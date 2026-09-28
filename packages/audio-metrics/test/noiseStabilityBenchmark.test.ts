@@ -58,7 +58,8 @@ describe('controlled noise stability benchmark', () => {
     if (process.env.UPDATE_NOISE_BENCHMARK === '1') {
       writeFileSync(new URL('../../../docs/noise-stability-results.json', import.meta.url), JSON.stringify({
         description: 'Controlled synthetic estimator evaluation with exact generated intervals; no human annotation or VAD accuracy claim.',
-        seed: 12345, calibrationSeconds: 2, speechInterval: [2, 4], rows
+        seed: 12345, calibrationSeconds: 2, speechInterval: [2, 4],
+        parameters: {sustainedWindowMs:250, sustainedGuardMs:300, eventWindowMs:50, eventHopMs:25, eventGuardMs:500, eventCoverageMs:100, eventRequiresRecovery:true, eventAfterSpeechOnly:true, changeDb:6, floorDb:-60}, rows
       }, null, 2) + '\n');
     }
   });

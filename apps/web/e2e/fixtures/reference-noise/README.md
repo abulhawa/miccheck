@@ -1,0 +1,9 @@
+# Independent reference-component fixtures
+
+Two clean-reference speech files and one environmental noise file from [Microsoft MS-SNSD](https://github.com/microsoft/MS-SNSD), pinned to revision `fe61c4ba0d9ac8dd7e23d719cc79f8947e1dc742`. Files are unmodified upstream mono PCM16 at 16 kHz. [manifest.json](manifest.json) records roles, original paths, sample counts, hashes, and the mixture protocol. [UPSTREAM_README.md](UPSTREAM_README.md) preserves attribution and original dataset license notices; MIT covers repository code, not all audio. Upstream lists PTDB-TUG/Edinburgh speech and Freesound/DEMAND noise terms but does not identify an individual origin for these filenames. Do not assign an invented per-file license or speaker identity.
+
+`packages/audio-metrics/test/referenceMixtures.test.ts` checks six 0/10/20 dB mixtures against independently retained reference components. The reference interval is the entire clean source, padded to a two-second boundary. Noise uses the first two seconds of the supplied recording, repeated in calibration, source interval, and tail. Components are normalized before addition; no hard limiting occurs. Reference SNR is calculated from their powers, not from app-selected intervals or app outputs. The acceptance error is at most 1 dB.
+
+These tests isolate estimator correctness using supplied intervals. They do not run Silero, annotate actual human speech, or prove real room SNR accuracy. The original clean designation is upstream reference data, not an independently measured absence of all noise. Periodic noise looping is a controlled condition, not a realistic recording of changing noise. Use the separate production-worker recording tests to assess speech detection and noise-event behavior.
+
+Reproduce original downloads with `https://raw.githubusercontent.com/microsoft/MS-SNSD/<revision>/<path>` using the manifest revision and paths. Tests verify all hashes and require no network downloads.

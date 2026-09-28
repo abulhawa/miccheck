@@ -149,7 +149,7 @@ const toBestNextSteps = (steps: Array<AdviceStepWithCoverage | GearStep>): Verdi
 
 export const buildRecommendationPolicy = (
   level: LevelMetrics,
-  clipping: ClippingMetrics,
+  clipping: Pick<ClippingMetrics, "clippingRatio" | "peak">,
   noise: NoiseMetrics,
   echo: EchoMetrics,
   context?: ContextInput
@@ -252,7 +252,7 @@ export const buildVerdictNextSteps = (
 
 export const recommendFix = (
   level: LevelMetrics,
-  clipping: ClippingMetrics,
+  clipping: Pick<ClippingMetrics, "clippingRatio" | "peak">,
   noise: NoiseMetrics,
   echo: EchoMetrics,
   context?: ContextInput

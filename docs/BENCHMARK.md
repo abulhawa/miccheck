@@ -13,7 +13,7 @@ The purpose of these benchmarks and recording artifacts is to improve the mic ch
 
 A report or a larger corpus is supporting work. Completion of an app improvement requires an implemented change and evidence for its intended behavior. When evidence supports retaining the current behavior, explain why and keep unresolved weaknesses actionable rather than claiming an optimization.
 
-The next concrete target is brief noise events missed by the current stability windows; see [the backlog](BACKLOG.md#2-assess-background-noise-stability--high-priority) and [controlled results](NOISE_STABILITY_BENCHMARK.md). Evaluate detection gains alongside false alarms from speech residue before deciding their effect on grading or retry guidance.
+Brief noise events missed by the original stability windows now have an implemented fix; see [the backlog](BACKLOG.md#2-assess-background-noise-stability--high-priority) and [before/after results](NOISE_STABILITY_BENCHMARK.md). The next accuracy work is independent human speech annotation, held-out capture conditions, and real-microphone validation. [MS-SNSD reference mixtures](../apps/web/e2e/fixtures/reference-noise/README.md) add SNR estimator gates with predefined intervals; keep these distinct from end-to-end speech-selection accuracy.
 
 Recorded September 10, 2026 on Windows, Chromium 153.0.8010.12. Machine-readable output: [benchmark-results.json](benchmark-results.json). Each input lasts seven seconds. The speech fixture is locally generated synthetic speech; its provenance is in `apps/web/public/demo/README.md`.
 

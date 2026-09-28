@@ -16,6 +16,8 @@ For SNR, seeded independent noise is added with a nominal whole-clip 20 dB ratio
 
 Acceptance run September 28, 2026: SNR, reflection, stationary/sustained-noise controls, and clipping invariance passed for all twelve clips. Brief-noise detection failed for `5639-40744-0033`, `260-123440-0018`, `7729-102255-0045`, and `3575-170457-0020`. The acceptance runner exits nonzero for these failures. The controlled estimator suite also fails its eighteen short-burst acceptance cases. These failures establish work to improve the app, not reasons to weaken the expectations.
 
+After implementing the short-window detector and protecting it from speech-boundary residue, all twelve recordings meet those expectations, including the four original misses. All eighteen controlled short-burst cases now pass as well. The acceptance suite also asserts that the original, stationary-noise, clipping, reflection, and known-mixture controls still receive grades, preventing improved burst detection from introducing unsupported retries. These recordings informed development; they are regression evidence, not held-out accuracy validation.
+
 Twelve unmodified human audiobook recordings from six additional LibriSpeech test-clean speakers, retrieved September 28, 2026. These are recorded people, not synthesized voices. Each clip is 3–12 seconds long, in 16 kHz FLAC format. Total duration is about 81 seconds.
 
 Source: [LibriSpeech / OpenSLR](https://www.openslr.org/12/).

@@ -132,6 +132,9 @@ try {
       check(get('brief-noise').evidence.noiseStability === 'unstable',
         '100 ms high-noise burst must flag changed noise evidence');
       check(get('low-noise').evidence.noiseStability === 'stable', 'stationary control must remain stable');
+      for (const scenario of ['original', 'low-noise', 'noisy', 'clipped', 'clipped-plus-silence', 'echo', 'known-mixture']) {
+        check(get(scenario).state === 'graded', `${scenario} must not request an unsupported retry`);
+      }
       check(get('changing-noise').evidence.retryReason === 'noise_unstable', 'sustained noise increase must request retry');
       check(get('clipped').metrics.speechClippingRatio === get('clipped-plus-silence').metrics.speechClippingRatio,
         'speech clipping must be invariant to appended silence');

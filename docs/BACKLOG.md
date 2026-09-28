@@ -23,12 +23,14 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 - [x] Compare calibration noise with sufficiently long later nonspeech windows. Exclude speech boundaries to reduce contamination from breaths, missed speech, and reverberation.
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.
 - [x] Surface unstable-noise evidence and define how it limits SNR confidence, grading, and retry guidance.
-- [ ] Address missed brief noise events demonstrated by the controlled benchmark. Distinguish intermittent events from sustained changes and connect the result to confidence or guidance; verify against stationary noise and speech-boundary residue before changing grading or retry behavior.
+- [x] Address missed brief noise events demonstrated by the controlled benchmark. Check brief level increases separately from sustained increases/decreases and connect detection to confidence and retry guidance; verify stationary noise and speech-boundary residue controls.
 
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
-Progress September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) adds 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It confirms the current behavior and demonstrates missed 100 ms bursts and floor-suppressed low-level changes. Human annotation and representative threshold tuning remain pending; production thresholds are unchanged.
+Initial baseline September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) added 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It demonstrated missed 100 ms bursts and floor-suppressed low-level changes before the following implementation update.
+
+Implementation update: overlapping 50 ms windows now catch the tested 100 ms increases; the sustained 250 ms check remains for increases/decreases. Guards are 300 ms for sustained measurements and 500 ms for the more sensitive brief-event check. The 18 controlled misses now pass, and all twelve human recordings pass the burst and stationary controls. Six [MS-SNSD reference mixtures](../apps/web/e2e/fixtures/reference-noise/README.md) additionally verify independently defined 0/10/20 dB SNR within 1 dB. These fixes do not complete representative threshold tuning or manual human annotation.
 
 Acceptance: controlled stationary noise remains reliable; meaningful increases/decreases and intermittent noise are flagged; short gaps and speech-boundary contamination do not cause unsupported stability claims. Missing later quiet windows receive an explicit unknown assessment.
 
@@ -63,10 +65,12 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `apps/web/lib/metricFor
 
 ## 5. Improve and validate experimental echo — lower priority
 
-- [ ] Analyze original contiguous audio segments, preserving timing instead of concatenating detected speech across pauses. Define aggregation across segments.
+- [x] Analyze original contiguous audio segments, preserving timing instead of concatenating detected speech across pauses. Define aggregation across segments.
 - [ ] Validate against controlled echo conditions and clean speech patterns that can produce similar autocorrelation peaks.
 - [ ] Revisit estimator confidence using validation evidence; fixing segment timing alone does not validate echo accuracy.
 
 Acceptance: test pause/segment handling and false positives from ordinary speech; publish limitations. Echo remains explicitly experimental and excluded from grades and purchase advice unless separate validation justifies a future change.
 
 Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics/src/metrics/echo.ts`, `packages/audio-metrics/src/metrics/echo.test.ts`.
+
+Contiguous-run echo scores are averaged by eligible sample count; runs of 200 ms or less do not contribute. A regression verifies invariance when pauses between identical speech runs change. This fixes timing semantics, not echo calibration; echo remains experimental and outside grading.

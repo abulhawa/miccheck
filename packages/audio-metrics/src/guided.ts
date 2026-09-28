@@ -37,13 +37,17 @@ const db = (rms: number) => 20 * Math.log10(Math.max(rms, 1e-8));
 
 /** Provisional stationarity check, not a calibrated uncertainty estimate. */
 function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd: number, rate: number, noiseFloor: number) {
-  const guard = Math.ceil(rate * 0.2);
+  const guard = Math.ceil(rate * 0.3);
   const window = Math.max(1, Math.floor(rate * 0.25));
+  const eventWindow = Math.max(1, Math.floor(rate * 0.05));
+  const eventHop = Math.max(1, Math.floor(rate * 0.025));
   // Ignore differences wholly below -60 dBFS, including appended digital silence.
   const referenceDb = db(Math.max(noiseFloor, 0.001));
   let windows = 0;
   let maxNoiseChangeDb = 0;
   let changedWindows = 0;
+  let briefNoiseEvent = false;
+  let unfinishedNoiseEvent = false;
   for (let i = quietEnd; i < mask.length;) {
     if (mask[i]) { i++; continue; }
     const runStart = i;
@@ -51,6 +55,34 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     const start = runStart + (runStart > quietEnd && mask[runStart - 1] ? guard : 0);
     const end = i - (i < mask.length ? guard : 0);
     if (end - start < window * 2) continue;
+    // A brief burst can fit inside one 250 ms window and be missed by the
+    // sustained-change rule. Require 100 ms of overlapping 50 ms evidence.
+    // Reset at every speech/quiet boundary so disjoint spikes cannot accumulate.
+    // Use a wider guard for short windows: weak speech and breaths may extend
+    // beyond Silero's boundaries, especially at the end of an utterance.
+    const eventGuard = Math.ceil(rate * 0.5);
+    const eventStart = runStart + (runStart > quietEnd && mask[runStart - 1] ? eventGuard : 0);
+    const eventEnd = i - (i < mask.length ? eventGuard : 0);
+    let elevatedStart = -1;
+    let eventHasEvidence = false;
+    // The leading voice interval can contain a soft onset missed by VAD.
+    // Reserve this sensitive check for pauses following detected speech.
+    for (let offset = eventStart; runStart > quietEnd && offset + eventWindow <= eventEnd; offset += eventHop) {
+      const levelDb = db(Math.max(computeRms(samples.subarray(offset, offset + eventWindow)), 0.001));
+      const increaseDb = levelDb - referenceDb;
+      maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(increaseDb));
+      if (increaseDb > 6) {
+        if (elevatedStart < 0) elevatedStart = offset;
+        if ((offset + eventWindow - elevatedStart) / rate >= 0.1) eventHasEvidence = true;
+      } else {
+        // A completed burst needs a return to the room level. Otherwise a
+        // truncated utterance at capture end can look like a noise event.
+        if (eventHasEvidence) briefNoiseEvent = true;
+        elevatedStart = -1;
+        eventHasEvidence = false;
+      }
+    }
+    if (eventHasEvidence) unfinishedNoiseEvent = true;
     for (let offset = start; offset + window <= end; offset += window) {
       const levelDb = db(Math.max(computeRms(samples.subarray(offset, offset + window)), 0.001));
       const changeDb = Math.abs(levelDb - referenceDb);
@@ -60,7 +92,7 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     }
   }
   const laterNoiseSeconds = windows * window / rate;
-  const noiseStability = laterNoiseSeconds < 0.5 ? 'unassessed' : changedWindows >= 2 ? 'unstable' : 'stable';
+  const noiseStability = laterNoiseSeconds < 0.5 ? 'unassessed' : changedWindows >= 2 || briefNoiseEvent ? 'unstable' : unfinishedNoiseEvent ? 'unassessed' : 'stable';
   return {noiseStability, laterNoiseSeconds, maxNoiseChangeDb} as const;
 }
 
@@ -97,11 +129,23 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   const humRatio = measureHum(samples.subarray(0, quietEnd), sampleRate);
   const clipping = measureClipping(speechSamples);
   const recordingClipping = measureClipping(samples);
-  const echo = measureEcho(speechSamples, sampleRate);
+  // Preserve original timing: concatenating speech across pauses creates
+  // artificial autocorrelation pairs. Average eligible contiguous runs by
+  // sample count; short runs with no full 200 ms lag contribute no evidence.
+  let echoWeightedScore = 0;
+  let echoSamples = 0;
+  for (let i = quietEnd; i < mask.length;) {
+    if (!mask[i]) { i++; continue; }
+    const start = i;
+    while (i < mask.length && mask[i]) i++;
+    if (i - start <= Math.floor(sampleRate * 0.2)) continue;
+    echoWeightedScore += measureEcho(samples.subarray(start, i), sampleRate).echoScore * (i - start);
+    echoSamples += i - start;
+  }
   const metrics = {clippingRatio: clipping.clippingRatio, speechClippingRatio: clipping.clippingRatio,
     clippedDurationSeconds: recordingClipping.nearFullScaleSampleCount / sampleRate,
     clippingEventCount: recordingClipping.clippingEventCount,
-    rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echo.echoScore};
+    rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echoSamples ? echoWeightedScore / echoSamples : 0};
   if (speechSeconds < 1 || !noiseReliable) {
     const retryReason: MeasurementEvidence['retryReason'] = input.speechDetection !== 'silero'
       ? 'speech_detection_unavailable'

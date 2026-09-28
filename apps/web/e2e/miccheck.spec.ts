@@ -121,6 +121,8 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
   const id = await page.evaluate(
     () => JSON.parse(sessionStorage.getItem("miccheck.session.v2.latest")!).id,
   );
+  const firstAnalysis = await page.evaluate(() => JSON.parse(sessionStorage.getItem('miccheck.session.v2.latest')!).analysis);
+  expect(firstAnalysis.specialState, JSON.stringify(firstAnalysis.evidence)).toBeUndefined();
   expect(
     await page.evaluate(
       () =>
@@ -149,6 +151,10 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
   await startVoice.click();
   await page.waitForTimeout(9000);
   await page.getByRole('button',{name:'Finish recording',exact:true}).click();
+  await expect(page.getByRole("heading", {name:"What this result is based on"})).toBeVisible({timeout:30000});
+  await expect.poll(() => page.evaluate(() => JSON.parse(sessionStorage.getItem('miccheck.session.v2.latest')!).id)).not.toBe(id);
+  const secondAnalysis = await page.evaluate(() => JSON.parse(sessionStorage.getItem('miccheck.session.v2.latest')!).analysis);
+  expect(secondAnalysis.specialState, JSON.stringify(secondAnalysis.evidence)).toBeUndefined();
   await expect(
     page.getByRole("heading", { name: "Before and after" }),
   ).toBeVisible({ timeout: 30000 });
@@ -161,7 +167,7 @@ test("records PCM, restores a paired result, compares takes, and releases tracks
   await expect(
     page.getByRole("button", { name: "Pause playback", exact: true }),
   ).toHaveCount(1);
-  await players.click();
+  await players.last().click();
   await expect(
     page.getByRole("button", { name: "Pause playback", exact: true }),
   ).toHaveCount(1);

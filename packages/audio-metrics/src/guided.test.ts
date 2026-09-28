@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { analyzeGuidedSamples, type GuidedEvidence } from './guided';
+import { measureEcho } from './metrics/echo';
 
 const rate = 16000;
 const context = {use_case: 'meetings' as const, device_type: 'usb_mic' as const, mode: 'basic' as const};
@@ -8,6 +9,25 @@ function fixture(signalAmplitude = 0.1) {
   return Float32Array.from({length: rate * 5}, (_, i) => 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate) + (i >= 2 * rate ? signalAmplitude * Math.sin(2 * Math.PI * 300 * i / rate) : 0));
 }
 describe('guided evidence', () => {
+  it('measures echo on contiguous original speech and preserves it when pauses change', () => {
+    let seed = 12345;
+    const source = Float32Array.from({length:rate}, () => {
+      seed = (Math.imul(seed,1664525)+1013904223) >>> 0;
+      return (seed / 4294967296 * 2 - 1) * 0.1;
+    });
+    const reflected = Float32Array.from(source, (x,i) => x + (i >= 1920 ? source[i-1920]*0.65 : 0));
+    const expected = (measureEcho(source,rate).echoScore+measureEcho(reflected,rate).echoScore)/2;
+    for (const pause of [0.3, 2, 5]) {
+      const secondStart = 3 + pause;
+      const samples = new Float32Array(Math.ceil((secondStart+2)*rate));
+      samples.set(source,2*rate);
+      samples.set(reflected,Math.round(secondStart*rate));
+      const result = analyzeGuidedSamples(samples,rate,context,{...evidence,segments:[{start:2,end:3},{start:secondStart,end:secondStart+1}]});
+      expect(result.metrics.echoScore).toBeCloseTo(expected,5);
+      expect(result.evidence?.echoExperimental).toBe(true);
+      expect(result.specialState).toBeUndefined();
+    }
+  });
   it('recovers known SNR from independent quiet and speech intervals', () => {
     const result = analyzeGuidedSamples(fixture(), rate, context, evidence);
     expect(result.metrics.snrDb).toBeCloseTo(20, 1);
@@ -99,5 +119,40 @@ describe('guided evidence', () => {
     expect(analyzeGuidedSamples(samples, rate, context, evidence).evidence?.noiseStability).toBe('stable');
     samples.fill(0.1, rate * 5.5, rate * 5.8);
     expect(analyzeGuidedSamples(samples, rate, context, evidence).evidence?.noiseStability).toBe('unstable');
+  });
+  it('protects the brief-event detector from 280 ms speech tails and isolated spikes', () => {
+    const samples = new Float32Array(rate * 6);
+    samples.set(fixture());
+    for (let i = rate * 5; i < samples.length; i++) samples[i] = 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate);
+    samples.fill(0.1, rate * 5, rate * 5.28);
+    samples.fill(0.5, rate * 5.6, rate * 5.61);
+    expect(analyzeGuidedSamples(samples, rate, context, evidence).evidence?.noiseStability).toBe('stable');
+  });
+  it.each([0.5, 0.513, 0.527])('detects a 100 ms event at window phase %s', phase => {
+    const samples = new Float32Array(rate * 6);
+    samples.set(fixture());
+    for (let i = rate * 5; i < samples.length; i++) samples[i] = 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate);
+    samples.fill(0.1, Math.floor(rate * (5 + phase)), Math.floor(rate * (5.1 + phase)));
+    const result = analyzeGuidedSamples(samples, rate, context, evidence);
+    expect(result.evidence?.noiseStability).toBe('unstable');
+    expect(result.evidence?.retryReason).toBe('noise_unstable');
+  });
+  it('does not interpret an isolated missed speech onset as a brief background event', () => {
+    const samples = new Float32Array(rate * 6);
+    for (let i = 0; i < samples.length; i++) samples[i] = 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate);
+    samples.fill(0.1, rate * 2.35, rate * 2.45);
+    samples.set(fixture().subarray(rate * 2), rate * 3);
+    const result = analyzeGuidedSamples(samples,rate,context,{...evidence,segments:[{start:3,end:6}]});
+    expect(result.evidence?.noiseStability).toBe('stable');
+  });
+  it('withholds a stability claim when an elevated event is cut off by capture end', () => {
+    const samples = new Float32Array(Math.round(rate * 5.9));
+    samples.set(fixture());
+    for (let i = rate * 5; i < samples.length; i++) samples[i] = 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate);
+    samples.fill(0.1, Math.round(rate * 5.76));
+    const result = analyzeGuidedSamples(samples,rate,context,evidence);
+    expect(result.evidence?.noiseStability).toBe('unassessed');
+    expect(result.verdict.diagnosticCertainty).toBe('low');
+    expect(result.specialState).toBeUndefined();
   });
 });

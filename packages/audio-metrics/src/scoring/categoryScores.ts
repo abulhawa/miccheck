@@ -180,7 +180,7 @@ export const describeEcho = (echoScore: number, useCase: UseCase = "meetings"): 
 
 export const buildCategoryScores = (
   level: LevelMetrics,
-  clipping: ClippingMetrics,
+  clipping: Pick<ClippingMetrics, "clippingRatio" | "peak">,
   noise: NoiseMetrics,
   echo: EchoMetrics,
   useCase: UseCase = "meetings"
