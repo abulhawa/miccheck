@@ -28,6 +28,14 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 The human recordings now participate in `apps/web/e2e/fixture-acceptance.spec.ts`. Its production-worker expectations fail normally when unmet; do not skip, mark expected-failure, or loosen them merely to make the suite green. Investigate the failing condition and improve the implementation, or revise an expectation only with evidence that its ground truth or acceptance requirement was wrong.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
+Phase-sensitivity follow-up: shifted 10 ms spikes exposed four estimator false
+alarms and two unnecessary retries on existing recorded speakers. Brief-event
+duration now requires disjoint-hop corroboration as well as overlapping-window
+coverage; all 80 controlled conditions pass without losing the 100 ms bursts.
+See the [phase decision](NOISE_PHASE_BENCHMARK.md). Intermediate event durations
+and envelopes, independent listening, held-out capture conditions, and physical
+validation remain open; this duration guard does not complete threshold tuning.
+
 Sample-grid follow-up: a 54-condition exact-label expansion found three missed
 100 ms, +7 dB bursts at 22.05 kHz. Brief-event coverage now uses the quantized
 window/hop grid, resolving those misses without false alarms in 45 controls;

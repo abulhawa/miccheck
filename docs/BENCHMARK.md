@@ -31,6 +31,12 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [short-spike phase decision](NOISE_PHASE_BENCHMARK.md) fixes unsupported
+noise retries when overlapping windows count one 10 ms spike repeatedly.
+Eighty exact-label conditions and a before/after worker comparison retain
+100 ms burst detection and stationary controls. Broader acoustic threshold
+tuning remains open.
+
 The [sample-grid decision](NOISE_SAMPLE_GRID_BENCHMARK.md) corrects missed
 100 ms, +7 dB noise bursts at 22.05 kHz. Exact-label estimator cases and a
 24-case recorded-speech worker comparison show the resulting retry/grade

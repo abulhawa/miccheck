@@ -72,20 +72,30 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
     const eventEnd = i - (i < mask.length ? eventGuard : 0);
     let elevatedStart = -1;
     let eventHasEvidence = false;
+    let elevatedHops = 0;
+    let eventHasCoverage = false;
     // The leading voice interval can contain a soft onset missed by VAD.
     // Reserve this sensitive check for pauses following detected speech.
     for (let offset = eventStart; runStart > quietEnd && offset + eventWindow <= eventEnd; offset += eventHop) {
       const increaseDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + eventWindow)));
+      // Overlapping windows can count the same 10 ms spike three times.
+      // Corroborate duration with disjoint hop-sized intervals; a 100 ms
+      // event contains at least three full hops regardless of onset phase.
+      const hopIncreaseDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + eventHop)));
+      elevatedHops = hopIncreaseDb > 6 ? elevatedHops + 1 : 0;
+      if (eventHasCoverage && elevatedHops >= 3) eventHasEvidence = true;
       maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(increaseDb));
       if (increaseDb > 6) {
         if (elevatedStart < 0) elevatedStart = offset;
-        if (offset + eventWindow - elevatedStart >= eventCoverage) eventHasEvidence = true;
+        if (offset + eventWindow - elevatedStart >= eventCoverage) eventHasCoverage = true;
+        if (eventHasCoverage && elevatedHops >= 3) eventHasEvidence = true;
       } else {
         // A completed burst needs a return to the room level. Otherwise a
         // truncated utterance at capture end can look like a noise event.
         if (eventHasEvidence) briefNoiseEvent = true;
         elevatedStart = -1;
         eventHasEvidence = false;
+        eventHasCoverage = false;
       }
     }
     if (eventHasEvidence) unfinishedNoiseEvent = true;
