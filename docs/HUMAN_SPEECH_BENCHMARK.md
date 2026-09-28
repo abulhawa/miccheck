@@ -2,6 +2,8 @@
 
 Recorded 2026-09-28T07:56:01.498Z; win32, Chromium 153.0.8010.12.
 
+The purpose of these recordings and results is to improve mic-checker measurements and guidance. Follow the [improvement workflow](BENCHMARK.md#improvement-workflow): reproduce a concrete failure, implement a fix, and compare missed failures and false alarms before and after. This report verifies earlier clipping and sustained-noise fixes; further passing cases alone do not establish a new optimization. Brief noise-event detection remains an [open improvement target](BACKLOG.md#2-assess-background-noise-stability--high-priority).
+
 Twelve unmodified English audiobook clips from six speakers were each analyzed under seven conditions (84 production-worker runs). All fixture SHA-256 hashes were checked before analysis. The runner bundles current production sources and uses the actual Silero model in Chromium; it supplies no speech boundaries or mocked model outputs. Background classification is disabled.
 
 ## Scope and source review

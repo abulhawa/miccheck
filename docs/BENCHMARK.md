@@ -1,5 +1,20 @@
 # Synthetic speech-detection benchmark
 
+The purpose of these benchmarks and recording artifacts is to improve the mic checker. Use them to find measurement and advice failures, make targeted production changes, and demonstrate better behavior without introducing false alarms.
+
+## Improvement workflow
+
+1. Name the user-visible failure and intended improvement in measurements, grading, confidence, or advice.
+2. Reproduce it with the smallest useful controlled case and relevant recorded speech. Add annotations or capture conditions where needed to judge correctness.
+3. Define desired behavior independently of the current implementation. Keep tests of existing behavior clearly identified as regressions; preserve known failures as improvement targets.
+4. Implement a scoped estimator or app change. Use tuning conditions to select parameters and separate speakers or capture conditions to evaluate them.
+5. Compare before/after missed events, false alarms, measurement error, and resulting app guidance on relevant evaluation cases. Run the production worker and capture/UI path when the change affects those flows.
+6. Record the decision, tradeoffs, validation limits, and remaining failure cases. Expand the corpus when it resolves a concrete uncertainty about the change.
+
+A report or a larger corpus is supporting work. Completion of an app improvement requires an implemented change and evidence for its intended behavior. When evidence supports retaining the current behavior, explain why and keep unresolved weaknesses actionable rather than claiming an optimization.
+
+The next concrete target is brief noise events missed by the current stability windows; see [the backlog](BACKLOG.md#2-assess-background-noise-stability--high-priority) and [controlled results](NOISE_STABILITY_BENCHMARK.md). Evaluate detection gains alongside false alarms from speech residue before deciding their effect on grading or retry guidance.
+
 Recorded September 10, 2026 on Windows, Chromium 153.0.8010.12. Machine-readable output: [benchmark-results.json](benchmark-results.json). Each input lasts seven seconds. The speech fixture is locally generated synthetic speech; its provenance is in `apps/web/public/demo/README.md`.
 
 | Input | Legacy energy detector: speech seconds | Silero: speech seconds | Worker wall time (ms) |

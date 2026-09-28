@@ -1,5 +1,7 @@
 # Human speech collection
 
+These recordings support improvements to the mic checker. Select clips and controlled transformations to reproduce a specific measurement or guidance failure, evaluate a production fix, and retain regression coverage. Follow the [benchmark improvement workflow](../../../../../docs/BENCHMARK.md#improvement-workflow); collection size and passing cases alone are not improvement outcomes. Keep tuning and evaluation speakers separate when selecting thresholds, and add speech annotations where correctness depends on boundaries.
+
 Twelve unmodified human audiobook recordings from six additional LibriSpeech test-clean speakers, retrieved September 28, 2026. These are recorded people, not synthesized voices. Each clip is 3–12 seconds long, in 16 kHz FLAC format. Total duration is about 81 seconds.
 
 Source: [LibriSpeech / OpenSLR](https://www.openslr.org/12/).

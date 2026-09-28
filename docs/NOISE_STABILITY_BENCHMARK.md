@@ -2,6 +2,8 @@
 
 Run September 28, 2026. [Machine-readable results](noise-stability-results.json).
 
+This artifact supports improving noise detection and app guidance. The missed 100 ms bursts below are an open implementation target, not successful accuracy results. Follow the [improvement workflow](BENCHMARK.md#improvement-workflow) to compare a proposed fix against these failures, sustained changes, stationary noise, and boundary residue. This run establishes a baseline; it does not claim a noise-stability optimization.
+
 This evaluates `analyzeGuidedSamples` with exact generated speech intervals. It isolates the noise estimator from speech detection. The speech interval contains a synthetic 200 Hz tone, not human speech; the supplied `silero` evidence value exercises the production grading path without running the model. These are controlled diagnostic cases, not representative accuracy evidence.
 
 ## Protocol

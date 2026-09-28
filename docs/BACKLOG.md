@@ -2,7 +2,9 @@
 
 Added September 28, 2026. Checkboxes track implemented work; remaining accuracy and real-world validation work is pending.
 
-Work in this order: clipping invariance, noise-stability evidence, a focused benchmark for both, repeatability and threshold tuning, then broader benchmark coverage. Keep echo outside grading throughout.
+The main aim is to improve the mic checker: more accurate measurements, fewer misleading grades, and more useful advice. Benchmarks and recording artifacts are evidence for identifying, implementing, and verifying app improvements. More cases or passing tests alone do not complete an improvement task.
+
+Work in this order: clipping invariance, noise-stability fixes informed by focused evidence, repeatability and threshold tuning, then broader coverage driven by unresolved app weaknesses. Keep echo outside grading throughout. Use the [benchmark improvement workflow](BENCHMARK.md#improvement-workflow) for each change.
 
 ## 1. Make clipping independent of pauses — high priority
 
@@ -21,6 +23,7 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 - [x] Compare calibration noise with sufficiently long later nonspeech windows. Exclude speech boundaries to reduce contamination from breaths, missed speech, and reverberation.
 - [x] Distinguish stable noise, unstable noise, and insufficient evidence to assess stability. Continuous speech alone must not imply unstable noise.
 - [x] Surface unstable-noise evidence and define how it limits SNR confidence, grading, and retry guidance.
+- [ ] Address missed brief noise events demonstrated by the controlled benchmark. Distinguish intermittent events from sustained changes and connect the result to confidence or guidance; verify against stationary noise and speech-boundary residue before changing grading or retry behavior.
 - [ ] Validate and tune provisional window lengths, change thresholds, and low-level floor using a broader annotated benchmark.
 
 Progress September 28, 2026: the [controlled estimator benchmark](NOISE_STABILITY_BENCHMARK.md) adds 144 cases with exact generated intervals across sample rates, noise shapes, levels, changes, bursts, and boundary residue. It confirms the current behavior and demonstrates missed 100 ms bursts and floor-suppressed low-level changes. Human annotation and representative threshold tuning remain pending; production thresholds are unchanged.
@@ -40,6 +43,8 @@ Progress September 28, 2026: collected twelve human speech clips from six additi
 - [ ] Evaluate individual estimators, the production worker, and the complete real capture-and-analysis path. Keep synthetic smoke tests distinct from representative accuracy evidence.
 
 Acceptance: publish a reproducible report with per-condition results and limitations, extending the existing benchmark documentation. Use results to justify thresholds; two recordings from one speaker cannot establish general accuracy.
+
+Each benchmark expansion must target a specific measurement, grading, confidence, or advice weakness and record the resulting implementation decision. Report before/after failures and false alarms on evaluation conditions; matching existing behavior is regression coverage, not evidence of improvement. If a fix is deferred, retain an actionable backlog item and state the missing evidence.
 
 Starting points: `docs/BENCHMARK.md`, `apps/web/e2e/real-speech.spec.ts`, `apps/web/e2e/fixtures/README.md`, `packages/audio-metrics/test`.
 
