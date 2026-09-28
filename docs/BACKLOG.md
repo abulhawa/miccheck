@@ -65,6 +65,12 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `apps/web/lib/metricFor
 
 ## 5. Improve and validate experimental echo — lower priority
 
+Deferred by user decision on September 28, 2026: revisit echo after the other mic-checker accuracy work. Keep the experimental label and exclude echo from grading and purchase advice until validation supports changing that policy.
+
+- [ ] Add traceable reference fixtures using measured room impulse responses and/or separate echo/reference components. Distinguish room reflections from loudspeaker acoustic echo cancellation data.
+- [ ] Define the quantity the app should identify (echo presence, delay, relative strength, or reverberation) and justified acceptance tolerances; the current score is not a calibrated physical measurement.
+- [ ] Measure missed detections and false alarms on held-out rooms, speakers, microphones, reflection delays/strengths, and clean periodic/repeated speech. Use failing acceptance tests to drive estimator improvements.
+
 - [x] Analyze original contiguous audio segments, preserving timing instead of concatenating detected speech across pauses. Define aggregation across segments.
 - [ ] Validate against controlled echo conditions and clean speech patterns that can produce similar autocorrelation peaks.
 - [ ] Revisit estimator confidence using validation evidence; fixing segment timing alone does not validate echo accuracy.
