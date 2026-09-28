@@ -1,0 +1,1099 @@
+{
+  "protocol": "annotated-accuracy-v1",
+  "estimatorBundleSha256": "b9f43892897bb034b8554536a986712e80b3d5dec29763d675c1febbcfbdca6f",
+  "starssReferenceSha256": "dfed88c24951d2e03f4e12e2bbfa8567bbd31868adb0cab35b4c6ec9c2129333",
+  "provenance": [
+    {
+      "file": "AirConditioner_1.wav",
+      "sha256": "3fe55d7035d7ef2599841738f818dc4463f5ef983eb4b5fefeee153d8caa2110"
+    },
+    {
+      "file": "clnsp0.wav",
+      "sha256": "be5c2c6578f085ac3e95bd42fb0cbda8f6f2bbda0d03bb5b19fbe60d67e079f7"
+    },
+    {
+      "file": "clnsp1.wav",
+      "sha256": "53906dc2f3da62041ec81c37c175ad4c6b89b9e444bf3c9e5c4a4b7cecfe3238"
+    },
+    {
+      "file": "fold3_room21_mix023.wav",
+      "sha256": "98899e2eb439f405cec157881c6a46225aedd4da73e9b77076c23d1d93b5f68f"
+    },
+    {
+      "file": "fold3_room6_mix007.wav",
+      "sha256": "ef32da3fa20e87ba700c72b782ee2ed24e434fac54bd352e4e956a4cd8447f0f"
+    },
+    {
+      "file": "fold4_room24_mix011.wav",
+      "sha256": "6e9292abd3afbf24e244514723a57b8577c8d87704b7c20929b075bf559298ac"
+    },
+    {
+      "file": "fold4_room10_mix003.wav",
+      "sha256": "47f3df22125266a745e7c037c2e53faffa39a2ef4e78e184ffe3e18400ab5865"
+    }
+  ],
+  "limitations": [
+    "Supplied upstream 100 ms speech/event annotations; not a real Silero detector run.",
+    "MS-SNSD clean designation and whole-source interval are reference components, not human speech boundaries.",
+    "Constructed mixtures and inserted threshold crossings are not native physical SNR or distortion ground truth.",
+    "All sources previously inspected: regression split only; no new held-out tuning claim.",
+    "Raw capture flags exercise estimator confidence only; no actual browser processing or microphone validation."
+  ],
+  "summary": {
+    "cases": 34,
+    "failures": 0,
+    "snrMeanAbsoluteErrorDb": 0.03523504532026505,
+    "snrMaxAbsoluteErrorDb": 0.09075543066930539,
+    "clippingFailures": 0
+  },
+  "rows": [
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 0,
+      "referenceDb": -2.340018708431548e-9,
+      "actualDb": -0.0907554330093241,
+      "errorDb": -0.09075543066930539,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 10,
+      "referenceDb": 9.999999997109377,
+      "actualDb": 9.971505128368268,
+      "errorDb": -0.028494868741109514,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp0.wav",
+      "targetDb": 20,
+      "referenceDb": 19.99999999449842,
+      "actualDb": 19.991009324271264,
+      "errorDb": -0.008990670227156272,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 0,
+      "referenceDb": -2.644668077062652e-10,
+      "actualDb": 0.05864014414985519,
+      "errorDb": 0.058640144414322,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 10,
+      "referenceDb": 9.99999999918493,
+      "actualDb": 10.018629383194948,
+      "errorDb": 0.018629384010019123,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "component-snr",
+      "file": "clnsp1.wav",
+      "targetDb": 20,
+      "referenceDb": 19.999999996573973,
+      "actualDb": 20.00589977043365,
+      "errorDb": 0.0058997738596779925,
+      "intervalKind": "Whole upstream clean source with padding; not manually annotated speech",
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "stationary",
+      "sampleRate": 24000,
+      "pcmSha256": "0bc5f64d08210b63e687234b46fbdb48d5e6e33358ff9ce91995a428f40d4d5f",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Noise",
+        "messageKey": "recommendation.reduce_noise",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "increase",
+      "sampleRate": 24000,
+      "pcmSha256": "b86de81aeec04735c277fcf1e0d0f62aebfb37062c336278438afa150088b1d2",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "decrease",
+      "sampleRate": 24000,
+      "pcmSha256": "cc6f5327e829e76dd46dc12862919c559804bb57ae428b93a3139c7b3795b544",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "d8db244ddd4f9cd7e07bf60d42daf83a62e71f2aa8722dedcbcb53f4f646499c",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "speech-clipping-plus-pause",
+      "sampleRate": 24000,
+      "pcmSha256": "a92343334a8078400f0d9f28358e1cc3dc5a000b49cccdea26c5c61e3b7bc90e",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.008,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true,
+      "pauseInvariance": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "calibration-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "a38c70326d1560f93c92c9bd900051b3aa2c761f21b743b93d8cc308b945bdc5",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.2,
+          "end": 4.5
+        },
+        {
+          "start": 5.8,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room21_mix023.wav",
+      "split": "development",
+      "room": "room21",
+      "condition": "no-speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "annotatedSpeechIntervals": [],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "stationary",
+      "sampleRate": 24000,
+      "pcmSha256": "6bf542a410f66ddf0c295faa423fa54ebfcda03885c6896d5fd2287d00487958",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Noise",
+        "messageKey": "recommendation.reduce_noise",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "increase",
+      "sampleRate": 24000,
+      "pcmSha256": "0d6085208a9dc3d5dddf62f1b8b7b3021a1e933cdf26ac9997d4fc29a8985141",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "decrease",
+      "sampleRate": 24000,
+      "pcmSha256": "d378a853876c03db0d51bec0536749e98f93ada61a69e4d465cf0121f6d9d578",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "f29f9145857bacc05201b4a345f8379766cb5d814d5f06d289c83fb832ec0656",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "speech-clipping-plus-pause",
+      "sampleRate": 24000,
+      "pcmSha256": "f79bea3b5c362e9a562974db1c9d08a8a13998ebf4dcd888fd50acd981786bec",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true,
+      "pauseInvariance": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "calibration-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "ff3cbd88845e2a1a29b84f7a9406c71bf5bf78aab72e7c4aae5cd489c52b6944",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold3_room6_mix007.wav",
+      "split": "development",
+      "room": "room6",
+      "condition": "no-speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "annotatedSpeechIntervals": [],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "stationary",
+      "sampleRate": 24000,
+      "pcmSha256": "340488e7f80b7c7b9367fbd567c9327acf7bbc093cd1a67aa8af179e3fda9dbb",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Noise",
+        "messageKey": "recommendation.reduce_noise",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "increase",
+      "sampleRate": 24000,
+      "pcmSha256": "22dbdb10b3dc544322946a40c7796d550473c74732f231146cbfda6700c8a49a",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "decrease",
+      "sampleRate": 24000,
+      "pcmSha256": "3f65a73cc765798b467fdf62d7444bdb7f54fa3dbb9f98d9658c6aa7bafd2897",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "c81528050a661fbb2039943801730697669c8bbe7a8f35cb4463c40e7e464a2a",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "C",
+      "recommendation": {
+        "category": "Noise",
+        "messageKey": "recommendation.reduce_noise",
+        "confidence": 0.78
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "speech-clipping-plus-pause",
+      "sampleRate": 24000,
+      "pcmSha256": "f1d69f5aa70254d479af6292af441aeaf5610fcb5c330d4c741af61609b18815",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.004,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "C",
+      "recommendation": {
+        "category": "Noise",
+        "messageKey": "recommendation.reduce_noise",
+        "confidence": 0.78
+      },
+      "passed": true,
+      "pauseInvariance": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "calibration-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "1ff030b5ce4377d371c6c2cad350d418943eb933c7b4e26182ab301ac9e48d2a",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 2,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room24_mix011.wav",
+      "split": "evaluation",
+      "room": "room24",
+      "condition": "no-speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "annotatedSpeechIntervals": [],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "stationary",
+      "sampleRate": 24000,
+      "pcmSha256": "fc5891518e83f6225785de5fcadab4091bae81e552857b4debc61a441584c96b",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "increase",
+      "sampleRate": 24000,
+      "pcmSha256": "4145c9965b8024d38f616e1236d7e5d199ca5c0eca224cab6b7b5f502ed8fcdf",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "decrease",
+      "sampleRate": 24000,
+      "pcmSha256": "19e49248f62269898f5e11c088c86d3d43cfd837d132cd1cb7923efa3da7c0a1",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0,
+        "clippingEventCount": 0
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "089b12664778f3190bdb54399547ea4c34930aa1e01cf5eb02160e8621ae417e",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "speech-clipping-plus-pause",
+      "sampleRate": 24000,
+      "pcmSha256": "41227582bf12164841fc8ff26a4b92ef1e32a12e012537efe9b47939142d6b19",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0.005714285714285714,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "stable",
+      "retry": null,
+      "state": "graded",
+      "grade": "F",
+      "recommendation": {
+        "category": "Volume",
+        "messageKey": "recommendation.raise_volume",
+        "confidence": 0.6
+      },
+      "passed": true,
+      "pauseInvariance": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "calibration-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "8a64db3921e34da977f9e06fb993509c6cda4dcf9b8395f72277200b33c84716",
+      "annotatedSpeechIntervals": [
+        {
+          "start": 3.5,
+          "end": 7
+        }
+      ],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    },
+    {
+      "family": "human-annotated-components",
+      "file": "fold4_room10_mix003.wav",
+      "split": "evaluation",
+      "room": "room10",
+      "condition": "no-speech-clipping",
+      "sampleRate": 24000,
+      "pcmSha256": "98edfea7378ad2221db6dd5d82b9d4a21b42b2977d4858bac554e91240792050",
+      "annotatedSpeechIntervals": [],
+      "expectedClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "actualClipping": {
+        "speechClippingRatio": 0,
+        "clippedDurationSeconds": 0.02,
+        "clippingEventCount": 1
+      },
+      "stability": "unstable",
+      "retry": "no_speech",
+      "state": "NO_SPEECH",
+      "grade": null,
+      "recommendation": {
+        "category": "General",
+        "messageKey": "recommendation.no_speech",
+        "confidence": 0
+      },
+      "passed": true
+    }
+  ]
+}

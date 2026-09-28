@@ -176,7 +176,16 @@ Starting points: `packages/audio-metrics/src/guided.ts`, `packages/audio-metrics
 
 Progress September 28, 2026: collected twelve human speech clips from six additional speakers and completed [84 production-worker diagnostic cases](HUMAN_SPEECH_BENCHMARK.md). The baseline reproduced clipping dilution and missing noise-stability evidence; the current run verifies both fixes. This does not complete the accuracy benchmark: listening review, speech annotation, SNR ground truth, and wider capture coverage remain pending.
 
-- [ ] First add annotated speech and known signal/noise mixtures covering clipping and noise stability, with reproducible expected measurements.
+The [first-stage accuracy benchmark](ANNOTATED_ACCURACY_BENCHMARK.md) now
+implements 34 reproducible estimator cases: upstream human speech intervals,
+sample-exact clipping references, calibration/no-speech crossings, pause
+invariance, known-component SNR error and recorded-component noise changes.
+All gates pass and run in normal fixture acceptance; twelve separate production
+worker noise cases pass. This completes the first stage only. Source recordings
+are existing regression evidence; model-selected clipping/SNR accuracy, broader
+coverage, untouched evaluation conditions and physical app capture remain open.
+
+- [x] First add annotated speech and known signal/noise mixtures covering clipping and noise stability, with reproducible expected measurements.
 - [ ] Expand to consented/licensed recordings across speakers, languages, devices, rooms, quiet speech, fans, typing, music, and browser processing on/off.
 - [ ] Separate tuning and evaluation data by speaker and capture conditions; record provenance, licenses, annotations, and reproducible generation settings.
 - [ ] Report speech precision/recall, boundary error, SNR error against known mixtures, clipping accuracy, and noise-stability detection results.

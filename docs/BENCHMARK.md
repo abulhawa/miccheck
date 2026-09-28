@@ -34,6 +34,12 @@ retains current parameters after 324 exact-label conditions with tonal carriers
 and tapered edges. All 81 decreases and 243 controls pass; this is supporting
 regression evidence, not an implemented optimization or completed tuning.
 
+The [first-stage annotated accuracy benchmark](ANNOTATED_ACCURACY_BENCHMARK.md)
+adds a normal acceptance gate for 34 estimator cases with upstream human speech
+intervals, exact clipping references, known-component SNR and recorded-component
+noise changes. It completes the first stage of backlog item 3, while model-selected
+measurement accuracy and broader capture validation remain open.
+
 ## Recorded human speech regression coverage
 
 The [confirmed-continuation improvement](VAD_CONTINUATION_BENCHMARK.md) retains

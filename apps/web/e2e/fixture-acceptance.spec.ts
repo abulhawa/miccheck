@@ -29,3 +29,12 @@ test('speech continuation improves frozen room crops without added candidate-noi
   }).then(({ stdout, stderr }) => ({ code: 0, stdout, stderr }), error => ({ code: error.code, stdout: error.stdout, stderr: error.stderr }));
   expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
 });
+
+
+test('annotated component references meet clipping, SNR and noise-stability gates', async () => {
+  test.setTimeout(30000);
+  const {stdout} = await promisify(execFile)(process.execPath, ['scripts/benchmark-annotated-accuracy.mjs', '--check'], {
+    timeout: 25000, maxBuffer: 1024 * 1024,
+  });
+  expect(JSON.parse(stdout.trim()).failures).toBe(0);
+});
