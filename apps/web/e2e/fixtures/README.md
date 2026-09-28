@@ -1,5 +1,7 @@
 # Recorded human speech fixtures
 
+A further twelve recordings from six speakers, with transcripts and checksums, are available in [human-speech](human-speech/README.md). They are collected source material and are not yet included in `real-speech.spec.ts`.
+
 These two unmodified FLAC recordings come from the LibriSpeech test-clean corpus,
 speaker 6930, chapter 75918. They are human audiobook readings, not synthesized speech.
 

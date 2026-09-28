@@ -1,0 +1,119 @@
+{
+  "source": "https://www.openslr.org/resources/12/test-clean.tar.gz",
+  "retrieved": "2026-09-28",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "LibriSpeech: Vassil Panayotov, Guoguo Chen, Daniel Povey, Sanjeev Khudanpur; source audiobooks from LibriVox",
+  "selection": "First six archive speakers other than 6930, first two clips per speaker lasting 3\u201312 seconds",
+  "speech_boundaries": "Not manually annotated",
+  "clips": [
+    {
+      "file": "1320-122617-0003.flac",
+      "speaker": "1320",
+      "archive_path": "LibriSpeech/test-clean/1320/122617/1320-122617-0003.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 6.285,
+      "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594",
+      "transcript": "THERE WAS SOMETHING IN HIS AIR AND MANNER THAT BETRAYED TO THE SCOUT THE UTTER CONFUSION OF THE STATE OF HIS MIND"
+    },
+    {
+      "file": "1320-122617-0012.flac",
+      "speaker": "1320",
+      "archive_path": "LibriSpeech/test-clean/1320/122617/1320-122617-0012.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 7.59,
+      "sha256": "6b5cd2c31ee61665ea0d81f2c76a1f2c32cb4f46e5ec5861bd9157e262785252",
+      "transcript": "FOUR OR FIVE OF THE LATTER ONLY LINGERED ABOUT THE DOOR OF THE PRISON OF UNCAS WARY BUT CLOSE OBSERVERS OF THE MANNER OF THEIR CAPTIVE"
+    },
+    {
+      "file": "5639-40744-0002.flac",
+      "speaker": "5639",
+      "archive_path": "LibriSpeech/test-clean/5639/40744/5639-40744-0002.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 8.91,
+      "sha256": "111c6b8b19d093736570bced344035b48f75c770aacc60103da9d9a20f904fb2",
+      "transcript": "RODOLFO AND HIS COMPANIONS WITH THEIR FACES MUFFLED IN THEIR CLOAKS STARED RUDELY AND INSOLENTLY AT THE MOTHER THE DAUGHTER AND THE SERVANT MAID"
+    },
+    {
+      "file": "5639-40744-0033.flac",
+      "speaker": "5639",
+      "archive_path": "LibriSpeech/test-clean/5639/40744/5639-40744-0033.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 9.15,
+      "sha256": "3cf3d1325b9a643f43f503a3be74b29e081e2a233774f39a48fe40e0040258cf",
+      "transcript": "HER BEARING WAS GRACEFUL AND ANIMATED SHE LED HER SON BY THE HAND AND BEFORE HER WALKED TWO MAIDS WITH WAX LIGHTS AND SILVER CANDLESTICKS"
+    },
+    {
+      "file": "260-123440-0018.flac",
+      "speaker": "260",
+      "archive_path": "LibriSpeech/test-clean/260/123440/260-123440-0018.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 3.64,
+      "sha256": "a80d66d866b8f9114094301a965a7b6d0a62d9467c96885ff1098a27f5b02cb4",
+      "transcript": "I AM VERY TIRED OF SWIMMING ABOUT HERE O MOUSE"
+    },
+    {
+      "file": "260-123440-0007.flac",
+      "speaker": "260",
+      "archive_path": "LibriSpeech/test-clean/260/123440/260-123440-0007.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 3.385,
+      "sha256": "87cb8fbcddb28a25deeb6ce7a889312eaede1ef07d26ebfdafe86c2a400ab493",
+      "transcript": "I ALMOST THINK I CAN REMEMBER FEELING A LITTLE DIFFERENT"
+    },
+    {
+      "file": "7729-102255-0045.flac",
+      "speaker": "7729",
+      "archive_path": "LibriSpeech/test-clean/7729/102255/7729-102255-0045.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 6.805,
+      "sha256": "52b2863422cf066b046facaf8c9608e81179a61be437b8e321c2832b2119805c",
+      "transcript": "CAPTAIN MARTIN SAID I SHALL GIVE YOU A PISTOL TO HELP PROTECT YOURSELF IF WORSE COMES TO WORST"
+    },
+    {
+      "file": "7729-102255-0012.flac",
+      "speaker": "7729",
+      "archive_path": "LibriSpeech/test-clean/7729/102255/7729-102255-0012.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 4.075,
+      "sha256": "438b540a2a84f8a9ffcec80aae8ab08dd95a1d9f829eeb89164192978d5672cd",
+      "transcript": "SEVERAL HUNDRED FREE STATE MEN PROMPTLY RESPONDED TO THE SUMMONS"
+    },
+    {
+      "file": "2094-142345-0059.flac",
+      "speaker": "2094",
+      "archive_path": "LibriSpeech/test-clean/2094/142345/2094-142345-0059.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 10.01,
+      "sha256": "d9e10be49f95d6c601d63e3c229eeda6cf29a03a040d10078bf6cd0975964554",
+      "transcript": "THIS MISSUS POYSER SAID BLUSHING AND BELIEVING THAT THE CAPTAIN WAS REALLY INTERESTED IN HER MILK PANS AND WOULD ADJUST HIS OPINION OF HER TO THE APPEARANCE OF HER DAIRY"
+    },
+    {
+      "file": "2094-142345-0045.flac",
+      "speaker": "2094",
+      "archive_path": "LibriSpeech/test-clean/2094/142345/2094-142345-0045.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 3.005,
+      "sha256": "1d62c5f9b72822a151674a2d6df7e11829ffd140b4bb12a9090b3df763ea7d9d",
+      "transcript": "OH SIR DON'T MENTION IT SAID MISSUS POYSER"
+    },
+    {
+      "file": "3575-170457-0023.flac",
+      "speaker": "3575",
+      "archive_path": "LibriSpeech/test-clean/3575/170457/3575-170457-0023.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 9.095,
+      "sha256": "2a062109a1c67a7b724649ce0e0d43c8e06c992a43fc9e21758db2c7ec83fc1d",
+      "transcript": "I CAREFULLY AVOID ANY APPEARANCE OF PREOCCUPATION AND ECCENTRICITY WHICH MIGHT LEAD THOSE I LIVE AMONGST TO SUSPECT THE NATURE OF MY PURSUITS"
+    },
+    {
+      "file": "3575-170457-0020.flac",
+      "speaker": "3575",
+      "archive_path": "LibriSpeech/test-clean/3575/170457/3575-170457-0020.flac",
+      "sample_rate": 16000,
+      "duration_seconds": 8.645,
+      "sha256": "39daa9ebbb087564cf6b1cb1c7edcc21fc5bbac1060d4ffd04eb8c7fea427dc4",
+      "transcript": "I KNOW THE FIRST LETTER I WROTE TO YOU WAS ALL SENSELESS TRASH FROM BEGINNING TO END BUT I AM NOT ALTOGETHER THE IDLE DREAMING BEING IT WOULD SEEM TO DENOTE"
+    }
+  ]
+}

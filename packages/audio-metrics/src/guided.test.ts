@@ -38,8 +38,66 @@ describe('guided evidence', () => {
   });
   it('bases certainty on capture evidence, independently of grade', () => {
     for (const amplitude of [0.02,0.1,1.5]) {
-      expect(analyzeGuidedSamples(fixture(amplitude),rate,context,evidence).verdict.diagnosticCertainty).toBe('medium');
+      expect(analyzeGuidedSamples(fixture(amplitude),rate,context,evidence).verdict.diagnosticCertainty).toBe('low');
     }
     expect(analyzeGuidedSamples(fixture(),rate,context,{...evidence,capture:{format:'encoded'}}).verdict.diagnosticCertainty).toBe('low');
+  });
+  it('keeps speech clipping, total clipped duration, grade, and advice invariant when silence is appended', () => {
+    const samples = fixture();
+    samples.fill(1, rate * 3, rate * 3.1);
+    const extended = new Float32Array(samples.length + rate * 10);
+    extended.set(samples);
+    const before = analyzeGuidedSamples(samples, rate, context, evidence);
+    const after = analyzeGuidedSamples(extended, rate, context, evidence);
+    expect(after.metrics.clippingRatio).toBe(before.metrics.clippingRatio);
+    expect(after.metrics.speechClippingRatio).toBe(before.metrics.clippingRatio);
+    expect(after.metrics.clippedDurationSeconds).toBeCloseTo(before.metrics.clippedDurationSeconds!, 10);
+    // Calibration noise here is audible; digital silence is a real noise decrease.
+    expect(after.specialState).toBe('INSUFFICIENT_EVIDENCE');
+    const quiet = samples.slice();
+    quiet.fill(0, 0, rate * 2);
+    const quietExtended = new Float32Array(quiet.length + rate * 10);
+    quietExtended.set(quiet);
+    const a = analyzeGuidedSamples(quiet, rate, context, evidence);
+    const b = analyzeGuidedSamples(quietExtended, rate, context, evidence);
+    expect(b.verdict.overall.grade).toBe(a.verdict.overall.grade);
+    expect(b.recommendation).toEqual(a.recommendation);
+  });
+  it('retains clipping outside detected speech, even when no speech is found', () => {
+    const samples = fixture();
+    samples.fill(1, 0, rate / 10);
+    const result = analyzeGuidedSamples(samples, rate, context, evidence);
+    expect(result.metrics.clippingRatio).toBe(0);
+    expect(result.metrics.clippedDurationSeconds).toBeCloseTo(0.1);
+    const noSpeech = analyzeGuidedSamples(samples, rate, context, {...evidence, segments:[]});
+    expect(noSpeech.metrics.clippingRatio).toBe(0);
+    expect(noSpeech.metrics.clippedDurationSeconds).toBeCloseTo(0.1);
+  });
+  it.each([0.01, 0.04, 0.001])('assesses later noise amplitude %s independently of speech', amplitude => {
+    const samples = new Float32Array(rate * 6);
+    samples.set(fixture());
+    for (let i = rate * 5; i < samples.length; i++) samples[i] = amplitude * Math.sin(2 * Math.PI * 3000 * i / rate);
+    const result = analyzeGuidedSamples(samples, rate, context, evidence);
+    expect(result.evidence?.noiseStability).toBe(amplitude === 0.01 ? 'stable' : 'unstable');
+    expect(result.specialState).toBe(amplitude === 0.01 ? undefined : 'INSUFFICIENT_EVIDENCE');
+    expect(result.evidence?.retryReason).toBe(amplitude === 0.01 ? undefined : 'noise_unstable');
+    if (amplitude === 0.01) expect(result.verdict.diagnosticCertainty).toBe('medium');
+  });
+  it('marks missing or too-short quiet intervals unassessed without forcing a retry', () => {
+    const continuous = analyzeGuidedSamples(fixture(), rate, context, evidence);
+    expect(continuous.evidence?.noiseStability).toBe('unassessed');
+    expect(continuous.specialState).toBeUndefined();
+    const short = new Float32Array(rate * 5.3);
+    short.set(fixture());
+    expect(analyzeGuidedSamples(short, rate, context, evidence).evidence?.noiseStability).toBe('unassessed');
+  });
+  it('excludes speech-boundary residue and detects intermittent later noise', () => {
+    const samples = new Float32Array(rate * 6);
+    samples.set(fixture());
+    for (let i = rate * 5; i < samples.length; i++) samples[i] = 0.01 * Math.sin(2 * Math.PI * 3000 * i / rate);
+    samples.fill(0.5, rate * 5, rate * 5.15);
+    expect(analyzeGuidedSamples(samples, rate, context, evidence).evidence?.noiseStability).toBe('stable');
+    samples.fill(0.1, rate * 5.5, rate * 5.8);
+    expect(analyzeGuidedSamples(samples, rate, context, evidence).evidence?.noiseStability).toBe('unstable');
   });
 });

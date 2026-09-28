@@ -16,6 +16,8 @@ These are synthetic smoke results, not a labeled speech corpus, accuracy percent
 
 ## Recorded human speech regression coverage
 
+The [human speech diagnostic benchmark](HUMAN_SPEECH_BENCHMARK.md) runs twelve natural human recordings from six additional speakers through the production worker under seven conditions (84 cases). The [baseline](HUMAN_SPEECH_BASELINE.md) reproduced clipping dilution and calibration-only noise reliability failures; the current report verifies the fixes. Speech-boundary annotation and listening review remain pending; these are diagnostic results, not accuracy claims.
+
 `apps/web/e2e/real-speech.spec.ts` additionally runs two LibriSpeech human audiobook
 recordings through the production worker. Both recordings pass with a two-second
 quiet start and at 10% amplitude. Starting speech during calibration instead

@@ -62,5 +62,7 @@ function validAnalysis(value: unknown): value is AnalysisResult {
 export function comparableTakes(before: RecordingSession, after: RecordingSession): boolean {
   const a = before.analysis.evidence;
   const b = after.analysis.evidence;
+  if (a?.noiseStability !== 'stable' || b?.noiseStability !== 'stable' ||
+    (before.analysis.metrics.speechClippingRatio === undefined) !== (after.analysis.metrics.speechClippingRatio === undefined)) return false;
   return !before.analysis.specialState && !after.analysis.specialState && !!a && !!b && before.deviceId === after.deviceId && before.analysis.verdict.context?.use_case === after.analysis.verdict.context?.use_case && a.speechDetection === b.speechDetection && a.noiseReliable && b.noiseReliable && a.capture.format === b.capture.format && ['echoCancellation','noiseSuppression','autoGainControl'].every((key)=>a.capture[key as 'echoCancellation'] === false && b.capture[key as 'echoCancellation'] === false);
 }

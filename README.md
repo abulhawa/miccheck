@@ -68,6 +68,8 @@ Vitest enforces coverage thresholds. Playwright exercises real local models, syn
 
 ## Limits
 
+Planned measurement improvements and acceptance criteria are tracked in the [measurement accuracy backlog](docs/BACKLOG.md).
+
 This is a portfolio prototype, not a calibrated acoustic instrument. The grade reflects heuristic level/noise/clipping thresholds, not microphone price or professional certification. Echo remains experimental and cannot affect the grade or recommend purchases. Diagnostic certainty is at most medium and drops with processed, encoded, or unknown capture settings. Background labels are tentative and are not probability estimates.
 
 Automated Chromium tests use synthetic audio. Real microphone hardware, speakers, rooms, Firefox, and Safari still need manual evaluation. No cross-browser or real-world accuracy claim is made. See [compatibility](docs/COMPATIBILITY.md) and the [release checklist](docs/RELEASE_CHECKLIST.md).

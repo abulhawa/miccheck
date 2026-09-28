@@ -21,16 +21,48 @@ export interface GuidedEvidence {
   capture: CaptureEvidence;
 }
 export interface MeasurementEvidence {
-  retryReason?: 'no_speech' | 'speech_too_short' | 'calibration_speech' | 'calibration_too_short' | 'speech_detection_unavailable';
+  retryReason?: 'no_speech' | 'speech_too_short' | 'calibration_speech' | 'calibration_too_short' | 'speech_detection_unavailable' | 'noise_unstable';
   speechSeconds: number;
   quietSeconds: number;
   speechDetection: 'silero' | 'energy';
   capture: CaptureEvidence;
   noiseReliable: boolean;
+  noiseStability?: 'stable' | 'unstable' | 'unassessed';
+  laterNoiseSeconds?: number;
+  maxNoiseChangeDb?: number;
   echoExperimental: true;
 }
 
 const db = (rms: number) => 20 * Math.log10(Math.max(rms, 1e-8));
+
+/** Provisional stationarity check, not a calibrated uncertainty estimate. */
+function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd: number, rate: number, noiseFloor: number) {
+  const guard = Math.ceil(rate * 0.2);
+  const window = Math.max(1, Math.floor(rate * 0.25));
+  // Ignore differences wholly below -60 dBFS, including appended digital silence.
+  const referenceDb = db(Math.max(noiseFloor, 0.001));
+  let windows = 0;
+  let maxNoiseChangeDb = 0;
+  let changedWindows = 0;
+  for (let i = quietEnd; i < mask.length;) {
+    if (mask[i]) { i++; continue; }
+    const runStart = i;
+    while (i < mask.length && !mask[i]) i++;
+    const start = runStart + (runStart > quietEnd && mask[runStart - 1] ? guard : 0);
+    const end = i - (i < mask.length ? guard : 0);
+    if (end - start < window * 2) continue;
+    for (let offset = start; offset + window <= end; offset += window) {
+      const levelDb = db(Math.max(computeRms(samples.subarray(offset, offset + window)), 0.001));
+      const changeDb = Math.abs(levelDb - referenceDb);
+      maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
+      if (changeDb > 6) changedWindows++;
+      windows++;
+    }
+  }
+  const laterNoiseSeconds = windows * window / rate;
+  const noiseStability = laterNoiseSeconds < 0.5 ? 'unassessed' : changedWindows >= 2 ? 'unstable' : 'stable';
+  return {noiseStability, laterNoiseSeconds, maxNoiseChangeDb} as const;
+}
 
 /** Guided quiet-then-speech measurements. Never infer noise from zero crossings. */
 export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, context: ContextInput, input: GuidedEvidence): AnalysisSummary {
@@ -53,17 +85,22 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   }
   const speechSamples = Float32Array.from(speech);
   const speechSeconds = speech.length / sampleRate;
-  const noiseReliable = quietSeconds >= 1 && calibrationSpeech / sampleRate < 0.15 && input.speechDetection === 'silero';
-  const evidence: MeasurementEvidence = {speechSeconds, quietSeconds, speechDetection: input.speechDetection, capture: input.capture, noiseReliable, echoExperimental: true};
   const noiseFloor = computeRms(samples.subarray(0, quietEnd));
+  const calibrationReliable = quietSeconds >= 1 && calibrationSpeech / sampleRate < 0.15 && input.speechDetection === 'silero';
+  const stability = assessNoiseStability(samples, mask, quietEnd, sampleRate, noiseFloor);
+  const noiseReliable = calibrationReliable && stability.noiseStability !== 'unstable';
+  const evidence: MeasurementEvidence = {speechSeconds, quietSeconds, speechDetection: input.speechDetection, capture: input.capture, noiseReliable, ...stability, echoExperimental: true};
   const speechRms = computeRms(speechSamples);
   // Speech intervals contain signal + background; subtract background power.
   const signalRms = Math.sqrt(Math.max(0, speechRms ** 2 - noiseFloor ** 2));
   const snrDb = signalRms > 0 ? Math.max(-20, Math.min(80, db(signalRms) - db(noiseFloor))) : -20;
   const humRatio = measureHum(samples.subarray(0, quietEnd), sampleRate);
-  const clipping = measureClipping(samples.subarray(quietEnd));
+  const clipping = measureClipping(speechSamples);
+  const recordingClipping = measureClipping(samples);
   const echo = measureEcho(speechSamples, sampleRate);
-  const metrics = {clippingRatio: clipping.clippingRatio, rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echo.echoScore};
+  const metrics = {clippingRatio: clipping.clippingRatio, speechClippingRatio: clipping.clippingRatio,
+    clippedDurationSeconds: recordingClipping.clippingRatio * samples.length / sampleRate,
+    rmsDb: db(speechRms), speechRmsDb: db(speechRms), snrDb, humRatio, echoScore: echo.echoScore};
   if (speechSeconds < 1 || !noiseReliable) {
     const retryReason: MeasurementEvidence['retryReason'] = input.speechDetection !== 'silero'
       ? 'speech_detection_unavailable'
@@ -73,7 +110,7 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
           ? 'calibration_speech'
           : quietSeconds < 1
             ? 'calibration_too_short'
-            : 'speech_too_short';
+            : speechSeconds < 1 ? 'speech_too_short' : 'noise_unstable';
     evidence.retryReason = retryReason;
     const noSpeech = retryReason === 'no_speech';
     return {metrics, evidence, specialState: noSpeech ? 'NO_SPEECH' : 'INSUFFICIENT_EVIDENCE', verdict: {...getNoSpeechVerdict(context), diagnosticCertainty: 'low', bestNextSteps: []}, recommendation: {category: 'General', messageKey: 'recommendation.no_speech', confidence: 0}};
@@ -89,7 +126,7 @@ export function analyzeGuidedSamples(samples: Float32Array, sampleRate: number, 
   verdict.reassuranceMode = verdict.useCaseFit === 'pass';
   // Confidence describes evidence, never how good/bad the grade is. Until a real
   // device benchmark is published, even raw PCM findings are at most medium.
-  verdict.diagnosticCertainty = input.capture.format === 'pcm' && input.capture.echoCancellation === false && input.capture.noiseSuppression === false && input.capture.autoGainControl === false ? 'medium' : 'low';
+  verdict.diagnosticCertainty = stability.noiseStability === 'stable' && input.capture.format === 'pcm' && input.capture.echoCancellation === false && input.capture.noiseSuppression === false && input.capture.autoGainControl === false ? 'medium' : 'low';
   verdict.bestNextSteps = verdict.reassuranceMode ? [] : buildVerdictNextSteps(policy).filter((step) => step.kind === 'action');
   return {metrics, verdict, evidence, recommendation: recommendFix(level, clipping, noise, conservativeEcho, context)};
 }

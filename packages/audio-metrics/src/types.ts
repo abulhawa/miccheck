@@ -4,6 +4,10 @@ export * from "./types/verdict";
 
 export interface MetricsSummary {
   clippingRatio: number;
+  /** Guided analysis: fraction of detected speech samples near full scale. */
+  speechClippingRatio?: number;
+  /** Near-full-scale sample duration across the entire recording, including calibration. */
+  clippedDurationSeconds?: number;
   rmsDb: number;
   speechRmsDb: number;
   snrDb: number;

@@ -467,6 +467,7 @@ export default function TestExperiencePage({
                   metrics={analysis.metrics}
                   verdict={analysis.verdict}
                 />
+                {analysis.evidence?.noiseStability === 'unassessed' ? <p className="text-sm text-amber-200">There was not enough later quiet audio to check whether background noise stayed consistent. SNR uses the initial room check.</p> : null}
                 <button
                   className={buttonStyles({
                     variant: "primary",

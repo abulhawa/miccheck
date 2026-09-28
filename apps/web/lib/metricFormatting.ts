@@ -12,4 +12,6 @@ export const formatEchoMetric = (metrics: MetricsSummary): string =>
   `Echo: ${metrics.echoScore.toFixed(2)} score`;
 
 export const formatClippingMetric = (metrics: MetricsSummary): string =>
-  `Clipping: ${(metrics.clippingRatio * 100).toFixed(1)}%`;
+  metrics.speechClippingRatio !== undefined
+    ? `Speech clipping: ${(metrics.speechClippingRatio * 100).toFixed(1)}%`
+    : `Clipping: ${(metrics.clippingRatio * 100).toFixed(1)}%`;

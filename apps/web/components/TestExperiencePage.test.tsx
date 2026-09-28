@@ -112,6 +112,7 @@ describe("TestExperiencePage", () => {
     ['speech_too_short', 'Speech detected, but the sample is too short'],
     ['speech_detection_unavailable', 'Could not verify speech reliably'],
     ['calibration_too_short', 'Room calibration was too short'],
+    ['noise_unstable', 'Background noise changed after calibration'],
     [undefined, 'Not enough evidence for a grade'],
   ] as const)("explains %s without claiming no speech", (retryReason, title) => {
     mockUseAudioRecorder.mockReturnValue({

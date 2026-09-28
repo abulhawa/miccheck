@@ -13,9 +13,9 @@ A grade requires at least one second of detected speech after calibration, at le
 ## Measurements
 
 - **Speech level:** RMS of samples in detected speech intervals after calibration, expressed in dBFS. It measures digital signal level, not physical sound pressure.
-- **Noise floor:** RMS of the initial quiet interval. This assumes the room noise stays reasonably stationary during the following speech.
+- **Noise floor:** RMS of the initial quiet interval. Later nonspeech runs are checked in 250 ms windows after excluding 200 ms around speech boundaries. At least 500 ms of usable quiet audio is required; two windows differing from calibration by more than 6 dB flag unstable noise and withhold the grade. Levels are floored at -60 dBFS for this comparison. Missing later quiet audio is explicitly unassessed, lowers diagnostic certainty, and prevents numerical take comparison without forcing a retry. These thresholds are provisional; speech detection errors and changes during speech can still escape the check.
 - **SNR:** subtract quiet power from speech-interval power, then compare the remaining estimated signal power with quiet power. `signalRms = sqrt(max(0, speechRms² - quietRms²))`; SNR is `20 log10(signalRms / quietRms)`, bounded to -20 through 80 dB with numerical floors. Unusable quiet evidence withholds a grade.
-- **Clipping:** fraction of post-calibration samples with absolute amplitude at least 0.98. This is a near-full-scale heuristic, not proof of every kind of analog distortion.
+- **Clipping:** fraction of detected speech samples with absolute amplitude at least 0.98, used for grading and advice. Separately, total near-full-scale sample duration across the entire recording (including calibration) is reported in seconds; samples are not yet grouped into events. Adding nonspeech silence cannot dilute speech clipping. This is a near-full-scale heuristic, not proof of every kind of analog distortion.
 - **Hum:** the dominant Hann-windowed sinusoid near 50 or 60 Hz (±2 Hz, 0.5 Hz steps), normalized by coherent window gain and quiet-interval power, bounded to [0, 1]. This estimates narrowband mains-like energy, not its physical cause.
 - **Echo:** the legacy autocorrelation estimator is experimental. It can confuse periodic voice structure with reflections. It is excluded from grading and actionable recommendations.
 

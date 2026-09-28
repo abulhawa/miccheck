@@ -1,4 +1,7 @@
 {
+  "test.retry.noise_unstable.badge": "Background noise changed",
+  "test.retry.noise_unstable.title": "Background noise changed after calibration",
+  "test.retry.noise_unstable.description": "Later quiet intervals differ from the room check, so the noise estimate cannot support a reliable grade. Try again with consistent background sound and leave a short pause after speaking.",
   "test.retry.no_speech.badge": "No speech detected",
   "test.retry.no_speech.title": "No speech detected in this recording",
   "test.retry.no_speech.description": "The speech detector did not find speech. If your voice is audible in playback, detection may have missed it. Try again: measure your room, then start voice recording and read the passage naturally.",

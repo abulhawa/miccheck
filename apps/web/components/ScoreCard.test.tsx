@@ -38,6 +38,12 @@ const metrics: MetricsSummary = {
 };
 
 describe("ScoreCard", () => {
+  it("distinguishes speech clipping from recording-wide near-full-scale duration", () => {
+    const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={{...metrics, clippingRatio:0.03, speechClippingRatio:0.03, clippedDurationSeconds:0.125}} />);
+    expect(html).toContain('Speech clipping: 3.0%');
+    expect(html).toContain('0.125 seconds');
+    expect(html).toContain('possible clipping');
+  });
   it("shows numeric metric values and units in visible card content", () => {
     const html = renderToStaticMarkup(<ScoreCard verdict={verdict} metrics={metrics} />);
 

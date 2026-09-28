@@ -1,6 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@miccheck/audio-core": ["../../packages/audio-core/src/index.ts"],
+      "@miccheck/audio-metrics": ["../../packages/audio-metrics/src/index.ts"]
+    },
     "jsx": "preserve",
     "noEmit": true,
     "plugins": [{ "name": "next" }]
