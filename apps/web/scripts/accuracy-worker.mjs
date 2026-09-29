@@ -6,7 +6,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { summarizeTakes } from './repeatability-summary.mjs';
+import { repeatabilitySetupSignature, summarizeTakes } from './repeatability-summary.mjs';
 
 // Actual worker and local models; no instrumentation or external inference.
 export async function accuracyWorker(root, { plugins = [] } = {}) {
@@ -141,9 +141,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (take.protocol !== manifest.protocol || take.version !== 1 || !take.audio?.startsWith('data:audio/wav;base64,') || !take.analysis?.evidence || !take.captureDetails?.trackSettings || !take.captureDetails?.audioContext?.sampleRate) throw new Error('Missing PCM export or capture metadata: ' + file);
     if (takes.some(t => t.id === take.id || t.audio === take.audio)) throw new Error('Duplicate take/audio: ' + file);
     const first = takes[0];
-    if (first && JSON.stringify([take.passage, take.deviceId, take.analysis.evidence.capture, take.captureDetails, take.analysis.verdict.context]) !== JSON.stringify([first.passage, first.deviceId, first.analysis.evidence.capture, first.captureDetails, first.analysis.verdict.context])) throw new Error('Setup, passage, or context differs: ' + file);
+    if (first && JSON.stringify(repeatabilitySetupSignature(take)) !== JSON.stringify(repeatabilitySetupSignature(first))) throw new Error('Setup, passage, or context differs: ' + file);
     takes.push(take);
-    provenance.push({ file, sha256: createHash('sha256').update(bytes).digest('hex'), audioSha256: createHash('sha256').update(Buffer.from(take.audio.split(',')[1], 'base64')).digest('hex') });
+    provenance.push({ file, sha256: createHash('sha256').update(bytes).digest('hex'), audioSha256: createHash('sha256').update(Buffer.from(take.audio.split(',')[1], 'base64')).digest('hex'), captureDetails: take.captureDetails });
   }
   await writeFile(output, JSON.stringify({ protocol: manifest.protocol, source: manifest.source, sourceVerification: 'operator declaration; not inferred from audio', appCommit: manifest.appCommit, setup: manifest.setup, provenance, analysisSource: 'saved app production results; WAV is quantized playback, not reanalyzed float PCM', summary: summarizeTakes(takes), limitation: 'One setup pilot; no population uncertainty, thresholds or independent pair sample count.' }, null, 2) + '\n');
 }

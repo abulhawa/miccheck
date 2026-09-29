@@ -4,7 +4,7 @@ import { promisify } from 'node:util';
 
 // Real current production worker + Silero, twelve checksummed recordings.
 // Deliberately no test.fail(), skips, or snapshot expectations of broken behavior.
-test('human recording fixtures meet measurement acceptance expectations', async () => {
+test('@benchmark human recording fixtures meet measurement acceptance expectations', async () => {
   test.setTimeout(240000);
   const result = await promisify(execFile)(process.execPath, ['scripts/benchmark-human-speech.mjs'], {
     env: {...process.env, FIXTURE_ACCEPTANCE: '1'}, timeout: 230000, maxBuffer: 1024 * 1024
@@ -12,7 +12,7 @@ test('human recording fixtures meet measurement acceptance expectations', async 
   expect(result.code, `${result.stdout}\n${result.stderr}`).toBe(0);
 });
 
-test('STARSS22 recorded-room components meet frozen stability and retry expectations', async () => {
+test('@benchmark STARSS22 recorded-room components meet frozen stability and retry expectations', async () => {
   test.setTimeout(240000);
   for (const args of [[], ['--evaluation']]) {
     const result = await promisify(execFile)(process.execPath, ['scripts/benchmark-starss22.mjs', ...args], {
@@ -22,7 +22,7 @@ test('STARSS22 recorded-room components meet frozen stability and retry expectat
   }
 });
 
-test('speech continuation improves frozen room crops without added candidate-noise speech', async () => {
+test('@benchmark speech continuation improves frozen room crops without added candidate-noise speech', async () => {
   test.setTimeout(180000);
   const result = await promisify(execFile)(process.execPath, ['scripts/benchmark-vad-continuation.mjs', '--evaluation'], {
     env: { ...process.env, VAD_NO_REPORT: '1' }, timeout: 170000, maxBuffer: 1024 * 1024,
@@ -31,7 +31,7 @@ test('speech continuation improves frozen room crops without added candidate-noi
 });
 
 
-test('annotated component references meet clipping, SNR and noise-stability gates', async () => {
+test('@benchmark annotated component references meet clipping, SNR and noise-stability gates', async () => {
   test.setTimeout(30000);
   const {stdout} = await promisify(execFile)(process.execPath, ['scripts/benchmark-annotated-accuracy.mjs', '--check'], {
     timeout: 25000, maxBuffer: 1024 * 1024,
@@ -39,7 +39,7 @@ test('annotated component references meet clipping, SNR and noise-stability gate
   expect(JSON.parse(stdout.trim()).failures).toBe(0);
 });
 
-test("production worker preserves recording clipping and known selected-component SNR", async () => {
+test("@benchmark production worker preserves recording clipping and known selected-component SNR", async () => {
   test.setTimeout(240000);
   const { stdout } = await promisify(execFile)(
     process.execPath,
@@ -55,7 +55,7 @@ test("production worker preserves recording clipping and known selected-componen
   expect(summary.selectedSnrFailures).toBe(0);
 });
 
-test('unselected clipping is disclosed with conservative certainty on regression and reserved rooms', async () => {
+test('@benchmark unselected clipping is disclosed with conservative certainty on regression and reserved rooms', async () => {
   test.setTimeout(360000);
   for (const args of [[], ['--evaluation']]) {
     const { stdout } = await promisify(execFile)(process.execPath, ['scripts/benchmark-clipping-selection.mjs', ...args, '--check'], {
@@ -68,7 +68,7 @@ test('unselected clipping is disclosed with conservative certainty on regression
   }
 });
 
-test('licensed device/language expansion retains exact measurement and introduced-change gates', async () => {
+test('@benchmark licensed device/language expansion retains exact measurement and introduced-change gates', async () => {
   test.setTimeout(420000);
   const { stdout } = await promisify(execFile)(process.execPath, ['scripts/benchmark-accuracy-expansion.mjs', '--recorded-only', '--check'], {
     timeout: 410000, maxBuffer: 1024 * 1024,
@@ -81,7 +81,7 @@ test('licensed device/language expansion retains exact measurement and introduce
   // truth. Exact generated negatives run separately and exit nonzero on failure.
 });
 
-test('separated short noise dips do not accumulate into sustained-change retries', async () => {
+test('@benchmark separated short noise dips do not accumulate into sustained-change retries', async () => {
   test.setTimeout(180000);
   const {stdout} = await promisify(execFile)(process.execPath, ['scripts/benchmark-noise-separated-decrease.mjs', '--check'], {
     timeout: 170000, maxBuffer: 1024 * 1024,

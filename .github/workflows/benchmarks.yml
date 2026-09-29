@@ -1,0 +1,67 @@
+name: Benchmarks
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "packages/audio-core/**"
+      - "packages/audio-metrics/**"
+      - "apps/web/lib/ai/**"
+      - "apps/web/scripts/accuracy-worker.mjs"
+      - "apps/web/scripts/benchmark-*.mjs"
+      - "apps/web/e2e/fixtures/**"
+      - "apps/web/public/models/**"
+      - ".github/workflows/benchmarks.yml"
+  pull_request:
+    paths:
+      - "packages/audio-core/**"
+      - "packages/audio-metrics/**"
+      - "apps/web/lib/ai/**"
+      - "apps/web/scripts/accuracy-worker.mjs"
+      - "apps/web/scripts/benchmark-*.mjs"
+      - "apps/web/e2e/fixtures/**"
+      - "apps/web/public/models/**"
+      - ".github/workflows/benchmarks.yml"
+
+concurrency:
+  group: benchmarks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acceptance:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Human and worker accuracy
+            command: |
+              FIXTURE_ACCEPTANCE=1 node apps/web/scripts/benchmark-human-speech.mjs
+              node apps/web/scripts/benchmark-annotated-accuracy.mjs --check
+              node apps/web/scripts/benchmark-annotated-accuracy.mjs --worker --check
+          - name: Room and VAD accuracy
+            command: |
+              STARSS22_NO_REPORT=1 node apps/web/scripts/benchmark-starss22.mjs
+              STARSS22_NO_REPORT=1 node apps/web/scripts/benchmark-starss22.mjs --evaluation
+              VAD_NO_REPORT=1 node apps/web/scripts/benchmark-vad-continuation.mjs --evaluation
+          - name: Clipping and licensed accuracy
+            command: |
+              node apps/web/scripts/benchmark-clipping-selection.mjs --check
+              node apps/web/scripts/benchmark-clipping-selection.mjs --evaluation --check
+              node apps/web/scripts/benchmark-accuracy-expansion.mjs --recorded-only --check
+          - name: Noise duration policy
+            command: |
+              node apps/web/scripts/benchmark-noise-separated-decrease.mjs --check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+      - run: npm ci --no-audit --no-fund --prefer-offline
+      - run: npm --workspace apps/web exec -- playwright install --with-deps chromium
+      - name: Run benchmark group
+        run: ${{ matrix.command }}

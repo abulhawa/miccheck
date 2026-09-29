@@ -22,3 +22,26 @@ export function summarizeTakes(takes) {
     outcomes: takes.map(t => ({ id: t.id, specialState: t.analysis.specialState ?? null, noiseStability: t.analysis.evidence?.noiseStability, certainty: t.analysis.verdict.diagnosticCertainty, grade: t.analysis.verdict.overall.grade })),
     meaningfulChangeThreshold: null };
 }
+
+
+export function repeatabilitySetupSignature(take) {
+  const track = take.captureDetails?.trackSettings ?? {};
+  const audioContext = take.captureDetails?.audioContext ?? {};
+  return {
+    passage: take.passage,
+    deviceId: take.deviceId ?? null,
+    capture: take.analysis?.evidence?.capture ?? null,
+    trackSettings: {
+      deviceId: track.deviceId ?? null,
+      groupId: track.groupId ?? null,
+      channelCount: track.channelCount ?? null,
+      sampleRate: track.sampleRate ?? null,
+      sampleSize: track.sampleSize ?? null,
+      echoCancellation: track.echoCancellation ?? null,
+      noiseSuppression: track.noiseSuppression ?? null,
+      autoGainControl: track.autoGainControl ?? null,
+    },
+    audioContext: { sampleRate: audioContext.sampleRate ?? null },
+    context: take.analysis?.verdict?.context ?? null,
+  };
+}

@@ -89,7 +89,11 @@ node apps/web/scripts/accuracy-worker.mjs --repeatability path/to/manifest.json 
 ```
 
 The evaluator rejects duplicate IDs/audio and differences in passage, device,
-reported capture details and context. Source type is explicitly operator-declared;
+stable capture configuration and context. Volatile latency observations (track,
+AudioContext base latency and output latency) are retained in each report entry
+but are not exact setup-identity gates because browsers may vary them between
+otherwise unchanged takes. Sample rate, channel count/size, processing flags and
+device identity remain comparison gates. Source type is explicitly operator-declared;
 audio alone cannot establish physical provenance. Preserve commit, model manifest
 from that checkout, take order, timestamps, hashes and setup notes with the report.
 

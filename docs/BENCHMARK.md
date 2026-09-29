@@ -146,6 +146,17 @@ npx playwright install chromium
 npm --workspace apps/web run test:e2e
 ```
 
+The normal E2E command excludes the long-running fixture benchmark group. To run
+every browser test locally, including fixture acceptance, use:
+
+```bash
+npm --workspace apps/web run test:e2e:all
+```
+
+GitHub Actions runs the expensive audio acceptance benchmarks in the separate
+`Benchmarks` workflow as parallel groups when analysis/model/fixture paths change,
+or on manual dispatch.
+
 To refresh the JSON report in PowerShell:
 
 ```powershell

@@ -306,7 +306,7 @@ export default function TestExperiencePage({
                 <blockquote className="mt-4 text-xl font-medium leading-relaxed text-white sm:text-2xl sm:leading-relaxed">
                   “{t("test.header.read_prompt_sample")}”
                 </blockquote>
-                <p className="mt-4 text-sm text-slate-300">Use your normal speaking voice and usual microphone distance. Aim for 10–15 seconds; you can also say a few sentences of your own.</p>
+                <p className="mt-4 text-sm text-slate-300">Use your normal speaking voice and usual microphone distance. For comparable takes, read this displayed passage each time and aim for 10–15 seconds.</p>
               </section>
               <label className="flex items-start gap-3 text-sm text-slate-300">
                 <input type="checkbox" checked={classifyNoise} disabled={setupLocked} onChange={(event) => setClassifyNoise(event.target.checked)} className="mt-1" />
@@ -411,19 +411,23 @@ export default function TestExperiencePage({
 
       {recordingBlob && analysis ? (
         <div ref={playbackRef} className="scroll-mt-6">
-          <button type="button" className="mb-3 text-sm underline" onClick={async () => {
-            try {
-            const session = loadSession();
-            if (!session) { setExportStatus('This take is not available to download.'); return; }
-            const artifact = await exportSession(session, t('test.header.read_prompt_sample'), { trackSettings: trackSettingsSnapshot, audioContext: audioContextSnapshot });
-            const url = URL.createObjectURL(new Blob([JSON.stringify(artifact)], { type: 'application/json' }));
-            const link = document.createElement('a');
-            link.href = url; link.download = `miccheck-take-${session.id}.json`; link.click();
-            setTimeout(() => URL.revokeObjectURL(url), 1000);
-            setExportStatus('Take download prepared. Keep it before recording another take.');
-            } catch { setExportStatus('Could not prepare the download. Please try again.'); }
-          }}>Download take and measurements</button>
-          <p role="status" className="text-sm text-slate-300">{exportStatus}</p>
+          <details className="mb-3 rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3">
+            <summary className="cursor-pointer text-sm font-medium text-slate-300">Repeatability / data export</summary>
+            <p className="mt-2 text-xs text-slate-400">Use this when collecting repeated takes or keeping a local copy of the measurements. The export includes this take's audio and capture metadata.</p>
+            <button type="button" className="mt-3 text-sm underline" onClick={async () => {
+              try {
+              const session = loadSession();
+              if (!session) { setExportStatus('This take is not available to download.'); return; }
+              const artifact = await exportSession(session, t('test.header.read_prompt_sample'), { trackSettings: trackSettingsSnapshot, audioContext: audioContextSnapshot });
+              const url = URL.createObjectURL(new Blob([JSON.stringify(artifact)], { type: 'application/json' }));
+              const link = document.createElement('a');
+              link.href = url; link.download = `miccheck-take-${session.id}.json`; link.click();
+              setTimeout(() => URL.revokeObjectURL(url), 1000);
+              setExportStatus('Take download prepared. Keep it before recording another take.');
+              } catch { setExportStatus('Could not prepare the download. Please try again.'); }
+            }}>Download take and measurements</button>
+            <p role="status" className="mt-2 text-sm text-slate-300">{exportStatus}</p>
+          </details>
           {baseline && !needsRetry ? (
             <section className="rounded-2xl border border-sky-500/30 p-5">
               <h2 className="text-lg font-semibold">Before and after</h2>
