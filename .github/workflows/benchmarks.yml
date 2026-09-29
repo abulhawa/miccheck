@@ -9,6 +9,7 @@ on:
       - "packages/audio-metrics/**"
       - "apps/web/lib/ai/**"
       - "apps/web/scripts/accuracy-worker.mjs"
+      - "apps/web/scripts/prepare-audio.mjs"
       - "apps/web/scripts/benchmark-*.mjs"
       - "apps/web/e2e/fixtures/**"
       - "apps/web/public/models/**"
@@ -19,6 +20,7 @@ on:
       - "packages/audio-metrics/**"
       - "apps/web/lib/ai/**"
       - "apps/web/scripts/accuracy-worker.mjs"
+      - "apps/web/scripts/prepare-audio.mjs"
       - "apps/web/scripts/benchmark-*.mjs"
       - "apps/web/e2e/fixtures/**"
       - "apps/web/public/models/**"
@@ -62,6 +64,8 @@ jobs:
           node-version: 22
           cache: "npm"
       - run: npm ci --no-audit --no-fund --prefer-offline
+      - name: Prepare local model runtime and production worker
+        run: node apps/web/scripts/prepare-audio.mjs
       - run: npm --workspace apps/web exec -- playwright install --with-deps chromium
       - name: Run benchmark group
         run: ${{ matrix.command }}

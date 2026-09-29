@@ -413,7 +413,7 @@ export default function TestExperiencePage({
         <div ref={playbackRef} className="scroll-mt-6">
           <details className="mb-3 rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3">
             <summary className="cursor-pointer text-sm font-medium text-slate-300">Repeatability / data export</summary>
-            <p className="mt-2 text-xs text-slate-400">Use this when collecting repeated takes or keeping a local copy of the measurements. The export includes this take's audio and capture metadata.</p>
+            <p className="mt-2 text-xs text-slate-400">Use this when collecting repeated takes or keeping a local copy of the measurements. The export includes this take&apos;s audio and capture metadata.</p>
             <button type="button" className="mt-3 text-sm underline" onClick={async () => {
               try {
               const session = loadSession();
