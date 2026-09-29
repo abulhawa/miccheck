@@ -80,3 +80,16 @@ test('licensed device/language expansion retains exact measurement and introduce
   // mixture disagreements stay in the report; they are not assigned false-alarm
   // truth. Exact generated negatives run separately and exit nonzero on failure.
 });
+
+test('separated short noise dips do not accumulate into sustained-change retries', async () => {
+  test.setTimeout(180000);
+  const {stdout} = await promisify(execFile)(process.execPath, ['scripts/benchmark-noise-separated-decrease.mjs', '--check'], {
+    timeout: 170000, maxBuffer: 1024 * 1024,
+  });
+  const summaries = JSON.parse(stdout.trim());
+  expect(summaries.map((row: {cases: number}) => row.cases)).toEqual([24, 72, 24]);
+  for (const row of summaries) {
+    expect(row.misses).toBe(0);
+    expect(row.falseAlarms).toBe(0);
+  }
+});

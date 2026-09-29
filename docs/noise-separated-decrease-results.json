@@ -1,0 +1,2526 @@
+{
+  "description": "Exact generated component duration policy; existing licensed recordings are worker regression evidence, not untouched physical evaluation.",
+  "baselineRef": null,
+  "estimatorSha256": "2c2228aeb7c6ac5aaca791f1e21e42de055a4f1f3c75ba7e3361e3cc49cdadf7",
+  "workerSha256": "b254faef4bb0a4f229f199376ff3ca653b8ee34197291d9da1a24d7e8f61fa64",
+  "modelManifestSha256": "ad6efd1c5e4c351a97bc1b5184c3ad25ab365faf2f02f69fc93ae351f80649d6",
+  "parameters": {
+    "noiseRms": 0.02,
+    "decreaseDb": 9,
+    "dipSeconds": 0.25,
+    "gapSeconds": 0.75,
+    "sustainedSeconds": 0.6
+  },
+  "summaries": [
+    {
+      "split": "development",
+      "cases": 24,
+      "misses": 0,
+      "falseAlarms": 0
+    },
+    {
+      "split": "parameter-evaluation",
+      "cases": 72,
+      "misses": 0,
+      "falseAlarms": 0
+    },
+    {
+      "split": "recorded-regression",
+      "cases": 24,
+      "misses": 0,
+      "falseAlarms": 0
+    }
+  ],
+  "rows": [
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          76800,
+          80800
+        ],
+        [
+          92800,
+          96800
+        ]
+      ],
+      "pcmSha256": "af980280c69f3ab98d8713a4c3debf8528ce64af9f6bf899bc6094c8c025091c",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          76800,
+          86400
+        ]
+      ],
+      "pcmSha256": "4701475b77951e1bfa5d9784e2ebc757e114b184b869b6643e1692fc8272972c",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "27946c407a368bb1d451bd7f0de236b49b421cf3b4b58c793acf2f830ef00e30",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          76800,
+          78400
+        ]
+      ],
+      "pcmSha256": "b48019c5f2b3869f119a1dddff9a57374b2949a2816190d6971bd06ff2244406",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          77392,
+          81392
+        ],
+        [
+          93392,
+          97392
+        ]
+      ],
+      "pcmSha256": "52029573e62ccb82408e2c9fd895c68aa3e31273ff8f8ef23d8dbcee66b7d168",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          77392,
+          86992
+        ]
+      ],
+      "pcmSha256": "d8eadf7f8a14b58bca9ed33958ea4b8ba61f8c86ad7b6a14f37a1d17e0f94b99",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "27946c407a368bb1d451bd7f0de236b49b421cf3b4b58c793acf2f830ef00e30",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          77392,
+          78992
+        ]
+      ],
+      "pcmSha256": "ebe8f241533bf306170f9a746ff0f4e5a7a2dea7ebf352ecb9def08903bf6bd7",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          78608,
+          82608
+        ],
+        [
+          94608,
+          98608
+        ]
+      ],
+      "pcmSha256": "4a9dfa6afc7b284ae4a68e3ec3ce20c9d058962a68837237870f5e76557f0122",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          78608,
+          88208
+        ]
+      ],
+      "pcmSha256": "01a6d5a4fe004deab7038ea0f943e9d91b56f200b2b7ac523d76b0f8fb0dc389",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "27946c407a368bb1d451bd7f0de236b49b421cf3b4b58c793acf2f830ef00e30",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          78608,
+          80208
+        ]
+      ],
+      "pcmSha256": "ec135ed9bbe029d0c89b066914b959f8993e8bf4e3aedaba05aee2c9e9004296",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          76800,
+          80800
+        ],
+        [
+          92800,
+          96800
+        ]
+      ],
+      "pcmSha256": "b3a9a180db72fdd63f89d07a7c89faad474e8aaff59ec3610695c3d21279fdef",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          76800,
+          86400
+        ]
+      ],
+      "pcmSha256": "0f000827daee892e1ae9cdcc43303382b4c08620f83361924c102bc6774605da",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "fadaf15af474f0ad1db283a3877c7bc06dd43ed7f094edc8fb904bd78fe18fde",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          76800,
+          78400
+        ]
+      ],
+      "pcmSha256": "45abba3932808ec1163bfec5c16e18b6557e06001f87e9c12685babe031e93ab",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          77392,
+          81392
+        ],
+        [
+          93392,
+          97392
+        ]
+      ],
+      "pcmSha256": "bbb0a2c68e5ae102f154eddb8066712c8259b7d6ef88f53011a7b151f8cae350",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          77392,
+          86992
+        ]
+      ],
+      "pcmSha256": "fa4bc34379550b8abc0a3ecb3cc93487534de9470e04ef5558dfd9926dc719db",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "fadaf15af474f0ad1db283a3877c7bc06dd43ed7f094edc8fb904bd78fe18fde",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          77392,
+          78992
+        ]
+      ],
+      "pcmSha256": "c769e95c496e27ad2365feb95138ff533b8bb11596abb3e563c21f13ed839a03",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          78608,
+          82608
+        ],
+        [
+          94608,
+          98608
+        ]
+      ],
+      "pcmSha256": "24e64f4f3fe0e82d79ec0b6cc62daeef15b44725fd07ac803248a7db5c8a4569",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          78608,
+          88208
+        ]
+      ],
+      "pcmSha256": "984e2e4a7c021b31500999f48e3c6b5fa48d3447d581d6266c7ad2a2abd017fe",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "fadaf15af474f0ad1db283a3877c7bc06dd43ed7f094edc8fb904bd78fe18fde",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "development",
+      "rate": 16000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          78608,
+          80208
+        ]
+      ],
+      "pcmSha256": "58935b5c6842f6fc5d20b72aaf86883f22a382f7b2bf0954feb4fb41e2bf892f",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          105840,
+          111353
+        ],
+        [
+          127890,
+          133403
+        ]
+      ],
+      "pcmSha256": "842c2be038e1980c064f16741835e2a9979f7ad0287d917b8adcb5b0bd060140",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          105840,
+          119070
+        ]
+      ],
+      "pcmSha256": "84b8d98397f6a6ccae53739f4a811bc96da3cfd5ab725a7ddd2999555a7fc9f7",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "aa4cab1c6bfc86722c7000af6d6957b85bd4fbbd968a01a30052574056c067a5",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          105840,
+          108045
+        ]
+      ],
+      "pcmSha256": "98f2ab36895da4eba06a81d4569ee829a8affdf7fdb623ef94cfc180d70344a6",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          106656,
+          112168
+        ],
+        [
+          128706,
+          134218
+        ]
+      ],
+      "pcmSha256": "2b9f48d3ff020e17a5c4915a94580248eab3ec174967712830b60cda65a05e62",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          106656,
+          119886
+        ]
+      ],
+      "pcmSha256": "310821177a2b4b2c7cbda7a50bbabc5055793de8b155e5b7003fe170a0b710fa",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "aa4cab1c6bfc86722c7000af6d6957b85bd4fbbd968a01a30052574056c067a5",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          106656,
+          108861
+        ]
+      ],
+      "pcmSha256": "0d96c0dba690c8ea22746446c4c38cd17fcd8c6fb8b3e21e8b84e69dd2fe4c27",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          108332,
+          113844
+        ],
+        [
+          130382,
+          135894
+        ]
+      ],
+      "pcmSha256": "d261396f1354a332b428c42c4b1ef69b3302f82025dc7a5aebade4d8889f359d",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          108332,
+          121562
+        ]
+      ],
+      "pcmSha256": "60cac51e5df458ddb2f1024b096d9cb3c6ca60132bb2f7a618afc296c212b9cb",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "aa4cab1c6bfc86722c7000af6d6957b85bd4fbbd968a01a30052574056c067a5",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          108332,
+          110537
+        ]
+      ],
+      "pcmSha256": "acd2c3dbb514f71e3ff88c09c13c508c70a51bdb81149f9a1ecd65f357cf1687",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          105840,
+          111353
+        ],
+        [
+          127890,
+          133403
+        ]
+      ],
+      "pcmSha256": "0d54d5dfb6dbe45d78e87f1bd2c7b67c8045fcf3c236e31144d80286e33c7921",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          105840,
+          119070
+        ]
+      ],
+      "pcmSha256": "1c0e2a687c27e404477af414fbd7f814f3b1e4351c082a7d3e7dbeccdc45fd36",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "14f32a6382035d4441d3c86bdfa4c9678bc8aec7915c8bed4fc7ca34dad55ba4",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          105840,
+          108045
+        ]
+      ],
+      "pcmSha256": "434620c99535f2b6290851ac200250715cded03c584505fae0707424ad8c3165",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          106656,
+          112168
+        ],
+        [
+          128706,
+          134218
+        ]
+      ],
+      "pcmSha256": "96872d6f737e530ae1bca91ac4656b992736502333871d600f36b2e6eaee0555",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          106656,
+          119886
+        ]
+      ],
+      "pcmSha256": "112871970543c50c10822c8698a4d52ae57b8c0373cf0b8df65a5ee2ee698e19",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "14f32a6382035d4441d3c86bdfa4c9678bc8aec7915c8bed4fc7ca34dad55ba4",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          106656,
+          108861
+        ]
+      ],
+      "pcmSha256": "81688fefeb9d9427ba8f27c0e8bdb41b8d22ec743540c40585937d919bb2961a",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          108332,
+          113844
+        ],
+        [
+          130382,
+          135894
+        ]
+      ],
+      "pcmSha256": "24f1e0ba76eb14dd02c29fec2ea61cd7117d36692633e3cd867e9e18d789ebcc",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          108332,
+          121562
+        ]
+      ],
+      "pcmSha256": "4bb6209cd77243b53e31ce6c8076511347dc88bfe6e305fb2a68ef6ed228a08f",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "14f32a6382035d4441d3c86bdfa4c9678bc8aec7915c8bed4fc7ca34dad55ba4",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 22050,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          108332,
+          110537
+        ]
+      ],
+      "pcmSha256": "bd1aac146d7a9cb59c5986c84682c20a88238b275ddb0fd9ebd91a59f88eae2b",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          211680,
+          222705
+        ],
+        [
+          255780,
+          266805
+        ]
+      ],
+      "pcmSha256": "d89623d7cc843ec852c9bcf105c616ce09aede658e52888000ea99ff661c2908",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          211680,
+          238140
+        ]
+      ],
+      "pcmSha256": "498d84d82b6d35570db40aabe9d2052ff58e3dede30d736096f5168fa198ee09",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "3ad789a6b706b9e62585c3d8db10def5efb67b6ae46066fc8884d89e3ca87a39",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          211680,
+          216090
+        ]
+      ],
+      "pcmSha256": "377a0eb2910bb86ed1847055de97fb03c122386a890bc5a2627ecc5fca06d49c",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          213312,
+          224337
+        ],
+        [
+          257412,
+          268437
+        ]
+      ],
+      "pcmSha256": "34194bdf4b02325741e853858f04cb1d9521d20ca1ae3ae0b3a41dff8ad87147",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          213312,
+          239772
+        ]
+      ],
+      "pcmSha256": "04ace41afb0a5ee1c5005640e63a944652871cce3ce5ba3e33e49b933319bd97",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "3ad789a6b706b9e62585c3d8db10def5efb67b6ae46066fc8884d89e3ca87a39",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          213312,
+          217722
+        ]
+      ],
+      "pcmSha256": "d99a36b84e2c920995e4a289436a9076ea2b20e1f93e4d0669e5a8a5fec2b80a",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          216663,
+          227688
+        ],
+        [
+          260763,
+          271788
+        ]
+      ],
+      "pcmSha256": "3659776f67975dfd1b8c314fdba4425f4b3b126a35a0774ddc5957b89614306a",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          216663,
+          243123
+        ]
+      ],
+      "pcmSha256": "4f725cad1b6fa84e5b2bc429d419ffb58be82e2df402f0b44d5d26ab4f38e046",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "3ad789a6b706b9e62585c3d8db10def5efb67b6ae46066fc8884d89e3ca87a39",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          216663,
+          221073
+        ]
+      ],
+      "pcmSha256": "4c91752856ab20e3c464cedf51a02e326e344afec4d97302e0baa283a25c55b1",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          211680,
+          222705
+        ],
+        [
+          255780,
+          266805
+        ]
+      ],
+      "pcmSha256": "9a932bee92500bed0db1ac025af2f0f0bb2b1ac3fb75aae764b0abe3b3d3d4e9",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          211680,
+          238140
+        ]
+      ],
+      "pcmSha256": "e2babb38edd8c7ee8ce0d77378cb2c9bfb1048d7244850d9812c9ae14df7d8f6",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "9da572fd397b6a1077f6252afe2622724e60d3becfc884aba0ae36a560f98575",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          211680,
+          216090
+        ]
+      ],
+      "pcmSha256": "5484c412a53e6d5780efb982801e51862092de10faf9afc42cf59b0d254a3c85",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          213312,
+          224337
+        ],
+        [
+          257412,
+          268437
+        ]
+      ],
+      "pcmSha256": "eb09bf4a87ab0369dec3474ae4ea29fc17946e18bc3fa793895eca3c72079655",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          213312,
+          239772
+        ]
+      ],
+      "pcmSha256": "3dceec941c6b3682902377b72a7d8c76915d6c3524ff872311d94372b62c163e",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "9da572fd397b6a1077f6252afe2622724e60d3becfc884aba0ae36a560f98575",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          213312,
+          217722
+        ]
+      ],
+      "pcmSha256": "42c71d98c8c371cfec3385be07d493c3802d71df6d1601cd58fc73d67294affe",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          216663,
+          227688
+        ],
+        [
+          260763,
+          271788
+        ]
+      ],
+      "pcmSha256": "96f77b5d4260db69ac2864ec90e1ee1a2b772a6c02c370783a95f3100c22f24c",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          216663,
+          243123
+        ]
+      ],
+      "pcmSha256": "842322d2098a14d0c4bf86bfd06c6380e127359371b16caeef71c27fdbeaafbd",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "9da572fd397b6a1077f6252afe2622724e60d3becfc884aba0ae36a560f98575",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 44100,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          216663,
+          221073
+        ]
+      ],
+      "pcmSha256": "8d8c858453e12e79146856fced626bbc492d85effaac6167ebb908e9a6fa218e",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          230400,
+          242400
+        ],
+        [
+          278400,
+          290400
+        ]
+      ],
+      "pcmSha256": "e07083caf76d037aef297e62fafc42a522a28574c0535ba6148c7fc5baa5c426",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          230400,
+          259200
+        ]
+      ],
+      "pcmSha256": "f54b22c8430bca450fe1f4f6a65ef3dbe73884d896967297a474330b152c297f",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "313fcc9dc838f14147edd5931c0de51dd540514fcf28c9a7466326133da8deee",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          230400,
+          235200
+        ]
+      ],
+      "pcmSha256": "6d7f1a45859b9b4228fde3072cf36acd3fd8c697fddfc2356ccefed9df33ccfc",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          232176,
+          244176
+        ],
+        [
+          280176,
+          292176
+        ]
+      ],
+      "pcmSha256": "bdd334f7788f558c3c384eb2749a33489398f47f260f6199c4896aa5075b08e1",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          232176,
+          260976
+        ]
+      ],
+      "pcmSha256": "557f23ac7d827c15e6b1a89a624b832c28e883a6e50c1e12244bc4878d155650",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "313fcc9dc838f14147edd5931c0de51dd540514fcf28c9a7466326133da8deee",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          232176,
+          236976
+        ]
+      ],
+      "pcmSha256": "3a4ad0baea5a43417a67b010d0812b65b91e9a442ed523528a9c9c6f1490455c",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          235824,
+          247824
+        ],
+        [
+          283824,
+          295824
+        ]
+      ],
+      "pcmSha256": "bbd7ecf12f5815ee674b5ea6bef4a374600309cfcc3c2e0f7ea6bbfa0a289c01",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          235824,
+          264624
+        ]
+      ],
+      "pcmSha256": "36f55dab9dbeea7e737bcaf42dd014e18faa79fd1f4b8d602f9ceaa3e8bb3340",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "313fcc9dc838f14147edd5931c0de51dd540514fcf28c9a7466326133da8deee",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 120,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          235824,
+          240624
+        ]
+      ],
+      "pcmSha256": "6c251fcb716835e270979c89116b52a84a4ac1546e0681e818ac82ef71a7b5a1",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "separated",
+      "events": [
+        [
+          230400,
+          242400
+        ],
+        [
+          278400,
+          290400
+        ]
+      ],
+      "pcmSha256": "30bab7a0674fbe5c32981fdba8b953db9355d7b8c81c8077fbd98d3ae03b9c46",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "sustained",
+      "events": [
+        [
+          230400,
+          259200
+        ]
+      ],
+      "pcmSha256": "568371963e9d7d072f912473eae590d33a31f568d821ed0625271a4f8e662fa2",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "7849c8286fdd7419dd72367b93357d79605220682fc4638cbb0e44f9b11e4b0c",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 0,
+      "condition": "burst",
+      "events": [
+        [
+          230400,
+          235200
+        ]
+      ],
+      "pcmSha256": "02c3c6096e28702e23c23cd24cadc0a422d7d3c24d9da93165c5315123fe8a73",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "separated",
+      "events": [
+        [
+          232176,
+          244176
+        ],
+        [
+          280176,
+          292176
+        ]
+      ],
+      "pcmSha256": "4e1af72dc9ce708456b9a6d5f4d34d34fbeebc022b2ca0e9ab455f3a3ead8306",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "sustained",
+      "events": [
+        [
+          232176,
+          260976
+        ]
+      ],
+      "pcmSha256": "f8760e270dbc65227860bcdd947459d21d60fcd095d22a8e428d40aa4272102b",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "7849c8286fdd7419dd72367b93357d79605220682fc4638cbb0e44f9b11e4b0c",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 37,
+      "condition": "burst",
+      "events": [
+        [
+          232176,
+          236976
+        ]
+      ],
+      "pcmSha256": "6914429f4625cc0ab9cc47a1c6128449b9ca6b0659b39fff7da772142687c123",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "separated",
+      "events": [
+        [
+          235824,
+          247824
+        ],
+        [
+          283824,
+          295824
+        ]
+      ],
+      "pcmSha256": "ef6a57459af186717c770fde11fda6fd1e3da75e024c1f872d05410038408487",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "sustained",
+      "events": [
+        [
+          235824,
+          264624
+        ]
+      ],
+      "pcmSha256": "72825109ba86f8447d5a5545b3f991fd680b853244016e6d92e61944dfcb3743",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "7849c8286fdd7419dd72367b93357d79605220682fc4638cbb0e44f9b11e4b0c",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "D",
+      "passed": true
+    },
+    {
+      "path": "estimator",
+      "split": "parameter-evaluation",
+      "rate": 48000,
+      "frequency": 997,
+      "phaseMs": 113,
+      "condition": "burst",
+      "events": [
+        [
+          235824,
+          240624
+        ]
+      ],
+      "pcmSha256": "c72b225157ff052620b7b32489a277f727e5cb941906ce5a06da5457c06e5f1d",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10004059102127011984.wav",
+      "sourceSha256": "2be3c0c3c38cfe6d193a340034cb13ed924a256f506fb4e7a0ad85735ab06272",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          331840,
+          335840
+        ],
+        [
+          347840,
+          351840
+        ]
+      ],
+      "pcmSha256": "69fec77ae9099c48a67509a1e2cc488c1a928ea9d61fdc5f7e0a8fa4ac7c8c9a",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10004059102127011984.wav",
+      "sourceSha256": "2be3c0c3c38cfe6d193a340034cb13ed924a256f506fb4e7a0ad85735ab06272",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          331840,
+          341440
+        ]
+      ],
+      "pcmSha256": "fdf1de25d7d83b50226427133e14ec1934dc658036cbbbe5b3b3871b7a0c1c78",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10004059102127011984.wav",
+      "sourceSha256": "2be3c0c3c38cfe6d193a340034cb13ed924a256f506fb4e7a0ad85735ab06272",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "02298d2ea9686e1fc3a6ef66ace70e1562c164271d9d0ddb213acef28a801bf6",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10004059102127011984.wav",
+      "sourceSha256": "2be3c0c3c38cfe6d193a340034cb13ed924a256f506fb4e7a0ad85735ab06272",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          331840,
+          333440
+        ]
+      ],
+      "pcmSha256": "0c3f7bc96cb143953767f8b4d71f2c2da7dfa09a43e5ec19727c2383d3d9fae4",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10009182821551087671.wav",
+      "sourceSha256": "46e6d27b7f57e8df293489f9169b86938a7941403df6e60beb9e9db0ba278b56",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          223360,
+          227360
+        ],
+        [
+          239360,
+          243360
+        ]
+      ],
+      "pcmSha256": "012cbe8ed08346b54215a9d3ecd8fd1860a389fe84e469f5f2c91aad5e23b8f9",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10009182821551087671.wav",
+      "sourceSha256": "46e6d27b7f57e8df293489f9169b86938a7941403df6e60beb9e9db0ba278b56",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          223360,
+          232960
+        ]
+      ],
+      "pcmSha256": "d670337c624b67a6b382400301a6d9951c05de6989db3b6251395aa2f314b021",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10009182821551087671.wav",
+      "sourceSha256": "46e6d27b7f57e8df293489f9169b86938a7941403df6e60beb9e9db0ba278b56",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "dadf96c316d784661f1429d34af2949704cdbde7d2d5fd16d4bb8c4ad3d30be7",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-de_de-10009182821551087671.wav",
+      "sourceSha256": "46e6d27b7f57e8df293489f9169b86938a7941403df6e60beb9e9db0ba278b56",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          223360,
+          224960
+        ]
+      ],
+      "pcmSha256": "75747f6c545f5cf7b016c4fc419fb9ec3ec868dd412ea1c75fae7ca0d14f55aa",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10043298898524273336.wav",
+      "sourceSha256": "134778929482432ef2b97550cb8293fa26dec2ecff8e0e92b7ad437e22fad98e",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          208000,
+          212000
+        ],
+        [
+          224000,
+          228000
+        ]
+      ],
+      "pcmSha256": "fd679006b70dd00a064e07aa56409743eb4cca872a02023b06f57d98f9a8305e",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10043298898524273336.wav",
+      "sourceSha256": "134778929482432ef2b97550cb8293fa26dec2ecff8e0e92b7ad437e22fad98e",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          208000,
+          217600
+        ]
+      ],
+      "pcmSha256": "ec48a268707ad43c82a3a5c9030ad41bf2286dc34db0b8603c698692fafb5e22",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10043298898524273336.wav",
+      "sourceSha256": "134778929482432ef2b97550cb8293fa26dec2ecff8e0e92b7ad437e22fad98e",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "a7b6d3db7e05420ca9415910f8ccb0c1e032dd289415d2b34a04bee4310b1633",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10043298898524273336.wav",
+      "sourceSha256": "134778929482432ef2b97550cb8293fa26dec2ecff8e0e92b7ad437e22fad98e",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          208000,
+          209600
+        ]
+      ],
+      "pcmSha256": "67ba9b49852878f161f82d3e0323a7326d28c58a3a65aa2e73f9a146fe57f501",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10097171356371990207.wav",
+      "sourceSha256": "5083201f5b1180c164c3e0f0560e6a03676870efc9b110611e9273e25255b42c",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          364800,
+          368800
+        ],
+        [
+          380800,
+          384800
+        ]
+      ],
+      "pcmSha256": "42af28d9068566a7af9cc0f2de3a7055d692c1e01da296e900fe9685ac53cc98",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10097171356371990207.wav",
+      "sourceSha256": "5083201f5b1180c164c3e0f0560e6a03676870efc9b110611e9273e25255b42c",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          364800,
+          374400
+        ]
+      ],
+      "pcmSha256": "b58b4ab89feca85f9e917a33575a61f009742d2b0f15f2c42c39a40d16868015",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10097171356371990207.wav",
+      "sourceSha256": "5083201f5b1180c164c3e0f0560e6a03676870efc9b110611e9273e25255b42c",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "1a0895bd3103814aa5b43cbb65ca391617fec4d82de32f0002756690b43e4a59",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-fr_fr-10097171356371990207.wav",
+      "sourceSha256": "5083201f5b1180c164c3e0f0560e6a03676870efc9b110611e9273e25255b42c",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          364800,
+          366400
+        ]
+      ],
+      "pcmSha256": "85af6c016e6445a514dcfa298cb31cdd44a1b2fe02284a2a13cfcf06b2d532bc",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-1001146817223348054.wav",
+      "sourceSha256": "cfbb5ac0a772ab77d56b9b5ccc0dcd1f3ced7c55d78f051cc64273ad0cfe1a82",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          250240,
+          254240
+        ],
+        [
+          266240,
+          270240
+        ]
+      ],
+      "pcmSha256": "003756944685eb0432e8eab7bca4c5484e548ee27130c6b653a895cbb4896705",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-1001146817223348054.wav",
+      "sourceSha256": "cfbb5ac0a772ab77d56b9b5ccc0dcd1f3ced7c55d78f051cc64273ad0cfe1a82",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          250240,
+          259840
+        ]
+      ],
+      "pcmSha256": "54f5abbdb84e892c27395a3fc34ce0a2a06f09f021ff10882642a5d97801dffe",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-1001146817223348054.wav",
+      "sourceSha256": "cfbb5ac0a772ab77d56b9b5ccc0dcd1f3ced7c55d78f051cc64273ad0cfe1a82",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "e4e01d223a779464fa3b43107792e3e7a8102d0e65f30a27b1a30d257fa9a9eb",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-1001146817223348054.wav",
+      "sourceSha256": "cfbb5ac0a772ab77d56b9b5ccc0dcd1f3ced7c55d78f051cc64273ad0cfe1a82",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          250240,
+          251840
+        ]
+      ],
+      "pcmSha256": "69dce6a99105c672bc6a2b0d3f318f31db06a0820866f19780934bac9b07d678",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-10050510856477907332.wav",
+      "sourceSha256": "e5e58eb2d3f37f71ff8843ae768a5e38483e0f6fc03da5499c135800b547cf7d",
+      "rate": 16000,
+      "condition": "separated",
+      "events": [
+        [
+          364800,
+          368800
+        ],
+        [
+          380800,
+          384800
+        ]
+      ],
+      "pcmSha256": "c311cfb947d2e61a8879de1ffe4f8d77b599805090597e4e7645db604ec0b4f2",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-10050510856477907332.wav",
+      "sourceSha256": "e5e58eb2d3f37f71ff8843ae768a5e38483e0f6fc03da5499c135800b547cf7d",
+      "rate": 16000,
+      "condition": "sustained",
+      "events": [
+        [
+          364800,
+          374400
+        ]
+      ],
+      "pcmSha256": "06c947d1c30b6421b53151ba58e876a9c1eb37de419dd7dcce7fa44e4dbdeb3f",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-10050510856477907332.wav",
+      "sourceSha256": "e5e58eb2d3f37f71ff8843ae768a5e38483e0f6fc03da5499c135800b547cf7d",
+      "rate": 16000,
+      "condition": "stationary",
+      "events": [],
+      "pcmSha256": "4bbe5212b7db2a4c722086eb6fed757134bc24080121cdf6a626c48f78fb90ec",
+      "expected": "stable",
+      "actual": "stable",
+      "retryReason": null,
+      "state": "graded",
+      "grade": "F",
+      "passed": true
+    },
+    {
+      "path": "worker",
+      "split": "recorded-regression",
+      "source": "fleurs-es_419-10050510856477907332.wav",
+      "sourceSha256": "e5e58eb2d3f37f71ff8843ae768a5e38483e0f6fc03da5499c135800b547cf7d",
+      "rate": 16000,
+      "condition": "burst",
+      "events": [
+        [
+          364800,
+          366400
+        ]
+      ],
+      "pcmSha256": "3aa883fdb31551c0c88e9e39d3ec79dee21e550b8bc683420956f4414a92b8db",
+      "expected": "unstable",
+      "actual": "unstable",
+      "retryReason": "noise_unstable",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "grade": null,
+      "passed": true
+    }
+  ]
+}

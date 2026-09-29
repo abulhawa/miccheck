@@ -24,6 +24,14 @@ windows; it is not proof that the entire recording's noise is stationary.
 
 ## Latest validation
 
+September 29 follow-up: [separated short decreases](NOISE_SEPARATED_DECREASE_BENCHMARK.md)
+exposed eight controlled false retries and one recorded-source false retry from
+nonconsecutive duration accumulation. Routing decreases solely through the
+existing consecutive-hop check resolves all nine across 120 paired cases, with
+no lost positives. The 140 sustained-decrease, 324 low-frequency/tapered-decrease
+and 600 tonal regression conditions retain zero misses and zero false alarms.
+The broader evidence requirements below remain open.
+
 The sustained-decrease improvement resolves eight controlled misses in 140
 conditions and two missed retries in twelve recorded-source pairs. There are
 zero false alarms in the 120 controlled negatives and twelve stationary worker

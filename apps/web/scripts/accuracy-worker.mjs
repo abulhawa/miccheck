@@ -6,7 +6,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 
 // Actual worker and local models; no instrumentation or external inference.
-export async function accuracyWorker(root) {
+export async function accuracyWorker(root, { plugins = [] } = {}) {
   const web = path.join(root, "apps/web");
   const manifestBytes = await readFile(
     path.join(web, "public/models/manifest.json"),
@@ -23,6 +23,7 @@ export async function accuracyWorker(root) {
     format: "esm",
     platform: "browser",
     target: "es2022",
+    plugins,
     alias: {
       "@miccheck/audio-core": path.join(
         root,

@@ -117,14 +117,16 @@ function assessNoiseStability(samples: Float32Array, mask: Uint8Array, quietEnd:
       if (decreasedHops * eventHop >= 2 * window) sustainedNoiseDecrease = true;
     }
     for (let offset = start; offset + window <= end; offset += window) {
-      const changeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(offset, offset + window))));
-      maxNoiseChangeDb = Math.max(maxNoiseChangeDb, changeDb);
+      const changeDb = changeFromCalibration(computeRms(samples.subarray(offset, offset + window)));
+      maxNoiseChangeDb = Math.max(maxNoiseChangeDb, Math.abs(changeDb));
       // A loud spike can contaminate two adjacent 250 ms windows. Corroborate
       // each candidate independently so residue elsewhere cannot support it.
+      // Decreases use consecutive duration evidence above. Counting separate
+      // lowered windows would merge unrelated short dips into a sustained drop.
       if (changeDb > 6) {
         let changedHops = 0;
         for (let hop = offset; hop + eventHop <= offset + window; hop += eventHop) {
-          const hopChangeDb = Math.abs(changeFromCalibration(computeRms(samples.subarray(hop, hop + eventHop))));
+          const hopChangeDb = changeFromCalibration(computeRms(samples.subarray(hop, hop + eventHop)));
           changedHops = hopChangeDb > 6 ? changedHops + 1 : 0;
           if (changedHops >= 3) { changedWindows++; break; }
         }

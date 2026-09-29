@@ -113,6 +113,23 @@ describe('guided evidence', () => {
     short.set(fixture());
     expect(analyzeGuidedSamples(short, rate, context, evidence).evidence?.noiseStability).toBe('unassessed');
   });
+  it('does not combine separated short noise dips into a sustained decrease', () => {
+    const samples = new Float32Array(8 * rate);
+    for (let i = 0; i < samples.length; i++) {
+      const dipped = (i >= 4.8 * rate && i < 5.05 * rate) || (i >= 5.8 * rate && i < 6.05 * rate);
+      samples[i] = .02 * Math.SQRT2 * Math.sin(2 * Math.PI * 120 * i / rate) * (dipped ? 10 ** (-9 / 20) : 1);
+      if (i >= 2 * rate && i < 4 * rate) samples[i] += .1 * Math.sin(2 * Math.PI * 200 * i / rate);
+    }
+    const result = analyzeGuidedSamples(samples, rate, context, {...evidence, segments: [{start: 2, end: 4}]});
+    expect(result.evidence?.noiseStability).toBe('stable');
+    expect(result.evidence?.maxNoiseChangeDb).toBeGreaterThan(6);
+    expect(result.evidence?.retryReason).toBeUndefined();
+    expect(result.specialState).toBeUndefined();
+    // One genuinely sustained decrease still invalidates the calibration.
+    samples.fill(0, Math.round(4.8 * rate), Math.round(5.4 * rate));
+    const sustained = analyzeGuidedSamples(samples, rate, context, {...evidence, segments: [{start: 2, end: 4}]});
+    expect(sustained.evidence?.retryReason).toBe('noise_unstable');
+  });
   it('excludes speech-boundary residue and detects intermittent later noise', () => {
     const samples = new Float32Array(rate * 6);
     samples.set(fixture());

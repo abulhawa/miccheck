@@ -11,6 +11,12 @@ gates from detection accuracy and records the resulting calibration-advice fix.
 
 ## Improvement workflow
 
+The [separated-decrease fix](NOISE_SEPARATED_DECREASE_BENCHMARK.md) prevents
+two short noise dips from accumulating into a sustained decrease. Eight
+controlled false retries and one recorded-source retry are removed, retaining
+positive detections across 120 paired conditions. This enforces the existing
+duration rule; it does not complete representative noise threshold validation.
+
 1. Name the user-visible failure and intended improvement in measurements, grading, confidence, or advice.
 2. Reproduce it with the smallest useful controlled case and relevant recorded speech. Add annotations or capture conditions where needed to judge correctness.
 3. Define desired behavior independently of the current implementation. Keep tests of existing behavior clearly identified as regressions; preserve known failures as improvement targets.
