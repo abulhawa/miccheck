@@ -1,5 +1,9 @@
 # Privacy
 
+The optional take download saves audio, measurements, passage and capture/device
+metadata to a local JSON file. It does not upload them. Downloaded files persist
+until you delete them; review consent and metadata before sharing.
+
 MicCheck processes microphone audio locally. It does not upload audio or transcripts, and does not require an account.
 
 ## Recording and retention

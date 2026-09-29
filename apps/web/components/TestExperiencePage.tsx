@@ -21,7 +21,7 @@ import { ANALYTICS_EVENTS, logEvent } from "../lib/analytics";
 import { isIOSPlatform } from "../lib/browserUtils";
 import { t } from "../lib/i18n";
 import { buttonStyles } from "./buttonStyles";
-import { clearSession, loadSession, saveSession, comparableTakes, type RecordingSession } from "../lib/recordingSession";
+import { clearSession, loadSession, saveSession, comparableTakes, exportSession, type RecordingSession } from "../lib/recordingSession";
 import { readStorage, writeStorage } from "../lib/safeStorage";
 import type { DeviceType, UseCase } from "../types";
 
@@ -44,6 +44,7 @@ export default function TestExperiencePage({
   initialDiscoverySource
 }: TestExperiencePageProps) {
   const [baseline, setBaseline] = useState<RecordingSession | null>(null);
+  const [exportStatus, setExportStatus] = useState('');
   const playbackRef = useRef<HTMLDivElement>(null);
   const [classifyNoise, setClassifyNoise] = useState(false);
   const [deviceId, setDeviceId] = useState<string | null>(null);
@@ -410,6 +411,19 @@ export default function TestExperiencePage({
 
       {recordingBlob && analysis ? (
         <div ref={playbackRef} className="scroll-mt-6">
+          <button type="button" className="mb-3 text-sm underline" onClick={async () => {
+            try {
+            const session = loadSession();
+            if (!session) { setExportStatus('This take is not available to download.'); return; }
+            const artifact = await exportSession(session, t('test.header.read_prompt_sample'), { trackSettings: trackSettingsSnapshot, audioContext: audioContextSnapshot });
+            const url = URL.createObjectURL(new Blob([JSON.stringify(artifact)], { type: 'application/json' }));
+            const link = document.createElement('a');
+            link.href = url; link.download = `miccheck-take-${session.id}.json`; link.click();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            setExportStatus('Take download prepared. Keep it before recording another take.');
+            } catch { setExportStatus('Could not prepare the download. Please try again.'); }
+          }}>Download take and measurements</button>
+          <p role="status" className="text-sm text-slate-300">{exportStatus}</p>
           {baseline && !needsRetry ? (
             <section className="rounded-2xl border border-sky-500/30 p-5">
               <h2 className="text-lg font-semibold">Before and after</h2>
@@ -425,6 +439,7 @@ export default function TestExperiencePage({
               </div>
               {(() => {const current=loadSession();return current && comparableTakes(baseline,current) ? <p className="mt-2 text-sm text-slate-300">Speech level: {(analysis.metrics.speechRmsDb-baseline.analysis.metrics.speechRmsDb).toFixed(1)} dB change · SNR: {(analysis.metrics.snrDb-baseline.analysis.metrics.snrDb).toFixed(1)} dB change · Clipping: {((analysis.metrics.clippingRatio-baseline.analysis.metrics.clippingRatio)*100).toFixed(2)} percentage points change. A higher level is not always better; aim for the recommended range.</p> : <p className="mt-2 text-sm text-amber-200">Capture settings or evidence differ. Listen to both takes; numerical changes may not be directly comparable.</p>;})()}
               <button type="button" className="mt-3 text-sm underline" onClick={()=>{clearSession('baseline');setBaseline(null);}}>Clear comparison</button>
+              <p className="mt-2 text-sm text-slate-300">Normal take-to-take variability has not yet been measured. A numerical difference alone does not establish a meaningful change. For repeatability, read the same passage and keep your setup unchanged.</p>
             </section>
           ) : null}
           {(!baseline || needsRetry) ? <AudioPlayer audioBlob={recordingBlob} showWaveform={false} /> : null}

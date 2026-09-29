@@ -4,6 +4,9 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { summarizeTakes } from './repeatability-summary.mjs';
 
 // Actual worker and local models; no instrumentation or external inference.
 export async function accuracyWorker(root, { plugins = [] } = {}) {
@@ -121,4 +124,26 @@ export async function accuracyWorker(root, { plugins = [] } = {}) {
     await new Promise((resolve) => server.close(resolve));
     throw error;
   }
+}
+
+// Extend the shared evidence entry point rather than start another benchmark server.
+// Uses saved app measurements paired with exact exported playback audio.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const [mode, input, output] = process.argv.slice(2);
+  if (mode !== '--repeatability' || !input || !output) throw new Error('Usage: node apps/web/scripts/accuracy-worker.mjs --repeatability manifest.json report.json');
+  const manifest = JSON.parse(await readFile(input, 'utf8'));
+  if (manifest.protocol !== 'miccheck-repeatability-v1' || manifest.source !== 'physical-microphone' || !manifest.setup || !manifest.appCommit || !Array.isArray(manifest.files) || manifest.files.length < 10) throw new Error('Require protocol, physical source declaration, setup, appCommit and at least ten exports');
+  const takes = [];
+  const provenance = [];
+  for (const file of manifest.files) {
+    const bytes = await readFile(path.resolve(path.dirname(input), file));
+    const take = JSON.parse(bytes);
+    if (take.protocol !== manifest.protocol || take.version !== 1 || !take.audio?.startsWith('data:audio/wav;base64,') || !take.analysis?.evidence || !take.captureDetails?.trackSettings || !take.captureDetails?.audioContext?.sampleRate) throw new Error('Missing PCM export or capture metadata: ' + file);
+    if (takes.some(t => t.id === take.id || t.audio === take.audio)) throw new Error('Duplicate take/audio: ' + file);
+    const first = takes[0];
+    if (first && JSON.stringify([take.passage, take.deviceId, take.analysis.evidence.capture, take.captureDetails, take.analysis.verdict.context]) !== JSON.stringify([first.passage, first.deviceId, first.analysis.evidence.capture, first.captureDetails, first.analysis.verdict.context])) throw new Error('Setup, passage, or context differs: ' + file);
+    takes.push(take);
+    provenance.push({ file, sha256: createHash('sha256').update(bytes).digest('hex'), audioSha256: createHash('sha256').update(Buffer.from(take.audio.split(',')[1], 'base64')).digest('hex') });
+  }
+  await writeFile(output, JSON.stringify({ protocol: manifest.protocol, source: manifest.source, sourceVerification: 'operator declaration; not inferred from audio', appCommit: manifest.appCommit, setup: manifest.setup, provenance, analysisSource: 'saved app production results; WAV is quantized playback, not reanalyzed float PCM', summary: summarizeTakes(takes), limitation: 'One setup pilot; no population uncertainty, thresholds or independent pair sample count.' }, null, 2) + '\n');
 }

@@ -1,5 +1,11 @@
 # Synthetic speech-detection benchmark
 
+Current executable roadmap: [Section 4 repeatability](REPEATABILITY.md).
+Existing reports below are regression evidence. Broader validation is long-term;
+its open requirements do not authorize automatic corpus expansion. The shared
+`accuracy-worker.mjs --repeatability` entry point summarizes exported production
+app takes without changing thresholds or claiming physical evidence from replay.
+
 The purpose of these benchmarks and recording artifacts is to improve the mic checker. Use them to find measurement and advice failures, make targeted production changes, and demonstrate better behavior without introducing false alarms.
 
 The [physical-testing alternatives](ACCURACY_ALTERNATIVES.md) add licensed AMI
@@ -26,7 +32,7 @@ duration rule; it does not complete representative noise threshold validation.
 
 A report or a larger corpus is supporting work. Completion of an app improvement requires an implemented change and evidence for its intended behavior. When evidence supports retaining the current behavior, explain why and keep unresolved weaknesses actionable rather than claiming an optimization.
 
-Brief noise events missed by the original stability windows now have an implemented fix; see [the backlog](BACKLOG.md#2-assess-background-noise-stability--high-priority) and [before/after results](NOISE_STABILITY_BENCHMARK.md). The next accuracy work is independent human speech annotation, held-out capture conditions, and real-microphone validation. [MS-SNSD reference mixtures](../apps/web/e2e/fixtures/reference-noise/README.md) add SNR estimator gates with predefined intervals; keep these distinct from end-to-end speech-selection accuracy.
+Brief noise events missed by the original stability windows now have an implemented fix; see [the backlog](BACKLOG.md#2-assess-background-noise-stability--high-priority) and [before/after results](NOISE_STABILITY_BENCHMARK.md). Independent annotation and broader capture validation remain long-term requirements. Next execute the repeatability protocol. [MS-SNSD reference mixtures](../apps/web/e2e/fixtures/reference-noise/README.md) add SNR estimator gates with predefined intervals; keep these distinct from end-to-end speech-selection accuracy.
 
 Recorded September 10, 2026 on Windows, Chromium 153.0.8010.12. Machine-readable output: [benchmark-results.json](benchmark-results.json). Each input lasts seven seconds. The speech fixture is locally generated synthetic speech; its provenance is in `apps/web/public/demo/README.md`.
 

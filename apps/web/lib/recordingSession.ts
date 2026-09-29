@@ -2,6 +2,18 @@ import type { AnalysisResult } from '../types';
 import { readStorage, writeStorage } from './safeStorage';
 
 type Slot = 'latest' | 'baseline';
+// Export the same paired artifact used for playback/restoration; no new capture path.
+export async function exportSession(session: RecordingSession, passage: string, captureDetails: unknown) {
+  const audio = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(session.blob);
+  });
+  return { version: 1, protocol: 'miccheck-repeatability-v1', passage, captureDetails,
+    source: 'unverified', id: session.id, createdAt: session.createdAt,
+    deviceId: session.deviceId, analysis: session.analysis, audio };
+}
 export interface RecordingSession {id: string; analysis: AnalysisResult; blob: Blob; deviceId: string | null; createdAt: number}
 const memory: Partial<Record<Slot,RecordingSession>> = {};
 const generations: Record<Slot,number> = {latest:0,baseline:0};

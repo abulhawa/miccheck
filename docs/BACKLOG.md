@@ -1,10 +1,39 @@
 # Measurement accuracy backlog
 
-Added September 28, 2026. Checkboxes track implemented work; remaining accuracy and real-world validation work is pending.
+Added September 28, 2026. Updated September 29: checkbox order is not task priority.
+
+## Current executable work and selection rule
+
+**Active roadmap: Section 4, first item — within-setup repeatability.** Follow
+[the repeatability protocol](REPEATABILITY.md). Capture/export and descriptive
+evaluation support are implemented; next collect ten physical microphone takes
+under one unchanged setup, then review the measured variability. Physical
+recordings remain pending, so the first checkbox stays open.
+
+“Do the next backlog item” means the next dependency-ready step in this active
+roadmap, never the first unchecked checkbox. If physical recordings are missing,
+report that dependency and improve necessary support within this scope; do not
+return to unlimited benchmark expansion. Subsequent Section 4 gates depend on
+observed evidence. Do not invent uncertainty thresholds or tune measurement
+thresholds before that evidence exists. Echo stays deferred.
+
+## Long-term validation requirements and completed regression evidence
+
+Open checkboxes in Sections 2 and 3 are long-term validation requirements, not
+the current execution queue. Current benchmark breadth is sufficient for this
+stage. Do not add datasets, specialized scripts, annotation pipelines or tuning
+to close them. Reopen focused work there only for a specific product failure
+exposed by repeatability. Their checked items and dated reports below preserve
+completed regression evidence and scoped fixes; passing regressions do not
+complete representative validation. Section 5 is deferred.
 
 The main aim is to improve the mic checker: more accurate measurements, fewer misleading grades, and more useful advice. Benchmarks and recording artifacts are evidence for identifying, implementing, and verifying app improvements. More cases or passing tests alone do not complete an improvement task.
 
-Work in this order: clipping invariance, noise-stability fixes informed by focused evidence, repeatability and threshold tuning, then broader coverage driven by unresolved app weaknesses. Keep echo outside grading throughout. Use the [benchmark improvement workflow](BENCHMARK.md#improvement-workflow) for each change.
+Roadmap priority: completed clipping/noise fixes → repeatability evidence →
+evidence-supported comparison improvements → broader validation driven by
+specific unresolved app failures. This takes priority over section/file/checkbox
+order. Keep echo outside grading throughout. Reuse the [benchmark improvement
+workflow](BENCHMARK.md#improvement-workflow) for each change.
 
 ## 1. Make clipping independent of pauses — high priority
 
@@ -245,6 +274,12 @@ Each benchmark expansion must target a specific measurement, grading, confidence
 Starting points: `docs/BENCHMARK.md`, `apps/web/e2e/real-speech.spec.ts`, `apps/web/e2e/fixtures/README.md`, `packages/audio-metrics/test`.
 
 ## 4. Establish repeatability and meaningful comparisons — follows initial benchmark
+
+**Current executable section.** [Protocol and infrastructure review](REPEATABILITY.md)
+define constants, repeated capture, ten-take pilot, metrics and summaries.
+Local take export and the shared accuracy evaluator support collection; actual
+physical evidence is pending. Do not mark the first item complete from tooling,
+synthetic fixtures or virtual microphone replay.
 
 - [ ] Use a consistent spoken passage and repeated takes under unchanged conditions to measure within-setup variability.
 - [ ] Evaluate speech-duration requirements against measured reliability instead of assuming that a longer recording guarantees accuracy.

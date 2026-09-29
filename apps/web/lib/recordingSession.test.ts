@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import {afterEach,expect,it,vi} from 'vitest';
 import {analyzeGuidedSamples} from '@miccheck/audio-metrics';
-import {clearSession,saveSession,loadSession,comparableTakes,type RecordingSession} from './recordingSession';
+import {clearSession,saveSession,loadSession,comparableTakes,exportSession,type RecordingSession} from './recordingSession';
 
 function take(): RecordingSession {
   const rate=16000;
@@ -10,6 +10,12 @@ function take(): RecordingSession {
   return {id:'take-1',blob:new Blob(['audio'],{type:'audio/webm'}),analysis,deviceId:'mic-1',createdAt:Date.now()};
 }
 afterEach(()=>{vi.restoreAllMocks();clearSession();clearSession('baseline');sessionStorage.clear();});
+it('exports the paired audio and result without asserting physical provenance', async () => {
+  const session = take();
+  const artifact = await exportSession(session, 'fixed passage', { sampleRate: 16000 });
+  expect(artifact).toMatchObject({ protocol: 'miccheck-repeatability-v1', source: 'unverified', id: session.id, analysis: session.analysis, passage: 'fixed passage' });
+  expect(artifact.audio).toBe('data:audio/webm;base64,YXVkaW8=');
+});
 it('persists audio and analysis in one record and restores the same take',async()=>{
   const session=take();expect(await saveSession(session)).toBe(true);
   const raw=sessionStorage.getItem('miccheck.session.v2.latest')!;
