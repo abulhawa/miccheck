@@ -23,7 +23,7 @@ pcm.copy(wave,44+Math.floor(rate*2.4)*2,0,Math.min(pcm.length,size-Math.floor(ra
 const fixture=path.resolve('.test-assets/microphone.wav');mkdirSync(path.dirname(fixture),{recursive:true});writeFileSync(fixture,wave);
 
 export default defineConfig({
-  testDir:'./e2e',fullyParallel:false,workers:1,timeout:60000,
+  testDir:'./e2e',fullyParallel:true,workers:2,timeout:60000,
   use:{baseURL:'http://127.0.0.1:3100',trace:'retain-on-failure',screenshot:'only-on-failure',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream',`--use-file-for-fake-audio-capture=${fixture}`]}},
   webServer:{command:'node ../../node_modules/next/dist/bin/next start --port 3100',url:'http://127.0.0.1:3100',reuseExistingServer:!process.env.CI,timeout:60000},
 });

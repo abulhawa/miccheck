@@ -6,7 +6,7 @@ import path from 'node:path';
 // No supplied speech segments, mocked probabilities, or model substitutions.
 for (const fixture of ['6930-75918-0000.flac', '6930-75918-0007.flac']) {
   for (const scenario of ['clean', 'quiet', 'early'] as const) {
-    test(`human speech ${fixture}: ${scenario}`, async ({ page }) => {
+    test(`@benchmark human speech ${fixture}: ${scenario}`, async ({ page }) => {
       await page.goto('/test');
       const encoded = readFileSync(path.resolve('e2e/fixtures', fixture)).toString('base64');
       const result = await page.evaluate(async ({ encoded, scenario }) => {

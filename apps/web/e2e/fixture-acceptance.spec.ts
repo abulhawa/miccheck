@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 
+test.describe.configure({ mode: 'serial' });
+
 // Real current production worker + Silero, twelve checksummed recordings.
 // Deliberately no test.fail(), skips, or snapshot expectations of broken behavior.
 test('@benchmark human recording fixtures meet measurement acceptance expectations', async () => {

@@ -146,22 +146,24 @@ npx playwright install chromium
 npm --workspace apps/web run test:e2e
 ```
 
-The normal E2E command excludes the long-running fixture benchmark group. To run
-every browser test locally, including fixture acceptance, use:
+The normal E2E command runs the product smoke/capture suite with two Playwright
+workers and excludes tests tagged `@benchmark`. Recorded-speech, clipping-selection,
+licensed virtual-capture and synthetic VAD browser evidence are kept out of the
+fast CI lane. To run every browser test locally, including fixture acceptance, use:
 
 ```bash
 npm --workspace apps/web run test:e2e:all
 ```
 
-GitHub Actions runs the expensive audio acceptance benchmarks in the separate
-`Benchmarks` workflow as parallel groups when analysis/model/fixture paths change,
-or on manual dispatch.
+GitHub Actions runs estimator/worker acceptance in the separate `Benchmarks`
+workflow and the recorded/browser evidence in the `Browser Evidence` workflow.
+Both are independent of the fast CI lane and use parallel execution where safe.
 
 To refresh the JSON report in PowerShell:
 
 ```powershell
 $env:UPDATE_BENCHMARK = '1'
-npm --workspace apps/web run test:e2e
+npm --workspace apps/web exec -- playwright test e2e/benchmark.spec.ts
 Remove-Item Env:UPDATE_BENCHMARK
 ```
 

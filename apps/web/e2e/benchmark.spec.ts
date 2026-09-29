@@ -3,7 +3,7 @@ import { build } from "esbuild";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 
-test("reports a reproducible synthetic energy versus neural VAD benchmark", async ({
+test("@benchmark reports a reproducible synthetic energy versus neural VAD benchmark", async ({
   page,
   browser,
 }) => {

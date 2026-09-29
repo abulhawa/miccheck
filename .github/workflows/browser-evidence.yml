@@ -1,0 +1,77 @@
+name: Browser Evidence
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "packages/audio-core/**"
+      - "packages/audio-metrics/**"
+      - "apps/web/app/**"
+      - "apps/web/components/**"
+      - "apps/web/hooks/**"
+      - "apps/web/lib/**"
+      - "apps/web/src/**"
+      - "apps/web/e2e/benchmark.spec.ts"
+      - "apps/web/e2e/clipping-selection.spec.ts"
+      - "apps/web/e2e/licensed-capture.spec.ts"
+      - "apps/web/e2e/real-speech.spec.ts"
+      - "apps/web/e2e/fixtures/**"
+      - "apps/web/public/models/**"
+      - "apps/web/playwright.config.ts"
+      - "apps/web/package.json"
+      - "package-lock.json"
+      - ".github/workflows/browser-evidence.yml"
+  pull_request:
+    paths:
+      - "packages/audio-core/**"
+      - "packages/audio-metrics/**"
+      - "apps/web/app/**"
+      - "apps/web/components/**"
+      - "apps/web/hooks/**"
+      - "apps/web/lib/**"
+      - "apps/web/src/**"
+      - "apps/web/e2e/benchmark.spec.ts"
+      - "apps/web/e2e/clipping-selection.spec.ts"
+      - "apps/web/e2e/licensed-capture.spec.ts"
+      - "apps/web/e2e/real-speech.spec.ts"
+      - "apps/web/e2e/fixtures/**"
+      - "apps/web/public/models/**"
+      - "apps/web/playwright.config.ts"
+      - "apps/web/package.json"
+      - "package-lock.json"
+      - ".github/workflows/browser-evidence.yml"
+
+concurrency:
+  group: browser-evidence-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .turbo
+            apps/web/.next/cache
+          key: ${{ runner.os }}-browser-evidence-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-browser-evidence-
+            ${{ runner.os }}-build-
+      - run: npm ci --no-audit --no-fund --prefer-offline
+      - run: npm run build
+      - run: npm --workspace apps/web exec -- playwright install --with-deps chromium
+      - name: Run recorded and browser evidence
+        run: npm --workspace apps/web exec -- playwright test e2e/benchmark.spec.ts e2e/clipping-selection.spec.ts e2e/licensed-capture.spec.ts e2e/real-speech.spec.ts --workers=3
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-evidence-results
+          path: apps/web/test-results/

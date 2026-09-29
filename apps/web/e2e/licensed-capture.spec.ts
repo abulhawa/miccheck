@@ -78,7 +78,7 @@ async function launch(file: string) {
 
 for (const agent of ["A", "B"])
   for (const device of ["headset", "distant-array"]) {
-    test(`licensed participant ${agent} ${device} recording traverses real browser capture with processing off and on`, async () => {
+    test(`@benchmark licensed participant ${agent} ${device} recording traverses real browser capture with processing off and on`, async () => {
       test.setTimeout(150000);
       const clip = manifest.clips.find(
         (c: { file: string }) =>
@@ -285,7 +285,7 @@ for (const agent of ["A", "B"])
     });
   }
 
-test("ignored processing changes do not fabricate enabled capture settings", async () => {
+test("@benchmark ignored processing changes do not fabricate enabled capture settings", async () => {
   test.setTimeout(60000);
   const browser = await launch(
     prepareReplay("ami-IS1001a-A-headset.wav").filePath,

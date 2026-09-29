@@ -7,7 +7,7 @@ import type { AnalysisResult } from "../types";
 // Actual source PCM -> production worker -> saved result -> visible result UI.
 // This is recorded-fixture rendering coverage, not physical microphone capture.
 for (const condition of ["original", "flat-crossing"] as const) {
-  test(`explains unselected clipping in a graded recorded result: ${condition}`, async ({
+  test(`@benchmark explains unselected clipping in a graded recorded result: ${condition}`, async ({
     page,
   }) => {
     const folder = path.resolve("e2e/fixtures/starss22");
