@@ -19,10 +19,14 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+      - name: Use repository-declared npm version
+        run: npm install -g npm@11.8.0
       - name: Upgrade security-sensitive Next.js packages
         run: npm install --workspace apps/web next@16.4.2 --save-exact --no-audit --no-fund
       - name: Refresh compatible dependency versions
-        run: npm update --workspaces --include-workspace-root --no-audit --no-fund
+        shell: bash
+        run: |
+          npm audit fix --no-fund || true
       - name: Record remaining dependency advisories
         shell: bash
         run: |
