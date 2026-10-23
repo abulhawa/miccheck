@@ -30,16 +30,10 @@ jobs:
       - run: npm run build
       - run: npm run test
       - run: npm run lint
-      # Block vulnerable deployed dependencies without forcing an untested Tailwind 4 migration.
-      # Full audits remain visible; fix remaining development dependencies separately.
-      - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=high
-      - name: Report development dependency advisories
-        shell: bash
-        run: |
-          if ! npm audit --audit-level=high; then
-            echo "::warning::Full npm audit still reports development-tool vulnerabilities. Production audit remains enforced; follow up on Tailwind CSS 3 and Vitest."
-          fi
+      - name: Test dependency audit exception policy
+        run: node --test scripts/check-npm-audit.test.mjs
+      - name: Audit all dependencies with bounded upstream exception
+        run: node scripts/check-npm-audit.mjs
       - run: npm --workspace apps/web exec -- playwright install --with-deps chromium
       - run: npm --workspace apps/web run test:e2e
       - uses: actions/upload-artifact@v4
