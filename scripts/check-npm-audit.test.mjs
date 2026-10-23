@@ -46,3 +46,9 @@ test("fails after the exception expires", () => {
 test("fails safely on invalid npm audit responses", () => {
   assert.equal(assessAudit({ error: "network" }, empty(), "2026-10-23").allowed, false);
 });
+
+test("fails closed when npm reports findings without details", () => {
+  const full = known();
+  full.vulnerabilities = {};
+  assert.equal(assessAudit(full, empty(), "2026-10-23").allowed, false);
+});
