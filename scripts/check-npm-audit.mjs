@@ -31,6 +31,9 @@ export function assessAudit(full, production, today = new Date().toISOString().s
   }
 
   const entries = Object.entries(full.vulnerabilities);
+  if (full.metadata.vulnerabilities.total !== entries.length) {
+    problems.push("Full audit summary does not match vulnerability details");
+  }
   const unexpectedPackages = entries.map(([name]) => name).filter((name) => !EXPECTED_CHAIN.has(name));
   if (unexpectedPackages.length) problems.push("Unexpected vulnerable packages: " + unexpectedPackages.join(", "));
 
