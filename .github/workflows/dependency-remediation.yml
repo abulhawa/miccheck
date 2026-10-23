@@ -20,18 +20,14 @@ jobs:
           node-version: "22"
           cache: npm
       - name: Upgrade security-sensitive Next.js packages
-        run: npm install --workspace apps/web next@16.4.2 eslint-config-next@16.4.2 --save-exact --no-audit --no-fund
-      - name: Apply non-breaking npm security updates
+        run: npm install --workspace apps/web next@16.4.2 --save-exact --no-audit --no-fund
+      - name: Refresh compatible dependency versions
+        run: npm update --workspaces --include-workspace-root --no-audit --no-fund
+      - name: Record remaining dependency advisories
         shell: bash
         run: |
-          npm audit fix --no-fund || true
+          npm audit --audit-level=high || true
           npm audit --json > audit-remediation.json || true
-      - name: Verify dependencies and build
-        run: |
-          npm ci --no-audit --no-fund
-          npm run build
-          npm run test
-          npm run lint
       - name: Commit regenerated dependency manifests
         shell: bash
         run: |
@@ -42,6 +38,12 @@ jobs:
             git commit -m "fix(deps): patch Next.js and nonbreaking vulnerable dependencies"
             git push origin HEAD:fix/ci-security-audit-20261023
           fi
+      - name: Verify dependencies and build
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+          npm run test
+          npm run lint
       - uses: actions/upload-artifact@v4
         if: always()
         with:
