@@ -41,5 +41,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
+          retention-days: 3
           name: browser-test-results
           path: apps/web/test-results/
